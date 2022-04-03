@@ -21,7 +21,6 @@ namespace EnTicTacToe
             Console.Write("---l---l---\n");
             Console.Write(" {0} l {1} l {2}\n", Array[6], Array[7], Array[8]);
             Console.Write("---l---l---\n");
-            Console.Write("X 차례입니다. :");
         }
         
         public void SecondSet(int SecondNumber)
@@ -35,7 +34,6 @@ namespace EnTicTacToe
             Console.Write("---l---l---\n");
             Console.Write(" {0} l {1} l {2}\n", Array[6], Array[7], Array[8]);
             Console.Write("---l---l---\n");
-            Console.Write("O 차례입니다.:");
         }
     }
 }

@@ -26,14 +26,14 @@ namespace EnTicTacToe
             while (MenuNumber != 0)
             { 
                 Console.Clear();
-                if (MenuNumber == 1)
+                if (MenuNumber == 1) // 1번 입력받으면 VS유저로 이동 후 종료
                 {
-                    UserCase.User();// 1번 입력받으면 VS유저로 이동 후 종료
+                    UserCase.User();
                     break;
                 }
-                else if (MenuNumber == 2)
+                else if (MenuNumber == 2) // 2번 입력받으면 VS컴퓨터로 이동 후 종료
                 {
-                    ComputerCase.Computer();// 2번 입력받으면 VS컴퓨터로 이동 후 종료
+                    ComputerCase.Computer();
                     break;
                 }
                 else // 그 외 입력받으면 다시 입력
