@@ -15,7 +15,6 @@ namespace EnTicTacToe
         public void User()
         {
             int Input; // 입력값
-            //int Second; // 두 번째로 입력한 사람
 
             Console.Clear();
             Console.Write("---l---l---\n");
@@ -32,8 +31,8 @@ namespace EnTicTacToe
                 Input = int.Parse(Console.ReadLine());// 플레이어 입력
                 if (GameBoard.Array[Input - 1] != ' ')
                 {
-                    Console.Clear();
-                    Game.Overlap();
+                    Console.Clear(); // 중복해서 입력했을 때 지우고
+                    Game.Overlap(); // 다시 입력
                     Console.Write("다시 입력해주세요:"); // 입력했던 곳에 다시 입력할 때 재입력 안내
                     continue;
                 }
