@@ -13,30 +13,23 @@ namespace EnTicTacToe
         public void Judge()
         {
             Win.Check(); // 행, 열, 대각선이 완성되는 것을 체크
-            if (GameCheck.Draw == 9)
+            if (GameCheck.Draw == 9) // 첫 번째 플레이어면서 무승부 일 때
             {
-                Console.Write("무승부");
-                Console.Write("게임을 다시 시작하기 0번을 눌러주세요.");
+                Console.Write("무승부\n");
+                Console.Write("메뉴로 가려면 0번\n다시 시작하기는 1번을 눌러주세요.");
                 VsUser.Winner = false;
             }
-            if (GameCheck.WinCheck == 1) // 행, 열 대각선 완성되면 게임종료
+            else if (GameCheck.WinCheck == 1 && GameCheck.Draw % 2 == 0) // 첫 번째 플레이어면서 행, 열, 대각선 중 하나가 완성됐을 때
             {
                 Console.Write("O Player 승리\n");
-                Console.Write("게임을 다시 시작하기 0번을 눌러주세요.");
+                Console.Write("메뉴로 가려면 0번\n다시 시작하기는 1번을 눌러주세요.");
                 VsUser.Winner = false;
             }
 
-            Win.Check(); // 행, 열, 대각선이 완성되는 것을 체크
-            if (GameCheck.Draw == 9)
-            {
-                Console.Write("무승부 입니다.");
-                Console.Write("게임을 다시 시작하기 0번을 눌러주세요.");
-                VsUser.Winner = false;
-            }
-            if (GameCheck.WinCheck == 1) // 행, 열 대각선 완성되면 게임종료
+            else if (GameCheck.WinCheck == 1 && GameCheck.Draw % 2 == 1) // 두 번째 플레이어면서 행, 열 대각선 중 하나가 완성됐을 때
             {
                 Console.Write("X Player 승리\n");
-                Console.Write("게임을 다시 시작하기 0번을 눌러주세요.");
+                Console.Write("메뉴로 가려면 0번\n다시 시작하기는 1번을 눌러주세요.");
                 VsUser.Winner = false;
             }
         }
