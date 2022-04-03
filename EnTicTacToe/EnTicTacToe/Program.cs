@@ -10,6 +10,8 @@ namespace EnTicTacToe
     {
         static void Main(string[] args)
         {
-
+            StartMenu Screen = new StartMenu();
+            Screen.Menu();
         }
+    }
 }

@@ -1,0 +1,15 @@
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\EnTicTacToe.csproj.AssemblyReference.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\EnTicTacToe.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\EnTicTacToe.AssemblyInfoInputs.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\EnTicTacToe.AssemblyInfo.cs
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\EnTicTacToe.csproj.CoreCompileInputs.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\bin\Debug\net6.0\EnTicTacToe.exe
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\bin\Debug\net6.0\EnTicTacToe.deps.json
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\bin\Debug\net6.0\EnTicTacToe.runtimeconfig.json
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\bin\Debug\net6.0\EnTicTacToe.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\bin\Debug\net6.0\EnTicTacToe.pdb
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\EnTicTacToe.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\refint\EnTicTacToe.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\EnTicTacToe.pdb
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\EnTicTacToe.genruntimeconfig.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnTicTacToe\EnTicTacToe\obj\Debug\net6.0\ref\EnTicTacToe.dll
