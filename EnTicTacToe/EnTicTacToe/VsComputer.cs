@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnTicTacToe
 {
-    internal class VsComputer
+    class VsComputer
     {
         public void Computer()
         {
