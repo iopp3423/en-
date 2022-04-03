@@ -8,5 +8,9 @@ namespace EnTicTacToe
 {
     internal class VsComputer
     {
+        public void Computer()
+        {
+
+        }
     }
 }
