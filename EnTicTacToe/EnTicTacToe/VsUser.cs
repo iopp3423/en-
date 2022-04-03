@@ -29,24 +29,26 @@ namespace EnTicTacToe
 
             while (Winner) 
             {
-                Input = int.Parse(Console.ReadLine());// 첫 번째로 입력하는 사람
-                Console.Write("{0}", Input);
+                Input = int.Parse(Console.ReadLine());// 플레이어 입력
                 if (GameBoard.Array[Input - 1] != ' ')
                 {
                     Console.Write("다시 입력해주세요:"); // 입력했던 곳에 다시 입력할 때 재입력 안내
-                    GameCheck.Draw--;
+                    continue;
                 }
-                else if (GameCheck.Draw % 2 == 0)
+                else if (GameCheck.Draw % 2 == 0)  // 짝수면 첫 번째 플레이어
                 {
                     Game.FirstSet(Input); // 입력값 배열에 넣기
-                    GameCheck.Draw++;
+                    GameCheck.Draw++; // 입력 횟수
+                    Result.Judge();
+                   if(Winner == true) Console.Write("X 입력할 차례입니다:");
                 }
-                else if (GameCheck.Draw % 2 == 1)
+                else if (GameCheck.Draw % 2 == 1) // 홀수면 두 번째 플레이어
                 {
-                    Game.SecondSet(Input);
-                    GameCheck.Draw++;
+                    Game.SecondSet(Input); // 입력값 배열에 넣기
+                    GameCheck.Draw++; // 입력 횟수
+                    Result.Judge();
+                    if (Winner == true)  Console.Write("O 입력할 차례입니다:");
                 }
-                Result.Judge();
             }
         }
     }
