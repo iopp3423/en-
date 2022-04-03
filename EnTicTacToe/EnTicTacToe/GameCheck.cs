@@ -8,10 +8,12 @@ namespace EnTicTacToe
 {
     public class GameCheck
     {
-        static public int WinCheck = 0;
+        static public int WinCheck = 0; // 1이 되면 게임 종료
+        static public int Draw = 0; // 무승부 세는 변수
 
         public void Check()
         {
+            Draw++; // 무승부 세기
             ////////////////////////행이 같을 때
             if (GameBoard.Array[0] == GameBoard.Array[1] && GameBoard.Array[1] == GameBoard.Array[2] && GameBoard.Array[0] != ' ') WinCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
             else if (GameBoard.Array[3] == GameBoard.Array[4] && GameBoard.Array[4] == GameBoard.Array[5] && GameBoard.Array[3] != ' ') WinCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
