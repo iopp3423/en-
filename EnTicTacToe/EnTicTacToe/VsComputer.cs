@@ -46,14 +46,39 @@ namespace EnTicTacToe
 
                 for (Matrix = 1; Matrix <= 9; Matrix++)
                 {
-                    if (GameBoard.Array[Matrix-1] == ' ')
+                    if (GameBoard.Array[Matrix-1] == ' ' && Matrix == 1) // 컴퓨터의 제일 처음 값은 ' '가 가장 빨리 오는 곳에 값을 넣는다.
                     {
-                        Console.Write(Matrix);
                         Game.SecondSet(Matrix);
                         Game.Overlap(); // 다시 화면출력
                         GameCheck.Draw++; // 입력 횟수
                         break;
                     }
+                    else if (GameBoard.Array[Matrix - 1] == ' ')
+                    {
+                        // 왼쪽 두 개 열에 O 입력 시 x로 방어
+                        if (GameBoard.Array[0] == GameBoard.Array[1]) Game.SecondSet(3);
+                        else if (GameBoard.Array[3] == GameBoard.Array[4]) Game.SecondSet(6);
+                        else if (GameBoard.Array[6] == GameBoard.Array[7]) Game.SecondSet(9);
+                        // 오른쪽 두 개 열에 O 입력 시 x로 방어
+                        if (GameBoard.Array[1] == GameBoard.Array[2]) Game.SecondSet(1);
+                        else if (GameBoard.Array[4] == GameBoard.Array[5]) Game.SecondSet(4);
+                        else if (GameBoard.Array[7] == GameBoard.Array[8]) Game.SecondSet(7);
+                        // 위에 두 개 행에 0 입력 시 x로 방어
+                        if (GameBoard.Array[0] == GameBoard.Array[3]) Game.SecondSet(7);
+                        else if (GameBoard.Array[1] == GameBoard.Array[4]) Game.SecondSet(8);
+                        else if (GameBoard.Array[2] == GameBoard.Array[5]) Game.SecondSet(9);
+                        // 아래 두 개 행에 0 입력 시 x로 방어
+                        if (GameBoard.Array[3] == GameBoard.Array[6]) Game.SecondSet(1);
+                        else if (GameBoard.Array[4] == GameBoard.Array[7]) Game.SecondSet(2);
+                        else if (GameBoard.Array[5] == GameBoard.Array[8]) Game.SecondSet(3);
+                        // 왼쪽에서 오른쪽 대각선 두 개 행 입력 시 x로 방어
+                        if (GameBoard.Array[0] == GameBoard.Array[4]) Game.SecondSet(9);
+                        else if (GameBoard.Array[4] == GameBoard.Array[8]) Game.SecondSet(1);
+                        // 오른쪽에서 왼쪽 대각선 두 개 행 입력 시 x로 방어
+                        if (GameBoard.Array[2] == GameBoard.Array[4]) Game.SecondSet(7);
+                        else if (GameBoard.Array[4] == GameBoard.Array[6]) Game.SecondSet(3);
+                    }
+
                 }
 
             }
