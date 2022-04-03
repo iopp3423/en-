@@ -21,14 +21,14 @@ namespace EnTicTacToe
             }
             else if (GameCheck.WinCheck == 1 && GameCheck.Draw % 2 == 0) // 첫 번째 플레이어면서 행, 열, 대각선 중 하나가 완성됐을 때
             {
-                Console.Write("O Player 승리\n");
+                Console.Write("X Player 승리\n");
                 Console.Write("메뉴로 가려면 0번\n다시 시작하기는 1번을 눌러주세요:");
                 VsUser.Winner = false; // VsUser 클래스의 while문 종료
             }
 
             else if (GameCheck.WinCheck == 1 && GameCheck.Draw % 2 == 1) // 두 번째 플레이어면서 행, 열 대각선 중 하나가 완성됐을 때
             {
-                Console.Write("X Player 승리\n");
+                Console.Write("O Player 승리\n");
                 Console.Write("메뉴로 가려면 0번\n다시 시작하기는 1번을 눌러주세요:");
                 VsUser.Winner = false; // VsUser 클래스의 while문 종료
             }

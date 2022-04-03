@@ -32,6 +32,8 @@ namespace EnTicTacToe
                 Input = int.Parse(Console.ReadLine());// 플레이어 입력
                 if (GameBoard.Array[Input - 1] != ' ')
                 {
+                    Console.Clear();
+                    Game.Overlap();
                     Console.Write("다시 입력해주세요:"); // 입력했던 곳에 다시 입력할 때 재입력 안내
                     continue;
                 }
