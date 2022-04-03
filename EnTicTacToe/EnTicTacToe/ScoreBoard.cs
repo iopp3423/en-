@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnTicTacToe
 {
-    class Program
+    internal class ScoreBoard
     {
-        static void Main(string[] args)
-        {
-
-        }
+    }
 }
