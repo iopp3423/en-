@@ -15,6 +15,7 @@ namespace EnTicTacToe
         public static int MenuNumber; // 입력받을 메뉴 번호
         static private bool Error;
         string InputSearch; // 오류 검출을 위한 입력 값
+        static public int Index=0; // 게임을 다시 시작할 때 구별하기 위한 값
 
         public void Menu()
         {
@@ -40,6 +41,7 @@ namespace EnTicTacToe
                 if (MenuNumber == 1) // 1번 입력받으면 VS유저로 이동 후 종료
                 {
                     UserCase.User();
+                    Index++;
                     break;
                 }
                 else if (MenuNumber == 2) // 2번 입력받으면 VS컴퓨터로 이동 후 종료
