@@ -40,53 +40,58 @@
                 Result.Judge(); // Judgement 클래스로 이동 후 행렬 체크
 
 
-                for (Matrix = 1; Matrix <= 9; Matrix++)
+                // == 'O'은 ' '끼리 같은 때 X가 입력되는 것을 방지
+                // continue는 두 개의 행과 열이 중첩 반복될 때 x가 두 번 입력되는 것을 방지
+                Count = 0;
+                if (GameBoard.Array[0] == 'O' && GameBoard.Array[1] == 'O' && GameBoard.Array[2] == ' ') { Game.SecondSet(3); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[3] == 'O' && GameBoard.Array[4] == 'O' && GameBoard.Array[5] == ' ') { Game.SecondSet(6); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[6] == 'O' && GameBoard.Array[7] == 'O' && GameBoard.Array[8] == ' ') { Game.SecondSet(9); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                // 오른쪽 두 개 열에 O 입력 시 x로 방어
+                if (GameBoard.Array[1] == 'O' && GameBoard.Array[2] == 'O' && GameBoard.Array[0] == ' ') { Game.SecondSet(1); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[4] == 'O' && GameBoard.Array[5] == 'O' && GameBoard.Array[3] == ' ') { Game.SecondSet(4); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[7] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[6] == ' ') { Game.SecondSet(7); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                // 위에 두 개 행에 0 입력 시 x로 방어
+                if (GameBoard.Array[0] == 'O' && GameBoard.Array[3] == 'O' && GameBoard.Array[6] == ' ') { Game.SecondSet(7); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[1] == 'O' && GameBoard.Array[4] == 'O' && GameBoard.Array[7] == ' ') { Game.SecondSet(8); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[2] == 'O' && GameBoard.Array[5] == 'O' && GameBoard.Array[8] == ' ') { Game.SecondSet(9); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                // 아래 두 개 행에 0 입력 시 x로 방어
+                if (GameBoard.Array[3] == 'O' && GameBoard.Array[6] == 'O' && GameBoard.Array[0] == ' ') { Game.SecondSet(1); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[4] == 'O' && GameBoard.Array[7] == 'O' && GameBoard.Array[1] == ' ') { Game.SecondSet(2); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[5] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[2] == ' ') { Game.SecondSet(3); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                // 왼쪽에서 오른쪽 대각선 두 개 행 입력 시 x로 방어
+                if (GameBoard.Array[0] == 'O' && GameBoard.Array[4] == 'O' && GameBoard.Array[8] == ' ') { Game.SecondSet(9); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[4] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[0] == ' ') { Game.SecondSet(1); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                // 오른쪽에서 왼쪽 대각선 두 개 행 입력 시 x로 방어
+                if (GameBoard.Array[2] == 'O' && GameBoard.Array[4] == 'O' && GameBoard.Array[6] == ' ') { Game.SecondSet(7); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[4] == 'O' && GameBoard.Array[6] == 'O' && GameBoard.Array[2] == ' ') { Game.SecondSet(3); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                // 첫행과 세 번째 행이 같을 시
+                if (GameBoard.Array[0] == 'O' && GameBoard.Array[6] == 'O' && GameBoard.Array[3] == ' ') { Game.SecondSet(4); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[1] == 'O' && GameBoard.Array[7] == 'O' && GameBoard.Array[4] == ' ') { Game.SecondSet(5); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[2] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[5] == ' ') { Game.SecondSet(6); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                // 첫열과 세 번째 열이 같을 시
+                if (GameBoard.Array[0] == 'O' && GameBoard.Array[2] == 'O' && GameBoard.Array[1] == ' ') { Game.SecondSet(2); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[3] == 'O' && GameBoard.Array[5] == 'O' && GameBoard.Array[4] == ' ') { Game.SecondSet(5); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[6] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[7] == ' ') { Game.SecondSet(8); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                // 띄어진 대각선 원소끼리 같을 시
+                if (GameBoard.Array[0] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[4] == ' ') { Game.SecondSet(5); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+                if (GameBoard.Array[2] == 'O' && GameBoard.Array[6] == 'O' && GameBoard.Array[4] == ' ') { Game.SecondSet(5); GameCheck.Draw++; Count++; Result.Judge(); continue; }
+
+                //방어가 안되는 경우일 경우 제일 처음오는 ' '에 x값 대입
+                if(Count == 0)
                 {
-                    if (Count == 0 && GameBoard.Array[Matrix - 1] == ' ') // 컴퓨터의 제일 처음 값은 ' '가 가장 빨리 오는 곳에 값을 넣는다.
+                    for (Matrix = 1; Matrix <= 9; Matrix++)
                     {
-                        Count++;
-                        Game.SecondSet(Matrix);
-                        Game.Overlap(); // 다시 화면출력
-                        GameCheck.Draw++; // 입력 횟수
-                        break;
+                        if (GameBoard.Array[Matrix - 1] == ' ') // 컴퓨터의 제일 처음 값은 ' '가 가장 빨리 오는 곳에 값을 넣는다.
+                        {
+                            Count++;
+                            Game.SecondSet(Matrix);
+                            Game.Overlap(); // 다시 화면출력
+                            GameCheck.Draw++; // 입력 횟수
+                            break;
+                        }
                     }
                 }
-                // == 'O'은 ' '끼리 같은 때 X가 입력되는 것을 방지
-                if (GameBoard.Array[0] == 'O' && GameBoard.Array[1] == 'O' && GameBoard.Array[2] == ' ') { Game.SecondSet(3); }
-                if (GameBoard.Array[3] == 'O' && GameBoard.Array[4] == 'O' && GameBoard.Array[5] == ' ') { Game.SecondSet(6); }
-                if (GameBoard.Array[6] == 'O' && GameBoard.Array[7] == 'O' && GameBoard.Array[8] == ' ') { Game.SecondSet(9); }
-                // 오른쪽 두 개 열에 O 입력 시 x로 방어
-                if (GameBoard.Array[1] == 'O' && GameBoard.Array[2] == 'O' && GameBoard.Array[0] == ' ') { Game.SecondSet(1); }
-                if (GameBoard.Array[4] == 'O' && GameBoard.Array[5] == 'O' && GameBoard.Array[3] == ' ') { Game.SecondSet(4); }
-                if (GameBoard.Array[7] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[6] == ' ') { Game.SecondSet(7); }
-                // 위에 두 개 행에 0 입력 시 x로 방어
-                if (GameBoard.Array[0] == 'O' && GameBoard.Array[3] == 'O' && GameBoard.Array[6] == ' ') { Game.SecondSet(7); }
-                if (GameBoard.Array[1] == 'O' && GameBoard.Array[4] == 'O' && GameBoard.Array[7] == ' ') { Game.SecondSet(8); }
-                if (GameBoard.Array[2] == 'O' && GameBoard.Array[5] == 'O' && GameBoard.Array[8] == ' ') { Game.SecondSet(9); }
-                // 아래 두 개 행에 0 입력 시 x로 방어
-                if (GameBoard.Array[3] == 'O' && GameBoard.Array[6] == 'O' && GameBoard.Array[0] == ' ') { Game.SecondSet(1); }
-                if (GameBoard.Array[4] == 'O' && GameBoard.Array[7] == 'O' && GameBoard.Array[1] == ' ') { Game.SecondSet(2); }
-                if (GameBoard.Array[5] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[2] == ' ') { Game.SecondSet(3); }
-                // 왼쪽에서 오른쪽 대각선 두 개 행 입력 시 x로 방어
-                if (GameBoard.Array[0] == 'O' && GameBoard.Array[4] == 'O' && GameBoard.Array[8] == ' ') { Game.SecondSet(9); }
-                if (GameBoard.Array[4] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[0] == ' ') { Game.SecondSet(1); }
-                // 오른쪽에서 왼쪽 대각선 두 개 행 입력 시 x로 방어
-                if (GameBoard.Array[2] == 'O' && GameBoard.Array[4] == 'O' && GameBoard.Array[6] == ' ') { Game.SecondSet(7); }
-                if (GameBoard.Array[4] == 'O' && GameBoard.Array[6] == 'O' && GameBoard.Array[2] == ' ') { Game.SecondSet(3); }
-                // 첫행과 세 번째 행이 같을 시
-                if (GameBoard.Array[0] == 'O' && GameBoard.Array[6] == 'O' && GameBoard.Array[3] == ' ') { Game.SecondSet(4); }
-                if (GameBoard.Array[1] == 'O' && GameBoard.Array[7] == 'O' && GameBoard.Array[4] == ' ') { Game.SecondSet(5); }
-                if (GameBoard.Array[2] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[5] == ' ') { Game.SecondSet(6); }
-                // 첫열과 세 번째 열이 같을 시
-                if (GameBoard.Array[0] == 'O' && GameBoard.Array[2] == 'O' && GameBoard.Array[1] == ' ') { Game.SecondSet(2); }
-                if (GameBoard.Array[3] == 'O' && GameBoard.Array[5] == 'O' && GameBoard.Array[4] == ' ') { Game.SecondSet(5); }
-                if (GameBoard.Array[6] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[7] == ' ') { Game.SecondSet(8); }
-                // 띄어진 대각선 원소끼리 같을 시
-                if (GameBoard.Array[0] == 'O' && GameBoard.Array[8] == 'O' && GameBoard.Array[4] == ' ') { Game.SecondSet(5); }
-                if (GameBoard.Array[2] == 'O' && GameBoard.Array[6] == 'O' && GameBoard.Array[4] == ' ') { Game.SecondSet(5); }
-
-                GameCheck.Draw++; // 입력 횟수
-                Result.Judge();
+                
 
 
 
