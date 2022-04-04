@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace EnTicTacToe
 {
-    class StartMenu
+    public class StartMenu
     {
         VsUser UserCase = new VsUser();
         VsComputer ComputerCase = new VsComputer();
+        public static int MenuNumber; // 입력받을 메뉴 번호
+
         public void Menu()
-        {
-            int MenuNumber; // 입력받을 메뉴 번호
+        {           
 
             Console.Write("      Tic Tac Toe 게임을 시작합니다!\n\n");
             Console.Write(" -----------------메뉴--------------------\n");

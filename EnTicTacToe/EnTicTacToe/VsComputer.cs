@@ -5,13 +5,13 @@
         GameBoard Game = new GameBoard();
         GameCheck Win = new GameCheck();
         Judgement Result = new Judgement();
-
+        int Data;
+        int Matrix;
+        int Count = 0; // 컴퓨터가 방어하는 경우의 수가 을 때 값을 입력넣기 위한 수
         static public bool Estimate = true;
+
         public void Computer()
         {
-            int Data;
-            int Matrix;
-            int Count = 0; // 컴퓨터가 방어하는 경우의 수가 없을 때 값을 입력넣기 위한 수
 
 
             Console.Clear();
