@@ -11,6 +11,7 @@ namespace EnTicTacToe
         GameBoard Game = new GameBoard();
         GameCheck Win = new GameCheck();
         Judgement Result = new Judgement();
+        ScoreBoard Score = new ScoreBoard();
         static public bool Winner = true;
         static private bool Error;
         string InputSearch; // 오류 검출을 위한 입력 값
@@ -19,6 +20,7 @@ namespace EnTicTacToe
         {
             Exception Code = new Exception();
             Console.Clear();
+            Score.Board();
             Console.Write("---l---l---\n");
             Console.Write(" 1 l 2 l 3\n");
             Console.Write("---l---l---\n");
@@ -30,11 +32,12 @@ namespace EnTicTacToe
 
             while (Winner)
             {
+                //////////////오류검출  및 입력코드/////////////////////
                 InputSearch = Console.ReadLine();
                 Error = Code.Check(InputSearch);
                 if (Error == true) Input = int.Parse(InputSearch);
                 else if (Error == false) { Console.Write("범위가 벗어난 값을 입력하여 게임이 종료됩니다."); break; }
-
+                //////////////오류검출  및 입력코드/////////////////////
 
                 if (GameBoard.Array[Input - 1] != ' ')
                 {

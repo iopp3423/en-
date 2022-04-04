@@ -10,11 +10,15 @@ namespace EnTicTacToe
     {
         VsUser UserCase = new VsUser();
         VsComputer ComputerCase = new VsComputer();
+        Exception Code = new Exception();
+        ScoreBoard Score = new ScoreBoard();
         public static int MenuNumber; // 입력받을 메뉴 번호
+        static private bool Error;
+        string InputSearch; // 오류 검출을 위한 입력 값
 
         public void Menu()
-        {           
-
+        {
+            Score.Board();
             Console.Write("      Tic Tac Toe 게임을 시작합니다!\n\n");
             Console.Write(" -----------------메뉴--------------------\n");
             Console.Write("ㅣ게임을 종료하시려면 0번을 입력주세요.  ㅣ\n");
@@ -23,7 +27,13 @@ namespace EnTicTacToe
             Console.Write(" -----------------------------------------\n");
             Console.Write("모드 선택 : ");
 
-            MenuNumber = int.Parse(Console.ReadLine()); // 모드 선택을 위한 메뉴넘버 입력
+            //////////////오류검출  및 입력코드/////////////////////
+            InputSearch = Console.ReadLine();
+            Error = Code.Check(InputSearch);
+            if (Error == true) MenuNumber = int.Parse(InputSearch);
+            else if (Error == false) { Console.Write("범위가 벗어난 값을 입력하여 게임이 종료됩니다.");}
+            //////////////오류검출  및 입력코드/////////////////////
+
             while (MenuNumber != 0)
             { 
                 Console.Clear();

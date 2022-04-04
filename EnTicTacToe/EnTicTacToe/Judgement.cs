@@ -13,16 +13,25 @@ namespace EnTicTacToe
         GameBoard Game = new GameBoard();
         ScoreBoard Score = new ScoreBoard();
         int MenuSelect;
+        static private bool Error;
+        string InputSearch; // 오류 검출을 위한 입력 값
         public void ReGame()
         {
+            Exception Code = new Exception();
             StartMenu Screen = new StartMenu();
             VsUser.Winner = false; // VsUser 클래스의 while문 종료
             VsComputer.Estimate = false; //Vscomputer 클래스의 while문 종료
-            MenuSelect = int.Parse(Console.ReadLine());
+
+            //////////////오류검출  및 입력코드/////////////////////
+            InputSearch = Console.ReadLine();
+            Error = Code.Check(InputSearch);
+            if (Error == true) MenuSelect = int.Parse(InputSearch);
+            else if (Error == false) { Console.Write("범위가 벗어난 값을 입력하여 게임이 종료됩니다.");}
+            //////////////오류검출  및 입력코드/////////////////////
             Console.Clear();
 
 
-            if (MenuSelect == 0)
+            if (MenuSelect == 1)
             {
                 Game.Set();// 입력했던 값 초기화
                 VsUser.Winner = true; // while 문 true로 재설정
@@ -41,8 +50,8 @@ namespace EnTicTacToe
                 Score.Board();
                 Game.Overlap();
                 Console.WriteLine("-----------------------무승부------------------------");
-                Console.WriteLine("------------다시 시작하기 메뉴 이동은 0번------------");
-                Console.WriteLine("-------------------게임 종료는 1번-------------------");
+                Console.WriteLine("-------------------게임 종료는 0번-------------------");
+                Console.WriteLine("------------다시 시작하기 메뉴 이동은 1번------------");
                 ReGame();
                
             }
@@ -51,8 +60,8 @@ namespace EnTicTacToe
                 ScoreBoard.XPlayer++;
                 WinPlayer();
                 Console.WriteLine("-------------------X Player 승리---------------------");
-                Console.WriteLine("------------다시 시작하기 메뉴 이동은 0번------------");
-                Console.WriteLine("-------------------게임 종료는 1번-------------------");
+                Console.WriteLine("------------다시 시작하기 메뉴 이동은 1번------------");
+                Console.WriteLine("-------------------게임 종료는 0번-------------------");
                 ReGame();
             }
 
@@ -61,8 +70,8 @@ namespace EnTicTacToe
                 ScoreBoard.YPlayer++;
                 WinPlayer();
                 Console.WriteLine("-------------------O Player 승리---------------------");
-                Console.WriteLine("------------다시 시작하기 메뉴 이동은 0번------------");
-                Console.WriteLine("-------------------게임 종료는 1번-------------------");
+                Console.WriteLine("------------다시 시작하기 메뉴 이동은 1번------------");
+                Console.WriteLine("-------------------게임 종료는 0번-------------------");
                 ReGame();
             }
         }

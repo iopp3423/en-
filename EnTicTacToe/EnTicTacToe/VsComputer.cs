@@ -5,16 +5,18 @@
         GameBoard Game = new GameBoard();
         GameCheck Win = new GameCheck();
         Judgement Result = new Judgement();
+        ScoreBoard Score = new ScoreBoard();
         int Data;
         int Matrix;
         int Count = 0; // 컴퓨터가 방어하는 경우의 수가 을 때 값을 입력넣기 위한 수
         static public bool Estimate = true;
-
+        static private bool Error;
+        string InputSearch; // 오류 검출을 위한 입력 값
         public void Computer()
         {
-
-
+            Exception Code = new Exception();
             Console.Clear();
+            Score.Board();
             Console.Write("---l---l---\n");
             Console.Write(" 1 l 2 l 3\n");
             Console.Write("---l---l---\n");
@@ -22,11 +24,18 @@
             Console.Write("---l---l---\n");
             Console.Write(" 7 l 8 l 9\n");
             Console.Write("---l---l---\n");
-            Console.Write("번호를 입력하세요:");
+ 
 
             while (Estimate)
             {
-                Data = int.Parse(Console.ReadLine());// 플레이어 입력
+                //////////////오류검출  및 입력코드/////////////////////
+                Console.Write("번호를 입력하세요::");
+                InputSearch = Console.ReadLine();
+                Error = Code.Check(InputSearch);
+                if (Error == true) Data = int.Parse(InputSearch);
+                else if (Error == false) { Console.Write("범위가 벗어난 값을 입력하여 게임이 종료됩니다."); break; }
+                //////////////오류검출  및 입력코드/////////////////////
+
                 if (GameBoard.Array[Data - 1] != ' ') // 중복입력시 재입력
                 {
                     Console.Clear(); // 중복해서 입력했을 때 화면 지우고
