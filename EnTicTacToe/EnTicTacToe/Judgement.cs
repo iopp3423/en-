@@ -34,7 +34,7 @@ namespace EnTicTacToe
         public void Judge()
         {
             Win.Check(); // 행, 열, 대각선이 완성되는 것을 체크
-            if (GameCheck.Draw == 9) // 첫 번째 플레이어면서 무승부 일 때
+            if (GameCheck.Draw == 9) // 첫 번째 플레이어면서 무승부 일 때    
             {
                 Console.Clear();
                 Score.Board();
