@@ -11,7 +11,7 @@
         {
             int Data;
             int Matrix;
-            int Count = 0; // 컴퓨터의 맨 처음 값을 입력하기 위한 변수
+            int Count = 0; // 컴퓨터가 방어하는 경우의 수가 없을 때 값을 입력넣기 위한 수
 
 
             Console.Clear();
