@@ -42,7 +42,7 @@
 
                 // == 'O'은 ' '끼리 같은 때 X가 입력되는 것을 방지
                 // continue는 두 개의 행과 열이 중첩 반복될 때 x가 두 번 입력되는 것을 방지
-                //Draw는 0, x 수 9 개 되면 무승부
+                //Draw는 0, x 수 
                 Count = 0;
                 if (GameBoard.Array[0] == 'O' && GameBoard.Array[1] == 'O' && GameBoard.Array[2] == ' ') { Game.SecondSet(3); GameCheck.Draw++; Count++; Result.Judge(); continue; }
                 if (GameBoard.Array[3] == 'O' && GameBoard.Array[4] == 'O' && GameBoard.Array[5] == ' ') { Game.SecondSet(6); GameCheck.Draw++; Count++; Result.Judge(); continue; }

@@ -8,37 +8,28 @@ namespace EnTicTacToe
 {
     public class GameBoard
     {
+        ScoreBoard Score = new ScoreBoard();
         static public char[] Array = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' };
         int Index;
 
+        
         public void FirstSet(int FirstNumber)
         {
             Array[FirstNumber - 1] = 'O';
             Console.Clear();
-            Console.Write("---l---l---\n");
-            Console.Write(" {0} l {1} l {2}\n", Array[0], Array[1], Array[2]);
-            Console.Write("---l---l---\n");
-            Console.Write(" {0} l {1} l {2}\n", Array[3], Array[4], Array[5]);
-            Console.Write("---l---l---\n");
-            Console.Write(" {0} l {1} l {2}\n", Array[6], Array[7], Array[8]);
-            Console.Write("---l---l---\n");
+            Overlap();
         }
         
         public void SecondSet(int SecondNumber)
         {
             Array[SecondNumber - 1] = 'X';
             Console.Clear();
-            Console.Write("---l---l---\n");
-            Console.Write(" {0} l {1} l {2}\n", Array[0], Array[1], Array[2]);
-            Console.Write("---l---l---\n");
-            Console.Write(" {0} l {1} l {2}\n", Array[3], Array[4], Array[5]);
-            Console.Write("---l---l---\n");
-            Console.Write(" {0} l {1} l {2}\n", Array[6], Array[7], Array[8]);
-            Console.Write("---l---l---\n");
+            Overlap();
         }
         public void Overlap()
         {
             Console.Clear();
+            Score.Board();
             Console.Write("---l---l---\n");
             Console.Write(" {0} l {1} l {2}\n", Array[0], Array[1], Array[2]);
             Console.Write("---l---l---\n");

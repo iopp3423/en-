@@ -11,7 +11,7 @@ namespace EnTicTacToe
     {
         GameCheck Win = new GameCheck();
         GameBoard Game = new GameBoard();
-        int index;
+        ScoreBoard Score = new ScoreBoard();
         int MenuSelect;
         public void ReGame()
         {
@@ -36,6 +36,9 @@ namespace EnTicTacToe
             Win.Check(); // 행, 열, 대각선이 완성되는 것을 체크
             if (GameCheck.Draw == 9) // 첫 번째 플레이어면서 무승부 일 때
             {
+                Console.Clear();
+                Score.Board();
+                Game.Overlap();
                 Console.WriteLine("-----------------------무승부------------------------");
                 Console.WriteLine("------------다시 시작하기 메뉴 이동은 0번------------");
                 Console.WriteLine("-------------------게임 종료는 1번-------------------");
@@ -44,6 +47,8 @@ namespace EnTicTacToe
             }
             else if (GameCheck.WinCheck == 1 && GameCheck.Draw % 2 == 0) // 첫 번째 플레이어면서 행, 열, 대각선 중 하나가 완성됐을 때
             {
+                ScoreBoard.XPlayer++;
+                WinPlayer();
                 Console.WriteLine("-------------------X Player 승리---------------------");
                 Console.WriteLine("------------다시 시작하기 메뉴 이동은 0번------------");
                 Console.WriteLine("-------------------게임 종료는 1번-------------------");
@@ -52,11 +57,19 @@ namespace EnTicTacToe
 
             else if (GameCheck.WinCheck == 1 && GameCheck.Draw % 2 == 1) // 두 번째 플레이어면서 행, 열 대각선 중 하나가 완성됐을 때
             {
+                ScoreBoard.YPlayer++;
+                WinPlayer();
                 Console.WriteLine("-------------------O Player 승리---------------------");
                 Console.WriteLine("------------다시 시작하기 메뉴 이동은 0번------------");
                 Console.WriteLine("-------------------게임 종료는 1번-------------------");
                 ReGame();
             }
+        }
+        public void WinPlayer()
+        {
+            Console.Clear();
+            Score.Board();
+            Game.Overlap();
         }
     }
 }
