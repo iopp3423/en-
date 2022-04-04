@@ -21,6 +21,7 @@ namespace EnTicTacToe
             MenuSelect = int.Parse(Console.ReadLine());
             Console.Clear();
 
+
             if (MenuSelect == 0)
             {
                 Game.Set();// 입력했던 값 초기화

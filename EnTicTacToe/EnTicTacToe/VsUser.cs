@@ -12,12 +12,12 @@ namespace EnTicTacToe
         GameCheck Win = new GameCheck();
         Judgement Result = new Judgement();
         static public bool Winner = true;
+        static private bool Error;
         string InputSearch; // 오류 검출을 위한 입력 값
-        int Input; // 정수 입력 값
+        int Input; // 정수 
         public void User()
         {
-
-
+            Exception Code = new Exception();
             Console.Clear();
             Console.Write("---l---l---\n");
             Console.Write(" 1 l 2 l 3\n");
@@ -28,15 +28,14 @@ namespace EnTicTacToe
             Console.Write("---l---l---\n");
             Console.Write("번호를 입력하세요:");
 
-            while (Winner) 
+            while (Winner)
             {
+                InputSearch = Console.ReadLine();
+                Error = Code.Check(InputSearch);
+                if (Error == true) Input = int.Parse(InputSearch);
+                else if (Error == false) { Console.Write("범위가 벗어난 값을 입력하여 게임이 종료됩니다."); break; }
 
-                //InputSearch = Console.ReadLine();
-                Input = int.Parse(Console.ReadLine()); 
-                
-                Console.Write(InputSearch);
-                //Input = int.Parse(Console.ReadLine());// 플레이어 입력
-                /*
+
                 if (GameBoard.Array[Input - 1] != ' ')
                 {
                     Console.Clear(); // 중복해서 입력했을 때 지우고
@@ -59,7 +58,7 @@ namespace EnTicTacToe
                     GameCheck.Draw++; // 입력 횟수
                     Result.Judge();
                     if (Winner == true)  Console.Write("O 입력할 차례입니다:");
-                }*/
+                }
             }
         }
     }

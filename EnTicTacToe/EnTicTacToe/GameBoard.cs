@@ -13,14 +13,14 @@ namespace EnTicTacToe
         int Index;
 
         
-        public void FirstSet(int FirstNumber)
+        public void FirstSet(int FirstNumber) // O 입력
         {
             Array[FirstNumber - 1] = 'O';
             Console.Clear();
             Overlap();
         }
         
-        public void SecondSet(int SecondNumber)
+        public void SecondSet(int SecondNumber) // X 입력
         {
             Array[SecondNumber - 1] = 'X';
             Console.Clear();
