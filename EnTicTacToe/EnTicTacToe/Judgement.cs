@@ -74,7 +74,7 @@ namespace EnTicTacToe
             {
                 ScoreBoard.XPlayer++;
                 WinPlayer();
-                Console.WriteLine("-----------------------무승부------------------------");
+                Console.WriteLine("-----------------------X 승리-----------------------");
                 Console.WriteLine("-------------------게임 종료는 0번-------------------");
                 Console.WriteLine("-------------------메뉴 이동은 1번-------------------");
                 Console.WriteLine("-----------------다시 시작하기는 2번-----------------");
@@ -85,7 +85,7 @@ namespace EnTicTacToe
             {
                 ScoreBoard.YPlayer++;
                 WinPlayer();
-                Console.WriteLine("-----------------------무승부------------------------");
+                Console.WriteLine("-----------------------O 승리------------------------");
                 Console.WriteLine("-------------------게임 종료는 0번-------------------");
                 Console.WriteLine("-------------------메뉴 이동은 1번-------------------");
                 Console.WriteLine("-----------------다시 시작하기는 2번-----------------");
