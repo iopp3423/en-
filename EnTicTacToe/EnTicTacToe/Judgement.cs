@@ -20,11 +20,11 @@ namespace EnTicTacToe
         {
             Exception Code = new Exception();
             StartMenu Screen = new StartMenu();
-            VsUser UserCase = new VsUser();
-            VsComputer ComputerCase = new VsComputer();
+            VersusUser UserCase = new VersusUser();
+            VersusComputer ComputerCase = new VersusComputer();
 
-            VsUser.Winner = false; // VsUser 클래스의 while문 종료
-            VsComputer.Estimate = false; //Vscomputer 클래스의 while문 종료
+            VersusUser.Winner = false; // VsUser 클래스의 while문 종료
+            VersusComputer.Estimate = false; //Vscomputer 클래스의 while문 종료
 
             //////////////오류검출  및 입력코드/////////////////////
             InputSearch = Console.ReadLine();
@@ -101,8 +101,8 @@ namespace EnTicTacToe
         public void Reset()
         {
             Game.Set();// 입력했던 값 초기화
-            VsUser.Winner = true; // while 문 true로 재설정
-            VsComputer.Estimate = true; // while 문 true로 재설정
+            VersusUser.Winner = true; // while 문 true로 재설정
+            VersusComputer.Estimate = true; // while 문 true로 재설정
             GameCheck.Draw = 0;
             GameCheck.WinCheck = 0;
         }

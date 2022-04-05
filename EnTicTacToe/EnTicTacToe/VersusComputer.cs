@@ -1,6 +1,6 @@
 ﻿namespace EnTicTacToe
 {
-    class VsComputer
+    class VersusComputer
     {
         GameBoard Game = new GameBoard();
         GameCheck Win = new GameCheck();
@@ -33,7 +33,18 @@
                 InputSearch = Console.ReadLine();
                 Error = Code.Check(InputSearch);
                 if (Error == true) Data = int.Parse(InputSearch);
-                else if (Error == false) { Console.Write("범위가 벗어난 값을 입력하여 게임이 종료됩니다."); break; }
+                else if (Error == false)
+                    {
+                        while (Error != true)
+                        {
+                            Console.Clear();
+                            Game.Overlap(); // 다시 입력
+                                            //UserMenuBoard();
+                            Console.Write("숫자 의외의 값입니다. 다시 입력해주세요 : ");
+                            InputSearch = Console.ReadLine();
+                            Error = Code.Check(InputSearch);
+                        }
+                    }
                 //////////////오류검출  및 입력코드/////////////////////
 
                 if (GameBoard.Array[Data - 1] != ' ') // 중복입력시 재입력
