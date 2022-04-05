@@ -16,6 +16,12 @@ namespace EnTicTacToe
         int MenuSelect;
         static private bool Error;
         string InputSearch; // 오류 검출을 위한 입력 값
+        void Select()
+        {
+            Console.WriteLine("-------------------게임 종료는 0번-------------------");
+            Console.WriteLine("-------------------메뉴 이동은 1번-------------------");
+            Console.WriteLine("-----------------다시 시작하기는 2번-----------------");
+        }
         public void ReGame()
         {
             Exception Code = new Exception();
@@ -30,7 +36,19 @@ namespace EnTicTacToe
             InputSearch = Console.ReadLine();
             Error = Code.Check(InputSearch);
             if (Error == true) MenuSelect = int.Parse(InputSearch);
-            else if (Error == false) { Console.Write("범위가 벗어난 값을 입력하여 게임이 종료됩니다.");}
+            else if (Error == false)
+            {
+                while (Error != true)
+                {
+                    Console.Clear();
+                    Game.Overlap(); // 다시 입력                
+                    Select();
+                    Console.Write("숫자 의외의 값입니다. 다시 입력해주세요 : ");
+                    InputSearch = Console.ReadLine();
+                    Error = Code.Check(InputSearch);
+                }
+                MenuSelect = int.Parse(InputSearch);
+            }
             //////////////오류검출  및 입력코드/////////////////////
             Console.Clear();
 
