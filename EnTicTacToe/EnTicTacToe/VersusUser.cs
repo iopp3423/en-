@@ -55,7 +55,7 @@ namespace EnTicTacToe
                 Input = int.Parse(InputSearch);
                 //////////////오류검출  및 입력코드/////////////////////
 
-                if (GameBoard.Array[Input - 1] != ' ')
+                if (GameBoard.Array[Input - 1] == 'O' || GameBoard.Array[Input - 1] == 'X')
                 {
                     Console.Clear(); // 중복해서 입력했을 때 지우고
                     Game.Overlap(); // 다시 입력
