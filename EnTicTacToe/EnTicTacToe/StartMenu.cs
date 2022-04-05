@@ -12,10 +12,10 @@ namespace EnTicTacToe
         VersusComputer ComputerCase = new VersusComputer();
         Exception Code = new Exception();
         ScoreBoard Score = new ScoreBoard();
-        public static int MenuNumber; // 입력받을 메뉴 번호
-        static private bool Error;
-        string InputSearch; // 오류 검출을 위한 입력 값
-        static public int Index=0; // 게임을 다시 시작할 때 구별하기 위한 값
+        public static int menuNumber; // 입력받을 메뉴 번호
+        static private bool error;
+        string inputSearch; // 오류 검출을 위한 입력 값
+        static public int index=0; // 게임을 다시 시작할 때 구별하기 위한 값
 
         void GameMenu()
         {
@@ -33,33 +33,33 @@ namespace EnTicTacToe
             Console.Write("모드 선택 : ");
 
             //////////////오류검출  및 입력코드/////////////////////
-            InputSearch = Console.ReadLine();
-            Error = Code.Check(InputSearch);
-            if (Error == true) MenuNumber = int.Parse(InputSearch);
-            else if (Error == false) 
+            inputSearch = Console.ReadLine();
+            error = Code.Check(inputSearch);
+            if (error == true) menuNumber = int.Parse(inputSearch);
+            else if (error == false) 
             {
-                while (Error != true)
+                while (error != true)
                 {
                     Console.Clear();
                     GameMenu();
                     Console.Write("숫자 의외의 값입니다. 다시 입력해주세요 : ");
-                    InputSearch = Console.ReadLine();
-                    Error = Code.Check(InputSearch);
+                    inputSearch = Console.ReadLine();
+                    error = Code.Check(inputSearch);
                 }
-                MenuNumber = int.Parse(InputSearch);
+                menuNumber = int.Parse(inputSearch);
             }
             //////////////오류검출  및 입력코드/////////////////////
 
-            while (MenuNumber != 0)
+            while (menuNumber != 0)
             { 
                 Console.Clear();
-                if (MenuNumber == 1) // 1번 입력받으면 VS유저로 이동 후 종료
+                if (menuNumber == 1) // 1번 입력받으면 VS유저로 이동 후 종료
                 {
                     UserCase.User();
-                    Index++;
+                    index++;
                     break;
                 }
-                else if (MenuNumber == 2) // 2번 입력받으면 VS컴퓨터로 이동 후 종료
+                else if (menuNumber == 2) // 2번 입력받으면 VS컴퓨터로 이동 후 종료
                 {
                     ComputerCase.Computer();
                     break;
@@ -69,7 +69,7 @@ namespace EnTicTacToe
                     GameMenu();
                     Console.Write("잘못 입력하셨습니다. 모드를 다시 입력해주세요.\n");
                     Console.Write("모드 선택 : ");
-                    MenuNumber = int.Parse(Console.ReadLine()); // 모드 선택을 위한 메뉴넘버 입력
+                    menuNumber = int.Parse(Console.ReadLine()); // 모드 선택을 위한 메뉴넘버 입력
                 }              
             }
         }

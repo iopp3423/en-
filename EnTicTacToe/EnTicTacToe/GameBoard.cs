@@ -10,7 +10,7 @@ namespace EnTicTacToe
     {
         ScoreBoard Score = new ScoreBoard();
         static public char[] Array = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        int Index;
+        int index;
 
         
         public void FirstSet(int FirstNumber) // O 입력
@@ -41,9 +41,9 @@ namespace EnTicTacToe
 
         public void Set() // 게임이 끝나면 입력했던 값 초기화 하기 위해 설정
         {
-            for(Index=0;Index<9;Index++)
+            for(index=0;index<9;index++)
             {
-                Array[Index] = ' ';
+                Array[index] = ' ';
             }
         }
     }
