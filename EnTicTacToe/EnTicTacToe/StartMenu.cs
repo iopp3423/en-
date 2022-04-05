@@ -55,8 +55,8 @@ namespace EnTicTacToe
                 Console.Clear();
                 if (menuNumber == 1) // 1번 입력받으면 VS유저로 이동 후 종료
                 {
-                    UserCase.User();
                     index++;
+                    UserCase.User();
                     break;
                 }
                 else if (menuNumber == 2) // 2번 입력받으면 VS컴퓨터로 이동 후 종료

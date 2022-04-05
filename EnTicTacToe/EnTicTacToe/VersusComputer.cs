@@ -12,8 +12,7 @@
         int count = 0; // 컴퓨터가 방어하는 경우의 수가 을 때 값을 입력넣기 위한 수       
         static public bool estimate = true;
         static private bool error;
-
-        string InputSearch; // 오류 검출을 위한 입력 값
+        string inputSearch; // 오류 검출을 위한 입력 값
         public void Computer()
         {
             int RandomInt;
@@ -30,10 +29,10 @@
             while (estimate)
             {
                 //////////////오류검출  및 입력코드/////////////////////
-                Console.Write("번호를 입력하세요::");
-                InputSearch = Console.ReadLine();
-                error = Code.Check(InputSearch);
-                if (error == true) data = int.Parse(InputSearch);
+                Console.Write("번호를 입력하세요:");
+                inputSearch = Console.ReadLine();
+                error = Code.Check(inputSearch);
+                if (error == true) data = int.Parse(inputSearch);
                 else if (error == false)
                 {
                         while (error != true)
@@ -41,10 +40,10 @@
                             Console.Clear();
                             Game.Overlap(); // 다시 입력
                             Console.Write("숫자 의외의 값입니다. 다시 입력해주세요 : ");
-                            InputSearch = Console.ReadLine();
-                            error = Code.Check(InputSearch);
+                            inputSearch = Console.ReadLine();
+                            error = Code.Check(inputSearch);
                         }
-                    data = int.Parse(InputSearch);
+                    data = int.Parse(inputSearch);
                 }
                 //////////////오류검출  및 입력코드/////////////////////
 
@@ -64,6 +63,7 @@
                 // continue는 두 개의 행과 열이 중첩 반복될 때 x가 두 번 입력되는 것을 방지
                 //Draw는 0, x 수 
                 count = 0;
+                // 왼쪽 두 개 열에 O 입력 시 x로 방어
                 if (GameBoard.array[0] == 'O' && GameBoard.array[1] == 'O' && GameBoard.array[1] != 'X') { Game.SecondSet(3); GameCheck.draw++; count++; Result.Judge(); continue; }
                 if (GameBoard.array[3] == 'O' && GameBoard.array[4] == 'O' && GameBoard.array[5] != 'X') { Game.SecondSet(6); GameCheck.draw++; count++; Result.Judge(); continue; }
                 if (GameBoard.array[6] == 'O' && GameBoard.array[7] == 'O' && GameBoard.array[8] != 'X') { Game.SecondSet(9); GameCheck.draw++; count++; Result.Judge(); continue; }
@@ -96,8 +96,8 @@
                 // 띄어진 대각선 원소끼리 같을 시
                 if (GameBoard.array[0] == 'O' && GameBoard.array[8] == 'O' && GameBoard.array[4] != 'X') { Game.SecondSet(5); GameCheck.draw++; count++; Result.Judge(); continue; }
                 if (GameBoard.array[2] == 'O' && GameBoard.array[6] == 'O' && GameBoard.array[4] != 'X') { Game.SecondSet(5); GameCheck.draw++; count++; Result.Judge(); continue; }
-
-                //방어가 안되는 경우일 경우 제일 처음오는 ' '에 x값 대입
+                
+                //방어가 안되는 경우일 경우 무작위 위치에 x대입
                 if(count == 0)
                 {
                     RandomAnswer = true;

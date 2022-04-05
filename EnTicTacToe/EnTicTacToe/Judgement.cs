@@ -57,12 +57,13 @@ namespace EnTicTacToe
             
             else if (menuSelect == 2 && StartMenu.index > 0) // 0보다 크면 유저모드
             {
+                StartMenu.index = 0;
                 Reset();// 리셋
-                UserCase.User(); // 유저랑 대결
-               
+                UserCase.User(); // 유저랑 대결   
             }
             else if(menuSelect == 2 && StartMenu.index == 0) // 0이랑 같으면 컴퓨터
             {
+                StartMenu.index = 0;
                 Reset();// 리셋
                 ComputerCase.Computer(); // 컴퓨터랑 대결
             }        
