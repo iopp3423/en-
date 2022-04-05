@@ -24,14 +24,7 @@
             Exception Code = new Exception();
             Console.Clear();
             Score.Board();
-            Console.Write("---l---l---\n");
-            Console.Write(" 1 l 2 l 3\n");
-            Console.Write("---l---l---\n");
-            Console.Write(" 4 l 5 l 6\n");
-            Console.Write("---l---l---\n");
-            Console.Write(" 7 l 8 l 9\n");
-            Console.Write("---l---l---\n");
-            Console.Write(RandomInt);
+            Game.Overlap();
  
 
             while (Estimate)
@@ -66,9 +59,6 @@
                 Game.FirstSet(Data); // 사용자의 입력값 배열에 넣기
                 GameCheck.Draw++; // 입력 횟수
                 Result.Judge(); // Judgement 클래스로 이동 후 행렬 체크
-                //Console.WriteLine(RandomInt);
-                //RandomInt = RandomValue.Next();
-
 
                 // == 'O'은 ' '끼리 같은 때 X가 입력되는 것을 방지
                 // continue는 두 개의 행과 열이 중첩 반복될 때 x가 두 번 입력되는 것을 방지
@@ -113,9 +103,9 @@
                     RandomAnswer = true;
                     while (RandomAnswer)
                     {
-                        if (GameBoard.Array[RandomInt] != '0' && GameBoard.Array[RandomInt] != 'X')
+                        if (GameBoard.Array[RandomInt] != '0' && GameBoard.Array[RandomInt] != 'X') // O나 X가 아닌 좌표에 값 대입
                         {
-                            Game.SecondSet(RandomInt + 1);
+                            Game.SecondSet(RandomInt + 1); //좌표에 값이 들어갈 때 -1이 되므로 +1로 넣어줌
                             Game.Overlap(); // 다시 화면출력
                             GameCheck.Draw++; // 입력 횟수
                             RandomAnswer = false;
@@ -123,23 +113,11 @@
                         else
                         {
                             RandomInt = RandomValue.Next();
-                            RandomInt %= 10;
+                            RandomInt %= 10; // 난수 생성후 %10을 통해 0~9까지 값이 나오게 설정
                         }
                     }
-                    /*
-                    for (Matrix = 1; Matrix <= 9; Matrix++)
-                    {
-                        if (GameBoard.Array[Matrix - 1] == '1') // 컴퓨터의 제일 처음 값은 ' '가 가장 빨리 오는 곳에 값을 넣는다.
-                        {
-                            Count++;
-                            Game.SecondSet(Matrix);
-                            Game.Overlap(); // 다시 화면출력
-                            GameCheck.Draw++; // 입력 횟수
-                            break;
-                        }
-                    }
-                    */
-                }
+                    
+               }
                 
             }
         }

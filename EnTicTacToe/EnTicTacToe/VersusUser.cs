@@ -17,22 +17,13 @@ namespace EnTicTacToe
         string InputSearch; // 오류 검출을 위한 입력 값
         int Input; // 정수 
         
-        void UserMenuBoard()
-        {
-            Console.Write("---l---l---\n");
-            Console.Write(" 1 l 2 l 3\n");
-            Console.Write("---l---l---\n");
-            Console.Write(" 4 l 5 l 6\n");
-            Console.Write("---l---l---\n");
-            Console.Write(" 7 l 8 l 9\n");
-            Console.Write("---l---l---\n");
-        }
+  
         public void User()
         {
             Exception Code = new Exception();
             Console.Clear();
             Score.Board();
-            UserMenuBoard();
+            Game.Overlap();
 
             while (Winner)
             {
