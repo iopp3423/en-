@@ -16,6 +16,8 @@ namespace EnTicTacToe
         static private bool error;
         string inputSearch; // 오류 검출을 위한 입력 값
         int input; // 정수 
+        int firstPlayer = 0;
+        int secondPlayer = 1;
         
   
         public void User()
@@ -54,7 +56,7 @@ namespace EnTicTacToe
                     continue;
                 }
 
-                else if (GameCheck.draw % 2 == 0)  // 짝수면 첫 번째 플레이어
+                else if (GameCheck.draw % 2 == firstPlayer)  // 짝수면 첫 번째 플레이어
                 {
                     Game.FirstSet(input); // 입력값 배열에 넣기
                     GameCheck.draw++; // 입력 횟수
@@ -62,7 +64,7 @@ namespace EnTicTacToe
                    if(winner == true) Console.Write("X 입력할 차례입니다.");
                 }
 
-                else if (GameCheck.draw % 2 == 1) // 홀수면 두 번째 플레이어
+                else if (GameCheck.draw % 2 == secondPlayer) // 홀수면 두 번째 플레이어
                 {
                     Game.SecondSet(input); // 입력값 배열에 넣기
                     GameCheck.draw++; // 입력 횟수

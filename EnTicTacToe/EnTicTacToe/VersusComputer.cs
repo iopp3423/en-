@@ -64,12 +64,12 @@
                 //Draw는 0, x 수 
                 count = 0;
                 // 왼쪽 두 개 열에 O 입력 시 x로 방어
-                if (GameBoard.array[0] == 'O' && GameBoard.array[1] == 'O' && GameBoard.array[1] != 'X') { Game.SecondSet(3); GameCheck.draw++; count++; Result.Judge(); continue; }
+                if (GameBoard.array[0] == 'O' && GameBoard.array[1] == 'O' && GameBoard.array[2] != 'X') { Game.SecondSet(3); GameCheck.draw++; count++; Result.Judge(); continue; }
                 if (GameBoard.array[3] == 'O' && GameBoard.array[4] == 'O' && GameBoard.array[5] != 'X') { Game.SecondSet(6); GameCheck.draw++; count++; Result.Judge(); continue; }
                 if (GameBoard.array[6] == 'O' && GameBoard.array[7] == 'O' && GameBoard.array[8] != 'X') { Game.SecondSet(9); GameCheck.draw++; count++; Result.Judge(); continue; }
                 // 오른쪽 두 개 열에 O 입력 시 x로 방어
                 if (GameBoard.array[1] == 'O' && GameBoard.array[2] == 'O' && GameBoard.array[0] != 'X') { Game.SecondSet(1); GameCheck.draw++; count++; Result.Judge(); continue; }
-                if (GameBoard.array[4] == 'O' && GameBoard.array[5] == 'O' && GameBoard.array[4] != 'X') { Game.SecondSet(4); GameCheck.draw++; count++; Result.Judge(); continue; }
+                if (GameBoard.array[4] == 'O' && GameBoard.array[5] == 'O' && GameBoard.array[3] != 'X') { Game.SecondSet(4); GameCheck.draw++; count++; Result.Judge(); continue; }
                 if (GameBoard.array[7] == 'O' && GameBoard.array[8] == 'O' && GameBoard.array[6] != 'X') { Game.SecondSet(7); GameCheck.draw++; count++; Result.Judge(); continue; }
                 // 위에 두 개 행에 0 입력 시 x로 방어
                 if (GameBoard.array[0] == 'O' && GameBoard.array[3] == 'O' && GameBoard.array[6] != 'X') { Game.SecondSet(7); GameCheck.draw++; count++; Result.Judge(); continue; }
@@ -96,14 +96,14 @@
                 // 띄어진 대각선 원소끼리 같을 시
                 if (GameBoard.array[0] == 'O' && GameBoard.array[8] == 'O' && GameBoard.array[4] != 'X') { Game.SecondSet(5); GameCheck.draw++; count++; Result.Judge(); continue; }
                 if (GameBoard.array[2] == 'O' && GameBoard.array[6] == 'O' && GameBoard.array[4] != 'X') { Game.SecondSet(5); GameCheck.draw++; count++; Result.Judge(); continue; }
-                
+
                 //방어가 안되는 경우일 경우 무작위 위치에 x대입
-                if(count == 0)
+                if (count == 0)
                 {
                     RandomAnswer = true;
                     while (RandomAnswer)
                     {
-                        if (GameBoard.array[RandomInt] != '0' && GameBoard.array[RandomInt] != 'X') // O나 X가 아닌 좌표에 값 대입
+                        if (GameBoard.array[RandomInt] != '0'  || GameBoard.array[RandomInt] != 'X') // O나 X가 아닌 좌표에 값 대입
                         {
                             Game.SecondSet(RandomInt + 1); //좌표에 값이 들어갈 때 -1이 되므로 +1로 넣어줌
                             Game.Overlap(); // 다시 화면출력

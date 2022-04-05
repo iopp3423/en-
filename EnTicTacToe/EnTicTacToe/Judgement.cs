@@ -14,6 +14,10 @@ namespace EnTicTacToe
         ScoreBoard Score = new ScoreBoard();
         
         int menuSelect;
+        int resetZero = 0;
+        int drawNumber = 9;
+        int reGame = 2;
+        int goMenu = 1;
         static private bool error;
         string inputSearch; // 오류 검출을 위한 입력 값
    
@@ -47,23 +51,23 @@ namespace EnTicTacToe
             Console.Clear();
 
 
-            if (menuSelect == 1)
+            if (menuSelect == goMenu)
             {
                 Reset(); // 리셋
-                ScoreBoard.XPlayer = 0;
-                ScoreBoard.YPlayer = 0;
+                ScoreBoard.XPlayer = resetZero;
+                ScoreBoard.YPlayer = resetZero;
                 Screen.Menu(); // 메뉴 이동
             }
             
-            else if (menuSelect == 2 && StartMenu.index > 0) // 0보다 크면 유저모드
+            else if (menuSelect == reGame && StartMenu.index > resetZero) // 0보다 크면 유저모드
             {
-                StartMenu.index = 0;
+                StartMenu.index = resetZero;
                 Reset();// 리셋
                 UserCase.User(); // 유저랑 대결   
             }
-            else if(menuSelect == 2 && StartMenu.index == 0) // 0이랑 같으면 컴퓨터
+            else if(menuSelect == reGame && StartMenu.index == resetZero) // 0이랑 같으면 컴퓨터
             {
-                StartMenu.index = 0;
+                StartMenu.index = resetZero;
                 Reset();// 리셋
                 ComputerCase.Computer(); // 컴퓨터랑 대결
             }        
@@ -71,7 +75,7 @@ namespace EnTicTacToe
         public void Judge()
         {
             Win.Check(); // 행, 열, 대각선이 완성되는 것을 체크
-            if (GameCheck.draw == 9) // 첫 번째 플레이어면서 무승부 일 때    
+            if (GameCheck.draw == drawNumber) // 첫 번째 플레이어면서 무승부 일 때    
             {
                 Console.Clear();
                 Score.Board();

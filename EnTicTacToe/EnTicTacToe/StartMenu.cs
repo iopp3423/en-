@@ -12,6 +12,9 @@ namespace EnTicTacToe
         VersusComputer ComputerCase = new VersusComputer();
         Exception Code = new Exception();
         ScoreBoard Score = new ScoreBoard();
+        int exitGame = 0;
+        int goUser = 1;
+        int goComputer = 2;
         public static int menuNumber; // 입력받을 메뉴 번호
         static private bool error;
         string inputSearch; // 오류 검출을 위한 입력 값
@@ -50,16 +53,16 @@ namespace EnTicTacToe
             }
             //////////////오류검출  및 입력코드/////////////////////
 
-            while (menuNumber != 0)
+            while (menuNumber != exitGame)
             { 
                 Console.Clear();
-                if (menuNumber == 1) // 1번 입력받으면 VS유저로 이동 후 종료
+                if (menuNumber == goUser) // 1번 입력받으면 VS유저로 이동 후 종료
                 {
                     index++;
                     UserCase.User();
                     break;
                 }
-                else if (menuNumber == 2) // 2번 입력받으면 VS컴퓨터로 이동 후 종료
+                else if (menuNumber == goComputer) // 2번 입력받으면 VS컴퓨터로 이동 후 종료
                 {
                     ComputerCase.Computer();
                     break;
