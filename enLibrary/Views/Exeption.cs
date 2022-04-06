@@ -18,9 +18,12 @@ namespace EnLibrary.Views
             {
                 if (Number == CodeCheck) correctCount=1;
             }
-            if (correctCount == 1) return 1; // 1이면 정상
+            if (correctCount == 1)
+            {
+                correctCount = 0;
+                return 1; // 1이면 정상
+            }
             else return 0;// 0이면 오류검출
-
         }
     }
     
