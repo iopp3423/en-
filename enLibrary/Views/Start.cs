@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Views
 {
-    class UserMode
+    class Start
     {
-        Print PrintCollection = new Print();
-
-        public void Print()
+        static void Main(string[] args)
         {
-             PrintCollection.LibraryPrint();
+            UserMode Mode = new UserMode();
+            Mode.Print();
         }
-       
     }
 }
