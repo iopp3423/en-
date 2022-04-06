@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnLibrary.View
+namespace EnLibrary.Views
 {
-    internal class MenuSelect
+    internal class Print
     {
     }
 }
