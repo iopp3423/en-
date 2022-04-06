@@ -16,11 +16,6 @@ namespace EnLibrary.Controls
         private string callNumber;
         private string address;
 
-        public void Print()
-        {
-            Console.Write("Hello world");
-        }
-
         public UserInformationVo()
         {
             // 생성자
@@ -36,6 +31,7 @@ namespace EnLibrary.Controls
             this.callNumber = callNumber;
             this.address = address;
         }
+
         public string Id
         {
             get { return id; }
