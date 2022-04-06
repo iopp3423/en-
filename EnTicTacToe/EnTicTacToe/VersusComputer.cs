@@ -15,10 +15,8 @@
         string inputSearch; // 오류 검출을 위한 입력 값
         public void Computer()
         {
-            int RandomInt;
-            bool RandomAnswer = true;
-            RandomInt = RandomValue.Next();
-            RandomInt = RandomInt % 10;
+            int randomInt;
+            bool randomAnswer = true;
 
             Exception Code = new Exception();
             Console.Clear();
@@ -100,21 +98,26 @@
                 //방어가 안되는 경우일 경우 무작위 위치에 x대입
                 if (count == 0)
                 {
-                    RandomAnswer = true;
-                    while (RandomAnswer)
+                    randomAnswer = true;
+                    randomInt = RandomValue.Next();
+                    randomInt = randomInt % 9;
+                    while (randomAnswer)
                     {
-                        if (GameBoard.array[RandomInt] != '0'  || GameBoard.array[RandomInt] != 'X') // O나 X가 아닌 좌표에 값 대입
+                        if (GameBoard.array[randomInt] == 'O'  || GameBoard.array[randomInt] == 'X') // O나 X가 아닌 좌표에 값 대입
                         {
-                            Game.SecondSet(RandomInt + 1); //좌표에 값이 들어갈 때 -1이 되므로 +1로 넣어줌
-                            Game.Overlap(); // 다시 화면출력
-                            GameCheck.draw++; // 입력 횟수
-                            RandomAnswer = false;
+                            randomInt = RandomValue.Next();
+                            randomInt = randomInt % 9;
+                            continue;
                         }
                         else
                         {
-                            RandomInt = RandomValue.Next();
-                            RandomInt %= 10; // 난수 생성후 %10을 통해 0~9까지 값이 나오게 설정
+                            Game.SecondSet(randomInt + 1); //좌표에 값이 들어갈 때 -1이 되므로 +1로 넣어줌
+                            Game.Overlap(); // 다시 화면출력
+                            Console.Write(randomInt);
+                            GameCheck.draw++; // 입력 횟수
+                            randomAnswer = false;
                         }
+
                     }
                     
                }

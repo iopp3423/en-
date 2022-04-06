@@ -61,31 +61,21 @@ namespace EnTicTacToe
             
             else if (menuSelect == reGame && StartMenu.index > resetZero) // 0보다 크면 유저모드
             {
-                StartMenu.index = resetZero;
+                StartMenu.index++;
+                
                 Reset();// 리셋
                 UserCase.User(); // 유저랑 대결   
             }
             else if(menuSelect == reGame && StartMenu.index == resetZero) // 0이랑 같으면 컴퓨터
             {
-                StartMenu.index = resetZero;
                 Reset();// 리셋
                 ComputerCase.Computer(); // 컴퓨터랑 대결
             }        
         }
         public void Judge()
         {
-            Win.Check(); // 행, 열, 대각선이 완성되는 것을 체크
-            if (GameCheck.draw == drawNumber) // 첫 번째 플레이어면서 무승부 일 때    
-            {
-                Console.Clear();
-                Score.Board();
-                Game.Overlap();
-                Console.WriteLine("-----------------------무승부------------------------");
-                SelectPrint();
-                ReGame();
-               
-            }
-            else if (GameCheck.winCheck == 1 && GameCheck.draw % 2 == 0) // 첫 번째 플레이어면서 행, 열, 대각선 중 하나가 완성됐을 때
+            Win.Check(); // 행, 열, 대각선이 완성되는 것을 체크            
+            if (GameCheck.winCheck == 1 && GameCheck.draw % 2 == 0) // 첫 번째 플레이어면서 행, 열, 대각선 중 하나가 완성됐을 때
             {
                 ScoreBoard.XPlayer++;
                 WinPlayer();
@@ -94,13 +84,23 @@ namespace EnTicTacToe
                 ReGame();
             }
 
-            else if (GameCheck.winCheck == 1 && GameCheck.draw % 2 == 1) // 두 번째 플레이어면서 행, 열 대각선 중 하나가 완성됐을 때
+            if (GameCheck.winCheck == 1 && GameCheck.draw % 2 == 1) // 두 번째 플레이어면서 행, 열 대각선 중 하나가 완성됐을 때
             {
                 ScoreBoard.YPlayer++;
                 WinPlayer();
                 Console.WriteLine("-----------------------O 승리------------------------");
                 SelectPrint();
                 ReGame();
+            }
+            else if (GameCheck.draw == drawNumber) // 첫 번째 플레이어면서 무승부 일 때    
+            {
+                Console.Clear();
+                Score.Board();
+                Game.Overlap();
+                Console.WriteLine("-----------------------무승부------------------------");
+                SelectPrint();
+                ReGame();
+
             }
         }
         public void WinPlayer()
@@ -116,6 +116,7 @@ namespace EnTicTacToe
             VersusComputer.estimate = true; // while 문 true로 재설정
             GameCheck.draw = 0;
             GameCheck.winCheck = 0;
+            StartMenu.index = 0;
         }
         void SelectPrint()
         {

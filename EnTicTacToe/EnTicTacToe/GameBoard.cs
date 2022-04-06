@@ -10,19 +10,19 @@ namespace EnTicTacToe
     {
         ScoreBoard Score = new ScoreBoard();
         static public char[] array = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        int Index;
+        int index;
 
         
-        public void FirstSet(int FirstNumber) // O 입력
+        public void FirstSet(int firstNumber) // O 입력
         {
-            array[FirstNumber - 1] = 'O';
+            array[firstNumber - 1] = 'O';
             Console.Clear();
             Overlap();
         }
         
-        public void SecondSet(int SecondNumber) // X 입력
+        public void SecondSet(int secondNumber) // X 입력
         {
-            array[SecondNumber - 1] = 'X';
+            array[secondNumber - 1] = 'X';
             Console.Clear();
             Overlap();
         }

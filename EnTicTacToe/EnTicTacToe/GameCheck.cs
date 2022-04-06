@@ -14,16 +14,16 @@ namespace EnTicTacToe
         public void Check()
         {
             ////////////////////////행이 같을 때
-            if (GameBoard.array[0] == GameBoard.array[1] && GameBoard.array[1] == GameBoard.array[2] && GameBoard.array[0] != ' ') winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
-            else if (GameBoard.array[3] == GameBoard.array[4] && GameBoard.array[4] == GameBoard.array[5] && GameBoard.array[3] != ' ') winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
-            else if (GameBoard.array[6] == GameBoard.array[7] && GameBoard.array[7] == GameBoard.array[8] && GameBoard.array[6] != ' ') winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
+            if (GameBoard.array[0] == GameBoard.array[1] && GameBoard.array[1] == GameBoard.array[2]) winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
+            else if (GameBoard.array[3] == GameBoard.array[4] && GameBoard.array[4] == GameBoard.array[5]) winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
+            else if (GameBoard.array[6] == GameBoard.array[7] && GameBoard.array[7] == GameBoard.array[8]) winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
             ////////////////////////열이 같을 때
-            else if (GameBoard.array[0] == GameBoard.array[3] && GameBoard.array[3] == GameBoard.array[6] && GameBoard.array[0] != ' ') winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
-            else if (GameBoard.array[1] == GameBoard.array[4] && GameBoard.array[4] == GameBoard.array[7] && GameBoard.array[1] != ' ') winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
-            else if (GameBoard.array[2] == GameBoard.array[5] && GameBoard.array[5] == GameBoard.array[8] && GameBoard.array[2] != ' ') winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
+            else if (GameBoard.array[0] == GameBoard.array[3] && GameBoard.array[3] == GameBoard.array[6]) winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
+            else if (GameBoard.array[1] == GameBoard.array[4] && GameBoard.array[4] == GameBoard.array[7]) winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
+            else if (GameBoard.array[2] == GameBoard.array[5] && GameBoard.array[5] == GameBoard.array[8]) winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
             ////////////////////////대각선이 같을 때
-            else if (GameBoard.array[0] == GameBoard.array[4] && GameBoard.array[4] == GameBoard.array[8] && GameBoard.array[0] != ' ') winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
-            else if (GameBoard.array[2] == GameBoard.array[4] && GameBoard.array[4] == GameBoard.array[6] && GameBoard.array[2] != ' ') winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
+            else if (GameBoard.array[0] == GameBoard.array[4] && GameBoard.array[4] == GameBoard.array[8]) winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
+            else if (GameBoard.array[2] == GameBoard.array[4] && GameBoard.array[4] == GameBoard.array[6]) winCheck = 1; // 공백일 경우에 게임이 끝나는 경우를  != ' '를 통해 제거
         }
     }
 }
