@@ -14,6 +14,7 @@ namespace EnLibrary.Views
         Input Inputting = new Input();
         UserInformationVo print = new UserInformationVo();
         UserInformationVo UserInformationVO = new UserInformationVo();
+        List<UserInformationVo> users = new List<UserInformationVo>();
 
         static private int inputData;
         public void Mode() // 모드 설정 함수
@@ -32,8 +33,10 @@ namespace EnLibrary.Views
 
         public void JoinGroup() // 회원가입
         {
-            UserInformationVO.Id = "iopp3423";
-            Console.Write(UserInformationVO.Id);
+            Console.Clear();
+            PrintCollection.Join(); // 위에 회원가입창 출력
+            Inputting.CallNumber(); // ID 입력
+   
         }
 
         public void Login() // 로그인

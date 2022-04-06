@@ -32,5 +32,38 @@ namespace EnLibrary.Views
             Console.WriteLine(string.Format("{0,42}", "로그인은 1번을 눌러주세요."));
             Console.WriteLine(string.Format("{0,42}", "도서관 프로그램을 종료하려면 2번을 눌러주세요."));
         }
+        public void Join()
+        {
+            Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                          회   원   가   입                       ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+        }
+
+        public void Id()
+        {
+            
+        }
+        public void Pw()
+        {
+
+        }
+        public void PwPass()
+        {
+
+        }
+        public void Name()
+        {
+
+        }
+        public void CallNumber()
+        {
+
+        }
+        public void Address()
+        {
+
+        }
     }
 }
