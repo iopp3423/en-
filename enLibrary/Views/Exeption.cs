@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Views
 {
-    internal class Exeption
+    class Exeption
     {
+        static int correctCount = 0;
+        string[] CheckArray = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+
+
+        public int Checking(string CodeCheck)
+        {
+            foreach (string Number in CheckArray)
+            {
+                if (Number == CodeCheck) correctCount=1;
+            }
+            if (correctCount == 1) return 1; // 1이면 정상
+            else return 0;// 0이면 오류검출
+
+        }
     }
+    
 }

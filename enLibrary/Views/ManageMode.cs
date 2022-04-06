@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Views
 {
-    class Start
+    class ManageMode
     {
-        static void Main(string[] args)
+        Print PrintCollection = new Print();
+        Input Inputting = new Input();
+        public void Mode()
         {
-            SelectMode Mode = new SelectMode();
-            Mode.Print();
+            Console.Write("맞나");
         }
     }
 }
