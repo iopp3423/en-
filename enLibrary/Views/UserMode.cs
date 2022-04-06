@@ -4,20 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace EnLibrary.Views
 {
+    using EnLibrary.Controls;
     class UserMode
     {
         Print PrintCollection = new Print();
         Input Inputting = new Input();
+        UserInformationVo print = new UserInformationVo();
         static private int inputData;
         public void Mode()
         {
             Console.Clear();
-            PrintCollection.LibraryPrint(); // 라이브러리 프린트
-            PrintCollection.JoinOrLogin(); // 회원가입 or 로그인 프린트
+            PrintCollection.LibraryPrint(); // 라이브러리 출력
+            PrintCollection.JoinOrLogin(); // 회원가입 or 로그인 출력
             inputData = Inputting.UserDoInPut(); //사용자 입력
-            switch(inputData)
+            print.Print();
+            switch (inputData)
             {
                 case 0: JoinGroup(); break;
                 case 1: Login(); break;
@@ -27,7 +31,7 @@ namespace EnLibrary.Views
 
         public void JoinGroup()
         {
-
+            
         }
 
         public void Login()

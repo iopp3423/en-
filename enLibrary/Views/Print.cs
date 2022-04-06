@@ -28,7 +28,7 @@ namespace EnLibrary.Views
 
         public void JoinOrLogin()
         {
-            Console.WriteLine(string.Format("{0,42}", "회원가입은 0번을 눌러주세요"));
+            Console.WriteLine(string.Format("{0,41}", "회원가입은 0번을 눌러주세요"));
             Console.WriteLine(string.Format("{0,42}", "로그인은 1번을 눌러주세요."));
             Console.WriteLine(string.Format("{0,42}", "도서관 프로그램을 종료하려면 2번을 눌러주세요."));
         }
