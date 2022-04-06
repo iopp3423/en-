@@ -15,6 +15,7 @@ namespace EnTicTacToe
         int exitGame = 0;
         int goUser = 1;
         int goComputer = 2;
+        int goZeroScore = 3;
         public static int menuNumber; // 입력받을 메뉴 번호
         static private bool error;
         string inputSearch; // 오류 검출을 위한 입력 값
@@ -27,19 +28,16 @@ namespace EnTicTacToe
             Console.Write("ㅣ게임을 종료하시려면 0번을 입력주세요.  ㅣ\n");
             Console.Write("ㅣ유저끼리 대결하시려면 1번을 입력주세요.ㅣ\n");
             Console.Write("ㅣ컴퓨터와 대결하시려면 2번을 입력주세요.ㅣ\n");
+            Console.Write("ㅣ점수를  초기화 하려면 3번을 입력주세요.ㅣ\n");
             Console.Write(" -----------------------------------------\n");
         }
-        public void Menu()
+        void CodeInput()
         {
-            Score.Board(); // 스코어보드
-            GameMenu(); // 시작 메뉴판
-            Console.Write("모드 선택 : ");
-
             //////////////오류검출  및 입력코드/////////////////////
             inputSearch = Console.ReadLine();
             error = Code.Check(inputSearch);
             if (error == true) menuNumber = int.Parse(inputSearch);
-            else if (error == false) 
+            else if (error == false)
             {
                 while (error != true)
                 {
@@ -52,6 +50,13 @@ namespace EnTicTacToe
                 menuNumber = int.Parse(inputSearch);
             }
             //////////////오류검출  및 입력코드/////////////////////
+        }
+        public void Menu()
+        {
+            Score.Board(); // 스코어보드
+            GameMenu(); // 시작 메뉴판
+            Console.Write("모드 선택 : ");
+            CodeInput();
 
             while (menuNumber != exitGame)
             { 
@@ -67,13 +72,22 @@ namespace EnTicTacToe
                     ComputerCase.Computer();
                     break;
                 }
+                else if (menuNumber == goZeroScore) // 3번 입력받으면 스코어 초기화
+                {
+                    ScoreBoard.XPlayer = 0;
+                    ScoreBoard.YPlayer = 0;
+                    Score.Board(); // 스코어보드
+                    GameMenu();
+                    Console.Write("점수가 초기화 되었습니다. 모드를 선택해주세요 : ");
+                    CodeInput();
+                }
                 else // 그 외 입력받으면 다시 입력
                 {
                     GameMenu();
                     Console.Write("잘못 입력하셨습니다. 모드를 다시 입력해주세요.\n");
                     Console.Write("모드 선택 : ");
-                    menuNumber = int.Parse(Console.ReadLine()); // 모드 선택을 위한 메뉴넘버 입력
-                }              
+                    CodeInput();
+                }
             }
         }
     }

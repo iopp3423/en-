@@ -54,8 +54,8 @@ namespace EnTicTacToe
             if (menuSelect == goMenu)
             {
                 Reset(); // 리셋
-                ScoreBoard.XPlayer = resetZero;
-                ScoreBoard.YPlayer = resetZero;
+                //ScoreBoard.XPlayer = resetZero;
+                //ScoreBoard.YPlayer = resetZero;
                 Screen.Menu(); // 메뉴 이동
             }
             
