@@ -12,14 +12,13 @@ namespace EnLibrary.Views
     {
         Exeption ErrorCheck = new Exeption();
         Print PrintCollection = new Print();
-        UserInformationVo Information = new UserInformationVo();
-        List<UserInformationVo> UserInformation = new List<UserInformationVo>();
+        UserInformationVo Information = new UserInformationVo();      
         Regex IdCheck = new Regex(@"^[0-9a-zA-Z]{8,10}$");
         Regex CallNumberCheck = new Regex(@"^01[01678]-[0-9]{4}-[0-9]{4}$");
         Regex PwCheck = new Regex(@"^[0-9a-zA-Z]{4,10}$");
         Regex NameCheck = new Regex(@"^[가-힣]{2,5}$");
         Regex AgeCheck = new Regex(@"^[0-9]{1,2}1?[0-9]?[0-9]$");
-        Regex AddressCheck = new Regex(@"^[가-힣]{2,5}[시]{1}?[가-힣]{2,5}[구]{1}?[가-힣]{2,5}[동 | 읍 | 면 | 리]{1} $");
+        Regex AddressCheck = new Regex(@"^[가-힣]{2,5}[시] {1}[가-힣]{2,5}[구] {1}[가-힣]{2,5}[동 | 읍 | 면 | 리]{1} $");
 
         string inputSearch; // 오류 검출을 위한 입력 값
         int input;
@@ -61,7 +60,7 @@ namespace EnLibrary.Views
         }
 
 
-        public void Id()
+        public void Id() // Id 입력 코드
         {
             while (pass == false)
             {
@@ -69,15 +68,14 @@ namespace EnLibrary.Views
                 if (reEnter == false) Console.Write("잘못된 입력입니다. 설명에 맞게 입력해주세요 :");
                 id = Console.ReadLine(); // 아이디 입력                               
                 completeInformation = IdCheck.IsMatch(id); // 유저아이디 정규화로 양식 맞는지 확인
-
+                
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-                    Information.Id = id; // 대입                   
-                    reEnter = true;
-                    Console.WriteLine("이게 맞나");
+                    Information.Id = id; // 대입 <- 아이디 입력하는 과정인데 Information.id 까지는 iopp3423같은 아이디 입력하면 들어가짐
+                    Information.StoreInformation();
+                    reEnter = true;                   
                     break;
                 }
-                Console.WriteLine("이게 맞나");
                 reEnter = false;
             }
         }

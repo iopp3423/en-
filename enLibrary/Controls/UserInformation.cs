@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Controls
 {
-    public class UserInformationVo
+
+    class UserInformationVo
     {
         List<UserInformationVo> UserInformation = new List<UserInformationVo>();
         private string id;
@@ -24,6 +25,7 @@ namespace EnLibrary.Controls
 
         public UserInformationVo(string id, string pw, string pwPass, string name, string age, string callNumber, string address)
         {
+
             this.id = id;
             this.pw = pw;
             this.pwPass = pwPass;
@@ -32,7 +34,10 @@ namespace EnLibrary.Controls
             this.callNumber = callNumber;
             this.address = address;
         }
-
+        public void StoreInformation<T>()
+        {
+            UserInformation[0].Id = "kim";
+        }
         public string Id
         {
             get { return id; }

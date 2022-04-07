@@ -27,6 +27,7 @@ namespace EnLibrary.Views
             }
             else return 0;// 0이면 오류검출
         }
+        
     }
     
 }
