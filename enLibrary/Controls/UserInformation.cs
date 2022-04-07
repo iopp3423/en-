@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Controls
 {
-    class UserInformationVo
+    public class UserInformationVo
     {
+        List<UserInformationVo> UserInformation = new List<UserInformationVo>();
         private string id;
         private string pw;
         private string pwPass;

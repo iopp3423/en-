@@ -35,8 +35,15 @@ namespace EnLibrary.Views
         {
             Console.Clear();
             PrintCollection.Join(); // 위에 회원가입창 출력
-            Inputting.CallNumber(); // ID 입력
-   
+            PrintCollection.JoinUser();
+            Inputting.Id();
+            Inputting.Pw(); // 비밀번호 입력으로 가기
+            Inputting.PwPass();
+            Inputting.Name();
+            Inputting.Age();
+            Inputting.CallNumber();
+            Inputting.Address();
+
         }
 
         public void Login() // 로그인

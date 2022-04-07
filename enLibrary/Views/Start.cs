@@ -8,6 +8,7 @@ namespace EnLibrary.Views
 {
     class Start
     {
+
         static void Main(string[] args)
         {
             SelectMode Mode = new SelectMode();

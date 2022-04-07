@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\EnLibrary\\EnLibrary.csproj": {}
+    "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\enLibrary\\EnLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\EnLibrary\\EnLibrary.csproj": {
+    "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\enLibrary\\EnLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\EnLibrary\\EnLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\enLibrary\\EnLibrary.csproj",
         "projectName": "EnLibrary",
-        "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\EnLibrary\\EnLibrary.csproj",
+        "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\enLibrary\\EnLibrary.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\EnLibrary\\obj\\",
+        "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\EN#프로젝트\\enLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
