@@ -11,8 +11,6 @@ namespace EnLibrary.Controls
     {
         public static List<UserInformationVo> UserInformation = new List<UserInformationVo>();
         // UserInformationVo user = new UserInformationVo();
-        BookMenu Menu = new BookMenu();
-        UserMode User = new UserMode();
 
         private string id;
         private string pw;
@@ -49,27 +47,29 @@ namespace EnLibrary.Controls
             user.callNumber = callNumber;
             user.address = address;
             UserInformation.Add(user);
-            Console.WriteLine("Hello worldUser");
-            Userprint();
+            //Userprint();
         }
-
-        /*
-        public void CheckingIdPw()
-        {
-            Console.Write("이게 맞나");
-            //if (id == UserInformation[0].id && pw == UserInformation[0].pw) Menu.SeeBookMenu();
-            //else { Console.Write("아이디 비밀번호가 일치하지 않습니다. 다시 입력해주세요 :"); User.LoginPrint(); }
-        }
-        */
         public void Userprint()
         {
             Console.WriteLine(UserInformation[0].id);
             Console.WriteLine(UserInformation[0].pw);
-            Console.WriteLine(UserInformation[0].pwPass);
-            Console.WriteLine(UserInformation[0].name);
-            Console.WriteLine(UserInformation[0].age);
-            Console.WriteLine(UserInformation[0].callNumber);
+            //Console.WriteLine(UserInformation[0].pwPass);
+            //Console.WriteLine(UserInformation[0].name);
+            //Console.WriteLine(UserInformation[0].age);
+            //Console.WriteLine(UserInformation[0].callNumber);
         }
+
+        public void CheckingIdPw()
+        {
+            Input Inputting = new Input();
+            BookMenu Menu = new BookMenu();
+            UserMode User = new UserMode();
+
+            if (Input.idConfirm == UserInformation[0].id && Input.pwConfirm == UserInformation[0].pw) Menu.SeeBookMenu();
+            else { Console.Write("아이디 비밀번호가 일치하지 않습니다. 다시 입력해주세요 :"); User.LoginPrint(); }
+        }
+        
+        
        
         
         public string Id

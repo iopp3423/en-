@@ -27,6 +27,8 @@ namespace EnLibrary.Views
         static private bool pass = false;
         static private bool reEnter = true;
         static private bool completeInformation;
+        static public string idConfirm;
+        static public string pwConfirm;
         static private string id;
         static private string pw;
         static private string pwPass;
@@ -59,6 +61,48 @@ namespace EnLibrary.Views
             return input; // 정수 값 리턴
         }
 
+        public void IdConfirm() // Id 입력 코드
+        {
+            while (pass == false)
+            {
+                //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
+                if (reEnter == false)
+                {
+                    Console.Clear();                  
+                    Console.Write("잘못된 입력입니다. 설명에 맞게 입력해주세요 :");
+                }
+                idConfirm = Console.ReadLine(); // 아이디 입력                               
+                completeInformation = IdCheck.IsMatch(idConfirm); // 유저아이디 정규화로 양식 맞는지 확인
+
+                if (completeInformation == true) // 양식이 맞으면  
+                {
+                    reEnter = true;
+                    break;
+                }
+                reEnter = false;
+            }
+        }
+        public void PwConfirm() // Id 입력 코드
+        {
+            while (pass == false)
+            {
+                //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
+                if (reEnter == false)
+                {
+                    Console.Clear();
+                    Console.Write("잘못된 입력입니다. 설명에 맞게 입력해주세요 :");
+                }
+                pwConfirm = Console.ReadLine(); // 아이디 입력                               
+                completeInformation = PwCheck.IsMatch(pwConfirm); // 유저비밀번호 정규화로 양식 맞는지 확인
+                Information.UserInformationStore(); // 나증에 지워줘야함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                if (completeInformation == true) // 양식이 맞으면  
+                {
+                    reEnter = true;
+                    break; //종료
+                }
+                reEnter = false;
+            }
+        }
 
         public void Id() // Id 입력 코드
         {
@@ -101,6 +145,7 @@ namespace EnLibrary.Views
                 {
                     Information.Pw = pw; // 대입                 
                     reEnter = true;
+                    Information.UserInformationStore(); // 이거 나중에 풀면 지워줘야함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 주소 or 전화번호에서 작성
                     break;
                 }
                 reEnter = false;
