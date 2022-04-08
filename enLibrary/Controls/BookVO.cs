@@ -51,22 +51,9 @@ namespace EnLibrary.Controls
 
         public void SearchingQuantity()
         {
-            Console.WriteLine("출력이 왜 안돼");
-            Console.WriteLine(Input.searchingBook);
-            foreach (BookVO Book in BookVo)
-            {
-                Console.WriteLine("안들어가나");
-                Console.WriteLine(Book);
-                /*
-                if (Book.bookNumber == Input.searchingBook)
-                {
-                    
-                    Number = int.Parse(Book.Quantity) - 1;
-                    Book.Quantity = Number.ToString();
-                    Print();
-                }
-                */
-            }
+            //Console.WriteLine("출력이 왜 안돼");
+            //Console.WriteLine(Input.searchingBook);
+            Console.WriteLine(BookVo);////////고쳐야함
             
         }
         

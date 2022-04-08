@@ -76,7 +76,7 @@ namespace EnLibrary.Controls
 
         public void Print()
         { 
-            Console.Write(UserInformation[0]);       
+            Console.WriteLine(UserInformation[0]);       
         }
        
         

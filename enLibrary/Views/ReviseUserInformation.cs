@@ -14,7 +14,9 @@ namespace EnLibrary.Views
         
         public void Revising()
         {
-            Information.Print();           
+            Information.Print();
+            Console.WriteLine("────────────────────────────────────────────────────────────");
+            Console.Write("\n\n");
         }
     }
 }

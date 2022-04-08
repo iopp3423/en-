@@ -45,10 +45,10 @@ namespace EnLibrary.Views
         {
             Console.Clear();
             Join();
-            Console.WriteLine("유저 ID : ");
-            Console.WriteLine("유저 PW : ");
-            Console.WriteLine("유저 PW확인 : ");
-            Console.WriteLine("유저 이름 : ");
+            Console.WriteLine("유저 ID(영어, 숫자 포함(8~10자) : ");
+            Console.WriteLine("유저 PW(영어, 숫자 포함(4~10자) : ");
+            Console.WriteLine("유저 PW확인(영어, 숫자 포함(4~10자) : ");
+            Console.WriteLine("유저 이름(2~5자) : ");
             Console.WriteLine("나이 : ");
             Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx):");
             Console.WriteLine("주소 :");
@@ -145,6 +145,11 @@ namespace EnLibrary.Views
         public void PrintSearchingPublisher()
         {
             Console.Write("출판사를 입력해주세요 :");
+        }
+
+        public void RevisingInformation()
+        {
+            Console.Write("1. 핸드폰 번호 변경");
         }
     }
 }
