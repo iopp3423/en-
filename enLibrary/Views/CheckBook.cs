@@ -16,6 +16,9 @@ namespace EnLibrary.Views
 
             Console.Clear();
             PrintCollection.PrintCheckBook();
+            Console.Clear();
+            Book.StoreBookLIst();
+            Book.Print();
         }
     }
 }

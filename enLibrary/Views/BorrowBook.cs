@@ -9,12 +9,16 @@ namespace EnLibrary.Views
     using EnLibrary.Controls;
     internal class BorrowBook
     {
+        int input;
         Print PrintCollection = new Print();
+        Input Inputting = new Input();
         BookVO Book = new BookVO();
+        SearchBook Search = new SearchBook(); 
         public void Borrowing()
         {
-            Console.Clear();
-            PrintCollection.PrintSearchMenu();
+            Search.Searching();
+            
         }
+       
     }
 }

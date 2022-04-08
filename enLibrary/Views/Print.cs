@@ -74,10 +74,10 @@ namespace EnLibrary.Views
         }
         public void PrintSearchMenu() // 도서찾기 메뉴 프린트
         {
-            Console.WriteLine("1. 제목으로 찾기");
-            Console.WriteLine("2. 작가명으로 찾기");
-            Console.WriteLine("3. 출판사로 찾기");
-            Console.WriteLine("4. 프로그램 종료");
+            Console.WriteLine("0. 제목으로 찾기");
+            Console.WriteLine("1. 작가명으로 찾기");
+            Console.WriteLine("2. 출판사로 찾기");
+            Console.WriteLine("3. 프로그램 종료");
             Console.Write("원하시는 번호를 눌러주세요 :");
         }
         public void PrintBorrowBook() // 도서찾기 메뉴 프린트
