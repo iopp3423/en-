@@ -13,9 +13,9 @@ namespace EnLibrary.Views
         Print PrintCollection = new Print();
         public void Checking()
         {
+
             Console.Clear();
             PrintCollection.PrintCheckBook();
-            Book.BookPrint();
         }
     }
 }

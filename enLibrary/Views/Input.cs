@@ -36,6 +36,7 @@ namespace EnLibrary.Views
         static private string callNumber;
         static private string age;
         static private string address;
+        static public string searchingBook;
  
 
 
@@ -271,5 +272,9 @@ namespace EnLibrary.Views
             }
         }
 
+        public void InputString()
+        {
+            searchingBook = Console.ReadLine();
+        }
     }
 }
