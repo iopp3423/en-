@@ -22,8 +22,8 @@ namespace EnLibrary.Views
             Console.Write("원하시는 도서 번호를 입력해주세요 : ");
             Inputting.InputString();
             Book.SearchingQuantity();
-            Book.Print();
-            Console.Write("이게맞나 : ");
+            //Book.Print();
+            //Console.Write("이게맞나 : ");
 
         }
     }

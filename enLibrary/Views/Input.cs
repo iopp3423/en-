@@ -12,7 +12,7 @@ namespace EnLibrary.Views
     {
         Exeption ErrorCheck = new Exeption();
         Print PrintCollection = new Print();
-        UserInformationVo Information = new UserInformationVo();      
+        UserVO Information = new UserVO();      
         Regex IdCheck = new Regex(@"^[0-9a-zA-Z]{8,10}$");
         Regex CallNumberCheck = new Regex(@"^01[01678]-[0-9]{4}-[0-9]{4}$");
         Regex PwCheck = new Regex(@"^[0-9a-zA-Z]{4,10}$");

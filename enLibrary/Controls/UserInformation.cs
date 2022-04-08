@@ -8,9 +8,9 @@ using System.Linq;
 namespace EnLibrary.Controls
 {
     using Views;
-    class UserInformationVo
+    class UserVO
     {
-        public static List<UserInformationVo> UserInformation = new List<UserInformationVo>();
+        public static List<UserVO> UserInformation = new List<UserVO>();
         // UserInformationVo user = new UserInformationVo();
 
         private string id;
@@ -21,12 +21,12 @@ namespace EnLibrary.Controls
         private string callNumber;
         private string address;
 
-        public UserInformationVo()
+        public UserVO()
         {
                    // 생성자
         }
 
-        public UserInformationVo(string id, string pw, string pwPass, string name, string age, string callNumber, string address)
+        public UserVO(string id, string pw, string pwPass, string name, string age, string callNumber, string address)
         {
             this.id = id;
             this.pw = pw;
@@ -39,7 +39,7 @@ namespace EnLibrary.Controls
         
         public void UserInformationStore() // 회원가입 정보 저장
         {
-            UserInformationVo user = new UserInformationVo();
+            UserVO user = new UserVO();
             user.id = id;
             user.pw = pw;
             user.pwPass = pwPass;
@@ -73,8 +73,11 @@ namespace EnLibrary.Controls
             }
             else { Console.Write("아이디 비밀번호가 일치하지 않습니다. 다시 입력해주세요 :"); User.LoginPrint(); }
         }
-        
-        
+
+        public void Print()
+        { 
+            Console.Write(UserInformation[0]);       
+        }
        
         
         public string Id
@@ -111,6 +114,11 @@ namespace EnLibrary.Controls
         {
             get { return address; }
             set { address = value; }
+        }
+
+        public override string ToString()
+        {
+            return "아이디 : " + id + "\n비밀번호 : " + pw + "\n이름 : " + age + "\n나이   : " + callNumber + "\n전화번호   : " + callNumber + "\n주소   : " + address;
         }
     }
 }
