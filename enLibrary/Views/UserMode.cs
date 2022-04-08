@@ -13,22 +13,23 @@ namespace EnLibrary.Views
         Print PrintCollection = new Print();
         Input Inputting = new Input();
         UserInformationVo Information = new UserInformationVo();
-        //List<UserInformationVo> UserInformation = new List<UserInformationVo>();
 
 
-        static private int inputData;
+
+        int inputData;
         public void Mode() // 모드 설정 함수
         {
             Console.Clear();
             PrintCollection.LibraryPrint(); // 라이브러리 출력
             PrintCollection.JoinOrLogin(); // 회원가입 or 로그인 출력
-            inputData = Inputting.UserDoInPut(); //사용자 입력
+            inputData = Inputting.UserDoInput(); //사용자 입력
             switch (inputData)
             {
                 case 0: JoinGroup(); break;
-                case 1: Login(); break;
-                case 2: break;
+                case 1: LoginPrint(); break;
+                default: break;
             }
+
         }
 
         public void JoinGroup() // 회원가입
@@ -42,22 +43,21 @@ namespace EnLibrary.Views
             Inputting.Name(); // 이름 입력
             Inputting.Age(); // 나이 입력
             Inputting.CallNumber(); // 전화번호 입력
+            Information.UserInformationStore();
             //Inputting.Address();  일단 킵
-            //Console.Clear();
-            //PrintCollection.LibraryPrint(); // 라이브러리 출력
-            //PrintCollection.JoinOrLogin(); // 회원가입 or 로그인 출력
-            //inputData = Inputting.UserDoInPut(); //사용자 입력
-            //switch (inputData)
-            //{
-            //    case 0: JoinGroup(); break;
-            //  case 1: Login(); break;
-            // case 2: break;
-            //}
+            //Mode();
         }
-
-        public void Login() // 로그인
+        
+        public void LoginPrint() // 로그인
         {
-
+            Console.Clear();
+            PrintCollection.PrintLogin();
+            Inputting.Id(); // 아이디 입력
+            Inputting.Pw(); // 비밀번호 입력
+            
+            Information.UserInformationStore();
+            Information.Userprint();
         }
+        
     }
 }

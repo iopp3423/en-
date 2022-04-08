@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Controls
 {
-
+    using Views;
     class UserInformationVo
     {
-        
-        List<UserInformationVo> UserInformation = new List<UserInformationVo>();
+        public static List<UserInformationVo> UserInformation = new List<UserInformationVo>();
+        // UserInformationVo user = new UserInformationVo();
+        BookMenu Menu = new BookMenu();
+        UserMode User = new UserMode();
+
         private string id;
         private string pw;
         private string pwPass;
@@ -18,7 +21,6 @@ namespace EnLibrary.Controls
         private string age;
         private string callNumber;
         private string address;
-
 
         public UserInformationVo()
         {
@@ -36,7 +38,7 @@ namespace EnLibrary.Controls
             this.address = address;
         }
         
-        public void UserInformationStore()
+        public void UserInformationStore() // 회원가입 정보 저장
         {
             UserInformationVo user = new UserInformationVo();
             user.id = id;
@@ -45,15 +47,28 @@ namespace EnLibrary.Controls
             user.name = name;
             user.age = age;
             user.callNumber = callNumber;
-            //user.address = address;
+            user.address = address;
             UserInformation.Add(user);
-            Console.WriteLine(UserInformation[0].id);          
+            Console.WriteLine("Hello worldUser");
+            Userprint();
+        }
+
+        /*
+        public void CheckingIdPw()
+        {
+            Console.Write("이게 맞나");
+            //if (id == UserInformation[0].id && pw == UserInformation[0].pw) Menu.SeeBookMenu();
+            //else { Console.Write("아이디 비밀번호가 일치하지 않습니다. 다시 입력해주세요 :"); User.LoginPrint(); }
+        }
+        */
+        public void Userprint()
+        {
+            Console.WriteLine(UserInformation[0].id);
             Console.WriteLine(UserInformation[0].pw);
             Console.WriteLine(UserInformation[0].pwPass);
             Console.WriteLine(UserInformation[0].name);
             Console.WriteLine(UserInformation[0].age);
             Console.WriteLine(UserInformation[0].callNumber);
-            
         }
        
         

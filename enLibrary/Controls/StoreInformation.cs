@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Controls
 {
-    class StoreUserInformation
+    class StoreInformation
     {
-        List<UserInformationVo> UserInformation = new List<UserInformationVo>();
+        List<StoreInformation> UserInformation = new List<StoreInformation>();
+
+        
     }
 }

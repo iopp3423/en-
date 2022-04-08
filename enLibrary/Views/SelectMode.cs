@@ -12,7 +12,7 @@ namespace EnLibrary.Views
         ManageMode Manage = new ManageMode();
         Print PrintCollection = new Print();
         Input Inputting = new Input();
-        static private int inputData; // 사용자 오류 검출 후 입력된 값
+        int inputData; // 사용자 오류 검출 후 입력된 값
         public void Print()
         {
             PrintCollection.LibraryPrint();
@@ -22,7 +22,7 @@ namespace EnLibrary.Views
 
         public void InputData()
         {
-            inputData = Inputting.UserDoInPut();
+            inputData = Inputting.UserDoInput();
 
             switch(inputData)
             {

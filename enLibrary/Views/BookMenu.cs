@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Views
 {
-    class Start
+    internal class BookMenu
     {
-        static void Main(string[] args)
+        Print PrintCollection = new Print();
+
+        public void SeeBookMenu()
         {
-            SelectMode Mode = new SelectMode();
-            Mode.Print();      
+            PrintCollection.PrintLoginAfter();
         }
     }
-
 }
