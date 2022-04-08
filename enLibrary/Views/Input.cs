@@ -71,8 +71,9 @@ namespace EnLibrary.Views
                 
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-                    Information.Id = id; // 대입 <- 아이디 입력하는 과정인데 Information.id 까지는 iopp3423같은 아이디 입력하면 들어가짐
-                    Information.StoreInformation();
+                    Information.Id = id; // UserInformation 클래스의 id에 저장
+                    //Information.UserInformationStore(); // UserInformation클래스 안에 있는 리스트에 id 저장
+                    //Information.StoreInformation(id);
                     reEnter = true;                   
                     break;
                 }
@@ -166,6 +167,7 @@ namespace EnLibrary.Views
                 if (completeInformation == true) // 양식이 맞으면  
                 {
                     Information.CallNumber = callNumber; // 대입
+                    Information.UserInformationStore();
                     reEnter = true;
                     break;
                 }
@@ -191,5 +193,6 @@ namespace EnLibrary.Views
                 reEnter = false;
             }
         }
+
     }
 }

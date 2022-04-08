@@ -89,5 +89,29 @@ namespace EnLibrary.Views
             Join();
             Console.Write("주소 :");
         }
+        public void PrintLogin() // 로그인 화면
+        {
+            Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine(string.Format("{0,41}", "      ★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "      ★                          ID & PW를 입력해주세요                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "      ★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.Write("ID를 입력해주세요 :");
+            Console.Write("PW를 입력해주세요 :");
+        }
+        public void PrintLoginAfter() // 로그인 후 화면
+        {
+            Console.WriteLine(string.Format("{0,41}", "원하시는 메뉴의 번호를 눌러주세요."));
+            Console.WriteLine(string.Format("{0,41}", "1. 도서찾기"));
+            Console.WriteLine(string.Format("{0,41}", "2. 도서대여"));
+            Console.WriteLine(string.Format("{0,41}", "3. 대여도서확인"));
+            Console.WriteLine(string.Format("{0,41}", "4. 회원정보수정"));  
+        }
+        public void PrintSearchMenu() // 도서찾기 메뉴 프린트
+        {
+            Console.Write("제목으로 찾기");
+            Console.Write("작가명으로 찾기");
+            Console.Write("출판사로 찾기");
+        }
     }
 }

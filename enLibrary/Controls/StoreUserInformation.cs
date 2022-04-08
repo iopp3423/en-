@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Controls
 {
-    internal class StoreUserInformation
+    class StoreUserInformation
     {
+        List<UserInformationVo> UserInformation = new List<UserInformationVo>();
     }
 }

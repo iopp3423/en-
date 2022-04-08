@@ -9,6 +9,7 @@ namespace EnLibrary.Controls
 
     class UserInformationVo
     {
+        
         List<UserInformationVo> UserInformation = new List<UserInformationVo>();
         private string id;
         private string pw;
@@ -18,14 +19,14 @@ namespace EnLibrary.Controls
         private string callNumber;
         private string address;
 
+
         public UserInformationVo()
         {
-            // 생성자
+                   // 생성자
         }
 
         public UserInformationVo(string id, string pw, string pwPass, string name, string age, string callNumber, string address)
         {
-
             this.id = id;
             this.pw = pw;
             this.pwPass = pwPass;
@@ -34,10 +35,28 @@ namespace EnLibrary.Controls
             this.callNumber = callNumber;
             this.address = address;
         }
-        public void StoreInformation<T>()
+        
+        public void UserInformationStore()
         {
-            UserInformation[0].Id = "kim";
+            UserInformationVo user = new UserInformationVo();
+            user.id = id;
+            user.pw = pw;
+            user.pwPass = pwPass;
+            user.name = name;
+            user.age = age;
+            user.callNumber = callNumber;
+            //user.address = address;
+            UserInformation.Add(user);
+            Console.WriteLine(UserInformation[0].id);          
+            Console.WriteLine(UserInformation[0].pw);
+            Console.WriteLine(UserInformation[0].pwPass);
+            Console.WriteLine(UserInformation[0].name);
+            Console.WriteLine(UserInformation[0].age);
+            Console.WriteLine(UserInformation[0].callNumber);
+            
         }
+       
+        
         public string Id
         {
             get { return id; }
