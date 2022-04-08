@@ -27,6 +27,7 @@ namespace EnLibrary.Views
             {
                 case 0: JoinGroup(); break;
                 case 1: LoginPrint(); break;
+                case 2: break;
                 default: break;
             }
 

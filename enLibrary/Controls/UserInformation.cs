@@ -66,10 +66,11 @@ namespace EnLibrary.Controls
             BookMenu Menu = new BookMenu();
             UserMode User = new UserMode();
 
-            if (Input.idConfirm == UserInformation[0].id && Input.pwConfirm == UserInformation[0].pw)
+            if (Input.idConfirm == UserInformation[0].id && Input.pwConfirm == UserInformation[0].pw) // 아디 비번 맞으면
             {
                 Console.Clear();
-                Menu.SeeBookMenu();
+                Console.WriteLine();
+                Menu.SeeBookMenu(); // BookInformation으로 이동
             }
             else { Console.Write("아이디 비밀번호가 일치하지 않습니다. 다시 입력해주세요 :"); User.LoginPrint(); }
         }
