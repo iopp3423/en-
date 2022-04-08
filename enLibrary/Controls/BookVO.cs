@@ -10,7 +10,7 @@ namespace EnLibrary.Controls
     class BookVO
     {
         public List<BookVO> BookVo = new List<BookVO> ();
-       
+        Input Inputting = new Input();
        
         private string bookNumber;
         private string name;
@@ -18,6 +18,8 @@ namespace EnLibrary.Controls
         private string author;
         private string price;
         private string quantity;
+        private string searchingBook;
+        int x=0;
 
         public void NewBookStore()
         {
@@ -26,11 +28,11 @@ namespace EnLibrary.Controls
 
         public void StoreBookLIst()
         {
-            BookVO DataStructure = new BookVO ("1","자료구조","세종대학교","국형준", "20000원", "2개");
-            BookVO Algorithm = new BookVO ("2", "Do it! 알고리즘 코딩 테스트 : 자바 편 ", "이지스퍼블리싱","김종관", "28,800원", "4개" );
-            BookVO Amagon = new BookVO("3"," 생활코딩! 아마존 웹 서비스", "위키북스", "이고잉", "22,500원", "3개" );
-            BookVO Java = new BookVO("4","생활코딩! 자바 프로그래밍 입문",  "위키북스",  "이고잉", "24,300원",  "3개" );
-            BookVO Test = new BookVO("5", " Do it! 알고리즘 코딩 테스트 — 자바 편 ", "이지스퍼블리싱",  "김종관", "22000원",  "4개" );
+            BookVO DataStructure = new BookVO ("1","자료구조","세종대학교","국형준", "20000원", "2");
+            BookVO Algorithm = new BookVO ("2", "Do it! 알고리즘 코딩 테스트 : 자바 편 ", "이지스퍼블리싱","김종관", "28,800원", "4" );
+            BookVO Amagon = new BookVO("3"," 생활코딩! 아마존 웹 서비스", "위키북스", "이고잉", "22,500원", "3" );
+            BookVO Java = new BookVO("4","생활코딩! 자바 프로그래밍 입문",  "위키북스",  "이고잉", "24,300원",  "3" );
+            BookVO Test = new BookVO("5", " Do it! 알고리즘 코딩 테스트 — 자바 편 ", "이지스퍼블리싱",  "김종관", "22000원",  "4" );
             BookVo.Add(DataStructure);
             BookVo.Add(Algorithm);
             BookVo.Add(Amagon);
@@ -38,12 +40,25 @@ namespace EnLibrary.Controls
             BookVo.Add(Test);
 
         }
-        public void print()
+        public void Print()
         {
             foreach (BookVO Book in BookVo)
             {
                 Console.WriteLine(Book);
                 Console.WriteLine("────────────────────────────────────────────────────────────");
+            }
+        }
+        
+        public void Searching()
+        {
+            searchingBook = Input.searchingBook;           
+            foreach (BookVO Book in BookVo)
+            {
+                if (Book.name == searchingBook)
+                {
+                    Console.Write(Book);
+                    break;
+                }
             }
         }
         

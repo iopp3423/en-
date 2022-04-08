@@ -65,18 +65,20 @@ namespace EnLibrary.Views
         }
         public void PrintLoginAfter() // 로그인 후 화면
         {
-            Console.WriteLine(string.Format("{0,41}", "원하시는 메뉴의 번호를 눌러주세요."));
             Console.WriteLine(string.Format("{0,41}", "0. 도서찾기"));
             Console.WriteLine(string.Format("{0,41}", "1. 도서대여"));
             Console.WriteLine(string.Format("{0,41}", "2. 대여도서확인"));
             Console.WriteLine(string.Format("{0,41}", "3. 회원정보수정"));
             Console.WriteLine(string.Format("{0,41}", "4. 프로그램 종료"));
+            Console.Write(string.Format("{0,41}", "원하시는 메뉴의 번호를 눌러주세요. :"));
         }
         public void PrintSearchMenu() // 도서찾기 메뉴 프린트
         {
             Console.WriteLine("1. 제목으로 찾기");
             Console.WriteLine("2. 작가명으로 찾기");
             Console.WriteLine("3. 출판사로 찾기");
+            Console.WriteLine("4. 프로그램 종료");
+            Console.Write("원하시는 번호를 눌러주세요 :");
         }
         public void PrintBorrowBook() // 도서찾기 메뉴 프린트
         {
@@ -131,6 +133,18 @@ namespace EnLibrary.Views
             Console.Write("번호 수정은 5번을 눌러주세요:");
             Console.Write("주소 수정은 6번을 눌러주세요:");
         }
-        
+
+        public void PrintSearchingTitle()
+        {
+            Console.Write("제목을 입력해주세요 :");
+        }
+        public void PrintSearchingAuthor()
+        {
+            Console.Write("작가명을 입력해주세요 :");
+        }
+        public void PrintSearchingPublisher()
+        {
+            Console.Write("출판사를 입력해주세요 :");
+        }
     }
 }
