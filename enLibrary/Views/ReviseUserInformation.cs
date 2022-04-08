@@ -8,6 +8,7 @@ namespace EnLibrary.Views
 {
     internal class ReviseUserInformation
     {
+        Print PrintCollection = new Print();
         public void Revising()
         {
 

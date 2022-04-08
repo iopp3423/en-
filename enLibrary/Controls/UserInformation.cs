@@ -20,7 +20,6 @@ namespace EnLibrary.Controls
         private string age;
         private string callNumber;
         private string address;
-        private string result;
 
         public UserInformationVo()
         {

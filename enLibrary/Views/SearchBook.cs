@@ -15,7 +15,8 @@ namespace EnLibrary.Views
         {
             Console.Clear();
             PrintCollection.PrintSearchMenu();
-            Book.BookPrint();
+            Book.StoreBookLIst();
+            //Book.BookPrint();
         }
     }
 }

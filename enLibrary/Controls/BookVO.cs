@@ -26,19 +26,41 @@ namespace EnLibrary.Controls
 
         public void StoreBookLIst()
         {
+            BookVO DataStructure = new BookVO ("1","자료구조","세종대학교","국형준", "20000원", "2개");
+            BookVO Algorithm = new BookVO ("2", "Do it! 알고리즘 코딩 테스트 : 자바 편 ", "이지스퍼블리싱","김종관", "28,800원", "4개" );
+            BookVO Amagon = new BookVO("3"," 생활코딩! 아마존 웹 서비스", "위키북스", "이고잉", "22,500원", "3개" );
+            BookVO Java = new BookVO("4","생활코딩! 자바 프로그래밍 입문",  "위키북스",  "이고잉", "24,300원",  "3개" );
+            BookVO Test = new BookVO("5", " Do it! 알고리즘 코딩 테스트 — 자바 편 ", "이지스퍼블리싱",  "김종관", "22000원",  "4개" );
+            BookVo.Add(DataStructure);
+            BookVo.Add(Algorithm);
+            BookVo.Add(Amagon);
+            BookVo.Add(Java);
+            BookVo.Add(Test);
+            /*
             BookVO Book = new BookVO(); /// 문제 있으면 이거임 아마
-            Book.bookNumber = "1";
-            Book.name = "자료구조 및 실습";
-            Book.publisher = "세종대학교";
-            Book.author = "국형준";
-            Book.price = "20000원";
-            Book.quantity = "2";
-            BookVo.Add(Book);
+            BookVO DataStructure = new BookVO("1", "자료구조 및 실습", "세종대학교", "국형준", "20000원", "23333");
+            BookVO Book2 = new BookVO();
+            
+            Book2.bookNumber = "13333";
+            Book2.name = "자료구조 및 실습3333";
+            Book2.publisher = "세종대학교3333";
+            Book2.author = "국형준3333";
+            Book2.price = "20000원3333";
+            Book2.quantity = "23333";
+            
+            BookVo.Add(DataStructure);
+            BookVo.Add(Book2);*/
+
             print();
         }
         public void print()
         {
-            Console.Write(BookVo[0].bookNumber);
+            foreach (BookVO Book in BookVo)
+            {
+                Console.WriteLine(Book);
+                Console.WriteLine("────────────────────────────────────────────────────────────");
+            }
+            Console.SetCursorPosition(30, 0);
         }
         
 
@@ -90,7 +112,7 @@ namespace EnLibrary.Controls
         }
         public override string ToString()
         {
-            return "책번호 : " + bookNumber + "책이름 : " + name + "출판사 : " + publisher + "저자 : " + author + "가격: " + price + "수량: " + quantity;
+            return "책번호 : " + bookNumber + "\n책이름 : " + name + "\n출판사 : " + publisher + "\n저자 : " + author + "\n가격: " + price + "\n수량: " + quantity;
         }
 
         public void BookPrint()
