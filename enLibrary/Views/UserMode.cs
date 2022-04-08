@@ -13,10 +13,8 @@ namespace EnLibrary.Views
         Print PrintCollection = new Print();
         Input Inputting = new Input();
         UserInformationVo Information = new UserInformationVo();
-
-
-
         int inputData;
+
         public void Mode() // 모드 설정 함수
         {
             Console.Clear();

@@ -51,17 +51,45 @@ namespace EnLibrary.Controls
         
         public void Searching()
         {
-            searchingBook = Input.searchingBook;           
+            searchingBook = Input.searchingBook;
+            Console.Clear();
             foreach (BookVO Book in BookVo)
             {
                 if (Book.name == searchingBook)
                 {
+                    Console.Write(Book);                 
+                }
+            }
+        }
+        public void SearchingAuthor()
+        {
+            searchingBook = Input.searchingBook;
+            Console.Clear();
+            foreach (BookVO Book in BookVo)
+            {
+                if (Book.author == searchingBook)
+                {
+                    Console.Clear();
                     Console.Write(Book);
                     break;
                 }
             }
         }
-        
+        public void SearchingPublisher()
+        {
+            searchingBook = Input.searchingBook;
+            Console.Clear();
+            foreach (BookVO Book in BookVo)
+            {
+                if (Book.publisher == searchingBook)
+                {
+                    Console.Clear();
+                    Console.Write(Book);
+                    break;
+                }
+            }
+        }
+
 
         public BookVO()
         {

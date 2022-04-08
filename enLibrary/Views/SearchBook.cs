@@ -51,19 +51,19 @@ namespace EnLibrary.Views
         {
             PrintCollection.PrintSearchingTitle(); //책 제목 안내문구 출력
             Inputting.InputString();
-            Book.Searching();
+            Book.Searching(); // 제목으로 검색
         }
         public void SearchingAuthor()
         {
             PrintCollection.PrintSearchingAuthor(); //작가 안내문구 출력
             Inputting.InputString();
-            Book.Searching();
+            Book.SearchingAuthor(); // 작가로검색
         }
         public void SearchingPublisher()
         {
             PrintCollection.PrintSearchingPublisher(); //출판사 안내문구 출력
             Inputting.InputString();
-            Book.Searching();
+            Book.SearchingPublisher();// 출판사로 검색
         }
     }
 }

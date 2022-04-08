@@ -274,7 +274,7 @@ namespace EnLibrary.Views
 
         public void InputString()
         {
-            searchingBook = Console.ReadLine();
+            searchingBook = (Console.ReadLine());
         }
     }
 }
