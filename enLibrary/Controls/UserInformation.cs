@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace EnLibrary.Controls
 {
@@ -19,6 +20,7 @@ namespace EnLibrary.Controls
         private string age;
         private string callNumber;
         private string address;
+        private string result;
 
         public UserInformationVo()
         {
@@ -59,13 +61,16 @@ namespace EnLibrary.Controls
             //Console.WriteLine(UserInformation[0].callNumber);
         }
 
-        public void CheckingIdPw()
+        public void CheckingIdPw() // 아이디 비밀번호 맞는지 확인
         {
-            Input Inputting = new Input();
             BookMenu Menu = new BookMenu();
             UserMode User = new UserMode();
 
-            if (Input.idConfirm == UserInformation[0].id && Input.pwConfirm == UserInformation[0].pw) Menu.SeeBookMenu();
+            if (Input.idConfirm == UserInformation[0].id && Input.pwConfirm == UserInformation[0].pw)
+            {
+                Console.Clear();
+                Menu.SeeBookMenu();
+            }
             else { Console.Write("아이디 비밀번호가 일치하지 않습니다. 다시 입력해주세요 :"); User.LoginPrint(); }
         }
         
