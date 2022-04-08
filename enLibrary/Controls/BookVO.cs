@@ -19,7 +19,7 @@ namespace EnLibrary.Controls
         private string price;
         private string quantity;
         private string searchingBook;
-        int x=0;
+        int Number;
 
         public void NewBookStore()
         {
@@ -46,6 +46,23 @@ namespace EnLibrary.Controls
             {
                 Console.WriteLine(Book);
                 Console.WriteLine("────────────────────────────────────────────────────────────");
+            }
+        }
+
+        public void SearchingQuantity()
+        {
+            foreach (BookVO Book in BookVo)
+            {
+                Console.WriteLine("출력이 왜 안돼");
+                Console.WriteLine(Book.BookNumber);
+                Console.WriteLine(Book.Quantity);
+                if (Book.BookNumber == searchingBook)
+                {
+                    
+                    Number = int.Parse(Book.Quantity) - 1;
+                    Book.Quantity = Number.ToString();
+                    Print();
+                }
             }
         }
         
@@ -138,7 +155,7 @@ namespace EnLibrary.Controls
         }
         public override string ToString()
         {
-            return "책번호 : " + bookNumber + "\n책이름 : " + name + "\n출판사 : " + publisher + "\n저자 : " + author + "\n가격: " + price + "\n수량: " + quantity;
+            return "책번호 : " + bookNumber + "\n책이름 : " + name + "\n출판사 : " + publisher + "\n저자   : " + author + "\n가격   : " + price + "\n수량   : " + quantity;
         }
 
     }
