@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace EnLibrary.Views
 {
-    internal class SearchBook
+    using EnLibrary.Controls;
+    class SearchBook
     {
+        BookVO Book = new BookVO();
+        Print PrintCollection = new Print();
+        public void Searching()
+        {
+            Console.Clear();
+            PrintCollection.PrintSearchMenu();
+            Book.BookPrint();
+        }
     }
 }

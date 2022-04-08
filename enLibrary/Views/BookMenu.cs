@@ -8,40 +8,52 @@ namespace EnLibrary.Views
 {
     internal class BookMenu
     {
+
         Print PrintCollection = new Print();
         Input Inputting = new Input();
+        SearchBook Search = new SearchBook();
+        BorrowBook Borrow = new BorrowBook();
+        CheckBook CheckBook = new CheckBook();
+        ReviseUserInformation Revise = new ReviseUserInformation();
+
         private int choose;
         public void SeeBookMenu()
         {
             PrintCollection.PrintLoginAfter(); // 도서 메뉴 출력
             choose = Inputting.UserDoInput();
-            switch(choose)
+
+            switch (choose)
             {
-                case 0: SearchBook(); break;
-                case 1: BorrowBook(); break;
-                case 2: CheckBook(); break;
-                case 3: ReviseUserInformation(); break;
+                case 0:
+                    {
+                        Search.Searching();
+                        break;
+                    }
+                case 1:
+                    {
+                        Borrow.Borrowing();
+                        break;
+                    }
+
+                case 2:
+                    {
+                        CheckBook.Checking();
+                        break;
+                    }
+                case 3:
+                    {
+                        Revise.Revising();
+                        break;
+                    }
+                case 4: break;
+
                 default: break;
             }
         }
 
-        public void SearchBook()
-        {
 
-        }
-
-        public void BorrowBook()
-        {
-
-        }
-
-        public void CheckBook()
-        {
-
-        }
-        public void ReviseUserInformation()
-        {
-
-        }
     }
+
+
 }
+

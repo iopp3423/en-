@@ -8,5 +8,9 @@ namespace EnLibrary.Views
 {
     internal class ReviseUserInformation
     {
+        public void Revising()
+        {
+
+        }
     }
 }
