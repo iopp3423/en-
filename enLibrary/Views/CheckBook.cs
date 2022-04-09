@@ -9,7 +9,7 @@ namespace EnLibrary.Views
     using EnLibrary.Controls;
     internal class CheckBook
     {
-        BookVO Book = new BookVO();
+        BookInformation Book = new BookInformation();
         Print PrintCollection = new Print();
         public void Checking()
         {

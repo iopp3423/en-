@@ -11,7 +11,7 @@ namespace EnLibrary.Views
     {
         static public string input;
         int i;
-        BookVO Book = new BookVO();
+        BookInformation Book = new BookInformation();
         Print PrintCollection = new Print();
         Input Inputting = new Input();
         SearchBook Search = new SearchBook();

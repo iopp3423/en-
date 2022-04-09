@@ -9,7 +9,7 @@ namespace EnLibrary.Views
     using EnLibrary.Controls;
     class SearchBook
     {
-        BookVO Book = new BookVO();
+        BookInformation Book = new BookInformation();
         Input Inputting = new Input();
         Print PrintCollection = new Print();
         //BookMenu Menu = new BookMenu();

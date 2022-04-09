@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace EnLibrary.Controls
 {
     using Views;
-    class BookVO
+    class BookInformation
     {
-        public List<BookVO> BookVo = new List<BookVO> ();
+        public List<BookInformation> BookVo = new List<BookInformation> ();
         Input Inputting = new Input();
         Print PrintCollectiion = new Print();
        
@@ -30,11 +30,11 @@ namespace EnLibrary.Controls
 
         public void StoreBookLIst()
         {
-            BookVO DataStructure = new BookVO ("1","자료구조","세종대학교","국형준", "20000원", "2");
-            BookVO Algorithm = new BookVO ("2", "Do it! 알고리즘 코딩 테스트 : 자바 편 ", "이지스퍼블리싱","김종관", "28,800원", "4" );
-            BookVO Amagon = new BookVO("3"," 생활코딩! 아마존 웹 서비스", "위키북스", "이고잉", "22,500원", "3" );
-            BookVO Java = new BookVO("4","생활코딩! 자바 프로그래밍 입문",  "위키북스",  "이고잉", "24,300원",  "3" );
-            BookVO Test = new BookVO("5", " Do it! 알고리즘 코딩 테스트 — 자바 편 ", "이지스퍼블리싱",  "김종관", "22000원",  "4" );
+            BookInformation DataStructure = new BookInformation ("1","자료구조","세종대학교","국형준", "20000원", "2");
+            BookInformation Algorithm = new BookInformation ("2", "Do it! 알고리즘 코딩 테스트 : 자바 편 ", "이지스퍼블리싱","김종관", "28,800원", "4" );
+            BookInformation Amagon = new BookInformation("3"," 생활코딩! 아마존 웹 서비스", "위키북스", "이고잉", "22,500원", "3" );
+            BookInformation Java = new BookInformation("4","생활코딩! 자바 프로그래밍 입문",  "위키북스",  "이고잉", "24,300원",  "3" );
+            BookInformation Test = new BookInformation("5", " Do it! 알고리즘 코딩 테스트 — 자바 편 ", "이지스퍼블리싱",  "김종관", "22000원",  "4" );
             BookVo.Add(DataStructure);
             BookVo.Add(Algorithm);
             BookVo.Add(Amagon);
@@ -44,7 +44,7 @@ namespace EnLibrary.Controls
         }
         public void Print()
         {
-            foreach (BookVO Book in BookVo)
+            foreach (BookInformation Book in BookVo)
             {
                 Console.WriteLine(Book);
                 Console.WriteLine("────────────────────────────────────────────────────────────");
@@ -63,7 +63,7 @@ namespace EnLibrary.Controls
         {
             Console.Clear();
             searchingBook = Input.searchingBook;
-            foreach (BookVO Book in BookVo)
+            foreach (BookInformation Book in BookVo)
             {
                 if (Book.name == searchingBook)
                 {
@@ -82,7 +82,7 @@ namespace EnLibrary.Controls
         {
             Console.Clear();
             searchingBook = Input.searchingBook;
-            foreach (BookVO Book in BookVo)
+            foreach (BookInformation Book in BookVo)
             {
                 if (Book.author == searchingBook)
                 {                    
@@ -102,7 +102,7 @@ namespace EnLibrary.Controls
         {
             Console.Clear();
             searchingBook = Input.searchingBook;           
-            foreach (BookVO Book in BookVo)
+            foreach (BookInformation Book in BookVo)
             {
                 if (Book.publisher == searchingBook)
                 {
@@ -119,12 +119,12 @@ namespace EnLibrary.Controls
         }
 
 
-        public BookVO()
+        public BookInformation()
         {
             // 생성자
         }
 
-        public BookVO(string bookNumber, string name, string publisher, string author, string price, string quantity)
+        public BookInformation(string bookNumber, string name, string publisher, string author, string price, string quantity)
         {
             this.bookNumber = bookNumber;
             this.name = name;
