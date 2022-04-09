@@ -12,6 +12,7 @@ namespace EnLibrary.Views
         BookVO Book = new BookVO();
         Input Inputting = new Input();
         Print PrintCollection = new Print();
+        //BookMenu Menu = new BookMenu();
         static private int input;
 
         public void Searching()
@@ -25,6 +26,7 @@ namespace EnLibrary.Views
             {
                 case 0:
                     {
+
                         SearchingTitle();
                         break;
                     }
@@ -49,25 +51,37 @@ namespace EnLibrary.Views
 
         public void SearchingTitle()
         {
+
+            BookMenu Menu = new BookMenu();
             PrintCollection.PrintSearchingTitle(); //책 제목 안내문구 출력
             Inputting.InputString();
             Book.Searching(); // 제목으로 검색
-           
+            Console.Write("뒤로가기는 0번을 눌러주세요 :");
+            Console.Write("프로그램 종료는 1번을 눌러주세요 :");
+            input = Inputting.UserDoInput();
+            if (input == 0) Menu.SeeBookMenu();
         }
         public void SearchingAuthor()
         {
-
+            BookMenu Menu = new BookMenu();
             PrintCollection.PrintSearchingAuthor(); //작가 안내문구 출력
             Inputting.InputString();
             Book.SearchingAuthor(); // 작가로검색
-           
+            Console.Write("뒤로가기는 0번을 눌러주세요 :");
+            Console.Write("프로그램 종료는 1번을 눌러주세요 :");
+            input = Inputting.UserDoInput();
+            if (input == 0) Menu.SeeBookMenu();
         }
         public void SearchingPublisher()
         {
+            BookMenu Menu = new BookMenu();
             PrintCollection.PrintSearchingPublisher(); //출판사 안내문구 출력
             Inputting.InputString();
             Book.SearchingPublisher();// 출판사로 검색
-           
+            Console.Write("뒤로가기는 0번을 눌러주세요 :");
+            Console.Write("프로그램 종료는 1번을 눌러주세요 :");
+            input = Inputting.UserDoInput();
+            if (input == 0) Menu.SeeBookMenu();
         }
     }
 }

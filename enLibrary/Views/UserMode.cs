@@ -53,8 +53,7 @@ namespace EnLibrary.Views
             PrintCollection.PrintLogin(); // 로그인 화면 프린트
             Inputting.IdConfirm(); // 아이디 입력함수
             Inputting.PwConfirm(); // 비밀번호 입력함수
-            Information.CheckingIdPw(); // 아이디 비밀번호 맞는지 체크          
-            //Information.Userprint();
+            Information.CheckingIdPw(); // 아이디 비밀번호 맞는지 체크      
         }
         
     }

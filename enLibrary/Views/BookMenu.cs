@@ -14,39 +14,24 @@ namespace EnLibrary.Views
         SearchBook Search = new SearchBook();
         BorrowBook Borrow = new BorrowBook();
         CheckBook CheckBook = new CheckBook();
+        UserMode User = new UserMode();
         ReviseUserInformation Revise = new ReviseUserInformation();
+        int inputData;
 
         private int choose;
         public void SeeBookMenu()
         {
+            Console.Clear();
             PrintCollection.PrintLoginAfter(); // 도서 메뉴 출력
             choose = Inputting.UserDoInput();
-
+            PrintCollection.LibraryPrint();
             switch (choose)
             {
-                case 0:
-                    {
-                        Search.Searching();
-                        break;
-                    }
-                case 1:
-                    {
-                        Borrow.Borrowing();
-                        break;
-                    }
-
-                case 2:
-                    {
-                        CheckBook.Checking();
-                        break;
-                    }
-                case 3:
-                    {
-                        Revise.Revising();
-                        break;
-                    }
-                case 4: break;
-
+                case 0: User.Mode(); break; 
+                case 1:Search.Searching();break;
+                case 2:CheckBook.Checking();break;
+                case 3:Revise.Revising(); break;
+                case 4: Revise.Revising();break;
                 default: break;
             }
         }

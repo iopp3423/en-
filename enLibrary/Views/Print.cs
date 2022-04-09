@@ -52,6 +52,7 @@ namespace EnLibrary.Views
             Console.WriteLine("나이 : ");
             Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx):");
             Console.WriteLine("주소 :");
+            Console.WriteLine("순서대로 입력해주세요 :");
         }
         public void PrintLogin() // 로그인 화면
         {
@@ -65,11 +66,12 @@ namespace EnLibrary.Views
         }
         public void PrintLoginAfter() // 로그인 후 화면
         {
-            Console.WriteLine(string.Format("{0,41}", "0. 도서찾기"));
-            Console.WriteLine(string.Format("{0,41}", "1. 도서대여"));
-            Console.WriteLine(string.Format("{0,41}", "2. 대여도서확인"));
-            Console.WriteLine(string.Format("{0,41}", "3. 회원정보수정"));
-            Console.WriteLine(string.Format("{0,41}", "4. 프로그램 종료"));
+            Console.WriteLine(string.Format("{0,41}", "0. 뒤로가기"));
+            Console.WriteLine(string.Format("{0,41}", "1. 도서찾기"));
+            Console.WriteLine(string.Format("{0,41}", "2. 도서대여"));
+            Console.WriteLine(string.Format("{0,41}", "3. 대여도서확인"));
+            Console.WriteLine(string.Format("{0,41}", "4. 회원정보수정"));
+            Console.WriteLine(string.Format("{0,41}", "5. 프로그램 종료"));
             Console.Write(string.Format("{0,41}", "원하시는 메뉴의 번호를 눌러주세요. :"));
         }
         public void PrintSearchMenu() // 도서찾기 메뉴 프린트
@@ -92,12 +94,12 @@ namespace EnLibrary.Views
         {
             Console.Clear();
             Join();
-            Console.Write("유저 ID : ");
+            Console.Write("유저 ID(영어, 숫자 포함(8~10자) : ");
         }
         public void Pw()
         {
             Join();
-            Console.Write("유저 PW : ");
+            Console.Write("유저 PW(영어, 숫자 포함(4~10자) : ");
         }
         public void PwPass()
         {
@@ -107,7 +109,7 @@ namespace EnLibrary.Views
         public void Name()
         {
             Join();
-            Console.Write("유저 이름 : ");
+            Console.Write("유저 이름(2~5자) : ");
         }
         public void Age()
         {
@@ -149,7 +151,13 @@ namespace EnLibrary.Views
 
         public void RevisingInformation()
         {
-            Console.Write("1. 핸드폰 번호 변경");
+            Console.WriteLine("1. 핸드폰 번호(01x-xxxx-xxxx)");
+            Console.Write("\n");
+            Console.WriteLine("2. 유저 PW(영어, 숫자 포함(4~10자)");
+            Console.Write("\n");
+            Console.WriteLine("3. 나이");
+            Console.Write("\n");
+            Console.Write("원하시는 메뉴의 번호를 눌러주세요 :");
         }
     }
 }

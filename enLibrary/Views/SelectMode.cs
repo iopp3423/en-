@@ -17,21 +17,15 @@ namespace EnLibrary.Views
         {
             PrintCollection.LibraryPrint();
             PrintCollection.MenuPrint();
-            InputData();
-        }
-
-        public void InputData()
-        {
+            //InputData();
             inputData = Inputting.UserDoInput();
-
-            switch(inputData)
+            switch (inputData)
             {
                 case 0: User.Mode(); break;
                 case 1: Manage.Mode(); break;
                 case 2: Console.Write("도서관리 프로그램이 종료되었습니다."); break;
             }
-        }
-      
+        }  
        
     }
 }

@@ -75,11 +75,33 @@ namespace EnLibrary.Controls
         }
 
         public void Print()
-        { 
-            Console.WriteLine(UserInformation[0]);       
+        {
+
+            Console.WriteLine(UserInformation[0]);
+            
         }
-       
-        
+
+        public void RevisingCallNumber()
+        {
+            UserVO user = new UserVO();
+            user.callNumber = callNumber;
+            UserInformation.Add(user);
+        }
+        public void RevisingAge()
+        {
+            UserVO user = new UserVO();
+            user.Age = Age;          
+            UserInformation.Add(user);
+        }
+        public void RevisingPw()
+        {
+            UserVO user = new UserVO();
+            user.Pw = Pw;
+            Console.Write(Pw);
+            UserInformation.Add(user);
+        }
+
+
         public string Id
         {
             get { return id; }
