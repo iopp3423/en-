@@ -23,15 +23,14 @@ namespace EnLibrary.Views
         {
             Console.Clear();
             PrintCollection.PrintLoginAfter(); // 도서 메뉴 출력
-            choose = Inputting.UserDoInput();
-            PrintCollection.LibraryPrint();
+            choose = Inputting.UserDoInput();           
             switch (choose)
             {
                 case 0: User.Mode(); break; 
                 case 1:Search.Searching();break;
-                case 2:CheckBook.Checking();break;
-                case 3:Revise.Revising(); break;
-                case 4: Revise.Revising();break;
+                case 2:Borrow.Borrowing();break;
+                case 3:CheckBook.Checking();break;
+                case 4:Revise.Revising(); break;
                 default: break;
             }
         }

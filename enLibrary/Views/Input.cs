@@ -18,7 +18,7 @@ namespace EnLibrary.Views
         Regex PwCheck = new Regex(@"^[0-9a-zA-Z]{4,10}$");
         Regex NameCheck = new Regex(@"^[가-힣]{2,5}$");
         Regex AgeCheck = new Regex(@"^[0-9]{1,2}1?[0-9]?[0-9]$");
-        Regex AddressCheck = new Regex(@"^[가-힣]{2,5}[시] {1}[가-힣]{2,5}[구] {1}[가-힣]{2,5}[동 | 읍 | 면 | 리]{1} $");
+       
 
         string inputSearch; // 오류 검출을 위한 입력 값
         int input;
@@ -146,7 +146,6 @@ namespace EnLibrary.Views
                 {
                     Information.Pw = pw; // 대입                 
                     reEnter = true;
-                    Information.UserInformationStore(); // 이거 나중에 풀면 지워줘야함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 주소 or 전화번호에서 작성
                     break;
                 }
                 reEnter = false;
@@ -239,8 +238,7 @@ namespace EnLibrary.Views
                
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-                    Information.CallNumber = callNumber; // 대입
-                    //Information.UserInformationStore();  /////////////////////////////////////여기까지 오면 회원가입 정보 저장 나중에 주소함수고치고 주소함수로 내려야함
+                    Information.CallNumber = callNumber; // 대입                   
                     reEnter = true;
                     break;
                 }
@@ -259,16 +257,11 @@ namespace EnLibrary.Views
                     PrintCollection.JoinUser();
                     Console.Write("잘못된 입력입니다. 주소를 다시 입력해주세요 :");
                 }
-                address = Console.ReadLine(); // 전화번호 입력                               
-                completeInformation = AddressCheck.IsMatch(address); // 전화번호 정규화로 01x-xxxx-xxxx양식 맞는지 확인
-
-                if (completeInformation == true) // 양식이 맞으면  
-                {
-                    Information.Address = address; // 대입
-                    reEnter = true;
-                    break;
-                }
-                reEnter = false;
+                address = Console.ReadLine(); //                                             
+                Information.Address = address; // 대입
+                Information.UserInformationStore();  /////////////////////////////////////여기까지 오면 회원가입 정보 저장 나중에 주소함수고치고 주소함수로 내려야함
+                break;
+           
             }
         }
 

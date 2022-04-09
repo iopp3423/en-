@@ -11,6 +11,7 @@ namespace EnLibrary.Controls
     {
         public List<BookVO> BookVo = new List<BookVO> ();
         Input Inputting = new Input();
+        Print PrintCollectiion = new Print();
        
         private string bookNumber;
         private string name;
@@ -19,7 +20,8 @@ namespace EnLibrary.Controls
         private string price;
         private string quantity;
         private string searchingBook;
-        int Number;
+        public int number;
+        public int zero = 0;
 
         public void NewBookStore()
         {
@@ -67,8 +69,14 @@ namespace EnLibrary.Controls
                 {
                     Console.WriteLine(Book);
                     Console.WriteLine("────────────────────────────────────────────────────────────");
+                    number++;// number가 0이면 찾는 책이 없음
                 }
             }
+            if (number == zero)
+            {
+                Inputting.InputString();
+            }
+            number = zero;
         }
         public void SearchingAuthor()
         {
@@ -80,8 +88,15 @@ namespace EnLibrary.Controls
                 {                    
                     Console.WriteLine(Book);
                     Console.WriteLine("────────────────────────────────────────────────────────────");
+                    number++;
                 }
             }
+            if (number == zero)
+            {
+                Inputting.InputString();
+
+            }
+            number = zero;
         }
         public void SearchingPublisher()
         {
@@ -93,8 +108,14 @@ namespace EnLibrary.Controls
                 {
                     Console.WriteLine(Book);
                     Console.WriteLine("────────────────────────────────────────────────────────────");
+                    number++;
                 }
             }
+            if (number == zero)
+            {
+                Inputting.InputString();
+            }
+            number = zero;
         }
 
 

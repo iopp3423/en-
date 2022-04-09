@@ -38,12 +38,11 @@ namespace EnLibrary.Views
             PrintCollection.JoinUser();
             Inputting.Id();
             Inputting.Pw(); // 비밀번호 입력으로 가기
-            //Inputting.PwPass(); //비밀번호 확인입력
-            //Inputting.Name(); // 이름 입력
-            //Inputting.Age(); // 나이 입력
-            //Inputting.CallNumber(); // 전화번호 입력
-            //Information.UserInformationStore(); 이거 여기엔 필요없고 Input에 꼭 이썽야함@@@@@@@@@@@@@@@@ 
-            //Inputting.Address();  일단 킵
+            Inputting.PwPass(); //비밀번호 확인입력
+            Inputting.Name(); // 이름 입력
+            Inputting.Age(); // 나이 입력
+            Inputting.CallNumber(); // 전화번호 입력
+            Inputting.Address();  
             Mode();
         }
         

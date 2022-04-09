@@ -11,7 +11,6 @@ namespace EnLibrary.Controls
     class UserVO
     {
         public static List<UserVO> UserInformation = new List<UserVO>();
-        // UserInformationVo user = new UserInformationVo();
 
         private string id;
         private string pw;
@@ -49,16 +48,7 @@ namespace EnLibrary.Controls
             user.address = address;
             UserInformation.Add(user);
             //Userprint();
-        }
-        public void Userprint()
-        {
-            Console.WriteLine(UserInformation[0].id);
-            Console.WriteLine(UserInformation[0].pw);
-            //Console.WriteLine(UserInformation[0].pwPass);
-            //Console.WriteLine(UserInformation[0].name);
-            //Console.WriteLine(UserInformation[0].age);
-            //Console.WriteLine(UserInformation[0].callNumber);
-        }
+        }      
 
         public void CheckingIdPw() // 아이디 비밀번호 맞는지 확인
         {
@@ -85,7 +75,7 @@ namespace EnLibrary.Controls
         {
             UserVO user = new UserVO();
             user.callNumber = callNumber;
-            UserInformation.Add(user);
+            Console.Write(user.callNumber);
         }
         public void RevisingAge()
         {

@@ -16,6 +16,7 @@ namespace EnLibrary.Views
 
         public void Revising()
         {
+            Console.Clear();
             Information.Print();
             Console.WriteLine("────────────────────────────────────────────────────────────");
             Console.Write("\n\n");
@@ -25,7 +26,7 @@ namespace EnLibrary.Views
             {
                 case 1: { RevisingCall(); break; }
                 case 2: { RevisingPw(); break; }
-                case 3: break;
+                case 3: { RevisingAge(); break; }
                 default: break;
             }
         }
