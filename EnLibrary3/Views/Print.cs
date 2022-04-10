@@ -69,10 +69,10 @@ namespace EnLibrary3.Views
         public void BookMenu()
         {
             LibraryPrint();
-            Console.WriteLine(string.Format("{0,41}", "도서찾기"));
-            Console.WriteLine(string.Format("{0,41}", "도서대여"));
-            Console.WriteLine(string.Format("{0,41}", "대여도서확인"));
-            Console.WriteLine(string.Format("{0,41}", "회원정보수정"));
+            Console.WriteLine(string.Format("{0,39}", "》도서찾기"));
+            Console.WriteLine(string.Format("{0,39}", "》도서대여"));
+            Console.WriteLine(string.Format("{0,41}", "》대여도서확인"));
+            Console.WriteLine(string.Format("{0,41}", "》회원정보수정"));
         }
     }
 }

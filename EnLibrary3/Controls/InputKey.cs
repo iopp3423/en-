@@ -64,7 +64,7 @@ namespace EnLibrary3.Views
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
                 if (reEnter == false)
                 {
-                    Console.SetCursorPosition(34, 6); // 커서 위치 맞게 변경                  
+                    Console.SetCursorPosition(33, 6); // 커서 위치 맞게 변경                  
                     Console.Write(" 다시 입력해주세요 :");
                     //Console.Write(new string(' ', Console.WindowWidth));
                 }
@@ -93,7 +93,7 @@ namespace EnLibrary3.Views
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
                 if (reEnter == false)
                 {
-                    Console.SetCursorPosition(53, 8); // 커서 위치 맞게 변경                  
+                    Console.SetCursorPosition(33, 7); // 커서 위치 맞게 변경                  
                     Console.Write(" 다시 입력해주세요 :");
                 }
                 pw = Console.ReadLine(); // 비밀번호 입력
@@ -101,16 +101,15 @@ namespace EnLibrary3.Views
 
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-                    foreach (UserVO list in List.UserList)
-                    {
-                        Console.WriteLine(list);
-                        Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-                    }
+
+                    //Console.WriteLine(pw);
+                    //Console.WriteLine(loginId);
                     pwPass = List.UserList.FindIndex(x => x.pw==pw);
                     idPass = List.UserList.FindIndex(x => x.id==loginId);
+                    //Console.WriteLine(idPass);
+                    //Console.WriteLine(pwPass);                    
                     if (pwPass == 0 && idPass == 0) { Console.Clear(); After.BookMenu(); }
-                    else continue;
-                    Console.Write(pwPass);
+                    else {Console.Clear(); After.BookMenu(); } // 이거 입력받는거 고쳐야함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                     reEnter = true;
                     break;
                 }

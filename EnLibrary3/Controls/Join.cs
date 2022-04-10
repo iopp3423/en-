@@ -12,7 +12,8 @@ namespace EnLibrary3.Views
     {
         Print View = new Print();
         InputKey Input = new InputKey();
-        ListVO List = new ListVO();
+        ListVO List;
+
         public void JoinLibrary()
         {
             User UserMode = new User();
@@ -38,6 +39,7 @@ namespace EnLibrary3.Views
                 if (y == 11) { y++; Input.CallNumber(); }
                 if (y == 12) { y++; Input.Address(); Console.Clear(); UserMode.Mode(); }
                 cursur = Console.ReadKey(true);
+
                 switch (cursur.Key)
                 {
                     // 상

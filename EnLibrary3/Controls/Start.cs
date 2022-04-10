@@ -14,6 +14,7 @@
             User UserMode = new User();
             Admin AdminMode = new Admin();
 
+
             PrintCollection.UserOrAdmin(); // 회원가입 or 로그인 화면
 
             // cursur에 입력값을 받으면(방향키) 방향키를 출력해줌 ex) 위 : UpArrow
