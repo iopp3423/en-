@@ -8,8 +8,8 @@ namespace EnLibrary3.Controls
 {
     public class UserVO
     {
-        private string id;
-        private string pw;
+        public string id;
+        public string pw;
         private string name;
         private string age;
         private string callNumber;

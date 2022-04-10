@@ -2,6 +2,7 @@
 {
     using EnLibrary3.Modes;
     using EnLibrary3.Views;
+    using EnLibrary3.Controls;
     class Start
     {
         static void Main(string[] args) // 관리자모드 추가해줘야함

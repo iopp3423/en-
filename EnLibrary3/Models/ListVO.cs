@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnLibrary3.Controls
 {
+
     public class ListVO
     {
         public List<BookVO> BookList = new List<BookVO>();
@@ -21,10 +22,10 @@ namespace EnLibrary3.Controls
 
 
             UserList.Add(new UserVO("iopp1234", "cho1234", "조준희", "24", "010-4050-3135", "천안시 동남구 신부동"));
-            UserList.Add(new UserVO("iopp1233", "cho1231", "조준희희", "21", "010-4050-3135", "천안시 동남구 신부동"));
-            UserList.Add(new UserVO("iopp1232", "cho1232", "조준", "22", "010-4050-3135", "천안시 동남구 신부동"));
-            UserList.Add(new UserVO("iopp1231", "cho1233", "조준희조", "23", "010-4050-3135", "천안시 동남구 신부동"));
-            UserList.Add(new UserVO("iopp1230", "cho1235", "조준희준", "24", "010-4050-3135", "천안시 동남구 신부동"));
+            UserList.Add(new UserVO("iopp1233", "cho1231", "조준희희", "21", "010-4050-3135", "천안시 동남구 두정동"));
+            UserList.Add(new UserVO("iopp1232", "cho1232", "조준", "22", "010-4050-3135", "천안시 동남구 유량동"));
+            UserList.Add(new UserVO("iopp1231", "cho1233", "조준희조", "23", "010-4050-3135", "서울특별시 광진구 군자동"));
+            UserList.Add(new UserVO("iopp1230", "cho1235", "조준희준", "24", "010-4050-3135", "천안시 서북구 불당동"));
         }
               
     }    

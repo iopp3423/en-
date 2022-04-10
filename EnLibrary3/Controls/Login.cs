@@ -27,7 +27,8 @@ namespace EnLibrary3.Views
 
                 cursur = Console.ReadKey(true);
                 // 저장된 키의 정보에 대해 검색
-
+                if (y == 6) { y++; Input.LoginId(); }
+                if (y == 7) { y++; Input.LoginPw(); }
                 switch (cursur.Key)
                 {
                     // 상

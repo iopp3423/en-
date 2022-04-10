@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnLibrary3.Controls
 {
-    internal class BookVO
+    public class BookVO
     {
         private string bookNumber;
         private string name;

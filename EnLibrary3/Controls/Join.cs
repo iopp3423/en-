@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 namespace EnLibrary3.Views
 {
     using EnLibrary3.Modes;
+    using EnLibrary3.Controls;
     internal class Join // 회원가입 화면
     {
         Print View = new Print();
         InputKey Input = new InputKey();
+        ListVO List = new ListVO();
         public void JoinLibrary()
         {
             User UserMode = new User();
@@ -34,7 +36,7 @@ namespace EnLibrary3.Views
                 if (y == 9) { y++; Input.Name(); }
                 if (y == 10) { y++; Input.Age(); }
                 if (y == 11) { y++; Input.CallNumber(); }
-                if (y == 12) { y++; Input.Address(); /*Console.Clear(); UserMode.Mode();*/ }
+                if (y == 12) { y++; Input.Address(); Console.Clear(); UserMode.Mode(); }
                 cursur = Console.ReadKey(true);
                 switch (cursur.Key)
                 {

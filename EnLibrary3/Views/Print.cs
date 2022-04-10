@@ -65,5 +65,14 @@ namespace EnLibrary3.Views
             Console.WriteLine(string.Format("{0,36}", "》:회원모드"));
             Console.WriteLine(string.Format("{0,37}", "》:관리자모드"));
         }
+
+        public void BookMenu()
+        {
+            LibraryPrint();
+            Console.WriteLine(string.Format("{0,41}", "도서찾기"));
+            Console.WriteLine(string.Format("{0,41}", "도서대여"));
+            Console.WriteLine(string.Format("{0,41}", "대여도서확인"));
+            Console.WriteLine(string.Format("{0,41}", "회원정보수정"));
+        }
     }
 }
