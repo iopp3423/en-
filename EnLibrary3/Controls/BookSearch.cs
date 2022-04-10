@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace EnLibrary3.Controls
 {
@@ -13,6 +14,7 @@ namespace EnLibrary3.Controls
         ListVO List = new ListVO();
         Print View = new Print();
         bool isFinished = true;
+        Regex BookCheck = new Regex(@"^[0-9a-zA-Z]{4,10}$");
         ConsoleKeyInfo cursur;
         public void SearchBook()
         {
@@ -48,7 +50,7 @@ namespace EnLibrary3.Controls
                     case ConsoleKey.Enter:
                         {
                             isFinished = true;
-                            if (y == 0) NameSearch();
+                            if (y == 0) { NameSearch(); isFinished = false; }
                             break;
                         }
 
@@ -64,12 +66,43 @@ namespace EnLibrary3.Controls
             }
             
         }
+
+
+
         public void NameSearch()
         {
+            string checking;
+            bool passing;
+
             Console.Clear();
             View.PrintBookName();
             View.PrintBookList();
-            Console.SetCursorPosition(5, 0);
+            Console.SetCursorPosition(20, 0);
+            checking = Console.ReadLine();
+            passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
+            Console.Clear();
+            Console.WriteLine(checking);
+
+            foreach (BookVO list in List.BookList)
+            {
+                if (List.BookList.Any(x => x.name.Contains(checking)))
+                {
+                    Console.WriteLine(list);
+                    Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+                    break;
+                }
+            
+            } 
+
+            /*
+            if (List.BookList.Any(x => x.name.Contains(checking)))
+            {
+            }
+            else continue;
+            */
+
+
+
         }
     }
 }

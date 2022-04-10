@@ -9,7 +9,7 @@ namespace EnLibrary3.Controls
     public class BookVO
     {
         private string bookNumber;
-        private string name;
+        public string name;
         private string publisher;
         private string author;
         private string price;
