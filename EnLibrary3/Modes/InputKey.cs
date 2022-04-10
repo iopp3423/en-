@@ -26,12 +26,12 @@ namespace EnLibrary3.Views
         static private bool completeInformation;
         static private string pw; // 비밀번호 확인 때문에 전역변수선언
 
-
         public void BackUserMode() // 유저모드로 뒤돌아가기 함수
         {
             User UserMode = new User();
             back = Console.ReadKey(true);
-            if (back.Key == ConsoleKey.F5) { Console.Clear(); UserMode.Mode(); }
+            if(ConsoleKey.F5 == back.Key) { Console.Clear(); UserMode.Mode(); }
+            
         }
         public int UserDoInput() // 1~9 에러 검출코드
         {

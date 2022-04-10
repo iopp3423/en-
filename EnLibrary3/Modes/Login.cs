@@ -19,7 +19,7 @@ namespace EnLibrary3.Views
 
             ConsoleKeyInfo cursur;
             // Console 창에 보여질 커서의 x 좌표와 y 좌표
-            int x = 34, y = 5;
+            int x = 48, y = 6;
             for (; ; )
             {
                 // x 와 y 좌표에 커서를 표시하기위한 메서드
@@ -34,14 +34,14 @@ namespace EnLibrary3.Views
                     case ConsoleKey.UpArrow:
                         {
                             y--;
-                            if (y < 10) y++; // 선택 외의 화면으로 커서 못나감
+                            if (y < 6) y++; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     // 하
                     case ConsoleKey.DownArrow:
                         {
                             y++;
-                            if (y > 11) y--; // 선택 외의 화면으로 커서 못나감
+                            if (y > 7) y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:

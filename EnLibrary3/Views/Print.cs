@@ -24,9 +24,9 @@ namespace EnLibrary3.Views
         public void JoinPrint()
         {
             Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
-            Console.WriteLine(string.Format("{0,41}", "      ★                                                                  ★"));
-            Console.WriteLine(string.Format("{0,41}", "      ★                          회   원   가   입                       ★"));
-            Console.WriteLine(string.Format("{0,41}", "      ★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                          회   원   가   입                       ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
             Console.WriteLine();
         }
@@ -50,12 +50,13 @@ namespace EnLibrary3.Views
         public void PrintLoginInformation()
         {
             Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
-            Console.WriteLine(string.Format("{0,41}", "      ★                                                                  ★"));
-            Console.WriteLine(string.Format("{0,41}", "      ★                          ID & PW를 입력해주세요                  ★"));
-            Console.WriteLine(string.Format("{0,41}", "      ★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                          ID & PW를 입력해주세요                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
-            Console.WriteLine("ID를 입력해주세요 :");
-            Console.WriteLine("PW를 입력해주세요 :");
+            Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+            Console.WriteLine("{0,41}","ID를 입력해주세요 :");
+            Console.WriteLine("{0,41}","PW를 입력해주세요 :");
         }
 
         public void UserOrAdmin()
