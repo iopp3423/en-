@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 namespace EnLibrary3.Views
 {
     using EnLibrary3.Views;
+    using EnLibrary3.Controls;
     internal class InputKey
     {
         Regex IdCheck = new Regex(@"^[0-9a-zA-Z]{8,10}$");
@@ -16,7 +17,10 @@ namespace EnLibrary3.Views
         Regex NameCheck = new Regex(@"^[가-힣]{2,5}$");
         Regex AgeCheck = new Regex(@"^[0-9]{1,2}1?[0-9]?[0-9]$");
         Exeption ErrorCheck = new Exeption();
-        
+        UserVO User = new UserVO();
+        ListVO UserList;
+
+
         ConsoleKeyInfo back;
 
         static private int noError = 1;
@@ -74,6 +78,7 @@ namespace EnLibrary3.Views
                 {
                     Console.SetCursorPosition(34, 7); // 커서 위치 맞게 변경
                     reEnter = true;
+                    User.Id = id;
                     break;
                 }
                 Console.WriteLine(id);
@@ -102,6 +107,7 @@ namespace EnLibrary3.Views
                 {
                     Console.SetCursorPosition(38, 8); // 커서 위치 맞게 변경
                     reEnter = true;
+                    User.Pw = pw;
                     break;
                 }
                 reEnter = false;
@@ -154,6 +160,7 @@ namespace EnLibrary3.Views
                 {
                     Console.SetCursorPosition(7, 10); // 커서 위치 맞게 변경
                     reEnter = true;
+                    User.Name = name;
                     break;
                 }
                 reEnter = false;
@@ -178,6 +185,7 @@ namespace EnLibrary3.Views
                 {
                     Console.SetCursorPosition(27, 11); // 커서 위치 맞게 변경
                     reEnter = true;
+                    User.Age = age;
                     break;
                 }
                 reEnter = false;
@@ -202,6 +210,7 @@ namespace EnLibrary3.Views
                 {
                     Console.SetCursorPosition(6, 12); // 커서 위치 맞게 변경
                     reEnter = true;
+                    User.CallNumber = callNumber;
                     break;
                 }
                 reEnter = false;
@@ -220,7 +229,9 @@ namespace EnLibrary3.Views
                     Console.SetCursorPosition(6, 12); // 커서 위치 맞게 변경                  
                     Console.Write(" 다시 입력해주세요 :");
                 }
-                address = Console.ReadLine();                                           
+                address = Console.ReadLine();
+                User.Address= address;
+                //UserList.Add(User);
                 break;
 
             }

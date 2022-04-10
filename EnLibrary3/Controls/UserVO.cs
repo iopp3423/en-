@@ -28,7 +28,6 @@ namespace EnLibrary3.Controls
             this.age = age;
             this.callNumber = callNumber;
             this.address = address;
-
         }
 
         public string Id

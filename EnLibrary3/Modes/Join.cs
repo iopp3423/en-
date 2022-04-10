@@ -13,6 +13,7 @@ namespace EnLibrary3.Views
         InputKey Input = new InputKey();
         public void JoinLibrary()
         {
+            User UserMode = new User();
             Console.Clear();
             View.JoinPrint();
             View.PrintJoinInformation();
@@ -33,7 +34,7 @@ namespace EnLibrary3.Views
                 if (y == 9) { y++; Input.Name(); }
                 if (y == 10) { y++; Input.Age(); }
                 if (y == 11) { y++; Input.CallNumber(); }
-                if (y == 12) { y++; Input.Address();}
+                if (y == 12) { y++; Input.Address(); UserMode.Mode(); }
                 cursur = Console.ReadKey(true);
                 switch (cursur.Key)
                 {
