@@ -12,14 +12,61 @@ namespace EnLibrary3.Controls
     {
         ListVO List = new ListVO();
         Print View = new Print();
+        ConsoleKeyInfo cursur;
         public void SearchBook()
         {
             Console.Clear();
-            foreach (BookVO list in List.BookList)
+            View.PrintSearchMenu();
+            int x = 30, y = 0;
+            View.PrintBookList();
+            // 커서의 이동을 표현하는 것이 목적이므로 무한 루프를통해 커서표현을 반복
+            for (; ; )
             {
-                Console.WriteLine(list);
-                Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+                // x 와 y 좌표에 커서를 표시하기위한 메서드
+                Console.SetCursorPosition(x, y);
+
+                cursur = Console.ReadKey(true);
+                // 저장된 키의 정보에 대해 검색
+
+                switch (cursur.Key)
+                {
+                    // 상
+                    case ConsoleKey.UpArrow:
+                        {
+                            y--;
+                            if (y < 0) y++; // 선택 외의 화면으로 커서 못나감
+                            break;
+                        }
+                    // 하
+                    case ConsoleKey.DownArrow:
+                        {
+                            y++;
+                            if (y > 2) y--; // 선택 외의 화면으로 커서 못나감
+                            break;
+                        }
+                    case ConsoleKey.Enter:
+                        {
+                            if (y == 0) NameSearch();
+                            break;
+                        }
+
+                    case ConsoleKey.Escape: // 종료
+                        {
+                            return;
+                        }
+
+                    default: break;
+
+                }
+
             }
+            
+        }
+        public void NameSearch()
+        {
+            Console.Clear();
+            View.PrintBookName();
+            View.PrintBookList();
         }
     }
 }

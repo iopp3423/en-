@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace EnLibrary3.Views
 {
+    using EnLibrary3.Controls;
     internal class Print
     {
+        ListVO List = new ListVO();
         public void LibraryPrint()
         {
             Console.WriteLine(string.Format("{0,42}", "★          ★★★   ★★★★     ★★★★   ★★★★   ★★★★   ★   ★"));
@@ -75,6 +77,24 @@ namespace EnLibrary3.Views
             Console.WriteLine(string.Format("{0,41}", "》회원정보수정"));
         }
 
-        public void 
+        public void PrintSearchMenu()
+        {
+            Console.WriteLine(string.Format("{0,39}", "》제목으로찾기"));
+            Console.WriteLine(string.Format("{0,40}", "》작가명으로찾기"));
+            Console.WriteLine(string.Format("{0,39}", "》출판사로찾기"));
+        }
+
+        public void PrintBookList()
+        {
+            foreach (BookVO list in List.BookList)
+            {
+                Console.WriteLine(list);
+                Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+            }
+        }
+        public void PrintBookName()
+        {
+            Console.WriteLine("제목을 입력해주세요:");
+        }
     }
 }

@@ -12,7 +12,6 @@ namespace EnLibrary3.Views
     {
         Print View = new Print();
         InputKey Input = new InputKey();
-        ListVO List;
 
         public void JoinLibrary()
         {
