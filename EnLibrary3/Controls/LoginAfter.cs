@@ -16,6 +16,7 @@ namespace EnLibrary3.Controls
         BookCheck Check = new BookCheck();
         BookSearch Search = new BookSearch();
         UserRevise Revise = new UserRevise();
+        bool isFinished = true;
 
         ConsoleKeyInfo cursur;
         public void BookMenu()
@@ -26,7 +27,7 @@ namespace EnLibrary3.Controls
             int x = 32, y = 10;
 
             // 커서의 이동을 표현하는 것이 목적이므로 무한 루프를통해 커서표현을 반복
-            for (; ; )
+            while(isFinished)
             {
                 // x 와 y 좌표에 커서를 표시하기위한 메서드
                 Console.SetCursorPosition(x, y);
@@ -52,10 +53,10 @@ namespace EnLibrary3.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (y == 10) Search.SearchBook();
-                            if (y == 11) Borrow.BorrowBook();
-                            if (y == 12) Check.CheckBook();
-                            if (y == 13) Revise.ReviseUser();
+                            if (y == 10) { Search.SearchBook(); isFinished = false; }
+                            if (y == 11) { Borrow.BorrowBook(); isFinished = false; }
+                            if (y == 12) { Check.CheckBook(); isFinished = false; }
+                            if (y == 13) { Revise.ReviseUser(); isFinished = false; }
                             break;
                         }
 

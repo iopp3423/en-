@@ -12,6 +12,7 @@ namespace EnLibrary3.Views
     {
         Print View = new Print();
         InputKey Input = new InputKey();
+        bool isFinished = true;
 
         public void JoinLibrary()
         {
@@ -23,7 +24,7 @@ namespace EnLibrary3.Views
             ConsoleKeyInfo cursur;
             // Console 창에 보여질 커서의 x 좌표와 y 좌표
             int x = 34, y = 6;
-            for (; ; )
+            while(isFinished)
             {
                 // x 와 y 좌표에 커서를 표시하기위한 메서드
                 Console.SetCursorPosition(x, y);
@@ -36,7 +37,7 @@ namespace EnLibrary3.Views
                 if (y == 9) { y++; Input.Name(); }
                 if (y == 10) { y++; Input.Age(); }
                 if (y == 11) { y++; Input.CallNumber(); }
-                if (y == 12) { y++; Input.Address(); Console.Clear(); UserMode.Mode(); }
+                if (y == 12) { y++; Input.Address(); Console.Clear(); UserMode.Mode(); isFinished = false; }
                 cursur = Console.ReadKey(true);
 
                 switch (cursur.Key)

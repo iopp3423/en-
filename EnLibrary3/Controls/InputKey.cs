@@ -34,8 +34,7 @@ namespace EnLibrary3.Views
         {
             User UserMode = new User();
             back = Console.ReadKey(true);
-            if(ConsoleKey.F5 == back.Key) { Console.Clear(); UserMode.Mode(); } // f5누르면 로그인 회원가입 선택화면으로 돌아가기
-            
+            if(ConsoleKey.F5 == back.Key) { Console.Clear(); UserMode.Mode(); } // f5누르면 로그인 회원가입 선택화면으로 돌아가기        
         }
         public int UserDoInput() // 1~9 에러 검출코드
         {

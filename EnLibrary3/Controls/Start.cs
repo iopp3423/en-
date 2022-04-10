@@ -6,13 +6,15 @@
     class Start
     {
         static void Main(string[] args) // 관리자모드 추가해줘야함
-        {
+        {           
             ListVO List = new ListVO();
             //Constants.constant = new Constants;
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HDIGHT); // 콘솔크기 지정
             Print PrintCollection = new Print();
             User UserMode = new User();
             Admin AdminMode = new Admin();
+            InputKey Input = new InputKey();
+            bool isFinished = true;
 
 
             PrintCollection.PrintUserOrAdmin(); // 회원가입 or 로그인 화면
@@ -26,7 +28,7 @@
             // Console 창에 보여질 커서의 x 좌표와 y 좌표
             int x = 28, y = 10;
             // 커서의 이동을 표현하는 것이 목적이므로 무한 루프를통해 커서표현을 반복
-            for (; ; )
+            while(isFinished)
             {               
                 // x 와 y 좌표에 커서를 표시하기위한 메서드
                 Console.SetCursorPosition(x, y);
@@ -52,8 +54,8 @@
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (x == 28 && y == 10) { Console.Clear(); UserMode.Mode(); break; }
-                            if (x == 28 && y == 11) { Console.Clear(); AdminMode.Mode(); break; }
+                            if (x == 28 && y == 10) { Console.Clear(); UserMode.Mode(); isFinished = false; break; }
+                            if (x == 28 && y == 11) { Console.Clear(); AdminMode.Mode(); isFinished = false; break; }
                             break;
                         }
                         

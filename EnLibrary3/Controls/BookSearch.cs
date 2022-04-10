@@ -12,6 +12,7 @@ namespace EnLibrary3.Controls
     {
         ListVO List = new ListVO();
         Print View = new Print();
+        bool isFinished = true;
         ConsoleKeyInfo cursur;
         public void SearchBook()
         {
@@ -20,7 +21,7 @@ namespace EnLibrary3.Controls
             int x = 30, y = 0;
             View.PrintBookList();
             // 커서의 이동을 표현하는 것이 목적이므로 무한 루프를통해 커서표현을 반복
-            for (; ; )
+            while(isFinished)
             {
                 // x 와 y 좌표에 커서를 표시하기위한 메서드
                 Console.SetCursorPosition(x, y);
@@ -46,6 +47,7 @@ namespace EnLibrary3.Controls
                         }
                     case ConsoleKey.Enter:
                         {
+                            isFinished = true;
                             if (y == 0) NameSearch();
                             break;
                         }
@@ -67,6 +69,7 @@ namespace EnLibrary3.Controls
             Console.Clear();
             View.PrintBookName();
             View.PrintBookList();
+            Console.SetCursorPosition(5, 0);
         }
     }
 }

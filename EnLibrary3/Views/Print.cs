@@ -95,6 +95,7 @@ namespace EnLibrary3.Views
         public void PrintBookName()
         {
             Console.WriteLine("제목을 입력해주세요:");
+            Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
         }
     }
 }
