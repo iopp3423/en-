@@ -1,0 +1,30 @@
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\bin\Debug\net6.0\EnLibrary.exe
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\bin\Debug\net6.0\EnLibrary.deps.json
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\bin\Debug\net6.0\EnLibrary.runtimeconfig.json
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\bin\Debug\net6.0\EnLibrary.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\bin\Debug\net6.0\EnLibrary.pdb
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\EnLibrary.csproj.AssemblyReference.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\EnLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\EnLibrary.AssemblyInfoInputs.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\EnLibrary.AssemblyInfo.cs
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\EnLibrary.csproj.CoreCompileInputs.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\EnLibrary.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\refint\EnLibrary.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\EnLibrary.pdb
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\EnLibrary.genruntimeconfig.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary\obj\Debug\net6.0\ref\EnLibrary.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\bin\Debug\net6.0\EnLibrary.exe
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\bin\Debug\net6.0\EnLibrary.deps.json
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\bin\Debug\net6.0\EnLibrary.runtimeconfig.json
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\bin\Debug\net6.0\EnLibrary.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\bin\Debug\net6.0\EnLibrary.pdb
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\EnLibrary.csproj.AssemblyReference.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\EnLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\EnLibrary.AssemblyInfoInputs.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\EnLibrary.AssemblyInfo.cs
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\EnLibrary.csproj.CoreCompileInputs.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\EnLibrary.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\refint\EnLibrary.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\EnLibrary.pdb
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\EnLibrary.genruntimeconfig.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\EnLibrary - 복사본\obj\Debug\net6.0\ref\EnLibrary.dll

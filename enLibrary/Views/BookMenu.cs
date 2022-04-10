@@ -8,7 +8,7 @@ namespace EnLibrary.Views
 {
     internal class BookMenu
     {
-
+        
         Print PrintCollection = new Print();
         Input Inputting = new Input();
         SearchBook Search = new SearchBook();
