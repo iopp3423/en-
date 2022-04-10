@@ -16,6 +16,11 @@ namespace EnLibrary3.Controls
         private string quantity;
         public int number;
 
+        public BookVO()
+        {
+            // 생성자
+        }
+
         public BookVO(string bookNumber, string name, string publisher, string author, string price, string quantity)
         {
             this.bookNumber = bookNumber;

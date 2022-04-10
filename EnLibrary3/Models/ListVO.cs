@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace EnLibrary3.Controls
 {
-    class ListVO
+    public class ListVO
     {
-        List<BookVO> BookList = new List<BookVO>();
-        List<UserVO> UserList = new List<UserVO>();
+        public List<BookVO> BookList = new List<BookVO>();
+        public List<UserVO> UserList = new List<UserVO>();
 
         public ListVO()
         {

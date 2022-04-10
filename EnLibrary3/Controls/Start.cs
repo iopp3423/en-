@@ -6,6 +6,7 @@
     {
         static void Main(string[] args) // 관리자모드 추가해줘야함
         {
+            ListVO List = new ListVO();
             //Constants.constant = new Constants;
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HDIGHT); // 콘솔크기 지정
             Print PrintCollection = new Print();

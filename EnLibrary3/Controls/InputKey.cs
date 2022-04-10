@@ -18,9 +18,7 @@ namespace EnLibrary3.Views
         Regex AgeCheck = new Regex(@"^[0-9]{1,2}1?[0-9]?[0-9]$");
         Exeption ErrorCheck = new Exeption();
         UserVO User = new UserVO();
-        ListVO UserList;
-
-
+        ListVO List = new ListVO();
         ConsoleKeyInfo back;
 
         static private int noError = 1;
@@ -29,6 +27,7 @@ namespace EnLibrary3.Views
         static private bool reEnter = true;
         static private bool completeInformation;
         static private string pw; // 비밀번호 확인 때문에 전역변수선언
+        string [] UserData = new string[7];
 
         public void BackUserMode() // 유저모드로 뒤돌아가기 함수
         {
@@ -231,7 +230,10 @@ namespace EnLibrary3.Views
                 }
                 address = Console.ReadLine();
                 User.Address= address;
-                //UserList.Add(User);
+
+                List.UserList.Add(User);
+
+                
                 break;
 
             }
