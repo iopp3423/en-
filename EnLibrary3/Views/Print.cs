@@ -46,7 +46,6 @@ namespace EnLibrary3.Views
             Console.WriteLine("나이 : ");
             Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx):");
             Console.WriteLine("주소 :");
-            Console.WriteLine("순서대로 입력해주세요 :");
         }
         public void PrintLoginInformation()
         {

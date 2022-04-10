@@ -16,19 +16,27 @@ namespace EnLibrary3.Views
         Regex NameCheck = new Regex(@"^[가-힣]{2,5}$");
         Regex AgeCheck = new Regex(@"^[0-9]{1,2}1?[0-9]?[0-9]$");
         Exeption ErrorCheck = new Exeption();
-        int input;
-        string inputSearch; // 오류 검출을 위한 입력 값
+        
+        ConsoleKeyInfo back;
+
         static private int noError = 1;
         static private int error;
-        static private string pwPass; // 전역변수 지역변수로 바꿔줘야함 //////////////////////////////////////////////////////
-        static private string name;
-        static private string callNumber;
-        static private string age;
-        static private string address;
-        
+        static private bool pass = false;
+        static private bool reEnter = true;
+        static private bool completeInformation;
+        static private string pw; // 비밀번호 확인 때문에 전역변수선언
 
+
+        public void BackUserMode() // 유저모드로 뒤돌아가기 함수
+        {
+            User UserMode = new User();
+            back = Console.ReadKey(true);
+            if (back.Key == ConsoleKey.F5) { Console.Clear(); UserMode.Mode(); }
+        }
         public int UserDoInput() // 1~9 에러 검출코드
         {
+            int input;
+            string inputSearch; // 오류 검출을 위한 입력 값
             inputSearch = Console.ReadLine();
             error = ErrorCheck.Checking(inputSearch); //error가 1이면 정상
             if (error == noError) input = int.Parse(inputSearch);
@@ -44,75 +52,81 @@ namespace EnLibrary3.Views
             }
             return input; // 정수 값 리턴
         }
-        /*
+        
         public void Id() // Id 입력 코드
-        {
+        {       
             string id;
+            BackUserMode();
             while (pass == false)
             {
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
                 if (reEnter == false)
                 {
-                    Console.Clear();
-                    PrintCollection.JoinUser();
-                    Console.Write("잘못된 입력입니다. ID를 다시 입력해주세요 :");
+                    Console.SetCursorPosition(34, 6); // 커서 위치 맞게 변경                  
+                    Console.Write(" 다시 입력해주세요 :");
+                    //Console.Write(new string(' ', Console.WindowWidth));
                 }
-                id = Console.ReadLine(); // 아이디 입력                               
+                
+                id = Console.ReadLine(); // 아이디 입력
                 completeInformation = IdCheck.IsMatch(id); // 유저아이디 정규화로 양식 맞는지 확인
 
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-                    Information.Id = id;
+                    Console.SetCursorPosition(34, 7); // 커서 위치 맞게 변경
                     reEnter = true;
                     break;
                 }
+                Console.WriteLine(id);
                 reEnter = false;
+
             }
         }
-        */
+        
 
-        /*
+        
         public void Pw()
         {
-            string pw;
+            BackUserMode();
             while (pass == false)
             {
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
                 if (reEnter == false)
                 {
-                    Console.Clear();
-                    PrintCollection.JoinUser();
-                    Console.Write("잘못된 입력입니다. PW를 다시 입력해주세요");
+                    Console.SetCursorPosition(34, 7); // 커서 위치 맞게 변경                  
+                    Console.Write(" 다시 입력해주세요 :");
                 }
                 pw = Console.ReadLine(); // 비밀번호 입력                               
                 completeInformation = PwCheck.IsMatch(pw); // 비밀번호 정규화로 양식 맞는지 확인
 
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-                    Information.Pw = pw; // 대입                 
+                    Console.SetCursorPosition(38, 8); // 커서 위치 맞게 변경
                     reEnter = true;
                     break;
                 }
                 reEnter = false;
             }
         }
+     
         public void PwPass()
         {
+            BackUserMode();
+            string pwPass;
             while (pass == false)
             {
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
                 if (reEnter == false)
                 {
-                    Console.Clear();
-                    PrintCollection.JoinUser();
-                    Console.Write("잘못된 입력입니다. PW를 다시 입력해주세요 :");
+                    Console.SetCursorPosition(36, 8); // 커서 위치 맞게 변경                  
+                    Console.Write(" 다시 입력해주세요 :");
+
                 }
                 pwPass = Console.ReadLine(); // 비밀번호 입력                               
                 completeInformation = PwCheck.IsMatch(pwPass); // 비밀번호 정규화로 양식 맞는지 확인 && 기존의 비밀번호랑 맞는지 확인
 
-                if (completeInformation == true && Information.Pw == pwPass) // 양식이 맞으면  
+                if (completeInformation == true && pwPass == pw) // 양식이 맞으면  
                 {
-                    Information.PwPass = pw; // 대입                 
+                    Console.SetCursorPosition(19, 9); // 커서 위치 맞게 변경
                     reEnter = true;
                     break;
 
@@ -120,24 +134,25 @@ namespace EnLibrary3.Views
                 reEnter = false;
             }
         }
-
+       
         public void Name()
         {
+            BackUserMode();
+            string name;
             while (pass == false)
             {
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
                 if (reEnter == false)
                 {
-                    Console.Clear();
-                    PrintCollection.JoinUser();
-                    Console.Write("잘못된 입력입니다. 이름을 다시 입력해주세요 :");
+                    Console.SetCursorPosition(19, 9); // 커서 위치 맞게 변경                  
+                    Console.Write(" 다시 입력해주세요 :");
                 }
                 name = Console.ReadLine(); //이름 입력                               
                 completeInformation = NameCheck.IsMatch(name); // 이름 정규화로 양식 맞는지 확인
 
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-                    Information.Name = name; // 대입                 
+                    Console.SetCursorPosition(7, 10); // 커서 위치 맞게 변경
                     reEnter = true;
                     break;
                 }
@@ -146,21 +161,22 @@ namespace EnLibrary3.Views
         }
         public void Age()
         {
+            BackUserMode();
+            string age;
             while (pass == false)
             {
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
                 if (reEnter == false)
                 {
-                    Console.Clear();
-                    PrintCollection.JoinUser();
-                    Console.Write("잘못된 입력입니다. 나이를 다시 입력해주세요 :");
+                    Console.SetCursorPosition(7, 10); // 커서 위치 맞게 변경                  
+                    Console.Write(" 다시 입력해주세요 :");
                 }
                 age = Console.ReadLine(); //나이 입력                               
                 completeInformation = AgeCheck.IsMatch(age); // 나이 정규화로 양식 맞는지 확인
 
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-                    Information.Age = age; // 대입                 
+                    Console.SetCursorPosition(27, 11); // 커서 위치 맞게 변경
                     reEnter = true;
                     break;
                 }
@@ -169,21 +185,22 @@ namespace EnLibrary3.Views
         }
         public void CallNumber()
         {
+            BackUserMode();
+            string callNumber;
             while (pass == false)
             {
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
                 if (reEnter == false)
                 {
-                    Console.Clear();
-                    PrintCollection.JoinUser();
-                    Console.Write("잘못된 입력입니다. 전화번호를 다시 입력해주세요 :");
+                    Console.SetCursorPosition(27, 11); // 커서 위치 맞게 변경                  
+                    Console.Write(" 다시 입력해주세요 :");
                 }
                 callNumber = Console.ReadLine(); // 전화번호 입력                               
                 completeInformation = CallNumberCheck.IsMatch(callNumber); // 전화번호 정규화로 01x-xxxx-xxxx양식 맞는지 확인
 
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-                    Information.CallNumber = callNumber; // 대입                   
+                    Console.SetCursorPosition(6, 12); // 커서 위치 맞게 변경
                     reEnter = true;
                     break;
                 }
@@ -193,22 +210,21 @@ namespace EnLibrary3.Views
 
         public void Address()
         {
+            BackUserMode();
+            string address;
             while (pass == false)
             {
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
                 if (reEnter == false)
                 {
-                    Console.Clear();
-                    PrintCollection.JoinUser();
-                    Console.Write("잘못된 입력입니다. 주소를 다시 입력해주세요 :");
+                    Console.SetCursorPosition(6, 12); // 커서 위치 맞게 변경                  
+                    Console.Write(" 다시 입력해주세요 :");
                 }
-                address = Console.ReadLine(); //                                             
-                Information.Address = address; // 대입
-                Information.UserInformationStore();  /////////////////////////////////////여기까지 오면 회원가입 정보 저장 나중에 주소함수고치고 주소함수로 내려야함
+                address = Console.ReadLine();                                           
                 break;
 
             }
         }
-        */
+        
     }
 }

@@ -24,10 +24,17 @@ namespace EnLibrary3.Views
             {
                 // x 와 y 좌표에 커서를 표시하기위한 메서드
                 Console.SetCursorPosition(x, y);
-
-                cursur = Console.ReadKey(true);
+              
                 // 저장된 키의 정보에 대해 검색
 
+                if (y == 6) { y++; Input.Id(); }
+                if (y == 7) { y++; Input.Pw(); }
+                if (y == 8) { y++; Input.PwPass(); }
+                if (y == 9) { y++; Input.Name(); }
+                if (y == 10) { y++; Input.Age(); }
+                if (y == 11) { y++; Input.CallNumber(); }
+                if (y == 12) { y++; Input.Address();}
+                cursur = Console.ReadKey(true);
                 switch (cursur.Key)
                 {
                     // 상
@@ -46,14 +53,13 @@ namespace EnLibrary3.Views
                         }
                     case ConsoleKey.Enter:
                         {
-
+                            y++;
                             break;
                         }
                     case ConsoleKey.Escape: // 종료
                         {
                             return;
                         }
-
 
                     default: break;
 

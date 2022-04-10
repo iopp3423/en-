@@ -19,7 +19,7 @@
             //cursur = Console.ReadKey(true); // 방향키 아래 누르면 cursur에 DownArrow 들어감, 맨 처음 아무것도 안했을 때 입력값은 System.ConsoleKeyInfo이다.
 
 
-
+            
             // Console 창에 보여질 커서의 x 좌표와 y 좌표
             int x = 28, y = 10;
             // 커서의 이동을 표현하는 것이 목적이므로 무한 루프를통해 커서표현을 반복
@@ -64,6 +64,7 @@
                 }              
             
             }
+            
         }
     }
 
