@@ -30,7 +30,7 @@ namespace EnLibrary3.Views
             Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
             Console.WriteLine();
         }
-        public void ChooseJoinLogin()
+        public void ChooseJoinLoginPrint()
         {
             Console.WriteLine(string.Format("{0,38}", "》회원가입"));
             Console.WriteLine(string.Format("{0,37}", "》로그인"));
@@ -59,14 +59,14 @@ namespace EnLibrary3.Views
             Console.WriteLine("{0,41}","PW를 입력해주세요 :");
         }
 
-        public void UserOrAdmin()
+        public void PrintUserOrAdmin()
         {
             LibraryPrint();
             Console.WriteLine(string.Format("{0,36}", "》:회원모드"));
             Console.WriteLine(string.Format("{0,37}", "》:관리자모드"));
         }
 
-        public void BookMenu()
+        public void PrintBookMenu()
         {
             LibraryPrint();
             Console.WriteLine(string.Format("{0,39}", "》도서찾기"));
@@ -74,5 +74,7 @@ namespace EnLibrary3.Views
             Console.WriteLine(string.Format("{0,41}", "》대여도서확인"));
             Console.WriteLine(string.Format("{0,41}", "》회원정보수정"));
         }
+
+        public void 
     }
 }

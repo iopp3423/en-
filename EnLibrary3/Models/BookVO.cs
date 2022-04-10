@@ -62,5 +62,9 @@ namespace EnLibrary3.Controls
             set { quantity = value; }
         }
 
+        public override string ToString()
+        {
+            return "책번호 : " + bookNumber + "\n책이름 : " + name + "\n출판사 : " + publisher + "\n저자   : " + author + "\n가격   : " + price + "\n수량   : " + quantity;
+        }
     }
 }

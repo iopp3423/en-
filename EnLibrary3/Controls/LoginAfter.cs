@@ -12,10 +12,15 @@ namespace EnLibrary3.Controls
     {
         Print View = new Print();
         ListVO List = new ListVO();
+        BookBorrow Borrow = new BookBorrow();
+        BookCheck Check = new BookCheck();
+        BookSearch Search = new BookSearch();
+        UserRevise Revise = new UserRevise();
+
         ConsoleKeyInfo cursur;
         public void BookMenu()
         {       
-            View.BookMenu(); // 로그인 후 화면 출력
+            View.PrintBookMenu(); // 로그인 후 화면 출력
            
             // Console 창에 보여질 커서의 x 좌표와 y 좌표
             int x = 32, y = 10;
@@ -47,7 +52,10 @@ namespace EnLibrary3.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-
+                            if (y == 10) Search.SearchBook();
+                            if (y == 11) Borrow.BorrowBook();
+                            if (y == 12) Check.CheckBook();
+                            if (y == 13) Revise.ReviseUser();
                             break;
                         }
 
@@ -60,14 +68,16 @@ namespace EnLibrary3.Controls
 
                 }
 
-            }
-            /*
-            foreach (UserVO list in List.UserList)
-            {
-                Console.WriteLine(list);
-                Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-            }
-            */
-        }
+            }           
+
+        }      
     }
 }
+
+/*
+foreach (UserVO list in List.UserList)
+{
+    Console.WriteLine(list);
+    Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+}
+*/
