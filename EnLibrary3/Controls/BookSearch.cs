@@ -88,8 +88,7 @@ namespace EnLibrary3.Controls
             View.PrintBookList();
             Console.SetCursorPosition(20, 0);
             checking = Console.ReadLine();
-            passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
-            
+            passing = BookCheck.IsMatch(checking);
 
             if (passing == false) NameSearch();
             else if (passing == true)

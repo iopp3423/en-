@@ -119,6 +119,7 @@ namespace EnLibrary3.Controls
                         if(list.id == loginId && list.pw == pw)
                         {
                             passlogin = true;
+                            reEnter = true;
                             pass = false;
                         }
                     }
@@ -128,7 +129,7 @@ namespace EnLibrary3.Controls
                         pass = false;
                         After.BookMenu();
                     }
-                    if (passlogin == false)
+                    else if (passlogin == false)
                     {
                         Console.SetCursorPosition(28, 8);
                         Console.WriteLine("회원정보가 일치하지 않습니다.");
@@ -143,8 +144,7 @@ namespace EnLibrary3.Controls
                     
                     
                 }
-                reEnter = false;
-
+                //reEnter = false;
             }
         }
 

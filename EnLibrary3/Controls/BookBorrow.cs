@@ -18,26 +18,19 @@ namespace EnLibrary3.Controls
         ConsoleKeyInfo cursur;
         Regex BookCheck = new Regex(@"^[가-힣a-zA-Z0-9]{1,15}$");
         public static bool existing = false;
-        string checking;
-        bool passing;
-        string book;
 
         public void BorrowBook()
         {
-
             string checking;
             bool passing;
             string book;
 
-
-            Console.Clear();
             Console.Clear();
             Console.WriteLine("대여할 책 제목 :\n");
             View.PrintBookList();
             Console.SetCursorPosition(17, 0);
             checking = Console.ReadLine();
-            passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
-           
+            passing = BookCheck.IsMatch(checking);        
 
             if (passing == false) BorrowBook();
             else if (passing == true)
@@ -54,9 +47,16 @@ namespace EnLibrary3.Controls
                 }
                 Console.WriteLine("책을 대여하시겠습니까?");
                 NotExist();
-                
+                cursur = Console.ReadKey(true);
+                if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); Borrow();}
+                else if (cursur.Key == ConsoleKey.Escape) return;
             }
         }      
+
+        public void Borrow()
+        {
+            Console.Write("Helloworld");
+        }
 
         public void NotExist()
         {
