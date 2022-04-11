@@ -22,7 +22,7 @@ namespace EnLibrary3.Controls
         }
 
 
-        public void Mode()
+        public void DoUser()
         {
             View.LibraryPrint();// 맨 위 도서관 프린트
             View.ChooseJoinLoginPrint(); // 로그인, 회원가입 화면 프린트

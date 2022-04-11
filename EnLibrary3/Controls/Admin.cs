@@ -10,7 +10,6 @@ namespace EnLibrary3.Controls
     {
         public void Mode()
         {
-            Console.WriteLine("Helloworld");
         }
     }
 }

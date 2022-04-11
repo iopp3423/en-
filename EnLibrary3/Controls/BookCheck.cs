@@ -3,15 +3,13 @@
     using EnLibrary3.Views;
     internal class BookCheck
     {
-        ListVO List;
-
         Print View = new Print();
         bool isFinished = true;
         ConsoleKeyInfo cursur;
         public void CheckBook()
         {
             Console.Clear();
-            int x = 30, y = 0;
+            int x = 15, y = 0;
             View.PrintBookList();
 
             while (isFinished)

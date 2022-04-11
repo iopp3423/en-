@@ -16,6 +16,7 @@ namespace EnLibrary3.Controls
         Print View = new Print();
         BookVO Book = new BookVO();
 
+
         bool isFinished = true;
         ConsoleKeyInfo cursur;
         Regex BookCheck = new Regex(@"^[가-힣a-zA-Z0-9]{1,15}$");
@@ -57,7 +58,11 @@ namespace EnLibrary3.Controls
 
         public void Borrow()
         {
-            Console.Write("Helloworld");
+            LoginAfter Menu = new LoginAfter();
+            Console.Write("구현을 못해서 Enter누르면 메뉴로 돌아갑니다..");
+            cursur = Console.ReadKey(true);
+            if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); Menu.BookMenu(); }
+            else if (cursur.Key == ConsoleKey.Escape) return;
         }
 
         public void NotExist()

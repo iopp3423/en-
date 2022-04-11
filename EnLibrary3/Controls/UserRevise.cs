@@ -34,7 +34,7 @@
                 }
             }
             Console.WriteLine();
-            Console.WriteLine(string.Format("{0,40}", "────---───변경하고 싶은 정보에 입력 전 Enter를 입력해주세요.─────────\n"));
+            Console.WriteLine(string.Format("{0,40}", "────---───변경하고 싶은 정보에 입력 전 Enter를 입력해주세요.─────────"));
             View.PrintUser();
             Console.SetCursorPosition(0, 13);
 
@@ -76,10 +76,12 @@
                                 {
                                     if (list.Id == InputKey.loginId)
                                     {
-                                        list.Id=id;                       
+                                        list.id=id;
+                                        Console.Write(list.id);
                                     }
                                 }
-                                void print();
+                              
+
                             } 
 
                             if (y == 14)
@@ -128,22 +130,23 @@
                             break;
 
                         }
-                    case ConsoleKey.Escape: isFinished = false; break;
                     default: break;
                 }
             }
-            public void print()
+            
+        }
+    }
+    /*
+    public void print()
+    {
+        foreach (UserVO list in List.UserList)
+        {
+            if (list.Id == InputKey.loginId)
             {
-                foreach (UserVO list in List.UserList)
-                {
-                    if (list.Id == InputKey.loginId)
-                    {
-                        Console.WriteLine(list);
-                    }
-                }
+                Console.WriteLine(list);
             }
         }
     }
-    
+    */
 }
   

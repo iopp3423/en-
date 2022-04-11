@@ -25,11 +25,11 @@ namespace EnLibrary3.Views
         }
         public void JoinPrint()
         {
-            Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
             Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,41}", "★                          회   원   가   입                       ★"));
-            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
-            Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine(string.Format("{0,34}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
             Console.WriteLine();
         }
         public void ChooseJoinLoginPrint()

@@ -15,8 +15,8 @@ namespace EnLibrary3.Controls
             //Constants.constant = new Constants;
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HDIGHT); // 콘솔크기 지정
             Print PrintCollection = new Print();
-            User UserMode = new User();
-            Admin AdminMode = new Admin();
+            User User = new User();
+            Admin AdminDo = new Admin();
             bool isFinished = true;
 
             
@@ -58,8 +58,8 @@ namespace EnLibrary3.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (x == 28 && y == 10) { Console.Clear(); UserMode.Mode(); isFinished = false; break; }
-                            if (x == 28 && y == 11) { Console.Clear(); AdminMode.Mode(); isFinished = false; break; }
+                            if (x == 28 && y == 10) { Console.Clear(); User.DoUser(); isFinished = false; break; }
+                            if (x == 28 && y == 11) { Console.Clear(); AdminDo.Mode(); isFinished = false; break; }
                             break;
                         }
                         

@@ -46,7 +46,7 @@ namespace EnLibrary3.Controls
         {
             User UserMode = new User();
             back = Console.ReadKey(true);
-            if(ConsoleKey.F5 == back.Key) { Console.Clear(); UserMode.Mode(); } // f5누르면 로그인 회원가입 선택화면으로 돌아가기        
+            if(ConsoleKey.F5 == back.Key) { Console.Clear(); UserMode.DoUser(); } // f5누르면 로그인 회원가입 선택화면으로 돌아가기        
         }
 
         public int UserDoInput() // 1~9 에러 검출코드
@@ -311,7 +311,7 @@ namespace EnLibrary3.Controls
 
         public void Address()
         {
-            User UserMode = new User();
+            User GoUser = new User();
             BackUserMode();
             string address;
             while (pass == false)
@@ -327,12 +327,18 @@ namespace EnLibrary3.Controls
 
                 List.UserList.Add(User);
 
-
                 
+               
                 foreach (UserVO list in List.UserList)
                 {
-                    Console.WriteLine(list.id);
-                    Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+                    if (list.Address == address)
+                    {
+                        Console.WriteLine("--------------------------------회원가입 완료------------------------------");
+                        Console.Write(list);
+                        Console.Clear();
+                        GoUser.DoUser();
+                    }
+                          
                 }
                 
                 
