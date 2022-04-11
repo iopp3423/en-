@@ -11,7 +11,6 @@ namespace EnLibrary3.Controls
     internal class LoginAfter
     {
         Print View = new Print();
-        ListVO List = new ListVO();
         BookBorrow Borrow = new BookBorrow();
         BookCheck Check = new BookCheck();
         BookSearch Search = new BookSearch();

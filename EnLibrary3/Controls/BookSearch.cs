@@ -14,8 +14,11 @@ namespace EnLibrary3.Controls
        
         Print View = new Print();
         bool isFinished = true;
-        Regex BookCheck = new Regex(@"^[가-힣a-zA-Z]{1,10}$");
+        Regex BookCheck = new Regex(@"^[가-힣a-zA-Z0-9]{1,15}$");
+        Regex AuthorCheck = new Regex(@"^[가-힣a-zA-Z]{1,10}$");
+        Regex PublishCheck = new Regex(@"^[가-힣a-zA-Z]{1,8}$");
         ListVO List = new ListVO();
+        public static bool existing = false;
         ConsoleKeyInfo cursur;
         public void SearchBook()
         {
@@ -51,8 +54,9 @@ namespace EnLibrary3.Controls
                     case ConsoleKey.Enter:
                         {
                             isFinished = true; 
-                            if (y == 0) { NameSearch(); isFinished = false; }
-                            if (y == 1) { AuthorSearch(); isFinished = false; }
+                            if (y == 0) { Console.SetCursorPosition(20, 0); NameSearch(); isFinished = false; }
+                            if (y == 1) { Console.SetCursorPosition(20, 1); AuthorSearch();isFinished = false; }
+                            if (y == 2) { Console.SetCursorPosition(20, 2); PublishSearch();isFinished = false; }
                             break;
                         }
 
@@ -74,9 +78,9 @@ namespace EnLibrary3.Controls
         public void NameSearch()
         {
             string checking;
-            bool passing = true;
-            bool pass;
+            bool passing;           
             string book;
+            existing = false;
 
             Console.Clear();
             View.PrintBookName();
@@ -84,25 +88,94 @@ namespace EnLibrary3.Controls
             Console.SetCursorPosition(20, 0);
             checking = Console.ReadLine();
             passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
-            
-            Console.Clear();
-            Console.WriteLine(passing);
-            //if (passing == false) NameSearch();
-
-            foreach (BookVO list in List.BookList)
+            if (passing == false) NameSearch();
+            else if (passing == true)
             {
-                /*
-                pass = List.BookList.Any(x => x.name.Contains(checking));
-                Bookname = List.BookList.Find(x => x.name == checking);
-                */
-                if (list.name == checking) Console.Write(list);
+                foreach (BookVO list in List.BookList)
+                {
+                    /*
+                    pass = List.BookList.Any(x => x.name.Contains(checking));
+                    Bookname = List.BookList.Find(x => x.name == checking);
+                    */
+                    if (list.name == checking)
+                    {
+                        Console.WriteLine(list);
+                        Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                        existing = true;
+                    }
+                }
+                NotExist();
             }
-            
-        
         }
         public void AuthorSearch()
         {
-            
+            string checking;
+            bool passing;
+            string book;
+            existing = false;
+
+            Console.Clear();
+            View.PrintBookName();
+            View.PrintBookList();
+            Console.SetCursorPosition(20, 0);
+            checking = Console.ReadLine();
+            passing = AuthorCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인         
+            if (passing == false) AuthorSearch();
+            else
+            {
+                foreach (BookVO list in List.BookList)
+                {
+                    if (list.author == checking)
+                    {
+                        Console.WriteLine(list);
+                        Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                    }
+                }
+               
+            }
+            NotExist();
+        }
+        public void PublishSearch()
+        {
+            string checking;
+            bool passing;
+            string book;
+            existing = false;
+
+            Console.Clear();
+            View.PrintBookName();
+            View.PrintBookList();
+            Console.SetCursorPosition(20, 0);
+            checking = Console.ReadLine();
+            passing = PublishCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인         
+            if (passing == false) PublishSearch();
+            else
+            {
+                foreach (BookVO list in List.BookList)
+                {
+                    if (list.publisher == checking)
+                    {
+                        Console.WriteLine(list);
+                        Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                    }
+                }
+            }
+            NotExist();
+        }
+        public void NotExist()
+        {
+            LoginAfter Menu = new LoginAfter();
+            if (existing == false)
+            {
+                Console.Clear();
+                View.PrintBookList();
+                Console.Write("찾으시는 책이 없습니다. 메뉴로 돌아가시겠습니까?");
+                cursur = Console.ReadKey(true);
+                if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); Menu.BookMenu(); }
+                else if (cursur.Key == ConsoleKey.Escape) return;
+                View.PrintBookList();
+                Console.ReadLine();
+            }
         }
     }
 }

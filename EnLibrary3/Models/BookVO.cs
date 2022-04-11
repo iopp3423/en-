@@ -10,8 +10,8 @@ namespace EnLibrary3.Controls
     {
         private string bookNumber;
         public string name;
-        private string publisher;
-        private string author;
+        public string publisher;
+        public string author;
         private string price;
         private string quantity;
         public int number;
