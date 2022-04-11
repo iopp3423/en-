@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnLibrary3.Modes
+namespace EnLibrary3.Controls
 {
     static class Constants
     {

@@ -1,8 +1,12 @@
-﻿namespace EnLibrary3.Views
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EnLibrary3.Controls
 {
-    using EnLibrary3.Modes;
     using EnLibrary3.Views;
-    using EnLibrary3.Controls;
     class Start
     {
         static void Main(string[] args) // 관리자모드 추가해줘야함
@@ -16,6 +20,7 @@
             InputKey Input = new InputKey();
             bool isFinished = true;
 
+            
 
             PrintCollection.PrintUserOrAdmin(); // 회원가입 or 로그인 화면
 

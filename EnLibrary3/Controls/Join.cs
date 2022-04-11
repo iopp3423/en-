@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnLibrary3.Views
+namespace EnLibrary3.Controls
 {
-    using EnLibrary3.Modes;
+    using EnLibrary3.Views;
     using EnLibrary3.Controls;
     internal class Join // 회원가입 화면
     {

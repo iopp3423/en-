@@ -4,15 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnLibrary3.Views
+namespace EnLibrary3.Controls
 {
+    using EnLibrary3.Views;
+    
     internal class User // 회원가입 로그인 고르는 화면
     {
-        Print View = new Print();
-        InputKey Input = new InputKey();
+        Print View = new Print();        
         Login DoLogin = new Login();
         Join DoJoin = new Join();
+        ListVO List = new ListVO();
+        InputKey Input;
         bool isFinished = true;
+
+        public User()
+        {
+            Input = new InputKey(List);
+        }
+
+
 
         public void Mode()
         {

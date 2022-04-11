@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EnLibrary3.Views
+namespace EnLibrary3.Controls
 {
-    using EnLibrary3.Modes;
+    using EnLibrary3.Views;
+    using EnLibrary3.Controls;
     internal class Login // 로그인 화면
     {
         Print View = new Print();
         InputKey Input = new InputKey();
+        public ListVO List;
         bool isFinished = true;
 
         public void LibraryLogin() // 로그인 화면
@@ -61,6 +63,11 @@ namespace EnLibrary3.Views
 
                 }
 
+            }
+            foreach (UserVO list in List.UserList)
+            {
+                Console.WriteLine(list);
+                Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
             }
         }
     }
