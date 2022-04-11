@@ -2,17 +2,27 @@
 {
     using EnLibrary3.Controls;
     using EnLibrary3.Views;
+    using System.Text.RegularExpressions;
     internal class UserRevise
     {
-       
+
+        Regex IdCheck = new Regex(@"^[0-9a-zA-Z]{8,10}$");
+        Regex CallNumberCheck = new Regex(@"^01[0-9]-[0-9]{4}-[0-9]{4}$");
+        Regex PwCheck = new Regex(@"^[0-9a-zA-Z]{4,10}$");
         bool isFinished = true;
-        //InputKey Input = new InputKey();
-        Print View = new Print();
-        
+        Print View = new Print();       
+
         ConsoleKeyInfo cursur;
         public void ReviseUser()
         {
+            string id;
+            string pw;
+            string call;
+            string address;
+            bool isRight;
+            InputKey Input = new InputKey();
             ListVO List = new ListVO();
+            UserVO User = new UserVO();
             Console.Clear();
            
             View.PrintUserRevise();
@@ -24,12 +34,12 @@
                 }
             }
             Console.WriteLine();
-            Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+            Console.WriteLine(string.Format("{0,40}", "────---───변경하고 싶은 정보에 입력 전 Enter를 입력해주세요.─────────\n"));
             View.PrintUser();
             Console.SetCursorPosition(0, 13);
 
 
-                int x = 0, y = 13;
+                int x = 16, y = 13;
             while (isFinished)
             {
                 // x 와 y 좌표에 커서를 표시하기위한 메서드
@@ -57,20 +67,83 @@
                         }
                     case ConsoleKey.Enter:
                         {
-                            isFinished = true;
+                            if (y == 13)
+                            {
+                                id = Console.ReadLine(); // 아이디 입력
+                                isRight = IdCheck.IsMatch(id); // 유저아이디 정규화로 양식 맞는지 확인
+                                if (isRight == true) { User.Id = id; }
+                                foreach (UserVO list in List.UserList)
+                                {
+                                    if (list.Id == InputKey.loginId)
+                                    {
+                                        list.Id=id;                       
+                                    }
+                                }
+                                void print();
+                            } 
+
+                            if (y == 14)
+                            {
+                                pw = Console.ReadLine();
+                                isRight = IdCheck.IsMatch(pw); // 유저아이디 정규화로 양식 맞는지 확인
+                                if (isRight == true) { User.Pw = pw; }
+                                foreach (UserVO list in List.UserList)
+                                {
+                                    if (list.Id == InputKey.loginId)
+                                    {
+                                        list.Pw = pw;
+                                    }
+                                }
+                            }
+                           
+
+                            if (y == 15)
+                            {
+                                call = Console.ReadLine();
+                                isRight = IdCheck.IsMatch(call); // 유저아이디 정규화로 양식 맞는지 확인
+                                if (isRight == true) { User.CallNumber = call; }
+
+                                foreach (UserVO list in List.UserList)
+                                {
+                                    if (list.Id == InputKey.loginId)
+                                    {
+                                        list.CallNumber = call;
+                                    }
+                                }
+
+                            }
+                            
+                            if (y == 16)
+                            {
+                                address = Console.ReadLine();
+                                User.Address = address;
+                                foreach (UserVO list in List.UserList)
+                                {
+                                    if (list.Id == InputKey.loginId)
+                                    {
+                                        list.Address = address;
+                                    }
+                                }
+                            }
                             break;
-                        }
 
-                    case ConsoleKey.Escape: // 종료
-                        {
-                            return;
                         }
-
+                    case ConsoleKey.Escape: isFinished = false; break;
                     default: break;
-
                 }
-
+            }
+            public void print()
+            {
+                foreach (UserVO list in List.UserList)
+                {
+                    if (list.Id == InputKey.loginId)
+                    {
+                        Console.WriteLine(list);
+                    }
+                }
             }
         }
     }
+    
 }
+  

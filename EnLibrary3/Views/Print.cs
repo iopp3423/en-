@@ -110,10 +110,10 @@ namespace EnLibrary3.Views
 
         public void PrintUser()
         {
-            Console.WriteLine(" 아이디 변경 : ");
+            Console.WriteLine("   아이디 변경 : ");
             Console.WriteLine(" 비밀번호 변경 :");
             Console.WriteLine(" 전화번호 변경 :");
-            Console.WriteLine(" 주소 변경 :");
+            Console.WriteLine("     주소 변경 :");
 
         }
     }
