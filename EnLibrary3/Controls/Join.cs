@@ -13,6 +13,11 @@ namespace EnLibrary3.Controls
         Print View = new Print();
         InputKey Input = new InputKey();
         bool isFinished = true;
+        ListVO List = new ListVO();
+        public Join()
+        {
+            InputKey Input = new InputKey(List);
+        }
 
 
         public void JoinLibrary()
@@ -38,7 +43,7 @@ namespace EnLibrary3.Controls
                 if (y == 9) { y++; Input.Name(); }
                 if (y == 10) { y++; Input.Age(); }
                 if (y == 11) { y++; Input.CallNumber(); }
-                if (y == 12) { y++; Input.Address(); Console.Clear();UserMode.Mode(); isFinished = false; }
+                if (y == 12) { y++; Input.Address(); /*Console.Clear();UserMode.Mode();*/ isFinished = false; }
                 cursur = Console.ReadKey(true);
 
                 switch (cursur.Key)

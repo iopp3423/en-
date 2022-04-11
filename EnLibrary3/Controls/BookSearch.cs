@@ -136,7 +136,7 @@ namespace EnLibrary3.Controls
                         Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
                     }
                 }
-               
+                SearchBookAfter();
             }
             NotExist();
         }
@@ -164,6 +164,7 @@ namespace EnLibrary3.Controls
                         Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
                     }
                 }
+                SearchBookAfter();
             }
             NotExist();
         }

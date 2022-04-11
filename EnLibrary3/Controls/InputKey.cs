@@ -20,9 +20,11 @@ namespace EnLibrary3.Controls
         UserVO User = new UserVO();
         ListVO List = new ListVO();
         LoginAfter After = new LoginAfter();
+        //Login DoLogin = new Login();
         //public ListVO List;
 
         ConsoleKeyInfo back;
+        ConsoleKeyInfo cursur;
 
         static private int noError = 1;
         static private int error;
@@ -40,12 +42,14 @@ namespace EnLibrary3.Controls
             this.List = List;
         }
         
+
         public void BackUserMode() // 유저모드로 뒤돌아가기 함수
         {
             User UserMode = new User();
             back = Console.ReadKey(true);
             if(ConsoleKey.F5 == back.Key) { Console.Clear(); UserMode.Mode(); } // f5누르면 로그인 회원가입 선택화면으로 돌아가기        
         }
+
         public int UserDoInput() // 1~9 에러 검출코드
         {
             int input;
@@ -65,6 +69,7 @@ namespace EnLibrary3.Controls
             }
             return input; // 정수 값 리턴
         }
+
         public void LoginId() //////////////로그인 아이디
         {
             BackUserMode();
@@ -95,8 +100,7 @@ namespace EnLibrary3.Controls
         public void LoginPw()/////////로그인 비밀번호
         {
             BackUserMode();
-            int idPass;
-            int pwPass;
+            Login DoLogin = new Login();
             while (pass == false)
             {
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
@@ -110,15 +114,22 @@ namespace EnLibrary3.Controls
 
                 if (completeInformation == true) // 양식이 맞으면  
                 {
-
-                    //Console.WriteLine(pw);
-                    //Console.WriteLine(loginId);
-                    pwPass = List.UserList.FindIndex(x => x.pw==pw);
-                    idPass = List.UserList.FindIndex(x => x.id==loginId);
-                    //Console.WriteLine(idPass);
-                    //Console.WriteLine(pwPass);                    
-                    if (pwPass == 0 && idPass == 0) { Console.Clear(); After.BookMenu(); }
-                    else {Console.Clear(); After.BookMenu(); } // 이거 입력받는거 고쳐야함@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                    foreach (UserVO list in List.UserList)
+                    {
+                        if(list.id == loginId && list.pw == pw)
+                        {
+                            Console.Clear();
+                            After.BookMenu();
+                       
+                        }
+                    }
+                    Console.SetCursorPosition(29, 8);
+                    Console.WriteLine("회원정보가 일치하지 않습니다.");
+                    Console.SetCursorPosition(29, 9);
+                    Console.WriteLine("재입력 :ENTER, 종료 : ESC");                   
+                    cursur = Console.ReadKey(true);
+                    if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); DoLogin.LibraryLogin(); } // enter누르면 로그인
+                    else if (cursur.Key == ConsoleKey.Escape) return; // esc는 저
                     reEnter = true;
                     break;
                 }
@@ -304,14 +315,18 @@ namespace EnLibrary3.Controls
                 address = Console.ReadLine();
                 User.Address= address;
 
+                List.UserList.Add(User);
+
+
+                
                 foreach (UserVO list in List.UserList)
                 {
-                    Console.WriteLine(list);
+                    Console.WriteLine(list.id);
                     Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
                 }
-
-                List.UserList.Add(User); // 유저리스트에 회원등록 완료
-                //UserMode.Mode();
+                
+                
+                //UserMode.Mode();qhghtnw
 
 
                 break;
