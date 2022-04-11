@@ -97,5 +97,24 @@ namespace EnLibrary3.Views
             Console.WriteLine("제목을 입력해주세요:");
             Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
         }
+
+        public void PrintUserRevise()
+        {
+            Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                         회 원 정 보 수 정                        ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+        }
+
+        public void PrintUser()
+        {
+            Console.WriteLine(" 아이디 변경 : ");
+            Console.WriteLine(" 비밀번호 변경 :");
+            Console.WriteLine(" 전화번호 변경 :");
+            Console.WriteLine(" 주소 변경 :");
+
+        }
     }
 }

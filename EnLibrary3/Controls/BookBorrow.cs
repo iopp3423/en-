@@ -14,6 +14,8 @@ namespace EnLibrary3.Controls
         BookSearch Search = new BookSearch();
         ListVO List = new ListVO();
         Print View = new Print();
+        BookVO Book = new BookVO();
+
         bool isFinished = true;
         ConsoleKeyInfo cursur;
         Regex BookCheck = new Regex(@"^[가-힣a-zA-Z0-9]{1,15}$");

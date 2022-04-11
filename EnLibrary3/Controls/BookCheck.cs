@@ -11,7 +11,6 @@
         public void CheckBook()
         {
             Console.Clear();
-            View.PrintSearchMenu();
             int x = 30, y = 0;
             View.PrintBookList();
 

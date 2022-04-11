@@ -32,7 +32,7 @@ namespace EnLibrary3.Controls
         static private bool reEnter = true;
         static private bool completeInformation;
         static private string pw; // 비밀번호 확인 때문에 전역변수선언
-        static private string loginId; // 로그인 때문에 전역변수 선언
+        static public string loginId; // 로그인 때문에 전역변수 선언
         
         public InputKey()
         {
