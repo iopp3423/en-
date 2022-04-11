@@ -51,11 +51,11 @@ namespace EnLibrary3.Views
         }
         public void PrintLoginInformation()
         {
-            Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
             Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,41}", "★                          ID & PW를 입력해주세요                  ★"));
             Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
-            Console.WriteLine(string.Format("{0,41}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
             Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
             Console.WriteLine("{0,41}","ID를 입력해주세요 :");
             Console.WriteLine("{0,41}","PW를 입력해주세요 :");

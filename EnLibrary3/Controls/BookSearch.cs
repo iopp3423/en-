@@ -89,6 +89,7 @@ namespace EnLibrary3.Controls
             Console.SetCursorPosition(20, 0);
             checking = Console.ReadLine();
             passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
+            existing = false; // true면 책이 없음
 
             if (passing == false) NameSearch();
             else if (passing == true)
@@ -103,10 +104,11 @@ namespace EnLibrary3.Controls
                     if (list.name == checking)
                     {
                         Console.WriteLine(list);
-                        Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
-                        existing = true;
+                        Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));             
                     }
                 }
+                SearchBookAfter();
+
                 NotExist();
             }
         }
@@ -180,6 +182,15 @@ namespace EnLibrary3.Controls
                 View.PrintBookList();
                 Console.ReadLine();
             }
+        }
+        public void SearchBookAfter()
+        {
+            LoginAfter Menu = new LoginAfter();
+            Console.WriteLine("메뉴로 돌아가시겠습니까?");
+            Console.WriteLine("종료는 ESC를 눌러주세요");
+            cursur = Console.ReadKey(true);
+            if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); Menu.BookMenu(); }
+            else if (cursur.Key == ConsoleKey.Escape) return;
         }
     }
 }
