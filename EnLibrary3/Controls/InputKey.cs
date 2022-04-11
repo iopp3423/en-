@@ -42,7 +42,6 @@ namespace EnLibrary3.Controls
             this.List = List;
         }
         
-
         public void BackUserMode() // 유저모드로 뒤돌아가기 함수
         {
             User UserMode = new User();
@@ -99,8 +98,9 @@ namespace EnLibrary3.Controls
 
         public void LoginPw()/////////로그인 비밀번호
         {
-            BackUserMode();
             Login DoLogin = new Login();
+            bool passlogin = false;
+            BackUserMode();
             while (pass == false)
             {
                 //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
@@ -118,20 +118,30 @@ namespace EnLibrary3.Controls
                     {
                         if(list.id == loginId && list.pw == pw)
                         {
-                            Console.Clear();
-                            After.BookMenu();
-                       
+                            passlogin = true;
+                            pass = false;
                         }
                     }
-                    Console.SetCursorPosition(29, 8);
-                    Console.WriteLine("회원정보가 일치하지 않습니다.");
-                    Console.SetCursorPosition(29, 9);
-                    Console.WriteLine("재입력 :ENTER, 종료 : ESC");                   
-                    cursur = Console.ReadKey(true);
-                    if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); DoLogin.LibraryLogin(); } // enter누르면 로그인
-                    else if (cursur.Key == ConsoleKey.Escape) return; // 
-                    reEnter = true;
-                    break;
+                    if (passlogin == true)
+                    {
+                        Console.Clear();
+                        pass = false;
+                        After.BookMenu();
+                    }
+                    if (passlogin == false)
+                    {
+                        Console.SetCursorPosition(28, 8);
+                        Console.WriteLine("회원정보가 일치하지 않습니다.");
+                        Console.SetCursorPosition(28, 9);
+                        Console.Write("다시 입력하려면 ENTER를 눌러주세요.");
+                        cursur = Console.ReadKey(true);
+                        if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); DoLogin.LibraryLogin(); } // enter누르면 로그인
+                        else if (cursur.Key == ConsoleKey.Escape) return; // esc는 저
+                        reEnter = true;
+                        break;
+                    }
+                    
+                    
                 }
                 reEnter = false;
 

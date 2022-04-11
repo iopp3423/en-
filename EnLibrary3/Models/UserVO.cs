@@ -61,10 +61,7 @@ namespace EnLibrary3.Controls
             set { address = value; }
         }
 
-        public override string ToString()
-        {
-            return "아이디 : " + id + "\n비밀번호 : " + pw + "\n이름 : " + age + "\n나이   : " + callNumber + "\n전화번호   : " + callNumber + "\n주소   : " + address;
-        }
+       
     }
 
 }

@@ -12,6 +12,7 @@ namespace EnLibrary3.Controls
     internal class BookBorrow
     {
         BookSearch Search = new BookSearch();
+        ListVO List = new ListVO();
         Print View = new Print();
         bool isFinished = true;
         ConsoleKeyInfo cursur;
@@ -23,12 +24,39 @@ namespace EnLibrary3.Controls
 
         public void BorrowBook()
         {
-            Console.Clear();
-            Console.WriteLine("대여할 책 제목 :");
-            int x = 17, y = 0;
-            Search.NameSearch(); // 책 제목으로 찾기
 
-        }
+            string checking;
+            bool passing;
+            string book;
+
+
+            Console.Clear();
+            Console.Clear();
+            Console.WriteLine("대여할 책 제목 :\n");
+            View.PrintBookList();
+            Console.SetCursorPosition(17, 0);
+            checking = Console.ReadLine();
+            passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
+           
+
+            if (passing == false) BorrowBook();
+            else if (passing == true)
+            {
+                Console.Clear();
+                foreach (BookVO list in List.BookList)
+                {
+                    if (list.name == checking)
+                    {
+                        Console.WriteLine(list);
+                        Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                        existing = true;
+                    }
+                }
+                Console.WriteLine("책을 대여하시겠습니까?");
+                NotExist();
+                
+            }
+        }      
 
         public void NotExist()
         {
@@ -44,6 +72,7 @@ namespace EnLibrary3.Controls
                 else if (cursur.Key == ConsoleKey.Escape) return;
                 View.PrintBookList();
                 Console.ReadLine();
+                existing = true;
             }
         }
     }

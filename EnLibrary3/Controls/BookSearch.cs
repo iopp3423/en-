@@ -19,6 +19,7 @@ namespace EnLibrary3.Controls
         Regex PublishCheck = new Regex(@"^[가-힣a-zA-Z]{1,8}$");
         ListVO List = new ListVO();
         public static bool existing = false;
+
         ConsoleKeyInfo cursur;
 
         public void SearchBook()
@@ -81,7 +82,6 @@ namespace EnLibrary3.Controls
             string checking;
             bool passing;           
             string book;
-            existing = false;
 
             Console.Clear();
             View.PrintBookName();
@@ -89,7 +89,7 @@ namespace EnLibrary3.Controls
             Console.SetCursorPosition(20, 0);
             checking = Console.ReadLine();
             passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
-            existing = false; // true면 책이 없음
+            
 
             if (passing == false) NameSearch();
             else if (passing == true)
@@ -97,27 +97,24 @@ namespace EnLibrary3.Controls
                 Console.Clear();
                 foreach (BookVO list in List.BookList)
                 {
-                    /*
-                    pass = List.BookList.Any(x => x.name.Contains(checking));
-                    Bookname = List.BookList.Find(x => x.name == checking);
-                    */
+                    
                     if (list.name == checking)
                     {
                         Console.WriteLine(list);
-                        Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));             
+                        Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                        existing = true;
                     }
                 }
-                SearchBookAfter();
-
                 NotExist();
+                SearchBookAfter();
             }
+            
         }
         public void AuthorSearch()
         {
             string checking;
             bool passing;
             string book;
-            existing = false;
 
             Console.Clear();
             View.PrintBookName();
@@ -134,18 +131,20 @@ namespace EnLibrary3.Controls
                     {
                         Console.WriteLine(list);
                         Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                        existing = true;
                     }
                 }
+                Console.Write(existing);
+                NotExist();
                 SearchBookAfter();
             }
-            NotExist();
+ 
         }
         public void PublishSearch()
         {
             string checking;
             bool passing;
             string book;
-            existing = false;
 
             Console.Clear();
             View.PrintBookName();
@@ -162,11 +161,13 @@ namespace EnLibrary3.Controls
                     {
                         Console.WriteLine(list);
                         Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                        existing = true;
                     }
                 }
+                NotExist();
                 SearchBookAfter();
             }
-            NotExist();
+           
         }
         public void NotExist()
         {
@@ -182,6 +183,7 @@ namespace EnLibrary3.Controls
                 else if (cursur.Key == ConsoleKey.Escape) return;
                 View.PrintBookList();
                 Console.ReadLine();
+                existing = true;
             }
         }
         public void SearchBookAfter()
