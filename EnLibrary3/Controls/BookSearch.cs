@@ -20,6 +20,7 @@ namespace EnLibrary3.Controls
         ListVO List = new ListVO();
         public static bool existing = false;
         ConsoleKeyInfo cursur;
+
         public void SearchBook()
         {
             Console.Clear();
@@ -88,9 +89,11 @@ namespace EnLibrary3.Controls
             Console.SetCursorPosition(20, 0);
             checking = Console.ReadLine();
             passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
+
             if (passing == false) NameSearch();
             else if (passing == true)
             {
+                Console.Clear();
                 foreach (BookVO list in List.BookList)
                 {
                     /*
@@ -169,7 +172,8 @@ namespace EnLibrary3.Controls
             {
                 Console.Clear();
                 View.PrintBookList();
-                Console.Write("찾으시는 책이 없습니다. 메뉴로 돌아가시겠습니까?");
+                Console.WriteLine("찾으시는 책이 없습니다. 메뉴로 돌아가시겠습니까?");
+                Console.Write("종료는 ESC를 눌러주세요");
                 cursur = Console.ReadKey(true);
                 if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); Menu.BookMenu(); }
                 else if (cursur.Key == ConsoleKey.Escape) return;
