@@ -129,7 +129,7 @@ namespace EnLibrary3.Controls
                     Console.WriteLine("재입력 :ENTER, 종료 : ESC");                   
                     cursur = Console.ReadKey(true);
                     if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); DoLogin.LibraryLogin(); } // enter누르면 로그인
-                    else if (cursur.Key == ConsoleKey.Escape) return; // esc는 저
+                    else if (cursur.Key == ConsoleKey.Escape) return; // 
                     reEnter = true;
                     break;
                 }

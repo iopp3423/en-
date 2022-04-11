@@ -26,7 +26,7 @@ namespace EnLibrary3.Controls
         {
             View.LibraryPrint();// 맨 위 도서관 프린트
             View.ChooseJoinLoginPrint(); // 로그인, 회원가입 화면 프린트
-
+            Console.Write("뒤로가기 : F5");
 
             ConsoleKeyInfo cursur;
             // Console 창에 보여질 커서의 x 좌표와 y 좌표
