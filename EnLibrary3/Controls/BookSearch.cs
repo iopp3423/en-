@@ -11,10 +11,12 @@ namespace EnLibrary3.Controls
     using EnLibrary3.Views;
     internal class BookSearch
     {
-        ListVO List = new ListVO();
+       
         Print View = new Print();
         bool isFinished = true;
         Regex BookCheck = new Regex(@"^[0-9a-zA-Z]{4,10}$");
+        ListVO List = new ListVO();
+        BookVO Bookname = new BookVO();
         ConsoleKeyInfo cursur;
         public void SearchBook()
         {
@@ -73,6 +75,8 @@ namespace EnLibrary3.Controls
         {
             string checking;
             bool passing;
+            bool pass;
+            string book;
 
             Console.Clear();
             View.PrintBookName();
@@ -81,28 +85,48 @@ namespace EnLibrary3.Controls
             checking = Console.ReadLine();
             passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
             Console.Clear();
-            Console.WriteLine(checking);
+            //Console.WriteLine(checking);
+
+
+            //Bookname = List.BookList.Contains(checking);
+
+            /*
+            while (true)
+            {
+                pass = List.BookList.Any(x => x.name.Contains(checking));
+                {
+                    if(pass = true) Console.WriteLine(List.BookList[1]);
+                }
+                break;
+            }
+            */
 
             foreach (BookVO list in List.BookList)
             {
-                if (List.BookList.Any(x => x.name.Contains(checking)))
-                {
-                    Console.WriteLine(list);
-                    Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-                    break;
-                }
-            
-            } 
+                /*
+                pass = List.BookList.Any(x => x.name.Contains(checking));
+                Bookname = List.BookList.Find(x => x.name == checking);
+                */
+                if (list.name == checking) Console.Write(list);
 
+                Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+            }
+            
+           
+            
+
+            /*
+            if (List.BookList.Contains(checking)) {
+                Console.WriteLine("{0}을 찾았습니다.", checking);
+            */
+
+            //List.BookList.Any(s =>checking.Contains(s));
             /*
             if (List.BookList.Any(x => x.name.Contains(checking)))
             {
             }
             else continue;
             */
-
-
-
         }
     }
 }
