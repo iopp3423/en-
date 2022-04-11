@@ -18,9 +18,9 @@ namespace EnLibrary3.Controls
         Regex AgeCheck = new Regex(@"^[0-9]{1,2}1?[0-9]?[0-9]$");
         Exeption ErrorCheck = new Exeption();
         UserVO User = new UserVO();
-        //ListVO List = new ListVO();
+        ListVO List = new ListVO();
         LoginAfter After = new LoginAfter();
-        public ListVO List;
+        //public ListVO List;
 
         ConsoleKeyInfo back;
 
@@ -31,7 +31,7 @@ namespace EnLibrary3.Controls
         static private bool completeInformation;
         static private string pw; // 비밀번호 확인 때문에 전역변수선언
         static private string loginId; // 로그인 때문에 전역변수 선언
-
+        
         public InputKey()
         {
         }
@@ -39,7 +39,7 @@ namespace EnLibrary3.Controls
         {
             this.List = List;
         }
-
+        
         public void BackUserMode() // 유저모드로 뒤돌아가기 함수
         {
             User UserMode = new User();
@@ -303,17 +303,17 @@ namespace EnLibrary3.Controls
                 }
                 address = Console.ReadLine();
                 User.Address= address;
-                
-                List.UserList.Add(User); // 유저리스트에 회원등록 완료
-                UserMode.Mode();
 
-                /*  유저 목록 프린트 나중에 지워야함!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
                 foreach (UserVO list in List.UserList)
                 {
                     Console.WriteLine(list);
                     Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
                 }
-                */
+
+                List.UserList.Add(User); // 유저리스트에 회원등록 완료
+                //UserMode.Mode();
+
+
                 break;
             }
         }

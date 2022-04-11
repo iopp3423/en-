@@ -14,6 +14,7 @@ namespace EnLibrary3.Controls
         InputKey Input = new InputKey();
         bool isFinished = true;
 
+
         public void JoinLibrary()
         {
             User UserMode = new User();
@@ -37,7 +38,7 @@ namespace EnLibrary3.Controls
                 if (y == 9) { y++; Input.Name(); }
                 if (y == 10) { y++; Input.Age(); }
                 if (y == 11) { y++; Input.CallNumber(); }
-                if (y == 12) { y++; Input.Address(); Console.Clear(); UserMode.Mode(); isFinished = false; }
+                if (y == 12) { y++; Input.Address(); /*Console.Clear();UserMode.Mode();*/ isFinished = false; }
                 cursur = Console.ReadKey(true);
 
                 switch (cursur.Key)

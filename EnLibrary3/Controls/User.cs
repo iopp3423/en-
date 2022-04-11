@@ -8,26 +8,30 @@ namespace EnLibrary3.Controls
 {
     using EnLibrary3.Views;
     
-    internal class User // 회원가입 로그인 고르는 화면
+    public class User // 회원가입 로그인 고르는 화면
     {
         Print View = new Print();        
         Login DoLogin = new Login();
         Join DoJoin = new Join();
         ListVO List = new ListVO();
-        InputKey Input;
         bool isFinished = true;
 
         public User()
         {
-            Input = new InputKey(List);
+            InputKey Input = new InputKey(List);
         }
-
 
 
         public void Mode()
         {
             View.LibraryPrint();// 맨 위 도서관 프린트
             View.ChooseJoinLoginPrint(); // 로그인, 회원가입 화면 프린트
+
+            foreach (BookVO list in List.BookList)
+            {
+                Console.WriteLine(list);
+                Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+            }
 
             ConsoleKeyInfo cursur;
             // Console 창에 보여질 커서의 x 좌표와 y 좌표

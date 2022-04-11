@@ -17,7 +17,6 @@ namespace EnLibrary3.Controls
             Print PrintCollection = new Print();
             User UserMode = new User();
             Admin AdminMode = new Admin();
-            InputKey Input = new InputKey();
             bool isFinished = true;
 
             

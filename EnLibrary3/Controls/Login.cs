@@ -15,6 +15,15 @@ namespace EnLibrary3.Controls
         public ListVO List;
         bool isFinished = true;
 
+        public Login()
+        {
+
+        }
+        public Login(ListVO list)
+        {
+            this.List = list;
+        }
+
         public void LibraryLogin() // 로그인 화면
         {
             Console.Clear();
