@@ -14,9 +14,8 @@ namespace EnLibrary3.Controls
        
         Print View = new Print();
         bool isFinished = true;
-        Regex BookCheck = new Regex(@"^[0-9a-zA-Z]{4,10}$");
+        Regex BookCheck = new Regex(@"^[가-힣a-zA-Z]{1,10}$");
         ListVO List = new ListVO();
-        BookVO Bookname = new BookVO();
         ConsoleKeyInfo cursur;
         public void SearchBook()
         {
@@ -51,8 +50,9 @@ namespace EnLibrary3.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            isFinished = true;
+                            isFinished = true; 
                             if (y == 0) { NameSearch(); isFinished = false; }
+                            if (y == 1) { AuthorSearch(); isFinished = false; }
                             break;
                         }
 
@@ -74,7 +74,7 @@ namespace EnLibrary3.Controls
         public void NameSearch()
         {
             string checking;
-            bool passing;
+            bool passing = true;
             bool pass;
             string book;
 
@@ -84,22 +84,10 @@ namespace EnLibrary3.Controls
             Console.SetCursorPosition(20, 0);
             checking = Console.ReadLine();
             passing = BookCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인
+            
             Console.Clear();
-            //Console.WriteLine(checking);
-
-
-            //Bookname = List.BookList.Contains(checking);
-
-            /*
-            while (true)
-            {
-                pass = List.BookList.Any(x => x.name.Contains(checking));
-                {
-                    if(pass = true) Console.WriteLine(List.BookList[1]);
-                }
-                break;
-            }
-            */
+            Console.WriteLine(passing);
+            //if (passing == false) NameSearch();
 
             foreach (BookVO list in List.BookList)
             {
@@ -108,25 +96,13 @@ namespace EnLibrary3.Controls
                 Bookname = List.BookList.Find(x => x.name == checking);
                 */
                 if (list.name == checking) Console.Write(list);
-
-                Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
             }
             
-           
+        
+        }
+        public void AuthorSearch()
+        {
             
-
-            /*
-            if (List.BookList.Contains(checking)) {
-                Console.WriteLine("{0}을 찾았습니다.", checking);
-            */
-
-            //List.BookList.Any(s =>checking.Contains(s));
-            /*
-            if (List.BookList.Any(x => x.name.Contains(checking)))
-            {
-            }
-            else continue;
-            */
         }
     }
 }
