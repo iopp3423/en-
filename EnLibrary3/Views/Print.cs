@@ -125,5 +125,16 @@ namespace EnLibrary3.Views
             Console.WriteLine(string.Format("{0,39}", "》도서삭제"));
             Console.WriteLine(string.Format("{0,39}", "》회원관리"));
         }
+
+        public void PrintAddBook()
+        {
+            Console.WriteLine(string.Format("{0,39}", "【도서추가】\n\n"));
+            Console.WriteLine(string.Format("책 제목(영어, 한글포함(1~15자):"));
+            Console.WriteLine(string.Format("작가(영어, 한글포함(1~10자) :"));
+            Console.WriteLine(string.Format("출판사(영어, 한글포함(1~8자) :"));
+            Console.WriteLine(string.Format("출시일(2022-04-12):"));
+            Console.WriteLine(string.Format("수량(1~99):"));
+            Console.WriteLine(string.Format("가격(1~99999) :"));
+        }
     }
 }

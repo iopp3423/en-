@@ -15,6 +15,10 @@ namespace EnLibrary3.Controls
         Regex BookCheck = new Regex(@"^[가-힣a-zA-Z0-9]{1,15}$");
         Regex AuthorCheck = new Regex(@"^[가-힣a-zA-Z]{1,10}$");
         Regex PublishCheck = new Regex(@"^[가-힣a-zA-Z]{1,8}$");
+        Regex NameCheck = new Regex(@"^[가-힣]{2,5}$");
+        Regex Publish = new Regex(@"^[0-9]{4}-[0-9]{2}-[0-9]{2}$");
+        Regex BookCount = new Regex(@"^[0-9]{2}$");
+        Regex Price = new Regex(@"^[1-9]{5}$");
         Print View = new Print();
         BookSearch Search = new BookSearch();
         ListVO List = new ListVO();
@@ -171,8 +175,31 @@ namespace EnLibrary3.Controls
             
 
         }
-        public void AddBook()
+        /*
+        completeInformation = IdCheck.IsMatch(loginId); // 유저아이디 정규화로 양식 맞는지 확인
+
+                if (completeInformation == true) // 양식이 맞으면  
+                {
+                    Console.SetCursorPosition(48, 7); // 커서 위치 맞게 변경
+                    reEnter = true;
+                    break;
+                }
+        */
+    public void AddBook()
         {
+            string input;
+            bool isRight;
+            Console.Clear();
+            View.PrintAddBook();
+            Console.SetCursorPosition(31, 3);
+
+            input = Console.ReadLine();
+            isRight = BookCheck.IsMatch(input);
+
+            if(isRight == true)
+            {
+                Console.SetCursorPosition(30, 2);
+            }
 
         }
         public void RemoveBook()
