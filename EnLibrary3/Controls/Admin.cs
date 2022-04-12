@@ -12,17 +12,12 @@ namespace EnLibrary3.Controls
 
     public class Admin : InputKey
     {
-        Regex BookCheck = new Regex(@"^[가-힣a-zA-Z0-9]{1,15}$");
-        Regex AuthorCheck = new Regex(@"^[가-힣a-zA-Z]{1,10}$");
-        Regex PublishCheck = new Regex(@"^[가-힣a-zA-Z]{1,8}$");
         Regex NameCheck = new Regex(@"^[가-힣]{2,5}$");
-        Regex Publish = new Regex(@"^[0-9]{4}-[0-9]{2}-[0-9]{2}$");
-        Regex BookCount = new Regex(@"^[0-9]{2}$");
-        Regex Price = new Regex(@"^[1-9]{5}$");
+        Regex BookCheck = new Regex(@"^[가-힣a-zA-Z0-9]{1,15}$");
         Print View = new Print();
         BookSearch Search = new BookSearch();
         ListVO List = new ListVO();
-        public static bool existing = false;
+        public static bool existing;
 
         ConsoleKeyInfo cursur;
         public void DoAdmin()
@@ -143,6 +138,7 @@ namespace EnLibrary3.Controls
                 string checking;
                 bool passing;
                 string book;
+                
 
                 Console.Clear();
                 View.PrintBookName();
@@ -175,40 +171,75 @@ namespace EnLibrary3.Controls
             
 
         }
-        /*
-        completeInformation = IdCheck.IsMatch(loginId); // 유저아이디 정규화로 양식 맞는지 확인
 
-                if (completeInformation == true) // 양식이 맞으면  
-                {
-                    Console.SetCursorPosition(48, 7); // 커서 위치 맞게 변경
-                    reEnter = true;
-                    break;
-                }
-        */
     public void AddBook()
         {
             string input;
-            bool isRight;
+           
             Console.Clear();
             View.PrintAddBook();
-            Console.SetCursorPosition(31, 3);
-
-            input = Console.ReadLine();
-            isRight = BookCheck.IsMatch(input);
-
-            if(isRight == true)
-            {
-                Console.SetCursorPosition(30, 2);
-            }
-
+            
+            
+            Console.Write("아직 구현하지 못해서 Enter누르면 메뉴로 돌아갑니다..");
+            cursur = Console.ReadKey(true);
+            if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); AdminMenu(); }
+            else if (cursur.Key == ConsoleKey.Escape) return;
         }
         public void RemoveBook()
         {
+            LoginAfter Menu = new LoginAfter();
+            string checking;
+            bool passing;
+            string book;
 
+            Console.Clear();
+            View.PrintBookName();
+            View.PrintBookList();
+            Console.SetCursorPosition(20, 0);
+            cursur = Console.ReadKey(true);
+            if (cursur.Key == ConsoleKey.F5) { Console.Clear(); AdminMenu(); }
+
+            checking = Console.ReadLine();
+            passing = BookCheck.IsMatch(checking);
+
+            if (passing == false) SearchBook();
+            else if (passing == true)
+            {
+                Console.Clear();
+                foreach (BookVO list in List.BookList)
+                {
+
+                    if (list.name == checking)
+                    {
+                        Console.WriteLine(list);
+                        Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                        existing = true;
+                    }
+                }
+                NotExist();
+            }
+            Console.Write("아직 구현하지 못해서 Enter누르면 메뉴로 돌아갑니다..");
+            cursur = Console.ReadKey(true);
+            if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); AdminMenu(); }
+            else if (cursur.Key == ConsoleKey.Escape) return;
         }
 
         public void AdminUser()
         {
+            Console.Clear();
+            foreach (UserVO list in List.UserList)
+            {
+                Console.WriteLine(list);
+                Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                existing = true;
+
+            }
+            Console.Write("아직 구현하지 못해서 Enter누르면 메뉴로 돌아갑니다..");
+            cursur = Console.ReadKey(true);
+            if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); AdminMenu(); }
+            else if (cursur.Key == ConsoleKey.Escape) return;
+           
+
 
         }
 

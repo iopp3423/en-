@@ -12,6 +12,9 @@ namespace EnLibrary3.Controls
         Regex PwCheck = new Regex(@"^[0-9a-zA-Z]{4,10}$");
         Regex NameCheck = new Regex(@"^[가-힣]{2,5}$");
         Regex AgeCheck = new Regex(@"^[0-9]{1,2}1?[0-9]?[0-9]$");
+
+       
+
         Exeption ErrorCheck = new Exeption();
         UserVO User = new UserVO();
         ListVO List = new ListVO();
@@ -39,7 +42,17 @@ namespace EnLibrary3.Controls
         {
             this.List = List;
         }
-
+        /*
+         * private string bookNumber;
+        public string name;
+        public string publisher;
+        public string author;
+        private string date;
+        private string price;
+        private string quantity;
+        public int number;
+         */
+     
 
         public void BackUserMode() // 유저모드로 뒤돌아가기 함수
         {
@@ -425,6 +438,7 @@ namespace EnLibrary3.Controls
                 break;
             }
         }
+        
     }
 }
 

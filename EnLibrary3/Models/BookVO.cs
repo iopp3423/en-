@@ -14,7 +14,7 @@ namespace EnLibrary3.Models
         public string author;
         private string price;
         private string quantity;
-        public int number;
+
 
         public BookVO()
         {
