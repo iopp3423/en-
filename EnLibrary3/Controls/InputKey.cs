@@ -333,8 +333,6 @@ namespace EnLibrary3.Controls
                 {
                     if (list.Address == address)
                     {
-                        Console.WriteLine("--------------------------------회원가입 완료------------------------------");
-                        Console.Write(list);
                         Console.Clear();
                         GoUser.DoUser();
                     }

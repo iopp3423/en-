@@ -65,8 +65,14 @@
                             if (y > 16) y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
-                    case ConsoleKey.Enter:
+                    case ConsoleKey.Escape:
                         {
+                            isFinished = false;
+                            return;
+                        }
+                    case ConsoleKey.Enter:
+                        {                         
+
                             if (y == 13)
                             {
                                 id = Console.ReadLine(); // 아이디 입력
@@ -76,12 +82,15 @@
                                 {
                                     if (list.Id == InputKey.loginId)
                                     {
-                                        list.id=id;
-                                        Console.Write(list.id);
+                                        //list.id=id;
+                                        Console.SetCursorPosition(30, 13);
+                                        Console.Write("아이디가 변경되었습니다.");
+                                        Console.SetCursorPosition(16, 14);
+                                        //Console.Write(list.id);
+                                        //isFinished = false;
                                     }
                                 }
-                              
-
+                                break;
                             } 
 
                             if (y == 14)
@@ -94,8 +103,12 @@
                                     if (list.Id == InputKey.loginId)
                                     {
                                         list.Pw = pw;
+                                        Console.SetCursorPosition(30, 14);
+                                        Console.Write("비밀번호가 변경되었습니다.");
+                                        Console.SetCursorPosition(16, 15);
                                     }
                                 }
+                                break;
                             }
                            
 
@@ -110,9 +123,12 @@
                                     if (list.Id == InputKey.loginId)
                                     {
                                         list.CallNumber = call;
+                                        Console.SetCursorPosition(30, 15);
+                                        Console.Write("전화번호가 변경되었습니다.");
+                                        Console.SetCursorPosition(16, 16);
                                     }
                                 }
-
+                                break;
                             }
                             
                             if (y == 16)
@@ -124,6 +140,9 @@
                                     if (list.Id == InputKey.loginId)
                                     {
                                         list.Address = address;
+                                        Console.SetCursorPosition(30, 16);
+                                        Console.Write("주소가 변경되었습니다.");
+                                        Console.SetCursorPosition(16, 17);
                                     }
                                 }
                             }

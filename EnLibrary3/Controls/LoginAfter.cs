@@ -55,7 +55,7 @@ namespace EnLibrary3.Controls
                             if (y == 10) { Search.SearchBook(); isFinished = false; }
                             if (y == 11) { Borrow.BorrowBook(); isFinished = false; }
                             if (y == 12) { Check.CheckBook(); isFinished = false; }
-                            if (y == 13) { Revise.ReviseUser(); isFinished = false; }
+                            if (y == 13) { isFinished = false; Revise.ReviseUser(); break; }
                             break;
                         }
 

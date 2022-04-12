@@ -32,6 +32,7 @@ namespace EnLibrary3.Controls
             // Console 창에 보여질 커서의 x 좌표와 y 좌표
             int x = 31, y = 10;
             // 커서의 이동을 표현하는 것이 목적이므로 무한 루프를통해 커서표현을 반복
+
             while(isFinished)
             {
                 // x 와 y 좌표에 커서를 표시하기위한 메서드
