@@ -115,7 +115,15 @@ namespace EnLibrary3.Views
             Console.WriteLine(" 비밀번호 변경 :");
             Console.WriteLine(" 전화번호 변경 :");
             Console.WriteLine("     주소 변경 :");
+        }
 
+        public void PrintAdminMenu()
+        {
+            LibraryPrint();
+            Console.WriteLine(string.Format("{0,39}", "》도서찾기"));
+            Console.WriteLine(string.Format("{0,39}", "》도서추가"));
+            Console.WriteLine(string.Format("{0,39}", "》도서삭제"));
+            Console.WriteLine(string.Format("{0,39}", "》회원관리"));
         }
     }
 }

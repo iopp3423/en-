@@ -1,5 +1,6 @@
 ﻿using EnLibrary3.Models;
 using System.Text.RegularExpressions;
+using EnLibrary3.Views;
 
 namespace EnLibrary3.Controls
 {
@@ -78,7 +79,8 @@ namespace EnLibrary3.Controls
         public void adminPw()
         {
             bool passlogin = false;
-            Admin DoAdmin = new Admin(); 
+            Admin DoAdmin = new Admin();
+            Print View = new Print();
             BackUserMode();
             while (pass == false)
             {
@@ -104,7 +106,8 @@ namespace EnLibrary3.Controls
                     {
                         Console.Clear();
                         pass = false;
-                        Console.Write("Helloworld");//////////////메뉴이동 넣자
+                        View.PrintAdminMenu();//////////////메뉴이동 넣자
+                        DoAdmin.AdminMenu();
                     }
 
                     else if (passlogin == false)
