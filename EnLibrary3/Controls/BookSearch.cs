@@ -18,6 +18,7 @@ namespace EnLibrary3.Controls
         Regex AuthorCheck = new Regex(@"^[가-힣a-zA-Z]{1,10}$");
         Regex PublishCheck = new Regex(@"^[가-힣a-zA-Z]{1,8}$");
         ListVO List = new ListVO();
+
         public static bool existing = false;
 
         ConsoleKeyInfo cursur;
@@ -79,6 +80,7 @@ namespace EnLibrary3.Controls
 
         public void NameSearch()
         {
+            LoginAfter Menu = new LoginAfter();
             string checking;
             bool passing;           
             string book;
@@ -87,6 +89,9 @@ namespace EnLibrary3.Controls
             View.PrintBookName();
             View.PrintBookList();
             Console.SetCursorPosition(20, 0);
+            cursur = Console.ReadKey(true);
+            if (cursur.Key == ConsoleKey.F5) { Console.Clear(); Menu.BookMenu(); }
+
             checking = Console.ReadLine();
             passing = BookCheck.IsMatch(checking);
 
@@ -111,6 +116,7 @@ namespace EnLibrary3.Controls
         }
         public void AuthorSearch()
         {
+            LoginAfter Menu = new LoginAfter();
             string checking;
             bool passing;
             string book;
@@ -118,6 +124,9 @@ namespace EnLibrary3.Controls
             Console.Clear();
             View.PrintBookName();
             View.PrintBookList();
+            Console.SetCursorPosition(20, 0);
+            cursur = Console.ReadKey(true);
+            if (cursur.Key == ConsoleKey.F5) { Console.Clear(); Menu.BookMenu(); }
             Console.SetCursorPosition(20, 0);
             checking = Console.ReadLine();
             passing = AuthorCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인         
@@ -141,6 +150,7 @@ namespace EnLibrary3.Controls
         }
         public void PublishSearch()
         {
+            LoginAfter Menu = new LoginAfter();
             string checking;
             bool passing;
             string book;
@@ -148,6 +158,9 @@ namespace EnLibrary3.Controls
             Console.Clear();
             View.PrintBookName();
             View.PrintBookList();
+            Console.SetCursorPosition(20, 0);
+            cursur = Console.ReadKey(true);
+            if (cursur.Key == ConsoleKey.F5) { Console.Clear(); Menu.BookMenu(); }
             Console.SetCursorPosition(20, 0);
             checking = Console.ReadLine();
             passing = PublishCheck.IsMatch(checking); // 유저아이디 정규화로 양식 맞는지 확인         
