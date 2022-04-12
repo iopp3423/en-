@@ -10,6 +10,7 @@
         {
             Console.Clear();
             int x = 15, y = 0;
+            Console.WriteLine();
             View.PrintBookList();
 
             while (isFinished)
