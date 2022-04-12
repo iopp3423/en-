@@ -1,6 +1,7 @@
 ﻿namespace EnLibrary3.Controls
 {
     using EnLibrary3.Views;
+    using EnLibrary3.Models;
     internal class BookCheck
     {
         Print View = new Print();
@@ -9,7 +10,7 @@
         public void CheckBook()
         {
             Console.Clear();
-            int x = 15, y = 0;
+            int x = 0, y = 0;
             Console.WriteLine();
             View.PrintBookList();
 

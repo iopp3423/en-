@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using EnLibrary3.Models;
+using EnLibrary3.Views;
 
 namespace EnLibrary3.Controls
 {
-    using EnLibrary3.Controls;
-    using EnLibrary3.Views;
+
     internal class BookBorrow
     {
         BookSearch Search = new BookSearch();

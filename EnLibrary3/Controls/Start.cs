@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EnLibrary3.Views;
+using EnLibrary3.Models;
 
 namespace EnLibrary3.Controls
 {
-    using EnLibrary3.Views;
+
     class Start
     {
         static void Main(string[] args) // 관리자모드 추가해줘야함

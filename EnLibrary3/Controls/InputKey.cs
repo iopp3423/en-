@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using EnLibrary3.Views;
+using EnLibrary3.Models;
 
 namespace EnLibrary3.Controls
 {
-    using EnLibrary3.Views;
-    using EnLibrary3.Controls;
+
     internal class InputKey
     {
         Regex IdCheck = new Regex(@"^[0-9a-zA-Z]{8,10}$");

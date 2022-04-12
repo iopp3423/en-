@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EnLibrary3.Views;
+using EnLibrary3.Models;
 
 namespace EnLibrary3.Controls
 {
-    using EnLibrary3.Views;
-    
+
     public class User // 회원가입 로그인 고르는 화면
     {
         Print View = new Print();        
