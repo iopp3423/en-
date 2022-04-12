@@ -106,7 +106,6 @@ namespace EnLibrary3.Controls
                     {
                         Console.Clear();
                         pass = false;
-                        View.PrintAdminMenu();//////////////메뉴이동 넣자
                         DoAdmin.AdminMenu();
                     }
 
