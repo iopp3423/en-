@@ -75,10 +75,3 @@ namespace EnLibrary3.Controls
     }
 }
 
-/*
-foreach (UserVO list in List.UserList)
-{
-    Console.WriteLine(list);
-    Console.WriteLine("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-}
-*/
