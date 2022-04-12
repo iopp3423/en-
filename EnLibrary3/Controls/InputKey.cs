@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EnLibrary3.Models;
 using System.Text.RegularExpressions;
-using EnLibrary3.Views;
-using EnLibrary3.Models;
 
 namespace EnLibrary3.Controls
 {
 
-    internal class InputKey
+    public class InputKey
     {
         Regex IdCheck = new Regex(@"^[0-9a-zA-Z]{8,10}$");
         Regex CallNumberCheck = new Regex(@"^01[0-9]-[0-9]{4}-[0-9]{4}$");
@@ -34,21 +28,101 @@ namespace EnLibrary3.Controls
         static private bool completeInformation;
         static private string pw; // 비밀번호 확인 때문에 전역변수선언
         static public string loginId; // 로그인 때문에 전역변수 선언
-        
+        static public string adminId; // 로그인 때문에 
+
         public InputKey()
         {
         }
+
         public InputKey(ListVO List)
         {
             this.List = List;
         }
-        
+
+
         public void BackUserMode() // 유저모드로 뒤돌아가기 함수
         {
             User UserMode = new User();
             back = Console.ReadKey(true);
-            if(ConsoleKey.F5 == back.Key) { Console.Clear(); UserMode.DoUser(); } // f5누르면 로그인 회원가입 선택화면으로 돌아가기        
+            if (ConsoleKey.F5 == back.Key) { Console.Clear(); UserMode.DoUser(); } // f5누르면 로그인 회원가입 선택화면으로 돌아가기        
         }
+
+        public void adminLogin()
+        {
+            BackUserMode();
+            while (pass == false)
+            {
+                //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
+                if (reEnter == false)
+                {
+                    Console.SetCursorPosition(33, 6); // 커서 위치 맞게 변경                  
+                    Console.Write(" 다시 입력해주세요 :");
+                    //Console.Write(new string(' ', Console.WindowWidth));
+                }
+
+                adminId = Console.ReadLine(); // 아이디 입력
+                completeInformation = IdCheck.IsMatch(adminId); // 유저아이디 정규화로 양식 맞는지 확인
+
+                if (completeInformation == true) // 양식이 맞으면  
+                {
+                    Console.SetCursorPosition(48, 7); // 커서 위치 맞게 변경
+                    reEnter = true;
+                    break;
+                }
+
+                reEnter = false;
+            }
+        }
+
+
+        public void adminPw()
+        {
+            bool passlogin = false;
+            Admin DoAdmin = new Admin(); 
+            BackUserMode();
+            while (pass == false)
+            {
+                //PrintCollection.JoinUser(); // 위 회원가입 창 and Id 설명 출력
+                if (reEnter == false)
+                {
+                    Console.SetCursorPosition(33, 7); // 커서 위치 맞게 변경                  
+                    Console.Write(" 다시 입력해주세요 :");
+                }
+                pw = Console.ReadLine(); // 비밀번호 입력
+                completeInformation = PwCheck.IsMatch(pw); // 비밀번호 정규화로 양식 맞는지 확인
+
+                if (completeInformation == true) // 양식이 맞으면  
+                {
+                    if (pw == "cho1111" && adminId == "iopp1111")
+                    {
+                        passlogin = true;
+                        reEnter = true;
+                        pass = false;
+                    }
+
+                    if (passlogin == true)
+                    {
+                        Console.Clear();
+                        pass = false;
+                        Console.Write("Helloworld");//////////////메뉴이동 넣자
+                    }
+
+                    else if (passlogin == false)
+                    {
+                        Console.SetCursorPosition(28, 8);
+                        Console.WriteLine("회원정보가 일치하지 않습니다.");
+                        Console.SetCursorPosition(28, 9);
+                        Console.Write("다시 입력하려면 ENTER를 눌러주세요.");
+                        cursur = Console.ReadKey(true);
+                        if (cursur.Key == ConsoleKey.Enter) { Console.Clear(); DoAdmin.DoAdmin(); }
+                        else if (cursur.Key == ConsoleKey.Escape) return; // 
+                        reEnter = true;
+                        break;
+                    }
+                }
+            }
+        }
+
 
         public int UserDoInput() // 1~9 에러 검출코드
         {
@@ -92,7 +166,7 @@ namespace EnLibrary3.Controls
                     reEnter = true;
                     break;
                 }
-                
+
                 reEnter = false;
             }
         }
@@ -117,7 +191,7 @@ namespace EnLibrary3.Controls
                 {
                     foreach (UserVO list in List.UserList)
                     {
-                        if(list.id == loginId && list.pw == pw)
+                        if (list.id == loginId && list.pw == pw)
                         {
                             passlogin = true;
                             reEnter = true;
@@ -142,16 +216,18 @@ namespace EnLibrary3.Controls
                         reEnter = true;
                         break;
                     }
-                    
-                    
+
+
                 }
                 //reEnter = false;
             }
         }
 
 
+
+
         public void Id() // Id 입력 코드
-        {       
+        {
             string id;
             BackUserMode();
             while (pass == false)
@@ -163,7 +239,7 @@ namespace EnLibrary3.Controls
                     Console.Write(" 다시 입력해주세요 :");
                     //Console.Write(new string(' ', Console.WindowWidth));
                 }
-                
+
                 id = Console.ReadLine(); // 아이디 입력
                 completeInformation = IdCheck.IsMatch(id); // 유저아이디 정규화로 양식 맞는지 확인
 
@@ -178,9 +254,9 @@ namespace EnLibrary3.Controls
 
             }
         }
-        
 
-        
+
+
         public void Pw()
         {
             BackUserMode();
@@ -233,7 +309,7 @@ namespace EnLibrary3.Controls
                 reEnter = false;
             }
         }
-       
+
         public void Name()
         {
             BackUserMode();
@@ -324,12 +400,12 @@ namespace EnLibrary3.Controls
                     Console.Write(" 다시 입력해주세요 :");
                 }
                 address = Console.ReadLine();
-                User.Address= address;
+                User.Address = address;
 
                 List.UserList.Add(User);
 
-                
-               
+
+
                 foreach (UserVO list in List.UserList)
                 {
                     if (list.Address == address)
@@ -337,16 +413,16 @@ namespace EnLibrary3.Controls
                         Console.Clear();
                         GoUser.DoUser();
                     }
-                          
+
                 }
-                
-                
+
+
                 //UserMode.Mode();qhghtnw
 
 
                 break;
             }
         }
-        
     }
 }
+

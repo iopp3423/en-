@@ -9,7 +9,7 @@ using EnLibrary3.Models;
 namespace EnLibrary3.Controls
 {
 
-    internal class Login // 로그인 화면
+    public class Login // 로그인 화면
     {
         Print View = new Print();
         InputKey Input = new InputKey();

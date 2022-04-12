@@ -61,7 +61,7 @@ namespace EnLibrary3.Controls
                     case ConsoleKey.Enter:
                         {
                             if (x == 28 && y == 10) { Console.Clear(); User.DoUser(); isFinished = false; break; }
-                            if (x == 28 && y == 11) { Console.Clear(); AdminDo.Mode(); isFinished = false; break; }
+                            if (x == 28 && y == 11) { Console.Clear(); AdminDo.DoAdmin(); isFinished = false; break; }
                             break;
                         }
                         

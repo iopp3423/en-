@@ -17,10 +17,6 @@
             
         }
 
-
-
-
-
         public void Check()
         {
             LoginAfter Menu = new LoginAfter();
