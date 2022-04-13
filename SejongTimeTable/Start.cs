@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
 using SejongTimeTable.Views;
+using SejongTimeTable.Controls;
 
 namespace SejongTimeTable//Example Example 왜 있지
 {
@@ -15,11 +16,10 @@ namespace SejongTimeTable//Example Example 왜 있지
         static void Main(string[] args)
         {
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HEIGHT); // 콘솔크기 지정
-            Print LoginView = new Print();
+            Logging Login = new Logging();
+           Print LoginView = new Print();
             LoginView.PrintLogin();
-
-
-
+            Login.LoginId();
 
 
 
