@@ -53,6 +53,7 @@
     <Compile Include="Controls\Logging.cs" />
     <Compile Include="Controls\MyClass.cs" />
     <Compile Include="Controls\TimeTable.cs" />
+    <Compile Include="Models\ClassList.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Printing.cs" />
@@ -61,8 +62,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

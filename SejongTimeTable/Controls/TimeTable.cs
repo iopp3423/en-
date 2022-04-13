@@ -47,12 +47,14 @@ namespace SejongTimeTable.Controls
                         }
                     case ConsoleKey.Enter:
                         {
+                            /*
                             if (Constants.TIME_TABLE_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Major(); break; }
                             if (Constants.TIME_TABLE_Y == Constants.FAVORITE_Y) { Divise(); Constants.Is_CHECK = false; break; }
                             if (Constants.TIME_TABLE_Y == Constants.APPLICATION_Y) { SearchClassName(); Constants.Is_CHECK = false; break; }
                             if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { SearchProfessorName(); Constants.Is_CHECK = false; break; }
                             if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { SearchGrade(); Constants.Is_CHECK = false; break; }
                             if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { CheckClass(); Constants.Is_CHECK = false; break; }
+                            */
                             break;
                         }
                     case ConsoleKey.Escape: // 종료
@@ -68,7 +70,7 @@ namespace SejongTimeTable.Controls
         }
         public void Major()
         {
-            
+            Console.Write("Hello");
         }
         public void Divise()
         {

@@ -29,7 +29,7 @@ namespace SejongTimeTable.Views
             Console.WriteLine(string.Format("{0,40}", "===============================================강좌조회 & 수강신청==============================================="));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                              ㅣ"));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                            【 강의시간표 조회 】                                             ㅣ"));
-            Console.WriteLine(string.Format("{0,40}", "ㅣ                                            【  관심과목 담기  】                                            ㅣ"));
+            Console.WriteLine(string.Format("{0,40}", "ㅣ                                            【  관심과목 담기  】                                             ㅣ"));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                            【    수강신청     】                                             ㅣ"));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                            【  수강내역 조회  】                                             ㅣ"));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                              ㅣ"));
@@ -48,15 +48,15 @@ namespace SejongTimeTable.Views
 
         public void AfterMenu()
         {
-            Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================ㅣ"));
-            Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                              ㅣ"));
-            Console.WriteLine(string.Format("{0,40}", "ㅣ                                             【 개설 학과 전공 】                                             ㅣ"));
-            Console.WriteLine(string.Format("{0,40}", "ㅣ                                             【    이수구분    】                                             ㅣ"));
-            Console.WriteLine(string.Format("{0,40}", "ㅣ                                             【    교과목명    】                                             ㅣ"));
-            Console.WriteLine(string.Format("{0,40}", "ㅣ                                             【     교수명     】                                             ㅣ"));
-            Console.WriteLine(string.Format("{0,40}", "ㅣ                                             【      학년      】                                             ㅣ"));
-            Console.WriteLine(string.Format("{0,40}", "ㅣ                                             【      조회      】                                             ㅣ"));
-            Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                              ㅣ"));
+            Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
+            Console.WriteLine(string.Format("{0,40}", "                                                                                                               "));
+            Console.WriteLine(string.Format("{0,40}", " 【 개설 학과 전공 】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【    이수구분    】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【    교과목명    】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【     교수명     】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【      학년      】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【      조회      】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", "                                                                                                               "));
             Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
         }
 
