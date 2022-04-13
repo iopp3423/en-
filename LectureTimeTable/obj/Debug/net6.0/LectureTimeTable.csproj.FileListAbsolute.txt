@@ -1,0 +1,17 @@
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\bin\Debug\net6.0\LectureTimeTable.exe
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\bin\Debug\net6.0\LectureTimeTable.deps.json
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\bin\Debug\net6.0\LectureTimeTable.runtimeconfig.json
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\bin\Debug\net6.0\LectureTimeTable.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\bin\Debug\net6.0\LectureTimeTable.pdb
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\LectureTimeTable.csproj.AssemblyReference.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\LectureTimeTable.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\LectureTimeTable.AssemblyInfoInputs.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\LectureTimeTable.AssemblyInfo.cs
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\LectureTimeTable.csproj.CoreCompileInputs.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\LectureTimeTable.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\refint\LectureTimeTable.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\LectureTimeTable.pdb
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\LectureTimeTable.genruntimeconfig.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\ref\LectureTimeTable.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\Interop.Microsoft.Office.Interop.Excel.dll
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\LectureTimeTable\obj\Debug\net6.0\LectureTimeTable.csproj.ResolveComReference.cache

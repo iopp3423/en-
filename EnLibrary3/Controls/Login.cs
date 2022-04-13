@@ -60,7 +60,6 @@ namespace EnLibrary3.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-
                             break;
                         }
                     case ConsoleKey.Escape: // 종료
