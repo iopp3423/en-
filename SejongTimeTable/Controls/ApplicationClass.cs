@@ -8,5 +8,9 @@ namespace SejongTimeTable.Controls
 {
     internal class ApplicationClass
     {
+        public void Menu()
+        {
+
+        }
     }
 }

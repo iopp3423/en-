@@ -8,5 +8,9 @@ namespace SejongTimeTable.Controls
 {
     internal class FavoriteClass
     {
+        public void Menu()
+        {
+
+        }
     }
 }

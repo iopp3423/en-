@@ -10,7 +10,12 @@ namespace SejongTimeTable.Controls
 {
     internal class Logging
     { 
-        Print MenuView = new Print();
+        Printing MenuView = new Printing();
+        TimeTable Table = new TimeTable();
+        FavoriteClass Favorite = new FavoriteClass();
+        ApplicationClass Appliction = new ApplicationClass();
+        MyClass Class = new MyClass();
+
         Regex ID = new Regex(Constants.ID_CHECK);
         Regex PW = new Regex(Constants.PW_CHECK);
 
@@ -90,7 +95,7 @@ namespace SejongTimeTable.Controls
                     case ConsoleKey.UpArrow:
                         {
                              Constants.MENU_Y--;
-                             if (Constants.MENU_Y < 6) Constants.MENU_Y++; // 선택 외의 화면으로 커서 못나감
+                             if (Constants.MENU_Y < Constants.MENU_Y_UPSTRICT) Constants.MENU_Y++; // 선택 외의 화면으로 커서 못나감
                              break;
                         }
                 
@@ -98,7 +103,7 @@ namespace SejongTimeTable.Controls
                     case ConsoleKey.DownArrow:
                         {
                             Constants.MENU_Y++;
-                            if (Constants.MENU_Y > 9) Constants.MENU_Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Constants.MENU_Y > Constants.MENU_Y_DOWNSTRICT) Constants.MENU_Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                          }
                     case ConsoleKey.F5:
@@ -107,14 +112,17 @@ namespace SejongTimeTable.Controls
                             break;
                         }
                     case ConsoleKey.Enter:
-                        {
-                                 break;
+                        {                      
+                            if (Constants.MENU_Y == Constants.TABLE_Y) {Table.Menu(); Constants.Is_CHECK = false; }
+                            if (Constants.MENU_Y == Constants.FAVORITE_Y) { Favorite.Menu(); Constants.Is_CHECK = false; }
+                            if (Constants.MENU_Y == Constants.APPLICATION_Y) { Appliction.Menu(); Constants.Is_CHECK = false; }
+                            if (Constants.MENU_Y == Constants.MYCLASS_Y) { Class.Menu(); Constants.Is_CHECK = false; }
+                            break;
                         }
-
                     case ConsoleKey.Escape: // 종료
                         {
                                 return;
-                          }
+                        }
 
                 default: break;
                     }

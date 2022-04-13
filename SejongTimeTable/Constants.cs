@@ -11,6 +11,7 @@ namespace SejongTimeTable
     {
         static public string ID_CHECK = @"^[0-9]{8}$";
         static public string PW_CHECK = @"^[0-9]{4,10}$";
+        static public string MENU = @"^[1-8]{1}$";
 
         public const int CONSOLE_SIZE_WIDTH = 120;
         public const int CONSOLE_SIZE_HEIGHT = 30;
@@ -21,6 +22,16 @@ namespace SejongTimeTable
         static public int PW_Y_AXIS = 15;
         static public int MENU_X = 45;
         static public int MENU_Y = 6;
+        static public int MENU_Y_UPSTRICT = 6;
+        static public int MENU_Y_DOWNSTRICT = 9;
+        static public int TABLE_Y = 6;
+        static public int FAVORITE_Y = 7;
+        static public int APPLICATION_Y = 8;
+        static public int MYCLASS_Y = 9;
+        static public int TIME_TABLE_Y = 6;
+        static public int TIME_TABLE_X = 45;
+        static public int TABLE_Y_UPSTRICT = 6;
+        static public int TABLE_Y_DOWNSTRICT = 11;
         static public ConsoleKeyInfo cursur;
     }
 }
