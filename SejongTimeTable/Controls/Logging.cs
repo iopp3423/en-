@@ -32,7 +32,7 @@ namespace SejongTimeTable.Controls
                 if (Constants.Is_CHECK != ID.IsMatch(id))
                 {
                     Console.SetCursorPosition(Constants.ID_X_AXIS, Constants.ID_Y_AXIS);
-                    Console.Write("다시d 입력해주세요"); continue;
+                    Console.Write("다시 입력해주세요"); continue;
                 }
                 LoginPw(id); /////////////////이거 한 번 봐야함
                 break;              

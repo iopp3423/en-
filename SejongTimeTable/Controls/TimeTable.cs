@@ -68,7 +68,7 @@ namespace SejongTimeTable.Controls
         }
         public void Major()
         {
-            Console.Write("Hello");
+            
         }
         public void Divise()
         {
