@@ -10,7 +10,7 @@ namespace SejongTimeTable.Controls
     {
         public void Menu()
         {
-
+            Console.Write("dd");
         }
     }
 }

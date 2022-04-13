@@ -7,7 +7,7 @@ using SejongTimeTable.Views;
 
 namespace SejongTimeTable.Controls
 {
-    internal class TimeTable : Logging
+    internal class TimeTable// : Logging
     {
         Printing MenuView = new Printing();
         public void Menu()
@@ -42,17 +42,17 @@ namespace SejongTimeTable.Controls
                         }
                     case ConsoleKey.F5:
                         {
-                            LoginAfter();
+                           // LoginAfter();
                             break;
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Constants.TIME_TABLE_Y == Constants.TABLE_Y) { Major(); Constants.Is_CHECK = false; }
-                            if (Constants.TIME_TABLE_Y == Constants.FAVORITE_Y) { Divise(); Constants.Is_CHECK = false; }
-                            if (Constants.TIME_TABLE_Y == Constants.APPLICATION_Y) { SearchClassName(); Constants.Is_CHECK = false; }
-                            if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { SearchProfessorName(); Constants.Is_CHECK = false; }
-                            if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { SearchGrade(); Constants.Is_CHECK = false; }
-                            if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { CheckClass(); Constants.Is_CHECK = false; }
+                            if (Constants.TIME_TABLE_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Major(); break; }
+                            if (Constants.TIME_TABLE_Y == Constants.FAVORITE_Y) { Divise(); Constants.Is_CHECK = false; break; }
+                            if (Constants.TIME_TABLE_Y == Constants.APPLICATION_Y) { SearchClassName(); Constants.Is_CHECK = false; break; }
+                            if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { SearchProfessorName(); Constants.Is_CHECK = false; break; }
+                            if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { SearchGrade(); Constants.Is_CHECK = false; break; }
+                            if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { CheckClass(); Constants.Is_CHECK = false; break; }
                             break;
                         }
                     case ConsoleKey.Escape: // 종료
@@ -68,7 +68,7 @@ namespace SejongTimeTable.Controls
         }
         public void Major()
         {
-            Constants.Is_CHECK = true;
+            Console.Write("Hello");
         }
         public void Divise()
         {

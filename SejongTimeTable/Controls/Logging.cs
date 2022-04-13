@@ -21,30 +21,30 @@ namespace SejongTimeTable.Controls
 
         public void LoginId()
         {
+            string id;
             Console.Clear();
             MenuView.PrintLogin();
             while (true)
             {
-                string id;
                 Console.SetCursorPosition(Constants.ID_X_AXIS, Constants.ID_Y_AXIS);
                 id = Console.ReadLine();
-                          
+
                 if (Constants.Is_CHECK != ID.IsMatch(id))
                 {
                     Console.SetCursorPosition(Constants.ID_X_AXIS, Constants.ID_Y_AXIS);
-                    Console.Write("다시 입력해주세요"); continue;
+                    Console.Write("다시d 입력해주세요"); continue;
                 }
-                
-                LoginPw(id);
-                break;
+                LoginPw(id); /////////////////이거 한 번 봐야함
+                break;              
             }
+            
         }
         
          public void LoginPw(string id)
         {
             string pw;
 
-            while (true)
+            while (Constants.IS_TRUE)
             { 
                 Console.SetCursorPosition(Constants.PW_X_AXIS, Constants.PW_Y_AXIS);
                 pw = Console.ReadLine();
@@ -55,7 +55,7 @@ namespace SejongTimeTable.Controls
                     Console.Write("다시 입력해주세요:"); continue;
                 }
 
-                if (id == "17013150" && pw == "99999999") LoginAfter();
+                if (id == "17013150" && pw == "99999999") { Constants.IS_TRUE = false; LoginAfter(); break; }
                 else
                 {
                     Console.Write("ID PW가 다릅니다. 재입력 : ENTER, 프로그램 종료 : ESC");
@@ -68,11 +68,13 @@ namespace SejongTimeTable.Controls
                     else if (Constants.cursur.Key == ConsoleKey.Escape) return;
                     else return;
 
-                    LoginId();
                 }
+                LoginId(); ////////////////////얘도 한 번 봐야함
                 break;
             }
+     
         }
+
 
 
         public void LoginAfter()
@@ -81,6 +83,7 @@ namespace SejongTimeTable.Controls
             MenuView.PrintESC();
             MenuView.PrintMenu();
             MenuView.Back();
+            Constants.IS_TRUE = true;
             Console.SetCursorPosition(Constants.MENU_X, Constants.MENU_Y);          
 
 
@@ -108,15 +111,15 @@ namespace SejongTimeTable.Controls
                          }
                     case ConsoleKey.F5:
                         {
-                            LoginId();
+                            LoginId();  ///////////////////////////얘도 한 번 봐야함
                             break;
                         }
                     case ConsoleKey.Enter:
                         {                      
-                            if (Constants.MENU_Y == Constants.TABLE_Y) {Table.Menu(); Constants.Is_CHECK = false; }
-                            if (Constants.MENU_Y == Constants.FAVORITE_Y) { Favorite.Menu(); Constants.Is_CHECK = false; }
-                            if (Constants.MENU_Y == Constants.APPLICATION_Y) { Appliction.Menu(); Constants.Is_CHECK = false; }
-                            if (Constants.MENU_Y == Constants.MYCLASS_Y) { Class.Menu(); Constants.Is_CHECK = false; }
+                            if (Constants.MENU_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Table.Menu(); }
+                            if (Constants.MENU_Y == Constants.FAVORITE_Y) { Constants.Is_CHECK = false; Favorite.Menu(); }
+                            if (Constants.MENU_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; Appliction.Menu();}
+                            if (Constants.MENU_Y == Constants.MYCLASS_Y) { Constants.Is_CHECK = false; Class.Menu(); }
                             break;
                         }
                     case ConsoleKey.Escape: // 종료
