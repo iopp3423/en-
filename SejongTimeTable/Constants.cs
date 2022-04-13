@@ -15,5 +15,6 @@ namespace SejongTimeTable
         static public int ID_Y_AXIS = 14;
         static public int PW_X_AXIS = 70;
         static public int PW_Y_AXIS = 15;
+        static public ConsoleKeyInfo cursur;
     }
 }

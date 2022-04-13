@@ -17,11 +17,9 @@ namespace SejongTimeTable//Example Example 왜 있지
         {
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HEIGHT); // 콘솔크기 지정
             Logging Login = new Logging();
-           Print LoginView = new Print();
+            Print LoginView = new Print();
             LoginView.PrintLogin();
             Login.LoginId();
-
-
 
             /*
             try
