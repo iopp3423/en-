@@ -10,6 +10,7 @@ namespace SejongTimeTable.Models
     {
         private string number;
         private string mager;
+        private string classNumber;
         private string group;
         private string classname;
         private string seperation;
@@ -25,10 +26,11 @@ namespace SejongTimeTable.Models
            //생성자
         }
 
-        public ClassVO(string number, string mager, string group, string classname, string seperation, string grade, string score, string day, string room, string professor, string language)
+        public ClassVO(string number, string mager, string classNumber,string group, string classname, string seperation, string grade, string score, string day, string room, string professor, string language)
         {
             this.number = number;
             this.mager = mager;
+            this.classNumber = classNumber;
             this.group = group;
             this.classname = classname;
             this.seperation = seperation;
@@ -49,6 +51,11 @@ namespace SejongTimeTable.Models
         {
             get { return mager; }
             set { mager = value; }
+        }
+        public string ClassNumber
+        {
+            get { return classNumber; }
+            set { classNumber = value; }
         }
         public string Group
         {

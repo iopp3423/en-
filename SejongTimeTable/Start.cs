@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Excel = Microsoft.Office.Interop.Excel;
 using SejongTimeTable.Views;
 using SejongTimeTable.Controls;
+using SejongTimeTable.Models;
 
 namespace SejongTimeTable//Example Example 왜 있지
 {
@@ -15,11 +16,16 @@ namespace SejongTimeTable//Example Example 왜 있지
         // C#에서 Excel을 사용하는 자세한 방법은 검색을 통해 스스로 공부해봅시다.
         static void Main(string[] args)
         {
-            /*
+            
+            ClassList print = new ClassList();
+
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HEIGHT); // 콘솔크기 지정
-            Logging Login = new Logging();
-            Login.LoginId();
-            */
+            print.Table();
+            //Logging Login = new Logging();
+            //Login.LoginId();
+            
+            
+            /*
             try
             {
                 // Excel Application 객체 생성
@@ -61,6 +67,7 @@ namespace SejongTimeTable//Example Example 왜 있지
             {
                 Console.WriteLine(e.Message);
             }
+            */
             
         }
     }
