@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Start", "Start.csproj", "{07D3AFD5-E0B0-4136-A6CE-76E99887339E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SejongTimeTable", "SejongTimeTable.csproj", "{608FAC40-E35A-4772-9DC8-B724454B5FA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{07D3AFD5-E0B0-4136-A6CE-76E99887339E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07D3AFD5-E0B0-4136-A6CE-76E99887339E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07D3AFD5-E0B0-4136-A6CE-76E99887339E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07D3AFD5-E0B0-4136-A6CE-76E99887339E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{608FAC40-E35A-4772-9DC8-B724454B5FA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{608FAC40-E35A-4772-9DC8-B724454B5FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{608FAC40-E35A-4772-9DC8-B724454B5FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{608FAC40-E35A-4772-9DC8-B724454B5FA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {47936947-D6F3-4D26-AEFE-130F53F6B803}
+		SolutionGuid = {68DDD7AA-951D-49EC-AA4C-3718E1A82754}
 	EndGlobalSection
 EndGlobal

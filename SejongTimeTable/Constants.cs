@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace SejongTimeTable
 {
-    internal class Constant
+    internal class Constants
     {
     }
 }

@@ -1,8 +1,0 @@
-C:\Users\user\OneDrive\Desktop\EN#프로젝트\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
-C:\Users\user\OneDrive\Desktop\EN#프로젝트\ConsoleApp1\bin\Debug\ConsoleApp1.exe
-C:\Users\user\OneDrive\Desktop\EN#프로젝트\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
-C:\Users\user\OneDrive\Desktop\EN#프로젝트\ConsoleApp1\obj\Debug\Start.csproj.AssemblyReference.cache
-C:\Users\user\OneDrive\Desktop\EN#프로젝트\ConsoleApp1\obj\Debug\Start.csproj.SuggestedBindingRedirects.cache
-C:\Users\user\OneDrive\Desktop\EN#프로젝트\ConsoleApp1\obj\Debug\Start.csproj.CoreCompileInputs.cache
-C:\Users\user\OneDrive\Desktop\EN#프로젝트\ConsoleApp1\obj\Debug\ConsoleApp1.exe
-C:\Users\user\OneDrive\Desktop\EN#프로젝트\ConsoleApp1\obj\Debug\ConsoleApp1.pdb
