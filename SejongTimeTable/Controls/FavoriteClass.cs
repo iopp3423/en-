@@ -6,5 +6,7 @@ using System.Threading.Tasks;
 
 namespace SejongTimeTable.Controls
 {
-    
+    internal class FavoriteClass
+    {
+    }
 }
