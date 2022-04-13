@@ -9,29 +9,32 @@ using SejongTimeTable.Views;
 namespace SejongTimeTable.Controls
 {
     internal class Logging
-    {
-        Regex IdCheck = new Regex(@"^[0-9]{8}$");
-        Regex PwCheck = new Regex(@"^[0-9]{4,10}$");
+    { 
         Print MenuView = new Print();
+        Regex ID = new Regex(Constants.ID_CHECK);
+        Regex PW = new Regex(Constants.PW_CHECK);
 
         public void LoginId()
-        {
-            string id;           
+        {         
 
 
             while (true)
             {
+                string id;
                 Console.SetCursorPosition(Constants.ID_X_AXIS, Constants.ID_Y_AXIS);
                 id = Console.ReadLine();
-                if (Constants.Is_CHECK != IdCheck.IsMatch(id))
+                             
+                if (Constants.Is_CHECK != ID.IsMatch(id))
                 {
                     Console.SetCursorPosition(Constants.ID_X_AXIS, Constants.ID_Y_AXIS);
                     Console.Write("다시 입력해주세요"); continue;
                 }
+                
                 LoginPw(id);
                 break;
             }
         }
+        
          public void LoginPw(string id)
         {
             string pw;
@@ -40,7 +43,7 @@ namespace SejongTimeTable.Controls
                 Console.SetCursorPosition(Constants.PW_X_AXIS, Constants.PW_Y_AXIS);
                 pw = Console.ReadLine();
 
-                if (Constants.Is_CHECK != PwCheck.IsMatch(pw))
+                if (Constants.Is_CHECK != PW.IsMatch(pw))
                 {
                     Console.SetCursorPosition(Constants.PW_X_AXIS, Constants.PW_Y_AXIS);
                     Console.Write("다시 입력해주세요:"); continue;
@@ -63,13 +66,14 @@ namespace SejongTimeTable.Controls
                 break;
             }
         }
-
+        
         public void LoginAfter()
         {
             Console.Clear();
             MenuView.PrintESC();
             MenuView.PrintMenu();
             MenuView.Back();
+           
         }
     }
 
