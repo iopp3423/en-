@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace SejongTimeTable
 {
-    internal class Constants
+    static class Constants
     {
+        public const int CONSOLE_SIZE_WIDTH = 120;
+        public const int CONSOLE_SIZE_HEIGHT = 30;
     }
 }
