@@ -263,7 +263,10 @@ namespace SejongTimeTable.Controls
                 case 5: choiceGrade = "4학년"; break;
                 default: break;
             }
-            
+
+            //MyClass.Data
+
+
             Console.WriteLine(choiceMajor);
             Console.WriteLine(choiceDivise);
             Console.WriteLine(choiceClassName);

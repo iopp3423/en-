@@ -66,19 +66,19 @@ namespace SejongTimeTable.Views
 
         public void ChooseMajor()
         {
-            Console.WriteLine("【 개설 학과 전공 】    <1번 전체>   <2번 컴퓨터공학과>   <3번 지능기전공학부>   <4번 기계항공우주공학부>");
+            Console.WriteLine("【 개설 학과 전공 】    <1번 전체>   <2번 컴퓨터공학과>   <3번 컴퓨터공학과>       <4번 지능기전공학부>   <5번 기계항공우주공학부>");
         }
         public void ChooseDivise()
         {
-            Console.WriteLine("【    이수구분    】    <1번 전체>     <2번 교양필수>        <3번 전공필수>           <4번 전공선택>");
+            Console.WriteLine("【    이수구분    】    <1번 전체>     <2번 교양필수>        <3번 전공필수>         <4번 전공선택>");
         }
         public void ChooseClassName()
         {
-            Console.WriteLine("【    교과목명    】    <1번 전체>   <2번 신입생세미나>    <3번 C프로그래밍>       <4번 디지털시스템>");
+            Console.WriteLine("【    교과목명    】    교과목명(2글자 이상입력) :   ");
         }
         public void ChooseSearchProfessorName()
         {
-            Console.WriteLine("【     교수명     】    <1번 전체>      <2번 박태순>          <3번 문현준>            <4번 공성곤>");
+            Console.WriteLine("【     교수명     】    교수명 :      ");
         }
         public void ChooseCheckClass()
         { 
