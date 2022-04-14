@@ -17,7 +17,6 @@ namespace SejongTimeTable.Controls
         ApplicationClass Appliction = new ApplicationClass();
         MyClass Class = new MyClass();
 
-
         Regex ID = new Regex(Constants.ID_CHECK);
         Regex PW = new Regex(Constants.PW_CHECK);
 
@@ -33,6 +32,7 @@ namespace SejongTimeTable.Controls
             string id;
             Console.Clear();
             MenuView.PrintLogin();
+
             while (true)
             {
                 Console.SetCursorPosition(Constants.ID_X_AXIS, Constants.ID_Y_AXIS);
