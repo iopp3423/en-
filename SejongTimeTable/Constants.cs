@@ -29,7 +29,7 @@ namespace SejongTimeTable
         static public int APPLICATION_Y = 8;
         static public int MYCLASS_Y = 9;
         static public int TIME_TABLE_Y = 6;
-        static public int TIME_TABLE_X = 45;
+        static public int TIME_TABLE_X = 1;
         static public int TABLE_Y_UPSTRICT = 6;
         static public int TABLE_Y_DOWNSTRICT = 11;
         static public int ROW_START = 2;

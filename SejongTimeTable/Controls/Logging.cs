@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using SejongTimeTable.Views;
+using SejongTimeTable.Models;
 
 namespace SejongTimeTable.Controls
 {
-    internal class Logging
+    class Logging
     { 
         Printing MenuView = new Printing();
         TimeTable Table = new TimeTable();
@@ -16,8 +17,16 @@ namespace SejongTimeTable.Controls
         ApplicationClass Appliction = new ApplicationClass();
         MyClass Class = new MyClass();
 
+
         Regex ID = new Regex(Constants.ID_CHECK);
         Regex PW = new Regex(Constants.PW_CHECK);
+
+        
+
+        public Logging()
+        {
+            ClassList Data = new ClassList();
+        }
 
         public void LoginId()
         {
@@ -115,7 +124,7 @@ namespace SejongTimeTable.Controls
                             break;
                         }
                     case ConsoleKey.Enter:
-                        {                      
+                        {
                             if (Constants.MENU_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Table.Menu(); }
                             if (Constants.MENU_Y == Constants.FAVORITE_Y) { Constants.Is_CHECK = false; Favorite.Menu(); }
                             if (Constants.MENU_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; Appliction.Menu();}

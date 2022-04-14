@@ -4,19 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SejongTimeTable.Views;
+using SejongTimeTable.Models;
 
 namespace SejongTimeTable.Controls
 {
-    internal class TimeTable// : Logging
+    internal class TimeTable //: Logging
     {
         Printing MenuView = new Printing();
+
+        public void clearCurrentLine()
+        {
+            string s = "\r";
+            s += new string(' ', Console.CursorLeft);
+            s += "\r";
+            Console.Write(s);
+        }
+
         public void Menu()
         {
             Console.Clear();
             Constants.Is_CHECK = true; // 초기값으로 변경
+           
             MenuView.PrintESC();
             MenuView.AfterMenu();
             MenuView.Back();
+            
 
             while (Constants.Is_CHECK)
             {
@@ -42,13 +54,14 @@ namespace SejongTimeTable.Controls
                         }
                     case ConsoleKey.F5:
                         {
-                           // LoginAfter();
+                            //LoginAfter();//////////////////////////뒤로가기 클래스 수정해야함
                             break;
                         }
                     case ConsoleKey.Enter:
-                        {
-                            /*
+                        {          
+                            
                             if (Constants.TIME_TABLE_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Major(); break; }
+                            /*
                             if (Constants.TIME_TABLE_Y == Constants.FAVORITE_Y) { Divise(); Constants.Is_CHECK = false; break; }
                             if (Constants.TIME_TABLE_Y == Constants.APPLICATION_Y) { SearchClassName(); Constants.Is_CHECK = false; break; }
                             if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { SearchProfessorName(); Constants.Is_CHECK = false; break; }
@@ -68,33 +81,37 @@ namespace SejongTimeTable.Controls
 
 
         }
+        
         public void Major()
         {
-            Console.Write("Hello");
+            MenuView.ChooseMajor();
+            //clearCurrentLine();
         }
-        public void Divise()
+        /*
+        public string Divise()
         {
 
         }
 
-        public void SearchClassName()
+        public string SearchClassName()
         {
 
         }
 
-        public void SearchProfessorName()
+        public string SearchProfessorName()
         {
 
         }
 
-        public void SearchGrade()
+        public string SearchGrade()
         {
 
         }
 
-        public void CheckClass()
+        public string CheckClass()
         {
 
         }
+        */
     }
 }

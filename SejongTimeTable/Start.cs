@@ -12,14 +12,17 @@ namespace SejongTimeTable//Example Example 왜 있지
 {
     class Start
     {
-        // 바탕화면에 excelStudy.xlsx 파일을 다운로드 받은 후 실행해보기!
-        // C#에서 Excel을 사용하는 자세한 방법은 검색을 통해 스스로 공부해봅시다.
+        public Start()
+        {
+            Logging Login = new Logging();
+        }
         static void Main(string[] args)
         {
-
+            
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HEIGHT); // 콘솔크기 지정
             Logging Login = new Logging();
             Login.LoginId();
+            
             
             
             /*

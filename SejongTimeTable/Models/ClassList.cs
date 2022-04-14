@@ -50,19 +50,6 @@ namespace SejongTimeTable.Models
                 // 설정한 범위만큼 데이터 담기 (Value2 -셀의 기본 값 제공)
                 Array data = cellRange.Cells.Value2;
 
-                // 데이터 출력
-                /*
-                Console.WriteLine(data.GetValue(1, 1));
-                Console.WriteLine(data.GetValue(1, 2));
-                Console.WriteLine(data.GetValue(1, 3));
-                Console.WriteLine(data.GetValue(2, 1));
-                Console.WriteLine(data.GetValue(2, 2));
-                Console.WriteLine(data.GetValue(2, 3));
-                Console.WriteLine(data.GetValue(3, 1));
-                Console.WriteLine(data.GetValue(3, 2));
-                Console.WriteLine(data.GetValue(3, 3));
-                */
-
                 for (row = Constants.ROW_START; row < Constants.ROW_END; row++) // 리스트에 엑셀 파일 저장
                 {
                     Constants.COL_START = Constants.ZERO;
@@ -141,18 +128,12 @@ namespace SejongTimeTable.Models
                     Data.Add(new ClassVO(number, mager, classNumber, group, classname, seperation, grade, score, day, room, professor, language));
         
                 }
-
-
-                //Console.WriteLine(AllPrint[0]);
-
-                foreach (ClassVO s in Data)
+                foreach (ClassVO list in Data)
                 {
                     
-                     Console.WriteLine(s);
+                     Console.WriteLine(list);
                     
                 }
-
-
                 // 모든 워크북 닫기
                 application.Workbooks.Close();
 

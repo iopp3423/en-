@@ -10,7 +10,7 @@ namespace SejongTimeTable.Views
     {
         public void PrintLogin()
         {
-            Console.WriteLine(string.Format("{0,40}", " ============================================== SeJong Time Table ================================================================================="));
+            Console.WriteLine(string.Format("{0,60}", " ============================================== SeJong Time Table ================================================"));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                               ㅣ"));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                               ㅣ"));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                               ㅣ"));
@@ -60,5 +60,29 @@ namespace SejongTimeTable.Views
             Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
         }
 
+        public void ChooseMajor()
+        {
+            Console.WriteLine("【 개설 학과 전공 】    <전체>          <컴퓨터공학과>         <지능기전공학부>       <기계항공우주공학부>");
+        }
+        public void ChooseDivise()
+        {
+            Console.WriteLine("【    이수구분    】    <전체>            <교양필수>              <전공필수>                <전공선택>");
+        }
+        public void ChooseClassName()
+        {
+            Console.WriteLine("【    교과목명    】    <전체>          <신입생세미나>           <C프로그래밍>            <디지털시스템>");
+        }
+        public void ChooseSearchProfessorName()
+        {
+            Console.WriteLine("【     교수명     】    <전체>              <1학년>                 <2학년>                    <3학년>           <4학년>");
+        }
+        public void ChooseCheckClass()
+        { 
+            Console.WriteLine("【      학년      】     <전체>              <1학년>                 <2학년>                    <3학년>           <4학년>");
+        }
+        public void Choose()
+        {
+            Console.WriteLine("【      조회     】");
+        }
     }
 }
