@@ -13,7 +13,7 @@ namespace SejongTimeTable
         static public string PW_CHECK = @"^[0-9]{4,10}$";
         static public string MENU = @"^[1-4]{1}$";
         static public string SUBJECT_NAME = @"^[가-힣a-zA-Z]{2,10}$";
-        static public string PROFESSOR_NAME = @"^[가-힣a-zA-Z]{2,10}$";
+        static public string PROFESSOR_NAME = @"^[가-힣a-zA-Z]{2,12}$";
         static public string GRADE_CHECK = @"^[1-5]{1}$";
 
         public const int CONSOLE_SIZE_WIDTH = 180;

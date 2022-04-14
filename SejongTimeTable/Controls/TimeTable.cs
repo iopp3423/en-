@@ -14,8 +14,8 @@ namespace SejongTimeTable.Controls
         Printing MenuView = new Printing();
         Regex MenuCheck = new Regex(Constants.MENU);
         Regex GradeCheck = new Regex(Constants.GRADE_CHECK);
-        Regex SUBJECT_NAME = new Regex(Constants.SUBJECT_NAME);
-        Regex PROFESSOR_NAME = new Regex(Constants.PROFESSOR_NAME);
+        Regex SubjectCheck = new Regex(Constants.SUBJECT_NAME);
+        Regex ProfessorCheck = new Regex(Constants.PROFESSOR_NAME);
 
         public ClassVO MyClass;
         
@@ -31,8 +31,8 @@ namespace SejongTimeTable.Controls
         string menu;
         int majorJudgment; // 전공
         int diviseJudgment; // 이수구분
-        int nameJudgment; // 교과목명
-        int professorJudgment; // 교수명 
+        string nameJudgment; // 교과목명
+        string professorJudgment; // 교수명 
         int gradeJudgment; // 학년
 
         public void clearCurrentLine()
@@ -155,7 +155,7 @@ namespace SejongTimeTable.Controls
             return int.Parse(menu);
         }
 
-        public int SearchClassName() // 교과목명
+        public string SearchClassName() // 교과목명
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseClassName();
@@ -165,17 +165,17 @@ namespace SejongTimeTable.Controls
             {
                 menu = Console.ReadLine();
 
-                if (Constants.Is_CHECK != MenuCheck.IsMatch(menu))
+                if (Constants.Is_CHECK != SubjectCheck.IsMatch(menu))
                 {
                     Console.SetCursorPosition(Constants.SUBJECT_X, Constants.NAME_CURSUR_Y);
                     continue;
                 }
                 break;
             }
-            return int.Parse(menu);
+            return menu;
         }
 
-        public int SearchProfessorName() // 교수명
+        public string SearchProfessorName() // 교수명
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseSearchProfessorName();
@@ -185,14 +185,14 @@ namespace SejongTimeTable.Controls
             {
                 menu = Console.ReadLine();
 
-                if (Constants.Is_CHECK != MenuCheck.IsMatch(menu))
+                if (Constants.Is_CHECK != ProfessorCheck.IsMatch(menu))
                 {
                     Console.SetCursorPosition(Constants.PROFFSOR_X, Constants.PROFESSOR_CURSUR_Y);
                     continue;
                 }
                 break;
             }
-            return int.Parse(menu);
+            return menu;
         }
 
         public int SearchGrade() // 학년
@@ -215,12 +215,10 @@ namespace SejongTimeTable.Controls
             return int.Parse(menu);
         }
 
-        public void SearchClass(int major, int divise, int className, int professor, int grade) // 숫자를 문자로 바꿔줌
+        public void SearchClass(int major, int divise, string className, string professor, int grade) // 숫자를 문자로 바꿔줌
         {
             string choiceMajor = null;
             string choiceDivise = null;
-            string choiceClassName = null;
-            string choiceProfessor = null;
             string choiceGrade = null;
 
             Console.WriteLine(major);
@@ -241,22 +239,7 @@ namespace SejongTimeTable.Controls
                 case 4: choiceDivise = "전공선택"; break;
                 default: break;
             }
-            switch (className)
-            {
-                case 1: choiceClassName = "전체"; break;
-                case 2: choiceClassName = "신입생세미나"; break;
-                case 3: choiceClassName = "C프로그래밍"; break;
-                case 4: choiceClassName = "디지털시스템"; break;
-                default: break;
-            }
-            switch (professor)
-            {
-                case 1: choiceProfessor = "전체"; break;
-                case 2: choiceProfessor = "박태순"; break;
-                case 3: choiceProfessor = "문현준"; break;
-                case 4: choiceProfessor = "공성곤"; break;
-                default: break;
-            }
+
             switch (grade)
             {
                 case 1: choiceGrade = "전체"; break;
@@ -272,8 +255,8 @@ namespace SejongTimeTable.Controls
 
             Console.WriteLine(choiceMajor);
             Console.WriteLine(choiceDivise);
-            Console.WriteLine(choiceClassName);
-            Console.WriteLine(choiceProfessor);
+            Console.WriteLine(className);
+            Console.WriteLine(professor);
             Console.WriteLine(choiceGrade);
         }
      
