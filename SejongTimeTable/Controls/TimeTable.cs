@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SejongTimeTable.Views;
 using SejongTimeTable.Models;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace SejongTimeTable.Controls
 {
@@ -16,6 +17,8 @@ namespace SejongTimeTable.Controls
         Regex GradeCheck = new Regex(Constants.GRADE_CHECK);
         Regex SubjectCheck = new Regex(Constants.SUBJECT_NAME);
         Regex ProfessorCheck = new Regex(Constants.PROFESSOR_NAME);
+        List<ClassVO> Search = new List<ClassVO>();
+        List<ClassVO> DistinctSearch = new List<ClassVO>();
 
         public ClassVO MyClass;
         
@@ -124,7 +127,7 @@ namespace SejongTimeTable.Controls
             {
                 menu = Console.ReadLine();
 
-                if (Constants.Is_CHECK != MenuCheck.IsMatch(menu))
+                if (Constants.Is_CHECK != GradeCheck.IsMatch(menu))
                 {
                     Console.SetCursorPosition(Constants.MAJOR_CURSUR_X, Constants.MAJOR_CURSUR_Y);
                     continue;
@@ -217,19 +220,19 @@ namespace SejongTimeTable.Controls
 
         public void SearchClass(int major, int divise, string className, string professor, int grade) // 숫자를 문자로 바꿔줌
         {
-            string choiceMajor = null;
-            string choiceDivise = null;
-            string choiceGrade = null;
-
-            Console.WriteLine(major);
+            string choiceMajor = "";
+            string choiceDivise = "";
+            string choiceGrade = "";
+            string input;
             
             switch(major)
             {
                 case 1: choiceMajor = "전체";break;
                 case 2: choiceMajor = "컴퓨터공학과"; break;
-                case 3: choiceMajor = "지능기전공학부"; break;
-                case 4: choiceMajor = "기계항공우주공학부"; break;
-                default: break;
+                case 3: choiceMajor = "소프트웨어학과"; break;
+                case 4: choiceMajor = "지능기전공학부"; break;
+                case 5: choiceMajor = "기계항공우주공학부"; break;
+                default: choiceMajor = null; break;
             }
             switch (divise)
             {
@@ -237,29 +240,54 @@ namespace SejongTimeTable.Controls
                 case 2: choiceDivise = "교양필수"; break;
                 case 3: choiceDivise = "전공필수"; break;
                 case 4: choiceDivise = "전공선택"; break;
-                default: break;
+                default: choiceDivise = null; break;
             }
 
             switch (grade)
             {
                 case 1: choiceGrade = "전체"; break;
-                case 2: choiceGrade = "1학년"; break;
-                case 3: choiceGrade = "2학년"; break;
-                case 4: choiceGrade = "3학년"; break;
-                case 5: choiceGrade = "4학년"; break;
-                default: break;
+                case 2: choiceGrade = "1"; break;
+                case 3: choiceGrade = "2"; break;
+                case 4: choiceGrade = "3"; break;
+                case 5: choiceGrade = "4"; break;
+                default: choiceGrade = null; break;
             }
 
-            //MyClass.Data
+
+            foreach (ClassVO list in MyClass.Data)
+            {
+                if (list.mager.Contains(choiceMajor) == true) Console.Write(choiceMajor);//{ Search.Add(list);  }
+                if (list.seperation.Contains(choiceDivise) == true) Console.Write(choiceDivise);//{ Search.Add(list);  }
+                if (list.classname.Contains(className) == true) Console.Write(className);//{ Search.Add(list);  }
+                if (list.professor.Contains(professor) == true) Console.Write(professor);//{Search.Add(list);  }
+                if (list.grade.Contains(choiceGrade) == true) Console.Write(choiceGrade);//{ Search.Add(list); }
+            }
+            
 
 
-            Console.WriteLine(choiceMajor);
-            Console.WriteLine(choiceDivise);
-            Console.WriteLine(className);
-            Console.WriteLine(professor);
-            Console.WriteLine(choiceGrade);
+            //DistinctSearch = (List<ClassVO>)Search.Distinct();
+
+
+            foreach (ClassVO list in Search)
+            {
+                Console.WriteLine(list);
+            }
+            
+            
+            /*
+            foreach (ClassVO list in DistinctSearch)
+            {
+                Console.Write(list);
+            }
+            */
+
+                //input = string.Concat(choiceMajor, choiceDivise, className, professor, choiceDivise, choiceGrade);
+
+           // Console.Write(input);
+            
         }
-     
+        
+
     }
         
     

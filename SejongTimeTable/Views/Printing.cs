@@ -52,7 +52,7 @@ namespace SejongTimeTable.Views
         }
         public void AfterMenu()
         {
-            Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
+            Console.WriteLine(string.Format("{0,40}", "=========================================================  강의시간표 조회  ========================================================="));
             Console.WriteLine(string.Format("{0,40}", "                                                                                                               "));
             Console.WriteLine(string.Format("{0,40}", " 【 개설 학과 전공 】                                                                                           "));
             Console.WriteLine(string.Format("{0,40}", " 【    이수구분    】                                                                                           "));
@@ -61,16 +61,17 @@ namespace SejongTimeTable.Views
             Console.WriteLine(string.Format("{0,40}", " 【      학년      】                                                                                           "));
             Console.WriteLine(string.Format("{0,40}", " 【      조회      】                                                                                           "));
             Console.WriteLine(string.Format("{0,40}", "                                                                                                               "));
-            Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
+            Console.WriteLine(string.Format("{0,40}", "=========================================================  강의시간표 조회  ========================================================="));
         }
 
         public void ChooseMajor()
         {
-            Console.WriteLine("【 개설 학과 전공 】    <1번 전체>   <2번 컴퓨터공학과>   <3번 컴퓨터공학과>       <4번 지능기전공학부>   <5번 기계항공우주공학부>");
+            Console.WriteLine("【 개설 학과 전공 】    <1번 전체>   <2번 컴퓨터공학과>   <3번 소프트웨어학과>   <4번 지능기전공학부>   <5번 기계항공우주공학부>");
         }
+
         public void ChooseDivise()
         {
-            Console.WriteLine("【    이수구분    】    <1번 전체>     <2번 교양필수>        <3번 전공필수>         <4번 전공선택>");
+            Console.WriteLine("【    이수구분    】    <1번 전체>      <2번 교양필수>        <3번 전공필수>         <4번 전공선택>");
         }
         public void ChooseClassName()
         {
