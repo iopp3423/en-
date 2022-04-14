@@ -32,6 +32,11 @@ namespace SejongTimeTable
         static public int TIME_TABLE_X = 45;
         static public int TABLE_Y_UPSTRICT = 6;
         static public int TABLE_Y_DOWNSTRICT = 11;
+        static public int ROW_START = 2;
+        static public int ROW_END = 186;
+        static public int COL_START = 0;
+        static public int COL_END = 13;
+        static public int ZERO = 0;
         static public bool IS_TRUE = true;
         static public ConsoleKeyInfo cursur;
     }

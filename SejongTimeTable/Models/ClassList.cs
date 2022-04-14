@@ -11,7 +11,7 @@ namespace SejongTimeTable.Models
 {
     class ClassList
     {
-        public List<ClassVO> AllPrint = new List<ClassVO>();
+        List<ClassVO> Data = new List<ClassVO>();
         // 바탕화면에 excelStudy.xlsx 파일을 다운로드 받은 후 실행해보기!
         // C#에서 Excel을 사용하는 자세한 방법은 검색을 통해 스스로 공부해봅시다.
         private string number;
@@ -63,26 +63,96 @@ namespace SejongTimeTable.Models
                 Console.WriteLine(data.GetValue(3, 3));
                 */
 
-                for (row = 1; row <= 184; row++)
+                for (row = Constants.ROW_START; row < Constants.ROW_END; row++)
                 {
+                    Constants.COL_START = Constants.ZERO;
+                    for (col = Constants.COL_START; col < 13; col++)
+                    {
+                        switch (col)
+                        {
+                            case 1:
+                                if (data.GetValue(row, col) == null)
+                                { number = null; break; }
+                                number = data.GetValue(row, col).ToString();
+                                break;
 
-                    number = (string)data.GetValue(row, 1);
-                    mager = (string)data.GetValue(row, 2);
-                    classNumber = (string)data.GetValue(row, 3);
-                    group = (string)data.GetValue(row, 4);
-                    classname = (string)data.GetValue(row, 5);
-                    seperation = (string)data.GetValue(row, 6);
-                    grade = (string)data.GetValue(row, 7);
-                    score = (string)data.GetValue(row, 8);
-                    day = (string)data.GetValue(row, 9);
-                    room = (string)data.GetValue(row, 10);
-                    professor = (string)data.GetValue(row, 11);
-                    language = (string)data.GetValue(row, 12);
+                            case 2:
+                                if (data.GetValue(row, col) == null)
+                                { mager = null; break; }
+                                mager = data.GetValue(row, col).ToString();
+                                break;
 
-                    AllPrint.Add(new ClassVO(number, mager, classNumber, group, classname, seperation, grade, score, day, room, professor, language));
+                            case 3:
+                                if (data.GetValue(row, col) == null)
+                                { classNumber = null; break; }
+                                classNumber = data.GetValue(row, col).ToString();
+                                break;
+
+                            case 4:
+                                if (data.GetValue(row, col) == null) { group = null; break; }
+                                group = data.GetValue(row, col).ToString();
+                                break;
+
+                            case 5:
+                                if (data.GetValue(row, col) == null) { classname = null; break; }
+                                classname = data.GetValue(row, col).ToString();
+                                break;
+
+                            case 6:
+                                if (data.GetValue(row, col) == null) {seperation = null; break; }
+                                seperation = data.GetValue(row, col).ToString();
+                                break;
+
+                            case 7:
+                                if (data.GetValue(row, col) == null) { grade = null; break;}
+                                grade = data.GetValue(row, col).ToString();
+                                break;
+
+                            case 8:
+                                if (data.GetValue(row, col) == null) { score = null; break;}
+                                score = data.GetValue(row, col).ToString();
+                                break;
+
+                            case 9:
+                                if (data.GetValue(row, col) == null) { day = null; break;}
+                                day = data.GetValue(row, col).ToString();
+                                break;
+
+                            case 10:
+                                if (data.GetValue(row, col) == null) { room = null; break;}
+                                room = data.GetValue(row, col).ToString();
+                                break;
+
+                            case 11:
+                                if (data.GetValue(row, col) == null) { professor = null; break;}
+                                professor = data.GetValue(row, col).ToString();
+                                break;
+
+                            case 12:
+                                if (data.GetValue(row, col) == null) { language = null; break;}
+                                language = data.GetValue(row, col).ToString();
+                                break;
+
+                         default: break;
+                        }
+
+
+                    }
+                    Data.Add(new ClassVO(number, mager, classNumber, group, classname, seperation, grade, score, day, room, professor, language));
+        
+                }
+                Console.WriteLine(Data[0].number);
+                Console.WriteLine(Data[1].number);
+
+                //Console.WriteLine(AllPrint[0]);
+
+                foreach (ClassVO s in Data)
+                {
+                    
+                     Console.WriteLine(s);
+                    
                 }
 
-                Console.WriteLine(AllPrint[0]);
 
                 // 모든 워크북 닫기
                 application.Workbooks.Close();
@@ -95,10 +165,7 @@ namespace SejongTimeTable.Models
                 Console.WriteLine(e.Message);
             }
         }
-            public override string ToString()
-        {
-            return "번호 : " + number + "개설학과 : " + mager + "학수번호 : " + classNumber + "교과목명 : " + classNumber + "이수구분   : " + group + "학년   : " + seperation + "학점   : " + grade + "요일   : " + score + "강의실   : " + day + "교수님   : " + room + "학년   : " + professor + "언어   : " + language;
-        }
+            
     
     }
 }

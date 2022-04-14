@@ -432,7 +432,7 @@ namespace EnLibrary3.Controls
                 }
 
 
-                //UserMode.Mode();qhghtnw
+                //UserMode.Mode();
 
 
                 break;

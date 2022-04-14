@@ -8,18 +8,18 @@ namespace SejongTimeTable.Models
 {
     internal class ClassVO
     {
-        private string number;
-        private string mager;
-        private string classNumber;
-        private string group;
-        private string classname;
-        private string seperation;
-        private string grade;
-        private string score;
-        private string day;
-        private string room;
-        private string professor;
-        private string language;
+        public string number;
+        public string mager;
+        public string classNumber;
+        public string group;
+        public string classname;
+        public string seperation;
+        public string grade;
+        public string score;
+        public string day;
+        public string room;
+        public string professor;
+        public string language;
 
         public ClassVO()
         {
@@ -104,6 +104,10 @@ namespace SejongTimeTable.Models
             set { language = value; }
         }
 
-        
+        public override string ToString()
+        {
+            return number  + "  " + mager  + "  " + classNumber   + "  " + group  + "  " + classname + "  " + seperation  + "  " + grade  + "  " + score + "  " + day + "  " + room  + "  " + professor  + "  " + language;
+        }
+
     }
 }
