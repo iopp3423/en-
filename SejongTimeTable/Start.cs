@@ -12,19 +12,16 @@ namespace SejongTimeTable//Example Example 왜 있지
 {
     class Start
     {
-        public Start()
-        {
-            Logging Login = new Logging();
-        }
+       
         static void Main(string[] args)
         {
             
-            Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HEIGHT); // 콘솔크기 지정
+            Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HEIGHT);// 콘솔크기 지정
             Logging Login = new Logging();
             Login.LoginId();
-            
-            
-            
+
+
+
             /*
             try
             {
@@ -68,7 +65,7 @@ namespace SejongTimeTable//Example Example 왜 있지
                 Console.WriteLine(e.Message);
             }
             */
-            
+
         }
     }
 }

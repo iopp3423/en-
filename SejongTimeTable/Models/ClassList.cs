@@ -9,26 +9,29 @@ using SejongTimeTable.Controls;
 
 namespace SejongTimeTable.Models
 {
-    class ClassList
+
+
+    public class ClassList
     {
-        List<ClassVO> Data = new List<ClassVO>();
-        // 바탕화면에 excelStudy.xlsx 파일을 다운로드 받은 후 실행해보기!
-        // C#에서 Excel을 사용하는 자세한 방법은 검색을 통해 스스로 공부해봅시다.
-        private string number;
-        private string mager;
-        private string classNumber;
-        private string group;
-        private string classname;
-        private string seperation;
-        private string grade;
-        private string score;
-        private string day;
-        private string room;
-        private string professor;
-        private string language;
-        public void Table()
+            public List<ClassVO> Data = new List<ClassVO>();
+
+            private string number;
+            private string mager;
+            private string classNumber;
+            private string group;
+            private string classname;
+            private string seperation;
+            private string grade;
+            private string score;
+            private string day;
+            private string room;
+            private string professor;
+            private string language;
+
+        public ClassList()
         {
             int row, col;
+
 
             try
             {
@@ -86,54 +89,56 @@ namespace SejongTimeTable.Models
                                 break;
 
                             case 6:
-                                if (data.GetValue(row, col) == null) {seperation = null; break; }
+                                if (data.GetValue(row, col) == null) { seperation = null; break; }
                                 seperation = data.GetValue(row, col).ToString();
                                 break;
 
                             case 7:
-                                if (data.GetValue(row, col) == null) { grade = null; break;}
+                                if (data.GetValue(row, col) == null) { grade = null; break; }
                                 grade = data.GetValue(row, col).ToString();
                                 break;
 
                             case 8:
-                                if (data.GetValue(row, col) == null) { score = null; break;}
+                                if (data.GetValue(row, col) == null) { score = null; break; }
                                 score = data.GetValue(row, col).ToString();
                                 break;
 
                             case 9:
-                                if (data.GetValue(row, col) == null) { day = null; break;}
+                                if (data.GetValue(row, col) == null) { day = null; break; }
                                 day = data.GetValue(row, col).ToString();
                                 break;
 
                             case 10:
-                                if (data.GetValue(row, col) == null) { room = null; break;}
+                                if (data.GetValue(row, col) == null) { room = null; break; }
                                 room = data.GetValue(row, col).ToString();
                                 break;
 
                             case 11:
-                                if (data.GetValue(row, col) == null) { professor = null; break;}
+                                if (data.GetValue(row, col) == null) { professor = null; break; }
                                 professor = data.GetValue(row, col).ToString();
                                 break;
 
                             case 12:
-                                if (data.GetValue(row, col) == null) { language = null; break;}
+                                if (data.GetValue(row, col) == null) { language = null; break; }
                                 language = data.GetValue(row, col).ToString();
                                 break;
 
-                         default: break;
+                            default: break;
                         }
 
 
                     }
                     Data.Add(new ClassVO(number, mager, classNumber, group, classname, seperation, grade, score, day, room, professor, language));
-        
+
                 }
+                /*
                 foreach (ClassVO list in Data)
                 {
-                    
-                     Console.WriteLine(list);
-                    
+
+                    Console.WriteLine(list);
+
                 }
+                */
                 // 모든 워크북 닫기
                 application.Workbooks.Close();
 
@@ -145,7 +150,6 @@ namespace SejongTimeTable.Models
                 Console.WriteLine(e.Message);
             }
         }
-            
-    
     }
+    
 }

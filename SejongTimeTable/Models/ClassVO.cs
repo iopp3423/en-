@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SejongTimeTable.Models
 {
-    internal class ClassVO
+    public class ClassVO
     {
         public string number;
         public string mager;

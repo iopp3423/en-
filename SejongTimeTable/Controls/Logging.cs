@@ -16,6 +16,7 @@ namespace SejongTimeTable.Controls
         FavoriteClass Favorite = new FavoriteClass();
         ApplicationClass Appliction = new ApplicationClass();
         MyClass Class = new MyClass();
+        ClassList MyData = new ClassList();
 
         Regex ID = new Regex(Constants.ID_CHECK);
         Regex PW = new Regex(Constants.PW_CHECK);
@@ -24,7 +25,7 @@ namespace SejongTimeTable.Controls
 
         public Logging()
         {
-            ClassList Data = new ClassList();
+            Table = new TimeTable(MyData);
         }
 
         public void LoginId()

@@ -14,6 +14,16 @@ namespace SejongTimeTable.Controls
         Printing MenuView = new Printing();
         Regex MenuCheck = new Regex(Constants.MENU);
         Regex GradeCheck = new Regex(Constants.GRADE_CHECK);
+        public ClassList MyClass;
+        
+        public TimeTable()
+        {
+
+        }
+        public TimeTable(ClassList MyClass)
+        {
+            this.MyClass = MyClass;
+        }
 
         string menu;
         string majorJudgment; // 전공
@@ -39,6 +49,8 @@ namespace SejongTimeTable.Controls
             Console.Clear();
             Constants.Is_CHECK = true; // 초기값으로 변경
 
+            Console.Write(MyClass.Data[0].number);
+            /*
             MenuView.PrintNumber();
             MenuView.AfterMenu();
             MenuView.Back();
@@ -91,7 +103,7 @@ namespace SejongTimeTable.Controls
                 }
 
             }
-
+            */
 
         }
 
@@ -100,6 +112,7 @@ namespace SejongTimeTable.Controls
             Constants.Is_CHECK = true;
             MenuView.ChooseMajor();
             Console.SetCursorPosition(Constants.MAJOR_CURSUR_X, Constants.MAJOR_CURSUR_Y);
+
 
             while (true)
             {
@@ -207,7 +220,7 @@ namespace SejongTimeTable.Controls
                 if (Constants.cursur.Key == ConsoleKey.Enter) return true;
                 else continue;
             }
-            return true;
+           
         }
     
     }
