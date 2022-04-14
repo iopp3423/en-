@@ -12,6 +12,8 @@ namespace SejongTimeTable
         static public string ID_CHECK = @"^[0-9]{8}$";
         static public string PW_CHECK = @"^[0-9]{4,10}$";
         static public string MENU = @"^[1-4]{1}$";
+        static public string SUBJECT_NAME = @"^[가-힣a-zA-Z]{2,10}$";
+        static public string PROFESSOR_NAME = @"^[가-힣a-zA-Z]{2,10}$";
         static public string GRADE_CHECK = @"^[1-5]{1}$";
 
         public const int CONSOLE_SIZE_WIDTH = 180;
@@ -48,6 +50,8 @@ namespace SejongTimeTable
         static public int CHECK_CURSUR_Y = 11;
         static public int GRADE_Y = 10;
         static public int REFER_Y = 11;
+        static public int SUBJECT_X = 43;
+        static public int PROFFSOR_X = 42;
         static public ConsoleKeyInfo cursur;
     }
 }

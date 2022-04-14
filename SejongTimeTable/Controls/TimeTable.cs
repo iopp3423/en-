@@ -14,6 +14,9 @@ namespace SejongTimeTable.Controls
         Printing MenuView = new Printing();
         Regex MenuCheck = new Regex(Constants.MENU);
         Regex GradeCheck = new Regex(Constants.GRADE_CHECK);
+        Regex SUBJECT_NAME = new Regex(Constants.SUBJECT_NAME);
+        Regex PROFESSOR_NAME = new Regex(Constants.PROFESSOR_NAME);
+
         public ClassVO MyClass;
         
         public TimeTable()
@@ -156,7 +159,7 @@ namespace SejongTimeTable.Controls
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseClassName();
-            Console.SetCursorPosition(Constants.MAJOR_CURSUR_X, Constants.NAME_CURSUR_Y);
+            Console.SetCursorPosition(Constants.SUBJECT_X, Constants.NAME_CURSUR_Y);
 
             while (true)
             {
@@ -164,7 +167,7 @@ namespace SejongTimeTable.Controls
 
                 if (Constants.Is_CHECK != MenuCheck.IsMatch(menu))
                 {
-                    Console.SetCursorPosition(Constants.MAJOR_CURSUR_X, Constants.NAME_CURSUR_Y);
+                    Console.SetCursorPosition(Constants.SUBJECT_X, Constants.NAME_CURSUR_Y);
                     continue;
                 }
                 break;
@@ -176,7 +179,7 @@ namespace SejongTimeTable.Controls
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseSearchProfessorName();
-            Console.SetCursorPosition(Constants.MAJOR_CURSUR_X, Constants.PROFESSOR_CURSUR_Y);
+            Console.SetCursorPosition(Constants.PROFFSOR_X, Constants.PROFESSOR_CURSUR_Y);
 
             while (true)
             {
@@ -184,7 +187,7 @@ namespace SejongTimeTable.Controls
 
                 if (Constants.Is_CHECK != MenuCheck.IsMatch(menu))
                 {
-                    Console.SetCursorPosition(Constants.MAJOR_CURSUR_X, Constants.PROFESSOR_CURSUR_Y);
+                    Console.SetCursorPosition(Constants.PROFFSOR_X, Constants.PROFESSOR_CURSUR_Y);
                     continue;
                 }
                 break;

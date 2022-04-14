@@ -61,7 +61,7 @@ namespace SejongTimeTable.Views
             Console.WriteLine(string.Format("{0,40}", " 【      학년      】                                                                                           "));
             Console.WriteLine(string.Format("{0,40}", " 【      조회      】                                                                                           "));
             Console.WriteLine(string.Format("{0,40}", "                                                                                                               "));
-            //Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
+            Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
         }
 
         public void ChooseMajor()
@@ -74,11 +74,11 @@ namespace SejongTimeTable.Views
         }
         public void ChooseClassName()
         {
-            Console.WriteLine("【    교과목명    】    교과목명(2글자 이상입력) :   ");
+            Console.WriteLine("【    교과목명    】    교과목명(2~10자) :");
         }
         public void ChooseSearchProfessorName()
         {
-            Console.WriteLine("【     교수명     】    교수명 :      ");
+            Console.WriteLine("【     교수명     】    교수명 (2~10자) : ");
         }
         public void ChooseCheckClass()
         { 
