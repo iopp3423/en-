@@ -26,11 +26,11 @@ namespace SejongTimeTable.Controls
         }
 
         string menu;
-        string majorJudgment; // 전공
-        string diviseJudgment; // 이수구분
-        string nameJudgment; // 교과목명
-        string professorJudgment; // 교수명 
-        string gradeJudgment; // 학년
+        int majorJudgment; // 전공
+        int diviseJudgment; // 이수구분
+        int nameJudgment; // 교과목명
+        int professorJudgment; // 교수명 
+        int gradeJudgment; // 학년
 
         public void clearCurrentLine()
         {
@@ -110,7 +110,7 @@ namespace SejongTimeTable.Controls
 
         }
 
-        public string Major() // 학과 전공
+        public int Major() // 학과 전공
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseMajor();
@@ -127,11 +127,12 @@ namespace SejongTimeTable.Controls
                     continue;
                 }
                 break;
+                
             }
-            return menu;
+            return int.Parse(menu);
         }
 
-        public string Divise() // 이수구분
+        public int Divise() // 이수구분
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseDivise();
@@ -148,10 +149,10 @@ namespace SejongTimeTable.Controls
                 }
                 break;
             }
-            return menu;
+            return int.Parse(menu);
         }
 
-        public string SearchClassName() // 교과목명
+        public int SearchClassName() // 교과목명
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseClassName();
@@ -168,10 +169,10 @@ namespace SejongTimeTable.Controls
                 }
                 break;
             }
-            return menu;
+            return int.Parse(menu);
         }
 
-        public string SearchProfessorName() // 교수명
+        public int SearchProfessorName() // 교수명
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseSearchProfessorName();
@@ -188,10 +189,10 @@ namespace SejongTimeTable.Controls
                 }
                 break;
             }
-            return menu;
+            return int.Parse(menu);
         }
 
-        public string SearchGrade() // 학년
+        public int SearchGrade() // 학년
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseCheckClass();
@@ -208,62 +209,66 @@ namespace SejongTimeTable.Controls
                 }
                 break;
             }
-            return menu;
+            return int.Parse(menu);
         }
 
-        public void SearchClass(string major, string divise, string className, string professor, string grade) // 숫자를 문자로 바꿔줌
+        public void SearchClass(int major, int divise, int className, int professor, int grade) // 숫자를 문자로 바꿔줌
         {
-            major = "전체";
-            divise = "학년";
-            /*
-            switch(int.Parse(major))
-            {
-                case 1: major = "전체";break;
-                case 2: major = "컴퓨터공학과"; break;
-                case 3: major = "지능기전공학부"; break;
-                case 4: major = "기계항공우주공학부"; break;
-                case ' ': major = null; break;
-                default: break;
-            }
-            switch (int.Parse(divise))
-            {
-                case 1: divise = "전체"; break;
-                case 2: divise = "교양필수"; break;
-                case 3: divise = "전공필수"; break;
-                case 4: divise = "전공선택"; break;
-                default: break;
-            }
-            switch (int.Parse(className))
-            {
-                case 1: className = "전체"; break;
-                case 2: className = "신입생세미나"; break;
-                case 3: className = "C프로그래밍"; break;
-                case 4: className = "디지털시스템"; break;
-                default: break;
-            }
-            switch (int.Parse(professor))
-            {
-                case 1: professor = "전체"; break;
-                case 2: professor = "박태순"; break;
-                case 3: professor = "문현준"; break;
-                case 4: professor = "공성곤"; break;
-                default: break;
-            }
-            switch (int.Parse(grade))
-            {
-                case 1: grade = "전체"; break;
-                case 2: grade = "1학년"; break;
-                case 3: grade = "2학년"; break;
-                case 4: grade = "3학년"; break;
-                case 5: grade = "4학년"; break;
-                default: break;
-            }
-            */
+            string choiceMajor = null;
+            string choiceDivise = null;
+            string choiceClassName = null;
+            string choiceProfessor = null;
+            string choiceGrade = null;
+
             Console.WriteLine(major);
-            Console.WriteLine(divise);
-            //Console.WriteLine(className);
-            //Console.WriteLine(professor);
-            //Console.WriteLine(grade);
+            
+            switch(major)
+            {
+                case 1: choiceMajor = "전체";break;
+                case 2: choiceMajor = "컴퓨터공학과"; break;
+                case 3: choiceMajor = "지능기전공학부"; break;
+                case 4: choiceMajor = "기계항공우주공학부"; break;
+                default: break;
+            }
+            switch (divise)
+            {
+                case 1: choiceDivise = "전체"; break;
+                case 2: choiceDivise = "교양필수"; break;
+                case 3: choiceDivise = "전공필수"; break;
+                case 4: choiceDivise = "전공선택"; break;
+                default: break;
+            }
+            switch (className)
+            {
+                case 1: choiceClassName = "전체"; break;
+                case 2: choiceClassName = "신입생세미나"; break;
+                case 3: choiceClassName = "C프로그래밍"; break;
+                case 4: choiceClassName = "디지털시스템"; break;
+                default: break;
+            }
+            switch (professor)
+            {
+                case 1: choiceProfessor = "전체"; break;
+                case 2: choiceProfessor = "박태순"; break;
+                case 3: choiceProfessor = "문현준"; break;
+                case 4: choiceProfessor = "공성곤"; break;
+                default: break;
+            }
+            switch (grade)
+            {
+                case 1: choiceGrade = "전체"; break;
+                case 2: choiceGrade = "1학년"; break;
+                case 3: choiceGrade = "2학년"; break;
+                case 4: choiceGrade = "3학년"; break;
+                case 5: choiceGrade = "4학년"; break;
+                default: break;
+            }
+            
+            Console.WriteLine(choiceMajor);
+            Console.WriteLine(choiceDivise);
+            Console.WriteLine(choiceClassName);
+            Console.WriteLine(choiceProfessor);
+            Console.WriteLine(choiceGrade);
         }
      
     }

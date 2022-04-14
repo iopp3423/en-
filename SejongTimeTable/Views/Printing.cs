@@ -61,7 +61,7 @@ namespace SejongTimeTable.Views
             Console.WriteLine(string.Format("{0,40}", " 【      학년      】                                                                                           "));
             Console.WriteLine(string.Format("{0,40}", " 【      조회      】                                                                                           "));
             Console.WriteLine(string.Format("{0,40}", "                                                                                                               "));
-            Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
+            //Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
         }
 
         public void ChooseMajor()
