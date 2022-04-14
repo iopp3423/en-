@@ -63,23 +63,23 @@ namespace SejongTimeTable.Models
                 Console.WriteLine(data.GetValue(3, 3));
                 */
 
-                for (row = Constants.ROW_START; row < Constants.ROW_END; row++)
+                for (row = Constants.ROW_START; row < Constants.ROW_END; row++) // 리스트에 엑셀 파일 저장
                 {
                     Constants.COL_START = Constants.ZERO;
-                    for (col = Constants.COL_START; col < 13; col++)
+                    for (col = Constants.COL_START; col < Constants.COL_END; col++)
                     {
                         switch (col)
                         {
                             case 1:
                                 if (data.GetValue(row, col) == null)
                                 { number = null; break; }
-                                number = data.GetValue(row, col).ToString();
+                                number = data.GetValue(row, col).ToString() + " ";
                                 break;
 
                             case 2:
                                 if (data.GetValue(row, col) == null)
                                 { mager = null; break; }
-                                mager = data.GetValue(row, col).ToString();
+                                mager = data.GetValue(row, col).ToString() + " ";
                                 break;
 
                             case 3:
@@ -141,8 +141,7 @@ namespace SejongTimeTable.Models
                     Data.Add(new ClassVO(number, mager, classNumber, group, classname, seperation, grade, score, day, room, professor, language));
         
                 }
-                Console.WriteLine(Data[0].number);
-                Console.WriteLine(Data[1].number);
+
 
                 //Console.WriteLine(AllPrint[0]);
 

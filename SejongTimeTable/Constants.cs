@@ -13,7 +13,7 @@ namespace SejongTimeTable
         static public string PW_CHECK = @"^[0-9]{4,10}$";
         static public string MENU = @"^[1-8]{1}$";
 
-        public const int CONSOLE_SIZE_WIDTH = 120;
+        public const int CONSOLE_SIZE_WIDTH = 180;
         public const int CONSOLE_SIZE_HEIGHT = 30;
         static public bool Is_CHECK = true;
         static public int ID_X_AXIS = 70;

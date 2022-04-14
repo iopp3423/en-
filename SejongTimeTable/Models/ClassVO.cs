@@ -106,7 +106,7 @@ namespace SejongTimeTable.Models
 
         public override string ToString()
         {
-            return number  + "  " + mager  + "  " + classNumber   + "  " + group  + "  " + classname + "  " + seperation  + "  " + grade  + "  " + score + "  " + day + "  " + room  + "  " + professor  + "  " + language;
+            return number  + "  " + mager  + "  " + classNumber   + "  " + group  + "  " + classname + "  " + seperation  + "  " + grade  + "  " + score + "  " + day + "  " + room  + "  " + professor  + "  " +language;
         }
 
     }

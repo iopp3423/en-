@@ -10,7 +10,7 @@ namespace SejongTimeTable.Views
     {
         public void PrintLogin()
         {
-            Console.WriteLine(string.Format("{0,40}", " ============================================== SeJong Time Table ==============================================="));
+            Console.WriteLine(string.Format("{0,40}", " ============================================== SeJong Time Table ================================================================================="));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                               ㅣ"));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                               ㅣ"));
             Console.WriteLine(string.Format("{0,40}", "ㅣ                                                                                                               ㅣ"));
