@@ -84,8 +84,6 @@ namespace SejongTimeTable.Controls
      
         }
 
-
-
         public void LoginAfter()
         {
             Console.Clear();

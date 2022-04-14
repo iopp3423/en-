@@ -20,12 +20,14 @@ namespace SejongTimeTable.Controls
             Console.Write(s);
         }
 
+        //clearCurrentLine();
+
         public void Menu()
         {
             Console.Clear();
             Constants.Is_CHECK = true; // 초기값으로 변경
-           
-            MenuView.PrintESC();
+
+            MenuView.PrintNumber();
             MenuView.AfterMenu();
             MenuView.Back();
             
@@ -81,11 +83,38 @@ namespace SejongTimeTable.Controls
 
 
         }
-        
+
         public void Major()
         {
             MenuView.ChooseMajor();
-            //clearCurrentLine();
+            while (true)
+            {
+                Console.SetCursorPosition(Constants.MAJOR_CURSUR_X, Constants.MAJOR_CURSUR_Y);
+
+                Constants.cursur = Console.ReadKey(true);
+
+                switch (Constants.cursur.Key)
+                {
+
+                    case ConsoleKey.RightArrow:
+                        {
+                            Constants.MAJOR_CURSUR_X+=15;
+                            //if (Constants.TIME_TABLE_Y < Constants.TABLE_Y_UPSTRICT) Constants.TIME_TABLE_Y++; // 선택 외의 화면으로 커서 못나감
+                            break;
+                        }
+
+                    // 하
+                    case ConsoleKey.LeftArrow:
+                        {
+                            Constants.MAJOR_CURSUR_X--;
+                           // if (Constants.TIME_TABLE_Y > Constants.TABLE_Y_DOWNSTRICT) Constants.TIME_TABLE_Y--; // 선택 외의 화면으로 커서 못나감
+                            break;
+                        }
+
+
+                        
+                }
+            }
         }
         /*
         public string Divise()

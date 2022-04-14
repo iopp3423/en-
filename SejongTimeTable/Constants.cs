@@ -38,6 +38,8 @@ namespace SejongTimeTable
         static public int COL_END = 13;
         static public int ZERO = 0;
         static public bool IS_TRUE = true;
+        static public int MAJOR_CURSUR_X = 21;
+        static public int MAJOR_CURSUR_Y = 6;
         static public ConsoleKeyInfo cursur;
     }
 }

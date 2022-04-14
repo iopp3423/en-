@@ -46,6 +46,10 @@ namespace SejongTimeTable.Views
             Console.WriteLine("                                                                                                    F5 : 뒤로가기 ");
         }
 
+        public void PrintNumber()
+        {
+            Console.WriteLine("\n\n\n원하시는 메뉴의 번호를 입력해주세요. ");
+        }
         public void AfterMenu()
         {
             Console.WriteLine(string.Format("{0,40}", "===============================================  강의시간표 조회  ==============================================="));
@@ -62,23 +66,23 @@ namespace SejongTimeTable.Views
 
         public void ChooseMajor()
         {
-            Console.WriteLine("【 개설 학과 전공 】    <전체>          <컴퓨터공학과>         <지능기전공학부>       <기계항공우주공학부>");
+            Console.WriteLine("【 개설 학과 전공 】    <1번 전체>   <2번 컴퓨터공학과>   <3번 지능기전공학부>   <4번 기계항공우주공학부>");
         }
         public void ChooseDivise()
         {
-            Console.WriteLine("【    이수구분    】    <전체>            <교양필수>              <전공필수>                <전공선택>");
+            Console.WriteLine("【    이수구분    】    <1번 전체>     <2번 교양필수>        <3번 전공필수>           <4번 전공선택>");
         }
         public void ChooseClassName()
         {
-            Console.WriteLine("【    교과목명    】    <전체>          <신입생세미나>           <C프로그래밍>            <디지털시스템>");
+            Console.WriteLine("【    교과목명    】    <1번 전체>   <2번 신입생세미나>    <3번 C프로그래밍>       <4번 디지털시스템>");
         }
         public void ChooseSearchProfessorName()
         {
-            Console.WriteLine("【     교수명     】    <전체>              <1학년>                 <2학년>                    <3학년>           <4학년>");
+            Console.WriteLine("【     교수명     】    <1번 전체>      <2번 박태순>          <3번 문현준>            <4번 공성곤>");
         }
         public void ChooseCheckClass()
         { 
-            Console.WriteLine("【      학년      】     <전체>              <1학년>                 <2학년>                    <3학년>           <4학년>");
+            Console.WriteLine("【      학년      】    <1번 전체>      <2번 1학년>        <3번 2학년>       <4번 3학년>       <5번 4학년>");
         }
         public void Choose()
         {
