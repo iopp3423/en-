@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace SejongTimeTable.Models
 
     public class ClassList
     {
-            public List<ClassVO> Data = new List<ClassVO>();
+           // public List<ClassVO> Data = new List<ClassVO>();
 
             private string number;
             private string mager;
@@ -131,14 +132,14 @@ namespace SejongTimeTable.Models
                     Data.Add(new ClassVO(number, mager, classNumber, group, classname, seperation, grade, score, day, room, professor, language));
 
                 }
-                /*
+                
                 foreach (ClassVO list in Data)
                 {
 
                     Console.WriteLine(list);
 
                 }
-                */
+                
                 // 모든 워크북 닫기
                 application.Workbooks.Close();
 
@@ -153,3 +154,4 @@ namespace SejongTimeTable.Models
     }
     
 }
+*/
