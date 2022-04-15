@@ -11,31 +11,34 @@ namespace SejongTimeTable.Controls
     internal class FavoriteClass 
     {
         Printing MenuView = new Printing();
-        List<ClassVO> MySubject = new List<ClassVO>(); // 관심과목 담는 리스트
+        List<ClassVO> MySubject = new List<ClassVO>();
 
         public ClassVO Favorite; // 엑셀값 저장
+        public ClassVO UserData;
 
         public FavoriteClass()
         {
 
         }
-        public FavoriteClass(ClassVO Favorite)
+        public FavoriteClass(ClassVO Favorite, ClassVO UserData)
         {
             this.Favorite = Favorite;
+            this.UserData = UserData;
         }
+        
 
         public void Menu()
         {
             Constants.Is_CHECK = true; // 초기화
             Console.Clear();
-            MenuView.PrintFavoriteClass();
-            MySubject.Add(Favorite.Data[1]);
-            /*
-            foreach (ClassVO list in Favorite.Data)
+            MenuView.PrintFavoriteClass();          
+
+            
+            foreach (ClassVO list in UserData.Data)
             {
                 Console.WriteLine(list);
             }
-            */
+            
 
             while (Constants.Is_CHECK)
             {
@@ -65,9 +68,9 @@ namespace SejongTimeTable.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_SEARCH_Y) { Constants.Is_CHECK = false; Console.Write("Hello"); break; }
+                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_SEARCH_Y) { Constants.Is_CHECK = false;  break; }
                             if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_MY_Y) { Constants.Is_CHECK = false; MyClass(); break;}
-                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_TIME_Y) { Constants.Is_CHECK = false; Table(); Console.Write("Hello"); break; }
+                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_TIME_Y) { Constants.Is_CHECK = false; Table(); break; }
                             if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_REMOVE_Y) { Constants.Is_CHECK = false; Remove(); break;}
                             break;
                         }
@@ -89,9 +92,16 @@ namespace SejongTimeTable.Controls
         {
             Console.Clear();
             MenuView.PrintMyClass();
-            Constants.cursur = Console.ReadKey(true);
-            if (Constants.cursur.Key == ConsoleKey.F5) Menu(); // 뒤로가기
-            Console.Write(MySubject[0]);
+            foreach (ClassVO list in Favorite.Data)
+            {
+                Console.WriteLine(list);
+            }
+            while (true)
+            {
+                Constants.cursur = Console.ReadKey(true);
+                if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
+                else continue;
+            }
 
 
 
@@ -110,9 +120,17 @@ namespace SejongTimeTable.Controls
         public void Remove()
         {
             Console.Clear();
-            MenuView.PrintMyTable();
-            Constants.cursur = Console.ReadKey(true);
-            if (Constants.cursur.Key == ConsoleKey.F5) Menu(); // 뒤로가기
+            MenuView.PrintMyClass();
+            foreach (ClassVO list in Favorite.Data)
+            {
+                Console.WriteLine(list);
+            }
+            while (true)
+            {
+                Constants.cursur = Console.ReadKey(true);
+                if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
+                else continue;
+            }
 
 
 

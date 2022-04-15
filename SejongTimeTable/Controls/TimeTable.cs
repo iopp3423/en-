@@ -21,15 +21,15 @@ namespace SejongTimeTable.Controls
         List<ClassVO> Search = new List<ClassVO>(); // 검색 값 저장하는 리스트
         //List<ClassVO> DistinctSearch = new List<ClassVO>();
 
-        public ClassVO MyClass; // 엑셀값
+        public ClassVO MyTable; // 엑셀값
         
         public TimeTable()
         {
 
         }
-        public TimeTable(ClassVO MyClass)
+        public TimeTable(ClassVO MyTable)
         {
-            this.MyClass = MyClass;
+            this.MyTable = MyTable;
         }
 
         string menu;
@@ -267,7 +267,7 @@ namespace SejongTimeTable.Controls
             //if (professor == null) 
             //if (choiceGrade == null) 
 
-            foreach (ClassVO list in MyClass.Data)
+            foreach (ClassVO list in MyTable.Data)
             {
                 if (list.mager.Contains(choiceMajor) == true) { Search.Add(list); }
                 if (list.seperation.Contains(choiceDivise) == true) Console.Write("H");// { Search.Add(list);  }
