@@ -66,6 +66,18 @@ namespace SejongTimeTable
         static public int ONE = 1;
         static public int PRINT_X = 0;
         static public int PRINT_Y = 17;
+        static public int CHOOSE_Y = 6;
+        static public int CHOOSE_X = 0;
+        static public int CHOOSE_UP_Y = 5;
+        static public int CHOOSE_DOWN_Y = 13;
+        static public int MAJOR_Y=6;
+        static public int NUMBER_Y=8;
+        static public int SUBJECT_Y=10;
+        static public int PROFESSOR_Y=12;
+        static public int GRADE_MENU_Y=154;
+        static public int SEARCH_AFTER_X = 55;
+        static public int SEARCH_AFTER_Y = 5;
+
 
         static public ConsoleKeyInfo cursur;
     }

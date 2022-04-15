@@ -18,7 +18,7 @@ namespace SejongTimeTable.Controls
         Regex ProfessorCheck = new Regex(Constants.PROFESSOR_NAME);
 
         List<ClassVO> Search = new List<ClassVO>(); // 검색 값 저장하는 리스트
-        List<ClassVO> DistinctSearch = new List<ClassVO>();
+       //List<ClassVO> DistinctSearch = new List<ClassVO>();
 
         public ClassVO MyTable; // 엑셀값
 
@@ -88,7 +88,7 @@ namespace SejongTimeTable.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Constants.TIME_TABLE_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; majorJudgment = Major(); break; }
+                            if (Constants.TIME_TABLE_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; majorJudgment = SearchMajor(); break; }
                             if (Constants.TIME_TABLE_Y == Constants.FAVORITE_Y) { Constants.Is_CHECK = false; diviseJudgment = Divise(); break; }
                             if (Constants.TIME_TABLE_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; nameJudgment = SearchClassName(); break; }
                             if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { Constants.Is_CHECK = false; professorJudgment = SearchProfessorName(); break; }
@@ -109,12 +109,11 @@ namespace SejongTimeTable.Controls
 
         }
 
-        public int Major() // 학과 전공
+        public int SearchMajor() // 학과 전공
         {
             Constants.Is_CHECK = true;
             MenuView.ChooseMajor();
             Console.SetCursorPosition(Constants.MAJOR_CURSUR_X, Constants.MAJOR_CURSUR_Y);
-
 
             while (true)
             {
@@ -274,7 +273,6 @@ namespace SejongTimeTable.Controls
 
             //Search = Search[0].number.Distinct().ToList();
             //Search = MyTable.number;
-
 
             Console.SetCursorPosition(Constants.PRINT_X, Constants.PRINT_Y);
             MenuView.PrintTable();

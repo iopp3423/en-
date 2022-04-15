@@ -9,10 +9,10 @@ using System.Text.RegularExpressions;
 
 namespace SejongTimeTable.Controls
 {
-    internal class FavoriteClass 
+    internal class FavoriteClass :TimeTable
     {
         Printing MenuView = new Printing();
-        List<ClassVO> MySubject = new List<ClassVO>();//???????????????????????뭐지 이거
+        List<ClassVO> MySubject = new List<ClassVO>();
         Regex RemoveData = new Regex(Constants.REMOVE_CLASS);
 
         public ClassVO Favorite; // 엑셀값 저장
@@ -37,7 +37,7 @@ namespace SejongTimeTable.Controls
 
                 
 
-            while (Constants.Is_CHECK)
+            while (Constants.Is_CHECK) // 관심과목메뉴
             {
                 Console.SetCursorPosition(Constants.FAVORITE_MENU_X, Constants.FAVORITE_MENU_Y);
                 Constants.cursur = Console.ReadKey(true);
@@ -65,9 +65,9 @@ namespace SejongTimeTable.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_SEARCH_Y) { Constants.Is_CHECK = false;  break; }
-                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_MY_Y) { Constants.Is_CHECK = false; MyClass(); break;}
-                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_TIME_Y) { Constants.Is_CHECK = false; Table(); break; }
+                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_SEARCH_Y) { Constants.Is_CHECK = false; Search(); break; }
+                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_MY_Y) { Constants.Is_CHECK = false; SearchMyClass(); break;}
+                            if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_TIME_Y) { Constants.Is_CHECK = false; SearchTable(); break; }
                             if (Constants.FAVORITE_MENU_Y == Constants.FAVORITE_REMOVE_Y) { Constants.Is_CHECK = false; Remove(); break;}
                             break;
                         }
@@ -83,9 +83,103 @@ namespace SejongTimeTable.Controls
 
         public void Search() // 관심과목 검색
         {
-            Constants.Is_CHECK = true;//초기화
+            //Constants.Is_CHECK = true;//초기화
+            string menu;
+            int majorJudgment = Constants.ONE; // 전공 전체로 초기화
+            int diviseJudgment = Constants.ONE; // 이수구분 전체로 초기화
+            string nameJudgment = "전체"; // 교과목명 
+            string professorJudgment = "전체"; // 교수명 
+            int gradeJudgment = Constants.ONE; // 학년 전체로 초기화
+            Constants.Is_CHECK = true;
+
+            Console.Clear();
+            MenuView.PrintFavoriteMenu();
+
+            while (Constants.Is_CHECK)
+            {
+                Console.SetCursorPosition(Constants.CHOOSE_X, Constants.CHOOSE_Y);
+                Constants.cursur = Console.ReadKey(true);
+                switch (Constants.cursur.Key)
+                {
+
+                    case ConsoleKey.UpArrow:
+                        {
+                            Constants.CHOOSE_Y -= 2;
+                            if (Constants.CHOOSE_Y < Constants.CHOOSE_UP_Y) Constants.CHOOSE_Y += 2; // 선택 외의 화면으로 커서 못나감
+                            break; 
+                        }
+
+                    // 하
+                    case ConsoleKey.DownArrow:
+                        {
+                            Constants.CHOOSE_Y += 2;
+                            if (Constants.CHOOSE_Y > Constants.CHOOSE_DOWN_Y) Constants.CHOOSE_Y -= 2; // 선택 외의 화면으로 커서 못나감
+                            break;
+                        }
+                    case ConsoleKey.F5:
+                        {
+                            Menu();  
+                            break;
+                        }
+                    case ConsoleKey.Enter:
+                        {
+                            if (Constants.CHOOSE_Y == Constants.MAJOR_Y) { Constants.Is_CHECK = false; SearchMyMajor(SearchMajor()); break; }
+                            if (Constants.CHOOSE_Y == Constants.NUMBER_Y) { Constants.Is_CHECK = false; diviseJudgment = Divise(); break; }
+                            if (Constants.CHOOSE_Y == Constants.SUBJECT_Y) { Constants.Is_CHECK = false; nameJudgment = SearchClassName(); break; }
+                            if (Constants.CHOOSE_Y == Constants.PROFESSOR_Y) { Constants.Is_CHECK = false; professorJudgment = SearchProfessorName(); break; }
+                            if (Constants.CHOOSE_Y == Constants.GRADE_MENU_Y) { Constants.Is_CHECK = false; gradeJudgment = SearchGrade(); break; }
+                            //if (Constants.CHOOSE_Y == Constants.REFER_Y) { Constants.Is_CHECK = false; SearchClass(majorJudgment, diviseJudgment, nameJudgment, professorJudgment, gradeJudgment); break; }
+                            break;
+                        }
+                    case ConsoleKey.Escape: // 종료
+                        {
+                            return;
+                        }
+
+                    default: break;
+                }
+            }
         }
-        public void MyClass()
+
+
+        public void SearchMyMajor(int major) // 전공검색 후 프린트
+        {
+            string choiceMajor;
+
+       
+
+            switch (major)
+            {
+                case 1: choiceMajor = "전체"; break;
+                case 2: choiceMajor = "컴퓨터공학과"; break;
+                case 3: choiceMajor = "소프트웨어학과"; break;
+                case 4: choiceMajor = "지능기전공학부"; break;
+                case 5: choiceMajor = "기계항공우주공학부"; break;
+                default: choiceMajor = null; break;
+            }
+    
+            foreach (ClassVO list in Favorite.Data)
+            {
+                if (list.mager.Contains(choiceMajor) == true) { MySubject.Add(list); }
+            }
+            Console.Clear();
+            Console.Write("\n\n\n\n");
+            Console.WriteLine("등록 가능 학점 : {0}      담은 학점 : {1}          담을 과목 NO :\n\n\n");
+            MenuView.PrintClass();
+
+            foreach (ClassVO list in MySubject)
+            {
+                Console.WriteLine(list);
+            }
+
+            Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
+
+            
+        }
+
+
+
+        public void SearchMyClass() 
         {
             Console.Clear();
             MenuView.PrintMyClass();
@@ -105,7 +199,7 @@ namespace SejongTimeTable.Controls
             Constants.Is_CHECK = true;//초기화
         }
 
-        public void Table() // 시간표
+        public void SearchTable() // 시간표
         {
             int row, col;
             string monday = "월";
@@ -143,8 +237,7 @@ namespace SejongTimeTable.Controls
 
                 }
                 */
-            
-            
+
             Constants.cursur = Console.ReadKey(true);
             if (Constants.cursur.Key == ConsoleKey.F5) Menu(); // 뒤로가기
 
@@ -176,6 +269,8 @@ namespace SejongTimeTable.Controls
             foreach (ClassVO list in UserData.Data)
             {
                 Console.WriteLine(list);
+
+
             }
 
             while (true)
@@ -220,7 +315,6 @@ namespace SejongTimeTable.Controls
                 Constants.cursur = Console.ReadKey(true);
                 if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
                 else continue;
-
 
             }
             Constants.Is_CHECK = true;//초기화

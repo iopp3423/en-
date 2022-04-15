@@ -50,6 +50,10 @@ namespace SejongTimeTable.Views
         {
             Console.WriteLine("\n\n\n원하시는 메뉴 Enter --->  번호 입력 ----> Enter. ");
         }
+        public void PrintExplanation()
+        {
+            Console.WriteLine("원하시는 메뉴 Enter --->  번호 입력 ----> Enter. ");
+        }
         public void AfterMenu()
         {
             Console.WriteLine(string.Format("{0,40}", "=========================================================  강의시간표 조회  ========================================================="));
@@ -116,6 +120,11 @@ namespace SejongTimeTable.Views
             Console.WriteLine(string.Format("{0,40}", "NO    개설학과전공    학수번호    분반    교과목명         이수구분       학년 학점     요일 및 강의시간     강의실      교수명     강의언어"));
             
         }
+        public void PrintClass()
+        {
+            Console.WriteLine(string.Format("{0,40}", "=========================================================  2022년도 1학기 시간표  ============================================================="));
+            Console.WriteLine(string.Format("{0,40}", "NO    개설학과전공    학수번호    분반    교과목명         이수구분       학년 학점     요일 및 강의시간     강의실      교수명     강의언어"));
+        }
         public void PrintTimeTable()
         {
             Console.WriteLine("09:00~09:30\n");
@@ -144,5 +153,20 @@ namespace SejongTimeTable.Views
         {
             Console.WriteLine(string.Format("{0,40}", "NO       개설학과전공      학수번호     분반     교과목명        이수구분      학년 학점      요일 및 강의시간     강의실       교수명     강의언어\n"));
         }
+
+        public void PrintFavoriteMenu()
+        {
+            Console.WriteLine("\n\n");
+            Console.WriteLine(string.Format("{0,40}", "                                                                                                                             F5 : 뒤로가기 "));
+            Console.WriteLine(string.Format("{0,40}", "=========================================================  관심 과목 메뉴  =========================================================\n"));
+            Console.WriteLine(string.Format("{0,40}", "【  개설 학과 전공  】                                                    \n"));
+            Console.WriteLine(string.Format("{0,40}", "【  학수번호 / 분반 】                                                     \n"));
+            Console.WriteLine(string.Format("{0,40}", "【      교과목명    】                                                    \n"));
+            Console.WriteLine(string.Format("{0,40}", "【       교수명     】                                                     \n"));
+            Console.WriteLine(string.Format("{0,40}", "【        학년      】                                                     \n"));
+            Console.WriteLine(string.Format("{0,40}", "=========================================================  관심 과목 메뉴  ========================================================="));
+        }
+
+        
     }
 }
