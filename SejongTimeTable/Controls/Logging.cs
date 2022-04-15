@@ -91,8 +91,7 @@ namespace SejongTimeTable.Controls
             MenuView.PrintESC();
             MenuView.PrintMenu();
             MenuView.Back();
-            Constants.IS_TRUE = true;
-            Console.SetCursorPosition(Constants.MENU_X, Constants.MENU_Y);          
+            Constants.IS_TRUE = true;  
 
 
             while (Constants.Is_CHECK)

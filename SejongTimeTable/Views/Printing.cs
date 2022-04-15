@@ -89,5 +89,16 @@ namespace SejongTimeTable.Views
         {
             Console.WriteLine("【      조회      】");
         }
+
+        public void PrintFavoriteClass()
+        {
+            Console.WriteLine("\n\n");
+            Console.WriteLine(string.Format("{0,40}", "=========================================================  관심 과목 메뉴  =========================================================\n"));
+            Console.WriteLine(string.Format("{0,40}", "                                                     【 관심 과목 분야별 검색】                                                    \n"));
+            Console.WriteLine(string.Format("{0,40}", "                                                     【  관심 과목 강의 내역 】                                                     \n"));
+            Console.WriteLine(string.Format("{0,40}", "                                                     【   관심 과목 시간표   】                                                    \n"));
+            Console.WriteLine(string.Format("{0,40}", "                                                     【    관심 과목 삭제    】                                                     \n"));
+            Console.WriteLine(string.Format("{0,40}", "=========================================================  관심 과목 메뉴  ========================================================="));
+        }
     }
 }

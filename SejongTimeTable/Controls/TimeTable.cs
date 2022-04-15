@@ -261,6 +261,12 @@ namespace SejongTimeTable.Controls
             }
 
 
+            //if (choiceMajor == null) 
+            //if (choiceDivise== null) 
+            //if (className == null) 
+            //if (professor == null) 
+            //if (choiceGrade == null) 
+
             foreach (ClassVO list in MyClass.Data)
             {
                 if (list.mager.Contains(choiceMajor) == true) { Search.Add(list); }

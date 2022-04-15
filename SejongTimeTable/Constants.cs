@@ -52,6 +52,15 @@ namespace SejongTimeTable
         static public int REFER_Y = 11;
         static public int SUBJECT_X = 43;
         static public int PROFFSOR_X = 42;
+        static public int FAVORITE_MENU_X = 51;
+        static public int FAVORITE_MENU_Y = 5;
+        static public int FAVORITE_UP_Y = 5;
+        static public int FAVORITE_DOWN_Y = 11;
+        static public int FAVORITE_SEARCH_Y = 5;
+        static public int FAVORITE_MY_Y = 7;
+        static public int FAVORITE_TIME_Y = 9;
+        static public int FAVORITE_REMOVE_Y = 11;
+
         static public ConsoleKeyInfo cursur;
     }
 }
