@@ -18,6 +18,7 @@ namespace SejongTimeTable.Controls
         MyClass MySubject = new MyClass();
 
         ClassVO MyData = new ClassVO();
+        ClassVO Search = new ClassVO();
         ClassVO User = new ClassVO();
 
 

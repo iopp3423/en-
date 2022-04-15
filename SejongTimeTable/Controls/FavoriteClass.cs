@@ -125,7 +125,7 @@ namespace SejongTimeTable.Controls
             //Console.WriteLine(UserData.Data[1]);
             // 18:00~19:00
 
-            int a = int.Parse(UserData.Data[0].day);
+            /*
             for (col = 0; col < 20; col++)
                 {
                     Console.SetCursorPosition(13, 5+col+col);
@@ -137,12 +137,12 @@ namespace SejongTimeTable.Controls
                     else Console.Write("                            ");
                     if (UserData.Data[0].day.Contains("목")) Console.Write(UserData.Data[0].room);
                     else Console.Write("                            ");
-                    if (UserData.Data[0].day.Contains("금") && a==col )Console.Write(UserData.Data[0].room);
+                    if (UserData.Data[0].day.Contains("금") && UserData.Data[0].day.Contains(col) Console.Write(UserData.Data[0].room);
                     else Console.WriteLine();
                     Console.SetCursorPosition(13, 6);
 
                 }
-                
+                */
             
             
             Constants.cursur = Console.ReadKey(true);

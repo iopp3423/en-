@@ -21,6 +21,7 @@ namespace SejongTimeTable.Controls
         List<ClassVO> DistinctSearch = new List<ClassVO>();
 
         public ClassVO MyTable; // 엑셀값
+
         
         public TimeTable()
         {
@@ -57,6 +58,7 @@ namespace SejongTimeTable.Controls
             MenuView.PrintNumber();
             MenuView.AfterMenu();
             MenuView.Back();
+
 
             while (Constants.Is_CHECK)
             {
@@ -211,7 +213,7 @@ namespace SejongTimeTable.Controls
             }
             return int.Parse(menu);
         }
-
+        
         public void SearchClass(int major, int divise, string className, string professor, int grade) // 숫자를 문자로 바꿔줌
         {
             string choiceMajor;
@@ -248,13 +250,12 @@ namespace SejongTimeTable.Controls
             }
 
 
-
             foreach (ClassVO list in MyTable.Data)
             {
                 if (list.mager.Contains(choiceMajor) == true) { Search.Add(list); }
             }
             foreach (ClassVO list in MyTable.Data)
-            {
+            {         
                 if (list.seperation.Contains(choiceDivise) == true) { Search.Add(list); }
             }
             foreach (ClassVO list in MyTable.Data)
@@ -268,19 +269,21 @@ namespace SejongTimeTable.Controls
             foreach (ClassVO list in MyTable.Data)
             {
                 if(list.grade.Contains(choiceGrade) == true ) { Search.Add(list); }
-                Search.Add(list);
             }
 
-            //Search = Search.Data.number.Distinct().ToList();
+
+            //Search = Search[0].number.Distinct().ToList();
             //Search = MyTable.number;
 
 
-
+            Console.SetCursorPosition(Constants.PRINT_X, Constants.PRINT_Y);
+            MenuView.PrintTable();
             foreach (ClassVO list in Search)
             {
                 Console.WriteLine(list);
-            }               
-            
+            }
+           
+
         }
         
 

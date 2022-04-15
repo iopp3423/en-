@@ -64,6 +64,8 @@ namespace SejongTimeTable
         static public int REMOVE_X = 135;
         static public int REMOVE_Y = 2;
         static public int ONE = 1;
+        static public int PRINT_X = 0;
+        static public int PRINT_Y = 17;
 
         static public ConsoleKeyInfo cursur;
     }

@@ -139,5 +139,10 @@ namespace SejongTimeTable.Views
             Console.WriteLine("19:00~19:30\n");
             Console.WriteLine("19:00~20:00\n");          
         }
+
+        public void PrintTable()
+        {
+            Console.WriteLine(string.Format("{0,40}", "NO       개설학과전공      학수번호     분반     교과목명        이수구분      학년 학점      요일 및 강의시간     강의실       교수명     강의언어\n"));
+        }
     }
 }
