@@ -125,6 +125,7 @@ namespace SejongTimeTable.Controls
 
             while (true)
             {
+             
                 menu = Console.ReadLine();
 
                 if (Constants.Is_CHECK != GradeCheck.IsMatch(menu))
@@ -146,6 +147,7 @@ namespace SejongTimeTable.Controls
 
             while (true)
             {
+          
                 menu = Console.ReadLine();
 
                 if (Constants.Is_CHECK != MenuCheck.IsMatch(menu))
@@ -206,6 +208,7 @@ namespace SejongTimeTable.Controls
 
             while (true)
             {
+             
                 menu = Console.ReadLine();
 
                 if (Constants.Is_CHECK != GradeCheck.IsMatch(menu))
@@ -220,12 +223,16 @@ namespace SejongTimeTable.Controls
 
         public void SearchClass(int major, int divise, string className, string professor, int grade) // 숫자를 문자로 바꿔줌
         {
-            string choiceMajor = "";
-            string choiceDivise = "";
-            string choiceGrade = "";
-            string input;
-            
-            switch(major)
+            string choiceMajor;
+            string choiceDivise;
+            string choiceGrade;
+            Console.WriteLine(major);
+            Console.WriteLine(divise);
+            Console.WriteLine(className);
+            Console.WriteLine(professor);
+            Console.WriteLine(grade);
+
+            switch (major)
             {
                 case 1: choiceMajor = "전체";break;
                 case 2: choiceMajor = "컴퓨터공학과"; break;
@@ -256,22 +263,21 @@ namespace SejongTimeTable.Controls
 
             foreach (ClassVO list in MyClass.Data)
             {
-                if (list.mager.Contains(choiceMajor) == true) Console.Write(choiceMajor);//{ Search.Add(list);  }
-                if (list.seperation.Contains(choiceDivise) == true) Console.Write(choiceDivise);//{ Search.Add(list);  }
+                if (list.mager.Contains(choiceMajor) == true) { Search.Add(list); }
+                if (list.seperation.Contains(choiceDivise) == true) Console.Write("H");// { Search.Add(list);  }
                 if (list.classname.Contains(className) == true) Console.Write(className);//{ Search.Add(list);  }
                 if (list.professor.Contains(professor) == true) Console.Write(professor);//{Search.Add(list);  }
                 if (list.grade.Contains(choiceGrade) == true) Console.Write(choiceGrade);//{ Search.Add(list); }
             }
-            
-
 
             //DistinctSearch = (List<ClassVO>)Search.Distinct();
 
-
+            
             foreach (ClassVO list in Search)
             {
                 Console.WriteLine(list);
             }
+            
             
             
             /*
@@ -280,10 +286,6 @@ namespace SejongTimeTable.Controls
                 Console.Write(list);
             }
             */
-
-                //input = string.Concat(choiceMajor, choiceDivise, className, professor, choiceDivise, choiceGrade);
-
-           // Console.Write(input);
             
         }
         
