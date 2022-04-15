@@ -272,7 +272,9 @@ namespace SejongTimeTable.Controls
             }
 
             Search = Search.Distinct().ToList();
-            
+
+
+
             foreach (ClassVO list in Search)
             {
                 Console.WriteLine(list);

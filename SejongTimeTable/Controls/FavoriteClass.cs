@@ -107,12 +107,29 @@ namespace SejongTimeTable.Controls
 
         public void Table() // 시간표
         {
+            int row, col;
             Console.Clear();
             MenuView.PrintMyTable();
             MenuView.PrintTimeTable();
             Constants.cursur = Console.ReadKey(true);
             if (Constants.cursur.Key == ConsoleKey.F5) Menu(); // 뒤로가기
 
+
+            Console.WriteLine(UserData.day);
+            Console.Write("Helloworld");
+
+
+            /*
+            for (row = 0; row <20;row++)
+            {
+                for(col=0;col<5;col++)
+                {
+                    if (UserData.day.Contains("수")) Console.Write(UserData);
+                    else Console.Write("          ");
+                }
+                Console.Write("\n\n");
+            }
+            */
 
 
 
@@ -134,7 +151,7 @@ namespace SejongTimeTable.Controls
             bool check = false;
             Console.Clear();
             Console.WriteLine("\n");
-            Console.Write(string.Format("                                                                                                          신청 학점 : {0}  삭제할 과목 NO : ", sum));// 이거 고쳐야함
+            Console.Write(string.Format("                                                                                                      신청 학점 : {0}  삭제할 과목 NO : ", sum));// 이거 고쳐야함
             
             MenuView.PrintMyClass();
 

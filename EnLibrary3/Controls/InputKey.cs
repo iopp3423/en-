@@ -11,7 +11,7 @@ namespace EnLibrary3.Controls
         Regex CallNumberCheck = new Regex(@"^01[0-9]-[0-9]{4}-[0-9]{4}$");
         Regex PwCheck = new Regex(@"^[0-9a-zA-Z]{4,10}$");
         Regex NameCheck = new Regex(@"^[가-힣]{2,5}$");
-        Regex AgeCheck = new Regex(@"^[0-9]?[0-9]?[0-9]$");
+        Regex AgeCheck = new Regex(@"^[0-9]{1,2}1?[0-9]?[0-9]$");
 
        
 

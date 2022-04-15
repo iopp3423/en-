@@ -137,8 +137,7 @@ namespace SejongTimeTable.Views
             Console.WriteLine("18:00~18:30\n");
             Console.WriteLine("18:30~19:00\n");
             Console.WriteLine("19:00~19:30\n");
-            Console.WriteLine("19:00~20:00\n");
-            Console.WriteLine("20:00~20:30\n");           
+            Console.WriteLine("19:00~20:00\n");          
         }
     }
 }

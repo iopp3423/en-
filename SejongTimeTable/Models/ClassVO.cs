@@ -114,9 +114,11 @@ namespace SejongTimeTable.Models
         }
 
 
+
         public void ClassList()
         {
             int row, col;
+            
 
             try
             {
@@ -141,6 +143,7 @@ namespace SejongTimeTable.Models
                 for (row = Constants.ROW_START; row < Constants.ROW_END; row++) // 리스트에 엑셀 파일 저장
                 {
                     Constants.COL_START = Constants.ZERO;
+
                     for (col = Constants.COL_START; col < Constants.COL_END; col++)
                     {
                         switch (col)
