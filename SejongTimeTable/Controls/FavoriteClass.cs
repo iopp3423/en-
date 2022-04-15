@@ -108,28 +108,45 @@ namespace SejongTimeTable.Controls
         public void Table() // 시간표
         {
             int row, col;
+            string monday = "월";
+            string tuesday = "화";
+            string wendsday = "수";
+            string thursday = "목";
+            string friday = "금";
             Console.Clear();
             MenuView.PrintMyTable();
             MenuView.PrintTimeTable();
+
+            //Console.WriteLine(UserData.Data[0].room);
+           
+            Console.SetCursorPosition(13, 5);
+            //Console.WriteLine(UserData.Data[0].classname);
+            //Console.WriteLine(UserData.Data[0]);
+            //Console.WriteLine(UserData.Data[1]);
+            // 18:00~19:00
+
+            int a = int.Parse(UserData.Data[0].day);
+            for (col = 0; col < 20; col++)
+                {
+                    Console.SetCursorPosition(13, 5+col+col);
+                    if (UserData.Data[0].day.Contains("월") && UserData.Data[0].day.Contains(col.ToString())) Console.Write(UserData.Data[0].room);
+                    else Console.Write("                            ");
+                    if (UserData.Data[0].day.Contains("화")) Console.Write(UserData.Data[0].room);
+                    else Console.Write("                            ");
+                    if (UserData.Data[0].day.Contains("수")) Console.Write(UserData.Data[0].room);
+                    else Console.Write("                            ");
+                    if (UserData.Data[0].day.Contains("목")) Console.Write(UserData.Data[0].room);
+                    else Console.Write("                            ");
+                    if (UserData.Data[0].day.Contains("금") && a==col )Console.Write(UserData.Data[0].room);
+                    else Console.WriteLine();
+                    Console.SetCursorPosition(13, 6);
+
+                }
+                
+            
+            
             Constants.cursur = Console.ReadKey(true);
             if (Constants.cursur.Key == ConsoleKey.F5) Menu(); // 뒤로가기
-
-
-            Console.WriteLine(UserData.day);
-            Console.Write("Helloworld");
-
-
-            /*
-            for (row = 0; row <20;row++)
-            {
-                for(col=0;col<5;col++)
-                {
-                    if (UserData.day.Contains("수")) Console.Write(UserData);
-                    else Console.Write("          ");
-                }
-                Console.Write("\n\n");
-            }
-            */
 
 
 

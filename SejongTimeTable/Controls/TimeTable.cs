@@ -271,7 +271,8 @@ namespace SejongTimeTable.Controls
                 Search.Add(list);
             }
 
-            Search = Search.Distinct().ToList();
+            //Search = Search.Data.number.Distinct().ToList();
+            //Search = MyTable.number;
 
 
 
