@@ -69,7 +69,7 @@ namespace SejongTimeTable
         static public int CHOOSE_Y = 6;
         static public int CHOOSE_X = 0;
         static public int CHOOSE_UP_Y = 5;
-        static public int CHOOSE_DOWN_Y = 13;
+        static public int CHOOSE_DOWN_Y = 15;
         static public int MAJOR_Y=6;
         static public int NUMBER_Y=8;
         static public int SUBJECT_Y=10;
@@ -78,6 +78,9 @@ namespace SejongTimeTable
         static public int SEARCH_AFTER_X = 65;
         static public int SEARCH_AFTER_Y = 4;
         static public int POSSBLE_SCORE = 24;
+        static public int TWO = 2;
+        static public int THREE = 3;
+
 
 
         static public ConsoleKeyInfo cursur;
