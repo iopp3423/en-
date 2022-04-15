@@ -60,6 +60,8 @@ namespace SejongTimeTable
         static public int FAVORITE_MY_Y = 7;
         static public int FAVORITE_TIME_Y = 9;
         static public int FAVORITE_REMOVE_Y = 11;
+        static public int REMOVE_X = 135;
+        static public int REMOVE_Y = 2;
 
         static public ConsoleKeyInfo cursur;
     }

@@ -92,7 +92,7 @@ namespace SejongTimeTable.Controls
         {
             Console.Clear();
             MenuView.PrintMyClass();
-            foreach (ClassVO list in Favorite.Data)
+            foreach (ClassVO list in UserData.Data)
             {
                 Console.WriteLine(list);
             }
@@ -120,13 +120,16 @@ namespace SejongTimeTable.Controls
         public void Remove()
         {
             Console.Clear();
+            Console.WriteLine("\n");
+            Console.Write(string.Format("{0,40}", "                                                                                                     신청 학점 : {0}  삭제할 과목 NO : ",UserData.Data[0].score));
             MenuView.PrintMyClass();
-            foreach (ClassVO list in Favorite.Data)
+            foreach (ClassVO list in UserData.Data)
             {
                 Console.WriteLine(list);
             }
             while (true)
             {
+                Console.SetCursorPosition(Constants.REMOVE_X, Constants.REMOVE_Y);
                 Constants.cursur = Console.ReadKey(true);
                 if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
                 else continue;
