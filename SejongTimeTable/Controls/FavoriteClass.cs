@@ -160,7 +160,7 @@ namespace SejongTimeTable.Controls
                 {
                     check = true; // 번호가 존재
                     UserData.Data.RemoveAt(number); // 번호 삭제
-                    Console.Write("강의를 지웠습니다.");
+                    Console.Write("강의를 지웠습니다. F5를 누르면 돌아갑니다.");
                     break;
                 }
             }

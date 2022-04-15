@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using SejongTimeTable.Views;
 using SejongTimeTable.Models;
 using System.Text.RegularExpressions;
-using System.Linq;
 
 namespace SejongTimeTable.Controls
 {
@@ -19,7 +18,7 @@ namespace SejongTimeTable.Controls
         Regex ProfessorCheck = new Regex(Constants.PROFESSOR_NAME);
 
         List<ClassVO> Search = new List<ClassVO>(); // 검색 값 저장하는 리스트
-        //List<ClassVO> DistinctSearch = new List<ClassVO>();
+        List<ClassVO> DistinctSearch = new List<ClassVO>();
 
         public ClassVO MyTable; // 엑셀값
         
@@ -33,12 +32,13 @@ namespace SejongTimeTable.Controls
         }
 
         string menu;
-        int majorJudgment; // 전공
-        int diviseJudgment; // 이수구분
-        string nameJudgment; // 교과목명
-        string professorJudgment; // 교수명 
-        int gradeJudgment; // 학년
+        int majorJudgment=Constants.ONE; // 전공 전체로 초기화
+        int diviseJudgment= Constants.ONE; // 이수구분 전체로 초기화
+        string nameJudgment = "전체"; // 교과목명 
+        string professorJudgment = "전체"; // 교수명 
+        int gradeJudgment=Constants.ONE; // 학년 전체로 초기화
 
+        /*
         public void clearCurrentLine()
         {
             string s = "\r";
@@ -46,8 +46,7 @@ namespace SejongTimeTable.Controls
             s += "\r";
             Console.Write(s);
         }
-
-        //clearCurrentLine();
+        */
 
         public void Menu()
         {
@@ -59,14 +58,6 @@ namespace SejongTimeTable.Controls
             MenuView.AfterMenu();
             MenuView.Back();
 
-            /*
-            foreach (ClassVO list in MyClass.Data)
-            {
-
-                Console.WriteLine(list);
-
-            }
-            */
             while (Constants.Is_CHECK)
             {
                 Console.SetCursorPosition(Constants.TIME_TABLE_X, Constants.TIME_TABLE_Y);
@@ -226,11 +217,7 @@ namespace SejongTimeTable.Controls
             string choiceMajor;
             string choiceDivise;
             string choiceGrade;
-            Console.WriteLine(major);
-            Console.WriteLine(divise);
-            Console.WriteLine(className);
-            Console.WriteLine(professor);
-            Console.WriteLine(grade);
+
 
             switch (major)
             {
@@ -261,37 +248,27 @@ namespace SejongTimeTable.Controls
             }
 
 
-            //if (choiceMajor == null) 
-            //if (choiceDivise== null) 
-            //if (className == null) 
-            //if (professor == null) 
-            //if (choiceGrade == null) 
 
             foreach (ClassVO list in MyTable.Data)
             {
                 if (list.mager.Contains(choiceMajor) == true) { Search.Add(list); }
-                if (list.seperation.Contains(choiceDivise) == true) Console.Write("H");// { Search.Add(list);  }
-                if (list.classname.Contains(className) == true) Console.Write(className);//{ Search.Add(list);  }
-                if (list.professor.Contains(professor) == true) Console.Write(professor);//{Search.Add(list);  }
-                if (list.grade.Contains(choiceGrade) == true) Console.Write(choiceGrade);//{ Search.Add(list); }
             }
+            foreach (ClassVO list in MyTable.Data)
+            {
+                if (list.seperation.Contains(choiceDivise) == true) { Search.Add(list); }
+            }
+            /*
+                if (list.classname.Contains(className) == true ) { Search.Add(list);  }
+                if (list.professor.Contains(professor) == true ) {Search.Add(list);  }
+                if (list.grade.Contains(choiceGrade) == true ) { Search.Add(list); }
+            }*/
 
-            //DistinctSearch = (List<ClassVO>)Search.Distinct();
-
+            //Search = Search.Distinct().ToList();
             
             foreach (ClassVO list in Search)
             {
                 Console.WriteLine(list);
-            }
-            
-            
-            
-            /*
-            foreach (ClassVO list in DistinctSearch)
-            {
-                Console.Write(list);
-            }
-            */
+            }               
             
         }
         

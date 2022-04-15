@@ -216,14 +216,7 @@ namespace SejongTimeTable.Models
                     Data.Add(new ClassVO(number, mager, classNumber, group, classname, seperation, grade, score, day, room, professor, language));
 
                 }
-                /*
-                foreach (ClassVO list in Data)
-                {
 
-                    Console.WriteLine(list);
-
-                }
-                */
                 // 모든 워크북 닫기
                 application.Workbooks.Close();
 
