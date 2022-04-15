@@ -150,6 +150,7 @@ namespace SejongTimeTable.Controls
             int sum = Constants.ZERO;
             int number;
             bool check = false;
+
             foreach (ClassVO list in UserData.Data)
             {
                 sum += int.Parse(list.score);
@@ -246,8 +247,9 @@ namespace SejongTimeTable.Controls
 
             foreach (ClassVO list in Favorite.Data)
             {
-                if (list.mager.Contains(choiceDivise) == true) { MySubject.Add(list); }
+                if (list.seperation.Contains(choiceDivise) == true) { MySubject.Add(list); }
             }
+
             Console.Clear();
             Console.Write("\n\n\n\n");
             Console.WriteLine("등록 가능 학점 : {0}      담은 학점 : {1}          담을 과목 NO :\n\n\n", Constants.POSSBLE_SCORE - sum, sum);
