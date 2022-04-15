@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using SejongTimeTable.Views;
 using SejongTimeTable.Models;
+using System.Text.RegularExpressions;
 
 namespace SejongTimeTable.Controls
 {
     internal class FavoriteClass 
     {
         Printing MenuView = new Printing();
-        List<ClassVO> MySubject = new List<ClassVO>();
+        List<ClassVO> MySubject = new List<ClassVO>();//???????????????????????뭐지 이거
+        Regex RemoveData = new Regex(Constants.REMOVE_CLASS);
 
         public ClassVO Favorite; // 엑셀값 저장
         public ClassVO UserData;
@@ -33,12 +35,7 @@ namespace SejongTimeTable.Controls
             Console.Clear();
             MenuView.PrintFavoriteClass();          
 
-            
-            foreach (ClassVO list in UserData.Data)
-            {
-                Console.WriteLine(list);
-            }
-            
+                
 
             while (Constants.Is_CHECK)
             {
@@ -117,8 +114,10 @@ namespace SejongTimeTable.Controls
 
             Constants.Is_CHECK = true;//초기화
         }
-        public void Remove()
+        public void Remove() // 관심과목 삭제
         {
+            string removeNumber;
+            int number;
             Console.Clear();
             Console.WriteLine("\n");
             Console.Write(string.Format("{0,40}", "                                                                                                     신청 학점 : {0}  삭제할 과목 NO : ",UserData.Data[0].score));
@@ -127,13 +126,48 @@ namespace SejongTimeTable.Controls
             {
                 Console.WriteLine(list);
             }
+
             while (true)
             {
+                Console.SetCursorPosition(Constants.REMOVE_X, Constants.REMOVE_Y); //위치 설정
+                removeNumber = Console.ReadLine();
+
+                if (false == RemoveData.IsMatch(removeNumber))
+                {
+                    Console.SetCursorPosition(Constants.REMOVE_X, Constants.REMOVE_Y);
+                    Console.Write("다시 입력해주세요"); continue;
+                }
+                break;
+            }
+
+            Console.Clear();
+
+          
+
+            Console.WriteLine(UserData.Data[0]);
+
+            foreach (ClassVO list in UserData.Data)
+            {
+                if (list.number == removeNumber)
+                {
+                    Console.WriteLine("Helloworld"); //UserData.Data.RemoveAt(number);}
+                    Console.WriteLine(list.number);
+                    Console.WriteLine(removeNumber);
+                }
+                Console.WriteLine(UserData.Data[0]);
+            }
+
+           //Console.WriteLine(UserData.Data[0]);
+
+            while (true)
+            { 
                 Console.SetCursorPosition(Constants.REMOVE_X, Constants.REMOVE_Y);
                 Constants.cursur = Console.ReadKey(true);
                 if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
                 else continue;
+
             }
+
 
 
 

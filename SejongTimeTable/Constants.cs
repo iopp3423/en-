@@ -14,6 +14,7 @@ namespace SejongTimeTable
         static public string MENU = @"^[1-4]{1}$";
         static public string SUBJECT_NAME = @"^[가-힣a-zA-Z]{2,10}$";
         static public string PROFESSOR_NAME = @"^[가-힣a-zA-Z]{2,12}$";
+        static public string REMOVE_CLASS = @"^[1-9]?[0-9]?[0-9]$";// 삭제할과목
         static public string GRADE_CHECK = @"^[1-5]{1}$";
 
         public const int CONSOLE_SIZE_WIDTH = 180;
