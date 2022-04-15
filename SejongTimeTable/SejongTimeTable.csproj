@@ -53,7 +53,6 @@
     <Compile Include="Controls\Logging.cs" />
     <Compile Include="Controls\MyClass.cs" />
     <Compile Include="Controls\TimeTable.cs" />
-    <Compile Include="Models\ClassList.cs" />
     <Compile Include="Models\ClassVO.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -267,10 +267,11 @@ namespace SejongTimeTable.Controls
             }
             foreach (ClassVO list in MyTable.Data)
             {
-                if (list.grade.Contains(choiceGrade) == true ) { Search.Add(list); }
+                if(list.grade.Contains(choiceGrade) == true ) { Search.Add(list); }
+                Search.Add(list);
             }
 
-            //Search = Search.Distinct().ToList();
+            Search = Search.Distinct().ToList();
             
             foreach (ClassVO list in Search)
             {

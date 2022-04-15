@@ -81,7 +81,7 @@ namespace SejongTimeTable.Controls
             }
         }
 
-        public void Search()
+        public void Search() // 관심과목 검색
         {
             Constants.Is_CHECK = true;//초기화
         }
@@ -104,12 +104,16 @@ namespace SejongTimeTable.Controls
 
             Constants.Is_CHECK = true;//초기화
         }
-        public void Table()
+
+        public void Table() // 시간표
         {
             Console.Clear();
             MenuView.PrintMyTable();
+            MenuView.PrintTimeTable();
             Constants.cursur = Console.ReadKey(true);
             if (Constants.cursur.Key == ConsoleKey.F5) Menu(); // 뒤로가기
+
+
 
 
             Constants.Is_CHECK = true;//초기화
@@ -118,17 +122,20 @@ namespace SejongTimeTable.Controls
 
 
 
-
-
-
         public void Remove() // 관심과목 삭제
         {
             string removeNumber;
             int number;
+            int sum = Constants.ZERO;
+            foreach(ClassVO list in UserData.Data)
+            {
+                sum += int.Parse(list.score);
+            }
             bool check = false;
             Console.Clear();
             Console.WriteLine("\n");
-            Console.Write(string.Format("{0,40}", "                                                                                                     신청 학점 : {0}  삭제할 과목 NO : ", UserData.Data[0].score));
+            Console.Write(string.Format("                                                                                                          신청 학점 : {0}  삭제할 과목 NO : ", sum));// 이거 고쳐야함
+            
             MenuView.PrintMyClass();
 
             
