@@ -257,11 +257,18 @@ namespace SejongTimeTable.Controls
             {
                 if (list.seperation.Contains(choiceDivise) == true) { Search.Add(list); }
             }
-            /*
-                if (list.classname.Contains(className) == true ) { Search.Add(list);  }
-                if (list.professor.Contains(professor) == true ) {Search.Add(list);  }
+            foreach (ClassVO list in MyTable.Data)
+            {
+                if (list.classname.Contains(className) == true) { Search.Add(list); }
+            }
+            foreach (ClassVO list in MyTable.Data)
+            {
+                if (list.professor.Contains(professor) == true) { Search.Add(list); }
+            }
+            foreach (ClassVO list in MyTable.Data)
+            {
                 if (list.grade.Contains(choiceGrade) == true ) { Search.Add(list); }
-            }*/
+            }
 
             //Search = Search.Distinct().ToList();
             
