@@ -30,6 +30,7 @@ namespace SejongTimeTable.Controls
         {
             MyData.ClassList(); // 리스트에 엑셀값 저장
             User.Data.Add(MyData.Data[0]);
+            User.Data.Add(MyData.Data[14]);
             Table = new TimeTable(MyData);           
             Favorite = new FavoriteClass(MyData, User);
         }

@@ -114,14 +114,24 @@ namespace SejongTimeTable.Controls
 
             Constants.Is_CHECK = true;//초기화
         }
+
+
+
+
+
+
+
         public void Remove() // 관심과목 삭제
         {
             string removeNumber;
             int number;
+            bool check = false;
             Console.Clear();
             Console.WriteLine("\n");
-            Console.Write(string.Format("{0,40}", "                                                                                                     신청 학점 : {0}  삭제할 과목 NO : ",UserData.Data[0].score));
+            Console.Write(string.Format("{0,40}", "                                                                                                     신청 학점 : {0}  삭제할 과목 NO : ", UserData.Data[0].score));
             MenuView.PrintMyClass();
+
+            
             foreach (ClassVO list in UserData.Data)
             {
                 Console.WriteLine(list);
@@ -140,37 +150,38 @@ namespace SejongTimeTable.Controls
                 break;
             }
 
-            Console.Clear();
+            number = int.Parse(removeNumber);
+            number -= Constants.ONE;
 
-          
-
-            Console.WriteLine(UserData.Data[0]);
 
             foreach (ClassVO list in UserData.Data)
             {
-                if (list.number == removeNumber)
+                if (int.Parse(list.number) == int.Parse(removeNumber))
                 {
-                    Console.WriteLine("Helloworld"); //UserData.Data.RemoveAt(number);}
-                    Console.WriteLine(list.number);
-                    Console.WriteLine(removeNumber);
+                    check = true; // 번호가 존재
+                    UserData.Data.RemoveAt(number); // 번호 삭제
+                    Console.Write("강의를 지웠습니다.");
+                    break;
                 }
-                Console.WriteLine(UserData.Data[0]);
             }
 
-           //Console.WriteLine(UserData.Data[0]);
+            if(check == false) // 존재안하면 다시 
+            {
+                Console.Write("입력한 번호가 없습니다.");
+                Remove();
+            }
+
+
 
             while (true)
-            { 
+            {
                 Console.SetCursorPosition(Constants.REMOVE_X, Constants.REMOVE_Y);
                 Constants.cursur = Console.ReadKey(true);
                 if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
                 else continue;
 
+
             }
-
-
-
-
             Constants.Is_CHECK = true;//초기화
 
         }
