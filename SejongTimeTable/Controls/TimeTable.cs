@@ -51,7 +51,6 @@ namespace SejongTimeTable.Controls
 
         public void Menu()
         {
-            MyClass.ClassList(); // 리스트에 엑셀값 저장
             Console.Clear();
             Constants.Is_CHECK = true; // 초기값으로 변경
             

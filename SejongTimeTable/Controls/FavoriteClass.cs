@@ -11,7 +11,7 @@ namespace SejongTimeTable.Controls
     internal class FavoriteClass 
     {
         Printing MenuView = new Printing();
-        List<ClassVO> MySu = new List<ClassVO>(); // 관심과목 담는 리스트
+        List<ClassVO> MySubject = new List<ClassVO>(); // 관심과목 담는 리스트
 
         public ClassVO Favorite; // 엑셀값 저장
 
@@ -27,13 +27,15 @@ namespace SejongTimeTable.Controls
         public void Menu()
         {
             Constants.Is_CHECK = true; // 초기화
-            Favorite.ClassList(); // 리스트에 엑셀값 저장
             Console.Clear();
             MenuView.PrintFavoriteClass();
+            MySubject.Add(Favorite.Data[1]);
+            /*
             foreach (ClassVO list in Favorite.Data)
             {
                 Console.WriteLine(list);
             }
+            */
 
             while (Constants.Is_CHECK)
             {
@@ -89,7 +91,7 @@ namespace SejongTimeTable.Controls
             MenuView.PrintMyClass();
             Constants.cursur = Console.ReadKey(true);
             if (Constants.cursur.Key == ConsoleKey.F5) Menu(); // 뒤로가기
-           
+            Console.Write(MySubject[0]);
 
 
 

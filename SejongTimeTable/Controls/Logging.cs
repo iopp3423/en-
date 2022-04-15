@@ -25,6 +25,7 @@ namespace SejongTimeTable.Controls
 
         public Logging()
         {
+            MyData.ClassList(); // 리스트에 엑셀값 저장
             Table = new TimeTable(MyData);
             Favorite = new FavoriteClass(MyData);
         }
