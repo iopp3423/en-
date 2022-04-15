@@ -15,7 +15,7 @@ namespace SejongTimeTable.Controls
         TimeTable Table = new TimeTable();
         FavoriteClass Favorite = new FavoriteClass();
         ApplicationClass Appliction = new ApplicationClass();
-        MyClass Class = new MyClass();
+        MyClass MySubject = new MyClass();
         ClassVO MyData = new ClassVO();
 
         Regex ID = new Regex(Constants.ID_CHECK);
@@ -26,6 +26,7 @@ namespace SejongTimeTable.Controls
         public Logging()
         {
             Table = new TimeTable(MyData);
+            Favorite = new FavoriteClass(MyData);
         }
 
         public void LoginId()
@@ -126,7 +127,7 @@ namespace SejongTimeTable.Controls
                             if (Constants.MENU_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Table.Menu(); }
                             if (Constants.MENU_Y == Constants.FAVORITE_Y) { Constants.Is_CHECK = false; Favorite.Menu(); }
                             if (Constants.MENU_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; Appliction.Menu();}
-                            if (Constants.MENU_Y == Constants.MYCLASS_Y) { Constants.Is_CHECK = false; Class.Menu(); }
+                            if (Constants.MENU_Y == Constants.MYCLASS_Y) { Constants.Is_CHECK = false; MySubject.Menu(); }
                             break;
                         }
                     case ConsoleKey.Escape: // 종료

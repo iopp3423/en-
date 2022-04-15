@@ -100,5 +100,20 @@ namespace SejongTimeTable.Views
             Console.WriteLine(string.Format("{0,40}", "                                                     【    관심 과목 삭제    】                                                     \n"));
             Console.WriteLine(string.Format("{0,40}", "=========================================================  관심 과목 메뉴  ========================================================="));
         }
+
+        public void PrintMyTable() // 관심 과목 시간표
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine(string.Format("{0,40}",  "                                                                                                                             F5 : 뒤로가기 "));
+            Console.WriteLine(string.Format("{0,40}", "===========================================================  관심 과목 메뉴  ============================================================="));
+            Console.WriteLine(string.Format("{0,40}", "                        월                        화                        수                       목                        금"));
+        }
+
+        public void PrintMyClass()
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine(string.Format("{0,40}", "                                                                                                                             F5 : 뒤로가기 "));
+            Console.WriteLine(string.Format("{0,40}", "===========================================================  나의 관심 강의  ============================================================="));
+        }
     }
 }
