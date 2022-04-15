@@ -75,8 +75,9 @@ namespace SejongTimeTable
         static public int SUBJECT_Y=10;
         static public int PROFESSOR_Y=12;
         static public int GRADE_MENU_Y=154;
-        static public int SEARCH_AFTER_X = 55;
-        static public int SEARCH_AFTER_Y = 5;
+        static public int SEARCH_AFTER_X = 65;
+        static public int SEARCH_AFTER_Y = 4;
+        static public int POSSBLE_SCORE = 24;
 
 
         static public ConsoleKeyInfo cursur;

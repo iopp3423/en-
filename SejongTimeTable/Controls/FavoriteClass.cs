@@ -95,9 +95,10 @@ namespace SejongTimeTable.Controls
             Console.Clear();
             MenuView.PrintFavoriteMenu();
 
+            Console.SetCursorPosition(Constants.CHOOSE_X, Constants.CHOOSE_Y);
             while (Constants.Is_CHECK)
             {
-                Console.SetCursorPosition(Constants.CHOOSE_X, Constants.CHOOSE_Y);
+                
                 Constants.cursur = Console.ReadKey(true);
                 switch (Constants.cursur.Key)
                 {
@@ -145,8 +146,15 @@ namespace SejongTimeTable.Controls
         public void SearchMyMajor(int major) // 전공검색 후 프린트
         {
             string choiceMajor;
+            string addNumber;
+            int sum = Constants.ZERO;
+            int number;
+            bool check = false;
+            foreach (ClassVO list in UserData.Data)
+            {
+                sum += int.Parse(list.score);
+            }
 
-       
 
             switch (major)
             {
@@ -164,7 +172,7 @@ namespace SejongTimeTable.Controls
             }
             Console.Clear();
             Console.Write("\n\n\n\n");
-            Console.WriteLine("등록 가능 학점 : {0}      담은 학점 : {1}          담을 과목 NO :\n\n\n");
+            Console.WriteLine("등록 가능 학점 : {0}      담은 학점 : {1}          담을 과목 NO :\n\n\n", Constants.POSSBLE_SCORE-sum, sum);
             MenuView.PrintClass();
 
             foreach (ClassVO list in MySubject)
@@ -172,9 +180,44 @@ namespace SejongTimeTable.Controls
                 Console.WriteLine(list);
             }
 
-            Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
 
-            
+            while (true)
+            {
+                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y); //커서 위치변경
+                addNumber = Console.ReadLine();
+
+                if (false == RemoveData.IsMatch(addNumber))
+                {
+                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
+                    Console.Write("다시 입력해주세요"); continue;
+                }
+                break;
+            }
+
+            number = int.Parse(addNumber);
+            number -= Constants.ONE;
+
+
+            foreach (ClassVO list in Favorite.Data)
+            {
+                if (int.Parse(list.number) == int.Parse(addNumber))
+                {
+                    check = true; // 번호가 존재
+                    UserData.Data.Add(list); // 관심과목에 추가
+                    Console.Write("관심과목에 추가하였습니다!");
+                    break;
+                }
+            }
+
+            if (check == false) // 존재안하면 다시 
+            {
+                Console.Write("입력한 번호가 없습니다.");  
+            }
+
+
+
+            Constants.Is_CHECK = true; // 초기화
+            GoBack();
         }
 
 
@@ -183,10 +226,12 @@ namespace SejongTimeTable.Controls
         {
             Console.Clear();
             MenuView.PrintMyClass();
+            Constants.Is_CHECK = true;//초기화
             foreach (ClassVO list in UserData.Data)
             {
                 Console.WriteLine(list);
             }
+
             while (true)
             {
                 Constants.cursur = Console.ReadKey(true);
@@ -196,7 +241,7 @@ namespace SejongTimeTable.Controls
 
 
 
-            Constants.Is_CHECK = true;//초기화
+            
         }
 
         public void SearchTable() // 시간표
@@ -269,9 +314,8 @@ namespace SejongTimeTable.Controls
             foreach (ClassVO list in UserData.Data)
             {
                 Console.WriteLine(list);
-
-
             }
+
 
             while (true)
             {
@@ -307,19 +351,24 @@ namespace SejongTimeTable.Controls
                 Remove();
             }
 
+            GoBack();
 
 
+
+            Constants.Is_CHECK = true;//초기화
+
+        }
+        public void GoBack()
+        {
             while (true)
             {
                 Console.SetCursorPosition(Constants.REMOVE_X, Constants.REMOVE_Y);
                 Constants.cursur = Console.ReadKey(true);
                 if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
                 else continue;
-
             }
-            Constants.Is_CHECK = true;//초기화
-
         }
 
     }
+   
 }
