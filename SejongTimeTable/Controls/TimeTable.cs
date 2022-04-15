@@ -47,8 +47,7 @@ namespace SejongTimeTable.Controls
             s += "\r";
             Console.Write(s);
         }
-        */
-
+        */      
         public void Menu()
         {
             Console.Clear();

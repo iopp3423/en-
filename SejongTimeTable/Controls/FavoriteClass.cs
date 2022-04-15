@@ -95,10 +95,10 @@ namespace SejongTimeTable.Controls
             Console.Clear();
             MenuView.PrintFavoriteMenu();
 
-            Console.SetCursorPosition(Constants.CHOOSE_X, Constants.CHOOSE_Y);
+            
             while (Constants.Is_CHECK)
             {
-                
+                Console.SetCursorPosition(Constants.CHOOSE_X, Constants.CHOOSE_Y);
                 Constants.cursur = Console.ReadKey(true);
                 switch (Constants.cursur.Key)
                 {
@@ -125,11 +125,11 @@ namespace SejongTimeTable.Controls
                     case ConsoleKey.Enter:
                         {
                             if (Constants.CHOOSE_Y == Constants.MAJOR_Y) { Constants.Is_CHECK = false; SearchMyMajor(SearchMajor()); break; }
-                            if (Constants.CHOOSE_Y == Constants.NUMBER_Y) { Constants.Is_CHECK = false; diviseJudgment = Divise(); break; }
+                            if (Constants.CHOOSE_Y == Constants.NUMBER_Y) { Constants.Is_CHECK = false; SearchMyDivse(Divise()); break; }
                             if (Constants.CHOOSE_Y == Constants.SUBJECT_Y) { Constants.Is_CHECK = false; nameJudgment = SearchClassName(); break; }
                             if (Constants.CHOOSE_Y == Constants.PROFESSOR_Y) { Constants.Is_CHECK = false; professorJudgment = SearchProfessorName(); break; }
                             if (Constants.CHOOSE_Y == Constants.GRADE_MENU_Y) { Constants.Is_CHECK = false; gradeJudgment = SearchGrade(); break; }
-                            //if (Constants.CHOOSE_Y == Constants.REFER_Y) { Constants.Is_CHECK = false; SearchClass(majorJudgment, diviseJudgment, nameJudgment, professorJudgment, gradeJudgment); break; }
+                            if (Constants.CHOOSE_Y == Constants.REFER_Y) { Constants.Is_CHECK = false; SearchClass(majorJudgment, diviseJudgment, nameJudgment, professorJudgment, gradeJudgment); break; }
                             break;
                         }
                     case ConsoleKey.Escape: // 종료
@@ -170,6 +170,7 @@ namespace SejongTimeTable.Controls
             {
                 if (list.mager.Contains(choiceMajor) == true) { MySubject.Add(list); }
             }
+
             Console.Clear();
             Console.Write("\n\n\n\n");
             Console.WriteLine("등록 가능 학점 : {0}      담은 학점 : {1}          담을 과목 NO :\n\n\n", Constants.POSSBLE_SCORE-sum, sum);
@@ -212,6 +213,83 @@ namespace SejongTimeTable.Controls
             if (check == false) // 존재안하면 다시 
             {
                 Console.Write("입력한 번호가 없습니다.");  
+            }
+
+
+
+            Constants.Is_CHECK = true; // 초기화
+            GoBack();
+        }
+        public void SearchMyDivse(int divise) // 이수구분 선택 후 프린트
+        {
+            string choiceDivise;
+            string addNumber;
+            int sum = Constants.ZERO;
+            int number;
+            bool check = false;
+
+
+            foreach (ClassVO list in UserData.Data)
+            {
+                sum += int.Parse(list.score);
+            }
+
+
+            switch (divise)
+            {
+                case 1: choiceDivise = "전체"; break;
+                case 2: choiceDivise = "교양필수"; break;
+                case 3: choiceDivise = "전공필수"; break;
+                case 4: choiceDivise = "전공선택"; break;
+                default: choiceDivise = null; break;
+            }
+
+            foreach (ClassVO list in Favorite.Data)
+            {
+                if (list.mager.Contains(choiceDivise) == true) { MySubject.Add(list); }
+            }
+            Console.Clear();
+            Console.Write("\n\n\n\n");
+            Console.WriteLine("등록 가능 학점 : {0}      담은 학점 : {1}          담을 과목 NO :\n\n\n", Constants.POSSBLE_SCORE - sum, sum);
+            MenuView.PrintClass();
+
+            foreach (ClassVO list in MySubject)
+            {
+                Console.WriteLine(list);
+            }
+
+
+            while (true)
+            {
+                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.NUMBER_Y); //커서 위치변경
+                addNumber = Console.ReadLine();
+
+                if (false == RemoveData.IsMatch(addNumber))
+                {
+                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.NUMBER_Y);
+                    Console.Write("다시 입력해주세요"); continue;
+                }
+                break;
+            }
+
+            number = int.Parse(addNumber);
+            number -= Constants.ONE;
+
+
+            foreach (ClassVO list in Favorite.Data)
+            {
+                if (int.Parse(list.number) == int.Parse(addNumber))
+                {
+                    check = true; // 번호가 존재
+                    UserData.Data.Add(list); // 관심과목에 추가
+                    Console.Write("관심과목에 추가하였습니다!");
+                    break;
+                }
+            }
+
+            if (check == false) // 존재안하면 다시 
+            {
+                Console.Write("입력한 번호가 없습니다.");
             }
 
 
@@ -331,15 +409,17 @@ namespace SejongTimeTable.Controls
             }
 
             number = int.Parse(removeNumber);
-            number -= Constants.ONE;
+            Console.WriteLine(number);
+            Console.WriteLine(removeNumber);
+
 
 
             foreach (ClassVO list in UserData.Data)
             {
-                if (int.Parse(list.number) == int.Parse(removeNumber))
+                if (int.Parse(list.number) == number)
                 {
                     check = true; // 번호가 존재
-                    UserData.Data.RemoveAt(number); // 번호 삭제
+                    UserData.Data.RemoveAt(number-1); // 번호 삭제
                     Console.Write("강의를 지웠습니다. F5를 누르면 돌아갑니다.");
                     break;
                 }
