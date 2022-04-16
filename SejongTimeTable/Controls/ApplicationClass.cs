@@ -286,13 +286,10 @@ namespace SejongTimeTable.Controls
         {
             Information.Clear();
 
-            
-
             foreach (ClassVO list in AllData.Data)
             {
                 if (list.classname.Contains(name) == true) { Information.Add(list); }
             }
-            /////////////////////////////////////////////////////////////////////////////////////////
             Check();
         }
 
@@ -315,7 +312,6 @@ namespace SejongTimeTable.Controls
             string choiceGrade;
             Information.Clear();
 
-
             switch (grade)
             {
                 case 1: choiceGrade = "전체"; break;
@@ -328,7 +324,7 @@ namespace SejongTimeTable.Controls
 
             foreach (ClassVO list in AllData.Data)
             {
-                if (list.grade.Contains(choiceGrade) == true) { Information.Add(list); }////////////////////////////////////////////////이 부분 함수만들 때 제외
+                if (list.grade.Contains(choiceGrade) == true) { Information.Add(list); }
             }
 
 
@@ -403,10 +399,13 @@ namespace SejongTimeTable.Controls
                 }
             }
 
+
+
             GoBack();
             Constants.Is_CHECK = true;//초기화
 
         }
+
 
         public void Check()
         {
