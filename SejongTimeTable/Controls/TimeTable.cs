@@ -269,20 +269,24 @@ namespace SejongTimeTable.Controls
                 if(list.grade.Contains(choiceGrade) == true ) { Search.Add(list); }
             }
 
-            //Search = Search[0].number.Distinct().ToList();
-            //Search = MyTable.number;
-
+            Console.Clear();
             Console.SetCursorPosition(Constants.PRINT_X, Constants.PRINT_Y);
             MenuView.PrintTable();
-            
+
+
             foreach (ClassVO list in Search)
             {
                 Console.WriteLine(list);
             }
-
-            Constants.cursur = Console.ReadKey(true);
-            if(Constants.cursur.Key == ConsoleKey.Enter) Menu();
-
+            Console.Write("재검색 : Enter, 프로그램 종료 : ESC");
+            
+            while (true)
+            {
+                Constants.cursur = Console.ReadKey(true);
+                if (Constants.cursur.Key == ConsoleKey.Enter) Menu();
+                else if (Constants.cursur.Key == ConsoleKey.Escape) return;
+                else continue;
+            }
 
 
         }

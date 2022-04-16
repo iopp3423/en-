@@ -32,6 +32,7 @@ namespace SejongTimeTable.Controls
                 Console.WriteLine(list);
 
             }
+
             /*
             while (true)
             {
