@@ -100,6 +100,8 @@ namespace SejongTimeTable
         static public int APPLY_GRADE_Y = 6;
         static public int APPLY_FAVORITE_Y = 7;
         static public int APPLY_SCORE = 21;
+        static public int SEARCH_X = 0;
+        static public int SEARCH_Y = 23;
 
 
 
