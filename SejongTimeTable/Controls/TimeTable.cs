@@ -15,8 +15,7 @@ namespace SejongTimeTable.Controls
         Regex MenuCheck = new Regex(Constants.MENU);
         Regex GradeCheck = new Regex(Constants.GRADE_CHECK);
         Regex SubjectCheck = new Regex(Constants.SUBJECT_NAME);
-        Regex ProfessorCheck = new Regex(Constants.PROFESSOR_NAME);
-
+        Regex ProfessorCheck = new Regex(Constants.PROFESSOR_NAME);      
         List<ClassVO> Search = new List<ClassVO>(); // 검색 값 저장하는 리스트
        //List<ClassVO> DistinctSearch = new List<ClassVO>();
 
@@ -56,7 +55,7 @@ namespace SejongTimeTable.Controls
 
             MenuView.PrintNumber();
             MenuView.AfterMenu();
-            MenuView.Back();
+ 
 
 
             while (Constants.Is_CHECK)
@@ -82,7 +81,7 @@ namespace SejongTimeTable.Controls
                         }
                     case ConsoleKey.F5:
                         {
-                            //LoginAfter();//////////////////////////뒤로가기 클래스 수정해야함
+                            //Login.LoginAfter();//////////////////////////뒤로가기 클래스 수정해야함
                             break;
                         }
                     case ConsoleKey.Enter:
@@ -269,7 +268,6 @@ namespace SejongTimeTable.Controls
                 if(list.grade.Contains(choiceGrade) == true ) { Search.Add(list); }
             }
 
-
             //Search = Search[0].number.Distinct().ToList();
             //Search = MyTable.number;
 
@@ -280,7 +278,11 @@ namespace SejongTimeTable.Controls
             {
                 Console.WriteLine(list);
             }
-           
+
+            Constants.cursur = Console.ReadKey(true);
+            if(Constants.cursur.Key == ConsoleKey.Enter) Menu();
+
+
 
         }
         

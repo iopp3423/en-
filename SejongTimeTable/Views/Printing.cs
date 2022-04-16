@@ -48,7 +48,7 @@ namespace SejongTimeTable.Views
 
         public void PrintNumber()
         {
-            Console.WriteLine("\n\n\n원하시는 메뉴 Enter --->  번호 입력 ----> Enter. ");
+            Console.WriteLine("\n\n\n원하시는 메뉴 Enter --->  번호 입력 ----> 조회. ");
         }
         public void PrintExplanation()
         {

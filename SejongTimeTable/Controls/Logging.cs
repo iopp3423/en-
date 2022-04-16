@@ -86,7 +86,7 @@ namespace SejongTimeTable.Controls
                         MenuView.PrintLogin();
                     }
                     else if (Constants.cursur.Key == ConsoleKey.Escape) return;
-                    else return;
+                    
 
                 }
                 LoginId(); ////////////////////얘도 한 번 봐야함

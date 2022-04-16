@@ -132,7 +132,7 @@ namespace SejongTimeTable.Controls
                             if (Constants.APPLY_MAGOR_Y == Constants.APPLY_SUBJECT_Y) { Constants.Is_CHECK = false; OpenSearch(SearchClassName()); break; }
                             if (Constants.APPLY_MAGOR_Y == Constants.APPLY_PROFESSOR_Y) { Constants.Is_CHECK = false; SearchProfessor(SearchProfessorName()); break; }
                             if (Constants.APPLY_MAGOR_Y == Constants.APPLY_GRADE_Y) { Constants.Is_CHECK = false; SearchMyGrade(SearchGrade()); break; }
-                            //if (Constants.APPLY_MAGOR_Y == Constants.APPLY_FAVORITE_Y) 
+                            if (Constants.APPLY_MAGOR_Y == Constants.APPLY_FAVORITE_Y) { Constants.Is_CHECK = false; ChooseFavorite(); break; }
                             break;
                         }
                     case ConsoleKey.Escape: // 종료
@@ -589,6 +589,23 @@ namespace SejongTimeTable.Controls
             GoBack();
         }
 
+        void ChooseFavorite() // 관심과목에서 추가
+        {          
+            Console.Clear();
+            MenuView.PrintMyClass();
+            Constants.Is_CHECK = true;//초기화
+            foreach (ClassVO list in UserData.Data)
+            {
+                Console.WriteLine(list);
+            }
+
+            while (true)
+            {
+                Constants.cursur = Console.ReadKey(true);
+                if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
+                else continue;
+            }
+        }
 
     }
 }
