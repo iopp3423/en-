@@ -14,12 +14,13 @@ namespace SejongTimeTable.Controls
         Printing MenuView = new Printing();
         TimeTable Table = new TimeTable();
         FavoriteClass Favorite = new FavoriteClass();
-        ApplicationClass Appliction = new ApplicationClass();
+        ApplicationClass Application = new ApplicationClass();
         MyClass MySubject = new MyClass();
 
         ClassVO MyData = new ClassVO();
         ClassVO Search = new ClassVO();
         ClassVO User = new ClassVO();
+        ClassVO Subject = new ClassVO();
 
 
         Regex ID = new Regex(Constants.ID_CHECK);
@@ -34,6 +35,7 @@ namespace SejongTimeTable.Controls
             User.Data.Add(MyData.Data[14]);
             Table = new TimeTable(MyData);           
             Favorite = new FavoriteClass(MyData, User);
+            Application = new ApplicationClass(MyData, User, Subject);
         }
 
         public void LoginId()
@@ -133,7 +135,7 @@ namespace SejongTimeTable.Controls
                         {
                             if (Constants.MENU_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Table.Menu(); }
                             if (Constants.MENU_Y == Constants.FAVORITE_Y) { Constants.Is_CHECK = false; Favorite.Menu(); }
-                            if (Constants.MENU_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; Appliction.ApplyMenu();}
+                            if (Constants.MENU_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; Application.ApplyMenu();}
                             if (Constants.MENU_Y == Constants.MYCLASS_Y) { Constants.Is_CHECK = false; MySubject.Menu(); }
                             break;
                         }
