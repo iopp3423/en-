@@ -125,7 +125,7 @@ namespace SejongTimeTable.Controls
                     case ConsoleKey.Enter:
                         {
                             if (Constants.CHOOSE_Y == Constants.MAJOR_Y) { Constants.Is_CHECK = false; SearchMyMajor(SearchMajor()); break; }
-                            if (Constants.CHOOSE_Y == Constants.NUMBER_Y) { Constants.Is_CHECK = false; SearchMyDivse(Divise()); break; }
+                            if (Constants.CHOOSE_Y == Constants.NUMBER_Y) { Constants.Is_CHECK = false; Constants.DIVISE_CURSUR_Y += Constants.ONE; SearchMyDivse(Divise()); break; }
                             if (Constants.CHOOSE_Y == Constants.SUBJECT_Y) { Constants.Is_CHECK = false; Constants.NAME_CURSUR_Y += Constants.TWO; SearchName(SearchClassName()); break; }
                             if (Constants.CHOOSE_Y == Constants.PROFESSOR_Y) { Constants.Is_CHECK = false; Constants.PROFESSOR_CURSUR_Y += Constants.THREE; SearchProfessor(SearchProfessorName()); break; }
                             if (Constants.CHOOSE_Y == Constants.GRADE_MENU_Y) { Constants.Is_CHECK = false; Constants.GRADE_CURSUR_Y += Constants.FOUR; SearchMyGrade(SearchGrade()); break; }
@@ -141,6 +141,16 @@ namespace SejongTimeTable.Controls
                 }
             }
         }
+        public void ReEnter()
+        {
+            Console.Write("입력한 번호가 없습니다. 돌아가기 : F5");
+            while (true)
+            {
+                Constants.cursur = Console.ReadKey(true);   
+                if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
+                else continue;
+            }
+        }
 
 
         public void SearchMyMajor(int major) // 전공검색 후 프린트
@@ -150,6 +160,7 @@ namespace SejongTimeTable.Controls
             int sum = Constants.ZERO;
             int number;
             bool check = false;
+            MySubject.Clear();
 
             foreach (ClassVO list in UserData.Data)
             {
@@ -200,10 +211,18 @@ namespace SejongTimeTable.Controls
             number -= Constants.ONE;
 
 
-            foreach (ClassVO list in Favorite.Data)
+            foreach (ClassVO list in MySubject)
             {
                 if (int.Parse(list.number) == int.Parse(addNumber))
                 {
+                    sum += int.Parse(list.score);
+                    if (Constants.POSSBLE_SCORE < sum)
+                    {
+                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
+                        GoBack();
+                        break;
+                    }
+
                     check = true; // 번호가 존재
                     UserData.Data.Add(list); // 관심과목에 추가
                     Console.Write("관심과목에 추가하였습니다! 돌아가려면 F5를 눌러주세요");
@@ -213,7 +232,7 @@ namespace SejongTimeTable.Controls
 
             if (check == false) // 존재안하면 다시 
             {
-                Console.Write("입력한 번호가 없습니다.");  
+                ReEnter();
             }
 
 
@@ -229,6 +248,8 @@ namespace SejongTimeTable.Controls
             int sum = Constants.ZERO;
             int number;
             bool check = false;
+            Constants.DIVISE_CURSUR_Y -= Constants.ONE;
+            MySubject.Clear();
 
 
             foreach (ClassVO list in UserData.Data)
@@ -264,12 +285,12 @@ namespace SejongTimeTable.Controls
 
             while (true)
             {
-                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SUBJECT_Y); //커서 위치변경
+                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y); //커서 위치변경
                 addNumber = Console.ReadLine();
 
                 if (false == RemoveData.IsMatch(addNumber))
                 {
-                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SUBJECT_Y);
+                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
                     Console.Write("다시 입력해주세요"); continue;
                 }
                 break;
@@ -279,10 +300,17 @@ namespace SejongTimeTable.Controls
             number -= Constants.ONE;
 
 
-            foreach (ClassVO list in Favorite.Data)
+            foreach (ClassVO list in MySubject)
             {
                 if (int.Parse(list.number) == int.Parse(addNumber))
                 {
+                    sum += int.Parse(list.score);
+                    if(Constants.POSSBLE_SCORE < sum)
+                    {
+                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
+                        GoBack();
+                        break;
+                    }
                     check = true; // 번호가 존재
                     UserData.Data.Add(list); // 관심과목에 추가
                     Console.Write("관심과목에 추가하였습니다! 돌아가려면 F5를 눌러주세요");
@@ -292,7 +320,8 @@ namespace SejongTimeTable.Controls
 
             if (check == false) // 존재안하면 다시 
             {
-                Console.Write("입력한 번호가 없습니다.");
+
+                ReEnter();
             }
 
 
@@ -307,6 +336,7 @@ namespace SejongTimeTable.Controls
             int sum = Constants.ZERO;
             int number;
             bool check = false;
+            MySubject.Clear();
 
             Constants.NAME_CURSUR_Y -= Constants.TWO;// 초기화
 
@@ -352,6 +382,14 @@ namespace SejongTimeTable.Controls
             {
                 if (int.Parse(list.number) == int.Parse(addNumber))
                 {
+                    sum += int.Parse(list.score);
+                    if (Constants.POSSBLE_SCORE < sum)
+                    {
+                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
+                        GoBack();
+                        break;
+                    }
+
                     check = true; // 번호가 존재
                     UserData.Data.Add(list); // 관심과목에 추가
                     Console.Write("관심과목에 추가하였습니다! 돌아가려면 F5를 눌러주세요");
@@ -361,7 +399,7 @@ namespace SejongTimeTable.Controls
 
             if (check == false) // 존재안하면 다시 
             {
-                Console.Write("입력한 번호가 없습니다.");
+                ReEnter();
             }
 
 
@@ -379,6 +417,7 @@ namespace SejongTimeTable.Controls
             int sum = Constants.ZERO;
             int number;
             bool check = false;
+            MySubject.Clear();
 
             Constants.PROFESSOR_CURSUR_Y += Constants.THREE;// 초기화
 
@@ -424,6 +463,14 @@ namespace SejongTimeTable.Controls
             {
                 if (int.Parse(list.number) == int.Parse(addNumber))
                 {
+                    sum += int.Parse(list.score);
+                    if (Constants.POSSBLE_SCORE < sum)
+                    {
+                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
+                        GoBack();
+                        break;
+                    }
+
                     check = true; // 번호가 존재
                     UserData.Data.Add(list); // 관심과목에 추가
                     Console.Write("관심과목에 추가하였습니다! 돌아가려면 F5를 눌러주세요");
@@ -433,7 +480,7 @@ namespace SejongTimeTable.Controls
 
             if (check == false) // 존재안하면 다시 
             {
-                Console.Write("입력한 번호가 없습니다.");
+                ReEnter();
             }
 
 
@@ -449,6 +496,7 @@ namespace SejongTimeTable.Controls
             int number;
             string choiceGrade;
             bool check = false;
+            MySubject.Clear();
 
             Constants.GRADE_CURSUR_Y += Constants.FOUR;// 초기화
 
@@ -504,6 +552,14 @@ namespace SejongTimeTable.Controls
             {
                 if (int.Parse(list.number) == int.Parse(addNumber))
                 {
+                    sum += int.Parse(list.score);
+                    if (Constants.POSSBLE_SCORE < sum)
+                    {
+                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
+                        GoBack();
+                        break;
+                    }
+
                     check = true; // 번호가 존재
                     UserData.Data.Add(list); // 관심과목에 추가
                     Console.Write("관심과목에 추가하였습니다! 돌아가려면 F5를 눌러주세요");
@@ -513,7 +569,7 @@ namespace SejongTimeTable.Controls
 
             if (check == false) // 존재안하면 다시 
             {
-                Console.Write("입력한 번호가 없습니다.");
+                ReEnter();
             }
 
 

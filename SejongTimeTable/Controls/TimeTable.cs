@@ -275,6 +275,7 @@ namespace SejongTimeTable.Controls
 
             Console.SetCursorPosition(Constants.PRINT_X, Constants.PRINT_Y);
             MenuView.PrintTable();
+            
             foreach (ClassVO list in Search)
             {
                 Console.WriteLine(list);
