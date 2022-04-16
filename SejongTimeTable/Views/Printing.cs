@@ -167,6 +167,29 @@ namespace SejongTimeTable.Views
             Console.WriteLine(string.Format("{0,40}", "=========================================================  관심 과목 메뉴  ========================================================="));
         }
 
-        
+        public void PrintApply()
+        {
+            Console.WriteLine("\n\n");
+            Console.WriteLine(string.Format("{0,40}", "=========================================================  관심 과목 메뉴  =========================================================\n"));
+            Console.WriteLine(string.Format("{0,40}", "                                                     【 수강과목 분야별 검색 】                                                    \n"));
+            Console.WriteLine(string.Format("{0,40}", "                                                     【    수강 신청 내역    】                                                     \n"));
+            Console.WriteLine(string.Format("{0,40}", "                                                     【   수강 신청 시간표   】                                                    \n"));
+            Console.WriteLine(string.Format("{0,40}", "                                                     【    수강 과목 삭제    】                                                     \n"));
+            Console.WriteLine(string.Format("{0,40}", "=========================================================  관심 과목 메뉴  ========================================================="));
+        }
+
+        public void ApplyMenu()
+        {
+            Console.WriteLine(string.Format("{0,40}", "=========================================================   수 강 신 청  ========================================================="));
+            Console.WriteLine(string.Format("{0,40}", "                                                                                                               "));
+            Console.WriteLine(string.Format("{0,40}", " 【 개설 학과 전공 】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【    이수구분    】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【    교과목명    】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【     교수명     】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【      학년      】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", " 【    관심 과목   】                                                                                           "));
+            Console.WriteLine(string.Format("{0,40}", "                                                                                                               "));
+            Console.WriteLine(string.Format("{0,40}", "=========================================================   수 강 신 청  ========================================================="));
+        }
     }
 }

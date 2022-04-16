@@ -81,6 +81,25 @@ namespace SejongTimeTable
         static public int TWO = 2;
         static public int THREE = 3;
         static public int FOUR = 4;
+        static public int APPLY_X = 52;
+        static public int APPLY_Y = 5;
+        static public int APPLY_UP_Y = 5;
+        static public int APPLY_DOWN_Y = 11;
+        static public int APPLY_SEARCH_Y = 5;
+        static public int APPLY_LOG_Y = 7;
+        static public int APPLY_TABLE_Y = 5;
+        static public int APPLY_REMOVE_Y = 5;
+        static public int APPLY_MAGOR_X = 1;
+        static public int APPLY_MAGOR_Y = 2;
+        static public int APPLY_MAGOR_UP = 2;
+        static public int APPLY_MAGOR_DOWN = 7;
+        static public int APPLY_DIVISE_Y = 3;
+        static public int APPLY_SUBJECT_Y = 4;
+        static public int APPLY_PROFESSOR_Y = 5;
+        static public int APPLY_GRADE_Y = 6;
+        static public int APPLY_FAVORITE_Y = 7;
+
+
 
 
 

@@ -133,7 +133,7 @@ namespace SejongTimeTable.Controls
                         {
                             if (Constants.MENU_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Table.Menu(); }
                             if (Constants.MENU_Y == Constants.FAVORITE_Y) { Constants.Is_CHECK = false; Favorite.Menu(); }
-                            if (Constants.MENU_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; Appliction.Menu();}
+                            if (Constants.MENU_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; Appliction.ApplyMenu();}
                             if (Constants.MENU_Y == Constants.MYCLASS_Y) { Constants.Is_CHECK = false; MySubject.Menu(); }
                             break;
                         }
