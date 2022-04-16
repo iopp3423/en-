@@ -15,10 +15,9 @@ namespace SejongTimeTable.Controls
         TimeTable Table = new TimeTable();
         FavoriteClass Favorite = new FavoriteClass();
         ApplicationClass Application = new ApplicationClass();
+        LoggingAfter Login = new LoggingAfter();
         MyClass MySubject = new MyClass();
-
         ClassVO MyData = new ClassVO();
-        //ClassVO Search = new ClassVO();
         ClassVO User = new ClassVO();
         ClassVO Subject = new ClassVO();
 
@@ -38,65 +37,7 @@ namespace SejongTimeTable.Controls
             Application = new ApplicationClass(MyData, User, Subject);
             MySubject = new MyClass(Subject);
         }
-        /*
-        public void LoginId()
-        {
-            string id;
-            Console.Clear();
-            MenuView.PrintLogin();
-
-            while (true)
-            {
-                Console.SetCursorPosition(Constants.ID_X_AXIS, Constants.ID_Y_AXIS);
-                id = Console.ReadLine();
-
-                if (Constants.Is_CHECK != ID.IsMatch(id))
-                {
-                    Console.SetCursorPosition(Constants.ID_X_AXIS, Constants.ID_Y_AXIS);
-                    Console.Write("다시 입력해주세요"); continue;
-                }
-                LoginPw(id); /////////////////이거 한 번 봐야함
-                break;              
-            }
-            
-        }
-        
-         public void LoginPw(string id)
-        {
-            string pw;
-
-            while (Constants.IS_TRUE)
-            { 
-                Console.SetCursorPosition(Constants.PW_X_AXIS, Constants.PW_Y_AXIS);
-                pw = Console.ReadLine();
-
-                if (Constants.Is_CHECK != PW.IsMatch(pw))
-                {
-                    Console.SetCursorPosition(Constants.PW_X_AXIS, Constants.PW_Y_AXIS);
-                    Console.Write("다시 입력해주세요:"); continue;
-                }
-
-                if (id == "17013150" && pw == "99999999") { Constants.IS_TRUE = false; LoginAfter(); break; }
-                else
-                {
-                    Console.Write("ID PW가 다릅니다. 재입력 : ENTER, 프로그램 종료 : ESC");
-                    Constants.cursur = Console.ReadKey();
-                    if (Constants.cursur.Key == ConsoleKey.Enter)
-                    {
-                        Console.Clear();
-                        MenuView.PrintLogin();
-                    }
-                    else if (Constants.cursur.Key == ConsoleKey.Escape) return;
-                    
-
-                }
-                LoginId(); ////////////////////얘도 한 번 봐야함
-                break;
-            }
-     
-        }
-        */
-
+       
         public string ReadPassword()
         {
             string password = "";
@@ -162,7 +103,7 @@ namespace SejongTimeTable.Controls
             }
 
 
-            if (id == "17013150" && password == "99999999") { Constants.IS_TRUE = false; LoginAfter(); }
+            if (id == "17013150" && password == "99999999") { Constants.IS_TRUE = false; Login.LoginAfter(); }
             else
             {
                 Console.Write("ID PW가 다릅니다. 재입력 : ENTER, 프로그램 종료 : ESC");               
@@ -172,7 +113,7 @@ namespace SejongTimeTable.Controls
                     if (Constants.cursur.Key == ConsoleKey.Enter)
                     {
                         Console.Clear();
-                        MenuView.PrintLogin();
+                        MenuView.PrintLogin();                       
                         LoginId();
                     }
                     else if (Constants.cursur.Key == ConsoleKey.Escape) return;
@@ -181,8 +122,9 @@ namespace SejongTimeTable.Controls
             }
 
         }
+
         
-        public void LoginAfter()
+       /* public void LoginAfter()
         {
             Console.Clear();
             MenuView.PrintESC();
@@ -234,7 +176,7 @@ namespace SejongTimeTable.Controls
                 default: break;
                     }
             }
-        }     
+        }*/     
             
             
         

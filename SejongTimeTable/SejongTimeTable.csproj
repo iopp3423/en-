@@ -51,6 +51,7 @@
     <Compile Include="Controls\ApplicationClass.cs" />
     <Compile Include="Controls\FavoriteClass.cs" />
     <Compile Include="Controls\Logging.cs" />
+    <Compile Include="Controls\LoggingAfter.cs" />
     <Compile Include="Controls\MyClass.cs" />
     <Compile Include="Controls\TimeTable.cs" />
     <Compile Include="Models\ClassVO.cs" />
