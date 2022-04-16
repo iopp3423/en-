@@ -87,8 +87,8 @@ namespace SejongTimeTable
         static public int APPLY_DOWN_Y = 11;
         static public int APPLY_SEARCH_Y = 5;
         static public int APPLY_LOG_Y = 7;
-        static public int APPLY_TABLE_Y = 5;
-        static public int APPLY_REMOVE_Y = 5;
+        static public int APPLY_TABLE_Y = 9;
+        static public int APPLY_REMOVE_Y =11;
         static public int APPLY_MAGOR_X = 1;
         static public int APPLY_MAGOR_Y = 2;
         static public int APPLY_MAGOR_UP = 2;
@@ -102,6 +102,7 @@ namespace SejongTimeTable
         static public int APPLY_SCORE = 21;
         static public int SEARCH_X = 0;
         static public int SEARCH_Y = 23;
+        static public int REMOVE_APPLY_X = 66;
 
 
 

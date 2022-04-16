@@ -68,9 +68,9 @@ namespace SejongTimeTable.Controls
                     case ConsoleKey.Enter:
                         {
                             if (Constants.APPLY_Y == Constants.APPLY_SEARCH_Y) { Constants.Is_CHECK = false; SearchMenu(); break; }
-                            if (Constants.APPLY_Y == Constants.APPLY_LOG_Y) ;
+                            if (Constants.APPLY_Y == Constants.APPLY_LOG_Y) { Constants.Is_CHECK = false; ApplySubject(); break; }
                             //if (Constants.APPLY_Y == Constants.APPLY_TABLE_Y) ;
-                            //if (Constants.APPLY_Y == Constants.APPLY_REMOVE_Y) ;
+                            if (Constants.APPLY_Y == Constants.APPLY_REMOVE_Y) { Constants.Is_CHECK = false; RemoveSubject(); break; }
                             break;
                         }
                     case ConsoleKey.Escape: // 종료
@@ -86,10 +86,71 @@ namespace SejongTimeTable.Controls
         public void ApplySubject()
         {
             Console.Clear();
+            
             MenuView.PrintMySubject();
+
+            foreach (ClassVO list in Application.Data)
+            {
+                Console.WriteLine(list);
+                
+            }
+            ;
             GoBack();
         }
 
+        public void RemoveSubject()
+        {
+            int sum = Constants.ZERO;
+            int remove;
+            int removeCount = Constants.ZERO;
+            bool check = false;
+            Console.Clear();
+
+            MenuView.PrintMySubject();
+            foreach (ClassVO list in Application.Data)
+            {
+                Console.WriteLine(list);
+                sum += int.Parse(list.score);
+            }
+            Console.SetCursorPosition(Constants.ZERO, Constants.THREE);
+            Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n\n\n", Constants.APPLY_SCORE - sum, sum);
+            Console.SetCursorPosition(Constants.REMOVE_APPLY_X, Constants.THREE);
+
+            remove = int.Parse(Console.ReadLine());
+
+            foreach (ClassVO list in Application.Data)
+            {
+
+                if (remove == int.Parse(list.number))
+                {
+                    check = true; // 번호가 존재
+                    Application.Data.RemoveAt(removeCount); // 번호 삭제
+                    Console.SetCursorPosition(Constants.REMOVE_APPLY_X, Constants.THREE);
+                    Console.Write("강의를 지웠습니다. F5를 누르면 돌아갑니다.");
+                    removeCount = Constants.ZERO;
+                    break;
+                }
+                removeCount++;
+            }
+
+
+            if (check == false) // 존재안하면 다시 
+            {
+                Console.SetCursorPosition(0, 0);
+                Console.Write("입력한 번호가 없습니다. Enter : 재입력, F5 : 뒤로가기");
+                while (true)
+                {
+                    
+                    Constants.cursur = Console.ReadKey(true);                  
+                    if (Constants.cursur.Key == ConsoleKey.Enter) { RemoveSubject(); break; }// 뒤로가기
+                    else if (Constants.cursur.Key == ConsoleKey.F5) { GoBack(); break; }// 뒤로가기
+                    else continue;
+                }
+            }
+
+
+            GoBack();
+        }
         public void SearchMenu()
         {
             

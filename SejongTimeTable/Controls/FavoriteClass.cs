@@ -655,7 +655,8 @@ namespace SejongTimeTable.Controls
             string removeNumber;
             int number;
             int sum = Constants.ZERO;
-            foreach(ClassVO list in UserData.Data)
+            int removeCount = Constants.ZERO;
+            foreach (ClassVO list in UserData.Data)
             {
                 sum += int.Parse(list.score);
             }
@@ -687,32 +688,37 @@ namespace SejongTimeTable.Controls
             }
 
             number = int.Parse(removeNumber);
-            Console.WriteLine(number);
-            Console.WriteLine(removeNumber);
-
-
 
             foreach (ClassVO list in UserData.Data)
             {
-                if (int.Parse(list.number) == number)
+
+                if (number == int.Parse(list.number))
                 {
                     check = true; // 번호가 존재
-                    UserData.Data.RemoveAt(number-1); // 번호 삭제
+                    UserData.Data.RemoveAt(removeCount); // 번호 삭제
+                    Console.SetCursorPosition(Constants.REMOVE_APPLY_X, Constants.THREE);
                     Console.Write("강의를 지웠습니다. F5를 누르면 돌아갑니다.");
+                    removeCount = Constants.ZERO;
                     break;
                 }
+                removeCount++;
             }
+
+           
 
             if(check == false) // 존재안하면 다시 
             {
-                Console.Write("입력한 번호가 없습니다.");
-                Remove();
+                Console.Write("입력한 번호가 없습니다. Enter : 재입력, F5 : 뒤로가기");
+                while (true)
+                {
+                    Constants.cursur = Console.ReadKey(true);
+                    if (Constants.cursur.Key == ConsoleKey.Enter) { Remove(); break; }// 뒤로가기
+                    else if (Constants.cursur.Key == ConsoleKey.F5) { GoBack(); break; }// 뒤로가기
+                    else continue;
+                }
             }
 
             GoBack();
-
-
-
             Constants.Is_CHECK = true;//초기화
 
         }
