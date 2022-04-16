@@ -233,10 +233,7 @@ namespace SejongTimeTable.Controls
         void OpenMajor(int major) // 전공
         {
             string choiceMajor;
-            string addNumber;
             int sum = Constants.ZERO;
-            int number;
-            bool check = false;
             Information.Clear();
 
             foreach (ClassVO list in Application.Data) // 신청 학점
@@ -258,75 +255,14 @@ namespace SejongTimeTable.Controls
             {
                 if (list.mager.Contains(choiceMajor) == true) {Information.Add(list); }
             }
-
-            Console.Clear();
-            Console.Write("\n\n\n\n");
-            Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n\n\n", Constants.APPLY_SCORE - sum, sum);
-            MenuView.PrintClass();
-
-            foreach (ClassVO list in Information)
-            {
-                Console.WriteLine(list);
-            }
-
-            while (true)
-            {
-                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y); //커서 위치변경
-                addNumber = Console.ReadLine();
-
-                if (false == RemoveData.IsMatch(addNumber))
-                {
-                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
-                    Console.Write("다시 입력해주세요"); continue;
-                }
-                break;
-            }
-
-            number = int.Parse(addNumber);
-
-            foreach (ClassVO list in Information)
-            {
-                if (int.Parse(list.number) == int.Parse(addNumber))
-                {
-                    sum += int.Parse(list.score);
-                    if (Constants.APPLY_SCORE < sum)
-                    {
-                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
-                        //GoBack();
-                        break;
-                    }
-
-                    check = true; // 번호가 존재
-                    Application.Data.Add(list); // 관심과목에 추가
-                    Console.Write("신청되었습니다! 돌아가려면 F5를 눌러주세요");
-                    break;
-                }
-            }
-
-            if (check == false) // 존재안하면 다시 
-            {
-                ReEnter();
-            }
-
-            Constants.Is_CHECK = true; // 초기화
-            GoBack();
+            Check();
         }
 
 
         void OpenDivise(int divise) // 이수구분
         {
             string choiceDivise;
-            string addNumber;
-            int sum = Constants.ZERO;
-            int number;
-            bool check = false;
             Information.Clear();
-
-
-            foreach (ClassVO list in Application.Data) // 신청 학점
-            {
-                sum += int.Parse(list.score);
-            }
 
 
             switch (divise)
@@ -342,230 +278,41 @@ namespace SejongTimeTable.Controls
             {
                 if (list.seperation.Contains(choiceDivise) == true) { Information.Add(list); }
             }
-
-            Console.Clear();
-            Console.Write("\n\n\n\n");
-            Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n\n\n", Constants.APPLY_SCORE - sum, sum);
-            MenuView.PrintClass();
-
-            foreach (ClassVO list in Information)
-            {
-                Console.WriteLine(list);
-            }
-
-
-            while (true)
-            {
-                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y); //커서 위치변경
-                addNumber = Console.ReadLine();
-
-                if (false == RemoveData.IsMatch(addNumber))
-                {
-                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
-                    Console.Write("다시 입력해주세요"); continue;
-                }
-                break;
-            }
-
-
-            number = int.Parse(addNumber);
-            //number -= Constants.ONE;
-
-
-            foreach (ClassVO list in Information)
-            {
-                if (int.Parse(list.number) == int.Parse(addNumber))
-                {
-                    sum += int.Parse(list.score);
-                    if (Constants.APPLY_SCORE < sum)
-                    {
-                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
-                        break;
-                    }
-
-                    check = true; // 번호가 존재
-                    Application.Data.Add(list); // 관심과목에 추가
-                    Console.Write("신청되었습니다! 돌아가려면 F5를 눌러주세요");
-                    break;
-                }
-            }
-
-            if (check == false) // 존재안하면 다시 
-            {
-
-                ReEnter();
-            }
-
-
-
-            Constants.Is_CHECK = true; // 초기화
-            GoBack();
+            Check();
         }
 
 
         public void OpenSearch(string name) // 교과목명 프린트
         {
-            string addNumber;
-            int sum = Constants.ZERO;
-            int number;
-            bool check = false;
             Information.Clear();
 
-            foreach (ClassVO list in Application.Data) // 신청 학점
-            {
-                sum += int.Parse(list.score);
-            }
+            
 
             foreach (ClassVO list in AllData.Data)
             {
                 if (list.classname.Contains(name) == true) { Information.Add(list); }
             }
-
-            Console.Clear();
-            Console.Write("\n\n\n\n");
-            Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n\n\n", Constants.APPLY_SCORE - sum, sum);
-            MenuView.PrintClass();
-
-            foreach (ClassVO list in Information) // 유저가 선택한 값 출력
-            {
-                Console.WriteLine(list);
-            }
-
-
-            while (true)
-            {
-                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y); //커서 위치변경
-                addNumber = Console.ReadLine();
-
-                if (false == RemoveData.IsMatch(addNumber))
-                {
-                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
-                    Console.Write("다시 입력해주세요"); continue;
-                }
-                break;
-            }
-
-
-            number = int.Parse(addNumber);
-            //number -= Constants.ONE;
-
-
-            foreach (ClassVO list in Information)
-            {
-                if (int.Parse(list.number) == int.Parse(addNumber))
-                {
-                    sum += int.Parse(list.score);
-                    if (Constants.APPLY_SCORE < sum)
-                    {
-                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
-                        break;
-                    }
-
-                    check = true; // 번호가 존재
-                    Application.Data.Add(list); // 관심과목에 추가
-                    Console.Write("신청되었습니다! 돌아가려면 F5를 눌러주세요");
-                    break;
-                }
-            }
-
-            if (check == false) // 존재안하면 다시 
-            {
-
-                ReEnter();
-            }
-
-
-
-            Constants.Is_CHECK = true; // 초기화
-            GoBack();
+            /////////////////////////////////////////////////////////////////////////////////////////
+            Check();
         }
 
         public void SearchProfessor(string name) // 교수명 프린트
         {
-            string addNumber;
-            int sum = Constants.ZERO;
-            int number;
-            bool check = false;
             Information.Clear();
-
-            foreach (ClassVO list in Application.Data) // 신청 학점
-            {
-                sum += int.Parse(list.score);
-            }
 
             foreach (ClassVO list in AllData.Data)
             {
                 if (list.professor.Contains(name) == true) { Information.Add(list); }
             }
-
-
-            Console.Clear();
-            Console.Write("\n\n\n\n");
-            Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n\n\n", Constants.APPLY_SCORE - sum, sum);
-            MenuView.PrintClass();
-
-            foreach (ClassVO list in Information) // 유저가 선택한 값 출력
-            {
-                Console.WriteLine(list);
-            }
-
-
-            while (true)
-            {
-                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y); //커서 위치변경
-                addNumber = Console.ReadLine();
-
-                if (false == RemoveData.IsMatch(addNumber))
-                {
-                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
-                    Console.Write("다시 입력해주세요"); continue;
-                }
-                break;
-            }
-
-            number = int.Parse(addNumber);
-            //number -= Constants.ONE;
-
-
-            foreach (ClassVO list in Information)
-            {
-                if (int.Parse(list.number) == int.Parse(addNumber))
-                {
-                    sum += int.Parse(list.score);
-                    if (Constants.APPLY_SCORE < sum)
-                    {
-                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
-                        break;
-                    }
-
-                    check = true; // 번호가 존재
-                    Application.Data.Add(list); // 관심과목에 추가
-                    Console.Write("신청되었습니다! 돌아가려면 F5를 눌러주세요");
-                    break;
-                }
-            }
-
-            if (check == false) // 존재안하면 다시 
-            {
-
-                ReEnter();
-            }
-
-
-
-            Constants.Is_CHECK = true; // 초기화
-            GoBack();
+            Check();
         }
 
 
 
         public void SearchMyGrade(int grade) // 학년 프린트
         {
-            string addNumber;
+
             string choiceGrade;
-            int sum = Constants.ZERO;
-            int number;          
-            bool check = false;
             Information.Clear();
 
 
@@ -579,76 +326,13 @@ namespace SejongTimeTable.Controls
                 default: choiceGrade = null; break;
             }
 
-            foreach(ClassVO list in Application.Data) // 신청 학점
-            {
-                sum += int.Parse(list.score);
-            }
-
             foreach (ClassVO list in AllData.Data)
             {
                 if (list.grade.Contains(choiceGrade) == true) { Information.Add(list); }////////////////////////////////////////////////이 부분 함수만들 때 제외
             }
 
 
-            Console.Clear();
-            Console.Write("\n\n\n\n");
-            Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n\n\n", Constants.APPLY_SCORE - sum, sum);
-            MenuView.PrintClass();
-
-            foreach (ClassVO list in Information) // 유저가 선택한 값 출력
-            {
-                Console.WriteLine(list);
-            }
-
-
-            while (true)
-            {
-                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y); //커서 위치변경
-                addNumber = Console.ReadLine();
-
-                if (false == RemoveData.IsMatch(addNumber))
-                {
-                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
-                    Console.Write("다시 입력해주세요"); continue;
-                }
-                break;
-            }
-
-            number = int.Parse(addNumber);
-            number -= Constants.ONE;
-
-
-            number = int.Parse(addNumber);
-            //number -= Constants.ONE;
-
-
-            foreach (ClassVO list in Information)
-            {
-                if (int.Parse(list.number) == int.Parse(addNumber))
-                {
-                    sum += int.Parse(list.score);
-                    if (Constants.APPLY_SCORE < sum)
-                    {
-                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
-                        break;
-                    }
-
-                    check = true; // 번호가 존재
-                    Application.Data.Add(list); // 관심과목에 추가
-                    Console.Write("신청되었습니다! 돌아가려면 F5를 눌러주세요");
-                    break;
-                }
-            }
-
-            if (check == false) // 존재안하면 다시 
-            {
-                ReEnter();
-            }
-
-
-
-            Constants.Is_CHECK = true; // 초기화
-            GoBack();
+            Check();
         }
 
         void ChooseFavorite() // 관심과목에서 추가
@@ -664,7 +348,7 @@ namespace SejongTimeTable.Controls
             bool check = false;
             Console.Clear();
             Console.WriteLine("\n");
-            Console.Write(string.Format("                                                                                                      신청 학점 : {0}  삭제할 과목 NO : ", sum));// 이거 고쳐야함
+            Console.Write(string.Format("                                                                                                      신청 학점 : {0}  추가할 과목 NO : ", sum));
 
             MenuView.PrintMyClass();
 
@@ -722,6 +406,71 @@ namespace SejongTimeTable.Controls
             GoBack();
             Constants.Is_CHECK = true;//초기화
 
+        }
+
+        public void Check()
+        {
+            string addNumber;
+            int sum = Constants.ZERO;
+            bool check = false;
+
+            Console.Clear();
+            Console.Write("\n\n\n\n");
+            Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n\n\n", Constants.APPLY_SCORE - sum, sum);
+            MenuView.PrintClass();
+
+            foreach (ClassVO list in Application.Data) // 신청 학점
+            {
+                sum += int.Parse(list.score);
+            }
+
+            foreach (ClassVO list in Information) // 유저가 선택한 값 출력
+            {
+                Console.WriteLine(list);
+            }
+
+
+            while (true)
+            {
+                Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y); //커서 위치변경
+                addNumber = Console.ReadLine();
+
+                if (false == RemoveData.IsMatch(addNumber))
+                {
+                    Console.SetCursorPosition(Constants.SEARCH_AFTER_X, Constants.SEARCH_AFTER_Y);
+                    Console.Write("다시 입력해주세요"); continue;
+                }
+                break;
+            }
+
+
+
+            foreach (ClassVO list in Information)
+            {
+                if (int.Parse(list.number) == int.Parse(addNumber))
+                {
+                    sum += int.Parse(list.score);
+                    if (Constants.APPLY_SCORE < sum)
+                    {
+                        Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
+                        break;
+                    }
+
+                    check = true; // 번호가 존재
+                    Application.Data.Add(list); // 관심과목에 추가
+                    Console.Write("신청되었습니다! 돌아가려면 F5를 눌러주세요");
+                    break;
+                }
+            }
+            if (check == false) // 존재안하면 다시 
+            {
+
+                ReEnter();
+            }
+
+
+            Constants.Is_CHECK = true; // 초기화
+            GoBack();
         }
     }
 }
