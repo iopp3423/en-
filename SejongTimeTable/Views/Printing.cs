@@ -191,5 +191,11 @@ namespace SejongTimeTable.Views
             Console.WriteLine(string.Format("{0,40}", "                                                                                                               "));
             Console.WriteLine(string.Format("{0,40}", "=========================================================   수 강 신 청  ========================================================="));
         }
+
+        public void PrintMySubject()
+        {
+            Console.WriteLine(string.Format("{0,40}", "=========================================================   수강 신청 목록  ========================================================="));
+            Console.WriteLine(string.Format("{0,40}", "NO       개설학과전공      학수번호     분반     교과목명        이수구분      학년 학점      요일 및 강의시간     강의실       교수명     강의언어\n"));
+        }
     }
 }

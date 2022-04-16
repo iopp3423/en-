@@ -68,7 +68,7 @@ namespace SejongTimeTable.Controls
                     case ConsoleKey.Enter:
                         {
                             if (Constants.APPLY_Y == Constants.APPLY_SEARCH_Y) { Constants.Is_CHECK = false; SearchMenu(); break; }
-                            //if (Constants.APPLY_Y == Constants.APPLY_LOG_Y) ;
+                            if (Constants.APPLY_Y == Constants.APPLY_LOG_Y) ;
                             //if (Constants.APPLY_Y == Constants.APPLY_TABLE_Y) ;
                             //if (Constants.APPLY_Y == Constants.APPLY_REMOVE_Y) ;
                             break;
@@ -81,17 +81,18 @@ namespace SejongTimeTable.Controls
                     default: break;
                 }
             }
-
-
         }
+
+        public void ApplySubject()
+        {
+            Console.Clear();
+            MenuView.PrintMySubject();
+            GoBack();
+        }
+
         public void SearchMenu()
         {
-            string menu;
-            int majorJudgment = Constants.ONE; // 전공 전체로 초기화
-            int diviseJudgment = Constants.ONE; // 이수구분 전체로 초기화
-            string nameJudgment = "전체"; // 교과목명 
-            string professorJudgment = "전체"; // 교수명 
-            int gradeJudgment = Constants.ONE; // 학년 전체로 초기화
+            
 
             Console.Clear();
             MenuView.ApplyMenu();
