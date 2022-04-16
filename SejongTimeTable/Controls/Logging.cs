@@ -15,7 +15,6 @@ namespace SejongTimeTable.Controls
         TimeTable Table = new TimeTable();
         FavoriteClass Favorite = new FavoriteClass();
         ApplicationClass Application = new ApplicationClass();
-        LoggingAfter Login = new LoggingAfter();
         MyClass MySubject = new MyClass();
         ClassVO MyData = new ClassVO();
         ClassVO User = new ClassVO();
@@ -103,7 +102,7 @@ namespace SejongTimeTable.Controls
             }
 
 
-            if (id == "17013150" && password == "99999999") { Constants.IS_TRUE = false; Login.LoginAfter(); }
+            if (id == "17013150" && password == "99999999") { Constants.IS_TRUE = false; LoginAfter(); }
             else
             {
                 Console.Write("ID PW가 다릅니다. 재입력 : ENTER, 프로그램 종료 : ESC");               
@@ -124,7 +123,7 @@ namespace SejongTimeTable.Controls
         }
 
         
-       /* public void LoginAfter()
+       public void LoginAfter()
         {
             Console.Clear();
             MenuView.PrintESC();
@@ -162,7 +161,7 @@ namespace SejongTimeTable.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Constants.MENU_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Table.Menu(); } // 강의시간표
+                           // if (Constants.MENU_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; Table.Menu(); } // 강의시간표
                             if (Constants.MENU_Y == Constants.FAVORITE_Y) { Constants.Is_CHECK = false; Favorite.Menu(); } //관심과목
                             if (Constants.MENU_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; Application.ApplyMenu();} // 수강신청
                             if (Constants.MENU_Y == Constants.MYCLASS_Y) { Constants.Is_CHECK = false; MySubject.Menu(); } // 수강내역조회
@@ -176,7 +175,7 @@ namespace SejongTimeTable.Controls
                 default: break;
                     }
             }
-        }*/     
+        }
             
             
         

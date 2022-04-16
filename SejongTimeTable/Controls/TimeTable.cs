@@ -16,7 +16,7 @@ namespace SejongTimeTable.Controls
         Regex GradeCheck = new Regex(Constants.GRADE_CHECK);
         Regex SubjectCheck = new Regex(Constants.SUBJECT_NAME);
         Regex ProfessorCheck = new Regex(Constants.PROFESSOR_NAME);
-        LoggingAfter After = new LoggingAfter();
+        //Logging LoginAfter = new Logging();
         List<ClassVO> Search = new List<ClassVO>(); // 검색 값 저장하는 리스트
        //List<ClassVO> DistinctSearch = new List<ClassVO>();
 

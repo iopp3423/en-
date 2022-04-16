@@ -113,10 +113,10 @@ namespace SejongTimeTable.Models
             return number  + "    " + mager  + "    " + classNumber   + "      " + group  + "    " + classname + "   " + seperation  + "     " + grade  + "     " + score + "        " + day + "     " + room  + "      " + professor  + "      " +language;
         }
 
-
-
+       
         public void ClassList()
         {
+
             int row, col;
             
 
