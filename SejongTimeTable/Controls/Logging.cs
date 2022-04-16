@@ -52,11 +52,11 @@ namespace SejongTimeTable.Controls
                 {
                     if (!string.IsNullOrEmpty(password))
                     {                  
-                        password = password.Substring(0, password.Length - 1);                   
+                        password = password.Substring(0, password.Length - Constants.ONE);                   
                         int passwordX = Console.CursorLeft;                      
-                        Console.SetCursorPosition(passwordX - 1, Console.CursorTop);                     
+                        Console.SetCursorPosition(passwordX - Constants.ONE, Console.CursorTop);                     
                         Console.Write(" ");                       
-                        Console.SetCursorPosition(passwordX - 1, Console.CursorTop);
+                        Console.SetCursorPosition(passwordX - Constants.ONE, Console.CursorTop);
                     }
                 }
                 info = Console.ReadKey(true);

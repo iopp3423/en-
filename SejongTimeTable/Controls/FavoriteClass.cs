@@ -46,16 +46,16 @@ namespace SejongTimeTable.Controls
 
                     case ConsoleKey.UpArrow:
                         {
-                            Constants.FAVORITE_MENU_Y -= 2;
-                            if (Constants.FAVORITE_MENU_Y < Constants.FAVORITE_UP_Y) Constants.FAVORITE_MENU_Y += 2; // 선택 외의 화면으로 커서 못나감
+                            Constants.FAVORITE_MENU_Y -= Constants.TWO;
+                            if (Constants.FAVORITE_MENU_Y < Constants.FAVORITE_UP_Y) Constants.FAVORITE_MENU_Y += Constants.TWO; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
 
                     // 하
                     case ConsoleKey.DownArrow:
                         {
-                            Constants.FAVORITE_MENU_Y += 2;
-                            if (Constants.FAVORITE_MENU_Y > Constants.FAVORITE_DOWN_Y) Constants.FAVORITE_MENU_Y -= 2; // 선택 외의 화면으로 커서 못나감
+                            Constants.FAVORITE_MENU_Y += Constants.TWO;
+                            if (Constants.FAVORITE_MENU_Y > Constants.FAVORITE_DOWN_Y) Constants.FAVORITE_MENU_Y -= Constants.TWO; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.F5:
@@ -105,16 +105,16 @@ namespace SejongTimeTable.Controls
 
                     case ConsoleKey.UpArrow:
                         {
-                            Constants.CHOOSE_Y -= 2;
-                            if (Constants.CHOOSE_Y < Constants.CHOOSE_UP_Y) Constants.CHOOSE_Y += 2; // 선택 외의 화면으로 커서 못나감
+                            Constants.CHOOSE_Y -= Constants.TWO;
+                            if (Constants.CHOOSE_Y < Constants.CHOOSE_UP_Y) Constants.CHOOSE_Y += Constants.TWO; // 선택 외의 화면으로 커서 못나감
                             break; 
                         }
 
                     // 하
                     case ConsoleKey.DownArrow:
                         {
-                            Constants.CHOOSE_Y += 2;
-                            if (Constants.CHOOSE_Y > Constants.CHOOSE_DOWN_Y) Constants.CHOOSE_Y -= 2; // 선택 외의 화면으로 커서 못나감
+                            Constants.CHOOSE_Y += Constants.TWO;
+                            if (Constants.CHOOSE_Y > Constants.CHOOSE_DOWN_Y) Constants.CHOOSE_Y -= Constants.TWO; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.F5:
@@ -602,6 +602,7 @@ namespace SejongTimeTable.Controls
 
         public void SearchTable() // 시간표
         {
+            /*
             int row, col;
             string monday = "월";
             string tuesday = "화";
@@ -620,7 +621,7 @@ namespace SejongTimeTable.Controls
             //Console.WriteLine(UserData.Data[1]);
             // 18:00~19:00
 
-            /*
+            
             for (col = 0; col < 20; col++)
                 {
                     Console.SetCursorPosition(13, 5+col+col);

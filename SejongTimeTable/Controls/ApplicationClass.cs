@@ -190,10 +190,10 @@ namespace SejongTimeTable.Controls
                     case ConsoleKey.Enter:
                         {
                             if (Constants.APPLY_MAGOR_Y == Constants.APPLY_MAGOR) { Constants.Is_CHECK = false; OpenMajor(SearchMajor()); break; }
-                            if (Constants.APPLY_MAGOR_Y == Constants.APPLY_DIVISE_Y) { Constants.Is_CHECK = false; OpenDivise(Divise());break; }
-                            if (Constants.APPLY_MAGOR_Y == Constants.APPLY_SUBJECT_Y) { Constants.Is_CHECK = false; OpenSearch(SearchClassName()); break; }
-                            if (Constants.APPLY_MAGOR_Y == Constants.APPLY_PROFESSOR_Y) { Constants.Is_CHECK = false; SearchProfessor(SearchProfessorName()); break; }
-                            if (Constants.APPLY_MAGOR_Y == Constants.APPLY_GRADE_Y) { Constants.Is_CHECK = false; SearchMyGrade(SearchGrade()); break; }
+                            if (Constants.APPLY_MAGOR_Y == Constants.APPLY_DIVISE_Y) { Constants.Is_CHECK = false; Constants.DIVISE_CURSUR_Y += Constants.ONE; OpenDivise(Divise());break; }
+                            if (Constants.APPLY_MAGOR_Y == Constants.APPLY_SUBJECT_Y) { Constants.Is_CHECK = false; Constants.NAME_CURSUR_Y += Constants.TWO; OpenSearch(SearchClassName()); break; }
+                            if (Constants.APPLY_MAGOR_Y == Constants.APPLY_PROFESSOR_Y) { Constants.Is_CHECK = false; Constants.PROFESSOR_CURSUR_Y += Constants.THREE; SearchProfessor(SearchProfessorName()); break; }
+                            if (Constants.APPLY_MAGOR_Y == Constants.APPLY_GRADE_Y) { Constants.Is_CHECK = false; Constants.GRADE_CURSUR_Y += Constants.FOUR;SearchMyGrade(SearchGrade()); break; }
                             if (Constants.APPLY_MAGOR_Y == Constants.APPLY_FAVORITE_Y) { Constants.Is_CHECK = false; ChooseFavorite(); break; }
                             break;
                         }
@@ -653,21 +653,75 @@ namespace SejongTimeTable.Controls
 
         void ChooseFavorite() // 관심과목에서 추가
         {          
+            string addNumber;
+            int number;
+            int sum = Constants.ZERO;
+            int addCount = Constants.ZERO;
+            foreach (ClassVO list in UserData.Data)
+            {
+                sum += int.Parse(list.score);
+            }
+            bool check = false;
             Console.Clear();
+            Console.WriteLine("\n");
+            Console.Write(string.Format("                                                                                                      신청 학점 : {0}  삭제할 과목 NO : ", sum));// 이거 고쳐야함
+
             MenuView.PrintMyClass();
-            Constants.Is_CHECK = true;//초기화
+
+
             foreach (ClassVO list in UserData.Data)
             {
                 Console.WriteLine(list);
             }
 
+
             while (true)
             {
-                Constants.cursur = Console.ReadKey(true);
-                if (Constants.cursur.Key == ConsoleKey.F5) { Menu(); break; }// 뒤로가기
-                else continue;
-            }
-        }
+                Console.SetCursorPosition(Constants.REMOVE_X, Constants.REMOVE_Y); //위치 설정
+                addNumber = Console.ReadLine();
 
+                if (false == RemoveData.IsMatch(addNumber))
+                {
+                    Console.SetCursorPosition(Constants.REMOVE_X, Constants.REMOVE_Y);
+                    Console.Write("다시 입력해주세요"); continue;
+                }
+                break;
+            }
+
+            number = int.Parse(addNumber);
+
+            foreach (ClassVO list in UserData.Data)
+            {
+
+                if (number == int.Parse(list.number))
+                {
+                    check = true; // 번호가 존재
+                    Application.Data.Add(list);// 번호 삭제
+                    Console.SetCursorPosition(Constants.REMOVE_APPLY_X, Constants.THREE);
+                    Console.Write("강의를 신청하였습니다. F5를 누르면 돌아갑니다.");
+                    addCount = Constants.ZERO;
+                    break;
+                }
+                addCount++;
+            }
+
+
+
+            if (check == false) // 존재안하면 다시 
+            {
+                Console.Write("입력한 번호가 없습니다. Enter : 재입력, F5 : 뒤로가기");
+                while (true)
+                {
+                    Constants.cursur = Console.ReadKey(true);
+                    if (Constants.cursur.Key == ConsoleKey.Enter) { ChooseFavorite(); break; }// 뒤로가기
+                    else if (Constants.cursur.Key == ConsoleKey.F5) { GoBack(); break; }// 뒤로가기
+                    else continue;
+                }
+            }
+
+            GoBack();
+            Constants.Is_CHECK = true;//초기화
+
+        }
     }
 }
