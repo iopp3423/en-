@@ -7,6 +7,10 @@ using SejongTimeTable.Views;
 using SejongTimeTable.Models;
 using System.Text.RegularExpressions;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
+
+
+
 
 namespace SejongTimeTable.Controls
 {
@@ -95,8 +99,53 @@ namespace SejongTimeTable.Controls
                 Console.WriteLine(list);
                 
             }
-            ;
+            SaveExcel();
+            
             GoBack();
+            
+            
+
+        }
+        public void SaveExcel()
+        {
+
+            
+                try
+                {
+                    // Excel Application 객체 생성
+                    Excel.Application excelApp = new Excel.Application();
+
+                    // Workbook 객체 생성 및 워크북 추가
+                    Excel.Workbook workbook = excelApp.Workbooks.Add();
+
+
+
+                    // sheets에 읽어온 엑셀값을 넣기 (한 workbook 내의 모든 sheet 가져옴)
+                    Excel.Sheets sheets = workbook.Sheets;
+
+                    // 특정 sheet의 값 가져오기
+                    // Excel.Worksheet worksheet = sheets["ensharp"] as Excel.Worksheet;
+                    Excel.Worksheet worksheet = workbook.Worksheets.get_Item(1) as Excel.Worksheet;
+                    worksheet.Cells[1, 1] = "No";
+
+
+
+
+
+
+
+                    // 모든 워크북 닫기
+                    excelApp.Workbooks.Close();
+
+                    // application 종료
+                    excelApp.Quit();
+                }
+                catch (SystemException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+            
         }
 
         public void RemoveSubject()

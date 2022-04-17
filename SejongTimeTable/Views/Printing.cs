@@ -110,7 +110,7 @@ namespace SejongTimeTable.Views
             Console.WriteLine("\n");
             Console.WriteLine(string.Format("{0,40}",  "                                                                                                                             F5 : 뒤로가기 "));
             Console.WriteLine(string.Format("{0,40}", "===========================================================  관심 과목 메뉴  ============================================================="));
-            Console.WriteLine(string.Format("{0,40}", "                        월                        화                        수                       목                        금"));
+            Console.WriteLine(string.Format("{0,40}", "                        월                        화                        수                        목                        금"));
         }
 
         public void PrintMyClass()
@@ -145,7 +145,7 @@ namespace SejongTimeTable.Views
             Console.WriteLine("18:00~18:30\n");
             Console.WriteLine("18:30~19:00\n");
             Console.WriteLine("19:00~19:30\n");
-            Console.WriteLine("19:00~20:00\n");          
+            Console.WriteLine("19:30~20:00\n");          
         }
 
         public void PrintTable()

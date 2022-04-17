@@ -304,7 +304,7 @@ namespace SejongTimeTable.Controls
 
         public void SearchTable() // 시간표
         {
-            /*
+            
             int row, col;
             string monday = "월";
             string tuesday = "화";
@@ -314,33 +314,91 @@ namespace SejongTimeTable.Controls
             Console.Clear();
             MenuView.PrintMyTable();
             MenuView.PrintTimeTable();
+            //UserData.Data 나의 관심과목
 
-            //Console.WriteLine(UserData.Data[0].room);
-           
-            Console.SetCursorPosition(13, 5);
-            //Console.WriteLine(UserData.Data[0].classname);
-            //Console.WriteLine(UserData.Data[0]);
-            //Console.WriteLine(UserData.Data[1]);
-            // 18:00~19:00
-
-            
-            for (col = 0; col < 20; col++)
+            foreach (ClassVO list in UserData.Data)
+            {
+                if(list.day.Contains("월"));
+                if(list.day.Contains("화"));
+                if(list.day.Contains("수"));
+                if(list.day.Contains("목"))
                 {
-                    Console.SetCursorPosition(13, 5+col+col);
-                    if (UserData.Data[0].day.Contains("월") && UserData.Data[0].day.Contains(col.ToString())) Console.Write(UserData.Data[0].room);
-                    else Console.Write("                            ");
-                    if (UserData.Data[0].day.Contains("화")) Console.Write(UserData.Data[0].room);
-                    else Console.Write("                            ");
-                    if (UserData.Data[0].day.Contains("수")) Console.Write(UserData.Data[0].room);
-                    else Console.Write("                            ");
-                    if (UserData.Data[0].day.Contains("목")) Console.Write(UserData.Data[0].room);
-                    else Console.Write("                            ");
-                    if (UserData.Data[0].day.Contains("금") && UserData.Data[0].day.Contains(col) Console.Write(UserData.Data[0].room);
-                    else Console.WriteLine();
-                    Console.SetCursorPosition(13, 6);
-
+                    if (list.day.Contains("18:00~19:00"))
+                    {
+                        Console.SetCursorPosition(125, 37);
+                        Console.WriteLine(list.classname);
+                        Console.SetCursorPosition(125, 38);
+                        Console.WriteLine(list.room);
+                    }
+                    if (list.day.Contains("18:00~19:30"))
+                    {
+                        Console.SetCursorPosition(125, 37);
+                        Console.WriteLine(list.classname);
+                        Console.SetCursorPosition(125, 38);
+                        Console.WriteLine(list.room);
+                    }
+                    if (list.day.Contains("18:00~20:00"))
+                    {
+                        Console.SetCursorPosition(125, 37);
+                        Console.WriteLine(list.classname);
+                        Console.SetCursorPosition(125, 38);
+                        Console.WriteLine(list.room);
+                    }
+                    if (list.day.Contains("18:00~19:00"))
+                    {
+                        Console.SetCursorPosition(125, 37);
+                        Console.WriteLine(list.classname);
+                        Console.SetCursorPosition(125, 38);
+                        Console.WriteLine(list.room);
+                    }
                 }
-                */
+ 
+                if(list.day.Contains("금"))
+                {
+                    if (list.day.Contains("18:00~19:00"))
+                    {
+                        Console.SetCursorPosition(125, 37);
+                        Console.WriteLine(list.classname);
+                        Console.SetCursorPosition(125, 38);
+                        Console.WriteLine(list.room);
+                    }
+                    if (list.day.Contains("18:00~19:30"))
+                    {
+                        Console.SetCursorPosition(125, 39);
+                        Console.WriteLine(list.mager);
+                        Console.SetCursorPosition(125, 40);
+                        Console.WriteLine(list.room);
+                    }
+                    if (list.day.Contains("18:00~20:00"))
+                    {
+                        Console.SetCursorPosition(125, 39);
+                        Console.WriteLine(list.mager);
+                        Console.SetCursorPosition(125, 40);
+                        Console.WriteLine(list.room);
+                    }
+                }
+
+                //if (list.mager.Contains(choiceMajor) == true) { MySubject.Add(list); }
+            }
+
+            /*
+            while (true)
+            {
+                if()
+                Console.SetCursorPosition(25, 5);
+                Console.Write("월");
+                Console.SetCursorPosition(50, 7);
+                Console.Write("화");
+                Console.SetCursorPosition(75, 9);
+                Console.Write("수");
+                Console.SetCursorPosition(100, 11);
+                Console.Write("목");
+                Console.SetCursorPosition(125, 13);
+                Console.Write("금");
+            }
+            */
+
+
 
             Constants.cursur = Console.ReadKey(true);
             if (Constants.cursur.Key == ConsoleKey.F5) Menu(); // 뒤로가기
