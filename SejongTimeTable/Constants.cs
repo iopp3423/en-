@@ -104,6 +104,13 @@ namespace SejongTimeTable
         static public int SEARCH_Y = 23;
         static public int REMOVE_APPLY_X = 66;
         static public string PW = "A";
+        static public int NUMBER_X=28;
+        static public int CLASS_X =68;
+        static public int GRADE_X =84;
+        static public int ROOM_X =120;
+        static public int LANGUAGE_X =145;
+        static public int Y = 2;
+
 
 
 

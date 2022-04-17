@@ -110,7 +110,7 @@ namespace SejongTimeTable.Models
 
         public override string ToString()
         {
-            return number  + "    " + mager  + "    " + classNumber   + "      " + group  + "    " + classname + "   " + seperation  + "     " + grade  + "     " + score + "        " + day + "     " + room  + "      " + professor  + "      " +language;
+            return number  + "    " + mager  + "    " + classNumber   + "      " + group  + "    " + classname + "       " + seperation  + "     " + grade  + "      " + score + "        " + day + "     " + room  + "      " + professor  + "      " +language;
         }
 
        
@@ -151,13 +151,13 @@ namespace SejongTimeTable.Models
                             case 1:
                                 if (data.GetValue(row, col) == null)
                                 { number = null; break; }
-                                number = data.GetValue(row, col).ToString() + " ";
+                                number = data.GetValue(row, col).ToString();
                                 break;
 
                             case 2:
                                 if (data.GetValue(row, col) == null)
                                 { mager = null; break; }
-                                mager = data.GetValue(row, col).ToString() + " ";
+                                mager = data.GetValue(row, col).ToString();
                                 break;
 
                             case 3:

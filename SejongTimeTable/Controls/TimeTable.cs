@@ -56,7 +56,6 @@ namespace SejongTimeTable.Controls
 
             MenuView.PrintNumber();
             MenuView.AfterMenu();
- 
 
 
             while (Constants.Is_CHECK)
@@ -87,13 +86,13 @@ namespace SejongTimeTable.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Constants.TIME_TABLE_Y == Constants.TABLE_Y) { Constants.Is_CHECK = false; majorJudgment = SearchMajor(); break; }
-                            if (Constants.TIME_TABLE_Y == Constants.FAVORITE_Y) { Constants.Is_CHECK = false; diviseJudgment = Divise(); break; }
-                            if (Constants.TIME_TABLE_Y == Constants.APPLICATION_Y) { Constants.Is_CHECK = false; nameJudgment = SearchClassName(); break; }
-                            if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) { Constants.Is_CHECK = false; professorJudgment = SearchProfessorName(); break; }
-                            if (Constants.TIME_TABLE_Y == Constants.GRADE_Y) { Constants.Is_CHECK = false; gradeJudgment = SearchGrade(); break; }
-                            if (Constants.TIME_TABLE_Y == Constants.REFER_Y) { Constants.Is_CHECK = false; SearchClass(majorJudgment, diviseJudgment, nameJudgment, professorJudgment, gradeJudgment); break; }
-                                break;
+                            if (Constants.TIME_TABLE_Y == Constants.TABLE_Y) {  majorJudgment = SearchMajor(); break; }
+                            if (Constants.TIME_TABLE_Y == Constants.FAVORITE_Y) {  diviseJudgment = Divise(); break; }
+                            if (Constants.TIME_TABLE_Y == Constants.APPLICATION_Y) {  nameJudgment = SearchClassName(); break; }
+                            if (Constants.TIME_TABLE_Y == Constants.MYCLASS_Y) {  professorJudgment = SearchProfessorName(); break; }
+                            if (Constants.TIME_TABLE_Y == Constants.GRADE_Y) {  gradeJudgment = SearchGrade(); break; }
+                            if (Constants.TIME_TABLE_Y == Constants.REFER_Y) { SearchClass(majorJudgment, diviseJudgment, nameJudgment, professorJudgment, gradeJudgment); break; }
+                                return;
                         }
                     case ConsoleKey.Escape: // 종료
                         {
@@ -217,6 +216,7 @@ namespace SejongTimeTable.Controls
             string choiceMajor;
             string choiceDivise;
             string choiceGrade;
+            Search.Clear();
 
 
             switch (major)
@@ -270,16 +270,66 @@ namespace SejongTimeTable.Controls
             }
 
             Console.Clear();
-            Console.SetCursorPosition(Constants.PRINT_X, Constants.PRINT_Y);
+            Console.SetCursorPosition(Constants.ZERO, Constants.ZERO);
             MenuView.PrintTable();
-
-
+            
             foreach (ClassVO list in Search)
             {
-                Console.WriteLine(list);
+
+                Console.Write(list.number.PadRight(8)); //NO        
+                Console.Write(list.mager.PadRight(10));//전공
+                Console.SetCursorPosition(Constants.NUMBER_X, Constants.Y);
+                Console.Write(list.classNumber.PadRight(13)); // 학수번호
+                Console.Write(list.group.PadRight(7)); // 분반
+                Console.Write(list.classname.PadRight(10)); //교과목명
+                Console.SetCursorPosition(Constants.CLASS_X, Constants.Y);
+                Console.Write(list.seperation.PadRight(10)); // 이수구분
+                Console.SetCursorPosition(Constants.GRADE_X, Constants.Y);
+                Console.Write(list.grade.PadRight(5)); // 학년
+                Console.Write(list.score.PadRight(10)); //학점
+                Console.Write(list.day.PadRight(10)); // 요일
+                Console.SetCursorPosition(Constants.ROOM_X, Constants.Y);
+                Console.Write(list.room.PadRight(10));//강의실
+                Console.Write(list.professor.PadRight(10)); //교수명
+                Console.SetCursorPosition(Constants.LANGUAGE_X, Constants.Y++);
+                Console.Write(list.language.PadRight(10)); // 언어
+                Console.WriteLine();
             }
+
+
+            /*
+            foreach (ClassVO list in Search)
+            {
+
+                
+                String strToPrint = list.classname.ToString();
+
+                int padLen = 10 - Encoding.Default.GetBytes(strToPrint).Length;
+
+                Console.WriteLine("{0}", "".PadLeft(padLen) + strToPrint);
+                
+            }
+            */
+
+            /*
+            foreach (ClassVO list in Search)
+            {
+
+
+                String strToPrint = list.classname;
+
+                int padLen = 5-Encoding.Default.GetBytes(strToPrint).Length;
+
+                Console.WriteLine("{0}", "".PadLeft(padLen) + strToPrint);
+
+            }
+            */
+
             Console.Write("재검색 : Enter, 프로그램 종료 : ESC");
+
+
             
+
             while (true)
             {
                 Constants.cursur = Console.ReadKey(true);

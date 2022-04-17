@@ -267,9 +267,29 @@ namespace SejongTimeTable.Controls
             Console.Clear();
             MenuView.PrintMyClass();
             Constants.Is_CHECK = true;//초기화
+
+            Constants.Y = Constants.FOUR;
             foreach (ClassVO list in UserData.Data)
             {
-                Console.WriteLine(list);
+
+                Console.Write(list.number.PadRight(8)); //NO        
+                Console.Write(list.mager.PadRight(10));//전공
+                Console.SetCursorPosition(Constants.NUMBER_X, Constants.Y);
+                Console.Write(list.classNumber.PadRight(13)); // 학수번호
+                Console.Write(list.group.PadRight(7)); // 분반
+                Console.Write(list.classname.PadRight(10)); //교과목명
+                Console.SetCursorPosition(Constants.CLASS_X, Constants.Y);
+                Console.Write(list.seperation.PadRight(10)); // 이수구분
+                Console.SetCursorPosition(Constants.GRADE_X, Constants.Y);
+                Console.Write(list.grade.PadRight(5)); // 학년
+                Console.Write(list.score.PadRight(10)); //학점
+                Console.Write(list.day.PadRight(10)); // 요일
+                Console.SetCursorPosition(Constants.ROOM_X, Constants.Y);
+                Console.Write(list.room.PadRight(10));//강의실
+                Console.Write(list.professor.PadRight(10)); //교수명
+                Console.SetCursorPosition(Constants.LANGUAGE_X, Constants.Y++);
+                Console.Write(list.language.PadRight(10)); // 언어
+                Console.WriteLine();
             }
 
             while (true)
@@ -345,15 +365,33 @@ namespace SejongTimeTable.Controls
             }
             bool check = false;
             Console.Clear();
-            Console.WriteLine("\n");
+            Console.SetCursorPosition(Constants.ZERO, Constants.ZERO);
             Console.Write(string.Format("                                                                                                      신청 학점 : {0}  삭제할 과목 NO : ", sum));
             
             MenuView.PrintMyClass();
 
-            
+            Constants.Y = Constants.FOUR;
             foreach (ClassVO list in UserData.Data)
             {
-                Console.WriteLine(list);
+
+                Console.Write(list.number.PadRight(8)); //NO        
+                Console.Write(list.mager.PadRight(10));//전공
+                Console.SetCursorPosition(Constants.NUMBER_X, Constants.Y);
+                Console.Write(list.classNumber.PadRight(13)); // 학수번호
+                Console.Write(list.group.PadRight(7)); // 분반
+                Console.Write(list.classname.PadRight(10)); //교과목명
+                Console.SetCursorPosition(Constants.CLASS_X, Constants.Y);
+                Console.Write(list.seperation.PadRight(10)); // 이수구분
+                Console.SetCursorPosition(Constants.GRADE_X, Constants.Y);
+                Console.Write(list.grade.PadRight(5)); // 학년
+                Console.Write(list.score.PadRight(10)); //학점
+                Console.Write(list.day.PadRight(10)); // 요일
+                Console.SetCursorPosition(Constants.ROOM_X, Constants.Y);
+                Console.Write(list.room.PadRight(10));//강의실
+                Console.Write(list.professor.PadRight(10)); //교수명
+                Console.SetCursorPosition(Constants.LANGUAGE_X, Constants.Y++);
+                Console.Write(list.language.PadRight(10)); // 언어
+                Console.WriteLine();
             }
 
 
@@ -427,15 +465,34 @@ namespace SejongTimeTable.Controls
             }
 
             Console.Clear();
-            Console.Write("\n\n\n\n");
-            Console.WriteLine("등록 가능 학점 : {0}      담은 학점 : {1}          담을 과목 NO :\n\n\n", Constants.POSSBLE_SCORE - sum, sum);
+            Console.SetCursorPosition(Constants.ZERO, Constants.ZERO);
+            Console.WriteLine("등록 가능 학점 : {0}      담은 학점 : {1}          담을 과목 NO :\n\n", Constants.POSSBLE_SCORE - sum, sum);
             MenuView.PrintClass();
 
+
+            Constants.Y = 7;
             foreach (ClassVO list in MySubject)
             {
-                Console.WriteLine(list);
-            }
 
+                Console.Write(list.number.PadRight(8)); //NO        
+                Console.Write(list.mager.PadRight(10));//전공
+                Console.SetCursorPosition(Constants.NUMBER_X, Constants.Y);
+                Console.Write(list.classNumber.PadRight(13)); // 학수번호
+                Console.Write(list.group.PadRight(7)); // 분반
+                Console.Write(list.classname.PadRight(10)); //교과목명
+                Console.SetCursorPosition(Constants.CLASS_X, Constants.Y);
+                Console.Write(list.seperation.PadRight(10)); // 이수구분
+                Console.SetCursorPosition(Constants.GRADE_X, Constants.Y);
+                Console.Write(list.grade.PadRight(5)); // 학년
+                Console.Write(list.score.PadRight(10)); //학점
+                Console.Write(list.day.PadRight(10)); // 요일
+                Console.SetCursorPosition(Constants.ROOM_X, Constants.Y);
+                Console.Write(list.room.PadRight(10));//강의실
+                Console.Write(list.professor.PadRight(10)); //교수명
+                Console.SetCursorPosition(Constants.LANGUAGE_X, Constants.Y++);
+                Console.Write(list.language.PadRight(10)); // 언어
+                Console.WriteLine();
+            }
 
             while (true)
             {

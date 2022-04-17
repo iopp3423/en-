@@ -115,15 +115,14 @@ namespace SejongTimeTable.Views
 
         public void PrintMyClass()
         {
-            Console.WriteLine(string.Format("{0,40}", "                                                                                                                             F5 : 뒤로가기 "));
-            Console.WriteLine(string.Format("{0,40}", "===========================================================  나의 관심 강의  ============================================================="));
-            Console.WriteLine(string.Format("{0,40}", "NO    개설학과전공    학수번호    분반    교과목명         이수구분       학년 학점     요일 및 강의시간     강의실      교수명     강의언어"));
-            
+            Console.WriteLine("                                                                                                                             F5 : 뒤로가기 ");
+            Console.WriteLine( "===========================================================  나의 관심 강의  =============================================================");
+            Console.WriteLine("NO       개설학과전공      학수번호     분반     교과목명            이수구분      학년 학점      요일 및 강의시간      강의실     교수명     강의언어\n");
         }
         public void PrintClass()
         {
-            Console.WriteLine(string.Format("{0,40}", "=========================================================  2022년도 1학기 시간표  ============================================================="));
-            Console.WriteLine(string.Format("{0,40}", "NO    개설학과전공    학수번호    분반    교과목명         이수구분       학년 학점     요일 및 강의시간     강의실      교수명     강의언어"));
+            Console.WriteLine("=========================================================  2022년도 1학기 시간표  =============================================================");
+            Console.WriteLine("NO       개설학과전공      학수번호     분반     교과목명            이수구분      학년 학점      요일 및 강의시간      강의실     교수명     강의언어\n");
         }
         public void PrintTimeTable()
         {
@@ -151,7 +150,7 @@ namespace SejongTimeTable.Views
 
         public void PrintTable()
         {
-            Console.WriteLine(string.Format("{0,40}", "NO       개설학과전공      학수번호     분반     교과목명        이수구분      학년 학점      요일 및 강의시간     강의실       교수명     강의언어\n"));
+            Console.WriteLine( "NO       개설학과전공      학수번호     분반     교과목명            이수구분      학년 학점      요일 및 강의시간      강의실     교수명     강의언어\n");
         }
 
         public void PrintFavoriteMenu()
@@ -195,9 +194,9 @@ namespace SejongTimeTable.Views
         public void PrintMySubject()
         {
             Console.WriteLine("\n\n");
-            Console.WriteLine(string.Format("{0,40}", "                                                                                                                                       돌아가기 : F5 "));
-            Console.WriteLine(string.Format("{0,40}", "===================================================================   수강 신청 목록  ==================================================================="));
-            Console.WriteLine(string.Format("{0,40}", "NO       개설학과전공      학수번호     분반     교과목명        이수구분      학년 학점      요일 및 강의시간     강의실       교수명     강의언어\n"));
+            Console.WriteLine("                                                                                                                                       돌아가기 : F5 ");
+            Console.WriteLine("===================================================================   수강 신청 목록  ===================================================================");
+            Console.WriteLine("NO       개설학과전공      학수번호     분반     교과목명            이수구분      학년 학점      요일 및 강의시간      강의실     교수명     강의언어\n");
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SejongTimeTable.Views;
 using SejongTimeTable.Models;
 using System.Text.RegularExpressions;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace SejongTimeTable.Controls
 {
@@ -107,10 +108,30 @@ namespace SejongTimeTable.Controls
             Console.Clear();
 
             MenuView.PrintMySubject();
+
+            Constants.Y = Constants.FOUR;
             foreach (ClassVO list in Application.Data)
             {
-                Console.WriteLine(list);
+
+                Console.Write(list.number.PadRight(8)); //NO        
+                Console.Write(list.mager.PadRight(10));//전공
+                Console.SetCursorPosition(Constants.NUMBER_X, Constants.Y);
+                Console.Write(list.classNumber.PadRight(13)); // 학수번호
+                Console.Write(list.group.PadRight(7)); // 분반
+                Console.Write(list.classname.PadRight(10)); //교과목명
+                Console.SetCursorPosition(Constants.CLASS_X, Constants.Y);
+                Console.Write(list.seperation.PadRight(10)); // 이수구분
+                Console.SetCursorPosition(Constants.GRADE_X, Constants.Y);
+                Console.Write(list.grade.PadRight(5)); // 학년
+                Console.Write(list.score.PadRight(10)); //학점
+                Console.Write(list.day.PadRight(10)); // 요일
+                Console.SetCursorPosition(Constants.ROOM_X, Constants.Y);
+                Console.Write(list.room.PadRight(10));//강의실
+                Console.Write(list.professor.PadRight(10)); //교수명
+                Console.SetCursorPosition(Constants.LANGUAGE_X, Constants.Y++);
+                Console.Write(list.language.PadRight(10)); // 언어
                 sum += int.Parse(list.score);
+                Console.WriteLine();
             }
             Console.SetCursorPosition(Constants.ZERO, Constants.THREE);
             Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n\n\n", Constants.APPLY_SCORE - sum, sum);
@@ -207,8 +228,40 @@ namespace SejongTimeTable.Controls
             }
 
         }
+        /*
+        public void writeToExcel()
+        {
+            int row, col;
+            Excel.Application myexcelApplication = new Excel.Application();
+            if (myexcelApplication != null)
+            {
+                Excel.Workbook myexcelWorkbook = myexcelApplication.Workbooks.Add();
+                Excel.Worksheet myexcelWorksheet = (Excel.Worksheet)myexcelWorkbook.Sheets.Add();
 
+                for (row = Constants.ONE; row < Constants.ROW_END; row++) // 리스트에 엑셀 파일 저장
+                {
+                  
+                    myexcelWorksheet.Cells[row, 1] = "Value 1";
+                    myexcelWorksheet.Cells[row, 2] = "Value 2";
+                    myexcelWorksheet.Cells[row, 3] = "Value 3";
+                    myexcelWorksheet.Cells[row, 4] = "Value 1";
+                    myexcelWorksheet.Cells[row, 5] = "Value 2";
+                    myexcelWorksheet.Cells[row, 6] = "Value 3";
+                    myexcelWorksheet.Cells[row, 7] = "Value 1";
+                    myexcelWorksheet.Cells[row, 8] = "Value 2";
+                    myexcelWorksheet.Cells[row, 9] = "Value 3";
+                    myexcelWorksheet.Cells[row, 10] = "Value 1";
+                    myexcelWorksheet.Cells[row, 11] = "Value 2";
+                    myexcelWorksheet.Cells[row, 12] = "Value 3";
+                }
 
+                myexcelApplication.ActiveWorkbook.SaveAs(@"C:\abc.xls", Excel.XlFileFormat.xlWorkbookNormal);
+                myexcelWorkbook.Close();
+                myexcelApplication.Quit();
+            
+            }
+        }
+        */
         public void ReEnter()
         {
             Console.Write("입력한 번호가 없습니다. 돌아가기 : F5");
@@ -414,8 +467,7 @@ namespace SejongTimeTable.Controls
             bool check = false;
 
             Console.Clear();
-            Console.Write("\n\n\n\n");
-            Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n\n\n", Constants.APPLY_SCORE - sum, sum);
+            Console.WriteLine("신청 가능 학점 : {0}      신청 학점 : {1}          신청할 과목 NO :\n", Constants.APPLY_SCORE - sum, sum);
             MenuView.PrintClass();
 
             foreach (ClassVO list in Application.Data) // 신청 학점
@@ -423,9 +475,28 @@ namespace SejongTimeTable.Controls
                 sum += int.Parse(list.score);
             }
 
-            foreach (ClassVO list in Information) // 유저가 선택한 값 출력
+            Constants.Y = Constants.FOUR;
+            foreach (ClassVO list in Information)
             {
-                Console.WriteLine(list);
+
+                Console.Write(list.number.PadRight(8)); //NO        
+                Console.Write(list.mager.PadRight(10));//전공
+                Console.SetCursorPosition(Constants.NUMBER_X, Constants.Y);
+                Console.Write(list.classNumber.PadRight(13)); // 학수번호
+                Console.Write(list.group.PadRight(7)); // 분반
+                Console.Write(list.classname.PadRight(10)); //교과목명
+                Console.SetCursorPosition(Constants.CLASS_X, Constants.Y);
+                Console.Write(list.seperation.PadRight(10)); // 이수구분
+                Console.SetCursorPosition(Constants.GRADE_X, Constants.Y);
+                Console.Write(list.grade.PadRight(5)); // 학년
+                Console.Write(list.score.PadRight(10)); //학점
+                Console.Write(list.day.PadRight(10)); // 요일
+                Console.SetCursorPosition(Constants.ROOM_X, Constants.Y);
+                Console.Write(list.room.PadRight(10));//강의실
+                Console.Write(list.professor.PadRight(10)); //교수명
+                Console.SetCursorPosition(Constants.LANGUAGE_X, Constants.Y++);
+                Console.Write(list.language.PadRight(10)); // 언어
+                Console.WriteLine();
             }
 
 
@@ -454,6 +525,7 @@ namespace SejongTimeTable.Controls
                         Console.Write("가능한 점수를 초과하였습니다. 돌아가려면 F5를 눌러주세요");
                         break;
                     }
+                  
 
                     check = true; // 번호가 존재
                     Application.Data.Add(list); // 관심과목에 추가
