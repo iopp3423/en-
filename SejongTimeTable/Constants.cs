@@ -115,6 +115,11 @@ namespace SejongTimeTable
         static public int WEDNESDAY =75;
         static public int THURSDAY = 100;
         static public int FRIDAY = 125;
+        static public int EXCEL_MONDAY = 2;
+        static public int EXCEL_TUESDAY = 4;
+        static public int EXCEL_WEDNESDAY = 6;
+        static public int EXCEL_THURSDAY = 8;
+        static public int EXCEL_FRIDAY = 10;
 
 
 

@@ -84,13 +84,6 @@ namespace SejongTimeTable.Controls
 
         public void Search() // 관심과목 검색
         {
-
-            string menu;
-            int majorJudgment = Constants.ONE; // 전공 전체로 초기화
-            int diviseJudgment = Constants.ONE; // 이수구분 전체로 초기화
-            string nameJudgment = "전체"; // 교과목명 
-            string professorJudgment = "전체"; // 교수명 
-            int gradeJudgment = Constants.ONE; // 학년 전체로 초기화
             Constants.Is_CHECK = true;
 
             Console.Clear();

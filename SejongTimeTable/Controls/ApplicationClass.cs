@@ -19,12 +19,13 @@ namespace SejongTimeTable.Controls
         Printing MenuView = new Printing();
         List<ClassVO> Information = new List<ClassVO>(); // 유저가 선택한 값 임시저장
         Regex RemoveData = new Regex(Constants.REMOVE_CLASS);
-
+        Excel.Application excelApp = new Excel.Application();
 
         public ClassVO AllData; // 엑셀값 저장
         public ClassVO UserData;
         public ClassVO Application;
-        int dayPos;
+        int excelX;
+        int dayPosX;
 
         public ApplicationClass()
         {
@@ -75,7 +76,7 @@ namespace SejongTimeTable.Controls
                         {
                             if (Constants.APPLY_Y == Constants.APPLY_SEARCH_Y) { Constants.Is_CHECK = false; SearchMenu(); break; }
                             if (Constants.APPLY_Y == Constants.APPLY_LOG_Y) { Constants.Is_CHECK = false; ApplySubject(); break; }
-                            if (Constants.APPLY_Y == Constants.APPLY_TABLE_Y) { Check(); }
+                            if (Constants.APPLY_Y == Constants.APPLY_TABLE_Y) { Constants.Is_CHECK = false; SearchTable(); break; }
                             if (Constants.APPLY_Y == Constants.APPLY_REMOVE_Y) { Constants.Is_CHECK = false; RemoveSubject(); break; }
                             break;
                         }
@@ -88,25 +89,46 @@ namespace SejongTimeTable.Controls
                 }
             }
         }
-        public void SearchTable() // 시간표
+        public void SearchTable(bool isExcel = false) // 시간표
         {
             Console.Clear();
             MenuView.PrintMyTable();
             MenuView.PrintTimeTable();
 
-            foreach (ClassVO list in UserData.Data)
+            if (isExcel)
             {
-                if (list.day.Contains("월")) { dayPos = Constants.MONDAY; Check(list); }
-                else if (list.day.Contains("화")) { dayPos = Constants.TUESDAY; Check(list); }
-                else if (list.day.Contains("수")) { dayPos = Constants.WEDNESDAY; Check(list); }
-                else if (list.day.Contains("목")) { dayPos = Constants.THURSDAY; Check(list); }
-                else if (list.day.Contains("금")) { dayPos = Constants.FRIDAY; Check(list); }
-                else { break; }
+                foreach (ClassVO list in Application.Data)
+                {
+                    if (list.day.Contains("월")) { excelX = Constants.EXCEL_MONDAY; SaveExcel(list); }
+                    else if (list.day.Contains("화")) { excelX = Constants.EXCEL_TUESDAY; SaveExcel(list); }
+                    else if (list.day.Contains("수")) { excelX = Constants.EXCEL_WEDNESDAY; SaveExcel(list); }
+                    else if (list.day.Contains("목")) { excelX = Constants.EXCEL_THURSDAY; SaveExcel(list); }
+                    else if (list.day.Contains("금")) { excelX = Constants.EXCEL_FRIDAY; SaveExcel(list); }
+                    else { break; }
+                }
+                excelApp.Workbooks.Close();
+
+                // application 종료
+                excelApp.Quit();
+            }
+
+            else
+            {
+                
+                foreach (ClassVO list in Application.Data)
+                {
+                    if (list.day.Contains("월")) { dayPosX = Constants.MONDAY; Check(list); }
+                    else if (list.day.Contains("화")) { dayPosX = Constants.TUESDAY; Check(list); }
+                    else if (list.day.Contains("수")) { dayPosX = Constants.WEDNESDAY; Check(list); }
+                    else if (list.day.Contains("목")) { dayPosX = Constants.THURSDAY; Check(list); }
+                    else if (list.day.Contains("금")) { dayPosX = Constants.FRIDAY; Check(list); }
+                    else { break; }
+                }
             }
 
 
             Constants.cursur = Console.ReadKey(true);
-            if (Constants.cursur.Key == ConsoleKey.F5) Menu(); // 뒤로가기
+            if (Constants.cursur.Key == ConsoleKey.F5) ApplyMenu(); // 뒤로가기
 
 
 
@@ -115,29 +137,33 @@ namespace SejongTimeTable.Controls
         public void ApplySubject()
         {
             Console.Clear();
-            
-            MenuView.PrintMySubject();
 
+            MenuView.PrintClass();
             foreach (ClassVO list in Application.Data)
             {
-                Console.WriteLine(list);
-                
+                Console.WriteLine(list);               
+            }
+
+            Console.Write("Enter를 누르면 엑셀에 저장됩니다.");
+
+            
+            if (Constants.cursur.Key == ConsoleKey.Enter)
+            {
+                SearchTable(true);
             }
             //SaveExcel();
             
             GoBack();
-            
-            
 
         }
-        public void SaveExcel()
+        public void SaveExcel(ClassVO list)
         {
 
             
                 try
                 {
                     // Excel Application 객체 생성
-                    Excel.Application excelApp = new Excel.Application();
+                    
 
                     // Workbook 객체 생성 및 워크북 추가
                     Excel.Workbook workbook = excelApp.Workbooks.Add();
@@ -178,11 +204,1008 @@ namespace SejongTimeTable.Controls
                     worksheet.Cells[1, 10] = "금요일";
 
 
-                // 모든 워크북 닫기
-                excelApp.Workbooks.Close();
+                    if (list.day.Contains("09:00") && list.day.Contains("12:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,2] = list.classname;                       
+                        worksheet.Cells[excelX,3] =list.room;
+                        
+                        worksheet.Cells[excelX,4] = list.classname;                      
+                        worksheet.Cells[excelX,5] =list.room;
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                        
+                        worksheet.Cells[excelX,8] = list.classname;
+                        
+                        worksheet.Cells[excelX,9] =list.room;
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                        
+                        worksheet.Cells[excelX,12] = list.classname;
+                        
+                        worksheet.Cells[excelX,13] =list.room;
+                    }
+                    if (list.day.Contains("10:00") && list.day.Contains("13:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                        
+                        worksheet.Cells[excelX,8] = list.classname;
+                        
+                        worksheet.Cells[excelX,9] =list.room;
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                        
+                        worksheet.Cells[excelX,12] = list.classname;
+                        
+                        worksheet.Cells[excelX,13] =list.room;
 
-                    // application 종료
-                    excelApp.Quit();
+                        worksheet.Cells[excelX,14] = list.classname;
+              
+                        worksheet.Cells[excelX,15] =list.room;
+
+                       worksheet.Cells[excelX,16] = list.classname;
+                       
+                        worksheet.Cells[excelX,17] =list.room;
+                    }
+                    if (list.day.Contains("11:00") && list.day.Contains("14:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                        
+                        worksheet.Cells[excelX,12] = list.classname;
+                        
+                        worksheet.Cells[excelX,13] =list.room;
+                        
+                        worksheet.Cells[excelX,14] = list.classname;
+                        
+                        worksheet.Cells[excelX,15] =list.room;
+                        
+                        worksheet.Cells[excelX,16] = list.classname;
+                        
+                        worksheet.Cells[excelX,17] =list.room;
+                        
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                       
+                        worksheet.Cells[excelX,20] = list.classname;
+                        
+                        worksheet.Cells[excelX,21] =list.room;
+                    }
+
+
+                    if (list.day.Contains("12:00") && list.day.Contains("15:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,14] = list.classname;
+                        
+                        worksheet.Cells[excelX,15] =list.room;
+                        
+                        worksheet.Cells[excelX,16] = list.classname;
+                        
+                        worksheet.Cells[excelX,17] =list.room;
+                        
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                       
+                        worksheet.Cells[excelX,20] = list.classname;
+                        
+                        worksheet.Cells[excelX,21] =list.room;
+                        
+                        worksheet.Cells[excelX,22] = list.classname;
+                        
+                        worksheet.Cells[excelX,23] =list.room;
+                        
+                        worksheet.Cells[excelX,24] = list.classname;
+                        
+                        worksheet.Cells[excelX,25] =list.room;
+                    }
+                    if (list.day.Contains("13:00") && list.day.Contains("16:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                       
+                        worksheet.Cells[excelX,20] = list.classname;
+                        
+                        worksheet.Cells[excelX,21] =list.room;
+                        
+                        worksheet.Cells[excelX,22] = list.classname;
+                        
+                        worksheet.Cells[excelX,23] =list.room;
+                        
+                        worksheet.Cells[excelX,24] = list.classname;
+                        
+                        worksheet.Cells[excelX,25] =list.room;
+                        
+                        worksheet.Cells[excelX,26] = list.classname;
+                        
+                        worksheet.Cells[excelX,27] =list.room;
+                       
+                        worksheet.Cells[excelX,28] = list.classname;
+                        
+                        worksheet.Cells[excelX,29] =list.room;
+                    }
+
+                    if (list.day.Contains("15:00") && list.day.Contains("18:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,22] = list.classname;
+                        
+                        worksheet.Cells[excelX,23] =list.room;
+                       
+                        worksheet.Cells[excelX,24] = list.classname;
+                        
+                        worksheet.Cells[excelX,25] =list.room;
+                      
+                        worksheet.Cells[excelX,26] = list.classname;
+                       
+                        worksheet.Cells[excelX,27] =list.room;
+                        
+                        worksheet.Cells[excelX,28] = list.classname;
+                      
+                        worksheet.Cells[excelX,29] =list.room;
+                        
+                        worksheet.Cells[excelX,30] = list.classname;
+                       
+                        worksheet.Cells[excelX,31] =list.room;
+                       
+                        worksheet.Cells[excelX,32] = list.classname;
+                       
+                        worksheet.Cells[excelX,33] =list.room;
+                    }
+
+                    if (list.day.Contains("09:30") && list.day.Contains("11:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,4] = list.classname;
+                        
+                        worksheet.Cells[excelX,5] =list.room;
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                        
+                        worksheet.Cells[excelX,8] = list.classname;
+                        
+                        worksheet.Cells[excelX,9] =list.room;
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                    }
+                    if (list.day.Contains("10:30") && list.day.Contains("12:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,8] = list.classname;
+                        
+                        worksheet.Cells[excelX,9] =list.room;
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                        
+                        worksheet.Cells[excelX,12] = list.classname;
+                        
+                        worksheet.Cells[excelX,13] =list.room;
+
+                        worksheet.Cells[excelX,14] = list.classname;
+
+                        worksheet.Cells[excelX,15] =list.room;
+                    }
+                    if (list.day.Contains("11:30") && list.day.Contains("13:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,12] = list.classname;
+                        
+                        worksheet.Cells[excelX,13] =list.room;
+                        
+                        worksheet.Cells[excelX,14] = list.classname;
+                        
+                        worksheet.Cells[excelX,15] =list.room;
+                        
+                        worksheet.Cells[excelX,16] = list.classname;
+                        
+                        worksheet.Cells[excelX,17] =list.room;
+                        
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                    }
+                    if (list.day.Contains("12:30") && list.day.Contains("14:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,16] = list.classname;
+                        
+                        worksheet.Cells[excelX,17] =list.room;
+                        
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                       
+                        worksheet.Cells[excelX,20] = list.classname;
+                        
+                        worksheet.Cells[excelX,21] =list.room;
+                        
+                        worksheet.Cells[excelX,22] = list.classname;
+                        
+                        worksheet.Cells[excelX,23] =list.room;
+                    }
+                    if (list.day.Contains("13:30") && list.day.Contains("15:30"))
+                    {
+                       
+                        worksheet.Cells[excelX,20] = list.classname;
+                        
+                        worksheet.Cells[excelX,21] =list.room;
+                        
+                        worksheet.Cells[excelX,22] = list.classname;
+                        
+                        worksheet.Cells[excelX,23] =list.room;
+                        
+                        worksheet.Cells[excelX,24] = list.classname;
+                        
+                        worksheet.Cells[excelX,25] =list.room;
+                        
+                        worksheet.Cells[excelX,26] = list.classname;
+                        
+                        worksheet.Cells[excelX,27] =list.room;
+                    }
+                    if (list.day.Contains("14:30") && list.day.Contains("16:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,24] = list.classname;
+                        
+                        worksheet.Cells[excelX,25] =list.room;
+                        
+                        worksheet.Cells[excelX,26] = list.classname;
+                        
+                        worksheet.Cells[excelX,27] =list.room;
+                       
+                        worksheet.Cells[excelX,28] = list.classname;
+                        
+                        worksheet.Cells[excelX,29] =list.room;
+                      
+                        worksheet.Cells[excelX,30] = list.classname;
+                       
+                        worksheet.Cells[excelX,31] =list.room;
+                    }
+                    if (list.day.Contains("15:30") && list.day.Contains("17:30"))
+                    {
+                       
+                        worksheet.Cells[excelX,28] = list.classname;
+                        
+                        worksheet.Cells[excelX,29] =list.room;
+                      
+                        worksheet.Cells[excelX,30] = list.classname;
+                       
+                        worksheet.Cells[excelX,31] =list.room;
+                        
+                        worksheet.Cells[excelX,32] = list.classname;
+                      
+                        worksheet.Cells[excelX,33] =list.room;
+                        
+                        worksheet.Cells[excelX,34] = list.classname;
+                       
+                        worksheet.Cells[excelX,35] =list.room;
+                    }
+                    if (list.day.Contains("16:30") && list.day.Contains("18:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,32] = list.classname;
+                      
+                        worksheet.Cells[excelX,33] =list.room;
+                        
+                        worksheet.Cells[excelX,34] = list.classname;
+                       
+                        worksheet.Cells[excelX,35] =list.room;
+                       
+                        worksheet.Cells[excelX,36] = list.classname;
+                       
+                        worksheet.Cells[excelX,37] =list.room;
+                        
+                        worksheet.Cells[excelX,38] = list.classname;
+                       
+                        worksheet.Cells[excelX,39] =list.room;
+                    }
+                    if (list.day.Contains("17:30") && list.day.Contains("19:30"))
+                    {
+                       
+                        worksheet.Cells[excelX,36] = list.classname;
+                       
+                        worksheet.Cells[excelX,37] =list.room;
+                        
+                        worksheet.Cells[excelX,38] = list.classname;
+                       
+                        worksheet.Cells[excelX,39] =list.room;
+                        ;
+                        worksheet.Cells[excelX,40] = list.classname;
+                        
+                        worksheet.Cells[excelX,41] =list.room;
+                      
+                        worksheet.Cells[excelX,42] = list.classname;
+                      
+                        worksheet.Cells[excelX,43] =list.room;
+                    }
+                    if (list.day.Contains("18:30") && list.day.Contains("20:30"))
+                    {
+                        ;
+                        worksheet.Cells[excelX,40] = list.classname;
+                        
+                        worksheet.Cells[excelX,41] =list.room;
+                      
+                        worksheet.Cells[excelX,42] = list.classname;
+                      
+                        worksheet.Cells[excelX,43] =list.room;
+                        
+                        worksheet.Cells[excelX,44] = list.classname;
+                        
+                        worksheet.Cells[excelX,45] =list.room;
+                        
+                        worksheet.Cells[excelX,46] = list.classname;
+                        
+                        worksheet.Cells[excelX,47] =list.room;
+                    }
+                    if (list.day.Contains("09:00") && list.day.Contains("11:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,2] = list.classname;
+                        
+                        worksheet.Cells[excelX,3] =list.room;
+                        
+                        worksheet.Cells[excelX,4] = list.classname;
+                        
+                        worksheet.Cells[excelX,5] =list.room;
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                        
+                        worksheet.Cells[excelX,8] = list.classname;
+                        
+                        worksheet.Cells[excelX,9] =list.room;
+                    }
+                    if (list.day.Contains("10:00") && list.day.Contains("12:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                        
+                        worksheet.Cells[excelX,8] = list.classname;
+                        
+                        worksheet.Cells[excelX,9] =list.room;
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                        
+                        worksheet.Cells[excelX,12] = list.classname;
+                        
+                        worksheet.Cells[excelX,13] =list.room;
+                    }
+                    if (list.day.Contains("11:00") && list.day.Contains("13:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,11] = list.classname;
+                        
+                        worksheet.Cells[excelX,12] =list.room;
+                        
+                        worksheet.Cells[excelX,13] = list.classname;
+                        
+                        worksheet.Cells[excelX,14] =list.room;
+                        
+                        worksheet.Cells[excelX,15] = list.classname;
+                        
+                        worksheet.Cells[excelX,16] =list.room;
+                        
+                        worksheet.Cells[excelX,17] = list.classname;
+                        
+                        worksheet.Cells[excelX,18] =list.room;
+                    }
+                    if (list.day.Contains("12:00") && list.day.Contains("14:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,15] = list.classname;
+                        
+                        worksheet.Cells[excelX,16] =list.room;
+                        
+                        worksheet.Cells[excelX,17] = list.classname;
+                        
+                        worksheet.Cells[excelX,18] =list.room;
+                        
+                        worksheet.Cells[excelX,19] = list.classname;
+                        
+                        worksheet.Cells[excelX,20] =list.room;
+                       
+                        worksheet.Cells[excelX,21] = list.classname;
+                        
+                        worksheet.Cells[excelX,22] =list.room;
+                    }
+                    if (list.day.Contains("13:00") && list.day.Contains("15:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,19] = list.classname;
+                        
+                        worksheet.Cells[excelX,20] =list.room;
+                       
+                        worksheet.Cells[excelX,21] = list.classname;
+                        
+                        worksheet.Cells[excelX,22] =list.room;
+                        
+                        worksheet.Cells[excelX,23] = list.classname;
+                        
+                        worksheet.Cells[excelX,24] =list.room;
+                        
+                        worksheet.Cells[excelX,25] = list.classname;
+                        
+                        worksheet.Cells[excelX,26] =list.room;
+                    }
+                    if (list.day.Contains("14:00") && list.day.Contains("16:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,23] = list.classname;
+                        
+                        worksheet.Cells[excelX,24] =list.room;
+                        
+                        worksheet.Cells[excelX,25] = list.classname;
+                        
+                        worksheet.Cells[excelX,26] =list.room;
+                        
+                        worksheet.Cells[excelX,27] = list.classname;
+                        
+                        worksheet.Cells[excelX,28] =list.room;
+                       
+                        worksheet.Cells[excelX,29] = list.classname;
+                        
+                        worksheet.Cells[excelX,30] =list.room;
+                    }
+                    if (list.day.Contains("15:00") && list.day.Contains("17:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,27] = list.classname;
+                        
+                        worksheet.Cells[excelX,28] =list.room;
+                       
+                        worksheet.Cells[excelX,29] = list.classname;
+                        
+                        worksheet.Cells[excelX,30] =list.room;
+                      
+                        worksheet.Cells[excelX,31] = list.classname;
+                       
+                        worksheet.Cells[excelX,32] =list.room;
+                        
+                        worksheet.Cells[excelX,33] = list.classname;
+                      
+                        worksheet.Cells[excelX,34] =list.room;
+                    }
+                    if (list.day.Contains("16:00") && list.day.Contains("18:00"))
+                    {
+                      
+                        worksheet.Cells[excelX,31] = list.classname;
+                       
+                        worksheet.Cells[excelX,32] =list.room;
+                        
+                        worksheet.Cells[excelX,33] = list.classname;
+                      
+                        worksheet.Cells[excelX,34] =list.room;
+                        
+                        worksheet.Cells[excelX,35] = list.classname;
+                       
+                        worksheet.Cells[excelX,36] =list.room;
+                       
+                        worksheet.Cells[excelX,37] = list.classname;
+                       
+                        worksheet.Cells[excelX,38] =list.room;
+                    }
+                    if (list.day.Contains("17:00") && list.day.Contains("19:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,35] = list.classname;
+                       
+                        worksheet.Cells[excelX,36] =list.room;
+                       
+                        worksheet.Cells[excelX,37] = list.classname;
+                       
+                        worksheet.Cells[excelX,38] =list.room;
+                        
+                        worksheet.Cells[excelX,39] = list.classname;
+                       
+                        worksheet.Cells[excelX,40] =list.room;
+                        ;
+                        worksheet.Cells[excelX,41] = list.classname;
+                        
+                        worksheet.Cells[excelX,42] =list.room;
+                    }
+                    if (list.day.Contains("18:00") && list.day.Contains("20:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,39] = list.classname;
+                       
+                        worksheet.Cells[excelX,40] =list.room;
+                        ;
+                        worksheet.Cells[excelX,41] = list.classname;
+                        
+                        worksheet.Cells[excelX,42] =list.room;
+                      
+                        worksheet.Cells[excelX,43] = list.classname;
+                      
+                        worksheet.Cells[excelX,44] =list.room;
+                        
+                        worksheet.Cells[excelX,45] = list.classname;
+                        
+                        worksheet.Cells[excelX,46] =list.room;
+                    }
+
+
+                    if (list.day.Contains("09:00") && list.day.Contains("10:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,2] = list.classname;
+                        
+                        worksheet.Cells[excelX,3] =list.room;
+                        
+                        worksheet.Cells[excelX,4] = list.classname;
+                        
+                        worksheet.Cells[excelX,5] =list.room;
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                    }
+                    if (list.day.Contains("10:00") && list.day.Contains("11:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                        
+                        worksheet.Cells[excelX,8] = list.classname;
+                        
+                        worksheet.Cells[excelX,9] =list.room;
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                    }
+                    if (list.day.Contains("11:00") && list.day.Contains("12:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                        
+                        worksheet.Cells[excelX,12] = list.classname;
+                        
+                        worksheet.Cells[excelX,13] =list.room;
+                        
+                        worksheet.Cells[excelX,14] = list.classname;
+                        
+                        worksheet.Cells[excelX,15] =list.room;
+                    }
+                    if (list.day.Contains("12:00") && list.day.Contains("13:30"))
+                    {
+                       
+                        worksheet.Cells[excelX,14] = list.classname;
+                        
+                        worksheet.Cells[excelX,15] =list.room;
+                        
+                        worksheet.Cells[excelX,16] = list.classname;
+                        
+                        worksheet.Cells[excelX,17] =list.room;
+                        
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                    }
+                    if (list.day.Contains("13:00") && list.day.Contains("14:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                       
+                        worksheet.Cells[excelX,20] = list.classname;
+                        
+                        worksheet.Cells[excelX,21] =list.room;
+                      
+                        worksheet.Cells[excelX,22] = list.classname;
+                       
+                        worksheet.Cells[excelX,23] =list.room;
+                    }
+                    if (list.day.Contains("14:00") && list.day.Contains("15:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,22] = list.classname;
+                      
+                        worksheet.Cells[excelX,23] =list.room;
+                        
+                        worksheet.Cells[excelX,24] = list.classname;
+                       
+                        worksheet.Cells[excelX,25] =list.room;
+                       
+                        worksheet.Cells[excelX,26] = list.classname;
+                       
+                        worksheet.Cells[excelX,27] =list.room;
+                    }
+                    if (list.day.Contains("15:00") && list.day.Contains("16:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,26] = list.classname;
+                       
+                        worksheet.Cells[excelX,27] =list.room;
+                        ;
+                        worksheet.Cells[excelX,28] = list.classname;
+                        
+                        worksheet.Cells[excelX,29] =list.room;
+                      
+                        worksheet.Cells[excelX,30] = list.classname;
+                      
+                        worksheet.Cells[excelX,31] =list.room;
+                    }
+                    if (list.day.Contains("16:00") && list.day.Contains("17:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,30] = list.classname;
+                        
+                        worksheet.Cells[excelX,31] =list.room;
+                        
+                        worksheet.Cells[excelX,32] = list.classname;
+                        
+                        worksheet.Cells[excelX,33] =list.room;
+                        
+                        worksheet.Cells[excelX,34] = list.classname;
+                        
+                        worksheet.Cells[excelX,35] =list.room;
+                    }
+                    if (list.day.Contains("17:00") && list.day.Contains("18:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,34] = list.classname;
+                      
+                        worksheet.Cells[excelX,35] =list.room;
+                       
+                        worksheet.Cells[excelX,36] = list.classname;
+                       
+                        worksheet.Cells[excelX,37] =list.room;
+                        
+                        worksheet.Cells[excelX,38] = list.classname;
+                     
+                        worksheet.Cells[excelX,39] =list.room;
+                    }
+                    if (list.day.Contains("18:00") && list.day.Contains("19:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,38] = list.classname;
+                        
+                        worksheet.Cells[excelX,39] =list.room;
+                       
+                        worksheet.Cells[excelX,40] = list.classname;
+                        
+                        worksheet.Cells[excelX,41] =list.room;
+                        
+                        worksheet.Cells[excelX,42] = list.classname;
+                        
+                        worksheet.Cells[excelX,43] =list.room;
+                    }
+                    if (list.day.Contains("19:00") && list.day.Contains("20:30"))
+                    {
+                        
+                        worksheet.Cells[excelX,42] = list.classname;
+                        
+                        worksheet.Cells[excelX,43] =list.room;
+                       
+                        worksheet.Cells[excelX,44] = list.classname;
+                        
+                        worksheet.Cells[excelX,45] =list.room;
+                        
+                        worksheet.Cells[excelX,46] = list.classname;
+                        
+                        worksheet.Cells[excelX,47] =list.room;
+                    }
+                    if (list.day.Contains("09:30") && list.day.Contains("12:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,2] = list.classname;
+                        
+                        worksheet.Cells[excelX,3] =list.room;
+                        
+                        worksheet.Cells[excelX,4] = list.classname;
+                        
+                        worksheet.Cells[excelX,5] =list.room;
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                    }
+                    if (list.day.Contains("10:30") && list.day.Contains("12:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                        
+                        worksheet.Cells[excelX,8] = list.classname;
+                        
+                        worksheet.Cells[excelX,9] =list.room;
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                    }
+                    if (list.day.Contains("11:30") && list.day.Contains("13:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                        
+                        worksheet.Cells[excelX,12] = list.classname;
+                        
+                        worksheet.Cells[excelX,13] =list.room;
+                       
+                        worksheet.Cells[excelX,14] = list.classname;
+                        
+                        worksheet.Cells[excelX,15] =list.room;
+                    }
+                    if (list.day.Contains("12:30") && list.day.Contains("14:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,14] = list.classname;
+                        
+                        worksheet.Cells[excelX,15] =list.room;
+                        
+                        worksheet.Cells[excelX,16] = list.classname;
+                        
+                        worksheet.Cells[excelX,17] =list.room;
+                        
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                    }
+                    if (list.day.Contains("13:30") && list.day.Contains("15:00"))
+                    {
+                       
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                      
+                        worksheet.Cells[excelX,20] = list.classname;
+                       
+                        worksheet.Cells[excelX,21] =list.room;
+                        
+                        worksheet.Cells[excelX,22] = list.classname;
+                      
+                        worksheet.Cells[excelX,23] =list.room;
+                    }
+                    if (list.day.Contains("14:30") && list.day.Contains("16:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,22] = list.classname;
+                       
+                        worksheet.Cells[excelX,23] =list.room;
+                       
+                        worksheet.Cells[excelX,24] = list.classname;
+                       
+                        worksheet.Cells[excelX,25] =list.room;
+                        
+                        worksheet.Cells[excelX,26] = list.classname;
+                        
+                        worksheet.Cells[excelX,27] =list.room;
+                    }
+                    if (list.day.Contains("15:30") && list.day.Contains("17:00"))
+                    {
+                      
+                        worksheet.Cells[excelX,26] = list.classname;
+                      
+                        worksheet.Cells[excelX,27] =list.room;
+                        
+                        worksheet.Cells[excelX,28] = list.classname;
+                        
+                        worksheet.Cells[excelX,29] =list.room;
+                        
+                        worksheet.Cells[excelX,30] = list.classname;
+                        
+                        worksheet.Cells[excelX,31] =list.room;
+                    }
+                    if (list.day.Contains("16:30") && list.day.Contains("18:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,30] = list.classname;
+                      
+                        worksheet.Cells[excelX,31] =list.room;
+                        
+                        worksheet.Cells[excelX,32] = list.classname;
+                      
+                        worksheet.Cells[excelX,33] =list.room;
+                       
+                        worksheet.Cells[excelX,34] = list.classname;
+                       
+                        worksheet.Cells[excelX,35] =list.room;
+                    }
+                    if (list.day.Contains("17:30") && list.day.Contains("19:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,34] = list.classname;
+                     
+                        worksheet.Cells[excelX,35] =list.room;
+                        
+                        worksheet.Cells[excelX,36] = list.classname;
+                        
+                        worksheet.Cells[excelX,37] =list.room;
+                       
+                        worksheet.Cells[excelX,38] = list.classname;
+                       
+                        worksheet.Cells[excelX,39] =list.room;
+                    }
+                    if (list.day.Contains("18:30") && list.day.Contains("20:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,38] = list.classname;
+                        
+                        worksheet.Cells[excelX,39] =list.room;
+                        
+                        worksheet.Cells[excelX,40] = list.classname;
+                        
+                        worksheet.Cells[excelX,41] =list.room;
+                       
+                        worksheet.Cells[excelX,42] = list.classname;
+                        
+                        worksheet.Cells[excelX,43] =list.room;
+                    }
+                    if (list.day.Contains("19:30") && list.day.Contains("21:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,42] = list.classname;
+                        
+                        worksheet.Cells[excelX,43] =list.room;
+                        
+                        worksheet.Cells[excelX,44] = list.classname;
+                        
+                        worksheet.Cells[excelX,45] =list.room;
+                     
+                        worksheet.Cells[excelX,46] = list.classname;
+                       
+                        worksheet.Cells[excelX,47] =list.room;
+                    }
+
+
+                    if (list.day.Contains("09:00") && list.day.Contains("10:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,2] = list.classname;
+                        
+                        worksheet.Cells[excelX,3] =list.room;
+                        
+                        worksheet.Cells[excelX,4] = list.classname;
+                        
+                        worksheet.Cells[excelX,5] =list.room;
+                    }
+                    if (list.day.Contains("10:00") && list.day.Contains("11:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,6] = list.classname;
+                        
+                        worksheet.Cells[excelX,7] =list.room;
+                        
+                        worksheet.Cells[excelX,8] = list.classname;
+                        
+                        worksheet.Cells[excelX,9] =list.room;
+                    }
+                    if (list.day.Contains("11:00") && list.day.Contains("12:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,10] = list.classname;
+                        
+                        worksheet.Cells[excelX,11] =list.room;
+                        
+                        worksheet.Cells[excelX,12] = list.classname;
+                        
+                        worksheet.Cells[excelX,13] =list.room;
+                    }
+                    if (list.day.Contains("12:00") && list.day.Contains("13:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,14] = list.classname;
+                        
+                        worksheet.Cells[excelX,15] =list.room;
+                        
+                        worksheet.Cells[excelX,16] = list.classname;
+                        
+                        worksheet.Cells[excelX,17] =list.room;
+                    }
+                    if (list.day.Contains("13:00") && list.day.Contains("14:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,18] = list.classname;
+                        
+                        worksheet.Cells[excelX,19] =list.room;
+                       
+                        worksheet.Cells[excelX,20] = list.classname;
+                        
+                        worksheet.Cells[excelX,21] =list.room;
+                    }
+                    if (list.day.Contains("14:00") && list.day.Contains("15:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,22] = list.classname;
+                        
+                        worksheet.Cells[excelX,23] =list.room;
+                        
+                        worksheet.Cells[excelX,24] = list.classname;
+                        
+                        worksheet.Cells[excelX,25] =list.room;
+                    }
+                    if (list.day.Contains("15:00") && list.day.Contains("16:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,26] = list.classname;
+                        
+                        worksheet.Cells[excelX,27] =list.room;
+                       
+                        worksheet.Cells[excelX,28] = list.classname;
+                        
+                        worksheet.Cells[excelX,29] =list.room;
+                    }
+                    if (list.day.Contains("16:00") && list.day.Contains("17:00"))
+                    {
+                      
+                        worksheet.Cells[excelX,30] = list.classname;
+                       
+                        worksheet.Cells[excelX,31] =list.room;
+                        
+                        worksheet.Cells[excelX,32] = list.classname;
+                      
+                        worksheet.Cells[excelX,33] =list.room;
+                    }
+                    if (list.day.Contains("17:00") && list.day.Contains("18:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,34] = list.classname;
+                       
+                        worksheet.Cells[excelX,35] =list.room;
+                       
+                        worksheet.Cells[excelX,36] = list.classname;
+                       
+                        worksheet.Cells[excelX,37] =list.room;
+                    }
+                    if (list.day.Contains("18:00") && list.day.Contains("19:00"))
+                    {
+                        
+                        worksheet.Cells[excelX,38] = list.classname;
+                       
+                        worksheet.Cells[excelX,39] =list.room;
+                        ;
+                        worksheet.Cells[excelX,40] = list.classname;
+                        
+                        worksheet.Cells[excelX,41] =list.room;
+                    }
+                    if (list.day.Contains("19:00") && list.day.Contains("20:00"))
+                    {
+                      
+                        worksheet.Cells[excelX,42] = list.classname;
+                      
+                        worksheet.Cells[excelX,43] =list.room;
+                        
+                        worksheet.Cells[excelX,44] = list.classname;
+                        
+                        worksheet.Cells[excelX,45] =list.room;
+                    }
+
+                // 모든 워크북 닫기
+                
                 }
                 catch (SystemException e)
                 {
@@ -603,1007 +1626,1008 @@ namespace SejongTimeTable.Controls
             Constants.Is_CHECK = true; // 초기화
             GoBack();
         }
+
         public void Check(ClassVO list)
         {
             if (list.day.Contains("09:00") && list.day.Contains("12:00"))
             {
-                Console.SetCursorPosition(dayPos, 01);
+                Console.SetCursorPosition(dayPosX, 01);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 02);
+                Console.SetCursorPosition(dayPosX, 02);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 03);
+                Console.SetCursorPosition(dayPosX, 03);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 04);
+                Console.SetCursorPosition(dayPosX, 04);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 05);
+                Console.SetCursorPosition(dayPosX, 05);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 06);
+                Console.SetCursorPosition(dayPosX, 06);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 07);
+                Console.SetCursorPosition(dayPosX, 07);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 08);
+                Console.SetCursorPosition(dayPosX, 08);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("10:00") && list.day.Contains("13:00"))
             {
-                Console.SetCursorPosition(dayPos, 05);
+                Console.SetCursorPosition(dayPosX, 05);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 06);
+                Console.SetCursorPosition(dayPosX, 06);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 07);
+                Console.SetCursorPosition(dayPosX, 07);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 08);
+                Console.SetCursorPosition(dayPosX, 08);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("11:00") && list.day.Contains("14:00"))
             {
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
             }
 
 
             if (list.day.Contains("12:00") && list.day.Contains("15:00"))
             {
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 21);
+                Console.SetCursorPosition(dayPosX, 21);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 22);
+                Console.SetCursorPosition(dayPosX, 22);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 23);
+                Console.SetCursorPosition(dayPosX, 23);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 24);
+                Console.SetCursorPosition(dayPosX, 24);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("13:00") && list.day.Contains("16:00"))
             {
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 21);
+                Console.SetCursorPosition(dayPosX, 21);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 22);
+                Console.SetCursorPosition(dayPosX, 22);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 23);
+                Console.SetCursorPosition(dayPosX, 23);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 24);
+                Console.SetCursorPosition(dayPosX, 24);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 25);
+                Console.SetCursorPosition(dayPosX, 25);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 26);
+                Console.SetCursorPosition(dayPosX, 26);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 27);
+                Console.SetCursorPosition(dayPosX, 27);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 28);
+                Console.SetCursorPosition(dayPosX, 28);
                 Console.WriteLine(list.room);
             }
 
             if (list.day.Contains("15:00") && list.day.Contains("18:00"))
             {
-                Console.SetCursorPosition(dayPos, 25);
+                Console.SetCursorPosition(dayPosX, 25);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 26);
+                Console.SetCursorPosition(dayPosX, 26);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 27);
+                Console.SetCursorPosition(dayPosX, 27);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 28);
+                Console.SetCursorPosition(dayPosX, 28);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 29);
+                Console.SetCursorPosition(dayPosX, 29);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 30);
+                Console.SetCursorPosition(dayPosX, 30);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 31);
+                Console.SetCursorPosition(dayPosX, 31);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 32);
+                Console.SetCursorPosition(dayPosX, 32);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 33);
+                Console.SetCursorPosition(dayPosX, 33);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 34);
+                Console.SetCursorPosition(dayPosX, 34);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 35);
+                Console.SetCursorPosition(dayPosX, 35);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 36);
+                Console.SetCursorPosition(dayPosX, 36);
                 Console.WriteLine(list.room);
             }
 
             if (list.day.Contains("09:30") && list.day.Contains("11:30"))
             {
-                Console.SetCursorPosition(dayPos, 03);
+                Console.SetCursorPosition(dayPosX, 03);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 04);
+                Console.SetCursorPosition(dayPosX, 04);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 05);
+                Console.SetCursorPosition(dayPosX, 05);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 06);
+                Console.SetCursorPosition(dayPosX, 06);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 07);
+                Console.SetCursorPosition(dayPosX, 07);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 08);
+                Console.SetCursorPosition(dayPosX, 08);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("10:30") && list.day.Contains("12:30"))
             {
-                Console.SetCursorPosition(dayPos, 07);
+                Console.SetCursorPosition(dayPosX, 07);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 08);
+                Console.SetCursorPosition(dayPosX, 08);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("11:30") && list.day.Contains("13:30"))
             {
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("12:30") && list.day.Contains("14:30"))
             {
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 21);
+                Console.SetCursorPosition(dayPosX, 21);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 22);
+                Console.SetCursorPosition(dayPosX, 22);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("13:30") && list.day.Contains("15:30"))
             {
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 21);
+                Console.SetCursorPosition(dayPosX, 21);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 22);
+                Console.SetCursorPosition(dayPosX, 22);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 23);
+                Console.SetCursorPosition(dayPosX, 23);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 24);
+                Console.SetCursorPosition(dayPosX, 24);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 25);
+                Console.SetCursorPosition(dayPosX, 25);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 26);
+                Console.SetCursorPosition(dayPosX, 26);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("14:30") && list.day.Contains("16:30"))
             {
-                Console.SetCursorPosition(dayPos, 23);
+                Console.SetCursorPosition(dayPosX, 23);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 24);
+                Console.SetCursorPosition(dayPosX, 24);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 25);
+                Console.SetCursorPosition(dayPosX, 25);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 26);
+                Console.SetCursorPosition(dayPosX, 26);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 27);
+                Console.SetCursorPosition(dayPosX, 27);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 28);
+                Console.SetCursorPosition(dayPosX, 28);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 29);
+                Console.SetCursorPosition(dayPosX, 29);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 30);
+                Console.SetCursorPosition(dayPosX, 30);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("15:30") && list.day.Contains("17:30"))
             {
-                Console.SetCursorPosition(dayPos, 27);
+                Console.SetCursorPosition(dayPosX, 27);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 28);
+                Console.SetCursorPosition(dayPosX, 28);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 29);
+                Console.SetCursorPosition(dayPosX, 29);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 30);
+                Console.SetCursorPosition(dayPosX, 30);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 31);
+                Console.SetCursorPosition(dayPosX, 31);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 32);
+                Console.SetCursorPosition(dayPosX, 32);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 33);
+                Console.SetCursorPosition(dayPosX, 33);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 34);
+                Console.SetCursorPosition(dayPosX, 34);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("16:30") && list.day.Contains("18:30"))
             {
-                Console.SetCursorPosition(dayPos, 31);
+                Console.SetCursorPosition(dayPosX, 31);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 32);
+                Console.SetCursorPosition(dayPosX, 32);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 33);
+                Console.SetCursorPosition(dayPosX, 33);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 34);
+                Console.SetCursorPosition(dayPosX, 34);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 35);
+                Console.SetCursorPosition(dayPosX, 35);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 36);
+                Console.SetCursorPosition(dayPosX, 36);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 37);
+                Console.SetCursorPosition(dayPosX, 37);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 38);
+                Console.SetCursorPosition(dayPosX, 38);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("17:30") && list.day.Contains("19:30"))
             {
-                Console.SetCursorPosition(dayPos, 35);
+                Console.SetCursorPosition(dayPosX, 35);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 36);
+                Console.SetCursorPosition(dayPosX, 36);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 37);
+                Console.SetCursorPosition(dayPosX, 37);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 38);
+                Console.SetCursorPosition(dayPosX, 38);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 39);
+                Console.SetCursorPosition(dayPosX, 39);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 40);
+                Console.SetCursorPosition(dayPosX, 40);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 41);
+                Console.SetCursorPosition(dayPosX, 41);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 42);
+                Console.SetCursorPosition(dayPosX, 42);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("18:30") && list.day.Contains("20:30"))
             {
-                Console.SetCursorPosition(dayPos, 39);
+                Console.SetCursorPosition(dayPosX, 39);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 40);
+                Console.SetCursorPosition(dayPosX, 40);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 41);
+                Console.SetCursorPosition(dayPosX, 41);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 42);
+                Console.SetCursorPosition(dayPosX, 42);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 43);
+                Console.SetCursorPosition(dayPosX, 43);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 44);
+                Console.SetCursorPosition(dayPosX, 44);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 45);
+                Console.SetCursorPosition(dayPosX, 45);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 46);
+                Console.SetCursorPosition(dayPosX, 46);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("09:00") && list.day.Contains("11:00"))
             {
-                Console.SetCursorPosition(dayPos, 01);
+                Console.SetCursorPosition(dayPosX, 01);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 02);
+                Console.SetCursorPosition(dayPosX, 02);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 03);
+                Console.SetCursorPosition(dayPosX, 03);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 04);
+                Console.SetCursorPosition(dayPosX, 04);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 05);
+                Console.SetCursorPosition(dayPosX, 05);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 06);
+                Console.SetCursorPosition(dayPosX, 06);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 07);
+                Console.SetCursorPosition(dayPosX, 07);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 08);
+                Console.SetCursorPosition(dayPosX, 08);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("10:00") && list.day.Contains("12:00"))
             {
-                Console.SetCursorPosition(dayPos, 05);
+                Console.SetCursorPosition(dayPosX, 05);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 06);
+                Console.SetCursorPosition(dayPosX, 06);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 07);
+                Console.SetCursorPosition(dayPosX, 07);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 08);
+                Console.SetCursorPosition(dayPosX, 08);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("11:00") && list.day.Contains("13:00"))
             {
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("12:00") && list.day.Contains("14:00"))
             {
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("13:00") && list.day.Contains("15:00"))
             {
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 21);
+                Console.SetCursorPosition(dayPosX, 21);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 22);
+                Console.SetCursorPosition(dayPosX, 22);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 23);
+                Console.SetCursorPosition(dayPosX, 23);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 24);
+                Console.SetCursorPosition(dayPosX, 24);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("14:00") && list.day.Contains("16:00"))
             {
-                Console.SetCursorPosition(dayPos, 21);
+                Console.SetCursorPosition(dayPosX, 21);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 22);
+                Console.SetCursorPosition(dayPosX, 22);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 23);
+                Console.SetCursorPosition(dayPosX, 23);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 24);
+                Console.SetCursorPosition(dayPosX, 24);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 25);
+                Console.SetCursorPosition(dayPosX, 25);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 26);
+                Console.SetCursorPosition(dayPosX, 26);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 27);
+                Console.SetCursorPosition(dayPosX, 27);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 28);
+                Console.SetCursorPosition(dayPosX, 28);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("15:00") && list.day.Contains("17:00"))
             {
-                Console.SetCursorPosition(dayPos, 25);
+                Console.SetCursorPosition(dayPosX, 25);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 26);
+                Console.SetCursorPosition(dayPosX, 26);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 27);
+                Console.SetCursorPosition(dayPosX, 27);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 28);
+                Console.SetCursorPosition(dayPosX, 28);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 29);
+                Console.SetCursorPosition(dayPosX, 29);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 30);
+                Console.SetCursorPosition(dayPosX, 30);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 31);
+                Console.SetCursorPosition(dayPosX, 31);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 32);
+                Console.SetCursorPosition(dayPosX, 32);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("16:00") && list.day.Contains("18:00"))
             {
-                Console.SetCursorPosition(dayPos, 29);
+                Console.SetCursorPosition(dayPosX, 29);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 30);
+                Console.SetCursorPosition(dayPosX, 30);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 31);
+                Console.SetCursorPosition(dayPosX, 31);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 32);
+                Console.SetCursorPosition(dayPosX, 32);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 33);
+                Console.SetCursorPosition(dayPosX, 33);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 34);
+                Console.SetCursorPosition(dayPosX, 34);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 35);
+                Console.SetCursorPosition(dayPosX, 35);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 36);
+                Console.SetCursorPosition(dayPosX, 36);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("17:00") && list.day.Contains("19:00"))
             {
-                Console.SetCursorPosition(dayPos, 33);
+                Console.SetCursorPosition(dayPosX, 33);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 34);
+                Console.SetCursorPosition(dayPosX, 34);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 35);
+                Console.SetCursorPosition(dayPosX, 35);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 36);
+                Console.SetCursorPosition(dayPosX, 36);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 37);
+                Console.SetCursorPosition(dayPosX, 37);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 38);
+                Console.SetCursorPosition(dayPosX, 38);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 39);
+                Console.SetCursorPosition(dayPosX, 39);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 40);
+                Console.SetCursorPosition(dayPosX, 40);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("18:00") && list.day.Contains("20:00"))
             {
-                Console.SetCursorPosition(dayPos, 37);
+                Console.SetCursorPosition(dayPosX, 37);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 38);
+                Console.SetCursorPosition(dayPosX, 38);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 39);
+                Console.SetCursorPosition(dayPosX, 39);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 40);
+                Console.SetCursorPosition(dayPosX, 40);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 41);
+                Console.SetCursorPosition(dayPosX, 41);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 42);
+                Console.SetCursorPosition(dayPosX, 42);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 43);
+                Console.SetCursorPosition(dayPosX, 43);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 44);
+                Console.SetCursorPosition(dayPosX, 44);
                 Console.WriteLine(list.room);
             }
 
 
             if (list.day.Contains("09:00") && list.day.Contains("10:30"))
             {
-                Console.SetCursorPosition(dayPos, 01);
+                Console.SetCursorPosition(dayPosX, 01);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 02);
+                Console.SetCursorPosition(dayPosX, 02);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 03);
+                Console.SetCursorPosition(dayPosX, 03);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 04);
+                Console.SetCursorPosition(dayPosX, 04);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 05);
+                Console.SetCursorPosition(dayPosX, 05);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 06);
+                Console.SetCursorPosition(dayPosX, 06);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("10:00") && list.day.Contains("11:30"))
             {
-                Console.SetCursorPosition(dayPos, 07);
+                Console.SetCursorPosition(dayPosX, 07);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 08);
+                Console.SetCursorPosition(dayPosX, 08);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("11:00") && list.day.Contains("12:30"))
             {
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("12:00") && list.day.Contains("13:30"))
             {
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 21);
+                Console.SetCursorPosition(dayPosX, 21);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 22);
+                Console.SetCursorPosition(dayPosX, 22);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 23);
+                Console.SetCursorPosition(dayPosX, 23);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 24);
+                Console.SetCursorPosition(dayPosX, 24);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("13:00") && list.day.Contains("14:30"))
             {
-                Console.SetCursorPosition(dayPos, 25);
+                Console.SetCursorPosition(dayPosX, 25);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 26);
+                Console.SetCursorPosition(dayPosX, 26);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 27);
+                Console.SetCursorPosition(dayPosX, 27);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 28);
+                Console.SetCursorPosition(dayPosX, 28);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 29);
+                Console.SetCursorPosition(dayPosX, 29);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 30);
+                Console.SetCursorPosition(dayPosX, 30);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("14:00") && list.day.Contains("15:30"))
             {
-                Console.SetCursorPosition(dayPos, 31);
+                Console.SetCursorPosition(dayPosX, 31);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 32);
+                Console.SetCursorPosition(dayPosX, 32);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 33);
+                Console.SetCursorPosition(dayPosX, 33);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 34);
+                Console.SetCursorPosition(dayPosX, 34);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 35);
+                Console.SetCursorPosition(dayPosX, 35);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 36);
+                Console.SetCursorPosition(dayPosX, 36);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("15:00") && list.day.Contains("16:30"))
             {
-                Console.SetCursorPosition(dayPos, 37);
+                Console.SetCursorPosition(dayPosX, 37);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 38);
+                Console.SetCursorPosition(dayPosX, 38);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 39);
+                Console.SetCursorPosition(dayPosX, 39);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 40);
+                Console.SetCursorPosition(dayPosX, 40);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 41);
+                Console.SetCursorPosition(dayPosX, 41);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 42);
+                Console.SetCursorPosition(dayPosX, 42);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("16:00") && list.day.Contains("17:30"))
             {
-                Console.SetCursorPosition(dayPos, 43);
+                Console.SetCursorPosition(dayPosX, 43);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 44);
+                Console.SetCursorPosition(dayPosX, 44);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 45);
+                Console.SetCursorPosition(dayPosX, 45);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 46);
+                Console.SetCursorPosition(dayPosX, 46);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 47);
+                Console.SetCursorPosition(dayPosX, 47);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 47);
+                Console.SetCursorPosition(dayPosX, 47);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("17:00") && list.day.Contains("18:30"))
             {
-                Console.SetCursorPosition(dayPos, 49);
+                Console.SetCursorPosition(dayPosX, 49);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 50);
+                Console.SetCursorPosition(dayPosX, 50);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 51);
+                Console.SetCursorPosition(dayPosX, 51);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 52);
+                Console.SetCursorPosition(dayPosX, 52);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 53);
+                Console.SetCursorPosition(dayPosX, 53);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 54);
+                Console.SetCursorPosition(dayPosX, 54);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("18:00") && list.day.Contains("19:30"))
             {
-                Console.SetCursorPosition(dayPos, 55);
+                Console.SetCursorPosition(dayPosX, 55);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 56);
+                Console.SetCursorPosition(dayPosX, 56);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 57);
+                Console.SetCursorPosition(dayPosX, 57);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 58);
+                Console.SetCursorPosition(dayPosX, 58);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 59);
+                Console.SetCursorPosition(dayPosX, 59);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 60);
+                Console.SetCursorPosition(dayPosX, 60);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("19:00") && list.day.Contains("20:30"))
             {
-                Console.SetCursorPosition(dayPos, 61);
+                Console.SetCursorPosition(dayPosX, 61);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 62);
+                Console.SetCursorPosition(dayPosX, 62);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 63);
+                Console.SetCursorPosition(dayPosX, 63);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 65);
+                Console.SetCursorPosition(dayPosX, 65);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 65);
+                Console.SetCursorPosition(dayPosX, 65);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 66);
+                Console.SetCursorPosition(dayPosX, 66);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("09:30") && list.day.Contains("12:00"))
             {
-                Console.SetCursorPosition(dayPos, 03);
+                Console.SetCursorPosition(dayPosX, 03);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 04);
+                Console.SetCursorPosition(dayPosX, 04);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 05);
+                Console.SetCursorPosition(dayPosX, 05);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 06);
+                Console.SetCursorPosition(dayPosX, 06);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 07);
+                Console.SetCursorPosition(dayPosX, 07);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 08);
+                Console.SetCursorPosition(dayPosX, 08);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("10:30") && list.day.Contains("12:00"))
             {
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("11:30") && list.day.Contains("13:00"))
             {
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("12:30") && list.day.Contains("14:00"))
             {
-                Console.SetCursorPosition(dayPos, 21);
+                Console.SetCursorPosition(dayPosX, 21);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 22);
+                Console.SetCursorPosition(dayPosX, 22);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 23);
+                Console.SetCursorPosition(dayPosX, 23);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 24);
+                Console.SetCursorPosition(dayPosX, 24);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 25);
+                Console.SetCursorPosition(dayPosX, 25);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 26);
+                Console.SetCursorPosition(dayPosX, 26);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("13:30") && list.day.Contains("15:00"))
             {
-                Console.SetCursorPosition(dayPos, 27);
+                Console.SetCursorPosition(dayPosX, 27);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 28);
+                Console.SetCursorPosition(dayPosX, 28);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 29);
+                Console.SetCursorPosition(dayPosX, 29);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 30);
+                Console.SetCursorPosition(dayPosX, 30);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 31);
+                Console.SetCursorPosition(dayPosX, 31);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 32);
+                Console.SetCursorPosition(dayPosX, 32);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("14:30") && list.day.Contains("16:00"))
             {
-                Console.SetCursorPosition(dayPos, 33);
+                Console.SetCursorPosition(dayPosX, 33);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 34);
+                Console.SetCursorPosition(dayPosX, 34);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 35);
+                Console.SetCursorPosition(dayPosX, 35);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 36);
+                Console.SetCursorPosition(dayPosX, 36);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 37);
+                Console.SetCursorPosition(dayPosX, 37);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 40);
+                Console.SetCursorPosition(dayPosX, 40);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("15:30") && list.day.Contains("17:00"))
             {
-                Console.SetCursorPosition(dayPos, 41);
+                Console.SetCursorPosition(dayPosX, 41);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 42);
+                Console.SetCursorPosition(dayPosX, 42);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 43);
+                Console.SetCursorPosition(dayPosX, 43);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 44);
+                Console.SetCursorPosition(dayPosX, 44);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 45);
+                Console.SetCursorPosition(dayPosX, 45);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 46);
+                Console.SetCursorPosition(dayPosX, 46);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("16:30") && list.day.Contains("18:00"))
             {
-                Console.SetCursorPosition(dayPos, 47);
+                Console.SetCursorPosition(dayPosX, 47);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 48);
+                Console.SetCursorPosition(dayPosX, 48);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 49);
+                Console.SetCursorPosition(dayPosX, 49);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 50);
+                Console.SetCursorPosition(dayPosX, 50);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 51);
+                Console.SetCursorPosition(dayPosX, 51);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 52);
+                Console.SetCursorPosition(dayPosX, 52);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("17:30") && list.day.Contains("19:00"))
             {
-                Console.SetCursorPosition(dayPos, 53);
+                Console.SetCursorPosition(dayPosX, 53);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 54);
+                Console.SetCursorPosition(dayPosX, 54);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 55);
+                Console.SetCursorPosition(dayPosX, 55);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 56);
+                Console.SetCursorPosition(dayPosX, 56);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 57);
+                Console.SetCursorPosition(dayPosX, 57);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 57);
+                Console.SetCursorPosition(dayPosX, 57);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("18:30") && list.day.Contains("20:00"))
             {
-                Console.SetCursorPosition(dayPos, 59);
+                Console.SetCursorPosition(dayPosX, 59);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 60);
+                Console.SetCursorPosition(dayPosX, 60);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 61);
+                Console.SetCursorPosition(dayPosX, 61);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 62);
+                Console.SetCursorPosition(dayPosX, 62);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 63);
+                Console.SetCursorPosition(dayPosX, 63);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 64);
+                Console.SetCursorPosition(dayPosX, 64);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("19:30") && list.day.Contains("21:00"))
             {
-                Console.SetCursorPosition(dayPos, 65);
+                Console.SetCursorPosition(dayPosX, 65);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 66);
+                Console.SetCursorPosition(dayPosX, 66);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 67);
+                Console.SetCursorPosition(dayPosX, 67);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 68);
+                Console.SetCursorPosition(dayPosX, 68);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 69);
+                Console.SetCursorPosition(dayPosX, 69);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 70);
+                Console.SetCursorPosition(dayPosX, 70);
                 Console.WriteLine(list.room);
             }
 
 
             if (list.day.Contains("09:00") && list.day.Contains("10:00"))
             {
-                Console.SetCursorPosition(dayPos, 01);
+                Console.SetCursorPosition(dayPosX, 01);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 02);
+                Console.SetCursorPosition(dayPosX, 02);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 03);
+                Console.SetCursorPosition(dayPosX, 03);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 04);
+                Console.SetCursorPosition(dayPosX, 04);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("10:00") && list.day.Contains("11:00"))
             {
-                Console.SetCursorPosition(dayPos, 05);
+                Console.SetCursorPosition(dayPosX, 05);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 06);
+                Console.SetCursorPosition(dayPosX, 06);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 07);
+                Console.SetCursorPosition(dayPosX, 07);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 08);
+                Console.SetCursorPosition(dayPosX, 08);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("11:00") && list.day.Contains("12:00"))
             {
-                Console.SetCursorPosition(dayPos, 09);
+                Console.SetCursorPosition(dayPosX, 09);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 10);
+                Console.SetCursorPosition(dayPosX, 10);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 11);
+                Console.SetCursorPosition(dayPosX, 11);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 12);
+                Console.SetCursorPosition(dayPosX, 12);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("12:00") && list.day.Contains("13:00"))
             {
-                Console.SetCursorPosition(dayPos, 13);
+                Console.SetCursorPosition(dayPosX, 13);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 14);
+                Console.SetCursorPosition(dayPosX, 14);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 15);
+                Console.SetCursorPosition(dayPosX, 15);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 16);
+                Console.SetCursorPosition(dayPosX, 16);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("13:00") && list.day.Contains("14:00"))
             {
-                Console.SetCursorPosition(dayPos, 17);
+                Console.SetCursorPosition(dayPosX, 17);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 18);
+                Console.SetCursorPosition(dayPosX, 18);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 19);
+                Console.SetCursorPosition(dayPosX, 19);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 20);
+                Console.SetCursorPosition(dayPosX, 20);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("14:00") && list.day.Contains("15:00"))
             {
-                Console.SetCursorPosition(dayPos, 21);
+                Console.SetCursorPosition(dayPosX, 21);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 22);
+                Console.SetCursorPosition(dayPosX, 22);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 23);
+                Console.SetCursorPosition(dayPosX, 23);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 24);
+                Console.SetCursorPosition(dayPosX, 24);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("15:00") && list.day.Contains("16:00"))
             {
-                Console.SetCursorPosition(dayPos, 25);
+                Console.SetCursorPosition(dayPosX, 25);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 26);
+                Console.SetCursorPosition(dayPosX, 26);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 27);
+                Console.SetCursorPosition(dayPosX, 27);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 28);
+                Console.SetCursorPosition(dayPosX, 28);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("16:00") && list.day.Contains("17:00"))
             {
-                Console.SetCursorPosition(dayPos, 29);
+                Console.SetCursorPosition(dayPosX, 29);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 30);
+                Console.SetCursorPosition(dayPosX, 30);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 31);
+                Console.SetCursorPosition(dayPosX, 31);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 32);
+                Console.SetCursorPosition(dayPosX, 32);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("17:00") && list.day.Contains("18:00"))
             {
-                Console.SetCursorPosition(dayPos, 33);
+                Console.SetCursorPosition(dayPosX, 33);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 34);
+                Console.SetCursorPosition(dayPosX, 34);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 35);
+                Console.SetCursorPosition(dayPosX, 35);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 36);
+                Console.SetCursorPosition(dayPosX, 36);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("18:00") && list.day.Contains("19:00"))
             {
-                Console.SetCursorPosition(dayPos, 37);
+                Console.SetCursorPosition(dayPosX, 37);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 38);
+                Console.SetCursorPosition(dayPosX, 38);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 39);
+                Console.SetCursorPosition(dayPosX, 39);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 40);
+                Console.SetCursorPosition(dayPosX, 40);
                 Console.WriteLine(list.room);
             }
             if (list.day.Contains("19:00") && list.day.Contains("20:00"))
             {
-                Console.SetCursorPosition(dayPos, 41);
+                Console.SetCursorPosition(dayPosX, 41);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 42);
+                Console.SetCursorPosition(dayPosX, 42);
                 Console.WriteLine(list.room);
-                Console.SetCursorPosition(dayPos, 43);
+                Console.SetCursorPosition(dayPosX, 43);
                 Console.WriteLine(list.classname);
-                Console.SetCursorPosition(dayPos, 44);
+                Console.SetCursorPosition(dayPosX, 44);
                 Console.WriteLine(list.room);
             }
 
@@ -1613,5 +2637,6 @@ namespace SejongTimeTable.Controls
 
 
         }
+
     }
 }

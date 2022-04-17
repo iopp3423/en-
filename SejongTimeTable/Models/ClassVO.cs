@@ -7,7 +7,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace SejongTimeTable.Models
 {
-
+  
     public class ClassVO
     {
         public List<ClassVO> Data = new List<ClassVO>();
