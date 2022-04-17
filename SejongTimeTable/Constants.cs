@@ -110,6 +110,12 @@ namespace SejongTimeTable
         static public int ROOM_X =120;
         static public int LANGUAGE_X =145;
         static public int Y = 2;
+        static public int MONDAY=25;
+        static public int TUESDAY =50;
+        static public int WEDNESDAY =75;
+        static public int THURSDAY = 100;
+        static public int FRIDAY = 125;
+
 
 
 
