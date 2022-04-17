@@ -14,7 +14,6 @@ namespace EnLibrary3.Controls
         static void Main(string[] args) // 관리자모드 추가해줘야함
         {           
             ListVO List = new ListVO();
-            //Constants.constant = new Constants;
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HDIGHT); // 콘솔크기 지정
             Print PrintCollection = new Print();
             User User = new User();
@@ -25,9 +24,7 @@ namespace EnLibrary3.Controls
 
             PrintCollection.PrintUserOrAdmin(); // 회원가입 or 로그인 화면
 
-            // cursur에 입력값을 받으면(방향키) 방향키를 출력해줌 ex) 위 : UpArrow
             ConsoleKeyInfo cursur;
-            //cursur = Console.ReadKey(true); // 방향키 아래 누르면 cursur에 DownArrow 들어감, 맨 처음 아무것도 안했을 때 입력값은 System.ConsoleKeyInfo이다.
 
 
             

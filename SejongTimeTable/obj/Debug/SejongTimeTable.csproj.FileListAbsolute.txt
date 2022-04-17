@@ -1,0 +1,8 @@
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\SejongTimeTable\bin\Debug\SejongTimeTable.exe.config
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\SejongTimeTable\bin\Debug\SejongTimeTable.exe
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\SejongTimeTable\bin\Debug\SejongTimeTable.pdb
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\SejongTimeTable\obj\Debug\SejongTimeTable.csproj.AssemblyReference.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\SejongTimeTable\obj\Debug\SejongTimeTable.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\SejongTimeTable\obj\Debug\SejongTimeTable.csproj.CoreCompileInputs.cache
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\SejongTimeTable\obj\Debug\SejongTimeTable.exe
+C:\Users\user\OneDrive\Desktop\EN#프로젝트\SejongTimeTable\obj\Debug\SejongTimeTable.pdb

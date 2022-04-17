@@ -156,17 +156,6 @@
             
         }
     }
-    /*
-    public void print()
-    {
-        foreach (UserVO list in List.UserList)
-        {
-            if (list.Id == InputKey.loginId)
-            {
-                Console.WriteLine(list);
-            }
-        }
-    }
-    */
+    
 }
   

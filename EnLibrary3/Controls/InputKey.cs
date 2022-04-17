@@ -42,17 +42,6 @@ namespace EnLibrary3.Controls
         {
             this.List = List;
         }
-        /*
-         * private string bookNumber;
-        public string name;
-        public string publisher;
-        public string author;
-        private string date;
-        private string price;
-        private string quantity;
-        public int number;
-         */
-     
 
         public void BackUserMode() // 유저모드로 뒤돌아가기 함수
         {
