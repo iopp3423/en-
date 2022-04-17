@@ -306,15 +306,11 @@ namespace SejongTimeTable.Controls
         {
             
             int row, col;
-            string monday = "월";
-            string tuesday = "화";
-            string wendsday = "수";
-            string thursday = "목";
-            string friday = "금";
             Console.Clear();
             MenuView.PrintMyTable();
             MenuView.PrintTimeTable();
             //UserData.Data 나의 관심과목
+            
 
             foreach (ClassVO list in UserData.Data)
             {

@@ -99,7 +99,7 @@ namespace SejongTimeTable.Controls
                 Console.WriteLine(list);
                 
             }
-            SaveExcel();
+            //SaveExcel();
             
             GoBack();
             
@@ -126,16 +126,36 @@ namespace SejongTimeTable.Controls
                     // 특정 sheet의 값 가져오기
                     // Excel.Worksheet worksheet = sheets["ensharp"] as Excel.Worksheet;
                     Excel.Worksheet worksheet = workbook.Worksheets.get_Item(1) as Excel.Worksheet;
-                    worksheet.Cells[1, 1] = "No";
+                    worksheet.Cells[2, 1] = "09:00~09:30";
+                    worksheet.Cells[4, 1] = "09:30~10:00";
+                    worksheet.Cells[6, 1] = "10:00~10:30";
+                    worksheet.Cells[8, 1] = "10:30~11:00";
+                    worksheet.Cells[10, 1] = "11:30~12:00";
+                    worksheet.Cells[12, 1] = "12:00~12:30";
+                    worksheet.Cells[14, 1] = "12~30~13:00";
+                    worksheet.Cells[16, 1] = "13:00~13:30";
+                    worksheet.Cells[18, 1] = "13:30~14:00";
+                    worksheet.Cells[20, 1] = "14:00~14:30";
+                    worksheet.Cells[22, 1] = "14:30~15:00";
+                    worksheet.Cells[24, 1] = "15:00~15:30";
+                    worksheet.Cells[26, 1] = "15:30~16:00";
+                    worksheet.Cells[28, 1] = "16:00~16:30";
+                    worksheet.Cells[30, 1] = "16:30~17:00";
+                    worksheet.Cells[32, 1] = "17:00~17:30";
+                    worksheet.Cells[34, 1] = "17:30~18:00";
+                    worksheet.Cells[36, 1] = "18:00~18:30";
+                    worksheet.Cells[38, 1] = "18:30~19:00";
+                    worksheet.Cells[40, 1] = "19:00~19:30";
+                    worksheet.Cells[42, 1] = "19:30~20:00";
+                    worksheet.Cells[1, 2] = "월요일";
+                    worksheet.Cells[1, 4] = "화요일";
+                    worksheet.Cells[1, 6] = "수요일";
+                    worksheet.Cells[1, 8] = "목요일";
+                    worksheet.Cells[1, 10] = "금요일";
 
 
-
-
-
-
-
-                    // 모든 워크북 닫기
-                    excelApp.Workbooks.Close();
+                // 모든 워크북 닫기
+                excelApp.Workbooks.Close();
 
                     // application 종료
                     excelApp.Quit();
@@ -146,7 +166,7 @@ namespace SejongTimeTable.Controls
                 }
 
             
-        }
+        }      
 
         public void RemoveSubject()
         {

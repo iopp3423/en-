@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Controls\ApplicationClass.cs" />
+    <Compile Include="Controls\test.cs" />
     <Compile Include="Controls\FavoriteClass.cs" />
     <Compile Include="Controls\Logging.cs" />
     <Compile Include="Controls\MyClass.cs" />
