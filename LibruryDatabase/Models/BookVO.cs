@@ -12,12 +12,6 @@ namespace LibruryDatabase.Models
     {
 
         private static BookVO BookData = null;
-        string number;
-        string name;
-        string author;
-        string publish;
-        string price;
-        string quantity;
 
         public static BookVO Get()
         {
@@ -27,9 +21,38 @@ namespace LibruryDatabase.Models
             return BookData;
         }
 
+        List<BookVO> BookInformation = new List<BookVO>();
+
+        private string number;
+        private string name;
+        private string author;
+        private string publish;
+        private string price;
+        private string quantity;
+
+        public BookVO()
+        {
+            // 생성자
+        }
+
+        public BookVO(string number, string name, string author,string publish, string price, string quantity)
+        {
+            this.number = number;
+            this.name = name;
+            this.author = author;
+            this.publish = publish;
+            this.price = price;
+            this.quantity = quantity;
+        }
+
+        public override string ToString()
+        {
+            return "책번호 : " + number + "\n책이름 : " + name + "\n출판사 : " + publish + "\n저자   : " + author + "\n가격   : " + price + "\n수량   : " + quantity;
+        }
 
         public void Book()
         {
+
             string number;
             string name;
             string author;
@@ -48,6 +71,7 @@ namespace LibruryDatabase.Models
                 //연결 모드로 데이타 가져오기
                 MySqlCommand Command = new MySqlCommand(sql, book);
                 MySqlDataReader bookInformation = Command.ExecuteReader();
+
                 while (bookInformation.Read())
                 {
                     number = bookInformation["Number"].ToString();
@@ -56,9 +80,21 @@ namespace LibruryDatabase.Models
                     publish =  bookInformation["publish"].ToString();
                     price = bookInformation["price"].ToString();
                     quantity = bookInformation["quantity"].ToString();
+
+                    BookInformation.Add(new BookVO(number, name, author, publish, price, quantity));
                 }
+
                 bookInformation.Close();
+            }         
+        }
+        public void print()
+        {
+
+            foreach (BookVO list in BookInformation)
+            {
+                Console.WriteLine(list);
             }
+
         }
 
 
