@@ -23,7 +23,7 @@ namespace LibruryDatabase
         public const bool CHECK = false;
         public const bool ENTRANCE = true;
         public const bool LOGIN = true;
-        public const int FIRSTX=28;
+        public const int FIRSTX=0;
         public const int FIRSTY=10;
         public const int LOGIN_Y = 10;
         public const int LOGIN_X = 43;

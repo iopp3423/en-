@@ -23,15 +23,15 @@ namespace LibruryDatabase.Views
         }
         public void PrintUserOrAdmin()
         {
-            Console.WriteLine(string.Format("{0,36}", "》:회원모드"));
-            Console.WriteLine(string.Format("{0,37}", "》:관리자모드"));
+            Console.WriteLine(string.Format("  》:회원모드"));
+            Console.WriteLine(string.Format("  》:관리자모드"));
         }
         
         public void PrintLogin()
         {
 
-            Console.WriteLine(string.Format("{0,36}", "ID(영어, 숫자 포함(8~10자) : "));
-            Console.Write(string.Format("{0,35}", "PW(영어, 숫자 포함(4~10자) :"));
+            Console.WriteLine(string.Format("ID(영어, 숫자 포함(8~10자) : "));
+            Console.Write(string.Format("PW(영어, 숫자 포함(4~10자) :"));
             //Console.SetCursorPosition((Console.WindowWidth - "로그인 :".Length) / 2, Console.CursorTop);
             //Console.SetCursorPosition((Console.WindowWidth - "회원가입:".Length) / 2, Console.CursorTop);
 
@@ -55,14 +55,16 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,41}", "★                          회   원   가   입                       ★"));
             Console.WriteLine(string.Format("{0,34}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,34}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
-            Console.WriteLine();
+            Console.WriteLine(string.Format("{0,40}", "============================================================================================"));
+            Console.WriteLine("\n\n");
         }
 
         public void JoinOrLogin()
         {
-            Console.WriteLine(string.Format("{0,38}", "》회원가입"));
-            Console.WriteLine(string.Format("{0,37}", "》로그인"));
+            Console.WriteLine(string.Format("  》회원가입"));
+            Console.WriteLine(string.Format("  》로그인"));
         }
 
         
