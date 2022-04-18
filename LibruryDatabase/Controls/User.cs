@@ -16,9 +16,8 @@ namespace LibruryDatabase.Controls
         Regex AGE = new Regex(Constants.AGE_CHECK);
         Regex NAME = new Regex(Constants.NAME_CHECK);
 
-
-        Start StartBack = new Start();
         Showing Menu = new Showing(); // 뷰 클래스 객체생성
+        UserBook GoUser = new UserBook();
 
 
         public void JoinOrLogin() // 회원가입 or 로그인 화면
@@ -92,6 +91,7 @@ namespace LibruryDatabase.Controls
            
             Console.Clear();
             Menu.JoinPrint();
+            Menu.PrintBack();
             Menu.PrintJoinMember();
             
 
@@ -122,7 +122,9 @@ namespace LibruryDatabase.Controls
 
             id = LoginId();
             password = LoginPassword();
-           
+
+            GoUser.StartBookmenu();
+
         }
 
         public void AdminLogin() // 관리자 로그인

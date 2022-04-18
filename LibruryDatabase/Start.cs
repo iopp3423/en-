@@ -20,11 +20,10 @@ namespace LibruryDatabase
             User UserLibruary = new User();
             Admin AdminLibruary = new Admin();
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HDIGHT); // 콘솔크기 지정
-            Book Book = new Book();
 
-            Book.SelectUsingReader();
+            //BookVO.Get().Book();
 
-            //StartMenu();
+            StartMenu();
 
             void StartMenu() // 유저 or 관리자
             {

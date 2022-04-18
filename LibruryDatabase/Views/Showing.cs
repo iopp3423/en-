@@ -31,8 +31,8 @@ namespace LibruryDatabase.Views
         public void PrintLogin()
         {
 
-            Console.WriteLine(string.Format("ID(영어, 숫자 포함(8~10자) : "));
-            Console.Write(string.Format("PW(영어, 숫자 포함(4~10자) :"));
+            Console.WriteLine("유저 ID(영어, 숫자 포함(8~10자) :");
+            Console.WriteLine("유저 PW(영어, 숫자 포함(4~10자) :");
             //Console.SetCursorPosition((Console.WindowWidth - "로그인 :".Length) / 2, Console.CursorTop);
             //Console.SetCursorPosition((Console.WindowWidth - "회원가입:".Length) / 2, Console.CursorTop);
 
@@ -58,6 +58,9 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,34}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
             Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+        }
+        public void PrintBack()
+        {
             Console.WriteLine(string.Format("{0,40}", "입력 : Enter                                              뒤로가기 : F5"));
             Console.WriteLine("\n");
         }
@@ -68,6 +71,14 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("  》로그인"));
         }
 
+        public void PrintUserMenu()
+        {
+            Console.WriteLine("  》:도서찾기");
+            Console.WriteLine("  》:도서대여");
+            Console.WriteLine("  》:도서확인");
+            Console.WriteLine("  》:회원정보수정");
+
+        }
         
     }
 }
