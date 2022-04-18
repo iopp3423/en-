@@ -34,5 +34,6 @@ namespace LibruryDatabase
         public const int START_DOWN_Y = 11;
         public const int JOIN_X = 0;
         public const int JOIN_Y = 15;
+        public const bool back = false;
     }
 }

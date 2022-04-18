@@ -57,8 +57,9 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,34}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,34}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
-            Console.WriteLine(string.Format("{0,40}", "============================================================================================"));
-            Console.WriteLine("\n\n");
+            Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+            Console.WriteLine(string.Format("{0,40}", "입력 : Enter                                              뒤로가기 : F5"));
+            Console.WriteLine("\n");
         }
 
         public void JoinOrLogin()

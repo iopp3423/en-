@@ -31,11 +31,13 @@ namespace LibruryDatabase
                 Menu.PrintMain();
                 Menu.PrintUserOrAdmin();
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.FIRSTY);// 처음 좌표
+                
 
-                //컨트롤러 
+
+                // 메인 컨트롤러
                 while (Constants.ENTRANCE) // 참이면
                 {
-
+                    
                     Console.SetCursorPosition(Constants.FIRSTX, Y);
                     Constants.cursur = Console.ReadKey(true);
 
@@ -74,6 +76,7 @@ namespace LibruryDatabase
 
 
             }
+
         }    
        
     }
