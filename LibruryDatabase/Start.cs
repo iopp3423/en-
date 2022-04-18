@@ -24,7 +24,7 @@ namespace LibruryDatabase
 
             StartMenu();
 
-            void StartMenu()
+            void StartMenu() // 유저 or 관리자
             {
                 int Y = Constants.FIRSTY;
                 int userY = Constants.USER_Y;
@@ -59,7 +59,7 @@ namespace LibruryDatabase
                             }
                         case ConsoleKey.Enter:
                             {
-                                if (Y == userY) { Console.Clear(); JoinMember(); }
+                                if (Y == userY) { Console.Clear(); JoinOrLogin(); }
                                 if (Y == adminY) { Console.Clear(); AdminLogin(); }
                                 break;
                             }
@@ -104,7 +104,7 @@ namespace LibruryDatabase
                 return password;
             }
 
-            void JoinMember()
+            void JoinOrLogin()
             {
                 int Y = Constants.FIRSTY;
                 int userY = Constants.USER_Y;
