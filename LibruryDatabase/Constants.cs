@@ -24,7 +24,7 @@ namespace LibruryDatabase
         public const bool ENTRANCE = true;
         public const bool LOGIN = true;
         public const int FIRSTX=0;
-        public const int FIRSTY=10;
+        public const int FIRSTY=11;
         public const int LOGIN_Y = 10;
         public const int LOGIN_X = 43;
         public const int PASSWORED_Y = 11;
@@ -33,7 +33,15 @@ namespace LibruryDatabase
         public const int START_UP_Y = 10;
         public const int START_DOWN_Y = 11;
         public const int JOIN_X = 0;
-        public const int JOIN_Y = 15;
-        public const bool back = false;
+        public const int ID_Y = 11;
+        public const int PW_Y = 13;
+        public const int PW_CHECK_Y = 15;
+        public const int NAME_Y = 17;
+        public const int AGE_Y = 19;
+        public const int NUMBER_Y = 21;
+        public const int ADDRESS_Y = 23;
+        public const bool BACK = false;
+        public const bool BACK_MENU = false;
+        
     }
 }

@@ -25,11 +25,11 @@ namespace LibruryDatabase.Controls
         {           
 
             Console.Clear();
-            Menu.JoinPrint();
+            Menu.PrintMain();
             Menu.JoinOrLogin();
 
 
-            if (Constants.back == cursur())
+            if (Constants.BACK == cursur()) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -73,7 +73,7 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.F5:
                         {
-                            return false;
+                            return Constants.BACK_MENU;
                         }
 
                     case ConsoleKey.Escape: // 종료
@@ -89,6 +89,12 @@ namespace LibruryDatabase.Controls
 
         public void JoinMember() // 회원가입
         {
+           
+            Console.Clear();
+            Menu.JoinPrint();
+            Menu.PrintJoinMember();
+            Console.SetCursorPosition(Constants.FIRSTX, Constants.ID_Y);
+            Console.ReadLine();
 
             string id;
             string password;
@@ -138,12 +144,12 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(Constants.LOGIN_X, Constants.LOGIN_Y);
+                Console.SetCursorPosition(Constants.FIRSTX, Constants.ID_Y);
                 id = Console.ReadLine();
 
                 if (Constants.CHECK == ID.IsMatch(id)) // 정규식에 맞지 않으면
                 {
-                    Console.SetCursorPosition(Constants.LOGIN_X, Constants.LOGIN_Y);
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.ID_Y);
                     Console.Write("다시 입력해주세요"); continue;
                 }
                 break;
@@ -157,12 +163,13 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+
+                Console.SetCursorPosition(Constants.FIRSTX, Constants.PW_Y);
                 password = ReadPassword();
 
                 if (Constants.CHECK == PW.IsMatch(password))
                 {
-                    Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.PW_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -205,12 +212,12 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+                Console.SetCursorPosition(Constants.FIRSTX, Constants.NAME_Y);
                 name = Console.ReadLine();
 
                 if (Constants.CHECK == NAME.IsMatch(name))
                 {
-                    Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.NAME_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -224,12 +231,12 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+                Console.SetCursorPosition(Constants.FIRSTX, Constants.NUMBER_Y);
                 callNumber = Console.ReadLine();
 
                 if (Constants.CHECK == NUMBER.IsMatch(callNumber))
                 {
-                    Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.NUMBER_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -244,16 +251,17 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+                Console.SetCursorPosition(Constants.FIRSTX, Constants.ADDRESS_Y);
                 address = Console.ReadLine();
                 /*
                 if (Constants.CHECK == ADDRESS.IsMatch(address))
                 {
-                    Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+                     Console.SetCursorPosition(Constants.FIRSTX, Constants.ADDRESS_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
-                break;
                 */
+                break;
+                
             }
             return address;
         }
@@ -264,12 +272,12 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+                Console.SetCursorPosition(Constants.FIRSTX, Constants.AGE_Y);
                 age = Console.ReadLine();
 
                 if (Constants.CHECK == AGE.IsMatch(age))
                 {
-                    Console.SetCursorPosition(Constants.LOGIN_X, Constants.PASSWORED_Y);
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.AGE_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;

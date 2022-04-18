@@ -18,7 +18,8 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,42}", "★            ★     ★    ★     ★    ★   ★    ★   ★     ★     ★ "));
             Console.WriteLine(string.Format("{0,42}", "★★★★★  ★★★   ★★★★     ★    ★   ★    ★   ★     ★     ★ "));
             Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
-            Console.Write("\n\n");
+            Console.WriteLine(string.Format("{0,40}", "입력 : Enter                                              뒤로가기 : F5"));
+            Console.Write("\n");
           
         }
         public void PrintUserOrAdmin()
@@ -45,7 +46,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("유저 이름(2~5자) \n");
             Console.WriteLine("나이 \n");
             Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx)\n");
-            Console.WriteLine("주소\n");
+            Console.WriteLine("주소");
      
         }
 
