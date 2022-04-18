@@ -46,6 +46,8 @@ namespace LibruryDatabase
         public const int RIVISE_USER = 13;
         public const int SEARCH_X = 0;
         public const int SEARCH_Y = 2;
+        public const bool SUCESS = true;
+        public const bool FAIL = false;
     
 
 

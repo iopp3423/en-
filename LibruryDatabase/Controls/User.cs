@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibruryDatabase.Views;
 using System.Text.RegularExpressions;
+using LibruryDatabase.Models;
 
 
 namespace LibruryDatabase.Controls
@@ -19,6 +20,7 @@ namespace LibruryDatabase.Controls
 
         Showing Menu = new Showing(); // 뷰 클래스 객체생성
         UserBook GoUser = new UserBook();
+        UserVO Data = new UserVO();
 
 
         public void JoinOrLogin() // 회원가입 or 로그인 화면
@@ -117,6 +119,7 @@ namespace LibruryDatabase.Controls
         {
             string id;
             string password;
+            bool check;
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintLogin();
@@ -124,8 +127,36 @@ namespace LibruryDatabase.Controls
             id = LoginId();
             password = LoginPassword();
 
-            GoUser.StartBookmenu();
+            check = CheckLogin(id, password);
 
+            if(check == Constants.SUCESS) GoUser.StartBookmenu();
+            Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : F5");
+
+            while(Constants.ENTRANCE)
+            {
+                Constants.cursur = Console.ReadKey(true);
+                switch(Constants.cursur.Key)
+                {
+                    case ConsoleKey.Enter: UserLogin(); break;
+                    case ConsoleKey.F5: return;
+                    default: continue;
+                }
+            }
+            //UserLogin();
+
+
+        }
+        public bool CheckLogin(string id, string password) // 로그인 체크
+        {
+            foreach (UserVO list in UserVO.Get().UserInformation)
+            {
+
+                if (id == list.id && password == list.pw)
+                {
+                    return Constants.SUCESS;                 
+                }
+            }
+            return Constants.FAIL;
         }
 
         public void AdminLogin() // 관리자 로그인

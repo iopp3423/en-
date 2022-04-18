@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LibruryDatabase.Views;
+using LibruryDatabase.Models;
+using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Controls
 {
     internal class UserBook
     {
+
         Showing Menu = new Showing(); // 뷰 클래스 객체생성
 
         public void StartBookmenu()
@@ -88,6 +91,7 @@ namespace LibruryDatabase.Controls
 
             Console.SetCursorPosition(Constants.SEARCH_X, Constants.SEARCH_Y);
             Constants.cursur = Console.ReadKey(true);
+            BookVO.Get().PrintBook();
 
         }
         public void BorrowBook()

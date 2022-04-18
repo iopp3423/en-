@@ -10,17 +10,6 @@ namespace LibruryDatabase.Models
 {
     class BookVO
     {
-
-        private static BookVO BookData = null;
-
-        public static BookVO Get()
-        {
-            if (BookData == null)
-                BookData = new BookVO();
-
-            return BookData;
-        }
-
         List<BookVO> BookInformation = new List<BookVO>();
 
         private string number;
@@ -29,13 +18,14 @@ namespace LibruryDatabase.Models
         private string publish;
         private string price;
         private string quantity;
+        
 
         public BookVO()
         {
             // 생성자
         }
 
-        public BookVO(string number, string name, string author,string publish, string price, string quantity)
+        public BookVO(string number, string name, string author, string publish, string price, string quantity)
         {
             this.number = number;
             this.name = name;
@@ -50,6 +40,16 @@ namespace LibruryDatabase.Models
             return "책번호 : " + number + "\n책이름 : " + name + "\n출판사 : " + publish + "\n저자   : " + author + "\n가격   : " + price + "\n수량   : " + quantity;
         }
 
+        // 책 데이터 싱글톤으로 저장
+        private static BookVO BookData = null;
+        public static BookVO Get()
+        {
+            if (BookData == null)
+                BookData = new BookVO();
+
+            return BookData;
+        }
+     
         public void Book()
         {
 
@@ -87,12 +87,13 @@ namespace LibruryDatabase.Models
                 bookInformation.Close();
             }         
         }
-        public void print()
+        public void PrintBook()
         {
 
             foreach (BookVO list in BookInformation)
             {
                 Console.WriteLine(list);
+                Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
             }
 
         }
