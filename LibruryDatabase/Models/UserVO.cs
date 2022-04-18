@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace LibruryDatabase.Models
 {
-    internal class UserVO
+    class UserVO
     {
+        private static UserVO UserData = null;
+
+        public static UserVO Get()
+        {
+            if (UserData == null)
+                UserData = new UserVO();
+
+            return UserData;
+        }
     }
 }
