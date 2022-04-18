@@ -58,6 +58,13 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
             Console.WriteLine();
         }
+
+        public void JoinOrLogin()
+        {
+            Console.WriteLine(string.Format("{0,38}", "》회원가입"));
+            Console.WriteLine(string.Format("{0,37}", "》로그인"));
+        }
+
         
     }
 }

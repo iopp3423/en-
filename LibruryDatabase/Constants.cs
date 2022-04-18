@@ -32,5 +32,7 @@ namespace LibruryDatabase
         public const int ADMIN_Y = 11;
         public const int START_UP_Y = 10;
         public const int START_DOWN_Y = 11;
+        public const int JOIN_X = 0;
+        public const int JOIN_Y = 15;
     }
 }

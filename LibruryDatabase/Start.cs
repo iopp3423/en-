@@ -59,7 +59,7 @@ namespace LibruryDatabase
                             }
                         case ConsoleKey.Enter:
                             {
-                                if (Y == userY) { Console.Clear(); UserLogin(); }
+                                if (Y == userY) { Console.Clear(); JoinMember(); }
                                 if (Y == adminY) { Console.Clear(); AdminLogin(); }
                                 break;
                             }
@@ -104,6 +104,55 @@ namespace LibruryDatabase
                 return password;
             }
 
+            void JoinMember()
+            {
+                int Y = Constants.FIRSTY;
+                int userY = Constants.USER_Y;
+                int adminY = Constants.ADMIN_Y;
+                Console.Clear();
+                Menu.JoinPrint();
+                Menu.JoinOrLogin();
+
+                while (Constants.ENTRANCE) // 참이면
+                {
+
+                    Console.SetCursorPosition(Constants.FIRSTX, Y);
+                    Constants.cursur = Console.ReadKey(true);
+
+                    switch (Constants.cursur.Key)
+                    {
+                        // 상
+                        case ConsoleKey.UpArrow:
+                            {
+                                Y--;
+                                if (Y < Constants.START_UP_Y) Y++; // 선택 외의 화면으로 커서 못나감
+                                break;
+                            }
+                        // 하
+                        case ConsoleKey.DownArrow:
+                            {
+                                Y++;
+                                if (Y > Constants.START_DOWN_Y) Y--; // 선택 외의 화면으로 커서 못나감
+                                break;
+                            }
+                        case ConsoleKey.Enter:
+                            {
+                                if (Y == userY) { Console.Clear(); UserLogin(); }
+                                if (Y == adminY) { Console.Clear(); AdminLogin(); }
+                                break;
+                            }
+
+                        case ConsoleKey.Escape: // 종료
+                            {
+                                return;
+                            }
+
+                        default: break;
+
+                    }
+                }
+            }
+
 
             void UserLogin() // 유저 로그인
             {
@@ -116,10 +165,7 @@ namespace LibruryDatabase
                 id = LoginId();
                 password = LoginPw();
 
-                Console.WriteLine(id);
-                Console.Write(password);
                 UserLibruary.JoinMember(); /// 일단 페이지 넘김부터
-
             }
 
             void AdminLogin() // 관리자 로그인
