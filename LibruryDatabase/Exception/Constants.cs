@@ -9,12 +9,6 @@ namespace LibruryDatabase
 {
     internal class Constants
     {
-        public const string ID_CHECK = @"^[0-9a-zA-Z]{8,10}$";
-        public const string NUMBER_CHECK = @"^01[0-9]-[0-9]{4}-[0-9]{4}$";
-        public const string PW_CHECK = @"^[0-9a-zA-Z]{4,10}$";
-        public const string NAME_CHECK = @"^[가-힣]{2,5}$";
-        public const string AGE_CHECK = @"^[0-9]{1,2}1?[0-9]?[0-9]$";
-
 
         static public ConsoleKeyInfo cursur;
         public const int ONE = 1;
@@ -46,6 +40,8 @@ namespace LibruryDatabase
         public const int RIVISE_USER = 13;
         public const int SEARCH_X = 0;
         public const int SEARCH_Y = 2;
+        public const int PW_FAIL_X = 4;
+        public const int PW_FAIL_Y = 8;
         public const bool SUCESS = true;
         public const bool FAIL = false;
     

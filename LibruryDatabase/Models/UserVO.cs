@@ -39,6 +39,7 @@ namespace LibruryDatabase.Models
             return "아이디 : " + id + "\n비밀번호 : " + pw + "\n이름 : " + name + "\n나이   : " + age + "\n전화번호   : " + phone + "\n주소   : " + address;
         }
 
+
         private static UserVO UserData = null;
 
         public static UserVO Get()
@@ -48,6 +49,8 @@ namespace LibruryDatabase.Models
 
             return UserData;
         }
+
+
         public void User()
         {
 
@@ -93,6 +96,35 @@ namespace LibruryDatabase.Models
             {
                 Console.WriteLine(list);
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+            }
+
+        }
+
+        public void StoreUserInformation(string id, string pw, string name, string phone, string age, string address)
+        {
+
+            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            using (MySqlConnection user = new MySqlConnection(getUser))
+            {
+                string insertQuery = string.Format("INSERT INTO member VALUES('{0}','{1}','{2}','{3}','{4}','{5}');", id, pw, name, phone, age, address);
+                //string insertQuery = "INSERT INTO member VALUES(" + id + "," + pw + "," + "name" + "," + "phone" + "," + "age" + "," + address +");";
+                Console.Write(insertQuery);
+                Console.ReadKey();
+
+                user.Open();
+                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+
+
+                // 만약에 내가처리한 Mysql에 정상적으로 들어갔다면 메세지를 보여주라는 뜻이다
+                if (Command.ExecuteNonQuery() == 1)
+                {
+                    Console.WriteLine("인서트 성공");
+                }
+                else
+                {
+                    Console.WriteLine("인서트 실패");
+                }
+
             }
 
         }

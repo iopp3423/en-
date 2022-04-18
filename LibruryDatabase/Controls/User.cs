@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using LibruryDatabase.Views;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Models;
+using LibruryDatabase.Exception;
 
 
 namespace LibruryDatabase.Controls
 {
     internal class User
     {
-        Regex ID = new Regex(Constants.ID_CHECK);
-        Regex PW = new Regex(Constants.PW_CHECK);
-        Regex NUMBER = new Regex(Constants.NUMBER_CHECK);
-        Regex AGE = new Regex(Constants.AGE_CHECK);
-        Regex NAME = new Regex(Constants.NAME_CHECK);
+        Regex ID = new Regex(Execption.ID_CHECK);
+        Regex PW = new Regex(Execption.PW_CHECK);
+        Regex NUMBER = new Regex(Execption.NUMBER_CHECK);
+        Regex AGE = new Regex(Execption.AGE_CHECK);
+        Regex NAME = new Regex(Execption.NAME_CHECK);
 
         Showing Menu = new Showing(); // 뷰 클래스 객체생성
         UserBook GoUser = new UserBook();
@@ -88,7 +89,7 @@ namespace LibruryDatabase.Controls
                 }
             }
         }
-
+        
         public void JoinMember() // 회원가입
         {
            
@@ -97,7 +98,6 @@ namespace LibruryDatabase.Controls
             Menu.PrintBack();
             Menu.PrintJoinMember();
             
-
             string id;
             string password;
             string passswordCheck;
@@ -109,10 +109,44 @@ namespace LibruryDatabase.Controls
             id = LoginId();
             password = LoginPassword();
             passswordCheck = LoginPasswordCheck();
+
+            if (password != passswordCheck)
+            {
+                Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
+                Console.Write("비밀번호가 일치하지않습니다. 재입력 : Enter, 뒤로가기 : F5 두 번");
+                while (Constants.ENTRANCE)
+                {
+                    Constants.cursur = Console.ReadKey(true);
+                    switch (Constants.cursur.Key)
+                    {
+                        case ConsoleKey.Enter: JoinMember(); break;
+                        case ConsoleKey.F5: return;
+                        default: continue;
+                    }
+                }
+            }
             name = LoginName();
             age = LoginAge();
             callNumber = LoginCallNumber();
             address = LoginAddress();
+            UserVO.Get().StoreUserInformation(id, password, name, callNumber, age, address);
+
+            
+            UserVO.Get().UserInformation.Add(new UserVO(id, password, name, callNumber, age, address)); // 회원정보 추가
+
+            Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
+            Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : F5 두 번");
+            while (Constants.ENTRANCE)
+            {
+                Constants.cursur = Console.ReadKey(true);
+                switch (Constants.cursur.Key)
+                {
+                    case ConsoleKey.Enter: UserLogin(); break;
+                    case ConsoleKey.F5: return;
+                    default: continue;
+                }
+            }
+           
         }
 
         public void UserLogin() // 유저 로그인
@@ -130,7 +164,7 @@ namespace LibruryDatabase.Controls
             check = CheckLogin(id, password);
 
             if(check == Constants.SUCESS) GoUser.StartBookmenu();
-            Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : F5");
+            Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : F5 두 번");
 
             while(Constants.ENTRANCE)
             {
@@ -142,7 +176,6 @@ namespace LibruryDatabase.Controls
                     default: continue;
                 }
             }
-            //UserLogin();
 
 
         }
@@ -211,6 +244,7 @@ namespace LibruryDatabase.Controls
             }
             return password;
         }
+
         string LoginPasswordCheck() // 비밀번호 입력
         {
             string password;
