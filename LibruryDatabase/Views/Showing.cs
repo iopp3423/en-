@@ -40,14 +40,13 @@ namespace LibruryDatabase.Views
 
         public void PrintJoinMember()
         {
-            Console.WriteLine("유저 ID(영어, 숫자 포함(8~10자) \n");
-            Console.WriteLine("유저 PW(영어, 숫자 포함(4~10자) \n");
-            Console.WriteLine("유저 PW확인(영어, 숫자 포함(4~10자) \n");
-            Console.WriteLine("유저 이름(2~5자) \n");
-            Console.WriteLine("나이 \n");
-            Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx)\n");
-            Console.WriteLine("주소");
-     
+            Console.WriteLine("유저 ID(영어, 숫자 포함(8~10자) :");
+            Console.WriteLine("유저 PW(영어, 숫자 포함(4~10자) :");
+            Console.WriteLine("유저 PW확인(영어, 숫자 포함(4~10자) :");
+            Console.WriteLine("유저 이름(2~5자) :");
+            Console.WriteLine("나이 :");
+            Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
+            Console.WriteLine("주소 :");  
         }
 
         public void JoinPrint()
