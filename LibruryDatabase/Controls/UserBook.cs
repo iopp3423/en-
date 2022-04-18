@@ -10,11 +10,8 @@ namespace LibruryDatabase.Controls
     internal class UserBook
     {
         Showing Menu = new Showing(); // 뷰 클래스 객체생성
-        public const int SEARCH_BOOK = 11;
-        public const int BORROW_BOOK = 12;
-        public const int CHECK_BOOK = 13;
-        public const int RIVISE_USER = 14;
-        public void StartBookmenu() // 회원가입 or 로그인 화면
+
+        public void StartBookmenu()
         {
 
             Console.Clear();
@@ -62,10 +59,10 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == searchY) { Console.Clear();  } // 도서찾기
-                            if (Y == borrowY) { Console.Clear();  } // 도서대여
-                            if (Y == checkY) { Console.Clear(); } // 도서확인
-                            if (Y == riviseY) { Console.Clear();  } // 회원정보수정
+                            if (Y == searchY) { Console.Clear(); SearchBook(); } // 도서찾기
+                            if (Y == borrowY) { Console.Clear(); BorrowBook(); } // 도서대여
+                            if (Y == checkY) { Console.Clear(); CheckBook(); } // 도서확인
+                            if (Y == riviseY) { Console.Clear(); RiviseUser(); } // 회원정보수정
                             break;
                         }
                     case ConsoleKey.F5:
@@ -82,6 +79,28 @@ namespace LibruryDatabase.Controls
 
                 }
             }
+        }
+
+        public void SearchBook()
+        {
+            Console.Clear();
+            Menu.PrintSearchMenu();
+
+            Console.SetCursorPosition(Constants.SEARCH_X, Constants.SEARCH_Y);
+            Constants.cursur = Console.ReadKey(true);
+
+        }
+        public void BorrowBook()
+        {
+
+        }
+        public void CheckBook()
+        {
+
+        }
+        public void RiviseUser()
+        {
+
         }
 
     }

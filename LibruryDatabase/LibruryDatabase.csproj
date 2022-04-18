@@ -86,10 +86,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
+    <Compile Include="Exception\Constants.cs" />
     <Compile Include="Controls\Admin.cs" />
     <Compile Include="Controls\User.cs" />
     <Compile Include="Controls\UserBook.cs" />
+    <Compile Include="Exception\Execption.cs" />
     <Compile Include="Models\BookVO.cs" />
     <Compile Include="Models\UserVO.cs" />
     <Compile Include="Start.cs" />

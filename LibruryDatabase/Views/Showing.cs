@@ -79,6 +79,16 @@ namespace LibruryDatabase.Views
             Console.WriteLine("  》:회원정보수정");
 
         }
+
+        public void PrintSearchMenu()
+        {
+            Console.Write("원하시는 검색 메뉴 -> Enter -> 검색");
+            Console.WriteLine("\n");
+            Console.WriteLine("  》작가명으로찾기 :");
+            Console.WriteLine("  》출판사로찾기 :");
+            Console.WriteLine("  》제목으로찾기 :");
+            Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+        }
         
     }
 }
