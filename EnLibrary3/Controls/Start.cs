@@ -34,6 +34,7 @@ namespace EnLibrary3.Controls
             while(isFinished)
             {               
                 // x 와 y 좌표에 커서를 표시하기위한 메서드
+
                 Console.SetCursorPosition(x, y);
 
                 cursur = Console.ReadKey(true);

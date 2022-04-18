@@ -18,8 +18,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,42}", "★            ★     ★    ★     ★    ★   ★    ★   ★     ★     ★ "));
             Console.WriteLine(string.Format("{0,42}", "★★★★★  ★★★   ★★★★     ★    ★   ★    ★   ★     ★     ★ "));
             Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
-            Console.WriteLine(string.Format("{0,42}", "  ENTER : 선택                                                   ESC 종료 "));
-            Console.Write("\n");
+            Console.Write("\n\n");
           
         }
         public void PrintUserOrAdmin()
@@ -27,5 +26,38 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,36}", "》:회원모드"));
             Console.WriteLine(string.Format("{0,37}", "》:관리자모드"));
         }
+        
+        public void PrintLogin()
+        {
+
+            Console.WriteLine(string.Format("{0,36}", "ID(영어, 숫자 포함(8~10자) : "));
+            Console.Write(string.Format("{0,35}", "PW(영어, 숫자 포함(4~10자) :"));
+            //Console.SetCursorPosition((Console.WindowWidth - "로그인 :".Length) / 2, Console.CursorTop);
+            //Console.SetCursorPosition((Console.WindowWidth - "회원가입:".Length) / 2, Console.CursorTop);
+
+        }
+
+        public void PrintJoinMember()
+        {
+            Console.WriteLine("유저 ID(영어, 숫자 포함(8~10자) \n");
+            Console.WriteLine("유저 PW(영어, 숫자 포함(4~10자) \n");
+            Console.WriteLine("유저 PW확인(영어, 숫자 포함(4~10자) \n");
+            Console.WriteLine("유저 이름(2~5자) \n");
+            Console.WriteLine("나이 \n");
+            Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx)\n");
+            Console.WriteLine("주소\n");
+     
+        }
+
+        public void JoinPrint()
+        {
+            Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,41}", "★                          회   원   가   입                       ★"));
+            Console.WriteLine(string.Format("{0,34}", "★                                                                  ★"));
+            Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
+            Console.WriteLine();
+        }
+        
     }
 }
