@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 using LibruryDatabase.Views;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Controls;
+using LibruryDatabase.Models;
 
 
 namespace LibruryDatabase
@@ -19,8 +20,11 @@ namespace LibruryDatabase
             User UserLibruary = new User();
             Admin AdminLibruary = new Admin();
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HDIGHT); // 콘솔크기 지정
+            Book Book = new Book();
 
-            StartMenu();
+            Book.SelectUsingReader();
+
+            //StartMenu();
 
             void StartMenu() // 유저 or 관리자
             {

@@ -40,6 +40,16 @@ namespace LibruryDatabase
         public const int AGE_Y = 14;
         public const int NUMBER_Y = 15;
         public const int ADDRESS_Y = 16;
+
+
+        public const int ID_X = 33;
+        public const int PW_X = 33;
+        public const int PW_CHECK_X = 38;
+        public const int NAME_X = 18;
+        public const int AGE_X = 28;
+        public const int NUMBER_X = 7;
+        public const int ADDRESS_X = 7;
+
         public const bool BACK = false;
         public const bool BACK_MENU = false;
         

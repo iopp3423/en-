@@ -145,12 +145,12 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(33, Constants.ID_Y);
+                Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
                 id = Console.ReadLine();
 
                 if (Constants.CHECK == ID.IsMatch(id)) // 정규식에 맞지 않으면
                 {
-                    Console.SetCursorPosition(33, Constants.ID_Y);
+                    Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
                     Console.Write("다시 입력해주세요"); continue;
                 }
                 break;
@@ -165,12 +165,12 @@ namespace LibruryDatabase.Controls
             while (Constants.LOGIN)
             {
 
-                Console.SetCursorPosition(33, Constants.PW_Y);
+                Console.SetCursorPosition(Constants.PW_X, Constants.PW_Y);
                 password = ReadPassword();
 
                 if (Constants.CHECK == PW.IsMatch(password))
                 {
-                    Console.SetCursorPosition(33, Constants.PW_Y);
+                    Console.SetCursorPosition(Constants.PW_X, Constants.PW_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -184,12 +184,12 @@ namespace LibruryDatabase.Controls
             while (Constants.LOGIN)
             {
 
-                Console.SetCursorPosition(38, Constants.PW_CHECK_Y);
+                Console.SetCursorPosition(Constants.PW_CHECK_X, Constants.PW_CHECK_Y);
                 password = ReadPassword();
 
                 if (Constants.CHECK == PW.IsMatch(password))
                 {
-                    Console.SetCursorPosition(38, Constants.PW_CHECK_Y);
+                    Console.SetCursorPosition(Constants.PW_CHECK_X, Constants.PW_CHECK_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -232,12 +232,12 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(18, Constants.NAME_Y);
+                Console.SetCursorPosition(Constants.NAME_X, Constants.NAME_Y);
                 name = Console.ReadLine();
 
                 if (Constants.CHECK == NAME.IsMatch(name))
                 {
-                    Console.SetCursorPosition(18, Constants.NAME_Y);
+                    Console.SetCursorPosition(Constants.NAME_X, Constants.NAME_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -251,12 +251,12 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(28, Constants.NUMBER_Y);
+                Console.SetCursorPosition(Constants.NUMBER_X, Constants.NUMBER_Y);
                 callNumber = Console.ReadLine();
 
                 if (Constants.CHECK == NUMBER.IsMatch(callNumber))
                 {
-                    Console.SetCursorPosition(28, Constants.NUMBER_Y);
+                    Console.SetCursorPosition(Constants.NUMBER_X, Constants.NUMBER_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -271,12 +271,12 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(7, Constants.ADDRESS_Y);
+                Console.SetCursorPosition(Constants.ADDRESS_X, Constants.ADDRESS_Y);
                 address = Console.ReadLine();
                 /*
                 if (Constants.CHECK == ADDRESS.IsMatch(address))
                 {
-                     Console.SetCursorPosition(7, Constants.ADDRESS_Y);
+                     Console.SetCursorPosition(Constants.ADDRESS_X, Constants.ADDRESS_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 */
@@ -292,12 +292,12 @@ namespace LibruryDatabase.Controls
 
             while (Constants.LOGIN)
             {
-                Console.SetCursorPosition(7, Constants.AGE_Y);
+                Console.SetCursorPosition(Constants.AGE_X, Constants.AGE_Y);
                 age = Console.ReadLine();
 
                 if (Constants.CHECK == AGE.IsMatch(age))
                 {
-                    Console.SetCursorPosition(7, Constants.AGE_Y);
+                    Console.SetCursorPosition(Constants.AGE_X, Constants.AGE_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
