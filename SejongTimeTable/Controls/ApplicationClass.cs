@@ -26,7 +26,7 @@ namespace SejongTimeTable.Controls
         int excelX;
         int dayPosX;
         static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        static string path = Path.Combine(desktopPath, "조준희");
+        static string path = Path.Combine(desktopPath, "LTT");
 
         public ApplicationClass()
         {
@@ -154,6 +154,7 @@ namespace SejongTimeTable.Controls
             excelApp.DisplayAlerts = false;
 
             Excel.Worksheet worksheet = workbook.Worksheets.Item["Sheet1"];
+
             worksheet.Name = "LTT";
 
 
