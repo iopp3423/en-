@@ -34,9 +34,11 @@ namespace SejongTimeTable.Controls
         {
             Constants.Is_CHECK = true; // 초기화
             Console.Clear();
-            MenuView.PrintFavoriteClass();          
+            MenuView.PrintFavoriteClass();
 
-                
+            
+
+
 
             while (Constants.Is_CHECK) // 관심과목메뉴
             {

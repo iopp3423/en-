@@ -58,6 +58,11 @@ namespace SejongTimeTable.Controls
             MenuView.AfterMenu();
 
 
+            Constants.cursur = Console.ReadKey(true);
+            if (Constants.cursur.Key == ConsoleKey.Enter) return;
+            Console.Write("Helo");
+
+
             while (Constants.Is_CHECK)
             {
                 Console.SetCursorPosition(Constants.TIME_TABLE_X, Constants.TIME_TABLE_Y);
