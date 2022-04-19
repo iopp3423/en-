@@ -57,7 +57,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,34}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,34}", "★                                                                  ★"));
             Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
-            Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+            Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────\n\n\n"));
         }
         public void PrintBack()
         {
@@ -82,11 +82,11 @@ namespace LibruryDatabase.Views
 
         public void PrintSearchMenu()
         {
-            Console.Write("원하시는 검색 메뉴 -> Enter -> 검색");
+            Console.Write("원하시는 검색 메뉴 -> Enter -> 검색                       뒤로가기 : F5");
             Console.WriteLine("\n");
-            Console.WriteLine("  》작가명으로찾기 :");
-            Console.WriteLine("  》출판사로찾기 :");
-            Console.WriteLine("  》제목으로찾기 :");
+            Console.WriteLine("  》작가명으로찾기 ");
+            Console.WriteLine("  》출판사로찾기 ");
+            Console.WriteLine("  》제목으로찾기 ");
             Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
         }
         

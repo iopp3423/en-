@@ -9,8 +9,16 @@ namespace LibruryDatabase
 {
     internal class Constants
     {
+        static public void ClearCurrentLine() // 줄 지우기 함수
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
+        }
 
-        static public ConsoleKeyInfo cursur;
+
+        static public ConsoleKeyInfo cursur; //커서조정
         public const int ONE = 1;
         public const int CONSOLE_SIZE_WIDTH = 75;
         public const int CONSOLE_SIZE_HDIGHT = 40;
@@ -44,6 +52,12 @@ namespace LibruryDatabase
         public const int PW_FAIL_Y = 8;
         public const bool SUCESS = true;
         public const bool FAIL = false;
+        public const int NAME_SEARCH_Y=2;
+        public const int BOOK_Y = 4;
+        public const int PUBLISH_Y=3;
+        public const int NAME_LINE = 2;
+        public const int PUBLISH_LINE = 3;
+        public const int BOOKNAME_LINE = 4;
     
 
 

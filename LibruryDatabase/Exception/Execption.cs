@@ -14,5 +14,8 @@ namespace LibruryDatabase.Exception
         public const string NAME_CHECK = @"^[가-힣]{2,5}$";
         public const string AGE_CHECK = @"^[0-9]{1,2}1?[0-9]?[0-9]$";
         public const string ADDRESS_CHECK = @"^(([가-힣]+(d|d(,|.)d|)+(읍|면|동|가|리))(^구|)((d(~|-)d|d)(가|리|)|))([ ](산(d(~|-)d|d))|)|(([가-힣]|(d(~|-)d)|d)+(로|길))$";
+        public const string CHECK = @"^[a-zA-Z가-힣]{2,8}$";
+        public const string PUBLISH_CHECK = @"^[가-힣]{2,8}$";
+        public const string TITLE_CHECK = @"^[가-힣a-zA-Z]{2,10}$";
     }
 }

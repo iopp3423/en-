@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using LibruryDatabase.Views;
 using LibruryDatabase.Models;
-using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Controls
 {
@@ -13,6 +12,7 @@ namespace LibruryDatabase.Controls
     {
 
         Showing Menu = new Showing(); // 뷰 클래스 객체생성
+        SearchingBook BookSearching = new SearchingBook();
 
         public void StartBookmenu()
         {
@@ -62,7 +62,7 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == searchY) { Console.Clear(); SearchBook(); } // 도서찾기
+                            if (Y == searchY) { Console.Clear(); BookSearching.SearchBook(); } // 도서찾기
                             if (Y == borrowY) { Console.Clear(); BorrowBook(); } // 도서대여
                             if (Y == checkY) { Console.Clear(); CheckBook(); } // 도서확인
                             if (Y == riviseY) { Console.Clear(); RiviseUser(); } // 회원정보수정
@@ -83,17 +83,9 @@ namespace LibruryDatabase.Controls
                 }
             }
         }
+        
 
-        public void SearchBook()
-        {
-            Console.Clear();
-            Menu.PrintSearchMenu();
 
-            Console.SetCursorPosition(Constants.SEARCH_X, Constants.SEARCH_Y);
-            Constants.cursur = Console.ReadKey(true);
-            BookVO.Get().PrintBook();
-
-        }
         public void BorrowBook()
         {
 

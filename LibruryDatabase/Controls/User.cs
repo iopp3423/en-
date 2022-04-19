@@ -19,6 +19,7 @@ namespace LibruryDatabase.Controls
         Regex AGE = new Regex(Execption.AGE_CHECK);
         Regex NAME = new Regex(Execption.NAME_CHECK);
         Regex ADDRESS = new Regex(Execption.ADDRESS_CHECK);
+        
 
         Showing Menu = new Showing(); // 뷰 클래스 객체생성
         UserBook GoUser = new UserBook();
@@ -95,7 +96,7 @@ namespace LibruryDatabase.Controls
            
             Console.Clear();
             Menu.JoinPrint();
-            Menu.PrintBack();
+            
             Menu.PrintJoinMember();
             
             string id;
@@ -213,8 +214,10 @@ namespace LibruryDatabase.Controls
             while (Constants.LOGIN)
             {
                 Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
+                Constants.ClearCurrentLine();
+                Console.Write("유저ID(영어, 숫자 포함(8~10자) :");
                 id = Console.ReadLine();
-
+                
                 if (Constants.CHECK == ID.IsMatch(id)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
