@@ -18,6 +18,7 @@ namespace LibruryDatabase.Controls
         Regex NUMBER = new Regex(Execption.NUMBER_CHECK);
         Regex AGE = new Regex(Execption.AGE_CHECK);
         Regex NAME = new Regex(Execption.NAME_CHECK);
+        Regex ADDRESS = new Regex(Execption.ADDRESS_CHECK);
 
         Showing Menu = new Showing(); // 뷰 클래스 객체생성
         UserBook GoUser = new UserBook();
@@ -130,8 +131,8 @@ namespace LibruryDatabase.Controls
             address = LoginAddress();
 
                 
-            UserVO.Get().UserInformation.Add(new UserVO(id, password, name, callNumber, age, address)); // 회원정보 추가
-            UserVO.Get().StoreUserInformation(id, password, name, callNumber, age, address); // 데이터베이스에 정보 추가
+            //UserVO.Get().UserInformation.Add(new UserVO(id, password, name, callNumber, age, address)); // 회원정보 추가
+           // UserVO.Get().StoreUserInformation(id, password, name, callNumber, age, address); // 데이터베이스에 정보 추가
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : F5 두 번");
@@ -340,13 +341,13 @@ namespace LibruryDatabase.Controls
             {
                 Console.SetCursorPosition(Constants.ADDRESS_X, Constants.ADDRESS_Y);
                 address = Console.ReadLine();
-                /*
+                
                 if (Constants.CHECK == ADDRESS.IsMatch(address))
                 {
                      Console.SetCursorPosition(Constants.ADDRESS_X, Constants.ADDRESS_Y);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
-                */
+                
                 break;
                 
             }
