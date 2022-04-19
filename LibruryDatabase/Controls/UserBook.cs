@@ -75,6 +75,7 @@ namespace LibruryDatabase.Controls
 
                     case ConsoleKey.Escape: // 종료
                         {
+                            Environment.Exit(Constants.EXIT);
                             break;
                         }
 

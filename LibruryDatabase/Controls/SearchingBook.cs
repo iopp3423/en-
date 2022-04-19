@@ -75,6 +75,7 @@ namespace LibruryDatabase.Controls
 
                     case ConsoleKey.Escape: // 종료
                         {
+                            Environment.Exit(Constants.EXIT);
                             break;
                         }
 
@@ -83,14 +84,23 @@ namespace LibruryDatabase.Controls
                 }
             }
         }
+        public void Check(bool check)
+        {
+            if (check == Constants.FAIL) // 책 정보 없으면
+            {
+                Console.Write("찾으시는 책이 없습니다. 뒤로가기 F5");
+            }
+            else Console.Write("뒤로가기 : F5, 프로그램 종료 : ESC");
+        }
 
-        public void SearchName() // 작가명으로 찾기
+        public void SearchName() // 책제목으로 찾기
         {
             string name;
+            bool check = Constants.FAIL;
             Constants.ClearCurrentLine();
             Console.Write("입력 (영어,한글 2~8자) :");
 
-            while (Constants.ENTRANCE)
+            while (Constants.ENTRANCE) // 책 예외처리
             {              
                 name = Console.ReadLine();
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.NAME_LINE);
@@ -98,13 +108,27 @@ namespace LibruryDatabase.Controls
                 {                  
                     Constants.ClearCurrentLine();                  
                     Console.Write("다시 입력해주세요:"); continue;
+                    
                 }
                 break;
-
             }
+
+            Console.Clear();
+            foreach (BookVO list in BookVO.Get().BookInformation) // 맞는 책 출력
+            {
+                if(list.author.Contains(name) == Constants.PASS)
+                {
+                    Console.WriteLine(list);
+                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                    check = Constants.PASS;
+                }
+            }
+            Check(check);
+
         }
         public void SearchPublishName() // 출판사로 찾기
         {
+            bool check = Constants.FAIL;
             string publish;
             Constants.ClearCurrentLine();
             Console.Write("입력 (한글 2~8자) :");
@@ -119,11 +143,24 @@ namespace LibruryDatabase.Controls
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
-
             }
+
+            Console.Clear();
+            foreach (BookVO list in BookVO.Get().BookInformation) // 맞는 책 출력
+            {
+                if (list.author.Contains(publish) == Constants.PASS)
+                {
+                    Console.WriteLine(list);
+                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                    check = Constants.PASS;
+                }
+            }
+            Check(check);
+
         }
         public void SearchBookName() // 제목으로 찾기
         {
+            bool check = Constants.FAIL;
             string bookName;
             Constants.ClearCurrentLine();
             Console.Write("입력 (한글, 영어 2~10자) :");
@@ -138,8 +175,21 @@ namespace LibruryDatabase.Controls
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
-
             }
+
+            Console.Clear();
+            foreach (BookVO list in BookVO.Get().BookInformation) // 맞는 책 출력
+            {
+                if (list.name.Contains(bookName) == Constants.PASS)
+                {
+                    Console.WriteLine(list);
+                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                    check = Constants.PASS;
+                }
+            }
+            Check(check);
         }
+
+
     }
 }

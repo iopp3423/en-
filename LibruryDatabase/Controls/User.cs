@@ -82,6 +82,7 @@ namespace LibruryDatabase.Controls
 
                     case ConsoleKey.Escape: // 종료
                         {
+                            Environment.Exit(Constants.EXIT);
                             break;
                         }
 
@@ -132,8 +133,8 @@ namespace LibruryDatabase.Controls
             address = LoginAddress();
 
                 
-            //UserVO.Get().UserInformation.Add(new UserVO(id, password, name, callNumber, age, address)); // 회원정보 추가
-           // UserVO.Get().StoreUserInformation(id, password, name, callNumber, age, address); // 데이터베이스에 정보 추가
+            UserVO.Get().UserInformation.Add(new UserVO(id, password, name, callNumber, age, address)); // 회원정보 추가
+            UserVO.Get().StoreUserInformation(id, password, name, callNumber, age, address); // 데이터베이스에 정보 추가
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : F5 두 번");

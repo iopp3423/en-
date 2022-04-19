@@ -25,6 +25,7 @@ namespace LibruryDatabase
         public const bool CHECK = false;
         public const bool ENTRANCE = true;
         public const bool LOGIN = true;
+        public const bool PASS = true;
         public const int FIRSTX=0;
         public const int FIRSTY=11;
         public const int LOGIN_Y = 10;
@@ -58,6 +59,7 @@ namespace LibruryDatabase
         public const int NAME_LINE = 2;
         public const int PUBLISH_LINE = 3;
         public const int BOOKNAME_LINE = 4;
+        public const int EXIT = 1;
     
 
 

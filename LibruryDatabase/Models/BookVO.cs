@@ -10,14 +10,14 @@ namespace LibruryDatabase.Models
 {
     class BookVO
     {
-        List<BookVO> BookInformation = new List<BookVO>();
+        public List<BookVO> BookInformation = new List<BookVO>();
 
         private string number;
-        private string name;
-        private string author;
-        private string publish;
-        private string price;
-        private string quantity;
+        public string name;
+        public string author;
+        public string publish;
+        public string price;
+        public string quantity;
         
 
         public BookVO()
