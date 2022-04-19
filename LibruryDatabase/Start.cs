@@ -23,6 +23,8 @@ namespace LibruryDatabase
 
             BookVO.Get().Book(); // 책 리스트 저장
             UserVO.Get().User(); // 유저 리스트 저장
+            // iopp 1111
+            // cho 1111
 
             StartMenu();
 

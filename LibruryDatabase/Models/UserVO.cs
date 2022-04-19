@@ -100,31 +100,15 @@ namespace LibruryDatabase.Models
 
         }
 
-        public void StoreUserInformation(string id, string pw, string name, string phone, string age, string address)
+        public void StoreUserInformation(string id, string pw, string name, string phone, string age, string address) // 데이터베이스에 회원정보 저장
         {
 
             string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
             using (MySqlConnection user = new MySqlConnection(getUser))
             {
                 string insertQuery = string.Format("INSERT INTO member VALUES('{0}','{1}','{2}','{3}','{4}','{5}');", id, pw, name, phone, age, address);
-                //string insertQuery = "INSERT INTO member VALUES(" + id + "," + pw + "," + "name" + "," + "phone" + "," + "age" + "," + address +");";
-                Console.Write(insertQuery);
-                Console.ReadKey();
-
                 user.Open();
                 MySqlCommand Command = new MySqlCommand(insertQuery, user);
-
-
-                // 만약에 내가처리한 Mysql에 정상적으로 들어갔다면 메세지를 보여주라는 뜻이다
-                if (Command.ExecuteNonQuery() == 1)
-                {
-                    Console.WriteLine("인서트 성공");
-                }
-                else
-                {
-                    Console.WriteLine("인서트 실패");
-                }
-
             }
 
         }
