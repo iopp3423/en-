@@ -8,15 +8,15 @@ using LibruryDatabase.Exception;
 
 namespace LibruryDatabase.Controls
 {
-    internal class AdminMenu
+    internal class AdminMenu : SearchingBook
     {
+        RemovingBook removingBookData = new RemovingBook();
         Screen Menu = new Screen();
         public void ChooseMenu()
         {
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintAdminMenu();
-            Console.ReadLine();
 
             if (Constants.BACK == moveMenu()) // 컨트롤러
             {
@@ -29,7 +29,7 @@ namespace LibruryDatabase.Controls
 
         public bool moveMenu()
         {
-            int Y = Constants.FIRSTY;
+            int Y = Constants.SEARCH_BOOK;
 
             while (Constants.ENTRANCE) // 참이면
             {
@@ -49,12 +49,18 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.RIVISE_USER) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.CURRENT_BOOK) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:
                         {
-                            break;
+                            if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.GO_ADMIN_SEARCH); break; }
+                            if (Y == Constants.ADD_BOOK) break;
+                            if (Y == Constants.REMOVE_BOOK) { removingBookData.RemoveBook(); break; } 
+                            if (Y == Constants.REVISE_BOOK) break; 
+                            if (Y == Constants.USER_MANAGE) break;
+                            if (Y == Constants.CURRENT_BOOK) break;
+                                break;
                         }
                     case ConsoleKey.F5:
                         {

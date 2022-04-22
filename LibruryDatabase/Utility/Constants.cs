@@ -31,6 +31,8 @@ namespace LibruryDatabase.Exception
         public const bool BACK_MENU = false;
         public const bool SUCESS = true;
         public const bool FAIL = false;
+        public const bool GO_USER_SEARCH = true;
+        public const bool GO_ADMIN_SEARCH = false;
 
         public const int FIRSTX=0;
         public const int FIRSTY=10;
@@ -81,6 +83,13 @@ namespace LibruryDatabase.Exception
         public const int GOING_ADDRESS = 23;
         public const int DONE_REVISE_Y = 19;
         public const int DONE_REVISE_X = 13;
-        
+
+
+        public const int ADD_BOOK = 11;
+        public const int REMOVE_BOOK = 12;
+        public const int REVISE_BOOK = 13;
+        public const int USER_MANAGE = 14;
+        public const int CURRENT_BOOK = 15;
+     
     }
 }

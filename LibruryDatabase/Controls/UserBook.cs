@@ -37,10 +37,10 @@ namespace LibruryDatabase.Controls
         public bool moveMenu(string id, string password)
         {
             int Y = Constants.FIRSTY;
-            int searchY = Constants.SEARCH_BOOK;
-            int borrowY = Constants.BORROW_BOOK;
-            int checkY = Constants.CHECK_BOOK;
-            int riviseY = Constants.RIVISE_USER;
+            int searchingY = Constants.SEARCH_BOOK;
+            int borrowingY = Constants.BORROW_BOOK;
+            int checkingY = Constants.CHECK_BOOK;
+            int riviseingY = Constants.RIVISE_USER;
 
             while (Constants.ENTRANCE) // 참이면
             {
@@ -65,10 +65,10 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == searchY) { Console.Clear(); BookSearching.SearchBook(); } // 도서찾기
-                            if (Y == borrowY) { Console.Clear(); BookBorrowing.BorrowBook(); } // 도서대여
-                            if (Y == checkY) { Console.Clear();  } // 도서확인
-                            if (Y == riviseY) { Console.Clear(); UserModification.ModifyUserInformation(id, password); } // 회원정보수정
+                            if (Y == searchingY) { Console.Clear(); BookSearching.SearchBook(Constants.GO_USER_SEARCH); } // 도서찾기
+                            if (Y == borrowingY) { Console.Clear(); BookBorrowing.BorrowBook(); } // 도서대여
+                            if (Y == checkingY) { Console.Clear();  } // 도서확인
+                            if (Y == riviseingY) { Console.Clear(); UserModification.ModifyUserInformation(id, password); } // 회원정보수정
                             break;
                         }
                     case ConsoleKey.F5:

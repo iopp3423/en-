@@ -21,17 +21,24 @@ namespace LibruryDatabase.Controls
         Regex TITLE = new Regex(Utility.Exception.TITLE_CHECK);
         Screen Menu = new Screen();
 
-        public void SearchBook()
+        public void SearchBook(bool goingUserOrAdmin)
         {
             Console.Clear();
             Menu.PrintSearchMenu();
             Menu.PrintBookData();
 
-            if (Constants.BACK == moveMenu()) // 마우스 함수
+            if (Constants.BACK == moveMenu() && Constants.GO_USER_SEARCH == goingUserOrAdmin) // 유저모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
                 Menu.PrintUserMenu();
+                return;
+            }
+            else if(Constants.BACK == moveMenu() && Constants.GO_ADMIN_SEARCH == goingUserOrAdmin) // 관리자모드용 책찾기
+            {
+                Console.Clear();
+                Menu.PrintMain();
+                Menu.PrintAdminMenu();
                 return;
             }
         }
