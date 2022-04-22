@@ -56,7 +56,6 @@ namespace LibruryDatabase.Models
 
             using (MySqlConnection user = new MySqlConnection(getUser))
             {
-                Console.Write("Helloworld");
                 user.Open();
                 string insertQuery = string.Format("INSERT INTO member VALUES({0},{1},{2},{3},{4},{5});", id, pw, name, phone, age,address);
                 //string insertQuery = string.Format("INSERT INTO MEMBER VALUES('id','pw','name','string','age','address')") ;

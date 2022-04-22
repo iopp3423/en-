@@ -10,20 +10,9 @@ namespace LibruryDatabase
         
         static void Main(string[] args)
         {
-            string Id = "iopp3423";
-            string Pw = "cho3135";
-
-            UserData Data = new UserData();
-            
             StartConnection Start = new StartConnection();
             Start.StartMenu();
-
-            
-            
-            
-            
         }
-        
-        
+    
     }
 }

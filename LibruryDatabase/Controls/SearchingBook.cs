@@ -7,6 +7,7 @@ using LibruryDatabase.Views;
 using LibruryDatabase.Models;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Exception;
+using MySql.Data.MySqlClient;
 using LibruryDatabase.Utility;
 
 
@@ -25,10 +26,8 @@ namespace LibruryDatabase.Controls
         public void SearchBook()
         {
             Console.Clear();
-            Menu.PrintUserData();
-            BookVO.Get().PrintBook();
-
-          
+            Menu.PrintSearchMenu();
+            Menu.PrintBookData();
 
             if (Constants.BACK == moveMenu()) // 마우스 함수
             {
@@ -96,7 +95,7 @@ namespace LibruryDatabase.Controls
             else Console.Write("뒤로가기 : F5, 프로그램 종료 : ESC");
         }
 
-        public void SearchName() // 책제목으로 찾기
+        public void SearchName() // 작가로 찾기
         {
             string name;
             bool check = Constants.FAIL;
@@ -104,30 +103,51 @@ namespace LibruryDatabase.Controls
             Console.Write("입력 (영어,한글 2~8자) :");
 
             while (Constants.ENTRANCE) // 책 예외처리
-            {              
+            {
                 name = Console.ReadLine();
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.NAME_LINE);
                 if (Constants.CHECK == NAME.IsMatch(name)) // 정규식에 맞지 않으면
-                {                  
-                    Constants.ClearCurrentLine();                  
+                {
+                    Constants.ClearCurrentLine();
                     Console.Write("다시 입력해주세요:"); continue;
-                    
+
                 }
                 break;
             }
 
             Console.Clear();
-            foreach (BookVO list in BookVO.Get().BookInformation) // 맞는 책 출력
+            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+
+            using (MySqlConnection book = new MySqlConnection(getBook))
             {
-                if(list.author.Contains(name) == Constants.PASS)
+                book.Open();
+                string insertQuery = "SELECT * FROM book";
+                MySqlCommand Command = new MySqlCommand(insertQuery, book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
                 {
-                    Console.WriteLine(list);
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                    if (bookData["author"].ToString().Contains(name))
+                    {
+                        Console.Write("책 번호 :");
+                        Console.WriteLine(bookData["number"].ToString());
+                        Console.Write("책 제목 :");
+                        Console.WriteLine(bookData["name"].ToString());
+                        Console.Write("책 저자 :");
+                        Console.WriteLine(bookData["author"].ToString());
+                        Console.Write("출판사  :");
+                        Console.WriteLine(bookData["publish"].ToString());
+                        Console.Write("책 가격 :");
+                        Console.WriteLine(bookData["price"].ToString());
+                        Console.Write("책 수량 :");
+                        Console.WriteLine(bookData["quantity"].ToString());
+                        Console.WriteLine("===============================================================");
+                    }
                     check = Constants.PASS;
                 }
+                book.Close();
             }
-            BookExistenceCheck(check);
-
+            BookExistenceCheck(check);          
         }
         public void SearchPublishName() // 출판사로 찾기
         {
@@ -149,19 +169,41 @@ namespace LibruryDatabase.Controls
             }
 
             Console.Clear();
-            foreach (BookVO list in BookVO.Get().BookInformation) // 맞는 책 출력
+            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+
+            using (MySqlConnection book = new MySqlConnection(getBook))
             {
-                if (list.publish.Contains(publish) == Constants.PASS)
+                book.Open();
+                string insertQuery = "SELECT * FROM book";
+                MySqlCommand Command = new MySqlCommand(insertQuery, book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
                 {
-                    Console.WriteLine(list);
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                    if (bookData["publish"].ToString().Contains(publish))
+                    {
+                        Console.Write("책 번호 :");
+                        Console.WriteLine(bookData["number"].ToString());
+                        Console.Write("책 제목 :");
+                        Console.WriteLine(bookData["name"].ToString());
+                        Console.Write("책 저자 :");
+                        Console.WriteLine(bookData["author"].ToString());
+                        Console.Write("출판사  :");
+                        Console.WriteLine(bookData["publish"].ToString());
+                        Console.Write("책 가격 :");
+                        Console.WriteLine(bookData["price"].ToString());
+                        Console.Write("책 수량 :");
+                        Console.WriteLine(bookData["quantity"].ToString());
+                        Console.WriteLine("===============================================================");
+                    }
                     check = Constants.PASS;
                 }
+                book.Close();
             }
             BookExistenceCheck(check);
 
         }
-        public void SearchBookName() // 제목으로 찾기
+        public void SearchBookName() // 책제목으로 찾기
         {
             bool check = Constants.FAIL;
             string bookName;
@@ -181,14 +223,36 @@ namespace LibruryDatabase.Controls
             }
 
             Console.Clear();
-            foreach (BookVO list in BookVO.Get().BookInformation) // 맞는 책 출력
+            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+
+            using (MySqlConnection book = new MySqlConnection(getBook))
             {
-                if (list.name.Contains(bookName) == Constants.PASS)
+                book.Open();
+                string insertQuery = "SELECT * FROM book";
+                MySqlCommand Command = new MySqlCommand(insertQuery, book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
                 {
-                    Console.WriteLine(list);
-                    Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
+                    if (bookData["name"].ToString().Contains(bookName))
+                    {
+                        Console.Write("책 번호 :");
+                        Console.WriteLine(bookData["number"].ToString());
+                        Console.Write("책 제목 :");
+                        Console.WriteLine(bookData["name"].ToString());
+                        Console.Write("책 저자 :");
+                        Console.WriteLine(bookData["author"].ToString());
+                        Console.Write("출판사  :");
+                        Console.WriteLine(bookData["publish"].ToString());
+                        Console.Write("책 가격 :");
+                        Console.WriteLine(bookData["price"].ToString());
+                        Console.Write("책 수량 :");
+                        Console.WriteLine(bookData["quantity"].ToString());
+                        Console.WriteLine("===============================================================");
+                    }
                     check = Constants.PASS;
                 }
+                book.Close();
             }
             BookExistenceCheck(check);
         }
