@@ -18,5 +18,6 @@ namespace LibruryDatabase.Utility
         public const string CHECK = @"^[a-zA-Z가-힣]{2,8}$";
         public const string PUBLISH_CHECK = @"^[가-힣]{2,8}$";
         public const string TITLE_CHECK = @"^[가-힣a-zA-Z]{2,10}$";
+        public const string BOOKNUMBER_CHECK = @"^[0-9]?[0-9]?[0-9]$";
     }
 }

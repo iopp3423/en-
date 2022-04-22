@@ -15,9 +15,7 @@ using LibruryDatabase.Utility;
 namespace LibruryDatabase.Controls
 {
     internal class SearchingBook
-
     {
-  
         Regex NAME = new Regex(Utility.Exception.CHECK);
         Regex PUBLISH = new Regex(Utility.Exception.PUBLISH_CHECK);
         Regex TITLE = new Regex(Utility.Exception.TITLE_CHECK);
@@ -208,7 +206,7 @@ namespace LibruryDatabase.Controls
             bool check = Constants.FAIL;
             string bookName;
             Constants.ClearCurrentLine();
-            Console.Write("입력 (한글, 영어 2~10자) :");
+            Console.Write("책 제목 (한글, 영어 2~10자) :");
 
             while (Constants.ENTRANCE)
             {

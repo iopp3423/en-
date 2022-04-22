@@ -14,8 +14,10 @@ namespace LibruryDatabase.Controls
 
         Screen Menu = new Screen(); // 뷰 클래스 객체생성
         SearchingBook BookSearching = new SearchingBook();
+        BorrowingBook BookBorrowing = new BorrowingBook();
+        ModificationUser UserModification = new ModificationUser();
 
-        public void StartBookmenu()
+        public void StartBookmenu(string id, string password) // id, pw정보 저장
         {
 
             Console.Clear();
@@ -23,7 +25,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintUserMenu();
 
 
-            if (Constants.BACK == moveMenu()) // 마우스 함수
+            if (Constants.BACK == moveMenu(id, password)) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -32,7 +34,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool moveMenu()
+        public bool moveMenu(string id, string password)
         {
             int Y = Constants.FIRSTY;
             int searchY = Constants.SEARCH_BOOK;
@@ -64,9 +66,9 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Enter:
                         {
                             if (Y == searchY) { Console.Clear(); BookSearching.SearchBook(); } // 도서찾기
-                            if (Y == borrowY) { Console.Clear(); BorrowBook(); } // 도서대여
-                            if (Y == checkY) { Console.Clear(); CheckBook(); } // 도서확인
-                            if (Y == riviseY) { Console.Clear(); RiviseUser(); } // 회원정보수정
+                            if (Y == borrowY) { Console.Clear(); BookBorrowing.BorrowBook(); } // 도서대여
+                            if (Y == checkY) { Console.Clear();  } // 도서확인
+                            if (Y == riviseY) { Console.Clear(); UserModification.ModifyUserInformation(id, password); } // 회원정보수정
                             break;
                         }
                     case ConsoleKey.F5:
@@ -84,22 +86,7 @@ namespace LibruryDatabase.Controls
 
                 }
             }
-        }
-        
-
-
-        public void BorrowBook()
-        {
-
-        }
-        public void CheckBook()
-        {
-
-        }
-        public void RiviseUser()
-        {
-
-        }
+        }  
 
     }
 }

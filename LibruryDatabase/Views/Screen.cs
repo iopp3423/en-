@@ -62,7 +62,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintBack()
         {
-            Console.WriteLine(string.Format("{0,40}", "입력 : Enter                                              뒤로가기 : F5"));
+            Console.WriteLine(string.Format("{0,40}", "입력 : Enter                                              뒤로가기 : F5 "));
             Console.WriteLine("\n");
         }
 
@@ -83,7 +83,7 @@ namespace LibruryDatabase.Views
 
         public void PrintSearchMenu()
         {
-            Console.Write("원하시는 검색 메뉴 -> Enter -> 검색                       뒤로가기 : F5");
+            Console.Write("원하시는 검색 메뉴 -> Enter -> 검색                       뒤로가기 : F5 ");
             Console.WriteLine("\n");
             Console.WriteLine("  》작가명으로찾기 ");
             Console.WriteLine("  》출판사로찾기 ");
@@ -109,13 +109,19 @@ namespace LibruryDatabase.Views
 
                 while (userInformation.Read())
                 {
+                    Console.Write("아이디 :");
                     Console.WriteLine(userInformation["id"].ToString());
+                    Console.Write("비밀번호 :");
                     Console.WriteLine(userInformation["pw"].ToString());
+                    Console.Write("이름 :");
                     Console.WriteLine(userInformation["name"].ToString());
+                    Console.Write("전화번호 :");
                     Console.WriteLine(userInformation["phone"].ToString());
+                    Console.Write("나이 :");
                     Console.WriteLine(userInformation["age"].ToString());
+                    Console.Write("주소 :");
                     Console.WriteLine(userInformation["address"].ToString());
-                    Console.WriteLine("===============================================================");
+                    Console.WriteLine("=======================================================================");
                 }
                 userInformation.Close();
             }
@@ -149,6 +155,50 @@ namespace LibruryDatabase.Views
                 }
                 bookData.Close();
             }
+        }
+        public void PrintLoginUser(string id, string password)
+        {
+            Console.WriteLine("=======================================================================");
+
+            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            using (MySqlConnection user = new MySqlConnection(getUser))
+            {
+                user.Open();
+                string sql = "SELECT * FROM member";
+
+                //ExecuteReader를 이용하여
+                //연결 모드로 데이타 가져오기
+                MySqlCommand Command = new MySqlCommand(sql, user);
+                MySqlDataReader userInformation = Command.ExecuteReader();
+
+                while (userInformation.Read())
+                {
+                    if (userInformation["id"].ToString() == id && (userInformation["pw"].ToString() == password))
+                    {
+                        Console.Write("아이디 :");
+                        Console.WriteLine(userInformation["id"].ToString());
+                        Console.Write("비밀번호 :");
+                        Console.WriteLine(userInformation["pw"].ToString());
+                        Console.Write("이름 :");
+                        Console.WriteLine(userInformation["name"].ToString());
+                        Console.Write("전화번호 :");
+                        Console.WriteLine(userInformation["phone"].ToString());
+                        Console.Write("나이 :");
+                        Console.WriteLine(userInformation["age"].ToString());
+                        Console.Write("주소 :");
+                        Console.WriteLine(userInformation["address"].ToString());
+                        Console.WriteLine("=======================================================================");
+                    }
+                }
+                userInformation.Close();
+            }
+        }
+        public void PrintUserInformation()
+        {
+            Console.WriteLine("\n\n");
+            Console.WriteLine("  ▶ 휴대폰 번호 변경");
+            Console.WriteLine("  ▶ 패스워드 변경");
+            Console.WriteLine("  ▶ 주소 변경");
         }
     }
 }

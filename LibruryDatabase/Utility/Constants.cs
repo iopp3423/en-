@@ -75,7 +75,12 @@ namespace LibruryDatabase.Exception
         public const int AGE_X = 7;
         public const int NUMBER_X = 28;
         public const int ADDRESS_X = 7;
-        
+
+        public const int GOING_PHONE = 21;
+        public const int GOING_PASSWORD = 22;
+        public const int GOING_ADDRESS = 23;
+        public const int DONE_REVISE_Y = 19;
+        public const int DONE_REVISE_X = 13;
         
     }
 }

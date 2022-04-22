@@ -169,7 +169,7 @@ namespace LibruryDatabase.Controls
 
             check = CheckLogin(id, password);
 
-            if(check == Constants.SUCESS) GoUser.StartBookmenu();
+            if(check == Constants.SUCESS) GoUser.StartBookmenu(id, password);
             Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : F5 두 번");
 
             while(Constants.ENTRANCE)
