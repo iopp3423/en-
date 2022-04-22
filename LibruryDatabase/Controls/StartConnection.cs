@@ -22,15 +22,13 @@ namespace LibruryDatabase.Controls
         public void StartMenu() // 유저 or 관리자
         {
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HDIGHT); // 콘솔크기 지정
-            //BookVO.Get().Book(); // 책 리스트 저장
-            //UserVO.Get().User();
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintUserOrAdmin();
             Console.SetCursorPosition(Constants.FIRSTX, Constants.FIRSTY);// 처음 좌표
             int Y = Constants.FIRSTY;
-            int userY = Constants.USER_Y;
-            int adminY = Constants.ADMIN_Y;
+            int goingUser = Constants.USER_Y;
+            int goingAdmin = Constants.ADMIN_Y;
 
 
 
@@ -59,8 +57,8 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == userY) { Console.Clear(); UserLibruary.JoinOrLogin(); }
-                            //if (Y == adminY) { Console.Clear(); AdminLibruary.AdminLogin(); }
+                            if (Y == goingUser) { Console.Clear(); UserLibruary.JoinOrLogin(); }
+                            if (Y == goingAdmin) { Console.Clear(); AdminLibruary.LoginAdmin(); }
                             break;
                         }
 

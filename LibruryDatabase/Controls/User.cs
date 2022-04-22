@@ -135,9 +135,7 @@ namespace LibruryDatabase.Controls
             address = LoginAddress();
 
 
-            UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);
-            //UserVO.Get().UserInformation.Add(new UserVO(id, password, name, callNumber, age, address)); // 회원정보 추가
-            //UserVO.Get().StoreUserInformation(id, password, name, callNumber, age, address); // 데이터베이스에 정보 추가
+            UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : F5 두 번");
@@ -206,20 +204,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        public void AdminLogin() // 관리자 로그인
-        {
-            string id, password;
-            Console.Clear();
-            Menu.PrintMain();
-            Menu.PrintLogin();
-            Console.SetCursorPosition(Constants.LOGIN_X, Constants.LOGIN_Y);
-
-            id = LoginId();
-            password = LoginPassword();
-
-        }
-
-        string LoginId() // id 입력
+        public string LoginId() // id 입력
         {
 
             string id;
@@ -241,7 +226,7 @@ namespace LibruryDatabase.Controls
             }
             return id;
         }
-        string LoginPassword() // 비밀번호 입력
+        public string LoginPassword() // 비밀번호 입력
         {
             string password;
 

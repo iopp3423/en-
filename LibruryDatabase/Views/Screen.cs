@@ -200,5 +200,19 @@ namespace LibruryDatabase.Views
             Console.WriteLine("  ▶ 패스워드 변경");
             Console.WriteLine("  ▶ 주소 변경");
         }
+
+        public void PrintAdminMenu()
+        {
+            Console.WriteLine("  》도서찾기 ");
+            Console.WriteLine("  》도서추가 ");
+            Console.WriteLine("  》도서삭제 ");
+            Console.WriteLine("  》도서수정 ");
+            Console.WriteLine("  》회원관리 ");
+            Console.WriteLine("  》대여상황 ");
+        }
+        public void PrintReturnMenu()
+        {
+            Console.WriteLine("유저 or 관리자 모드 : F5, 관리자 로그인 : ENTER");
+        }
     }
 }
