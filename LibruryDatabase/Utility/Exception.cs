@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
-namespace LibruryDatabase.Exception
+namespace LibruryDatabase.Utility
 {
-    internal class Execption
+    internal class Exception
     {
         public const string ID_CHECK = @"^[0-9a-zA-Z]{8,10}$";
         public const string NUMBER_CHECK = @"^01[0-9]-[0-9]{4}-[0-9]{4}$";

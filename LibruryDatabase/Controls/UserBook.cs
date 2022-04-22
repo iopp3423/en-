@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using LibruryDatabase.Views;
 using LibruryDatabase.Models;
+using LibruryDatabase.Exception;
 
 namespace LibruryDatabase.Controls
 {
     internal class UserBook
     {
 
-        Showing Menu = new Showing(); // 뷰 클래스 객체생성
+        Screen Menu = new Screen(); // 뷰 클래스 객체생성
         SearchingBook BookSearching = new SearchingBook();
 
         public void StartBookmenu()
@@ -22,7 +23,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintUserMenu();
 
 
-            if (Constants.BACK == cursur()) // 마우스 함수
+            if (Constants.BACK == moveMenu()) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -31,7 +32,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool cursur()
+        public bool moveMenu()
         {
             int Y = Constants.FIRSTY;
             int searchY = Constants.SEARCH_BOOK;
@@ -42,9 +43,9 @@ namespace LibruryDatabase.Controls
             while (Constants.ENTRANCE) // 참이면
             {
                 Console.SetCursorPosition(Constants.FIRSTX, Y);
-                Constants.cursur = Console.ReadKey(true);
+                Constants.cursor = Console.ReadKey(true);
 
-                switch (Constants.cursur.Key)
+                switch (Constants.cursor.Key)
                 {
                     // 상
                     case ConsoleKey.UpArrow:

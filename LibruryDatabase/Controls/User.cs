@@ -7,21 +7,24 @@ using LibruryDatabase.Views;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Models;
 using LibruryDatabase.Exception;
+using MySql.Data.MySqlClient;
+using LibruryDatabase.Utility;
 
 
 namespace LibruryDatabase.Controls
 {
     internal class User
     {
-        Regex ID = new Regex(Execption.ID_CHECK);
-        Regex PW = new Regex(Execption.PW_CHECK);
-        Regex NUMBER = new Regex(Execption.NUMBER_CHECK);
-        Regex AGE = new Regex(Execption.AGE_CHECK);
-        Regex NAME = new Regex(Execption.NAME_CHECK);
-        Regex ADDRESS = new Regex(Execption.ADDRESS_CHECK);
+        //정규식 고쳐야함
+        Regex ID = new Regex(Utility.Exception.ID_CHECK);
+        Regex PW = new Regex(Utility.Exception.PW_CHECK);
+        Regex NUMBER = new Regex(Utility.Exception.NUMBER_CHECK);
+        Regex AGE = new Regex(Utility.Exception.AGE_CHECK);
+        Regex NAME = new Regex(Utility.Exception.NAME_CHECK);
+        Regex ADDRESS = new Regex(Utility.Exception.ADDRESS_CHECK);
         
 
-        Showing Menu = new Showing(); // 뷰 클래스 객체생성
+        Screen Menu = new Screen(); // 뷰 클래스 객체생성
         UserBook GoUser = new UserBook();
 
 
@@ -33,7 +36,7 @@ namespace LibruryDatabase.Controls
             Menu.JoinOrLogin();
 
 
-            if (Constants.BACK == cursur()) // 마우스 함수
+            if (Constants.BACK == moveMenu()) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -42,18 +45,18 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool cursur()
+        public bool moveMenu()
         {
             int Y = Constants.FIRSTY;
-            int JoinY = Constants.USER_Y;
-            int LoginY = Constants.ADMIN_Y;
+            int goingJoin = Constants.USER_Y;
+            int goingLogin = Constants.ADMIN_Y;
 
             while (Constants.ENTRANCE) // 참이면
             {
                 Console.SetCursorPosition(Constants.FIRSTX, Y);
-                Constants.cursur = Console.ReadKey(true);
+                Constants.cursor = Console.ReadKey(true);
 
-                switch (Constants.cursur.Key)
+                switch (Constants.cursor.Key)
                 {
                     // 상
                     case ConsoleKey.UpArrow:
@@ -71,8 +74,8 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == JoinY) { Console.Clear(); JoinMember(); } // 회원가입
-                            if (Y == LoginY) { Console.Clear(); UserLogin(); } // 로그인
+                            if (Y == goingJoin) { Console.Clear(); JoinMember(); } // 회원가입
+                            if (Y == goingLogin) { Console.Clear(); UserLogin(); } // 로그인
                             break;
                         }
                     case ConsoleKey.F5:
@@ -96,8 +99,7 @@ namespace LibruryDatabase.Controls
         {
            
             Console.Clear();
-            Menu.JoinPrint();
-            
+            Menu.JoinPrint();          
             Menu.PrintJoinMember();
             
             string id;
@@ -118,8 +120,8 @@ namespace LibruryDatabase.Controls
                 Console.Write("비밀번호가 일치하지않습니다. 재입력 : Enter, 뒤로가기 : F5 두 번");
                 while (Constants.ENTRANCE)
                 {
-                    Constants.cursur = Console.ReadKey(true);
-                    switch (Constants.cursur.Key)
+                    Constants.cursor = Console.ReadKey(true);
+                    switch (Constants.cursor.Key)
                     {
                         case ConsoleKey.Enter: JoinMember(); break;
                         case ConsoleKey.F5: return;
@@ -132,16 +134,18 @@ namespace LibruryDatabase.Controls
             callNumber = LoginCallNumber();
             address = LoginAddress();
 
-                
-            UserVO.Get().UserInformation.Add(new UserVO(id, password, name, callNumber, age, address)); // 회원정보 추가
-            UserVO.Get().StoreUserInformation(id, password, name, callNumber, age, address); // 데이터베이스에 정보 추가
+
+            UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);
+            //UserVO.Get().UserInformation.Add(new UserVO(id, password, name, callNumber, age, address)); // 회원정보 추가
+            //UserVO.Get().StoreUserInformation(id, password, name, callNumber, age, address); // 데이터베이스에 정보 추가
+
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : F5 두 번");
             while (Constants.ENTRANCE)
             {
-                Constants.cursur = Console.ReadKey(true);
-                switch (Constants.cursur.Key)
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
                 {
                     case ConsoleKey.Enter: UserLogin(); break;
                     case ConsoleKey.F5: return;
@@ -170,8 +174,8 @@ namespace LibruryDatabase.Controls
 
             while(Constants.ENTRANCE)
             {
-                Constants.cursur = Console.ReadKey(true);
-                switch(Constants.cursur.Key)
+                Constants.cursor = Console.ReadKey(true);
+                switch(Constants.cursor.Key)
                 {
                     case ConsoleKey.Enter: UserLogin(); break;
                     case ConsoleKey.F5: return;
@@ -183,16 +187,25 @@ namespace LibruryDatabase.Controls
         }
         public bool CheckLogin(string id, string password) // 로그인 체크
         {
-            foreach (UserVO list in UserVO.Get().UserInformation)
-            {
+            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
-                if (id == list.id && password == list.pw)
+            using (MySqlConnection user = new MySqlConnection(getUser))
+            {
+                user.Open();
+                string insertQuery = "SELECT * FROM member";
+                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
                 {
-                    return Constants.SUCESS;                 
+                    if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.SUCESS;
                 }
+                user.Close();
             }
             return Constants.FAIL;
+       
         }
+
 
         public void AdminLogin() // 관리자 로그인
         {

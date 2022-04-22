@@ -7,27 +7,30 @@ using LibruryDatabase.Views;
 using LibruryDatabase.Models;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Exception;
+using LibruryDatabase.Utility;
+
 
 
 namespace LibruryDatabase.Controls
 {
     internal class SearchingBook
-    {
-        Regex NAME = new Regex(Execption.CHECK);
-        Regex PUBLISH = new Regex(Execption.PUBLISH_CHECK);
-        Regex TITLE = new Regex(Execption.TITLE_CHECK);
 
-        Showing Menu = new Showing();
+    {
+  
+        Regex NAME = new Regex(Utility.Exception.CHECK);
+        Regex PUBLISH = new Regex(Utility.Exception.PUBLISH_CHECK);
+        Regex TITLE = new Regex(Utility.Exception.TITLE_CHECK);
+        Screen Menu = new Screen();
 
         public void SearchBook()
         {
             Console.Clear();
-            Menu.PrintSearchMenu();
+            Menu.PrintUserData();
             BookVO.Get().PrintBook();
 
           
 
-            if (Constants.BACK == cursur()) // 마우스 함수
+            if (Constants.BACK == moveMenu()) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -36,16 +39,16 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool cursur()
+        public bool moveMenu()
         {
             int Y = Constants.SEARCH_Y;
 
             while (Constants.ENTRANCE) // 참이면
             {
                 Console.SetCursorPosition(Constants.SEARCH_X, Y);
-                Constants.cursur = Console.ReadKey(true);
+                Constants.cursor = Console.ReadKey(true);
 
-                switch (Constants.cursur.Key)
+                switch (Constants.cursor.Key)
                 {
                     // 상
                     case ConsoleKey.UpArrow:
@@ -84,7 +87,7 @@ namespace LibruryDatabase.Controls
                 }
             }
         }
-        public void Check(bool check)
+        public void BookExistenceCheck(bool check)
         {
             if (check == Constants.FAIL) // 책 정보 없으면
             {
@@ -123,7 +126,7 @@ namespace LibruryDatabase.Controls
                     check = Constants.PASS;
                 }
             }
-            Check(check);
+            BookExistenceCheck(check);
 
         }
         public void SearchPublishName() // 출판사로 찾기
@@ -148,14 +151,14 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             foreach (BookVO list in BookVO.Get().BookInformation) // 맞는 책 출력
             {
-                if (list.author.Contains(publish) == Constants.PASS)
+                if (list.publish.Contains(publish) == Constants.PASS)
                 {
                     Console.WriteLine(list);
                     Console.WriteLine("---------------------------------------------------------------------------------------------------------------------");
                     check = Constants.PASS;
                 }
             }
-            Check(check);
+            BookExistenceCheck(check);
 
         }
         public void SearchBookName() // 제목으로 찾기
@@ -169,7 +172,7 @@ namespace LibruryDatabase.Controls
             {
                 bookName = Console.ReadLine();
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
-                if (Constants.CHECK == NAME.IsMatch(bookName)) // 정규식에 맞지 않으면
+                if (Constants.CHECK == TITLE.IsMatch(bookName)) // 정규식에 맞지 않으면
                 {
                     Constants.ClearCurrentLine();
                     Console.Write("다시 입력해주세요:"); continue;
@@ -187,7 +190,7 @@ namespace LibruryDatabase.Controls
                     check = Constants.PASS;
                 }
             }
-            Check(check);
+            BookExistenceCheck(check);
         }
 
 

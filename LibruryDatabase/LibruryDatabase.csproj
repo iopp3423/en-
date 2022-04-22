@@ -87,16 +87,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\SearchingBook.cs" />
-    <Compile Include="Exception\Constants.cs" />
+    <Compile Include="Controls\StartConnection.cs" />
+    <Compile Include="Utility\Constants.cs" />
     <Compile Include="Controls\Admin.cs" />
     <Compile Include="Controls\User.cs" />
     <Compile Include="Controls\UserBook.cs" />
-    <Compile Include="Exception\Execption.cs" />
+    <Compile Include="Utility\Exception.cs" />
     <Compile Include="Models\BookVO.cs" />
+    <Compile Include="Models\UserData.cs" />
     <Compile Include="Models\UserVO.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Showing.cs" />
+    <Compile Include="Views\Screen.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace LibruryDatabase
+namespace LibruryDatabase.Exception
 {
     internal class Constants
     {
@@ -18,16 +18,22 @@ namespace LibruryDatabase
         }
 
 
-        static public ConsoleKeyInfo cursur; //커서조정
+        static public ConsoleKeyInfo cursor; //커서조정
         public const int ONE = 1;
         public const int CONSOLE_SIZE_WIDTH = 75;
         public const int CONSOLE_SIZE_HDIGHT = 40;
+        public const int DATABASE_PASSWORD = 0000;
         public const bool CHECK = false;
         public const bool ENTRANCE = true;
         public const bool LOGIN = true;
         public const bool PASS = true;
+        public const bool BACK = false;
+        public const bool BACK_MENU = false;
+        public const bool SUCESS = true;
+        public const bool FAIL = false;
+
         public const int FIRSTX=0;
-        public const int FIRSTY=11;
+        public const int FIRSTY=10;
         public const int LOGIN_Y = 10;
         public const int LOGIN_X = 43;
         public const int PASSWORED_Y = 11;
@@ -51,8 +57,6 @@ namespace LibruryDatabase
         public const int SEARCH_Y = 2;
         public const int PW_FAIL_X = 4;
         public const int PW_FAIL_Y = 8;
-        public const bool SUCESS = true;
-        public const bool FAIL = false;
         public const int NAME_SEARCH_Y=2;
         public const int BOOK_Y = 4;
         public const int PUBLISH_Y=3;
@@ -71,9 +75,7 @@ namespace LibruryDatabase
         public const int AGE_X = 7;
         public const int NUMBER_X = 28;
         public const int ADDRESS_X = 7;
-
-        public const bool BACK = false;
-        public const bool BACK_MENU = false;
+        
         
     }
 }
