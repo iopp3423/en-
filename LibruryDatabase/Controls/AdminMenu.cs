@@ -10,7 +10,8 @@ namespace LibruryDatabase.Controls
 {
     internal class AdminMenu : SearchingBook
     {
-        RemovingBook removingBookData = new RemovingBook();
+        RemovingBook removing = new RemovingBook();
+        AddingBook adding = new AddingBook();
         Screen Menu = new Screen();
         public void ChooseMenu()
         {
@@ -54,9 +55,9 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.GO_ADMIN_SEARCH); break; }
-                            if (Y == Constants.ADD_BOOK) break;
-                            if (Y == Constants.REMOVE_BOOK) { removingBookData.RemoveBook(); break; } 
+                            if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.GO_ADMIN_SEARCH); break; } // 관리자 도서검색
+                            if (Y == Constants.ADD_BOOK) { adding.AddBook(); break; } // 책 추가 클래스 이동
+                            if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
                             if (Y == Constants.REVISE_BOOK) break; 
                             if (Y == Constants.USER_MANAGE) break;
                             if (Y == Constants.CURRENT_BOOK) break;

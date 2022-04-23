@@ -214,5 +214,14 @@ namespace LibruryDatabase.Views
         {
             Console.WriteLine("유저 or 관리자 모드 : F5, 관리자 로그인 : ENTER");
         }
+        public void PrintAddBook()
+        {
+            Console.WriteLine("책 제목(영어, 한글 2~10자) :");
+            Console.WriteLine("작가(영어, 한글 2~8자) :");
+            Console.WriteLine("출판사(영어 한글 2~8자):");
+            Console.WriteLine("출시일(YYYY/MM/DD) :");
+            Console.WriteLine("수량(1~3자리 숫자):");
+            Console.WriteLine("가격 :");
+        }
     }
 }

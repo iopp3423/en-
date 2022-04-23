@@ -16,7 +16,7 @@ namespace LibruryDatabase.Controls
 {
     internal class SearchingBook
     {
-        Regex NAME = new Regex(Utility.Exception.CHECK);
+        Regex NAME = new Regex(Utility.Exception.AUTHOR_CHECK);
         Regex PUBLISH = new Regex(Utility.Exception.PUBLISH_CHECK);
         Regex TITLE = new Regex(Utility.Exception.TITLE_CHECK);
         Screen Menu = new Screen();

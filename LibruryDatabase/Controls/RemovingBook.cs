@@ -8,14 +8,12 @@ using LibruryDatabase.Exception;
 
 namespace LibruryDatabase.Controls
 {
-    internal class RemovingBook : SearchingBook
+    internal class RemovingBook
     {
 
         public void RemoveBook()
         {
-            SearchBook(Constants.GO_ADMIN_SEARCH);
-            Console.ReadLine();
-            Console.WriteLine("HelloWord");
+            
         }
 
     }

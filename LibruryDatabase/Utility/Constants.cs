@@ -90,6 +90,16 @@ namespace LibruryDatabase.Exception
         public const int REVISE_BOOK = 13;
         public const int USER_MANAGE = 14;
         public const int CURRENT_BOOK = 15;
-     
+
+        //AddingBook에서 좌표 
+        public const int BOOK_NAME_X = 29;
+        public const int BOOK_NAME_Y = 10;
+        public const int AUTHOR_X = 25;
+        public const int PUBLISHER_X = 25; 
+        public const int PUBLISH_DAY_X = 21;   
+        public const int QUANTITY_X = 20; 
+        public const int BOOK_PRICE_X = 5;
+
+
     }
 }
