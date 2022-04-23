@@ -9,7 +9,7 @@ namespace LibruryDatabase.Exception
 {
     internal class Constants
     {
-        static public void ClearCurrentLine() // 줄 지우기 함수
+        static public void ClearCurrentLine() // 줄 지우기 함수 위치 바꾸자
         {
             int currentLineCursor = Console.CursorTop;
             Console.SetCursorPosition(0, Console.CursorTop);
@@ -17,8 +17,8 @@ namespace LibruryDatabase.Exception
             Console.SetCursorPosition(0, currentLineCursor);
         }
 
-
-        static public ConsoleKeyInfo cursor; //커서조정
+        static public int BOOK_NUMBER = 11;
+        static public ConsoleKeyInfo cursor; //커서
         public const int ONE = 1;
         public const int CONSOLE_SIZE_WIDTH = 75;
         public const int CONSOLE_SIZE_HDIGHT = 40;
@@ -71,7 +71,7 @@ namespace LibruryDatabase.Exception
 
 
         public const int ID_X = 33;
-        public const int PW_X = 33;
+        public const int PW_X = 28;
         public const int PW_CHECK_X = 38;
         public const int NAME_X = 18;
         public const int AGE_X = 7;
@@ -98,7 +98,7 @@ namespace LibruryDatabase.Exception
         public const int PUBLISHER_X = 25; 
         public const int PUBLISH_DAY_X = 21;   
         public const int QUANTITY_X = 20; 
-        public const int BOOK_PRICE_X = 5;
+        public const int BOOK_PRICE_X = 6;
 
 
     }

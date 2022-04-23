@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 using LibruryDatabase.Views;
 using LibruryDatabase.Exception;
 using System.Text.RegularExpressions;
+using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Controls
 {
@@ -35,7 +36,12 @@ namespace LibruryDatabase.Controls
             publishDay = InputPublishDay(movingInputY++);
             quantity = InputQuantity(movingInputY++);
             price = InputPrice(movingInputY);
+
+            BookData.Get().StoreBookInformation(bookName, author, publisher, publishDay, quantity, price);
+            Console.Write("도서가 등록되었습니다.");
         }
+
+
 
 
         string InputBookName(int bookNameY)

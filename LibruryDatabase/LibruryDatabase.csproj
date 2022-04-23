@@ -93,6 +93,7 @@
     <Compile Include="Controls\RemovingBook.cs" />
     <Compile Include="Controls\SearchingBook.cs" />
     <Compile Include="Controls\StartConnection.cs" />
+    <Compile Include="Models\BookData.cs" />
     <Compile Include="Utility\Constants.cs" />
     <Compile Include="Controls\Admin.cs" />
     <Compile Include="Controls\User.cs" />

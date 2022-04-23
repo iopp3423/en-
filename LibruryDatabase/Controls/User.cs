@@ -213,7 +213,7 @@ namespace LibruryDatabase.Controls
             {
                 Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
                 Constants.ClearCurrentLine();
-                Console.Write("유저ID(영어, 숫자 포함(8~10자) :");
+                Console.Write("ID(영어, 숫자 포함(8~10자) :");
                 id = Console.ReadLine();
                 
                 if (Constants.CHECK == ID.IsMatch(id)) // 정규식에 맞지 않으면
