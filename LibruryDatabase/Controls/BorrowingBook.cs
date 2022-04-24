@@ -60,9 +60,6 @@ namespace LibruryDatabase.Controls
                 book.Close();
             }
             BookExistenceCheck(check);
-
         }
-        
-             
     }
 }

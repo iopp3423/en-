@@ -22,5 +22,6 @@ namespace LibruryDatabase.Utility
         public const string PUBLISH_DAY = @"^[0-9]{4}/[0-9]{2}/[0-9]{2}$"; // 출시일
         public const string QUANTITY = @"^[1-9]?[0-9]?[0-9]$"; // 수량 고쳐야함
         public const string PRICE = @"^[0-9]{4,6}$"; // 가격 고쳐야함
+        public const string MODIFICATION_BOOK = @"^[1-3]{1}$"; // 가격 고쳐야함
     }
 }

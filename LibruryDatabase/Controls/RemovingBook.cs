@@ -22,6 +22,7 @@ namespace LibruryDatabase.Controls
            
             bookNumber = InputBookNumber();
             BookData.Get().RemoveBookInformation(bookNumber);
+            Console.Write("책이 삭제되었습니다.");
         }
 
         string InputBookNumber()
@@ -32,11 +33,11 @@ namespace LibruryDatabase.Controls
             {
                 Constants.ClearCurrentLine();
                 Console.Write("삭제하실 책 번호를 입력해주세요 :");
-                Console.SetCursorPosition(34, 7);
+                Console.SetCursorPosition(34, 7);///////////////////////////////////수정해야함
                 bookNumber = Console.ReadLine();
                 if (Constants.CHECK == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK))
                 {
-                    Console.SetCursorPosition(50, 7);
+                    Console.SetCursorPosition(50, 7);///////////////////////////////////수정해야함
                     Console.Write("다시 입력해주세요"); continue;
                 }
                 break;

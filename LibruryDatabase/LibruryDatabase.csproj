@@ -89,6 +89,7 @@
     <Compile Include="Controls\AddingBook.cs" />
     <Compile Include="Controls\AdminMenu.cs" />
     <Compile Include="Controls\BorrowingBook.cs" />
+    <Compile Include="Controls\ModificationBook.cs" />
     <Compile Include="Controls\ModificationUser.cs" />
     <Compile Include="Controls\RemovingBook.cs" />
     <Compile Include="Controls\SearchingBook.cs" />
