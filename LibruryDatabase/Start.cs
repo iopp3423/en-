@@ -14,9 +14,7 @@ namespace LibruryDatabase
         static void Main(string[] args)
         {
             StartConnection Start = new StartConnection();
-            Start.StartMenu();
-
-            
+            Start.StartMenu();           
             //관리자 id = enen1234, pw = enen4321
         }
     

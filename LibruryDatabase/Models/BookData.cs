@@ -19,7 +19,7 @@ namespace LibruryDatabase.Models
             return Book;
         }
 
-        public void StoreBookInformation(string bookName, string author, string publish, string publishDay, string quantity, string price) // 데이터베이스에 회원정보 저장
+        public void StoreBookInformation(string bookName, string author, string publish, string publishDay, string quantity, string price) // 데이터베이스에 책 추가
         {
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
@@ -33,20 +33,16 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public int BringMaxBookNumber() // 데이터베이스에 회원정보 저장
+        public void RemoveBookInformation(string bookNunmber) // 
         {
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
-            int max;
 
             using (MySqlConnection book = new MySqlConnection(getBook))
             {
                 book.Open();
-                string MaxNumberQuery = "SELECT MIN(number) FROM book";
-
-                MySqlCommand Command = new MySqlCommand(MaxNumberQuery, book);
-                max = Command.ExecuteNonQuery();
-                Console.WriteLine(max);
-                return max;
+                string DeleteQuery = "DELETE FROM book WHERE number = '" + bookNunmber + " ';";
+                MySqlCommand Command = new MySqlCommand(DeleteQuery, book);
+                Command.ExecuteNonQuery();
             }
         }
     }

@@ -10,8 +10,7 @@ using System.Text.RegularExpressions;
 using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Controls
-{
-    // hello= Regex.IsMatch(id, ID_CHECK);   // bool 형식으로 반환된다.          
+{ 
     internal class AddingBook
     {
         Screen Menu = new Screen();
@@ -106,7 +105,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.PUBLISH_DAY_X, publishDayY);
                 publishDay = Console.ReadLine();
                 if (Constants.CHECK == Regex.IsMatch(publishDay, Utility.Exception.PUBLISH_DAY))
-                {
+                {                   
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, publishDayY);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
