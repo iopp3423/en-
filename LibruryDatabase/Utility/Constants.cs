@@ -101,5 +101,10 @@ namespace LibruryDatabase.Exception
         public const int BOOK_PRICE_X = 6;
 
 
+        //수량 or 가격 입력
+        public const int InputMenu_Y = 7;
+        public const int GO_QUANTITY = 1;
+        public const int GO_PRICE = 2;
+
     }
 }

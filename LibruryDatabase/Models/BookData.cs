@@ -45,5 +45,20 @@ namespace LibruryDatabase.Models
                 Command.ExecuteNonQuery();
             }
         }
+    
+        public void ModifyBookInformation(string bookInformation, string menu, string bookNumber)
+        {
+            string ModifyQuery;
+            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            if (menu == "1") ModifyQuery = "UPDATE book SET price = '" + bookInformation + "' WHERE number = '" + bookNumber + " ';";
+            ModifyQuery = "UPDATE book SET quantity = '" + bookInformation + "'WHERE number = '" + bookNumber + " ';";
+
+            using (MySqlConnection book = new MySqlConnection(getBook))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(ModifyQuery, book);
+                Command.ExecuteNonQuery();
+            }
+        }
     }
 }

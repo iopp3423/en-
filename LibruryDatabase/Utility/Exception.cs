@@ -18,7 +18,7 @@ namespace LibruryDatabase.Utility
         public const string AUTHOR_CHECK = @"^[a-zA-Z가-힣]{2,8}$"; //작가
         public const string PUBLISH_CHECK = @"^[가-힣]{2,8}$"; // 출판사
         public const string TITLE_CHECK = @"^[가-힣a-zA-Z]{2,10}$"; //제목
-        public const string BOOKNUMBER_CHECK = @"^[0-9]?[0-9]?[0-9]$"; //책번호
+        public const string BOOKNUMBER_CHECK = @"^[1-9]?[0-9]?[0-9]$"; //책번호
         public const string PUBLISH_DAY = @"^[0-9]{4}/[0-9]{2}/[0-9]{2}$"; // 출시일
         public const string QUANTITY = @"^[1-9]?[0-9]?[0-9]$"; // 수량 고쳐야함
         public const string PRICE = @"^[0-9]{4,6}$"; // 가격 고쳐야함
