@@ -33,7 +33,7 @@ namespace LibruryDatabase.Controls
 
             while (Constants.PASS)
             {
-                Constants.ClearCurrentLine();
+                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Console.Write("책 수량 수정 1번, 책 가격 수정 2번 입력:");
                 modificatioNumber = Console.ReadLine();
                 Console.SetCursorPosition(Console.CursorLeft, Constants.InputMenu_Y);
@@ -62,7 +62,7 @@ namespace LibruryDatabase.Controls
 
             while (Constants.PASS)
             {
-                Constants.ClearCurrentLine();
+                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Console.Write("수정할 수량을 입력해주세요 :");
                 quantity = Console.ReadLine();
                 Console.SetCursorPosition(Console.CursorLeft, Constants.InputMenu_Y);
@@ -83,7 +83,7 @@ namespace LibruryDatabase.Controls
             while (Constants.PASS)
             {
 
-                Constants.ClearCurrentLine();
+                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Console.Write("수정할 가격을 입력해주세요 :");
                 bookPrice = Console.ReadLine();
                 Console.SetCursorPosition(Console.CursorLeft, Constants.InputMenu_Y);
@@ -103,7 +103,7 @@ namespace LibruryDatabase.Controls
             while (Constants.PASS)
             {
 
-                Constants.ClearCurrentLine();
+                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Console.Write("책 번호를 입력해주세요 :");
                 bookNumber = Console.ReadLine();
                 Console.SetCursorPosition(Console.CursorLeft, Constants.InputMenu_Y);

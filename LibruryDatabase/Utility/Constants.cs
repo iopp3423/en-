@@ -9,10 +9,10 @@ namespace LibruryDatabase.Exception
 {
     internal class Constants
     {
-        static public void ClearCurrentLine() // 줄 지우기 함수 위치 바꾸자
+        static public void ClearCurrentLine(int number) // 줄 지우기 함수 위치 바꾸자
         {
             int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.SetCursorPosition(0, Console.CursorTop-number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, currentLineCursor);
         }
@@ -22,7 +22,8 @@ namespace LibruryDatabase.Exception
         public const int ONE = 1;
         public const int CONSOLE_SIZE_WIDTH = 75;
         public const int CONSOLE_SIZE_HDIGHT = 40;
-        public const int DATABASE_PASSWORD = 0000;
+        public const int CURRENT_LOCATION = 0;
+        public const int BEFORE_INPUT_LOCATION = 1;
         public const bool CHECK = false;
         public const bool ENTRANCE = true;
         public const bool LOGIN = true;

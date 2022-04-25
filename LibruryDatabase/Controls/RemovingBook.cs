@@ -31,7 +31,7 @@ namespace LibruryDatabase.Controls
 
             while (Constants.PASS)
             {
-                Constants.ClearCurrentLine();
+                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Console.Write("삭제하실 책 번호를 입력해주세요 :");
                 Console.SetCursorPosition(34, 7);///////////////////////////////////수정해야함
                 bookNumber = Console.ReadLine();

@@ -104,7 +104,7 @@ namespace LibruryDatabase.Controls
         {
             string name;
             bool check = Constants.FAIL;
-            Constants.ClearCurrentLine();
+            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("입력 (영어,한글 2~8자) :");
 
             while (Constants.ENTRANCE) // 책 예외처리
@@ -113,7 +113,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.NAME_LINE);
                 if (Constants.CHECK == NAME.IsMatch(name)) // 정규식에 맞지 않으면
                 {
-                    Constants.ClearCurrentLine();
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
 
                 }
@@ -158,7 +158,7 @@ namespace LibruryDatabase.Controls
         {
             bool check = Constants.FAIL;
             string publish;
-            Constants.ClearCurrentLine();
+            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("입력 (한글 2~8자) :");
 
             while (Constants.ENTRANCE)
@@ -167,7 +167,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.PUBLISH_LINE);
                 if (Constants.CHECK == PUBLISH.IsMatch(publish)) // 정규식에 맞지 않으면
                 {
-                    Constants.ClearCurrentLine();
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -212,7 +212,7 @@ namespace LibruryDatabase.Controls
         {
             bool check = Constants.FAIL;
             string bookName;
-            Constants.ClearCurrentLine();
+            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("책 제목 (한글, 영어 2~10자) :");
 
             while (Constants.ENTRANCE)
@@ -221,7 +221,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
                 if (Constants.CHECK == TITLE.IsMatch(bookName)) // 정규식에 맞지 않으면
                 {
-                    Constants.ClearCurrentLine();
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;

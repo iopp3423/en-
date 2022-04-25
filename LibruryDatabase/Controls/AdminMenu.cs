@@ -13,6 +13,7 @@ namespace LibruryDatabase.Controls
         RemovingBook removing = new RemovingBook();
         AddingBook adding = new AddingBook();
         ModificationBook modify = new ModificationBook();
+        ModificationAdmin member = new ModificationAdmin();
         Screen Menu = new Screen();
         public void ChooseMenu()
         {
@@ -59,8 +60,8 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.GO_ADMIN_SEARCH); break; } // 관리자 도서검색
                             if (Y == Constants.ADD_BOOK) { adding.AddBook(); break; } // 책 추가 클래스 이동
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
-                            if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } 
-                            if (Y == Constants.USER_MANAGE) break;
+                            if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
+                            if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
                             if (Y == Constants.CURRENT_BOOK) break;
                                 break;
                         }

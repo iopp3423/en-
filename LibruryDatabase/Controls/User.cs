@@ -110,7 +110,7 @@ namespace LibruryDatabase.Controls
             string callNumber;
             string address;
 
-            id = LoginId();
+            id = InputId();
             password = LoginPassword();
             passswordCheck = LoginPasswordCheck();
 
@@ -161,7 +161,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintMain();
             Menu.PrintLogin();
 
-            id = LoginId();
+            id = InputId();
             password = LoginPassword();
 
             check = CheckLogin(id, password);
@@ -204,7 +204,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        public string LoginId() // id 입력
+        public string InputId() // id 입력
         {
 
             string id;
@@ -212,7 +212,7 @@ namespace LibruryDatabase.Controls
             while (Constants.LOGIN)
             {
                 Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
-                Constants.ClearCurrentLine();
+                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Console.Write("ID(영어, 숫자 포함(8~10자) :");
                 id = Console.ReadLine();
                 

@@ -26,7 +26,7 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintLogin();
-            id = LoginId(); // 아이디 입력
+            id = InputId(); // 아이디 입력
             password = LoginPassword(); // 비밀번호 입력
             checkingLogin = LoginCheck(id, password); // 아이디 비밀번호 확인
 

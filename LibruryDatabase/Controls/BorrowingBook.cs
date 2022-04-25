@@ -29,7 +29,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
                 if (Constants.CHECK == NUMBER.IsMatch(bookNumber)) // 정규식에 맞지 않으면
                 {
-                    Constants.ClearCurrentLine();
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;

@@ -193,6 +193,44 @@ namespace LibruryDatabase.Views
                 userInformation.Close();
             }
         }
+
+        public void PrintSearchUser(string name)
+        {
+            Console.WriteLine("=======================================================================");
+
+            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            using (MySqlConnection user = new MySqlConnection(getUser))
+            {
+                user.Open();
+                string sql = "SELECT * FROM member";
+
+                //ExecuteReader를 이용하여
+                //연결 모드로 데이타 가져오기
+                MySqlCommand Command = new MySqlCommand(sql, user);
+                MySqlDataReader userInformation = Command.ExecuteReader();
+
+                while (userInformation.Read())
+                {
+                    if (userInformation["name"].ToString().Contains(name))
+                    {
+                        Console.Write("아이디 :");
+                        Console.WriteLine(userInformation["id"].ToString());
+                        Console.Write("비밀번호 :");
+                        Console.WriteLine(userInformation["pw"].ToString());
+                        Console.Write("이름 :");
+                        Console.WriteLine(userInformation["name"].ToString());
+                        Console.Write("전화번호 :");
+                        Console.WriteLine(userInformation["phone"].ToString());
+                        Console.Write("나이 :");
+                        Console.WriteLine(userInformation["age"].ToString());
+                        Console.Write("주소 :");
+                        Console.WriteLine(userInformation["address"].ToString());
+                        Console.WriteLine("=======================================================================");
+                    }
+                }
+                userInformation.Close();
+            }
+        }
         public void PrintUserInformation()
         {
             Console.WriteLine("\n\n");

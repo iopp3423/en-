@@ -27,12 +27,24 @@ namespace LibruryDatabase.Models
             {
                 user.Open();
                 string insertQuery = "INSERT INTO member(id,pw,name,phone,age,address) VALUES('"+id+"','"+ pw+"','"+name+"','"+ phone+"','"+age+"','"+address+"');";
-                //string insertQuery = string.Format("INSERT INTO MEMBER VALUES('id','pw','name','string','age','address')") ;
                 MySqlCommand Command = new MySqlCommand(insertQuery, user);
                 Command.ExecuteNonQuery();
             }
 
-        }       
+        }
+
+        public void RemoveUserInformation(string userId) // 
+        {
+            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+
+            using (MySqlConnection book = new MySqlConnection(getBook))
+            {
+                book.Open();
+                string DeleteQuery = "DELETE FROM member WHERE id = '" + userId + " ';";
+                MySqlCommand Command = new MySqlCommand(DeleteQuery, book);
+                Command.ExecuteNonQuery();
+            }
+        }
     }
 }
 
