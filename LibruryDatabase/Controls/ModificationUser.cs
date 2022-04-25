@@ -156,7 +156,7 @@ namespace LibruryDatabase.Controls
                 Console.Write("핸드폰 번호(01x - xxxx - xxxx) :");
                 callNumber = Console.ReadLine();
 
-                if (Constants.CHECK == NUMBER.IsMatch(callNumber))
+                if (Constants.CHECK == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PHONE); //커서 조정
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -177,7 +177,7 @@ namespace LibruryDatabase.Controls
                 password = Console.ReadLine();
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PASSWORD);
 
-                if (Constants.CHECK == PW.IsMatch(password))
+                if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PASSWORD); //커서 조정
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -198,7 +198,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
 
 
-                if (Constants.CHECK == ADDRESS.IsMatch(address))
+                if (Constants.CHECK == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
