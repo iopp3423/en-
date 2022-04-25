@@ -111,8 +111,8 @@ namespace LibruryDatabase.Controls
             string address;
 
             id = InputId();
-            password = LoginPassword();
-            passswordCheck = LoginPasswordCheck();
+            password = InputPassword();
+            passswordCheck = InputPasswordCheck();
 
             if (password != passswordCheck)
             {
@@ -129,10 +129,10 @@ namespace LibruryDatabase.Controls
                     }
                 }
             }
-            name = LoginName();
-            age = LoginAge();
-            callNumber = LoginCallNumber();
-            address = LoginAddress();
+            name = InputName();
+            age = InputAge();
+            callNumber = InputCallNumber();
+            address = InputAddress();
 
 
             UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
@@ -162,7 +162,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintLogin();
 
             id = InputId();
-            password = LoginPassword();
+            password = InputPassword();
 
             check = CheckLogin(id, password);
 
@@ -227,7 +227,7 @@ namespace LibruryDatabase.Controls
             return id;
         }
        
-        public string LoginPassword() // 비밀번호 입력
+        public string InputPassword() // 비밀번호 입력
         {
             string password;
 
@@ -247,7 +247,7 @@ namespace LibruryDatabase.Controls
             return password;
         }
 
-        string LoginPasswordCheck() // 비밀번호 입력
+        string InputPasswordCheck() // 비밀번호 입력
         {
             string password;
 
@@ -296,7 +296,7 @@ namespace LibruryDatabase.Controls
             return password;
         }
 
-        string LoginName() // 이름입력
+        string InputName() // 이름입력
         {
             string name;
 
@@ -315,7 +315,7 @@ namespace LibruryDatabase.Controls
             return name;
         }
 
-        string LoginCallNumber() // 전화번호
+        string InputCallNumber() // 전화번호
         {
             string callNumber;
 
@@ -335,7 +335,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string LoginAddress() // 주소
+        string InputAddress() // 주소
         {
             string address;
 
@@ -356,7 +356,7 @@ namespace LibruryDatabase.Controls
             return address;
         }
 
-        string LoginAge() // 나이입력
+        string InputAge() // 나이입력
         {
             string age;
 
