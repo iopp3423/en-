@@ -71,12 +71,12 @@ namespace LibruryDatabase.Controls
                             if (Y == riviseingY) { Console.Clear(); UserModification.ModifyUserInformation(id, password); } // 회원정보수정
                             break;
                         }
-                    case ConsoleKey.F5:
+                     case ConsoleKey.Escape:
                         {
                             return Constants.BACK_MENU;
                         }
 
-                    case ConsoleKey.Escape: // 종료
+                    case ConsoleKey.F5: // 종료
                         {
                             Environment.Exit(Constants.EXIT);
                             break;

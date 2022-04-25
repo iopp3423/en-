@@ -39,7 +39,7 @@ namespace LibruryDatabase.Controls
                 switch (Constants.cursor.Key)
                 {
                     case ConsoleKey.Enter: LoginAdmin(); break;
-                    case ConsoleKey.F5:
+                     case ConsoleKey.Escape:
                         {
                             Console.Clear();
                             Menu.PrintMain();

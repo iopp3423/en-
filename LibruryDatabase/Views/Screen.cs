@@ -19,7 +19,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,42}", "★            ★     ★    ★     ★    ★   ★    ★   ★     ★     ★ "));
             Console.WriteLine(string.Format("{0,42}", "★★★★★  ★★★   ★★★★     ★    ★   ★    ★   ★     ★     ★ "));
             Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
-            Console.WriteLine(string.Format("{0,40}", "입력 : Enter                                              뒤로가기 : F5"));
+            Console.WriteLine(string.Format("{0,40}", "입력 : Enter                                              뒤로가기 : ESC"));
             Console.Write("\n");
           
         }
@@ -62,7 +62,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintBack()
         {
-            Console.WriteLine(string.Format("{0,40}", "입력 : Enter                                              뒤로가기 : F5 "));
+            Console.WriteLine(string.Format("{0,40}", "입력 : Enter                                              뒤로가기 : ESC "));
             Console.WriteLine("\n");
         }
 
@@ -83,7 +83,7 @@ namespace LibruryDatabase.Views
 
         public void PrintSearchMenu()
         {
-            Console.Write("원하시는 검색 메뉴 -> Enter -> 검색                       뒤로가기 : F5 ");
+            Console.Write("원하시는 검색 메뉴 -> Enter -> 검색                       뒤로가기 : ESC ");
             Console.WriteLine("\n");
             Console.WriteLine("  》작가명으로찾기 ");
             Console.WriteLine("  》출판사로찾기 ");
@@ -250,7 +250,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintReturnMenu()
         {
-            Console.WriteLine("유저 or 관리자 모드 : F5, 관리자 로그인 : ENTER");
+            Console.WriteLine("유저 or 관리자 모드 : ESC, 관리자 로그인 : ENTER");
         }
         public void PrintAddBook()
         {

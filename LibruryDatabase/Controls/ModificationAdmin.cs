@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 namespace LibruryDatabase.Controls
 {
-    // 이름,id 검색했을 때 없는 유저면 재 검색하라고 안내메시지 나와야함
+    // 이름,id 검색했을 때 없는 유저면 재 검색하라고 안내메시지 나와야함, 삭제 완료메시지 및 뒤로가기 메뉴 나와야함
     internal class ModificationAdmin
     {
 

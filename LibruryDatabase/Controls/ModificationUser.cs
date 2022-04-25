@@ -63,12 +63,12 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.GOING_ADDRESS) { ModifyAddress(id); }                        
                             break;
                         }
-                    case ConsoleKey.F5:
+                     case ConsoleKey.Escape:
                         {
                             return Constants.BACK_MENU;
                         }
 
-                    case ConsoleKey.Escape: // 종료
+                    case ConsoleKey.F5: // 종료
                         {
                             Environment.Exit(Constants.EXIT);
                             break;

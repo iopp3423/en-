@@ -62,7 +62,7 @@ namespace LibruryDatabase.Controls
                             break;
                         }
 
-                    case ConsoleKey.Escape: // 종료
+                    case ConsoleKey.F5: // 종료
                         {
                             return;
                         }

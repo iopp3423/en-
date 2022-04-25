@@ -65,12 +65,12 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.CURRENT_BOOK) break;
                                 break;
                         }
-                    case ConsoleKey.F5:
+                     case ConsoleKey.Escape:
                         {
                             return Constants.BACK_MENU;
                         }
 
-                    case ConsoleKey.Escape: // 종료
+                    case ConsoleKey.F5: // 종료
                         {
                             Environment.Exit(Constants.EXIT);
                             break;

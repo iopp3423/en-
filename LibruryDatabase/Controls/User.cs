@@ -78,12 +78,12 @@ namespace LibruryDatabase.Controls
                             if (Y == goingLogin) { Console.Clear(); UserLogin(); } // 로그인
                             break;
                         }
-                    case ConsoleKey.F5:
+                     case ConsoleKey.Escape:
                         {
                             return Constants.BACK_MENU;
                         }
 
-                    case ConsoleKey.Escape: // 종료
+                    case ConsoleKey.F5: // 종료
                         {
                             Environment.Exit(Constants.EXIT);
                             break;
@@ -124,7 +124,7 @@ namespace LibruryDatabase.Controls
                     switch (Constants.cursor.Key)
                     {
                         case ConsoleKey.Enter: JoinMember(); break;
-                        case ConsoleKey.F5: return;
+                         case ConsoleKey.Escape: return;
                         default: continue;
                     }
                 }
@@ -145,7 +145,7 @@ namespace LibruryDatabase.Controls
                 switch (Constants.cursor.Key)
                 {
                     case ConsoleKey.Enter: UserLogin(); break;
-                    case ConsoleKey.F5: return;
+                     case ConsoleKey.Escape: return;
                     default: continue;
                 }
             }
@@ -175,7 +175,7 @@ namespace LibruryDatabase.Controls
                 switch(Constants.cursor.Key)
                 {
                     case ConsoleKey.Enter: UserLogin(); break;
-                    case ConsoleKey.F5: return;
+                     case ConsoleKey.Escape: return;
                     default: continue;
                 }
             }
