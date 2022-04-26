@@ -27,11 +27,11 @@ namespace LibruryDatabase.Controls
             Menu.PrintMain();
             Menu.PrintLogin();
             id = InputId(); // 아이디 입력
-            password = LoginPassword(); // 비밀번호 입력
+            password = InputPassword(); // 비밀번호 입력
             checkingLogin = LoginCheck(id, password); // 아이디 비밀번호 확인
 
             if (checkingLogin == Constants.SUCESS) goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
-            else if(checkingLogin == Constants.FAIL) Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : F5 두 번");
+            else if(checkingLogin == Constants.FAIL) Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
 
             while (Constants.ENTRANCE)
             {

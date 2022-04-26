@@ -12,9 +12,6 @@ namespace LibruryDatabase.Controls
 {
     internal class ModificationUser
     {
-        Regex PW = new Regex(Utility.Exception.PW_CHECK);
-        Regex NUMBER = new Regex(Utility.Exception.NUMBER_CHECK);
-        Regex ADDRESS = new Regex(Utility.Exception.ADDRESS_CHECK);
         Screen Menu = new Screen();
         public void ModifyUserInformation(string id, string password)
         {

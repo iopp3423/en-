@@ -16,14 +16,8 @@ namespace LibruryDatabase.Controls
     internal class User
     {
         //정규식 고쳐야함
-        Regex ID = new Regex(Utility.Exception.ID_CHECK);
-        Regex PW = new Regex(Utility.Exception.PW_CHECK);
-        Regex NUMBER = new Regex(Utility.Exception.NUMBER_CHECK);
-        Regex AGE = new Regex(Utility.Exception.AGE_CHECK);
-        Regex NAME = new Regex(Utility.Exception.NAME_CHECK);
-        Regex ADDRESS = new Regex(Utility.Exception.ADDRESS_CHECK);
-        
 
+        Regex PW = new Regex(Utility.Exception.PW_CHECK);    
         Screen Menu = new Screen(); // 뷰 클래스 객체생성
         UserBook GoUser = new UserBook();
 
@@ -117,7 +111,7 @@ namespace LibruryDatabase.Controls
             if (password != passswordCheck)
             {
                 Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
-                Console.Write("비밀번호가 일치하지않습니다. 재입력 : Enter, 뒤로가기 : F5 두 번");
+                Console.Write("비밀번호가 일치하지않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
                 while (Constants.ENTRANCE)
                 {
                     Constants.cursor = Console.ReadKey(true);
@@ -138,7 +132,7 @@ namespace LibruryDatabase.Controls
             UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
-            Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : F5 두 번");
+            Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : ESC 두 번");
             while (Constants.ENTRANCE)
             {
                 Constants.cursor = Console.ReadKey(true);
@@ -167,7 +161,7 @@ namespace LibruryDatabase.Controls
             check = CheckLogin(id, password);
 
             if(check == Constants.SUCESS) GoUser.StartBookmenu(id, password);
-            Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : F5 두 번");
+            Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
 
             while(Constants.ENTRANCE)
             {
@@ -216,10 +210,10 @@ namespace LibruryDatabase.Controls
                 Console.Write("ID(영어, 숫자 포함(8~10자) :");
                 id = Console.ReadLine();
                 
-                if (Constants.CHECK == ID.IsMatch(id)) // 정규식에 맞지 않으면
+                if (Constants.CHECK == Regex.IsMatch(id, Utility.Exception.ID_CHECK)) // 정규식에 맞지 않으면
                 {
-                    Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
-                    Console.Write("다시 입력해주세요"); continue;
+                Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
+                Console.Write("다시 입력해주세요"); continue;
                 }
                 break;
 
@@ -237,10 +231,10 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.PW_X, Constants.PW_Y);
                 password = ReadPassword();
 
-                if (Constants.CHECK == PW.IsMatch(password))
+                if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
                 {
-                    Console.SetCursorPosition(Constants.PW_X, Constants.PW_Y);
-                    Console.Write("다시 입력해주세요:"); continue;
+                Console.SetCursorPosition(Constants.PW_X, Constants.PW_Y);
+                Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
             }
@@ -305,7 +299,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.NAME_X, Constants.NAME_Y);
                 name = Console.ReadLine();
 
-                if (Constants.CHECK == NAME.IsMatch(name))
+                if (Constants.CHECK == Regex.IsMatch(name, Utility.Exception.NAME_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.NAME_X, Constants.NAME_Y);
                     Console.Write("다시 입력해주세요:"); continue;
@@ -324,7 +318,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.NUMBER_X, Constants.NUMBER_Y);
                 callNumber = Console.ReadLine();
 
-                if (Constants.CHECK == NUMBER.IsMatch(callNumber))
+                if (Constants.CHECK == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.NUMBER_X, Constants.NUMBER_Y);
                     Console.Write("다시 입력해주세요:"); continue;
@@ -343,8 +337,8 @@ namespace LibruryDatabase.Controls
             {
                 Console.SetCursorPosition(Constants.ADDRESS_X, Constants.ADDRESS_Y);
                 address = Console.ReadLine();
-                
-                if (Constants.CHECK == ADDRESS.IsMatch(address))
+
+                if (Constants.CHECK == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
                 {
                      Console.SetCursorPosition(Constants.ADDRESS_X, Constants.ADDRESS_Y);
                     Console.Write("다시 입력해주세요:"); continue;
@@ -365,7 +359,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.AGE_X, Constants.AGE_Y);
                 age = Console.ReadLine();
 
-                if (Constants.CHECK == AGE.IsMatch(age))
+                if (Constants.CHECK == Regex.IsMatch(age, Utility.Exception.AGE_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.AGE_X, Constants.AGE_Y);
                     Console.Write("다시 입력해주세요:"); continue;

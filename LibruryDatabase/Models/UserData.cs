@@ -33,7 +33,7 @@ namespace LibruryDatabase.Models
 
         }
 
-        public void RemoveUserInformation(string userId) // 
+        public void RemoveUserInformation(string userId)
         {
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 

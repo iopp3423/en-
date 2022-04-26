@@ -19,7 +19,7 @@ namespace LibruryDatabase.Models
             return Book;
         }
 
-        public void StoreBookInformation(string bookName, string author, string publish, string publishDay, string quantity, string price) // 데이터베이스에 책 추가
+        public void StoreBookInformation(string bookName, string author, string publish, string publishDay, string quantity, string price) // 책 추가
         {
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
@@ -33,7 +33,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public void RemoveBookInformation(string bookNunmber) // 
+        public void RemoveBookInformation(string bookNunmber) // 책 제거
         {
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
@@ -46,7 +46,7 @@ namespace LibruryDatabase.Models
             }
         }
     
-        public void ModifyBookInformation(string bookInformation, string menu, string bookNumber)
+        public void ModifyBookInformation(string bookInformation, string menu, string bookNumber) // 책 수정
         {
             string ModifyQuery;
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";

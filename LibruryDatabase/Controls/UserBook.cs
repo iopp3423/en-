@@ -66,7 +66,7 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Enter:
                         {
                             if (Y == searchingY) { Console.Clear(); BookSearching.SearchBook(Constants.GO_USER_SEARCH); } // 도서찾기
-                            if (Y == borrowingY) { Console.Clear(); BookBorrowing.BorrowBook(); } // 도서대여
+                            if (Y == borrowingY) { Console.Clear(); BookBorrowing.InputBookTitleandBookNumber(id); } // 도서대여
                             if (Y == checkingY) { Console.Clear();  } // 도서확인
                             if (Y == riviseingY) { Console.Clear(); UserModification.ModifyUserInformation(id, password); } // 회원정보수정
                             break;

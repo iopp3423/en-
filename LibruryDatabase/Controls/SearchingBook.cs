@@ -95,9 +95,9 @@ namespace LibruryDatabase.Controls
         {
             if (check == Constants.FAIL) // 책 정보 없으면
             {
-                Console.Write("찾으시는 책이 없습니다. 뒤로가기 F5");
+                Console.Write("찾으시는 책이 없습니다. 뒤로가기 ESC");
             }
-            else Console.Write("뒤로가기 : F5, 프로그램 종료 : ESC");
+            else Console.Write("뒤로가기 : ESC, 프로그램 종료 : F5");
         }
 
         public void SearchName() // 작가로 찾기
