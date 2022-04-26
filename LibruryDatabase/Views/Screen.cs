@@ -107,6 +107,12 @@ namespace LibruryDatabase.Views
             Console.WriteLine("  》제목으로찾기 ");
             Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
         }
+        public void PrintSearchBookName()
+        {
+            Console.Write("입력 : Enter                                              뒤로가기 : ESC ");
+            Console.WriteLine("\n\n\n\n");
+            Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+        }
 
 
         public void PrintUserData() // 

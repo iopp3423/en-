@@ -166,7 +166,7 @@ namespace LibruryDatabase.Controls
             address = InputAddress();
 
 
-            //UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
+            UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             Console.ForegroundColor = ConsoleColor.Green;

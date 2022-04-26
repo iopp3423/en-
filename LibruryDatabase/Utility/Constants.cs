@@ -17,8 +17,9 @@ namespace LibruryDatabase.Exception
             Console.SetCursorPosition(0, currentLineCursor);
         }
 
-        static public int BOOK_NUMBER = 11;
+        static public bool SEARCH_RESULT_BOOK;
         static public ConsoleKeyInfo cursor; //커서
+
         public const int ONE = 1;
         public const int CONSOLE_SIZE_WIDTH = 75;
         public const int CONSOLE_SIZE_HDIGHT = 40;
