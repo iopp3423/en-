@@ -47,7 +47,7 @@ namespace LibruryDatabase.Controls
 
             while (Constants.ENTRANCE) // 참이면
             {
-                Console.SetCursorPosition(Constants.FIRSTX, Y);
+                Console.SetCursorPosition(Console.CursorLeft, Y);
                 Constants.cursor = Console.ReadKey(true);
 
                 switch (Constants.cursor.Key)
@@ -56,14 +56,14 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.UpArrow:
                         {
                             Y--;
-                            if (Y < Constants.START_UP_Y) Y++; // 선택 외의 화면으로 커서 못나감
+                            if (Y < Constants.USER_Y) Y++; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     // 하
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.START_DOWN_Y) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.ADMIN_Y) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:
@@ -146,7 +146,7 @@ namespace LibruryDatabase.Controls
            
         }
 
-        public void UserLogin() // 유저 로그인
+        public void UserLogin() // 로그인
         {
             string id;
             string password;
@@ -176,7 +176,7 @@ namespace LibruryDatabase.Controls
 
 
         }
-        public bool CheckLogin(string id, string password) // 로그인 체크
+        public bool CheckLogin(string id, string password) // 데베에서 유저 유무 확인
         {
             string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
@@ -206,21 +206,26 @@ namespace LibruryDatabase.Controls
             while (Constants.LOGIN)
             {
                 Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
-                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
-                Console.Write("ID(영어, 숫자 포함(8~10자) :");
                 id = Console.ReadLine();
-                
+           
                 if (Constants.CHECK == Regex.IsMatch(id, Utility.Exception.ID_CHECK)) // 정규식에 맞지 않으면
                 {
-                Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
-                Console.Write("다시 입력해주세요"); continue;
-                }
-                break;
 
+                    Console.SetCursorPosition(Constants.ID_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+                    Console.Write("ID(영어, 숫자 포함(8~10자) :");
+                    Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
+                    Console.Write("잘못 입력하셨습니다."); continue;
+                }
+                break;              
             }
+
+            Menu.PrintInputMessage();
             return id;
         }
-       
+
+             
         public string InputPassword() // 비밀번호 입력
         {
             string password;
@@ -233,15 +238,21 @@ namespace LibruryDatabase.Controls
 
                 if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
                 {
-                Console.SetCursorPosition(Constants.PW_X, Constants.PW_Y);
-                Console.Write("다시 입력해주세요:"); continue;
+                    Console.SetCursorPosition(Constants.PW_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+                    Console.Write("PW(영어, 숫자 포함(4~10자) :");
+                    Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
+                    Console.Write("잘못 입력하셨습니다."); continue;
                 }
                 break;
             }
+            Menu.PrintInputMessage();
             return password;
         }
 
-        string InputPasswordCheck() // 비밀번호 입력
+
+        string InputPasswordCheck() // 비밀번호확인 입력
         {
             string password;
 
@@ -253,11 +264,16 @@ namespace LibruryDatabase.Controls
 
                 if (Constants.CHECK == PW.IsMatch(password))
                 {
-                    Console.SetCursorPosition(Constants.PW_CHECK_X, Constants.PW_CHECK_Y);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+                    Console.WriteLine("PW확인(영어, 숫자 포함(4~10자) :");
+                    Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
+                    Console.Write("잘못 입력하셨습니다."); continue;
                 }
                 break;
             }
+            Menu.PrintInputMessage();
             return password;
         }
 

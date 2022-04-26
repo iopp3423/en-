@@ -90,7 +90,6 @@
     <Compile Include="Controls\AdminMenu.cs" />
     <Compile Include="Controls\BorrowingBook.cs" />
     <Compile Include="Controls\CheckingReturnBook.cs" />
-    <Compile Include="Controls\CurrentBorrowSituation.cs" />
     <Compile Include="Controls\ModificationBook.cs" />
     <Compile Include="Controls\ModificationAdmin.cs" />
     <Compile Include="Controls\ModificationUser.cs" />
@@ -103,9 +102,7 @@
     <Compile Include="Controls\User.cs" />
     <Compile Include="Controls\UserBook.cs" />
     <Compile Include="Utility\Exception.cs" />
-    <Compile Include="Models\BookVO.cs" />
     <Compile Include="Models\UserData.cs" />
-    <Compile Include="Models\UserVO.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Screen.cs" />

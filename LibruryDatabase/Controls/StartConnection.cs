@@ -25,18 +25,16 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintUserOrAdmin();
-            Console.SetCursorPosition(Constants.FIRSTX, Constants.FIRSTY);// 처음 좌표
             int Y = Constants.FIRSTY;
             int goingUser = Constants.USER_Y;
             int goingAdmin = Constants.ADMIN_Y;
-
 
 
             // 메인 컨트롤러
             while (Constants.ENTRANCE) // 참이면
             {
 
-                Console.SetCursorPosition(Constants.FIRSTX, Y);
+                Console.SetCursorPosition(Console.CursorLeft, Y);// 처음 좌표
                 Constants.cursor = Console.ReadKey(true);
 
                 switch (Constants.cursor.Key)
@@ -45,14 +43,14 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.UpArrow:
                         {
                             Y--;
-                            if (Y < Constants.START_UP_Y) Y++; // 선택 외의 화면으로 커서 못나감
+                            if (Y < Constants.USER_Y) Y++; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     // 하
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.START_DOWN_Y) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.ADMIN_Y) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:

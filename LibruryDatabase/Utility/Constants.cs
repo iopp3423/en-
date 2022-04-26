@@ -71,9 +71,9 @@ namespace LibruryDatabase.Exception
 
 
 
-        public const int ID_X = 33;
+        public const int ID_X = 28;
         public const int PW_X = 28;
-        public const int PW_CHECK_X = 38;
+        public const int PW_CHECK_X = 32;
         public const int NAME_X = 18;
         public const int AGE_X = 7;
         public const int NUMBER_X = 28;
@@ -106,6 +106,10 @@ namespace LibruryDatabase.Exception
         public const int InputMenu_Y = 7;
         public const int GO_QUANTITY = 1;
         public const int GO_PRICE = 2;
+
+        //아이디 비밀번호 오류 메시지
+        public const int ERROR_X=24;
+        public const int ERROR_Y=9;
 
     }
 }

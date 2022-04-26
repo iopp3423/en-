@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using LibruryDatabase.Exception;
 
 namespace LibruryDatabase.Views
 {
@@ -33,17 +34,23 @@ namespace LibruryDatabase.Views
         {
 
             Console.WriteLine("ID(영어, 숫자 포함(8~10자) :");
-            Console.WriteLine("PW(영어, 숫자 포함(4~10자) :");
-            //Console.SetCursorPosition((Console.WindowWidth - "로그인 :".Length) / 2, Console.CursorTop);
-            //Console.SetCursorPosition((Console.WindowWidth - "회원가입:".Length) / 2, Console.CursorTop);
+            Console.Write("PW(영어, 숫자 포함(4~10자) :");
 
+        }
+
+        public void PrintInputMessage()
+        {
+            Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
+            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+            Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
+            Console.Write("입력되었습니다.");
         }
 
         public void PrintJoinMember()
         {
-            Console.WriteLine("유저 ID(영어, 숫자 포함(8~10자) :");
-            Console.WriteLine("유저 PW(영어, 숫자 포함(4~10자) :");
-            Console.WriteLine("유저 PW확인(영어, 숫자 포함(4~10자) :");
+            Console.WriteLine("ID(영어, 숫자 포함(8~10자) :");
+            Console.WriteLine("PW(영어, 숫자 포함(4~10자) :");
+            Console.WriteLine("PW확인(영어, 숫자 포함(4~10자) :");
             Console.WriteLine("유저 이름(2~5자) :");
             Console.WriteLine("나이 :");
             Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
