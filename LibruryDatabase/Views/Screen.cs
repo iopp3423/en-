@@ -231,6 +231,38 @@ namespace LibruryDatabase.Views
                 userInformation.Close();
             }
         }
+
+        public void PrintBorrowBookData() // 대여한 책 데이터 출력
+        {
+            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+
+            using (MySqlConnection book = new MySqlConnection(getBook))
+            {
+                book.Open();
+                string insertQuery = "SELECT * FROM book";
+                MySqlCommand Command = new MySqlCommand(insertQuery, book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
+                {
+                    Console.Write("책 번호 :");
+                    Console.WriteLine(bookData["number"].ToString());
+                    Console.Write("책 제목 :");
+                    Console.WriteLine(bookData["name"].ToString());
+                    Console.Write("책 저자 :");
+                    Console.WriteLine(bookData["author"].ToString());
+                    Console.Write("출판사  :");
+                    Console.WriteLine(bookData["publish"].ToString());
+                    Console.Write("책 가격 :");
+                    Console.WriteLine(bookData["price"].ToString());
+                    Console.Write("책 수량 :");
+                    Console.WriteLine(bookData["quantity"].ToString());
+                    Console.WriteLine("===============================================================");
+                }
+                bookData.Close();
+            }
+        }
+
         public void PrintUserInformation()
         {
             Console.WriteLine("\n\n");

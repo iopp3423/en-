@@ -37,7 +37,7 @@ namespace LibruryDatabase.Controls
             SearchBook(id, bookNumber);
         }
         
-        public void SearchBook(string id, string number)
+        public void SearchBook(string id, string number) // 로그인한 유저 아이디값, 책 번호 전달받음
         {
 
             string bookName = null;
@@ -63,12 +63,12 @@ namespace LibruryDatabase.Controls
                 bookData.Close();
             }
 
-            AddBorrowBook(id, bookName, author, publish); // 책 대여 함수에 데이터 전송
+            AddBorrowBook(id, number, bookName, author, publish); // 책 대여 함수에 데이터 전송
         }
 
 
         
-        public void AddBorrowBook(string id, string bookName, string author, string publish) 
+        public void AddBorrowBook(string id, string number, string bookName, string author, string publish) // 로그인한 유저 책 대여
         {
             string borrowDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
@@ -76,7 +76,7 @@ namespace LibruryDatabase.Controls
             using (MySqlConnection book = new MySqlConnection(getBook))
             {
                 book.Open();
-                string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, bookname, author, publish, returnbook) VALUES('" + id + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "');";
+                string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "');";
 
                 MySqlCommand Command = new MySqlCommand(borrowIdQuery, book);
                 Command.ExecuteNonQuery();
