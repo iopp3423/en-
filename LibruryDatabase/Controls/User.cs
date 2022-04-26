@@ -88,30 +88,67 @@ namespace LibruryDatabase.Controls
                 }
             }
         }
+        public void BackMenuOrReEnter()
+        {
+            while (Constants.ENTRANCE)
+                {
+                    Constants.cursor = Console.ReadKey(true);
+                    switch (Constants.cursor.Key)
+                    {
+                        case ConsoleKey.Enter: UserLogin(); break;
+                        case ConsoleKey.Escape: return;
+                        default: continue;
+                    }
+                }
+        }
         
         public void JoinMember() // 회원가입
         {
            
             Console.Clear();
             Menu.JoinPrint();          
-            Menu.PrintJoinMember();
-            
+            Menu.PrintJoinMember();            
             string id;
             string password;
             string passswordCheck;
             string name;
             string age;
             string callNumber;
-            string address;
+            string address;           
+            bool overlapCheck;
+
 
             id = InputId();
+
+            overlapCheck = CheckIdOverlap(id); // id 중복 확인
+            if (overlapCheck == Constants.SUCESS)
+            {
+                Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("이미 존재하는 ID 입니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
+                Console.ResetColor();
+
+                while (Constants.ENTRANCE)
+                {
+                    Constants.cursor = Console.ReadKey(true);
+                    switch (Constants.cursor.Key)
+                    {
+                        case ConsoleKey.Enter: JoinMember(); break;
+                        case ConsoleKey.Escape: return;
+                        default: continue;
+                    }
+                }
+            }
+
             password = InputPassword();
             passswordCheck = InputPasswordCheck();
 
             if (password != passswordCheck)
             {
                 Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("비밀번호가 일치하지않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
+                Console.ResetColor();
                 while (Constants.ENTRANCE)
                 {
                     Constants.cursor = Console.ReadKey(true);
@@ -129,10 +166,14 @@ namespace LibruryDatabase.Controls
             address = InputAddress();
 
 
-            UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
+            //UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : ESC 두 번");
+            Console.ResetColor();
+
+
             while (Constants.ENTRANCE)
             {
                 Constants.cursor = Console.ReadKey(true);
@@ -150,7 +191,7 @@ namespace LibruryDatabase.Controls
         {
             string id;
             string password;
-            bool check;
+            bool overlapCheck;
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintLogin();
@@ -158,12 +199,15 @@ namespace LibruryDatabase.Controls
             id = InputId();
             password = InputPassword();
 
-            check = CheckLogin(id, password);
+            overlapCheck = CheckLogin(id, password);
 
-            if(check == Constants.SUCESS) GoUser.StartBookmenu(id, password);
+            if(overlapCheck == Constants.SUCESS) GoUser.StartBookmenu(id, password);
+            Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
+            Console.ResetColor();
 
-            while(Constants.ENTRANCE)
+            while (Constants.ENTRANCE)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch(Constants.cursor.Key)
@@ -176,7 +220,28 @@ namespace LibruryDatabase.Controls
 
 
         }
-        public bool CheckLogin(string id, string password) // 데베에서 유저 유무 확인
+        public bool CheckIdOverlap(string id) // 데베에서 중복아이디 있는지 체크
+        {
+            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+
+            using (MySqlConnection user = new MySqlConnection(getUser))
+            {
+                user.Open();
+                string insertQuery = "SELECT * FROM member";
+                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["id"].ToString() == id) return Constants.SUCESS;
+                }
+                user.Close();
+            }
+            return Constants.FAIL;
+
+        }
+
+        public bool CheckLogin(string id, string password) // 데베에서 회원 유무 확인
         {
             string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
@@ -200,7 +265,6 @@ namespace LibruryDatabase.Controls
 
         public string InputId() // id 입력
         {
-
             string id;
 
             while (Constants.LOGIN)
@@ -215,12 +279,12 @@ namespace LibruryDatabase.Controls
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.Write("ID(영어, 숫자 포함(8~10자) :");
-                    Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
-                    Console.Write("잘못 입력하셨습니다."); continue;
+                    Menu.PrintLoginErrorMessage(); continue;
+                    
                 }
                 break;              
             }
-
+          
             Menu.PrintInputMessage();
             return id;
         }
@@ -242,8 +306,8 @@ namespace LibruryDatabase.Controls
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.Write("PW(영어, 숫자 포함(4~10자) :");
-                    Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
-                    Console.Write("잘못 입력하셨습니다."); continue;
+                    Menu.PrintLoginErrorMessage(); continue;
+                    
                 }
                 break;
             }
@@ -268,8 +332,8 @@ namespace LibruryDatabase.Controls
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("PW확인(영어, 숫자 포함(4~10자) :");
-                    Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
-                    Console.Write("잘못 입력하셨습니다."); continue;
+                    Menu.PrintLoginErrorMessage(); continue;
+                    
                 }
                 break;
             }
@@ -306,6 +370,7 @@ namespace LibruryDatabase.Controls
             return password;
         }
 
+
         string InputName() // 이름입력
         {
             string name;
@@ -317,13 +382,18 @@ namespace LibruryDatabase.Controls
 
                 if (Constants.CHECK == Regex.IsMatch(name, Utility.Exception.NAME_CHECK)) // 정규식에 맞지 않으면
                 {
-                    Console.SetCursorPosition(Constants.NAME_X, Constants.NAME_Y);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    Console.SetCursorPosition(Constants.NAME_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+                    Console.WriteLine("유저 이름(2~5자) :");
+                    Menu.PrintLoginErrorMessage(); continue;
+                    
                 }
                 break;
             }
+            Menu.PrintInputMessage();
             return name;
-        }
+        }   
 
         string InputCallNumber() // 전화번호
         {
@@ -336,11 +406,16 @@ namespace LibruryDatabase.Controls
 
                 if (Constants.CHECK == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
-                    Console.SetCursorPosition(Constants.NUMBER_X, Constants.NUMBER_Y);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    Console.SetCursorPosition(Constants.NUMBER_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    
+                    Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
+                    Menu.PrintLoginErrorMessage(); continue;
+                    
                 }
                 break;
             }
+            Menu.PrintInputMessage();
             return callNumber;
         }
 
@@ -356,13 +431,19 @@ namespace LibruryDatabase.Controls
 
                 if (Constants.CHECK == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
                 {
-                     Console.SetCursorPosition(Constants.ADDRESS_X, Constants.ADDRESS_Y);
-                    Console.Write("다시 입력해주세요:"); continue;
+                     Console.SetCursorPosition(Constants.ADDRESS_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+
+                    Console.WriteLine("주소 :");
+                    Menu.PrintLoginErrorMessage(); continue;
+                    
                 }
-                
+                Menu.PrintInputMessage();
                 break;
                 
             }
+           
             return address;
         }
 
@@ -377,11 +458,16 @@ namespace LibruryDatabase.Controls
 
                 if (Constants.CHECK == Regex.IsMatch(age, Utility.Exception.AGE_CHECK)) // 정규식에 맞지 않으면
                 {
-                    Console.SetCursorPosition(Constants.AGE_X, Constants.AGE_Y);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    Console.SetCursorPosition(Constants.AGE_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+                    Console.WriteLine("나이 :");
+                    Menu.PrintLoginErrorMessage(); continue;
+                    
                 }
                 break;
             }
+            Menu.PrintInputMessage();
             return age;
         }
 

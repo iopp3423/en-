@@ -43,7 +43,17 @@ namespace LibruryDatabase.Views
             Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
             Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("입력되었습니다.");
+            Console.ResetColor();
+        }
+
+        public void PrintLoginErrorMessage()
+        {
+            Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("잘못 입력하셨습니다.");
+            Console.ResetColor();
         }
 
         public void PrintJoinMember()
