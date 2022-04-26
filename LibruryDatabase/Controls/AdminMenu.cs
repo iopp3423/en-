@@ -62,7 +62,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
-                            if (Y == Constants.CURRENT_BOOK) break;
+                            if (Y == Constants.CURRENT_BOOK) { Console.Clear(); Menu.PrintCurrentBorrowBook(); break; }
                                 break;
                         }
                      case ConsoleKey.Escape:
