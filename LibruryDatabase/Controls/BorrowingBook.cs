@@ -76,7 +76,7 @@ namespace LibruryDatabase.Controls
             using (MySqlConnection book = new MySqlConnection(getBook))
             {
                 book.Open();
-                string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "');";
+                string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "');";
 
                 MySqlCommand Command = new MySqlCommand(borrowIdQuery, book);
                 Command.ExecuteNonQuery();

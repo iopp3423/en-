@@ -16,6 +16,7 @@ namespace LibruryDatabase.Controls
         SearchingBook BookSearching = new SearchingBook();
         BorrowingBook BookBorrowing = new BorrowingBook();
         ModificationUser UserModification = new ModificationUser();
+        CheckingReturnBook ReturnBook = new CheckingReturnBook();
 
         public void StartBookmenu(string id, string password) // id, pw정보 저장
         {
@@ -67,7 +68,7 @@ namespace LibruryDatabase.Controls
                         {
                             if (Y == searchingY) { Console.Clear(); BookSearching.SearchBook(Constants.GO_USER_SEARCH); } // 도서찾기
                             if (Y == borrowingY) { Console.Clear(); BookBorrowing.InputBookTitleandBookNumber(id); } // 도서대여
-                            if (Y == checkingY) { Console.Clear();  } // 도서확인
+                            if (Y == checkingY) { Console.Clear();  ReturnBook.ShowBorrowBook(); } // 도서확인
                             if (Y == riviseingY) { Console.Clear(); UserModification.ModifyUserInformation(id, password); } // 회원정보수정
                             break;
                         }
