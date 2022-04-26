@@ -13,10 +13,9 @@ namespace LibruryDatabase.Controls
     internal class BorrowingBook : SearchingBook
     {
         Screen Menu = new Screen();
-        Regex NUMBER = new Regex(Utility.Exception.BOOKNUMBER_CHECK);
+
         public void InputBookTitleandBookNumber(string id) // 책 제목, 책 번호 
         {
-            bool check = Constants.FAIL;
             string bookNumber;
             Console.Clear();
             Menu.PrintBookData(); // 책 목록 프린트
@@ -27,7 +26,8 @@ namespace LibruryDatabase.Controls
             {
                 bookNumber = Console.ReadLine();
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
-                if (Constants.CHECK == NUMBER.IsMatch(bookNumber)) // 정규식에 맞지 않으면
+
+                if (Constants.CHECK == Regex.IsMatch(bookNumber,Utility.Exception.BOOKNUMBER_CHECK )) // 정규식에 맞지 않으면
                 {
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;

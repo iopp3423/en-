@@ -232,15 +232,15 @@ namespace LibruryDatabase.Views
             }
         }
 
-        public void PrintBorrowBookData() // 대여한 책 데이터 출력
+        public void PrintBorrowBookData(string id) // 대여한 책 데이터 출력
         {
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
             using (MySqlConnection book = new MySqlConnection(getBook))
             {
                 book.Open();
-                string insertQuery = "SELECT * FROM BORROWMEMBER";
-                MySqlCommand Command = new MySqlCommand(insertQuery, book);
+                string borrowUserQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(borrowUserQuery, book);
                 MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (bookData.Read())

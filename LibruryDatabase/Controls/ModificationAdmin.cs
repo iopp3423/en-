@@ -29,7 +29,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchUser(name); // 이름맞는 사람 출력
             Console.Write("삭제하실 유저 id를 입력하세요 :");
             id = InputId();
-            UserData.Get().RemoveUserInformation(id);
+            UserData.Get().RemoveUserInformation(id); // 유저 삭제
         }
 
 
