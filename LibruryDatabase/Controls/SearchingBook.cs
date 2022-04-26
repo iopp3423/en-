@@ -95,9 +95,26 @@ namespace LibruryDatabase.Controls
         {
             if (check == Constants.FAIL) // 책 정보 없으면
             {
-                Console.Write("찾으시는 책이 없습니다. 뒤로가기 ESC");
+                Console.Write("찾으시는 책이 없습니다. 뒤로가기 ESC 두 번 입력");
             }
-            else Console.Write("뒤로가기 : ESC, 프로그램 종료 : F5");
+            else Console.Write("뒤로가기 : ESC 두 번 입력, 프로그램 종료 : F5");
+
+            while (Constants.ENTRANCE)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Enter: break;
+                    case ConsoleKey.Escape: return;
+                    case ConsoleKey.F5: // 종료
+                        {
+                            Environment.Exit(Constants.EXIT);
+                            break;
+                        }
+                    default: continue;
+                }
+
+            }
         }
 
         public void SearchName() // 작가로 찾기
@@ -115,7 +132,6 @@ namespace LibruryDatabase.Controls
                 {
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
-
                 }
                 break;
             }
@@ -147,8 +163,9 @@ namespace LibruryDatabase.Controls
                         Console.Write("책 수량 :");
                         Console.WriteLine(bookData["quantity"].ToString());
                         Console.WriteLine("===============================================================");
+                        check = Constants.PASS;
                     }
-                    check = Constants.PASS;
+                    
                 }
                 book.Close();
             }
@@ -200,8 +217,8 @@ namespace LibruryDatabase.Controls
                         Console.Write("책 수량 :");
                         Console.WriteLine(bookData["quantity"].ToString());
                         Console.WriteLine("===============================================================");
+                        check = Constants.PASS;
                     }
-                    check = Constants.PASS;
                 }
                 book.Close();
             }
@@ -254,8 +271,8 @@ namespace LibruryDatabase.Controls
                         Console.Write("책 수량 :");
                         Console.WriteLine(bookData["quantity"].ToString());
                         Console.WriteLine("===============================================================");
+                        check = Constants.PASS;
                     }
-                    check = Constants.PASS;
                 }
                 book.Close();
             }
