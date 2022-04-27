@@ -62,7 +62,13 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
-                            if (Y == Constants.CURRENT_BOOK) { Console.Clear(); Menu.PrintCurrentBorrowBook(); break; } // 대여상황
+                            if (Y == Constants.CURRENT_BOOK) 
+                            { 
+                                Console.Clear(); 
+                                Menu.PrintCurrentBorrowBook();
+                                Console.Write("뒤로가기 : ESC                   프로그램 종료 : F5");
+                                GoBackMenu(); 
+                            } // 대여상황
                                 break;
                         }
                      case ConsoleKey.Escape:
@@ -79,6 +85,30 @@ namespace LibruryDatabase.Controls
                     default: break;
 
                 }
+            }
+        }
+        public void GoBackMenu() //이전 메뉴로 돌아가기
+        {
+            while (Constants.ENTRANCE)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Escape:
+                        {
+                            Console.Clear();
+                            Menu.PrintMain();
+                            Menu.PrintAdminMenu();
+                            return;
+                        }
+                    case ConsoleKey.F5: // 종료
+                        {
+                            Environment.Exit(Constants.EXIT);
+                            break;
+                        }
+                    default: continue;
+                }
+
             }
         }
     }

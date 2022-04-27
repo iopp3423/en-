@@ -78,10 +78,10 @@ namespace LibruryDatabase.Controls
 
                 if (existenceUsername == Constants.FAIL) Console.Write("반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5");
                 else if(existenceUsername == Constants.PASS)Console.Write("삭제되었습니다.    뒤로가기 : ESC                 프로그램 종료 : F5");
+                UserData.Get().RemoveUserInformation(id); // 유저 삭제
                 moveMenu();
             }
-            
-            //UserData.Get().RemoveUserInformation(id); // 유저 삭제
+           
         }
 
 
