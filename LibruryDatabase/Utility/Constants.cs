@@ -113,5 +113,8 @@ namespace LibruryDatabase.Exception
         public const int ERROR_X=24;
         public const int ERROR_Y=9;
 
+        //회원관리 이름입력 위치
+        public const int INPUT_NAME_Y = 5;
+        public const int INPUT_NAME_X = 20;
     }
 }

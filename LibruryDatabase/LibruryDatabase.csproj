@@ -91,9 +91,9 @@
     <Compile Include="Controls\BorrowingBook.cs" />
     <Compile Include="Controls\CheckingReturnBook.cs" />
     <Compile Include="Controls\ModificationBook.cs" />
-    <Compile Include="Controls\ModificationAdmin.cs" />
+    <Compile Include="Controls\RemovalUser.cs" />
     <Compile Include="Controls\ModificationUser.cs" />
-    <Compile Include="Controls\RemovingBook.cs" />
+    <Compile Include="Controls\RemovalBook.cs" />
     <Compile Include="Controls\SearchingBook.cs" />
     <Compile Include="Controls\StartConnection.cs" />
     <Compile Include="Models\BookData.cs" />

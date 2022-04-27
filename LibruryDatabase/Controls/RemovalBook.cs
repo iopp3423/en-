@@ -11,7 +11,7 @@ using MySql.Data.MySqlClient;
 
 namespace LibruryDatabase.Controls
 {
-    internal class RemovingBook : SearchingBook
+    internal class RemovalBook : SearchingBook
     {
         Screen Menu = new Screen();
         public void moveMenu() //이전 메뉴로 돌아가기
@@ -38,7 +38,7 @@ namespace LibruryDatabase.Controls
 
             }
         }
-
+        
         public void RemoveBook()
         {
             string bookNumber;
@@ -64,6 +64,9 @@ namespace LibruryDatabase.Controls
             }
             moveMenu();
         }
+
+
+
 
         string InputBookNumber() // 책 번호 입력
         {

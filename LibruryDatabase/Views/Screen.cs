@@ -114,8 +114,16 @@ namespace LibruryDatabase.Views
             Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
         }
 
+        public void PrintInputUserName()
+        {
+            Console.Write("입력 : Enter                                              뒤로가기 : ESC ");
+            Console.WriteLine("\n\n\n\n");
+            Console.WriteLine("이름을 입력하세요 :");
+            Console.WriteLine("────────────────────────────────────────────────────────────────────────");
+        }
 
-        public void PrintUserData() // 
+
+        public void PrintUserData() 
         {
 
             string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";

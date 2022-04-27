@@ -10,10 +10,10 @@ namespace LibruryDatabase.Controls
 {
     internal class AdminMenu : SearchingBook
     {
-        RemovingBook removing = new RemovingBook();
+        RemovalBook removing = new RemovalBook();
         AddingBook adding = new AddingBook();
         ModificationBook modify = new ModificationBook();
-        ModificationAdmin member = new ModificationAdmin();
+        RemovalUser member = new RemovalUser();
         Screen Menu = new Screen();
         public void ChooseMenu()
         {
