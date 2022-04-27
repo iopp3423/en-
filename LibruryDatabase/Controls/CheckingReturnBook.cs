@@ -154,8 +154,7 @@ namespace LibruryDatabase.Controls
         {
             string returnDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
-
-            /*
+           
             using (MySqlConnection book = new MySqlConnection(getBook))
             {
                 book.Open();
@@ -164,7 +163,7 @@ namespace LibruryDatabase.Controls
                 MySqlCommand Command = new MySqlCommand(returnBookQuery, book);
                 Command.ExecuteNonQuery();
             }
-            */
+            
         }
 
     }
