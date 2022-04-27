@@ -4,7 +4,6 @@ using LibruryDatabase.Controls;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Utility;
-using LibruryDatabase.Exception;
 
 namespace LibruryDatabase
 {

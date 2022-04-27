@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using LibruryDatabase.Exception;
+using LibruryDatabase.Utility;
 
 namespace LibruryDatabase.Views
 {
@@ -159,9 +159,9 @@ namespace LibruryDatabase.Views
         }
         public void PrintBookData() // 책 데이터 출력
         {
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string insertQuery = "SELECT * FROM book";
@@ -265,9 +265,9 @@ namespace LibruryDatabase.Views
 
         public void PrintBorrowBookData(string id) // 대여한 책 데이터 출력
         {
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string borrowUserQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
@@ -296,9 +296,9 @@ namespace LibruryDatabase.Views
 
         public void PrintCurrentBorrowBook() // 대여상황
         {
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string borrowUserQuery = "SELECT * FROM BORROWMEMBER";

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using LibruryDatabase.Utility;
 
 namespace LibruryDatabase.Models
 {
@@ -35,9 +36,9 @@ namespace LibruryDatabase.Models
 
         public void RemoveUserInformation(string userId)
         {
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string DeleteQuery = "DELETE FROM member WHERE id = '" + userId + " ';";

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using LibruryDatabase.Views;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Models;
-using LibruryDatabase.Exception;
-using MySql.Data.MySqlClient;
 using LibruryDatabase.Utility;
+using MySql.Data.MySqlClient;
 
 
 namespace LibruryDatabase.Controls

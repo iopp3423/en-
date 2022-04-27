@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace LibruryDatabase.Exception
+namespace LibruryDatabase.Utility
 {
     internal class Constants
     {
@@ -19,6 +19,9 @@ namespace LibruryDatabase.Exception
 
         static public bool SEARCH_RESULT_BOOK;
         static public ConsoleKeyInfo cursor; //커서
+
+        //query문 모음
+        public const string getQuery = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
         public const string REVISE_BOOK_QUANTITY = "1";
         public const int ONE = 1;
@@ -116,5 +119,11 @@ namespace LibruryDatabase.Exception
         //회원관리 이름입력 위치
         public const int INPUT_NAME_Y = 5;
         public const int INPUT_NAME_X = 20;
+
+
+        //query문 모음
+
+
+
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibruryDatabase.Views;
 using LibruryDatabase.Models;
-using LibruryDatabase.Exception;
+using LibruryDatabase.Utility;
 
 namespace LibruryDatabase.Controls
 {

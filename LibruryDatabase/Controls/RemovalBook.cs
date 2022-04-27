@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LibruryDatabase.Views;
-using LibruryDatabase.Exception;
+using LibruryDatabase.Utility;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Models;
 using MySql.Data.MySqlClient;
@@ -14,7 +14,7 @@ namespace LibruryDatabase.Controls
     internal class RemovalBook : SearchingBook
     {
         Screen Menu = new Screen();
-        public void moveMenu() //이전 메뉴로 돌아가기
+        public void GoBackMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.ENTRANCE)
             {
@@ -62,9 +62,8 @@ namespace LibruryDatabase.Controls
                 BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
                 Console.Write("책이 삭제되었습니다.  뒤로가기 : ESC    프로그램 종료 : F5");
             }
-            moveMenu();
+            GoBackMenu();
         }
-
 
 
 

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using LibruryDatabase.Views;
 using LibruryDatabase.Models;
 using System.Text.RegularExpressions;
-using LibruryDatabase.Exception;
-using MySql.Data.MySqlClient;
 using LibruryDatabase.Utility;
+using MySql.Data.MySqlClient;
 
 
 
@@ -119,9 +118,9 @@ namespace LibruryDatabase.Controls
             }
 
             Console.Clear();
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string insertQuery = "SELECT * FROM book";
@@ -175,9 +174,9 @@ namespace LibruryDatabase.Controls
             }
 
             Console.Clear();
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string insertQuery = "SELECT * FROM book";
@@ -230,9 +229,9 @@ namespace LibruryDatabase.Controls
             }
 
             Console.Clear();
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string insertQuery = "SELECT * FROM book";

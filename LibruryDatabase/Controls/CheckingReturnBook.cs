@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibruryDatabase.Views;
 using System.Text.RegularExpressions;
-using LibruryDatabase.Exception;
+using LibruryDatabase.Utility;
 using MySql.Data.MySqlClient;
 
 namespace LibruryDatabase.Controls
@@ -153,9 +153,9 @@ namespace LibruryDatabase.Controls
         public void ReturnBook(string bookNumber) // 로그인한 유저 책 반납
         {
             string returnDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
            
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string returnBookQuery = "UPDATE BORROWMEMBER SET returnbook = '" + returnDay + "' WHERE number = '" + bookNumber + " ';";

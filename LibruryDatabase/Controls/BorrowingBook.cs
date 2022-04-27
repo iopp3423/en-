@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LibruryDatabase.Exception;
+using LibruryDatabase.Utility;
 using MySql.Data.MySqlClient;
 using LibruryDatabase.Views;
 using System.Text.RegularExpressions;
@@ -109,10 +109,10 @@ namespace LibruryDatabase.Controls
             string author= null;
             string publish= null;
 
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string insertQuery = "SELECT name, author, publish FROM book WHERE number = '" + number + "';";
@@ -136,9 +136,9 @@ namespace LibruryDatabase.Controls
         public void AddBorrowBook(string id, string number, string bookName, string author, string publish) // 로그인한 유저 책 대여
         {
             string borrowDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
             
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "');";

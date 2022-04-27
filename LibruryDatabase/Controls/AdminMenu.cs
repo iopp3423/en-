@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LibruryDatabase.Views;
-using LibruryDatabase.Exception;
+using LibruryDatabase.Utility;
 
 namespace LibruryDatabase.Controls
 {
@@ -21,7 +21,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintMain();
             Menu.PrintAdminMenu();
 
-            if (Constants.BACK == moveMenu()) // 컨트롤러
+            if (Constants.BACK == GoMenuSelect()) // 컨트롤러
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -30,7 +30,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool moveMenu()
+        public bool GoMenuSelect()
         {
             int Y = Constants.SEARCH_BOOK;
 

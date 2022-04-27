@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using LibruryDatabase.Exception;
+using LibruryDatabase.Utility;
 
 namespace LibruryDatabase.Models
 {
@@ -21,9 +21,8 @@ namespace LibruryDatabase.Models
 
         public void StoreBookInformation(string bookName, string author, string publish, string publishDay, string quantity, string price) // 책 추가
         {
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
-
-            using (MySqlConnection book = new MySqlConnection(getBook))
+           
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string insertQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES('" + bookName + "','" + author + "','" + publish + "','" + publishDay + "','" + price + "','" + quantity + "');";
@@ -35,9 +34,9 @@ namespace LibruryDatabase.Models
 
         public void RemoveBookInformation(string bookNunmber) // 책 제거
         {
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 string DeleteQuery = "DELETE FROM book WHERE number = '" + bookNunmber + " ';";
@@ -49,11 +48,11 @@ namespace LibruryDatabase.Models
         public void ModifyBookInformation(string bookInformation, string menu, string bookNumber) // 책 수정
         {
             string ModifyQuery;
-            string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
             if (menu == Constants.REVISE_BOOK_QUANTITY) ModifyQuery = "UPDATE book SET quantity = '" + bookInformation + "'WHERE number = '" + bookNumber + " ';"; // 수량 수정
             else ModifyQuery = "UPDATE book SET price = '" + bookInformation + "' WHERE number = '" + bookNumber + " ';"; // 가격 수정
 
-            using (MySqlConnection book = new MySqlConnection(getBook))
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 MySqlCommand Command = new MySqlCommand(ModifyQuery, book);
