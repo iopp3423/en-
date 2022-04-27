@@ -58,6 +58,7 @@ namespace LibruryDatabase.Controls
 
             else if (AlreadyBorrow == Constants.PASS)
             {
+
                 checkAlreadyReturn = CheckBookOverlap(id, bookNumber);
 
                 if (checkAlreadyReturn == Constants.PASS)
@@ -121,7 +122,6 @@ namespace LibruryDatabase.Controls
                 user.Close();
             }
             return Constants.FAIL;
-
         }
 
 

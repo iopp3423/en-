@@ -44,7 +44,8 @@ namespace LibruryDatabase.Controls
         {
             string name;
             string id;
-            bool existenceUser;
+            bool existenceUsername;
+            bool existenceId;
 
             Console.Clear();
             Menu.PrintInputUserName();
@@ -52,26 +53,35 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.INPUT_NAME_X, Constants.INPUT_NAME_Y);
 
             name = InputName(); // 이름 입력
-            existenceUser = CheckExistenceUser(name);
-            if (existenceUser == Constants.FAIL) ExistenceUserAfter();
+            existenceUsername = CheckExistenceUser(name);
 
+            if (existenceUsername == Constants.FAIL) // 회원목록에 없음
+            {
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                Console.Write("회원목록에 없습니다.  뒤로가기 : ESC         프로그램 종료 : F5");
+                moveMenu();
+            }
 
+            else if (existenceUsername == Constants.PASS) // 이름이 회원목록에 있음
+            {
+                Console.Clear();
+                Menu.PrintSearchUser(name); // 이름맞는 사람 출력
 
-            Console.Clear();
-            Menu.PrintSearchUser(name); // 이름맞는 사람 출력
-            Console.Write("삭제하실 유저 id를 입력하세요 :");
-            id = InputId();
+                Console.Write("삭제하실 유저 id를 입력하세요 :");
+                id = InputId(); // 아이디 입력
+
+                existenceId = CheckExistenceId(id); //id 회원목록에 있는지 조사
+                if (existenceId == Constants.FAIL) { Console.Write("회원목록에 없습니다.  뒤로가기 : ESC         프로그램 종료 : F5"); moveMenu();  return; } // return;안쓰면 밑에 문장 실행됨 
+
+                existenceUsername = CheckUserBorrowedBook(id); // 해당 id 반납하지 않은 책 조사
+
+                if (existenceUsername == Constants.FAIL) Console.Write("반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5");
+                else if(existenceUsername == Constants.PASS)Console.Write("삭제되었습니다.    뒤로가기 : ESC                 프로그램 종료 : F5");
+                moveMenu();
+            }
             
-           
             //UserData.Get().RemoveUserInformation(id); // 유저 삭제
-        }
-
-        public void ExistenceUserAfter()
-        {
-            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
-            Console.Write("회원목록에 없습니다.  뒤로가기 : ESC         프로그램 종료 : F5");
-            moveMenu();
         }
 
 
@@ -109,30 +119,71 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                     Console.Write("id를 다시 입력해주세요 :"); continue;
                 }
-                break;
+                return id;
             }
-            return id;
         }
 
-        public bool CheckExistenceUser(string name) // 회원이 존재하는지 체크
+        public bool CheckExistenceId(string id) // 아이디 존재유무
         {
             string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
             using (MySqlConnection user = new MySqlConnection(getUser))
             {
                 user.Open();
-                string existenceUserQuery = "SELECT * FROM member WHERE name = '" + name + " ';";
-                MySqlCommand Command = new MySqlCommand(existenceUserQuery, user);
+                string insertQuery = "SELECT * FROM member";
+                MySqlCommand Command = new MySqlCommand(insertQuery, user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (userData.Read())
                 {
-                    if (userData["name"].ToString() == name) return Constants.SUCESS;
+                    if (userData["id"].ToString() == id) return Constants.PASS;
+                }
+                user.Close();
+            }
+            return Constants.FAIL;
+        }
+
+        public bool CheckExistenceUser(string name) // 회원이름이 존재하는지 체크
+        {
+            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+
+            using (MySqlConnection user = new MySqlConnection(getUser))
+            {
+                user.Open();
+                string existenceUserQuery = "SELECT * FROM member";
+                MySqlCommand Command = new MySqlCommand(existenceUserQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+                
+                while (userData.Read())
+                {
+                    if (userData["name"].ToString().Contains(name)) return Constants.SUCESS;
                 }
                 user.Close();
             }
             return Constants.FAIL;
 
+        }
+
+        public bool CheckUserBorrowedBook(string id) // 유저가 대여한 책이 있는지 체크
+        {
+            bool checkingBook = Constants.PASS;
+
+            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+
+            using (MySqlConnection user = new MySqlConnection(getUser))
+            {
+                user.Open();
+                string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["returnbook"].ToString() == " ") checkingBook = Constants.FAIL; // 책을 대여했는데 한 권이라도 반납하지 않는 책이 있는경우
+                }
+                user.Close();
+                return checkingBook;
+            }
         }
 
     }
