@@ -151,7 +151,8 @@ namespace LibruryDatabase.Controls
                 }
                 book.Close();
             }
-            BookExistenceCheck();          
+            BookExistenceCheck();
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
         }
        
 
@@ -206,6 +207,7 @@ namespace LibruryDatabase.Controls
                 book.Close();
             }
             BookExistenceCheck();
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
 
         }
         public void SearchBookName() // 책제목으로 찾기
@@ -259,7 +261,8 @@ namespace LibruryDatabase.Controls
                 }
                 book.Close();
             }
-            BookExistenceCheck();            
+            BookExistenceCheck();
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
         }
 
     }

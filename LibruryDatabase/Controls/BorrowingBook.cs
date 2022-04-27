@@ -14,8 +14,7 @@ namespace LibruryDatabase.Controls
     {
         Screen Menu = new Screen();
 
-
-        public void moveMenu()
+        public void moveMenu() //이전 메뉴로 돌아가기
         {          
             while (Constants.ENTRANCE)
             {
@@ -68,7 +67,8 @@ namespace LibruryDatabase.Controls
                     }
                     break;
                 }
-                alreadyBorrow = CheckIdOverlap(id, bookNumber);
+                alreadyBorrow = CheckBookOverlap(id, bookNumber); // 책 대여 체크
+
                 if (alreadyBorrow == Constants.PASS)
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -80,20 +80,20 @@ namespace LibruryDatabase.Controls
             }            
         }
 
-        public bool CheckIdOverlap(string id, string bookNumber) // 데베에서 책 대여했는지 체크
+        public bool CheckBookOverlap(string id, string bookNumber) // 데베에서 책 대여했는지 체크
         {
             string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
 
             using (MySqlConnection user = new MySqlConnection(getUser))
             {
                 user.Open();              
-                string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+                string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(borrowIdQuery, user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (userData.Read())
                 {
-                    if (userData["number"].ToString() == bookNumber) return Constants.SUCESS;
+                    if (userData["number"].ToString() == bookNumber && userData["returnbook"].ToString() != " ") return Constants.SUCESS;
                 }
                 user.Close();
             }
