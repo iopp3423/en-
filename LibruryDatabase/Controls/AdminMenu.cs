@@ -62,13 +62,13 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
-                            if (Y == Constants.CURRENT_BOOK) 
+                            if (Y == Constants.CURRENT_BOOK) // 대여상황
                             { 
                                 Console.Clear(); 
                                 Menu.PrintCurrentBorrowBook();
                                 Console.Write("뒤로가기 : ESC                   프로그램 종료 : F5");
                                 GoBackMenu(); 
-                            } // 대여상황
+                            } 
                                 break;
                         }
                      case ConsoleKey.Escape:

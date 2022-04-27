@@ -14,7 +14,7 @@ namespace LibruryDatabase.Controls
     {
         Screen Menu = new Screen();
 
-        public void moveMenu() //이전 메뉴로 돌아가기
+        public void GoBackMenu() //이전 메뉴로 돌아가기
         {          
             while (Constants.ENTRANCE)
             {
@@ -74,7 +74,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("이미 대여하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
-                    moveMenu();
+                    GoBackMenu();
                 }
                 else SearchBook(id, bookNumber);
             }            

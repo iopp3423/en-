@@ -13,7 +13,7 @@ namespace LibruryDatabase.Controls
     internal class ModificationBook : SearchingBook
     {
         Screen Menu = new Screen();
-        public void moveMenu() //이전 메뉴로 돌아가기
+        public void GoBackMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.ENTRANCE)
             {
@@ -54,7 +54,7 @@ namespace LibruryDatabase.Controls
             receiveInput = modificationMenu(number); // 가격 or 수량           
             BookData.Get().ModifyBookInformation(receiveInput, number, keyInput); // 데베에서 책 수정\
             Console.Write("수정이 완료되었습니다.  뒤로가기 : ESC        프로그램 종료 : F5");
-            moveMenu();
+            GoBackMenu();
         }
 
         string InputNumber() // 수정메뉴 입력
