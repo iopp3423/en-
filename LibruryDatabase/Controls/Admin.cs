@@ -31,15 +31,22 @@ namespace LibruryDatabase.Controls
             checkingLogin = LoginCheck(id, password); // 아이디 비밀번호 확인
 
             if (checkingLogin == Constants.SUCESS) goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
-            else if(checkingLogin == Constants.FAIL) Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
 
-            while (Constants.ENTRANCE)
+            else if (checkingLogin == Constants.FAIL)
+            {
+                Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC");
+                Console.ResetColor();
+            }
+
+            while (Constants.ENTRANCE) // 관리자 불일치시 재입력 컨트롤러
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)
                 {
                     case ConsoleKey.Enter: LoginAdmin(); break;
-                     case ConsoleKey.Escape:
+                    case ConsoleKey.Escape:
                         {
                             Console.Clear();
                             Menu.PrintMain();
@@ -50,6 +57,7 @@ namespace LibruryDatabase.Controls
                 }
             }
         }
+
 
         public bool LoginCheck(string id, string password) // 로그인 체크
         {
