@@ -92,9 +92,9 @@ namespace LibruryDatabase.Controls
 
         public bool CheckBookExistence(string bookNumber) // 데베에 책 있는지 체크
         {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string borrowIdQuery = "SELECT * FROM book WHERE number = '" + bookNumber + " ';";

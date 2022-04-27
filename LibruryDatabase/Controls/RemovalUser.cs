@@ -125,9 +125,9 @@ namespace LibruryDatabase.Controls
 
         public bool CheckExistenceId(string id) // 아이디 존재유무
         {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string insertQuery = "SELECT * FROM member";
@@ -145,9 +145,9 @@ namespace LibruryDatabase.Controls
 
         public bool CheckExistenceUser(string name) // 회원이름이 존재하는지 체크
         {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string existenceUserQuery = "SELECT * FROM member";
@@ -168,9 +168,9 @@ namespace LibruryDatabase.Controls
         {
             bool checkingBook = Constants.PASS;
 
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";

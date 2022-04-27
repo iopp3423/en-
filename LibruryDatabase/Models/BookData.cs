@@ -59,5 +59,75 @@ namespace LibruryDatabase.Models
                 Command.ExecuteNonQuery();
             }
         }
+
+
+        public bool CheckBookOverlap(string id, string bookNumber) // 데베에서 책 대여했는지 체크
+        {
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+                string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+
+                MySqlCommand Command = new MySqlCommand(borrowIdQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["number"].ToString() == bookNumber && userData["returnbook"].ToString() != " ") return Constants.SUCESS;
+
+                }
+                user.Close();
+            }
+            return Constants.FAIL;
+
+        }
+
+
+        public void SearchBook(string id, string number) // 로그인한 유저 아이디값, 책 번호 전달받음
+        {
+
+            string bookName = null;
+            string author = null;
+            string publish = null;
+
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                string insertQuery = "SELECT name, author, publish FROM book WHERE number = '" + number + "';";
+                MySqlCommand Command = new MySqlCommand(insertQuery, book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
+                {
+                    bookName = (bookData["name"].ToString());
+                    author = (bookData["author"].ToString());
+                    publish = (bookData["publish"].ToString());
+                }
+                bookData.Close();
+            }
+
+            AddBorrowBook(id, number, bookName, author, publish); // 책 대여 함수에 데이터 전송
+        }
+
+
+
+        public void AddBorrowBook(string id, string number, string bookName, string author, string publish) // 로그인한 유저 책 대여
+        {
+            string borrowDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
+
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                //string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "');";
+
+                //MySqlCommand Command = new MySqlCommand(borrowIdQuery, book);
+                //Command.ExecuteNonQuery();
+                Console.Write("됐다.");
+            }
+
+        }
     }
 }

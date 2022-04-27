@@ -126,9 +126,9 @@ namespace LibruryDatabase.Views
         public void PrintUserData() 
         {
 
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string sql = "SELECT * FROM member";
@@ -191,8 +191,8 @@ namespace LibruryDatabase.Views
         {
             Console.WriteLine("=======================================================================");
 
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string sql = "SELECT * FROM member";
@@ -229,8 +229,8 @@ namespace LibruryDatabase.Views
         {
             Console.WriteLine("=======================================================================");
 
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string sql = "SELECT * FROM member";
@@ -324,6 +324,105 @@ namespace LibruryDatabase.Views
                     Console.WriteLine("===============================================================");
                 }
                 bookData.Close();
+            }
+        }
+
+        public void PrintSearchAuthor(string name)
+        {
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+
+                MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
+                {
+                    if (bookData["author"].ToString().Contains(name))
+                    {
+                        Console.Write("책 번호 :");
+                        Console.WriteLine(bookData["number"].ToString());
+                        Console.Write("책 제목 :");
+                        Console.WriteLine(bookData["name"].ToString());
+                        Console.Write("책 저자 :");
+                        Console.WriteLine(bookData["author"].ToString());
+                        Console.Write("출판사  :");
+                        Console.WriteLine(bookData["publish"].ToString());
+                        Console.Write("책 가격 :");
+                        Console.WriteLine(bookData["price"].ToString());
+                        Console.Write("책 수량 :");
+                        Console.WriteLine(bookData["quantity"].ToString());
+                        Console.WriteLine("=============================================================================");
+                        Constants.SEARCH_RESULT_BOOK = Constants.PASS;
+                    }
+
+                }
+                book.Close();
+            }
+        }
+
+        public void PrintSearchPublish(string publish)
+        {
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+
+                MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
+                {
+                    if (bookData["publish"].ToString().Contains(publish))
+                    {
+                        Console.Write("책 번호 :");
+                        Console.WriteLine(bookData["number"].ToString());
+                        Console.Write("책 제목 :");
+                        Console.WriteLine(bookData["name"].ToString());
+                        Console.Write("책 저자 :");
+                        Console.WriteLine(bookData["author"].ToString());
+                        Console.Write("출판사  :");
+                        Console.WriteLine(bookData["publish"].ToString());
+                        Console.Write("책 가격 :");
+                        Console.WriteLine(bookData["price"].ToString());
+                        Console.Write("책 수량 :");
+                        Console.WriteLine(bookData["quantity"].ToString());
+                        Console.WriteLine("=============================================================================");
+                        Constants.SEARCH_RESULT_BOOK = Constants.PASS;
+                    }
+                }
+                book.Close();
+            }
+        }
+
+        public void PrintSearchBookName(string bookName)
+        {
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
+                {
+                    if (bookData["name"].ToString().Contains(bookName))
+                    {
+                        Console.Write("책 번호 :");
+                        Console.WriteLine(bookData["number"].ToString());
+                        Console.Write("책 제목 :");
+                        Console.WriteLine(bookData["name"].ToString());
+                        Console.Write("책 저자 :");
+                        Console.WriteLine(bookData["author"].ToString());
+                        Console.Write("출판사  :");
+                        Console.WriteLine(bookData["publish"].ToString());
+                        Console.Write("책 가격 :");
+                        Console.WriteLine(bookData["price"].ToString());
+                        Console.Write("책 수량 :");
+                        Console.WriteLine(bookData["quantity"].ToString());
+                        Console.WriteLine("============================================================================");
+                        Constants.SEARCH_RESULT_BOOK = Constants.PASS;
+                    }
+                }
+                book.Close();
             }
         }
 

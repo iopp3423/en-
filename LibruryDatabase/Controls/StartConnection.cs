@@ -17,8 +17,6 @@ namespace LibruryDatabase.Controls
         Admin AdminLibruary = new Admin();
         
 
- 
-
         public void StartMenu() // 유저 or 관리자
         {
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HDIGHT); // 콘솔크기 지정

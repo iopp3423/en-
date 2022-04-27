@@ -100,7 +100,7 @@
     <Compile Include="Utility\Constants.cs" />
     <Compile Include="Controls\Admin.cs" />
     <Compile Include="Controls\User.cs" />
-    <Compile Include="Controls\UserBook.cs" />
+    <Compile Include="Controls\UserMenu.cs" />
     <Compile Include="Utility\Exception.cs" />
     <Compile Include="Models\UserData.cs" />
     <Compile Include="Start.cs" />

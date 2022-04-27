@@ -87,13 +87,14 @@ namespace LibruryDatabase.Controls
                 }
             }
         }
+
         public void BookExistenceCheck()
         {
             if (Constants.SEARCH_RESULT_BOOK == Constants.FAIL) // 책 정보 없으면
             {
                 Console.Write("찾으시는 책이 없습니다. 뒤로가기 ESC");
             }
-            else Console.Write("뒤로가기 : ESC, 프로그램 종료 : F5");
+            else Console.Write("뒤로가기 : ESC, 프로그램 종료 : F5"); 
         }
 
 
@@ -118,39 +119,8 @@ namespace LibruryDatabase.Controls
             }
 
             Console.Clear();
-            
-
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
-                book.Open();
-                string insertQuery = "SELECT * FROM book";
-                MySqlCommand Command = new MySqlCommand(insertQuery, book);
-                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (bookData.Read())
-                {
-                    if (bookData["author"].ToString().Contains(name))
-                    {
-                        Console.Write("책 번호 :");
-                        Console.WriteLine(bookData["number"].ToString());
-                        Console.Write("책 제목 :");
-                        Console.WriteLine(bookData["name"].ToString());
-                        Console.Write("책 저자 :");
-                        Console.WriteLine(bookData["author"].ToString());
-                        Console.Write("출판사  :");
-                        Console.WriteLine(bookData["publish"].ToString());
-                        Console.Write("책 가격 :");
-                        Console.WriteLine(bookData["price"].ToString());
-                        Console.Write("책 수량 :");
-                        Console.WriteLine(bookData["quantity"].ToString());
-                        Console.WriteLine("=============================================================================");
-                        Constants.SEARCH_RESULT_BOOK = Constants.PASS;
-                    }
-                    
-                }
-                book.Close();
-            }
-            BookExistenceCheck();
+            Menu.PrintSearchAuthor(name); // 출력
+            BookExistenceCheck();            
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
         }
        
@@ -174,41 +144,13 @@ namespace LibruryDatabase.Controls
             }
 
             Console.Clear();
-            
 
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
-                book.Open();
-                string insertQuery = "SELECT * FROM book";
-                MySqlCommand Command = new MySqlCommand(insertQuery, book);
-                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (bookData.Read())
-                {
-                    if (bookData["publish"].ToString().Contains(publish))
-                    {
-                        Console.Write("책 번호 :");
-                        Console.WriteLine(bookData["number"].ToString());
-                        Console.Write("책 제목 :");
-                        Console.WriteLine(bookData["name"].ToString());
-                        Console.Write("책 저자 :");
-                        Console.WriteLine(bookData["author"].ToString());
-                        Console.Write("출판사  :");
-                        Console.WriteLine(bookData["publish"].ToString());
-                        Console.Write("책 가격 :");
-                        Console.WriteLine(bookData["price"].ToString());
-                        Console.Write("책 수량 :");
-                        Console.WriteLine(bookData["quantity"].ToString());
-                        Console.WriteLine("=============================================================================");
-                        Constants.SEARCH_RESULT_BOOK = Constants.PASS;
-                    }
-                }
-                book.Close();
-            }
+            Menu.PrintSearchPublish(publish);//출력          
             BookExistenceCheck();
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-
         }
+
+
         public void SearchBookName() // 책제목으로 찾기
         {
             string bookName;
@@ -229,37 +171,8 @@ namespace LibruryDatabase.Controls
             }
 
             Console.Clear();
-            
 
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
-                book.Open();
-                string insertQuery = "SELECT * FROM book";
-                MySqlCommand Command = new MySqlCommand(insertQuery, book);
-                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (bookData.Read())
-                {
-                    if (bookData["name"].ToString().Contains(bookName))
-                    {
-                        Console.Write("책 번호 :");
-                        Console.WriteLine(bookData["number"].ToString());
-                        Console.Write("책 제목 :");
-                        Console.WriteLine(bookData["name"].ToString());
-                        Console.Write("책 저자 :");
-                        Console.WriteLine(bookData["author"].ToString());
-                        Console.Write("출판사  :");
-                        Console.WriteLine(bookData["publish"].ToString());
-                        Console.Write("책 가격 :");
-                        Console.WriteLine(bookData["price"].ToString());
-                        Console.Write("책 수량 :");
-                        Console.WriteLine(bookData["quantity"].ToString());
-                        Console.WriteLine("============================================================================");
-                        Constants.SEARCH_RESULT_BOOK = Constants.PASS;
-                    }
-                }
-                book.Close();
-            }
+            Menu.PrintSearchBookName(bookName);// 출력            
             BookExistenceCheck();
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
         }

@@ -9,7 +9,7 @@ using LibruryDatabase.Utility;
 
 namespace LibruryDatabase.Controls
 {
-    internal class UserBook
+    internal class UserMenu
     {
 
         Screen Menu = new Screen(); // 뷰 클래스 객체생성

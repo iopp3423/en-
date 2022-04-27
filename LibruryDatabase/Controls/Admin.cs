@@ -61,9 +61,9 @@ namespace LibruryDatabase.Controls
 
         public bool LoginCheck(string id, string password) // 로그인 체크
         {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string insertQuery = "SELECT * FROM admin";

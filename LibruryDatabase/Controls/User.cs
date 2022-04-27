@@ -14,11 +14,9 @@ namespace LibruryDatabase.Controls
 {
     internal class User
     {
-        //정규식 고쳐야함
 
-        Regex PW = new Regex(Utility.Exception.PW_CHECK);    
         Screen Menu = new Screen(); // 뷰 클래스 객체생성
-        UserBook GoUser = new UserBook();
+        UserMenu GoUser = new UserMenu();
 
 
         public void JoinOrLogin() // 회원가입 or 로그인 화면
@@ -118,8 +116,9 @@ namespace LibruryDatabase.Controls
 
 
             id = InputId();
+         
+            overlapCheck = UserData.Get().CheckIdOverlap(id); // 데베에서 id 중복 확인
 
-            overlapCheck = CheckIdOverlap(id); // id 중복 확인
             if (overlapCheck == Constants.SUCESS)
             {
                 Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
@@ -166,7 +165,6 @@ namespace LibruryDatabase.Controls
 
 
             UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
-
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : ESC 두 번");
@@ -198,9 +196,9 @@ namespace LibruryDatabase.Controls
             id = InputId();
             password = InputPassword();
 
-            overlapCheck = CheckLogin(id, password);
+            overlapCheck = UserData.Get().CheckLogin(id, password); //데베에서 회원 유무 확인
 
-            if(overlapCheck == Constants.SUCESS) GoUser.StartBookmenu(id, password);
+            if (overlapCheck == Constants.SUCESS) GoUser.StartBookmenu(id, password);
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
@@ -216,49 +214,6 @@ namespace LibruryDatabase.Controls
                     default: continue;
                 }
             }
-
-
-        }
-        public bool CheckIdOverlap(string id) // 데베에서 중복아이디 있는지 체크
-        {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
-
-            using (MySqlConnection user = new MySqlConnection(getUser))
-            {
-                user.Open();
-                string insertQuery = "SELECT * FROM member";
-                MySqlCommand Command = new MySqlCommand(insertQuery, user);
-                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (userData.Read())
-                {
-                    if (userData["id"].ToString() == id) return Constants.SUCESS;
-                }
-                user.Close();
-            }
-            return Constants.FAIL;
-
-        }
-
-        public bool CheckLogin(string id, string password) // 데베에서 회원 유무 확인
-        {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
-
-            using (MySqlConnection user = new MySqlConnection(getUser))
-            {
-                user.Open();
-                string insertQuery = "SELECT * FROM member";
-                MySqlCommand Command = new MySqlCommand(insertQuery, user);
-                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (userData.Read())
-                {
-                    if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.SUCESS;
-                }
-                user.Close();
-            }
-            return Constants.FAIL;
-       
         }
 
 
@@ -325,7 +280,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.PW_CHECK_X, Constants.PW_CHECK_Y);
                 password = ReadPassword();
 
-                if (Constants.CHECK == PW.IsMatch(password))
+               if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);

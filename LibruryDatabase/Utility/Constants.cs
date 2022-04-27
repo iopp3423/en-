@@ -18,10 +18,16 @@ namespace LibruryDatabase.Utility
         }
 
         static public bool SEARCH_RESULT_BOOK;
-        static public ConsoleKeyInfo cursor; //커서
+        static public ConsoleKeyInfo cursor; 
 
         //query문 모음
         public const string getQuery = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+        public const string SearchMemberQuery = "SELECT * FROM member";
+        public const string SearchBookQuery = "SELECT * FROM book";
+        //////////////////////////////////////////////////////////////////
+
+
+
 
         public const string REVISE_BOOK_QUANTITY = "1";
         public const int ONE = 1;

@@ -78,9 +78,9 @@ namespace LibruryDatabase.Controls
         }
         public void ModifyPhone(string callNumber, string id)// 전화번호 데베에서 변경
         {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string updateQuery = "UPDATE member SET phone ='" + callNumber + "' WHERE id = '" + id +" ';";
@@ -90,9 +90,9 @@ namespace LibruryDatabase.Controls
         }
         public void ModifyPhoneInformation(string password, string id) // 비밀번호 데베에서 변경
         {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string updateQuery = "UPDATE member SET pw ='" + password + "' WHERE id = '" + id + " ';";
@@ -102,9 +102,9 @@ namespace LibruryDatabase.Controls
         }
         public void ModifyAddressInformation(string address, string id)// 주소 데베에서 변경
         {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string updateQuery = "UPDATE member SET address ='" + address + "' WHERE id = '" + id + " ';";

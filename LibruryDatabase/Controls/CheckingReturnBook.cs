@@ -105,9 +105,9 @@ namespace LibruryDatabase.Controls
 
         public bool CheckAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크
         {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
@@ -127,9 +127,9 @@ namespace LibruryDatabase.Controls
 
         public bool CheckBookOverlap(string id, string bookNumber) // 데베에서 책 이미반납했는지 체크
         {
-            string getUser = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
+            
 
-            using (MySqlConnection user = new MySqlConnection(getUser))
+            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
                 string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
