@@ -14,12 +14,13 @@ namespace LibruryDatabase.Exception
             int currentLineCursor = Console.CursorTop;
             Console.SetCursorPosition(0, Console.CursorTop-number);
             Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(0, currentLineCursor);
+            Console.SetCursorPosition(CURRENT_LOCATION, currentLineCursor);
         }
 
         static public bool SEARCH_RESULT_BOOK;
         static public ConsoleKeyInfo cursor; //커서
 
+        public const string REVISE_BOOK_QUANTITY = "1";
         public const int ONE = 1;
         public const int CONSOLE_SIZE_WIDTH = 75;
         public const int CONSOLE_SIZE_HDIGHT = 40;

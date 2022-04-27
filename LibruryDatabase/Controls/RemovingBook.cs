@@ -52,19 +52,20 @@ namespace LibruryDatabase.Controls
 
             bookNumber = InputBookNumber();
             BookExitence = CheckBookExistence(bookNumber); // 도서관에 책 있는지 체크
+
             if (BookExitence == Constants.FAIL)
             {
                 Console.Write("존재하지 않는 책 번호입니다.  뒤로가기 : ESC    프로그램 종료 : F5");
             }
-            if (BookExitence == Constants.PASS)
+            else if (BookExitence == Constants.PASS)
             {
-                //BookData.Get().RemoveBookInformation(bookNumber);
+                BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
                 Console.Write("책이 삭제되었습니다.  뒤로가기 : ESC    프로그램 종료 : F5");
             }
             moveMenu();
         }
 
-        string InputBookNumber()
+        string InputBookNumber() // 책 번호 입력
         {
             string bookNumber;
             Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);

@@ -50,8 +50,8 @@ namespace LibruryDatabase.Models
         {
             string ModifyQuery;
             string getBook = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
-            if (menu == "1") ModifyQuery = "UPDATE book SET price = '" + bookInformation + "' WHERE number = '" + bookNumber + " ';";
-            ModifyQuery = "UPDATE book SET quantity = '" + bookInformation + "'WHERE number = '" + bookNumber + " ';";
+            if (menu == Constants.REVISE_BOOK_QUANTITY) ModifyQuery = "UPDATE book SET quantity = '" + bookInformation + "'WHERE number = '" + bookNumber + " ';"; // 수량 수정
+            else ModifyQuery = "UPDATE book SET price = '" + bookInformation + "' WHERE number = '" + bookNumber + " ';"; // 가격 수정
 
             using (MySqlConnection book = new MySqlConnection(getBook))
             {
