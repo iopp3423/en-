@@ -63,6 +63,7 @@ namespace LibruryDatabase.Controls
             price = InputPrice(movingInputY);
 
             BookData.Get().StoreBookInformation(bookName, author, publisher, publishDay, quantity, price); // 책 데베 추가
+
             Console.SetCursorPosition(Console.CursorLeft, Constants.ERROR_Y);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("도서가 등록되었습니다. 뒤로가기 : ESC   종료 : F5");
