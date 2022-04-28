@@ -72,7 +72,8 @@ namespace LibruryDatabase.Controls
                 }
                 else
                 {
-                    BookData.Get().ReturnBook(bookNumber);
+                    BookData.Get().ReturnBook(bookNumber); // 책 반납
+                    BookData.Get().PlusBook(bookNumber); // 책 수량 증가
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
