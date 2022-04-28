@@ -24,6 +24,7 @@ namespace LibruryDatabase.Utility
         public const string getQuery = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
         public const string SearchMemberQuery = "SELECT * FROM member";
         public const string SearchBookQuery = "SELECT * FROM book";
+        public const string BorrrowBookUserquery = "SELECT * FROM BORROWMEMBER";
         //////////////////////////////////////////////////////////////////
 
 

@@ -123,11 +123,71 @@ namespace LibruryDatabase.Models
                 book.Open();
                 //string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "');";
                 string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "') ON DUPLICATE KEY UPDATE id = '" + id + "',borrowbook= '" + borrowDay + "',returnbook = '" + ' ' + "';";
-
                 MySqlCommand Command = new MySqlCommand(borrowIdQuery, book);
                 Command.ExecuteNonQuery();
             }
             
+        }
+
+        public bool CheckAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크
+        {
+
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+                string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["number"].ToString() == bookNumber) return Constants.SUCESS;
+
+                }
+                user.Close();
+            }
+            return Constants.FAIL;
+        }
+
+
+        public bool CheckUserBorrowedBook(string id, string bookNumber) // 데베에서 책 이미반납했는지 체크
+        {
+
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+                string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(borrowIdQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["number"].ToString() == bookNumber && userData["returnbook"].ToString() != " ") return Constants.SUCESS; // 해당 번호 책 반납했는지 체크                                     
+                }
+                user.Close();
+            }
+            return Constants.FAIL;
+
+        }
+
+        public void ReturnBook(string bookNumber) // 로그인한 유저 책 반납
+        {
+            string returnDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
+
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+
+                book.Open();
+                string returnBookQuery = "UPDATE BORROWMEMBER SET returnbook = '" + returnDay + "' WHERE number = '" + bookNumber + " ';";
+
+                MySqlCommand Command = new MySqlCommand(returnBookQuery, book);
+                Command.ExecuteNonQuery();
+                
+            }
+
         }
     }
 }

@@ -7,6 +7,7 @@ using LibruryDatabase.Views;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Utility;
 using MySql.Data.MySqlClient;
+using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Controls
 {
@@ -47,7 +48,8 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             Menu.PrintBorrowBookData(id);
             bookNumber = InputBookNumber();
-            AlreadyBorrow = CheckAlreadyBorrowBook(id, bookNumber);
+            //AlreadyBorrow = CheckAlreadyBorrowBook(id, bookNumber);
+            AlreadyBorrow = BookData.Get().CheckAlreadyBorrowBook(id, bookNumber);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
             if (AlreadyBorrow == Constants.FAIL)
@@ -59,7 +61,8 @@ namespace LibruryDatabase.Controls
             else if (AlreadyBorrow == Constants.PASS)
             {
 
-                checkAlreadyReturn = CheckBookOverlap(id, bookNumber);
+                //checkAlreadyReturn = CheckBookOverlap(id, bookNumber);
+                checkAlreadyReturn = BookData.Get().CheckUserBorrowedBook(id, bookNumber);
 
                 if (checkAlreadyReturn == Constants.PASS)
                 {
@@ -70,7 +73,8 @@ namespace LibruryDatabase.Controls
                 }
                 else
                 {
-                    ReturnBook(bookNumber);
+                    BookData.Get().ReturnBook(bookNumber);
+                    //ReturnBook(bookNumber);
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
@@ -125,7 +129,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        public bool CheckBookOverlap(string id, string bookNumber) // 데베에서 책 이미반납했는지 체크
+        public bool CheckUserBorrowedBook(string id, string bookNumber) // 데베에서 책 이미반납했는지 체크
         {
             
 
