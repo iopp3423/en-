@@ -107,6 +107,40 @@ namespace LibruryDatabase.Models
 
         }
 
+        public bool CheckReturnBook(string id, string bookNumber) // 데베에서 책 대여했는지 체크
+        {
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowIdQuery, id), user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() != " ") return Constants.SUCESS;// 대여하고 반납함
+                }
+                user.Close();
+            }
+            return Constants.FAIL;
+
+        }
+
+        public void RemoveRetuenBookInformation(string id, string bookNumber) // 반납한 책 제거
+        {
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                //string DeleteQuery = "DELETE FROM book WHERE number = '" + bookNumber + " ';";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.revomeReturnBook,id,bookNumber), book);
+                Command.ExecuteNonQuery();
+            }
+        }
+
+
+
 
 
         public void SearchBook(string id, string number) // 로그인한 유저 아이디값, 책 번호 전달받음

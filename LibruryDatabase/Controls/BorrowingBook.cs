@@ -70,7 +70,7 @@ namespace LibruryDatabase.Controls
                     }
                     break;
                 }
-
+                if (BookData.Get().CheckReturnBook(id, bookNumber) == Constants.PASS) BookData.Get().RemoveRetuenBookInformation(id, bookNumber);
                 if (BookData.Get().CheckBookExistence(bookNumber) == Constants.FAIL) { Console.Write("존재하지 않는 책 번호 입니다. 뒤로가기 : ESC      프로그램 종료 : F5"); GoBackMenu(); return; }
 
                  alreadyBorrow = BookData.Get().CheckBookOverlap(id, bookNumber); // 책 대여 체크
@@ -83,13 +83,12 @@ namespace LibruryDatabase.Controls
                     GoBackMenu();
                     return;
                 }
-                else if (alreadyBorrow == Constants.PASS)
-                {
-                    BookData.Get().SearchBook(id, bookNumber);
-                    Console.Write("대여하였습니다. 뒤로가기 : ESC     프로그램 종료 : F5");
-                    GoBackMenu();
-                    return;
-                }
+
+                BookData.Get().SearchBook(id, bookNumber);
+                Console.Write("대여하였습니다. 뒤로가기 : ESC     프로그램 종료 : F5");
+                GoBackMenu();
+                return;
+                
             }
             GoBackMenu();
         }
