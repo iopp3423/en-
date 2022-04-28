@@ -45,6 +45,8 @@ namespace LibruryDatabase.Utility
         public const string updateAddressQuery = "UPDATE member SET  address = ('{0}') WHERE id = ('{1}')";
         public const string revomeReturnBook = "DELETE FROM BORROWMEMBER WHERE id = ('{0}') AND number =  ('{1}')";
         public const string OrderQuery = "SELECT * FROM BORROWMEMBER ORDER BY id ASC";
+        public const string borrowQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES( ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'), ('{6}'));";
+       
         //////////////////////////////////////////////////////////////////
 
 

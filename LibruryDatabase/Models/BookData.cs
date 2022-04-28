@@ -161,8 +161,8 @@ namespace LibruryDatabase.Models
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "');";
-                MySqlCommand Command = new MySqlCommand(borrowIdQuery, book);
+                //string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "');";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowQuery,id,number,bookName,author,publish,borrowDay,' '), book);
                 Command.ExecuteNonQuery();
             }           
         }
@@ -206,17 +206,6 @@ namespace LibruryDatabase.Models
             }
             return Constants.FAIL;
 
-        }
-        public void OrderBook() // 도서 빌린 유저 정렬
-        {
-
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
-
-                book.Open();
-                MySqlCommand Command = new MySqlCommand(Constants.OrderQuery, book);
-                Command.ExecuteNonQuery();
-            }          
         }
 
         public void ReturnBook(string bookNumber) // 로그인한 유저 책 반납
