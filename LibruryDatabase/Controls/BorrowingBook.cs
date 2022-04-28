@@ -71,7 +71,9 @@ namespace LibruryDatabase.Controls
                     break;
                 }
 
-                alreadyBorrow = BookData.Get().CheckBookOverlap(id, bookNumber); // 책 대여 체크
+                if (BookData.Get().CheckBookExistence(bookNumber) == Constants.FAIL) { Console.Write("존재하지 않는 책 번호 입니다. 뒤로가기 : ESC      프로그램 종료 : F5"); GoBackMenu(); return; }
+
+                 alreadyBorrow = BookData.Get().CheckBookOverlap(id, bookNumber); // 책 대여 체크
 
                 if (alreadyBorrow == Constants.FAIL)
                 {
@@ -79,14 +81,17 @@ namespace LibruryDatabase.Controls
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("이미 대여하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                     GoBackMenu();
+                    return;
                 }
                 else if (alreadyBorrow == Constants.PASS)
                 {
                     BookData.Get().SearchBook(id, bookNumber);
                     Console.Write("대여하였습니다. 뒤로가기 : ESC     프로그램 종료 : F5");
                     GoBackMenu();
+                    return;
                 }
-            }            
+            }
+            GoBackMenu();
         }
       
     }

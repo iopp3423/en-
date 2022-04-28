@@ -20,7 +20,7 @@ namespace LibruryDatabase.Controls
 
 
 
-        public bool GoBackMenu() //이전 메뉴로 돌아가기
+        public bool GoReturnMenuㄲ() //이전 메뉴로 돌아가기
         {
             while (Constants.ENTRANCE)
             {
@@ -94,7 +94,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.NAME_SEARCH_Y) { SearchName();  } // 작가로찾기
                             if (Y == Constants.PUBLISH_Y) { SearchPublishName();} // 출판사로찾기
                             if (Y == Constants.BOOK_Y) { SearchBookName();} // 책이름으로찾기
-                            return GoBackMenu();
+                            return GoReturnMenuㄲ();
                         }
                      case ConsoleKey.Escape:
                         {                           
@@ -154,6 +154,7 @@ namespace LibruryDatabase.Controls
         public void SearchPublishName() // 출판사로 찾기
         {
             string publish;
+            Constants.SEARCH_RESULT_BOOK = Constants.FAIL;
             Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("입력 (한글 2~8자) :");
 
