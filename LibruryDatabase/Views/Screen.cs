@@ -131,11 +131,10 @@ namespace LibruryDatabase.Views
             using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
-                string sql = "SELECT * FROM member";
 
                 //ExecuteReader를 이용하여
                 //연결 모드로 데이타 가져오기
-                MySqlCommand Command = new MySqlCommand(sql, user);
+                MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
                 MySqlDataReader userInformation = Command.ExecuteReader();
 
                 while (userInformation.Read())
@@ -164,8 +163,7 @@ namespace LibruryDatabase.Views
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                string insertQuery = "SELECT * FROM book";
-                MySqlCommand Command = new MySqlCommand(insertQuery, book);
+                MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
                 MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (bookData.Read())
@@ -195,11 +193,10 @@ namespace LibruryDatabase.Views
             using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
-                string sql = "SELECT * FROM member";
 
                 //ExecuteReader를 이용하여
                 //연결 모드로 데이타 가져오기
-                MySqlCommand Command = new MySqlCommand(sql, user);
+                MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
                 MySqlDataReader userInformation = Command.ExecuteReader();
 
                 while (userInformation.Read())
@@ -233,11 +230,10 @@ namespace LibruryDatabase.Views
             using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
-                string sql = "SELECT * FROM member";
 
                 //ExecuteReader를 이용하여
                 //연결 모드로 데이타 가져오기
-                MySqlCommand Command = new MySqlCommand(sql, user);
+                MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
                 MySqlDataReader userInformation = Command.ExecuteReader();
 
                 while (userInformation.Read())
@@ -301,8 +297,7 @@ namespace LibruryDatabase.Views
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                string borrowUserQuery = "SELECT * FROM BORROWMEMBER";
-                MySqlCommand Command = new MySqlCommand(borrowUserQuery, book);
+                MySqlCommand Command = new MySqlCommand(Constants.BorrrowBookUserquery, book);
                 MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (bookData.Read())

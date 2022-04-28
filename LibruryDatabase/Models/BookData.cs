@@ -209,5 +209,27 @@ namespace LibruryDatabase.Models
             }
             return Constants.FAIL;
         }
+
+        public bool CheckUserBorrowedBook(string id) // 유저가 대여한 책이 있는지 체크
+        {
+            bool checkingBook = Constants.PASS;
+
+
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+                string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["returnbook"].ToString() == " ") checkingBook = Constants.FAIL; // 책을 대여했는데 한 권이라도 반납하지 않는 책이 있는경우
+                }
+                user.Close();
+                return checkingBook;
+            }
+        }
     }
 }

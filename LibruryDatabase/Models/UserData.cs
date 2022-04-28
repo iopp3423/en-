@@ -146,6 +146,45 @@ namespace LibruryDatabase.Models
                 Command.ExecuteNonQuery(); // 
             }
         }
+
+        public bool CheckExistenceId(string id) // 아이디 존재유무
+        {
+
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+                MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["id"].ToString() == id) return Constants.PASS;
+                }
+                user.Close();
+            }
+            return Constants.FAIL;
+        }
+
+        public bool CheckExistenceUser(string name) // 회원이름이 존재하는지 체크
+        {
+
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+                MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["name"].ToString().Contains(name)) return Constants.SUCESS;
+                }
+                user.Close();
+            }
+            return Constants.FAIL;
+
+        }
     }
 }
 
