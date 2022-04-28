@@ -18,6 +18,9 @@ namespace LibruryDatabase.Models
 
             return Book;
         }
+        
+
+
 
         public void StoreBookInformation(string bookName, string author, string publish, string publishDay, string quantity, string price) // 책 추가
         {
@@ -25,31 +28,50 @@ namespace LibruryDatabase.Models
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                string insertQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES('" + bookName + "','" + author + "','" + publish + "','" + publishDay + "','" + price + "','" + quantity + "');";
-
-                MySqlCommand Command = new MySqlCommand(insertQuery, book);
+                //string insertQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES('" + bookName + "','" + author + "','" + publish + "','" + publishDay + "','" + price + "','" + quantity + "');";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.addingBookQuery,bookName, author, publish, publishDay, price, quantity), book);
                 Command.ExecuteNonQuery();
             }
         }
 
-        public void RemoveBookInformation(string bookNunmber) // 책 제거
+        public void RemoveBookInformation(string bookNumber) // 책 제거
         {
-            
 
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                string DeleteQuery = "DELETE FROM book WHERE number = '" + bookNunmber + " ';";
-                //string DeleteQuer = String.Format("DELETE FROM book WHERE number = {0}", bookNunmber);
-                MySqlCommand Command = new MySqlCommand(DeleteQuery, book);
+                //string DeleteQuery = "DELETE FROM book WHERE number = '" + bookNumber + " ';";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteQuery, bookNumber), book);
                 Command.ExecuteNonQuery();
             }
         }
-    
+
+
         public void ModifyBookInformation(string bookInformation, string menu, string bookNumber) // 책 수정
         {
-            string ModifyQuery;
-            
+     
+            if (menu == Constants.REVISE_BOOK_QUANTITY)
+            {
+                using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+                {
+                    book.Open();
+                    MySqlCommand Command = new MySqlCommand(String.Format(Constants.ModifyQuantityQuery,bookInformation, bookNumber), book);
+                    Command.ExecuteNonQuery();
+                }
+            }
+            else
+            {
+                using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+                {
+                    book.Open();
+                    MySqlCommand Command = new MySqlCommand(String.Format(Constants.ModifyPriceQuery, bookInformation, bookNumber), book);
+                    Command.ExecuteNonQuery();
+                }
+            }
+
+           
+
+            /*
             if (menu == Constants.REVISE_BOOK_QUANTITY) ModifyQuery = "UPDATE book SET quantity = '" + bookInformation + "'WHERE number = '" + bookNumber + " ';"; // 수량 수정
             else ModifyQuery = "UPDATE book SET price = '" + bookInformation + "' WHERE number = '" + bookNumber + " ';"; // 가격 수정
 
@@ -59,18 +81,19 @@ namespace LibruryDatabase.Models
                 MySqlCommand Command = new MySqlCommand(ModifyQuery, book);
                 Command.ExecuteNonQuery();
             }
+            */
         }
 
-
+ 
         public bool CheckBookOverlap(string id, string bookNumber) // 데베에서 책 대여했는지 체크
         {
 
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
                 user.Open();
-                string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                //string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
 
-                MySqlCommand Command = new MySqlCommand(borrowIdQuery, user);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowIdQuery,id), user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (userData.Read())
@@ -85,6 +108,7 @@ namespace LibruryDatabase.Models
         }
 
 
+
         public void SearchBook(string id, string number) // 로그인한 유저 아이디값, 책 번호 전달받음
         {
 
@@ -96,8 +120,8 @@ namespace LibruryDatabase.Models
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                string insertQuery = "SELECT name, author, publish FROM book WHERE number = '" + number + "';";
-                MySqlCommand Command = new MySqlCommand(insertQuery, book);
+                //string insertQuery = "SELECT name, author, publish FROM book WHERE number = '" + number + "';";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.SearchDataQuery, number), book);
                 MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (bookData.Read())
@@ -133,12 +157,12 @@ namespace LibruryDatabase.Models
         public bool CheckAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크
         {
 
-
+            
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
                 user.Open();
-                string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+                //string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowUserQuery,id), user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (userData.Read())
@@ -155,12 +179,11 @@ namespace LibruryDatabase.Models
         public bool CheckUserBorrowedBook(string id, string bookNumber) // 데베에서 책 이미반납했는지 체크
         {
 
-
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
                 user.Open();
-                string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(borrowIdQuery, user);
+                //string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowUserQuery, id), user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (userData.Read())
@@ -182,9 +205,8 @@ namespace LibruryDatabase.Models
             {
 
                 book.Open();
-                string returnBookQuery = "UPDATE BORROWMEMBER SET returnbook = '" + returnDay + "' WHERE number = '" + bookNumber + " ';";
-
-                MySqlCommand Command = new MySqlCommand(returnBookQuery, book);
+                //string returnBookQuery = "UPDATE BORROWMEMBER SET returnbook = '" + returnDay + "' WHERE number = '" + bookNumber + " ';";   
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.returnBookQuery,returnDay,bookNumber), book);
                 Command.ExecuteNonQuery();
                 
             }
@@ -193,13 +215,13 @@ namespace LibruryDatabase.Models
 
         public bool CheckBookExistence(string bookNumber) // 데베에 책 있는지 체크
         {
-
+            
 
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
                 user.Open();
-                string borrowIdQuery = "SELECT * FROM book WHERE number = '" + bookNumber + " ';";
-                MySqlCommand Command = new MySqlCommand(borrowIdQuery, user);
+                //string borrowIdQuery = "SELECT * FROM book WHERE number = '" + bookNumber + " ';";               
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowedIdQuery,bookNumber), user);
                 MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (bookData.Read())
@@ -214,14 +236,12 @@ namespace LibruryDatabase.Models
         public bool CheckUserBorrowedBook(string id) // 유저가 대여한 책이 있는지 체크
         {
             bool checkingBook = Constants.PASS;
-
-
-
+           
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
                 user.Open();
-                string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+                //string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowUserQuery, id), user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (userData.Read())

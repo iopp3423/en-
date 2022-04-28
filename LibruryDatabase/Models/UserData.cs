@@ -42,13 +42,13 @@ namespace LibruryDatabase.Models
         }
 
         public void StoreUserInformation(string id, string pw, string name, string phone, string age, string address) // 데이터베이스에 회원정보 저장
-        {
-   
+        {           
+
             using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
-                string insertQuery = "INSERT INTO member(id,pw,name,phone,age,address) VALUES('"+id+"','"+ pw+"','"+name+"','"+ phone+"','"+age+"','"+address+"');";
-                MySqlCommand Command = new MySqlCommand(insertQuery, user);
+                //string insertQuery = "INSERT INTO member(id,pw,name,phone,age,address) VALUES('"+id+"','"+ pw+"','"+name+"','"+ phone+"','"+age+"','"+address+"');";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.insertUserQuery,id,pw,name,phone,age,address), user);
                 Command.ExecuteNonQuery();
             }
 
@@ -56,13 +56,13 @@ namespace LibruryDatabase.Models
 
         public void RemoveUserInformation(string userId) // 유저 삭제
         {
-            
+
 
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                string DeleteQuery = "DELETE FROM member WHERE id = '" + userId + " ';";
-                MySqlCommand Command = new MySqlCommand(DeleteQuery, book);
+                //string DeleteQuery = "DELETE FROM member WHERE id = '" + userId + " ';";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteUserQuery,userId), book);
                 Command.ExecuteNonQuery();
             }
         }
@@ -115,21 +115,21 @@ namespace LibruryDatabase.Models
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
                 user.Open();
-                string updateQuery = "UPDATE member SET phone ='" + callNumber + "' WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(updateQuery, user);
+                //string updateQuery = "UPDATE member SET phone ='" + callNumber + "' WHERE id = '" + id + " ';";
+               
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePhoneQuery,id), user);
                 Command.ExecuteNonQuery();
             }
         }
 
         public void ModifyPassword(string password, string id) // 비밀번호 데베에서 변경
         {
-
-
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
                 user.Open();
-                string updateQuery = "UPDATE member SET pw ='" + password + "' WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(updateQuery, user);
+
+                //string updateQuery = "UPDATE member SET pw ='" + password + "' WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePwQuery,id), user);
                 Command.ExecuteNonQuery(); 
             }
         }
@@ -141,8 +141,9 @@ namespace LibruryDatabase.Models
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
                 user.Open();
-                string updateQuery = "UPDATE member SET address ='" + address + "' WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(updateQuery, user);
+                
+                //string updateQuery = "UPDATE member SET address ='" + address + "' WHERE id = '" + id + " ';";
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.updateAddressQuery,id), user);
                 Command.ExecuteNonQuery(); // 
             }
         }

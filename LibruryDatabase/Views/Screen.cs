@@ -156,6 +156,8 @@ namespace LibruryDatabase.Views
                 userInformation.Close();
             }
         }
+
+
         public void PrintBookData() // 책 데이터 출력
         {
            
@@ -184,6 +186,8 @@ namespace LibruryDatabase.Views
                 bookData.Close();
             }
         }
+
+
         public void PrintLoginUser(string id, string password)
         {
             Console.WriteLine("=======================================================================");
@@ -219,6 +223,7 @@ namespace LibruryDatabase.Views
                 userInformation.Close();
             }
         }
+
 
         public void PrintSearchUser(string name)
         {
@@ -257,6 +262,8 @@ namespace LibruryDatabase.Views
             }
         }
 
+
+
         public void PrintBorrowBookData(string id) // 대여한 책 데이터 출력
         {
             
@@ -264,8 +271,7 @@ namespace LibruryDatabase.Views
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                string borrowUserQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(borrowUserQuery, book);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowUserQuery,id), book);
                 MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (bookData.Read())

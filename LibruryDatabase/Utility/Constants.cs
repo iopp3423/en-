@@ -21,11 +21,28 @@ namespace LibruryDatabase.Utility
         static public ConsoleKeyInfo cursor; 
 
         //query문 모음
+        //유저관련
         public const string getQuery = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
         public const string SearchMemberQuery = "SELECT * FROM member";
         public const string SearchBookQuery = "SELECT * FROM book";
         public const string BorrrowBookUserquery = "SELECT * FROM BORROWMEMBER";
         public const string AdminSearchQuery = "SELECT * FROM admin";
+        public const string borrowUserQuery = "SELECT * FROM BORROWMEMBER WHERE id = ('{0}')";
+        public const string addingBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}')";
+        public const string DeleteQuery = "DELETE FROM book WHERE number = ('{0}')";
+        public const string ModifyQuantityQuery = "UPDATE book SET quantity = ('{0}') WHERE number = ('{1}')";
+        public const string ModifyPriceQuery = "UPDATE book SET price = ('{0}') WHERE number = ('{1}')";
+        public const string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = ('{0}')";
+        public const string SearchDataQuery = "SELECT name, author, publish FROM book WHERE number = ('{0}')";
+        public const string returnBookQuery = "UPDATE BORROWMEMBER SET returnbook = ('{0}') WHERE number = ('{1}')";
+        public const string borrowedIdQuery = "SELECT * FROM book WHERE number = ('{0}')";
+
+        //책 관련
+        public const string insertUserQuery = "INSERT INTO member(id,pw,name,phone,age,address) VALUES(('{0}'),('{1}'),('{2}'),('{3}'),('{4}'),('{5}'));";
+        public const string DeleteUserQuery = "DELETE FROM member WHERE id = ('{0}')";
+        public const string updatePhoneQuery = "UPDATE member SET phone = ('{0}') WHERE id = ('{1}')";
+        public const string updatePwQuery = "UPDATE member SET pw = ('{0}') WHERE id = ('{1}')";
+        public const string updateAddressQuery = "UPDATE member SET  address = ('{0}') WHERE id = ('{1}')";
         //////////////////////////////////////////////////////////////////
 
 
