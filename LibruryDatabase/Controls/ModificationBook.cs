@@ -52,7 +52,7 @@ namespace LibruryDatabase.Controls
             keyInput = InputBookNumber(); // 책 번호 입력받기
             number = InputNumber(); // 수정메뉴 입력
             receiveInput = modificationMenu(number); // 가격 or 수량           
-            BookData.Get().ModifyBookInformation(receiveInput, number, keyInput); // 데베에서 책 수정\
+            BookData.Get().ModifyBookInformation(receiveInput, number, keyInput); // 데베에서 책 수정
             Console.Write("수정이 완료되었습니다.  뒤로가기 : ESC        프로그램 종료 : F5");
             GoBackMenu();
         }

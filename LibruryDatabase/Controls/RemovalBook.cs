@@ -51,18 +51,21 @@ namespace LibruryDatabase.Controls
             SearchBookName(); // 책 제목 검색
 
             bookNumber = InputBookNumber();
-            BookExitence = BookData.Get().CheckBookExistence(bookNumber);
-            //BookExitence = CheckBookExistence(bookNumber); // 도서관에 책 있는지 체크
+            BookExitence = BookData.Get().CheckBookExistence(bookNumber);// 도서관에 책 있는지 체크
 
             if (BookExitence == Constants.FAIL)
             {
-                Console.Write("존재하지 않는 책 번호입니다.  뒤로가기 : ESC    프로그램 종료 : F5");
+                Console.Write("존재하지 않는 책입니다.  뒤로가기 : ESC    프로그램 종료 : F5");
             }
             else if (BookExitence == Constants.PASS)
             {
                 BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
                 Console.Write("책이 삭제되었습니다.  뒤로가기 : ESC    프로그램 종료 : F5");
             }
+
+
+
+
             GoBackMenu();
         }
 
@@ -90,26 +93,5 @@ namespace LibruryDatabase.Controls
             }
             return bookNumber;         
         }
-
-        public bool CheckBookExistence(string bookNumber) // 데베에 책 있는지 체크
-        {
-            
-
-            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
-            {
-                user.Open();
-                string borrowIdQuery = "SELECT * FROM book WHERE number = '" + bookNumber + " ';";
-                MySqlCommand Command = new MySqlCommand(borrowIdQuery, user);
-                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (bookData.Read())
-                {
-                    if (bookData["number"].ToString() == bookNumber) return Constants.SUCESS;
-                }
-                user.Close();
-            }
-            return Constants.FAIL;
-        }
-
     }
 }

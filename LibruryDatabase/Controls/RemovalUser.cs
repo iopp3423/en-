@@ -72,14 +72,18 @@ namespace LibruryDatabase.Controls
                 id = InputId(); // 아이디 입력
 
                 existenceId = CheckExistenceId(id); //id 회원목록에 있는지 조사
-                if (existenceId == Constants.FAIL) { Console.Write("회원목록에 없습니다.  뒤로가기 : ESC         프로그램 종료 : F5"); moveMenu();  return; } // return;안쓰면 밑에 문장 실행됨 
+                if (existenceId == Constants.FAIL) { Console.Write("회원목록에 없습니다.  뒤로가기 : ESC         프로그램 종료 : F5"); moveMenu(); return; } // return;안쓰면 밑에 문장 실행됨 
 
                 existenceUsername = CheckUserBorrowedBook(id); // 해당 id 반납하지 않은 책 조사
 
-                if (existenceUsername == Constants.FAIL) Console.Write("반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5");
-                else if(existenceUsername == Constants.PASS)Console.Write("삭제되었습니다.    뒤로가기 : ESC                 프로그램 종료 : F5");
-                UserData.Get().RemoveUserInformation(id); // 유저 삭제
-                moveMenu();
+                if (existenceUsername == Constants.FAIL) { Console.Write("반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5"); moveMenu(); }
+                else if (existenceUsername == Constants.PASS)
+                {
+                    Console.Write("삭제되었습니다.    뒤로가기 : ESC                 프로그램 종료 : F5");
+                    UserData.Get().RemoveUserInformation(id); // 유저 삭제
+                    moveMenu();
+                }
+
             }
            
         }
