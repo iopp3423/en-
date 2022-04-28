@@ -74,12 +74,12 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["number"].ToString() == bookNumber && userData["returnbook"].ToString() != " ") return Constants.SUCESS;
-
+                    if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() != " ") return Constants.SUCESS;// 대여하고 반납함
+                    else if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() == " ") return Constants.FAIL; // 대여하고 반납안함
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.SUCESS;
 
         }
 
@@ -117,17 +117,17 @@ namespace LibruryDatabase.Models
         {
             string borrowDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
 
-
+            
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
                 //string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "');";
+                string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "') ON DUPLICATE KEY UPDATE id = '" + id + "',borrowbook= '" + borrowDay + "',returnbook = '" + ' ' + "';";
 
-                //MySqlCommand Command = new MySqlCommand(borrowIdQuery, book);
-                //Command.ExecuteNonQuery();
-                Console.Write("됐다.");
+                MySqlCommand Command = new MySqlCommand(borrowIdQuery, book);
+                Command.ExecuteNonQuery();
             }
-
+            
         }
     }
 }
