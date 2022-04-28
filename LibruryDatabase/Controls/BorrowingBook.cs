@@ -88,27 +88,7 @@ namespace LibruryDatabase.Controls
                 }
             }            
         }
-
-
-        // 잘못만듬 나중에 지우자 - 로그인한 아이디가 책 빌렸는지 확인
-        public bool CheckBorrowId(string id)
-        {
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
-                user.Open();
-                string borrowIdQuery = "SELECT * FROM BORROWMEMBER";
-
-                MySqlCommand Command = new MySqlCommand(borrowIdQuery, user);
-                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (userData.Read())
-                {
-                    if (userData["id"].ToString() == id) return Constants.PASS; // 책 빌린 회원 id 있음
-                }
-                user.Close();
-            }
-            return Constants.FAIL; // 책 빌린 회원 id 없음
-        }
+      
     }
     
 }

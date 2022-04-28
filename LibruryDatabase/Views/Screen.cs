@@ -158,8 +158,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintBookData() // 책 데이터 출력
         {
-            
-
+           
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
@@ -188,8 +187,7 @@ namespace LibruryDatabase.Views
         public void PrintLoginUser(string id, string password)
         {
             Console.WriteLine("=======================================================================");
-
-            
+           
             using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();

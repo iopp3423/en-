@@ -40,6 +40,7 @@ namespace LibruryDatabase.Models
             {
                 book.Open();
                 string DeleteQuery = "DELETE FROM book WHERE number = '" + bookNunmber + " ';";
+                //string DeleteQuer = String.Format("DELETE FROM book WHERE number = {0}", bookNunmber);
                 MySqlCommand Command = new MySqlCommand(DeleteQuery, book);
                 Command.ExecuteNonQuery();
             }
