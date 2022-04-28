@@ -16,6 +16,29 @@ namespace LibruryDatabase.Controls
     internal class SearchingBook
     {
         Screen Menu = new Screen();
+        public bool stop = Constants.PASS;
+
+        public bool GoBackMenu() //이전 메뉴로 돌아가기
+        {
+            while (Constants.ENTRANCE)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Escape:
+                        {
+                            return Constants.BACK_MENU;
+                        }
+                    case ConsoleKey.F5: // 종료
+                        {
+                            Environment.Exit(Constants.EXIT);
+                            break;
+                        }
+                    default: continue;
+                }
+
+            }
+        }
 
         public void SearchBook(bool goingUserOrAdmin)
         {
@@ -23,14 +46,14 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchMenu();
             Menu.PrintBookData();
 
-            if (Constants.BACK == moveMenu() && Constants.GO_USER_SEARCH == goingUserOrAdmin) // 유저모드용 책찾기
+            if (Constants.BACK_MENU == moveMenu() && Constants.GO_USER_SEARCH == goingUserOrAdmin) // 유저모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
                 Menu.PrintUserMenu();
                 return;
             }
-            else if(Constants.BACK == moveMenu() && Constants.GO_ADMIN_SEARCH == goingUserOrAdmin) // 관리자모드용 책찾기
+            else if (Constants.BACK_MENU == moveMenu() && Constants.GO_ADMIN_SEARCH == goingUserOrAdmin) // 관리자모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -45,7 +68,7 @@ namespace LibruryDatabase.Controls
 
             while (Constants.ENTRANCE) // 참이면
             {
-                Console.SetCursorPosition(Constants.SEARCH_X, Y);
+                Console.SetCursorPosition(Constants.SEARCH_X, Y); 
                 Constants.cursor = Console.ReadKey(true);
 
                 switch (Constants.cursor.Key)
@@ -66,13 +89,14 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.NAME_SEARCH_Y) { SearchName(); } // 작가로찾기
-                            if (Y == Constants.PUBLISH_Y) { SearchPublishName(); } // 출판사로찾기
-                            if (Y == Constants.BOOK_Y) { SearchBookName(); } // 책이름으로찾기          
-                            break;
+                            if (Y == Constants.NAME_SEARCH_Y) { SearchName();  } // 작가로찾기
+                            if (Y == Constants.PUBLISH_Y) { SearchPublishName();} // 출판사로찾기
+                            if (Y == Constants.BOOK_Y) { SearchBookName();} // 책이름으로찾기
+                            return GoBackMenu();
+                            return Constants.BACK_MENU;
                         }
                      case ConsoleKey.Escape:
-                        {
+                        {                           
                             return Constants.BACK_MENU;
                         }
 
@@ -94,7 +118,8 @@ namespace LibruryDatabase.Controls
             {
                 Console.Write("찾으시는 책이 없습니다. 뒤로가기 ESC");
             }
-            else Console.Write("뒤로가기 : ESC, 프로그램 종료 : F5"); 
+            else Console.Write("뒤로가기 : ESC, 프로그램 종료 : F5");
+           
         }
 
 
@@ -174,7 +199,7 @@ namespace LibruryDatabase.Controls
 
             Menu.PrintSearchBookName(bookName);// 출력            
             BookExistenceCheck();
-            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);           
         }
 
     }

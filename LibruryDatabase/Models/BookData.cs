@@ -10,7 +10,7 @@ namespace LibruryDatabase.Models
 {
     internal class BookData
     {
-        private static BookData Book = null;
+        private static BookData Book;
         public static BookData Get()
         {
             if (Book == null)

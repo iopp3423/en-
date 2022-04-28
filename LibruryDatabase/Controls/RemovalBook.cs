@@ -63,9 +63,6 @@ namespace LibruryDatabase.Controls
                 Console.Write("책이 삭제되었습니다.  뒤로가기 : ESC    프로그램 종료 : F5");
             }
 
-
-
-
             GoBackMenu();
         }
 
