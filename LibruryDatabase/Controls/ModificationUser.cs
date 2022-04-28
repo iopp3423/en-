@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 using LibruryDatabase.Views;
 using LibruryDatabase.Utility;
 using System.Text.RegularExpressions;
+using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Controls
 {
@@ -88,7 +89,7 @@ namespace LibruryDatabase.Controls
                 Command.ExecuteNonQuery();  
             }
         }
-        public void ModifyPhoneInformation(string password, string id) // 비밀번호 데베에서 변경
+        public void ModifyPassword(string password, string id) // 비밀번호 데베에서 변경
         {
             
 
@@ -100,7 +101,7 @@ namespace LibruryDatabase.Controls
                 Command.ExecuteNonQuery(); // 
             }
         }
-        public void ModifyAddressInformation(string address, string id)// 주소 데베에서 변경
+        public void ModifyAddress(string address, string id)// 주소 데베에서 변경
         {
             
 
@@ -118,7 +119,9 @@ namespace LibruryDatabase.Controls
             string callNumber;
             Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기          
             callNumber = InputCallNumber(); // 입력받기
-            ModifyPhone(callNumber, id); // 정보 변경
+            UserData.Get().ModifyPhone(callNumber, id); // 정보 변경
+
+            //ModifyPhone(callNumber, id); // 정보 변경
             Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
             Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
         }
@@ -128,7 +131,8 @@ namespace LibruryDatabase.Controls
             string password;
             Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기   
             password = InputPasswordCheck();// 입력받기
-            ModifyPhoneInformation(password, id); // 정보 변경
+            UserData.Get().ModifyPassword(password, id); // 정보 변경
+            //ModifyPassword(password, id); // 정보 변경
             Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
             Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
         }
@@ -138,7 +142,8 @@ namespace LibruryDatabase.Controls
             string address;
             Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기 
             address = InputAddress();// 입력받기
-            ModifyAddressInformation(address, id); // 정보 변경
+            //ModifyAddress(address, id); // 정보 변경
+            UserData.Get().ModifyAddress(address, id); // 정보 변경
             Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
             Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
         }

@@ -48,7 +48,6 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             Menu.PrintBorrowBookData(id);
             bookNumber = InputBookNumber();
-            //AlreadyBorrow = CheckAlreadyBorrowBook(id, bookNumber);
             AlreadyBorrow = BookData.Get().CheckAlreadyBorrowBook(id, bookNumber);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
@@ -74,7 +73,6 @@ namespace LibruryDatabase.Controls
                 else
                 {
                     BookData.Get().ReturnBook(bookNumber);
-                    //ReturnBook(bookNumber);
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
@@ -105,70 +103,7 @@ namespace LibruryDatabase.Controls
             }
             return bookNumber;
         }
-
-
-        public bool CheckAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크
-        {
-            
-
-            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
-            {
-                user.Open();
-                string insertQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(insertQuery, user);
-                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (userData.Read())
-                {
-                    if (userData["number"].ToString() == bookNumber) return Constants.SUCESS;
-                    
-                }
-                user.Close();
-            }
-            return Constants.FAIL;
-        }
-
-
-        public bool CheckUserBorrowedBook(string id, string bookNumber) // 데베에서 책 이미반납했는지 체크
-        {
-            
-
-            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
-            {
-                user.Open();
-                string borrowIdQuery = "SELECT * FROM BORROWMEMBER WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(borrowIdQuery, user);
-                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (userData.Read())
-                {
-                    if (userData["number"].ToString() == bookNumber && userData["returnbook"].ToString() != " ") return Constants.SUCESS; // 해당 번호 책 반납했는지 체크                                     
-                }
-                user.Close();
-            }
-            return Constants.FAIL;
-          
-        }
-
-
-
-
-
-        public void ReturnBook(string bookNumber) // 로그인한 유저 책 반납
-        {
-            string returnDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
-            
-           
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
-                book.Open();
-                string returnBookQuery = "UPDATE BORROWMEMBER SET returnbook = '" + returnDay + "' WHERE number = '" + bookNumber + " ';";
-
-                MySqlCommand Command = new MySqlCommand(returnBookQuery, book);
-                Command.ExecuteNonQuery();
-            }
-            
-        }
+        
 
     }
 
