@@ -21,7 +21,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintMain();
             Menu.PrintAdminMenu();
 
-            if (Constants.BACK == GoMenuSelect()) // 컨트롤러
+            if (Constants.BACK == moveMenu()) // 컨트롤러
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -30,7 +30,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool GoMenuSelect()
+        public bool moveMenu()
         {
             int Y = Constants.SEARCH_BOOK;
 
@@ -60,6 +60,8 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.GO_ADMIN_SEARCH); break; } // 관리자 도서검색
                             if (Y == Constants.ADD_BOOK) { adding.AddBook(); break; } // 책 추가 클래스 이동
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
+
+
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
                             if (Y == Constants.CURRENT_BOOK) // 대여상황
