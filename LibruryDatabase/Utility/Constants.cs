@@ -25,6 +25,7 @@ namespace LibruryDatabase.Utility
         public const string SearchMemberQuery = "SELECT * FROM member";
         public const string SearchBookQuery = "SELECT * FROM book";
         public const string BorrrowBookUserquery = "SELECT * FROM BORROWMEMBER";
+        public const string AdminSearchQuery = "SELECT * FROM admin";
         //////////////////////////////////////////////////////////////////
 
 

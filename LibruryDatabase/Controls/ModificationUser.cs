@@ -77,42 +77,7 @@ namespace LibruryDatabase.Controls
                 }
             }
         }
-        public void ModifyPhone(string callNumber, string id)// 전화번호 데베에서 변경
-        {
-            
 
-            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
-            {
-                user.Open();
-                string updateQuery = "UPDATE member SET phone ='" + callNumber + "' WHERE id = '" + id +" ';";
-                MySqlCommand Command = new MySqlCommand(updateQuery, user);
-                Command.ExecuteNonQuery();  
-            }
-        }
-        public void ModifyPassword(string password, string id) // 비밀번호 데베에서 변경
-        {
-            
-
-            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
-            {
-                user.Open();
-                string updateQuery = "UPDATE member SET pw ='" + password + "' WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(updateQuery, user);
-                Command.ExecuteNonQuery(); // 
-            }
-        }
-        public void ModifyAddress(string address, string id)// 주소 데베에서 변경
-        {
-            
-
-            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
-            {
-                user.Open();
-                string updateQuery = "UPDATE member SET address ='" + address + "' WHERE id = '" + id + " ';";
-                MySqlCommand Command = new MySqlCommand(updateQuery, user);
-                Command.ExecuteNonQuery(); // 
-            }
-        }
 
         public void ModifyPhoneNumber(string id)  // 전화번호
         {
@@ -121,7 +86,6 @@ namespace LibruryDatabase.Controls
             callNumber = InputCallNumber(); // 입력받기
             UserData.Get().ModifyPhone(callNumber, id); // 정보 변경
 
-            //ModifyPhone(callNumber, id); // 정보 변경
             Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
             Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
         }
@@ -132,7 +96,7 @@ namespace LibruryDatabase.Controls
             Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기   
             password = InputPasswordCheck();// 입력받기
             UserData.Get().ModifyPassword(password, id); // 정보 변경
-            //ModifyPassword(password, id); // 정보 변경
+
             Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
             Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
         }
@@ -142,8 +106,8 @@ namespace LibruryDatabase.Controls
             string address;
             Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기 
             address = InputAddress();// 입력받기
-            //ModifyAddress(address, id); // 정보 변경
             UserData.Get().ModifyAddress(address, id); // 정보 변경
+
             Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
             Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
         }

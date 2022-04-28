@@ -19,6 +19,28 @@ namespace LibruryDatabase.Models
 
             return User;
         }
+
+        public bool LoginCheck(string id, string password) // 관리자 아이디로그인 체크
+        {
+
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+
+                MySqlCommand Command = new MySqlCommand(Constants.AdminSearchQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.SUCESS;
+                }
+                user.Close();
+            }
+            return Constants.FAIL;
+
+        }
+
         public void StoreUserInformation(string id, string pw, string name, string phone, string age, string address) // 데이터베이스에 회원정보 저장
         {
    

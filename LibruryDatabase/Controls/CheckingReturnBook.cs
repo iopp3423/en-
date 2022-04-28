@@ -60,7 +60,6 @@ namespace LibruryDatabase.Controls
             else if (AlreadyBorrow == Constants.PASS)
             {
 
-                //checkAlreadyReturn = CheckBookOverlap(id, bookNumber);
                 checkAlreadyReturn = BookData.Get().CheckUserBorrowedBook(id, bookNumber);
 
                 if (checkAlreadyReturn == Constants.PASS)

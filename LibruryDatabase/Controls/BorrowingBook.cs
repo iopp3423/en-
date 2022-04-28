@@ -51,7 +51,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintBookData(); // 책 목록 프린트
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);            
-            SearchBookName(); // 책 제목 검색            
+            SearchBookName(); // 책 제목 검색
             
             if (Constants.SEARCH_RESULT_BOOK == Constants.PASS) // 찾는 책이 없을 시 건너뜀
             {

@@ -51,7 +51,8 @@ namespace LibruryDatabase.Controls
             SearchBookName(); // 책 제목 검색
 
             bookNumber = InputBookNumber();
-            BookExitence = CheckBookExistence(bookNumber); // 도서관에 책 있는지 체크
+            BookExitence = BookData.Get().CheckBookExistence(bookNumber);
+            //BookExitence = CheckBookExistence(bookNumber); // 도서관에 책 있는지 체크
 
             if (BookExitence == Constants.FAIL)
             {

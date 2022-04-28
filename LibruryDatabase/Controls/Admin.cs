@@ -28,7 +28,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintLogin();
             id = InputId(); // 아이디 입력
             password = InputPassword(); // 비밀번호 입력
-            checkingLogin = LoginCheck(id, password); // 아이디 비밀번호 확인
+            checkingLogin = UserData.Get().LoginCheck(id, password); // 아이디 비밀번호 확인
 
             if (checkingLogin == Constants.SUCESS) goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
 
@@ -58,26 +58,6 @@ namespace LibruryDatabase.Controls
             }
         }
 
-
-        public bool LoginCheck(string id, string password) // 로그인 체크
-        {
-            
-
-            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
-            {
-                user.Open();
-                string insertQuery = "SELECT * FROM admin";
-                MySqlCommand Command = new MySqlCommand(insertQuery, user);
-                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (userData.Read())
-                {
-                    if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.SUCESS;
-                }
-                user.Close();
-            }
-            return Constants.FAIL;
-
-        }
+       
     }
 }
