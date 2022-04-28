@@ -301,7 +301,7 @@ namespace LibruryDatabase.Views
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                MySqlCommand Command = new MySqlCommand(Constants.BorrrowBookUserquery, book);
+                MySqlCommand Command = new MySqlCommand(Constants.OrderQuery, book);
                 MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (bookData.Read())

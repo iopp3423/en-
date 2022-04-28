@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LibruryDatabase.Views;
 using LibruryDatabase.Utility;
+using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Controls
 {
@@ -66,7 +67,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
                             if (Y == Constants.CURRENT_BOOK) // 대여상황
                             { 
-                                Console.Clear(); 
+                                Console.Clear();
                                 Menu.PrintCurrentBorrowBook();
                                 Console.Write("뒤로가기 : ESC                   프로그램 종료 : F5");
                                 GoBackMenu(); 

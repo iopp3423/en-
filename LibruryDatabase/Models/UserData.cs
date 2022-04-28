@@ -46,7 +46,6 @@ namespace LibruryDatabase.Models
             using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {
                 user.Open();
-                //string insertQuery = "INSERT INTO member(id,pw,name,phone,age,address) VALUES('"+id+"','"+ pw+"','"+name+"','"+ phone+"','"+age+"','"+address+"');";
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.insertUserQuery,id,pw,name,phone,age,address), user);
                 Command.ExecuteNonQuery();
             }
@@ -60,7 +59,6 @@ namespace LibruryDatabase.Models
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                //string DeleteQuery = "DELETE FROM member WHERE id = '" + userId + " ';";
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteUserQuery,userId), book);
                 Command.ExecuteNonQuery();
             }
@@ -114,7 +112,6 @@ namespace LibruryDatabase.Models
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
                 user.Open();
-                //string updateQuery = "UPDATE member SET phone ='" + callNumber + "' WHERE id = '" + id + " ';";
                
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePhoneQuery,id), user);
                 Command.ExecuteNonQuery();
@@ -127,7 +124,6 @@ namespace LibruryDatabase.Models
             {
                 user.Open();
 
-                //string updateQuery = "UPDATE member SET pw ='" + password + "' WHERE id = '" + id + " ';";
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePwQuery,id), user);
                 Command.ExecuteNonQuery(); 
             }
@@ -141,7 +137,6 @@ namespace LibruryDatabase.Models
             {
                 user.Open();
                 
-                //string updateQuery = "UPDATE member SET address ='" + address + "' WHERE id = '" + id + " ';";
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.updateAddressQuery,id), user);
                 Command.ExecuteNonQuery(); // 
             }
