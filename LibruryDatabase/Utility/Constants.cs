@@ -24,7 +24,6 @@ namespace LibruryDatabase.Utility
         //유저관련
         public const string getQuery = "Server=localhost;Database=enbook;Uid=root;Pwd=0000;";
         public const string SearchMemberQuery = "SELECT * FROM member";
-        public const string SearchBookQuery = "SELECT * FROM book";
         public const string BorrrowBookUserquery = "SELECT * FROM BORROWMEMBER";
         public const string AdminSearchQuery = "SELECT * FROM admin";
         public const string borrowUserQuery = "SELECT * FROM BORROWMEMBER WHERE id = ('{0}')";
@@ -38,6 +37,7 @@ namespace LibruryDatabase.Utility
         public const string borrowedIdQuery = "SELECT * FROM book WHERE number = ('{0}')";
 
         //책 관련
+        public const string SearchBookQuery = "SELECT * FROM book";
         public const string insertUserQuery = "INSERT INTO member(id,pw,name,phone,age,address) VALUES(('{0}'),('{1}'),('{2}'),('{3}'),('{4}'),('{5}'));";
         public const string DeleteUserQuery = "DELETE FROM member WHERE id = ('{0}')";
         public const string updatePhoneQuery = "UPDATE member SET phone = ('{0}') WHERE id = ('{1}')";
@@ -46,13 +46,16 @@ namespace LibruryDatabase.Utility
         public const string revomeReturnBook = "DELETE FROM BORROWMEMBER WHERE id = ('{0}') AND number =  ('{1}')";
         public const string OrderQuery = "SELECT * FROM BORROWMEMBER ORDER BY id ASC";
         public const string borrowQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES( ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'), ('{6}'));";
-       
+        public const string minusBook = "UPDATE book SET quantity = quantity - 1 WHERE number =  ('{0}')";
+        public const string plusBook = "UPDATE book SET quantity = quantity + 1 WHERE number =  ('{0}')";
+
         //////////////////////////////////////////////////////////////////
 
 
 
 
         public const string REVISE_BOOK_QUANTITY = "1";
+        public const string NONE_BOOK = "0";
         public const int ONE = 1;
         public const int CONSOLE_SIZE_WIDTH = 75;
         public const int CONSOLE_SIZE_HDIGHT = 40;

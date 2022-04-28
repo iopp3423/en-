@@ -161,12 +161,42 @@ namespace LibruryDatabase.Models
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                //string borrowIdQuery = "INSERT INTO BORROWMEMBER(id, number, bookname, author, publish, borrowbook, returnbook) VALUES('" + id + "','" + number + "','" + bookName + "','" + author + "','" + publish + "','" + borrowDay + "','" + ' ' + "');";
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowQuery,id,number,bookName,author,publish,borrowDay,' '), book);
                 Command.ExecuteNonQuery();
             }           
         }
+ 
 
+        public void MinusBook(string bookNumber) // 책 대여시 해당 책 갯수 1 감소
+        {
+
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.minusBook, bookNumber), book);
+                Command.ExecuteNonQuery();
+            }
+        }
+
+        public bool CheckBookQuantity(string bookNumber) // 책 수량 체크
+        {
+
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowedIdQuery, bookNumber), book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+                while (bookData.Read())
+                {
+                    Console.Write(bookData["quantity"].ToString());
+                    if (bookData["quantity"].ToString() == Constants.NONE_BOOK) return Constants.FAIL;
+                }
+                bookData.Close();
+                return Constants.PASS;
+            }
+        }
 
         public bool CheckAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크
         {
