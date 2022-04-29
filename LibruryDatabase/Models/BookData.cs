@@ -81,12 +81,12 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() != " ") return Constants.SUCESS;// 대여하고 반납함
-                    else if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() == " ") return Constants.FAIL; // 대여하고 반납안함
+                    if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() != " ") return Constants.isSucess;// 대여하고 반납함
+                    else if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() == " ") return Constants.isFail; // 대여하고 반납안함
                 }
                 user.Close();
             }
-            return Constants.SUCESS;
+            return Constants.isSucess;
 
         }
 
@@ -102,11 +102,11 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() != " ") return Constants.SUCESS;// 대여하고 반납함
+                    if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() != " ") return Constants.isSucess;// 대여하고 반납함
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.isFail;
 
         }
 
@@ -203,10 +203,10 @@ namespace LibruryDatabase.Models
                 MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
                 while (bookData.Read())
                 {
-                    if (bookData["quantity"].ToString() == Constants.NONE_BOOK) return Constants.FAIL;
+                    if (bookData["quantity"].ToString() == Constants.NONE_BOOK) return Constants.isFail;
                 }
                 bookData.Close();
-                return Constants.PASS;
+                return Constants.isPassing;
             }
         }
 
@@ -222,12 +222,12 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["number"].ToString() == bookNumber) return Constants.SUCESS;
+                    if (userData["number"].ToString() == bookNumber) return Constants.isSucess;
 
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.isFail;
         }
 
 
@@ -242,11 +242,11 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["number"].ToString() == bookNumber && userData["returnbook"].ToString() != " ") return Constants.SUCESS; // 해당 번호 책 반납했는지 체크                                     
+                    if (userData["number"].ToString() == bookNumber && userData["returnbook"].ToString() != " ") return Constants.isSucess; // 해당 번호 책 반납했는지 체크                                     
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.isFail;
 
         }
 
@@ -278,16 +278,16 @@ namespace LibruryDatabase.Models
 
                 while (bookData.Read())
                 {
-                    if (bookData["number"].ToString() == bookNumber) return Constants.SUCESS;
+                    if (bookData["number"].ToString() == bookNumber) return Constants.isSucess;
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.isFail;
         }
 
         public bool CheckUserBorrowedBook(string id) // 유저가 대여한 책이 있는지 체크
         {
-            bool checkingBook = Constants.PASS;
+            bool checkingBook = Constants.isPassing;
            
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
@@ -297,7 +297,7 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["returnbook"].ToString() == " ") checkingBook = Constants.FAIL; // 책을 대여했는데 한 권이라도 반납하지 않는 책이 있는경우
+                    if (userData["returnbook"].ToString() == " ") checkingBook = Constants.isFail; // 책을 대여했는데 한 권이라도 반납하지 않는 책이 있는경우
                 }
                 user.Close();
                 return checkingBook;

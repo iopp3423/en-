@@ -32,11 +32,11 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.SUCESS;
+                    if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.isSucess;
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.isFail;
 
         }
 
@@ -77,11 +77,11 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["id"].ToString() == id) return Constants.SUCESS;
+                    if (userData["id"].ToString() == id) return Constants.isSucess;
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.isFail;
 
         }
 
@@ -97,11 +97,11 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.SUCESS;
+                    if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.isSucess;
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.isFail;
 
         }
 
@@ -154,11 +154,11 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["id"].ToString() == id) return Constants.PASS;
+                    if (userData["id"].ToString() == id) return Constants.isPassing;
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.isFail;
         }
 
         public bool CheckExistenceUser(string name) // 회원이름이 존재하는지 체크
@@ -173,11 +173,11 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["name"].ToString().Contains(name)) return Constants.SUCESS;
+                    if (userData["name"].ToString().Contains(name)) return Constants.isSucess;
                 }
                 user.Close();
             }
-            return Constants.FAIL;
+            return Constants.isFail;
 
         }
     }

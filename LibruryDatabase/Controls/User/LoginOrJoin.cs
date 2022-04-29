@@ -27,7 +27,7 @@ namespace LibruryDatabase.Controls
             Menu.JoinOrLogin();
 
 
-            if (Constants.BACK == moveMenu()) // 마우스 함수
+            if (Constants.isBack == moveMenu()) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -42,7 +42,7 @@ namespace LibruryDatabase.Controls
             int goingJoin = Constants.USER_Y;
             int goingLogin = Constants.ADMIN_Y;
 
-            while (Constants.ENTRANCE) // 참이면
+            while (Constants.isEntrancing) // 참이면
             {
                 Console.SetCursorPosition(Console.CursorLeft, Y);
                 Constants.cursor = Console.ReadKey(true);
@@ -71,7 +71,7 @@ namespace LibruryDatabase.Controls
                         }
                      case ConsoleKey.Escape:
                         {
-                            return Constants.BACK_MENU;
+                            return Constants.isBackMenu;
                         }
 
                     case ConsoleKey.F5: // 종료
@@ -87,7 +87,7 @@ namespace LibruryDatabase.Controls
         }
         public void BackMenuOrReEnter()
         {
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
                 {
                     Constants.cursor = Console.ReadKey(true);
                     switch (Constants.cursor.Key)
@@ -119,14 +119,14 @@ namespace LibruryDatabase.Controls
          
             overlapCheck = UserData.Get().CheckIdOverlap(id); // 데베에서 id 중복 확인
 
-            if (overlapCheck == Constants.SUCESS)
+            if (overlapCheck == Constants.isSucess)
             {
                 Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("이미 존재하는 ID 입니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
                 Console.ResetColor();
 
-                while (Constants.ENTRANCE)
+                while (Constants.isEntrancing)
                 {
                     Constants.cursor = Console.ReadKey(true);
                     switch (Constants.cursor.Key)
@@ -147,7 +147,7 @@ namespace LibruryDatabase.Controls
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("비밀번호가 일치하지않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
                 Console.ResetColor();
-                while (Constants.ENTRANCE)
+                while (Constants.isEntrancing)
                 {
                     Constants.cursor = Console.ReadKey(true);
                     switch (Constants.cursor.Key)
@@ -171,7 +171,7 @@ namespace LibruryDatabase.Controls
             Console.ResetColor();
 
 
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)
@@ -198,13 +198,13 @@ namespace LibruryDatabase.Controls
 
             overlapCheck = UserData.Get().CheckLogin(id, password); //데베에서 회원 유무 확인
 
-            if (overlapCheck == Constants.SUCESS) GoUser.StartBookmenu(id, password);
+            if (overlapCheck == Constants.isSucess) GoUser.StartBookmenu(id, password);
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
             Console.ResetColor();
 
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch(Constants.cursor.Key)
@@ -221,12 +221,12 @@ namespace LibruryDatabase.Controls
         {
             string id;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
                 Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
                 id = Console.ReadLine();
            
-                if (Constants.CHECK == Regex.IsMatch(id, Utility.Exception.ID_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(id, Utility.Exception.ID_CHECK)) // 정규식에 맞지 않으면
                 {
 
                     Console.SetCursorPosition(Constants.ID_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -248,13 +248,13 @@ namespace LibruryDatabase.Controls
         {
             string password;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
 
                 Console.SetCursorPosition(Constants.PW_X, Constants.PW_Y);
                 password = ReadPassword();
 
-                if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.PW_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -274,13 +274,13 @@ namespace LibruryDatabase.Controls
         {
             string password;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
 
                 Console.SetCursorPosition(Constants.PW_CHECK_X, Constants.PW_CHECK_Y);
                 password = ReadPassword();
 
-               if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK))
+               if (Constants.isFail == Regex.IsMatch(password, Utility.Exception.PW_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -328,12 +328,12 @@ namespace LibruryDatabase.Controls
         {
             string name;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
                 Console.SetCursorPosition(Constants.NAME_X, Constants.NAME_Y);
                 name = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(name, Utility.Exception.NAME_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(name, Utility.Exception.NAME_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.NAME_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -352,12 +352,12 @@ namespace LibruryDatabase.Controls
         {
             string callNumber;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
                 Console.SetCursorPosition(Constants.NUMBER_X, Constants.NUMBER_Y);
                 callNumber = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.NUMBER_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -377,15 +377,15 @@ namespace LibruryDatabase.Controls
         {
             string address;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
                 Console.SetCursorPosition(Constants.ADDRESS_X, Constants.ADDRESS_Y);
                 address = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
                 {
                      Console.SetCursorPosition(Constants.ADDRESS_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                   ClearCurrentLine(Constants.CURRENT_LOCATION);
+                     ClearCurrentLine(Constants.CURRENT_LOCATION);
 
 
                     Console.WriteLine("주소 :");
@@ -404,12 +404,12 @@ namespace LibruryDatabase.Controls
         {
             string age;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
                 Console.SetCursorPosition(Constants.AGE_X, Constants.AGE_Y);
                 age = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(age, Utility.Exception.AGE_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(age, Utility.Exception.AGE_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.AGE_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);

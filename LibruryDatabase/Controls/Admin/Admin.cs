@@ -30,9 +30,9 @@ namespace LibruryDatabase.Controls
             password = InputPassword(); // 비밀번호 입력
             checkingLogin = UserData.Get().LoginCheck(id, password); // 아이디 비밀번호 확인
 
-            if (checkingLogin == Constants.SUCESS) goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
+            if (checkingLogin == Constants.isSucess) goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
 
-            else if (checkingLogin == Constants.FAIL)
+            else if (checkingLogin == Constants.isFail)
             {
                 Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -40,7 +40,7 @@ namespace LibruryDatabase.Controls
                 Console.ResetColor();
             }
 
-            while (Constants.ENTRANCE) // 관리자 불일치시 재입력 컨트롤러
+            while (Constants.isEntrancing) // 관리자 불일치시 재입력 컨트롤러
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)

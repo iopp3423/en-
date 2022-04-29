@@ -352,7 +352,7 @@ namespace LibruryDatabase.Views
                         Console.Write("책 수량 :");
                         Console.WriteLine(bookData["quantity"].ToString());
                         Console.WriteLine("=============================================================================");
-                        Constants.SEARCH_RESULT_BOOK = Constants.PASS;
+                        Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                     }
 
                 }
@@ -386,7 +386,7 @@ namespace LibruryDatabase.Views
                         Console.Write("책 수량 :");
                         Console.WriteLine(bookData["quantity"].ToString());
                         Console.WriteLine("=============================================================================");
-                        Constants.SEARCH_RESULT_BOOK = Constants.PASS;
+                        Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                     }
                 }
                 book.Close();
@@ -418,7 +418,7 @@ namespace LibruryDatabase.Views
                         Console.Write("책 수량 :");
                         Console.WriteLine(bookData["quantity"].ToString());
                         Console.WriteLine("============================================================================");
-                        Constants.SEARCH_RESULT_BOOK = Constants.PASS;
+                        Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                     }
                 }
                 book.Close();
@@ -458,7 +458,7 @@ namespace LibruryDatabase.Views
 
         public bool EntranceAfterReturnMenu()
         {
-            while (Constants.PASS) // 메뉴 입장한 후 뒤로가기
+            while (Constants.isPassing) // 메뉴 입장한 후 뒤로가기
             {
                 Constants.cursor = Console.ReadKey(true);
                 if (Constants.cursor.Key == ConsoleKey.Escape)
@@ -467,11 +467,11 @@ namespace LibruryDatabase.Views
                     PrintMain();
                     PrintAdminMenu();
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.BOOK_NAME_Y);
-                    return Constants.BACK_MENU;
+                    return Constants.isBackMenu;
                 }
                 else if (Constants.cursor.Key == ConsoleKey.Enter) {ClearCurrentLine(Constants.CURRENT_LOCATION); break; }
             }
-            return Constants.PASS;
+            return Constants.isPassing;
         }
 
         public void ClearCurrentLine(int number) // 줄 지우기

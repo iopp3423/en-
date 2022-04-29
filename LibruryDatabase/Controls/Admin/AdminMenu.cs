@@ -22,7 +22,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintMain();
             Menu.PrintAdminMenu();
 
-            if (Constants.BACK == moveAdminMenu()) // 컨트롤러
+            if (Constants.isBack == moveAdminMenu()) // 컨트롤러
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -37,7 +37,7 @@ namespace LibruryDatabase.Controls
         {
             int Y = Constants.SEARCH_BOOK;
 
-            while (Constants.ENTRANCE) // 참이면
+            while (Constants.isEntrancing) // 참이면
             {
                 Console.SetCursorPosition(Constants.FIRSTX, Y);
                 Constants.cursor = Console.ReadKey(true);
@@ -60,7 +60,7 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.GO_ADMIN_SEARCH); break; } // 관리자 도서검색
+                            if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.isAdminSearching); break; } // 관리자 도서검색
                             if (Y == Constants.ADD_BOOK) { adding.AddBook(); break; } // 책 추가 클래스 이동
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
@@ -78,7 +78,7 @@ namespace LibruryDatabase.Controls
                         }
                      case ConsoleKey.Escape:
                         {
-                            return Constants.BACK_MENU;
+                            return Constants.isBackMenu;
                         }
 
                     case ConsoleKey.F5: // 종료
@@ -94,7 +94,7 @@ namespace LibruryDatabase.Controls
         }
         public void GoBackMenu() //이전 메뉴로 돌아가기
         {
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)

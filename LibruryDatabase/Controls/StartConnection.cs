@@ -29,7 +29,7 @@ namespace LibruryDatabase.Controls
 
 
             // 메인 컨트롤러
-            while (Constants.ENTRANCE) // 참이면
+            while (Constants.isEntrancing) // 참이면
             {
 
                 Console.SetCursorPosition(Console.CursorLeft, Y);// 처음 좌표

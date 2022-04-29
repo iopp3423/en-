@@ -17,14 +17,14 @@ namespace LibruryDatabase.Controls
 
         public bool GoReturnMenu() //이전 메뉴로 돌아가기
         {
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)
                 {
                     case ConsoleKey.Escape:
                         {
-                            return Constants.BACK_MENU;
+                            return Constants.isBackMenu;
                         }
                     case ConsoleKey.F5: // 종료
                         {
@@ -44,7 +44,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintLoginUser(id, password);
             Menu.PrintUserInformation();
 
-            if (Constants.BACK == moveMenu(id)) // 마우스 함수
+            if (Constants.isBack == moveMenu(id)) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -56,7 +56,7 @@ namespace LibruryDatabase.Controls
         {
             int Y = Constants.GOING_PHONE;
 
-            while (Constants.ENTRANCE) // 참이면
+            while (Constants.isEntrancing) // 참이면
             {
                 Console.SetCursorPosition(Constants.FIRSTX, Y);
                 Constants.cursor = Console.ReadKey(true);
@@ -86,7 +86,7 @@ namespace LibruryDatabase.Controls
                         }
                      case ConsoleKey.Escape:
                         {
-                            return Constants.BACK_MENU;
+                            return Constants.isBackMenu;
                         }
 
                     case ConsoleKey.F5: // 종료
@@ -137,12 +137,12 @@ namespace LibruryDatabase.Controls
         {
             string callNumber;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
                 Console.Write("핸드폰 번호(01x - xxxx - xxxx) :");
                 callNumber = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PHONE); //커서 조정
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -157,13 +157,13 @@ namespace LibruryDatabase.Controls
         {
             string password;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
                 Console.Write("유저 PW(영어, 숫자 포함(4~10자) :");
                 password = Console.ReadLine();
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PASSWORD);
 
-                if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PASSWORD); //커서 조정
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -178,13 +178,13 @@ namespace LibruryDatabase.Controls
         {
             string address;
             Console.Write("주소 :");
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {            
                 address = Console.ReadLine();
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
 
 
-                if (Constants.CHECK == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);

@@ -21,14 +21,14 @@ namespace LibruryDatabase.Controls
 
         public bool GoReturnMenu() //이전 메뉴로 돌아가기
         {
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)
                 {
                     case ConsoleKey.Escape:
                         {
-                            return Constants.BACK_MENU;
+                            return Constants.isBackMenu;
                         }
                     case ConsoleKey.F5: // 종료
                         {
@@ -47,14 +47,14 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchMenu();
             Menu.PrintBookData();
 
-            if (Constants.BACK_MENU == moveMenu() && Constants.GO_USER_SEARCH == goingUserOrAdmin) // 유저모드용 책찾기
+            if (Constants.isBackMenu == moveMenu() && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
                 Menu.PrintUserMenu();
                 return;
             }
-            else if (Constants.BACK_MENU == moveMenu() && Constants.GO_ADMIN_SEARCH == goingUserOrAdmin) // 관리자모드용 책찾기
+            else if (Constants.isBackMenu == moveMenu() && Constants.isAdminSearching == goingUserOrAdmin) // 관리자모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -67,7 +67,7 @@ namespace LibruryDatabase.Controls
         {
             int Y = Constants.SEARCH_Y;
 
-            while (Constants.ENTRANCE) // 참이면
+            while (Constants.isEntrancing) // 참이면
             {
                 Console.SetCursorPosition(Constants.SEARCH_X, Y); 
                 Constants.cursor = Console.ReadKey(true);
@@ -97,7 +97,7 @@ namespace LibruryDatabase.Controls
                         }
                      case ConsoleKey.Escape:
                         {                           
-                            return Constants.BACK_MENU;
+                            return Constants.isBackMenu;
                         }
 
                     case ConsoleKey.F5: // 종료
@@ -114,7 +114,7 @@ namespace LibruryDatabase.Controls
 
         public void BookExistenceCheck()
         {
-            if (Constants.SEARCH_RESULT_BOOK == Constants.FAIL) // 책 정보 없으면
+            if (Constants.SEARCH_RESULT_BOOK == Constants.isFail) // 책 정보 없으면
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("찾으시는 책이 없습니다. 뒤로가기 ESC");
@@ -128,16 +128,16 @@ namespace LibruryDatabase.Controls
         public void SearchName() // 작가로 찾기
         {
             string name;
-            Constants.SEARCH_RESULT_BOOK = Constants.FAIL;
+            Constants.SEARCH_RESULT_BOOK = Constants.isFail;
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("입력 (영어,한글 2~8자) :");
 
-            while (Constants.ENTRANCE) // 책 예외처리
+            while (Constants.isEntrancing) // 책 예외처리
             {
                 name = Console.ReadLine();
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.NAME_LINE);
                 
-                if (Constants.CHECK == Regex.IsMatch(name, Utility.Exception.AUTHOR_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(name, Utility.Exception.AUTHOR_CHECK)) // 정규식에 맞지 않으면
                 {
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
@@ -155,15 +155,15 @@ namespace LibruryDatabase.Controls
         public void SearchPublishName() // 출판사로 찾기
         {
             string publish;
-            Constants.SEARCH_RESULT_BOOK = Constants.FAIL;
+            Constants.SEARCH_RESULT_BOOK = Constants.isFail;
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("입력 (한글 2~8자) :");
 
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 publish = Console.ReadLine();
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.PUBLISH_LINE);
-                if (Constants.CHECK == Regex.IsMatch(publish, Utility.Exception.PUBLISH_CHECK))// 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(publish, Utility.Exception.PUBLISH_CHECK))// 정규식에 맞지 않으면
                 {
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
@@ -182,16 +182,16 @@ namespace LibruryDatabase.Controls
         public void SearchBookName() // 책제목으로 찾기
         {
             string bookName;
-            Constants.SEARCH_RESULT_BOOK = Constants.FAIL;
+            Constants.SEARCH_RESULT_BOOK = Constants.isFail;
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("책 제목 (한글, 영어 2~10자) :");
 
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 bookName = Console.ReadLine();
                 Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
 
-                if (Constants.CHECK == Regex.IsMatch(bookName, Utility.Exception.TITLE_CHECK))// 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(bookName, Utility.Exception.TITLE_CHECK))// 정규식에 맞지 않으면
                 {
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;

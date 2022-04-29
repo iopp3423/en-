@@ -15,7 +15,7 @@ namespace LibruryDatabase.Controls
         Screen Menu = new Screen();
         public void GoBackMenu() //이전 메뉴로 돌아가기
         {
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)
@@ -49,7 +49,7 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 수정 : Enter                                          뒤로가기 : ESC");
             Console.ResetColor();
-            if (Menu.EntranceAfterReturnMenu() == Constants.BACK_MENU) return;// 입장 후 뒤로가기 메뉴
+            if (Menu.EntranceAfterReturnMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
             SearchBookName(); // 책 제목 검색
@@ -72,11 +72,11 @@ namespace LibruryDatabase.Controls
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("책 수량 수정 1번, 책 가격 수정 2번 입력:");
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 modificatioNumber = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(modificatioNumber, Utility.Exception.MODIFICATION_BOOK))
+                if (Constants.isFail == Regex.IsMatch(modificatioNumber, Utility.Exception.MODIFICATION_BOOK))
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop-Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -103,12 +103,12 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("수정할 수량을 입력해주세요(숫자만) :");
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 quantity = Console.ReadLine();
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
-                if (Constants.CHECK == Regex.IsMatch(quantity, Utility.Exception.QUANTITY))
+                if (Constants.isFail == Regex.IsMatch(quantity, Utility.Exception.QUANTITY))
                 {
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
@@ -126,11 +126,11 @@ namespace LibruryDatabase.Controls
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("수정할 가격을 입력해주세요(숫자만) :");
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {            
                 bookPrice = Console.ReadLine();
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                if (Constants.CHECK == Regex.IsMatch(bookPrice, Utility.Exception.PRICE))
+                if (Constants.isFail == Regex.IsMatch(bookPrice, Utility.Exception.PRICE))
 
                 {
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -148,11 +148,11 @@ namespace LibruryDatabase.Controls
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("책 번호를 입력해주세요 :");
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 bookNumber = Console.ReadLine();
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                if (Constants.CHECK == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK))
+                if (Constants.isFail == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK))
                 {
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;

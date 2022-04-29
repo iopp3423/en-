@@ -17,7 +17,7 @@ namespace LibruryDatabase.Controls
         Screen Menu = new Screen();
         public void moveMenu() //이전 메뉴로 돌아가기
         {
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)
@@ -53,13 +53,13 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("회원삭제 : Enter                                          뒤로가기 : ESC");
             Console.ResetColor();
-            if (Menu.EntranceAfterReturnMenu() == Constants.BACK_MENU) return;// 입장 후 뒤로가기 메뉴
+            if (Menu.EntranceAfterReturnMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.INPUT_NAME_X, Constants.INPUT_NAME_Y);
 
             name = InputName(); // 이름 입력
             existenceUsername = UserData.Get().CheckExistenceUser(name); //이름 회원목록에 있는지 조사
-            if (existenceUsername == Constants.FAIL) // 회원목록에 없음
+            if (existenceUsername == Constants.isFail) // 회원목록에 없음
             {
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -77,7 +77,7 @@ namespace LibruryDatabase.Controls
             id = InputId(); // 아이디 입력
 
             existenceId = UserData.Get().CheckExistenceId(id); //id 회원목록에 있는지 조사
-            if (existenceId == Constants.FAIL) 
+            if (existenceId == Constants.isFail) 
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("회원목록에 없습니다.             뒤로가기 : ESC         프로그램 종료 : F5");
@@ -88,7 +88,7 @@ namespace LibruryDatabase.Controls
 
             existenceUsername = BookData.Get().CheckUserBorrowedBook(id);// 해당 id 반납하지 않은 책 조사
 
-            if (existenceUsername == Constants.FAIL)
+            if (existenceUsername == Constants.isFail)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5");
@@ -111,10 +111,10 @@ namespace LibruryDatabase.Controls
         {
             string name;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
                 name = Console.ReadLine();
-                if (Constants.CHECK == Regex.IsMatch(name, Utility.Exception.NAME_CHECK))
+                if (Constants.isFail == Regex.IsMatch(name, Utility.Exception.NAME_CHECK))
                 {                   
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -130,12 +130,12 @@ namespace LibruryDatabase.Controls
 
             string id;
 
-            while (Constants.LOGIN)
+            while (Constants.isLogin)
             {
                 id = Console.ReadLine();
                ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                if (Constants.CHECK == Regex.IsMatch(id, Utility.Exception.ID_CHECK))
+                if (Constants.isFail == Regex.IsMatch(id, Utility.Exception.ID_CHECK))
                 {
                    ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);

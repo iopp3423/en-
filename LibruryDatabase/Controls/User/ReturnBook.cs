@@ -16,7 +16,7 @@ namespace LibruryDatabase.Controls
         Screen Menu = new Screen();
         public void moveMenu() //이전 메뉴로 돌아가기
         {
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)
@@ -53,7 +53,7 @@ namespace LibruryDatabase.Controls
             Console.Write("반납 : Enter                                  뒤로가기 : ESC");
             Console.ResetColor();
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 if (Constants.cursor.Key == ConsoleKey.Escape)
@@ -71,7 +71,7 @@ namespace LibruryDatabase.Controls
             AlreadyBorrow = BookData.Get().CheckAlreadyBorrowBook(id, bookNumber);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
-            if (AlreadyBorrow == Constants.FAIL)
+            if (AlreadyBorrow == Constants.isFail)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("대여하지 않은 도서입니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
@@ -83,7 +83,7 @@ namespace LibruryDatabase.Controls
             
             checkAlreadyReturn = BookData.Get().CheckUserBorrowedBook(id, bookNumber);
 
-            if (checkAlreadyReturn == Constants.PASS)
+            if (checkAlreadyReturn == Constants.isPassing)
             {
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -115,12 +115,12 @@ namespace LibruryDatabase.Controls
             string bookNumber;
 
             Console.Write("반납할 책 번호를 입력해주세요 : ");
-            while (Constants.ENTRANCE) // 책 번호 입력
+            while (Constants.isEntrancing) // 책 번호 입력
             {
 
                 bookNumber = Console.ReadLine();
                ClearCurrentLine(Constants.CURRENT_LOCATION);
-                if (Constants.CHECK == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK)) // 정규식에 맞지 않으면
+                if (Constants.isFail == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                    ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);

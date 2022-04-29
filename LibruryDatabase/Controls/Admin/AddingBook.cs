@@ -17,7 +17,7 @@ namespace LibruryDatabase.Controls
 
         public void moveMenu() //이전 메뉴로 돌아가기
         {
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)
@@ -57,7 +57,7 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 정보 입력 : Enter                                      뒤로가기 : ESC");
             Console.ResetColor();
-            if (Menu.EntranceAfterReturnMenu() == Constants.BACK_MENU) return;// 입장 후 뒤로가기 메뉴
+            if (Menu.EntranceAfterReturnMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             bookName = InputBookName(movingInputY++);
             author = InputAuthor(movingInputY++);
@@ -80,12 +80,12 @@ namespace LibruryDatabase.Controls
         {
             string bookName;
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.BOOK_NAME_X, bookNameY);
                 bookName = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(bookName, Utility.Exception.TITLE_CHECK))
+                if (Constants.isFail == Regex.IsMatch(bookName, Utility.Exception.TITLE_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -105,12 +105,12 @@ namespace LibruryDatabase.Controls
         {
             string author;
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.AUTHOR_X, authorY);
                 author = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(author, Utility.Exception.AUTHOR_CHECK))
+                if (Constants.isFail == Regex.IsMatch(author, Utility.Exception.AUTHOR_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -129,12 +129,12 @@ namespace LibruryDatabase.Controls
         {
             string publisher;
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.PUBLISHER_X, publisherY);
                 publisher = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(publisher, Utility.Exception.PUBLISH_CHECK))
+                if (Constants.isFail == Regex.IsMatch(publisher, Utility.Exception.PUBLISH_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -153,12 +153,12 @@ namespace LibruryDatabase.Controls
         {
             string publishDay;
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.PUBLISH_DAY_X, publishDayY);
                 publishDay = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(publishDay, Utility.Exception.PUBLISH_DAY))
+                if (Constants.isFail == Regex.IsMatch(publishDay, Utility.Exception.PUBLISH_DAY))
                 {
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -175,12 +175,12 @@ namespace LibruryDatabase.Controls
         {
             string quantity;
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.QUANTITY_X, quantityY);
                 quantity = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(quantity, Utility.Exception.QUANTITY))
+                if (Constants.isFail == Regex.IsMatch(quantity, Utility.Exception.QUANTITY))
                 {
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -198,11 +198,11 @@ namespace LibruryDatabase.Controls
         {
             string bookPrice;
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.BOOK_PRICE_X, bookPriceY);
                 bookPrice = Console.ReadLine();
-                if (Constants.CHECK == Regex.IsMatch(bookPrice, Utility.Exception.PRICE))
+                if (Constants.isFail == Regex.IsMatch(bookPrice, Utility.Exception.PRICE))
                 {
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);

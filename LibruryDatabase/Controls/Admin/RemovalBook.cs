@@ -16,7 +16,7 @@ namespace LibruryDatabase.Controls
         Screen Menu = new Screen();
         public void GoBackMenu() //이전 메뉴로 돌아가기
         {
-            while (Constants.ENTRANCE)
+            while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
                 switch (Constants.cursor.Key)
@@ -50,7 +50,7 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 제거 : Enter                                         뒤로가기 : ESC");
             Console.ResetColor();
-            if (Menu.EntranceAfterReturnMenu() == Constants.BACK_MENU) return;// 입장 후 뒤로가기 메뉴
+            if (Menu.EntranceAfterReturnMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
             SearchBookName(); // 책 제목 검색
@@ -58,13 +58,13 @@ namespace LibruryDatabase.Controls
             bookNumber = InputBookNumber();
             BookExitence = BookData.Get().CheckBookExistence(bookNumber);// 도서관에 책 있는지 체크
 
-            if (BookExitence == Constants.FAIL)
+            if (BookExitence == Constants.isFail)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("존재하지 않는 책입니다.  뒤로가기 : ESC    프로그램 종료 : F5");
                 Console.ResetColor();
             }
-            else if (BookExitence == Constants.PASS)
+            else if (BookExitence == Constants.isPassing)
             {
                 BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -83,12 +83,12 @@ namespace LibruryDatabase.Controls
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("삭제할 책 번호 :");
 
-            while (Constants.PASS)
+            while (Constants.isPassing)
             {           
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                 bookNumber = Console.ReadLine();
 
-                if (Constants.CHECK == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK))
+                if (Constants.isFail == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);

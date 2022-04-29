@@ -55,16 +55,15 @@ namespace LibruryDatabase.Utility
         public const int CONSOLE_SIZE_HDIGHT = 40;
         public const int CURRENT_LOCATION = 0;
         public const int BEFORE_INPUT_LOCATION = 1;
-        public const bool CHECK = false;
-        public const bool ENTRANCE = true;
-        public const bool LOGIN = true;
-        public const bool PASS = true;
-        public const bool BACK = false;
-        public const bool BACK_MENU = false;
-        public const bool SUCESS = true;
-        public const bool FAIL = false;
-        public const bool GO_USER_SEARCH = true;
-        public const bool GO_ADMIN_SEARCH = false;
+        public const bool isEntrancing = true;
+        public const bool isLogin = true;
+        public const bool isPassing = true;
+        public const bool isBack = false;
+        public const bool isBackMenu = false;
+        public const bool isSucess = true;
+        public const bool isFail = false;
+        public const bool isUserSearching = true;
+        public const bool isAdminSearching = false;
 
         public const int FIRSTX=0;
         public const int FIRSTY=10;
