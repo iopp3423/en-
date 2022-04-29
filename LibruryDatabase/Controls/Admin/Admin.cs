@@ -11,7 +11,7 @@ using MySql.Data.MySqlClient;
 
 namespace LibruryDatabase.Controls
 {
-    internal class Admin : User
+    internal class Admin : LoginOrJoin
     {
         Screen Menu = new Screen();
         AdminMenu goingMenu= new AdminMenu();

@@ -13,7 +13,7 @@ namespace LibruryDatabase.Controls
     {
         
         Screen Menu = new Screen(); // 뷰 클래스 객체생성
-        User UserLibruary = new User();
+        LoginOrJoin UserLibruary = new LoginOrJoin();
         Admin AdminLibruary = new Admin();
         
 

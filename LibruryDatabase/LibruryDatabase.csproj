@@ -86,21 +86,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AddingBook.cs" />
-    <Compile Include="Controls\AdminMenu.cs" />
-    <Compile Include="Controls\BorrowingBook.cs" />
-    <Compile Include="Controls\CheckingReturnBook.cs" />
-    <Compile Include="Controls\ModificationBook.cs" />
-    <Compile Include="Controls\RemovalUser.cs" />
-    <Compile Include="Controls\ModificationUser.cs" />
-    <Compile Include="Controls\RemovalBook.cs" />
+    <Compile Include="Controls\Admin\AddingBook.cs" />
+    <Compile Include="Controls\Admin\AdminMenu.cs" />
+    <Compile Include="Controls\User\BorrowingBook.cs" />
+    <Compile Include="Controls\User\CheckingReturnBook.cs" />
+    <Compile Include="Controls\Admin\ModificationBook.cs" />
+    <Compile Include="Controls\Admin\RemovalUser.cs" />
+    <Compile Include="Controls\User\ModificationUser.cs" />
+    <Compile Include="Controls\Admin\RemovalBook.cs" />
     <Compile Include="Controls\User\SearchingBook.cs" />
     <Compile Include="Controls\StartConnection.cs" />
     <Compile Include="Models\BookData.cs" />
     <Compile Include="Utility\Constants.cs" />
-    <Compile Include="Controls\Admin.cs" />
-    <Compile Include="Controls\User.cs" />
-    <Compile Include="Controls\UserMenu.cs" />
+    <Compile Include="Controls\Admin\Admin.cs" />
+    <Compile Include="Controls\User\LoginOrJoin.cs" />
+    <Compile Include="Controls\User\UserMenu.cs" />
     <Compile Include="Utility\Exception.cs" />
     <Compile Include="Models\UserData.cs" />
     <Compile Include="Start.cs" />

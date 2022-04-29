@@ -12,7 +12,7 @@ using MySql.Data.MySqlClient;
 
 namespace LibruryDatabase.Controls
 {
-    internal class User
+    internal class LoginOrJoin
     {
 
         Screen Menu = new Screen(); // 뷰 클래스 객체생성
