@@ -129,7 +129,7 @@ namespace LibruryDatabase.Controls
         {
             string name;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
-           ClearCurrentLine(Constants.CURRENT_LOCATION);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("입력 (영어,한글 2~8자) :");
 
             while (Constants.isEntrancing) // 책 예외처리

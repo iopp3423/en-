@@ -38,10 +38,6 @@ namespace LibruryDatabase.Controls
         public bool IsChoosingMenu(string id, string password)
         {
             int Y = Constants.FIRSTY;
-            int searchingY = Constants.SEARCH_BOOK;
-            int borrowingY = Constants.BORROW_BOOK;
-            int checkingY = Constants.CHECK_BOOK;
-            int riviseingY = Constants.RIVISE_USER;
 
             while (Constants.isEntrancing) // 참이면
             {
