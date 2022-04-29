@@ -218,7 +218,7 @@ namespace LibruryDatabase.Controls
         public void ClearCurrentLine(int number) // 줄 지우기
         {
             int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }

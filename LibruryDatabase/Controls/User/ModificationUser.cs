@@ -139,7 +139,7 @@ namespace LibruryDatabase.Controls
 
             while (Constants.isLogin)
             {
-                Console.Write("핸드폰 번호(01x - xxxx - xxxx) :");
+                Console.Write("핸드폰 번호(Constants.CURRENT_LOCATION1x - xxxx - xxxx) :");
                 callNumber = Console.ReadLine();
 
                 if (Constants.isFail == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
@@ -208,7 +208,7 @@ namespace LibruryDatabase.Controls
         public void ClearCurrentLine(int number) // 줄 지우기
         {
             int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }

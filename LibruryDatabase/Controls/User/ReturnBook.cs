@@ -14,6 +14,7 @@ namespace LibruryDatabase.Controls
     internal class ReturnBook
     {
         Screen Menu = new Screen();
+
         public void IsSelectingMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
@@ -92,9 +93,9 @@ namespace LibruryDatabase.Controls
                 Console.Write("이미 반납하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                 Console.ResetColor();
                 IsSelectingMenu();
+                return;
             }
-            else
-            {
+            
                 BookData.Get().ReturnBook(bookNumber); // 책 반납
                 BookData.Get().PlusBook(bookNumber); // 책 수량 증가
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
@@ -104,7 +105,7 @@ namespace LibruryDatabase.Controls
                 Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
                 Console.ResetColor();
                 IsSelectingMenu();
-            }
+            
             
             
         }
@@ -134,7 +135,7 @@ namespace LibruryDatabase.Controls
         public void ClearCurrentLine(int number) // 줄 지우기
         {
             int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }

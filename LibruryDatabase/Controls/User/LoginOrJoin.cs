@@ -362,7 +362,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.NUMBER_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     
-                    Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
+                    Console.WriteLine("핸드폰 번호(Constants.CURRENT_LOCATION1x-xxxx-xxxx) :");
                     Menu.PrintLoginErrorMessage(); continue;
                     
                 }
@@ -427,7 +427,7 @@ namespace LibruryDatabase.Controls
         public void ClearCurrentLine(int number) // 줄 지우기
         {
             int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }

@@ -63,7 +63,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("PW확인(영어, 숫자 포함(4~10자) :");
             Console.WriteLine("유저 이름(2~5자) :");
             Console.WriteLine("나이 :");
-            Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
+            Console.WriteLine("핸드폰 번호(Constants.CURRENT_LOCATION1x-xxxx-xxxx) :");
             Console.WriteLine("주소 :");  
         }
 
@@ -477,7 +477,7 @@ namespace LibruryDatabase.Views
         public void ClearCurrentLine(int number) // 줄 지우기
         {
             int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }

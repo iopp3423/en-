@@ -156,7 +156,7 @@ namespace LibruryDatabase.Controls
         {
             string publish;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
-           ClearCurrentLine(Constants.CURRENT_LOCATION);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("입력 (한글 2~8자) :");
 
             while (Constants.isEntrancing)
@@ -183,7 +183,7 @@ namespace LibruryDatabase.Controls
         {
             string bookName;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
-           ClearCurrentLine(Constants.CURRENT_LOCATION);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("책 제목 (한글, 영어 2~10자) :");
 
             while (Constants.isEntrancing)
@@ -198,7 +198,6 @@ namespace LibruryDatabase.Controls
                 }
                 break;
             }
-
             Console.Clear();
 
             Menu.PrintSearchBookName(bookName);// 출력            
@@ -209,7 +208,7 @@ namespace LibruryDatabase.Controls
         public void ClearCurrentLine(int number) // 줄 지우기
         {
             int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
