@@ -92,9 +92,6 @@ namespace LibruryDatabase.Controls
                 Console.Write("대여하였습니다. 뒤로가기 : ESC     프로그램 종료 : F5");
                 GoBackMenu();
                 return;
-
-                
-                GoBackMenu();
             }
 
         }

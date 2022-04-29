@@ -190,7 +190,7 @@ namespace LibruryDatabase.Views
 
         public void PrintLoginUser(string id, string password)
         {
-            Console.WriteLine("=======================================================================");
+            Console.WriteLine("====================================================================");
            
             using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
             {

@@ -11,7 +11,7 @@ using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Controls
 {
-    internal class CheckingReturnBook
+    internal class ReturnBook
     {
         Screen Menu = new Screen();
         public void moveMenu() //이전 메뉴로 돌아가기
@@ -46,8 +46,24 @@ namespace LibruryDatabase.Controls
             bool AlreadyBorrow;
 
                       
-            Console.Clear();
+            Console.Clear();                 
             Menu.PrintBorrowBookData(id);
+
+            Console.Write("입력 : Enter                                  뒤로가기 : ESC");                     
+            while (Constants.PASS)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    Menu.PrintMain();
+                    Menu.PrintUserMenu();
+                    return;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter) break;
+            }
+
+            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
             bookNumber = InputBookNumber();
             AlreadyBorrow = BookData.Get().CheckAlreadyBorrowBook(id, bookNumber);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -56,30 +72,29 @@ namespace LibruryDatabase.Controls
             {
                 Console.Write("대여하지 않은 도서입니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                 moveMenu();
+                return;
             }
 
-            else if (AlreadyBorrow == Constants.PASS)
+            
+            checkAlreadyReturn = BookData.Get().CheckUserBorrowedBook(id, bookNumber);
+
+            if (checkAlreadyReturn == Constants.PASS)
             {
-
-                checkAlreadyReturn = BookData.Get().CheckUserBorrowedBook(id, bookNumber);
-
-                if (checkAlreadyReturn == Constants.PASS)
-                {
-                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("이미 반납하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
-                    moveMenu();
-                }
-                else
-                {
-                    BookData.Get().ReturnBook(bookNumber); // 책 반납
-                    BookData.Get().PlusBook(bookNumber); // 책 수량 증가
-                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
-                    moveMenu();
-                }
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                Console.Write("이미 반납하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
+                moveMenu();
             }
+            else
+            {
+                BookData.Get().ReturnBook(bookNumber); // 책 반납
+                BookData.Get().PlusBook(bookNumber); // 책 수량 증가
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
+                moveMenu();
+            }
+            
             
         }
 

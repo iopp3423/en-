@@ -89,7 +89,7 @@
     <Compile Include="Controls\Admin\AddingBook.cs" />
     <Compile Include="Controls\Admin\AdminMenu.cs" />
     <Compile Include="Controls\User\BorrowingBook.cs" />
-    <Compile Include="Controls\User\CheckingReturnBook.cs" />
+    <Compile Include="Controls\User\ReturnBook.cs" />
     <Compile Include="Controls\Admin\ModificationBook.cs" />
     <Compile Include="Controls\Admin\RemovalUser.cs" />
     <Compile Include="Controls\User\ModificationUser.cs" />

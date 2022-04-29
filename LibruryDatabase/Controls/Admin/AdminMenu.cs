@@ -22,7 +22,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintMain();
             Menu.PrintAdminMenu();
 
-            if (Constants.BACK == moveMenu()) // 컨트롤러
+            if (Constants.BACK == moveAdminMenu()) // 컨트롤러
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -31,7 +31,9 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool moveMenu()
+
+
+        public bool moveAdminMenu()
         {
             int Y = Constants.SEARCH_BOOK;
 

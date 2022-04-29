@@ -16,7 +16,7 @@ namespace LibruryDatabase.Controls
         SearchingBook BookSearching = new SearchingBook();
         BorrowingBook BookBorrowing = new BorrowingBook();
         ModificationUser UserModification = new ModificationUser();
-        CheckingReturnBook ReturnBook = new CheckingReturnBook();
+        ReturnBook ReturnBook = new ReturnBook();
 
         public void StartBookmenu(string id, string password) // id, pw정보 저장
         {
