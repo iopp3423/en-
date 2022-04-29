@@ -105,7 +105,7 @@ namespace LibruryDatabase.Controls
         public void ModifyPhoneNumber(string id)  // 전화번호
         {
             string callNumber;
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기          
+           ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기          
             callNumber = InputCallNumber(); // 입력받기
             UserData.Get().ModifyPhone(callNumber, id); // 정보 변경
 
@@ -116,7 +116,7 @@ namespace LibruryDatabase.Controls
         public void ModifyPassword(string id) // 비밀번호
         {
             string password;
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기   
+           ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기   
             password = InputPasswordCheck();// 입력받기
             UserData.Get().ModifyPassword(password, id); // 정보 변경
 
@@ -127,7 +127,7 @@ namespace LibruryDatabase.Controls
         public void ModifyAddress(string id) // 주소
         {
             string address;
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기 
+           ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기 
             address = InputAddress();// 입력받기
             UserData.Get().ModifyAddress(address, id); // 정보 변경
 
@@ -148,7 +148,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PHONE); //커서 조정
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -169,7 +169,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PASSWORD); //커서 조정
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -190,7 +190,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
 
@@ -198,6 +198,14 @@ namespace LibruryDatabase.Controls
 
             }
             return address;
+        }
+
+        public void ClearCurrentLine(int number) // 줄 지우기
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
     }
 }

@@ -62,7 +62,7 @@ namespace LibruryDatabase.Controls
             if (existenceUsername == Constants.FAIL) // 회원목록에 없음
             {
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+               ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Console.Write("회원목록에 없습니다.  뒤로가기 : ESC         프로그램 종료 : F5");
                 moveMenu();
             }
@@ -103,7 +103,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(name, Utility.Exception.NAME_CHECK))
                 {                   
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요 :"); continue;
                 }
                 break;
@@ -119,17 +119,24 @@ namespace LibruryDatabase.Controls
             while (Constants.LOGIN)
             {
                 id = Console.ReadLine();
-                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+               ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                 if (Constants.CHECK == Regex.IsMatch(id, Utility.Exception.ID_CHECK))
                 {
-                    Constants.ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
+                   ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                     Console.Write("id를 다시 입력해주세요 :"); continue;
                 }
                 return id;
             }
-        }      
+        }
 
+        public void ClearCurrentLine(int number) // 줄 지우기
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
+        }
     }
 }

@@ -63,7 +63,7 @@ namespace LibruryDatabase.Controls
                 else if (Constants.cursor.Key == ConsoleKey.Enter) break;
             }
 
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+           ClearCurrentLine(Constants.CURRENT_LOCATION);
             bookNumber = InputBookNumber();
             AlreadyBorrow = BookData.Get().CheckAlreadyBorrowBook(id, bookNumber);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -81,7 +81,7 @@ namespace LibruryDatabase.Controls
             if (checkAlreadyReturn == Constants.PASS)
             {
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+               ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Console.Write("이미 반납하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                 moveMenu();
             }
@@ -90,7 +90,7 @@ namespace LibruryDatabase.Controls
                 BookData.Get().ReturnBook(bookNumber); // 책 반납
                 BookData.Get().PlusBook(bookNumber); // 책 수량 증가
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+               ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
                 moveMenu();
             }
@@ -108,10 +108,10 @@ namespace LibruryDatabase.Controls
             {
 
                 bookNumber = Console.ReadLine();
-                Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+               ClearCurrentLine(Constants.CURRENT_LOCATION);
                 if (Constants.CHECK == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
-                    Constants.ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
+                   ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
@@ -119,7 +119,14 @@ namespace LibruryDatabase.Controls
             }
             return bookNumber;
         }
-        
+
+        public void ClearCurrentLine(int number) // 줄 지우기
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
+        }
 
     }
 

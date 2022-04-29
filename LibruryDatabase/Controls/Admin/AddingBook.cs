@@ -88,7 +88,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(bookName, Utility.Exception.TITLE_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("책 제목(영어, 한글 2~10자) :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -113,7 +113,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(author, Utility.Exception.AUTHOR_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("작가(영어, 한글 2~8자) :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -137,7 +137,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(publisher, Utility.Exception.PUBLISH_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("출판사(영어 한글 2~8자):");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -161,7 +161,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(publishDay, Utility.Exception.PUBLISH_DAY))
                 {
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("출시일(YYYY/MM/DD) :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -183,7 +183,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(quantity, Utility.Exception.QUANTITY))
                 {
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("수량(1~3자리 숫자):");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -205,7 +205,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(bookPrice, Utility.Exception.PRICE))
                 {
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("가격 :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -214,6 +214,13 @@ namespace LibruryDatabase.Controls
             }
             return bookPrice;
         }
-        
+
+        public void ClearCurrentLine(int number) // 줄 지우기
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
+        }
     }
 }

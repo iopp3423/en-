@@ -64,7 +64,7 @@ namespace LibruryDatabase.Controls
                     if (Constants.CHECK == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK)) // 정규식에 맞지 않으면
                     {
                         Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                        Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                       ClearCurrentLine(Constants.CURRENT_LOCATION);
                         Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                         continue;
                     }
@@ -81,7 +81,7 @@ namespace LibruryDatabase.Controls
                 if (alreadyBorrow == Constants.FAIL)
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("이미 대여하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                     GoBackMenu();
                     return;
@@ -94,6 +94,15 @@ namespace LibruryDatabase.Controls
                 return;
             }
 
+
+        }
+
+        public void ClearCurrentLine(int number) // 줄 지우기
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
 
     }

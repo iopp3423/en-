@@ -66,7 +66,7 @@ namespace LibruryDatabase.Controls
         {
             string modificatioNumber;
 
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+           ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("책 수량 수정 1번, 책 가격 수정 2번 입력:");
 
             while (Constants.PASS)
@@ -76,7 +76,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(modificatioNumber, Utility.Exception.MODIFICATION_BOOK))
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop-Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요 : "); continue;
                 }
                 break;
@@ -98,7 +98,7 @@ namespace LibruryDatabase.Controls
             string quantity;
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+           ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("수정할 수량을 입력해주세요(숫자만) :");
             while (Constants.PASS)
             {
@@ -107,7 +107,7 @@ namespace LibruryDatabase.Controls
 
                 if (Constants.CHECK == Regex.IsMatch(quantity, Utility.Exception.QUANTITY))
                 {
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -120,7 +120,7 @@ namespace LibruryDatabase.Controls
             string bookPrice;
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+           ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("수정할 가격을 입력해주세요(숫자만) :");
 
             while (Constants.PASS)
@@ -130,7 +130,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(bookPrice, Utility.Exception.PRICE))
 
                 {
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
@@ -142,7 +142,7 @@ namespace LibruryDatabase.Controls
         {
             string bookNumber;
 
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+           ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("책 번호를 입력해주세요 :");
 
             while (Constants.PASS)
@@ -151,12 +151,20 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                 if (Constants.CHECK == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK))
                 {
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
                 break;
             }
             return bookNumber;
+        }
+
+        public void ClearCurrentLine(int number) // 줄 지우기
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
     }
 }

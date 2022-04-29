@@ -76,7 +76,7 @@ namespace LibruryDatabase.Controls
         string InputBookNumber() // 책 번호 입력
         {
             string bookNumber;
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+           ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.Write("삭제할 책 번호 :");
 
             while (Constants.PASS)
@@ -87,13 +87,21 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.Write("다시 입력해주세요 :"); continue;
                 }
                 break;
             }
             return bookNumber;         
+        }
+
+        public void ClearCurrentLine(int number) // 줄 지우기
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
     }
 }

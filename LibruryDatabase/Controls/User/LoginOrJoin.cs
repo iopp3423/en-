@@ -230,7 +230,7 @@ namespace LibruryDatabase.Controls
                 {
 
                     Console.SetCursorPosition(Constants.ID_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.Write("ID(영어, 숫자 포함(8~10자) :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -257,7 +257,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.PW_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.Write("PW(영어, 숫자 포함(4~10자) :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -283,7 +283,7 @@ namespace LibruryDatabase.Controls
                if (Constants.CHECK == Regex.IsMatch(password, Utility.Exception.PW_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("PW확인(영어, 숫자 포함(4~10자) :");
                     Menu.PrintLoginErrorMessage(); continue;               
@@ -336,7 +336,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(name, Utility.Exception.NAME_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.NAME_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("유저 이름(2~5자) :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -360,7 +360,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.NUMBER_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
                     
                     Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -385,7 +385,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
                 {
                      Console.SetCursorPosition(Constants.ADDRESS_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
 
                     Console.WriteLine("주소 :");
@@ -412,7 +412,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.CHECK == Regex.IsMatch(age, Utility.Exception.AGE_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.AGE_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                   ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("나이 :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -422,6 +422,14 @@ namespace LibruryDatabase.Controls
             }
             Menu.PrintInputMessage();
             return age;
+        }
+
+        public void ClearCurrentLine(int number) // 줄 지우기
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
 
     }

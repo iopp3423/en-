@@ -41,7 +41,7 @@ namespace LibruryDatabase.Views
         public void PrintInputMessage()
         {
             Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+           ClearCurrentLine(Constants.CURRENT_LOCATION);
             Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("입력되었습니다.");
@@ -469,9 +469,16 @@ namespace LibruryDatabase.Views
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.BOOK_NAME_Y);
                     return Constants.BACK_MENU;
                 }
-                else if (Constants.cursor.Key == ConsoleKey.Enter) { Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); break; }
+                else if (Constants.cursor.Key == ConsoleKey.Enter) {ClearCurrentLine(Constants.CURRENT_LOCATION); break; }
             }
             return Constants.PASS;
+        }
+        public void ClearCurrentLine(int number) // 줄 지우기
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - number);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
     }
 }

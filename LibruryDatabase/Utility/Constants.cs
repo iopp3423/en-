@@ -9,13 +9,7 @@ namespace LibruryDatabase.Utility
 {
     internal class Constants
     {
-        static public void ClearCurrentLine(int number) // 줄 지우기 함수 위치 바꾸자
-        {
-            int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop-number);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(CURRENT_LOCATION, currentLineCursor);
-        }
+        
 
         static public bool SEARCH_RESULT_BOOK;
         static public ConsoleKeyInfo cursor; 
