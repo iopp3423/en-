@@ -33,7 +33,6 @@ namespace LibruryDatabase.Controls
                         }
                     default: continue;
                 }
-
             }
         }
 
@@ -52,6 +51,7 @@ namespace LibruryDatabase.Controls
                 return;
             }
         }
+
         public bool IsChoosingMenu(string id)
         {
             int Y = Constants.GOING_PHONE;
@@ -139,7 +139,7 @@ namespace LibruryDatabase.Controls
 
             while (Constants.isLogin)
             {
-                Console.Write("핸드폰 번호(Constants.CURRENT_LOCATION1x - xxxx - xxxx) :");
+                Console.Write("핸드폰 번호(01x - xxxx - xxxx) :");
                 callNumber = Console.ReadLine();
 
                 if (Constants.isFail == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
@@ -183,11 +183,10 @@ namespace LibruryDatabase.Controls
                 address = Console.ReadLine();
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
 
-
                 if (Constants.isFail == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
-                   ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Console.Write("다시 입력해주세요:"); continue;
                 }
 

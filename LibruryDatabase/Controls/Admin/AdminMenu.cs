@@ -74,7 +74,7 @@ namespace LibruryDatabase.Controls
                                 Console.ResetColor();
                                 GoBackMenu(); 
                             } 
-                                break;
+                            break;
                         }
                      case ConsoleKey.Escape:
                         {

@@ -210,7 +210,7 @@ namespace LibruryDatabase.Controls
                 switch(Constants.cursor.Key)
                 {
                     case ConsoleKey.Enter: UserLogin(); break;
-                     case ConsoleKey.Escape: return;
+                    case ConsoleKey.Escape: return;
                     default: continue;
                 }
             }
@@ -362,7 +362,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.NUMBER_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     
-                    Console.WriteLine("핸드폰 번호(Constants.CURRENT_LOCATION1x-xxxx-xxxx) :");
+                    Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
                     Menu.PrintLoginErrorMessage(); continue;
                     
                 }

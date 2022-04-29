@@ -106,7 +106,7 @@ namespace LibruryDatabase.Utility
         public const int NAME_X = 18;
         public const int AGE_X = 7;
         public const int NUMBER_X = 28;
-        public const int ADDRESS_X = 7;
+        public const int ADDRESS_X = 26;
 
         public const int GOING_PHONE = 21;
         public const int GOING_PASSWORD = 22;

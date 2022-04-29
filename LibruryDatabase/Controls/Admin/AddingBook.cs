@@ -88,7 +88,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.isFail == Regex.IsMatch(bookName, Utility.Exception.TITLE_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                   ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("책 제목(영어, 한글 2~10자) :");
                     Menu.PrintLoginErrorMessage(); continue;
@@ -171,6 +171,8 @@ namespace LibruryDatabase.Controls
             Menu.PrintInputMessage();
             return publishDay;
         }
+
+
         string InputQuantity(int quantityY)
         {
             string quantity;
@@ -193,6 +195,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintInputMessage();
             return quantity;
         }
+
 
         string InputPrice(int bookPriceY)
         {

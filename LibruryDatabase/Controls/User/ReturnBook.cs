@@ -80,8 +80,7 @@ namespace LibruryDatabase.Controls
                 IsSelectingMenu();
                 return;
             }
-
-            
+          
             isCheckAlreadyReturn = BookData.Get().IsCheckingUserBorrowedBook(id, bookNumber);
 
             if (isCheckAlreadyReturn == Constants.isPassing)
@@ -96,18 +95,16 @@ namespace LibruryDatabase.Controls
                 return;
             }
             
-                BookData.Get().ReturnBook(bookNumber); // 책 반납
-                BookData.Get().PlusBook(bookNumber); // 책 수량 증가
-                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-                ClearCurrentLine(Constants.CURRENT_LOCATION);
+            BookData.Get().ReturnBook(bookNumber); // 책 반납
+            BookData.Get().PlusBook(bookNumber); // 책 수량 증가
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
-                Console.ResetColor();
-                IsSelectingMenu();
-            
-            
-            
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
+            Console.ResetColor();
+            IsSelectingMenu();
+                               
         }
 
 
@@ -120,7 +117,7 @@ namespace LibruryDatabase.Controls
             {
 
                 bookNumber = Console.ReadLine();
-               ClearCurrentLine(Constants.CURRENT_LOCATION);
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
                 if (Constants.isFail == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                    ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);

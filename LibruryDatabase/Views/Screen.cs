@@ -63,8 +63,9 @@ namespace LibruryDatabase.Views
             Console.WriteLine("PW확인(영어, 숫자 포함(4~10자) :");
             Console.WriteLine("유저 이름(2~5자) :");
             Console.WriteLine("나이 :");
-            Console.WriteLine("핸드폰 번호(Constants.CURRENT_LOCATION1x-xxxx-xxxx) :");
-            Console.WriteLine("주소 :");  
+            Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
+            //Console.WriteLine("주소 :");  
+            Console.WriteLine("주소(천안시동남구신부동) :");
         }
 
         public void JoinPrint()

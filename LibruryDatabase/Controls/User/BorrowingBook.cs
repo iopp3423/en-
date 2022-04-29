@@ -98,6 +98,7 @@ namespace LibruryDatabase.Controls
                     Console.ResetColor(); GoBackMenu(); 
                     return; 
                 }
+
                 if (BookData.Get().IsCheckongBookQuantity(bookNumber) == Constants.isFail) 
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
