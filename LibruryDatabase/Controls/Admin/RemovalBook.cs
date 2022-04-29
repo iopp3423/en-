@@ -47,6 +47,11 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchBookName();
             Menu.PrintBookData(); // 책 목록 프린트
 
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("책 제거 : Enter                                         뒤로가기 : ESC");
+            Console.ResetColor();
+            if (Menu.EntranceAfterReturnMenu() == Constants.BACK_MENU) return;// 입장 후 뒤로가기 메뉴
+
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
             SearchBookName(); // 책 제목 검색
 

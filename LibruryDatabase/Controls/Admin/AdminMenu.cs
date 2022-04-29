@@ -63,15 +63,15 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.GO_ADMIN_SEARCH); break; } // 관리자 도서검색
                             if (Y == Constants.ADD_BOOK) { adding.AddBook(); break; } // 책 추가 클래스 이동
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
-
-
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
                             if (Y == Constants.CURRENT_BOOK) // 대여상황
                             { 
                                 Console.Clear();
                                 Menu.PrintCurrentBorrowBook();
-                                Console.Write("뒤로가기 : ESC                   프로그램 종료 : F5");
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.Write("뒤로가기 : ESC                                프로그램 종료 : F5");
+                                Console.ResetColor();
                                 GoBackMenu(); 
                             } 
                                 break;

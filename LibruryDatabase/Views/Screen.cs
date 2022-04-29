@@ -455,5 +455,23 @@ namespace LibruryDatabase.Views
             Console.WriteLine("수량(1~3자리 숫자):");
             Console.WriteLine("가격 :");
         }
+
+        public bool EntranceAfterReturnMenu()
+        {
+            while (Constants.PASS) // 메뉴 입장한 후 뒤로가기
+            {
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    PrintMain();
+                    PrintAdminMenu();
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.BOOK_NAME_Y);
+                    return Constants.BACK_MENU;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter) { Constants.ClearCurrentLine(Constants.CURRENT_LOCATION); break; }
+            }
+            return Constants.PASS;
+        }
     }
 }

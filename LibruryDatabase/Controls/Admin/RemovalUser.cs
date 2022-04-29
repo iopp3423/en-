@@ -49,6 +49,12 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             Menu.PrintInputUserName();
             Menu.PrintUserData(); //유저목록 출력           
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("회원정보 수정 : Enter                                      뒤로가기 : ESC");
+            Console.ResetColor();
+            if (Menu.EntranceAfterReturnMenu() == Constants.BACK_MENU) return;// 입장 후 뒤로가기 메뉴
+
             Console.SetCursorPosition(Constants.INPUT_NAME_X, Constants.INPUT_NAME_Y);
 
             name = InputName(); // 이름 입력

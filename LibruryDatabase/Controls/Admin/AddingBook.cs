@@ -57,20 +57,7 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 정보 입력 : Enter                                      뒤로가기 : ESC");
             Console.ResetColor();
-
-            while (Constants.PASS) // 메뉴 입장한 후 뒤로가기
-            {
-                Constants.cursor = Console.ReadKey(true);
-                if (Constants.cursor.Key == ConsoleKey.Escape)
-                {
-                    Console.Clear();
-                    Menu.PrintMain();
-                    Menu.PrintAdminMenu();
-                    return;
-                }
-                else if (Constants.cursor.Key == ConsoleKey.Enter) break;
-            }
-            Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+            if (Menu.EntranceAfterReturnMenu() == Constants.BACK_MENU) return;// 입장 후 뒤로가기 메뉴
 
             bookName = InputBookName(movingInputY++);
             author = InputAuthor(movingInputY++);
