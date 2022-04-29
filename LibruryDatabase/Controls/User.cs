@@ -286,8 +286,7 @@ namespace LibruryDatabase.Controls
                     Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Console.WriteLine("PW확인(영어, 숫자 포함(4~10자) :");
-                    Menu.PrintLoginErrorMessage(); continue;
-                    
+                    Menu.PrintLoginErrorMessage(); continue;               
                 }
                 break;
             }
@@ -311,7 +310,7 @@ namespace LibruryDatabase.Controls
                 {
                     if (!string.IsNullOrEmpty(password))
                     {
-                        password = password.Substring(0, password.Length - Constants.ONE);
+                        password = password.Substring(Constants.CURRENT_LOCATION, password.Length - Constants.ONE);
                         int passwordX = Console.CursorLeft;
                         Console.SetCursorPosition(passwordX - Constants.ONE, Console.CursorTop);
                         Console.Write(" ");

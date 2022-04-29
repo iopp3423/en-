@@ -16,11 +16,9 @@ namespace LibruryDatabase.Controls
     internal class SearchingBook
     {
         Screen Menu = new Screen();
-        public bool stop = Constants.PASS;
 
 
-
-        public bool GoReturnMenuㄲ() //이전 메뉴로 돌아가기
+        public bool GoReturnMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.ENTRANCE)
             {
@@ -94,7 +92,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.NAME_SEARCH_Y) { SearchName();  } // 작가로찾기
                             if (Y == Constants.PUBLISH_Y) { SearchPublishName();} // 출판사로찾기
                             if (Y == Constants.BOOK_Y) { SearchBookName();} // 책이름으로찾기
-                            return GoReturnMenuㄲ();
+                            return GoReturnMenu();
                         }
                      case ConsoleKey.Escape:
                         {                           

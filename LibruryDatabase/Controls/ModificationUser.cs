@@ -14,6 +14,29 @@ namespace LibruryDatabase.Controls
     internal class ModificationUser
     {
         Screen Menu = new Screen();
+
+        public bool GoReturnMenu() //이전 메뉴로 돌아가기
+        {
+            while (Constants.ENTRANCE)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Escape:
+                        {
+                            return Constants.BACK_MENU;
+                        }
+                    case ConsoleKey.F5: // 종료
+                        {
+                            Environment.Exit(Constants.EXIT);
+                            break;
+                        }
+                    default: continue;
+                }
+
+            }
+        }
+
         public void ModifyUserInformation(string id, string password)
         {
             Console.Clear();
@@ -58,8 +81,8 @@ namespace LibruryDatabase.Controls
                         {
                             if (Y == Constants.GOING_PHONE) { ModifyPhoneNumber(id); } 
                             if (Y == Constants.GOING_PASSWORD) {  ModifyPassword(id); } 
-                            if (Y == Constants.GOING_ADDRESS) { ModifyAddress(id); }                        
-                            break;
+                            if (Y == Constants.GOING_ADDRESS) { ModifyAddress(id); }
+                            return GoReturnMenu();
                         }
                      case ConsoleKey.Escape:
                         {

@@ -113,7 +113,7 @@ namespace LibruryDatabase.Models
             {
                 user.Open();
                
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePhoneQuery,id), user);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePhoneQuery,callNumber, id), user);
                 Command.ExecuteNonQuery();
             }
         }
@@ -124,7 +124,7 @@ namespace LibruryDatabase.Models
             {
                 user.Open();
 
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePwQuery,id), user);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePwQuery,password, id), user);
                 Command.ExecuteNonQuery(); 
             }
         }
@@ -137,7 +137,7 @@ namespace LibruryDatabase.Models
             {
                 user.Open();
                 
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.updateAddressQuery,id), user);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.updateAddressQuery,user, id), user);
                 Command.ExecuteNonQuery(); // 
             }
         }

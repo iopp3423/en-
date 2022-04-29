@@ -72,28 +72,28 @@ namespace LibruryDatabase.Controls
                 }
 
                 if (BookData.Get().CheckReturnBook(id, bookNumber) == Constants.PASS) BookData.Get().RemoveRetuenBookInformation(id, bookNumber); // 반납한 책 확인 후 제거                
-                if (BookData.Get().CheckBookExistence(bookNumber) == Constants.FAIL) { Console.Write("존재하지 않는 책 번호 입니다. 뒤로가기 : ESC      프로그램 종료 : F5"); GoBackMenu(); return; }
+                if (BookData.Get().CheckBookExistence(bookNumber) == Constants.FAIL) { Console.Write("존재하지 않는 책입니다. 뒤로가기 : ESC      프로그램 종료 : F5"); GoBackMenu(); return; }
                 if (BookData.Get().CheckBookQuantity(bookNumber) == Constants.FAIL) { Console.Write("도서 수량이 부족합니다. 뒤로가기 : ESC       프로그램 종료 : F5"); GoBackMenu(); return; }
-                {                  
 
-                    alreadyBorrow = BookData.Get().CheckBookOverlap(id, bookNumber); // 책 대여 체크
+                                  
+                alreadyBorrow = BookData.Get().CheckBookOverlap(id, bookNumber); // 책 대여 체크
 
-                    if (alreadyBorrow == Constants.FAIL)
-                    {
-                        Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                        Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
-                        Console.Write("이미 대여하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
-                        GoBackMenu();
-                        return;
-                    }
-
-                    BookData.Get().SearchBook(id, bookNumber);
-                    BookData.Get().MinusBook(bookNumber); // 책 수량 감소
-                    Console.Write("대여하였습니다. 뒤로가기 : ESC     프로그램 종료 : F5");
+                if (alreadyBorrow == Constants.FAIL)
+                {
+                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    Constants.ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    Console.Write("이미 대여하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                     GoBackMenu();
                     return;
-
                 }
+
+                BookData.Get().SearchBook(id, bookNumber);
+                BookData.Get().MinusBook(bookNumber); // 책 수량 감소
+                Console.Write("대여하였습니다. 뒤로가기 : ESC     프로그램 종료 : F5");
+                GoBackMenu();
+                return;
+
+                
                 GoBackMenu();
             }
 
