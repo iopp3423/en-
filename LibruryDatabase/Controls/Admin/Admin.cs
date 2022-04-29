@@ -21,18 +21,18 @@ namespace LibruryDatabase.Controls
         {
             string id;
             string password;
-            bool checkingLogin;
+            bool isCheckingLogin;
 
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintLogin();
             id = InputId(); // 아이디 입력
             password = InputPassword(); // 비밀번호 입력
-            checkingLogin = UserData.Get().LoginCheck(id, password); // 아이디 비밀번호 확인
+            isCheckingLogin = UserData.Get().LoginCheck(id, password); // 아이디 비밀번호 확인
 
-            if (checkingLogin == Constants.isSucess) goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
+            if (isCheckingLogin == Constants.isSucess) goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
 
-            else if (checkingLogin == Constants.isFail)
+            else if (isCheckingLogin == Constants.isFail)
             {
                 Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
                 Console.ForegroundColor = ConsoleColor.Red;

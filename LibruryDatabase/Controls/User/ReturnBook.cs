@@ -14,7 +14,7 @@ namespace LibruryDatabase.Controls
     internal class ReturnBook
     {
         Screen Menu = new Screen();
-        public void moveMenu() //이전 메뉴로 돌아가기
+        public void ChoiceMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -42,8 +42,8 @@ namespace LibruryDatabase.Controls
         public void ShowBorrowBook(string id)
         {
             string bookNumber;
-            bool checkAlreadyReturn;
-            bool AlreadyBorrow;
+            bool isCheckAlreadyReturn;
+            bool isAlreadyBorrow;
 
                       
             Console.Clear();                 
@@ -68,22 +68,22 @@ namespace LibruryDatabase.Controls
 
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             bookNumber = InputBookNumber();
-            AlreadyBorrow = BookData.Get().CheckAlreadyBorrowBook(id, bookNumber);
+            isAlreadyBorrow = BookData.Get().CheckAlreadyBorrowBook(id, bookNumber);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
-            if (AlreadyBorrow == Constants.isFail)
+            if (isAlreadyBorrow == Constants.isFail)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("대여하지 않은 도서입니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                 Console.ResetColor();
-                moveMenu();
+                ChoiceMenu();
                 return;
             }
 
             
-            checkAlreadyReturn = BookData.Get().CheckUserBorrowedBook(id, bookNumber);
+            isCheckAlreadyReturn = BookData.Get().CheckUserBorrowedBook(id, bookNumber);
 
-            if (checkAlreadyReturn == Constants.isPassing)
+            if (isCheckAlreadyReturn == Constants.isPassing)
             {
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -91,7 +91,7 @@ namespace LibruryDatabase.Controls
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("이미 반납하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                 Console.ResetColor();
-                moveMenu();
+                ChoiceMenu();
             }
             else
             {
@@ -103,7 +103,7 @@ namespace LibruryDatabase.Controls
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
                 Console.ResetColor();
-                moveMenu();
+                ChoiceMenu();
             }
             
             

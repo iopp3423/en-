@@ -15,7 +15,7 @@ namespace LibruryDatabase.Controls
     {
         Screen Menu = new Screen();
 
-        public void moveMenu() //이전 메뉴로 돌아가기
+        public void ChoiceMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -73,7 +73,7 @@ namespace LibruryDatabase.Controls
             Console.Write("도서가 등록되었습니다. 뒤로가기 : ESC   종료 : F5");
             Console.ResetColor();
 
-            moveMenu(); 
+            ChoiceMenu(); 
         }
 
         string InputBookName(int bookNameY)

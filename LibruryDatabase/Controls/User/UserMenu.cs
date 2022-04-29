@@ -26,7 +26,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintUserMenu();
 
 
-            if (Constants.isBack == moveMenu(id, password)) // 컨트롤러
+            if (Constants.isBack == ChoiceMenu(id, password)) // 컨트롤러
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -35,7 +35,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool moveMenu(string id, string password)
+        public bool ChoiceMenu(string id, string password)
         {
             int Y = Constants.FIRSTY;
             int searchingY = Constants.SEARCH_BOOK;

@@ -47,14 +47,14 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchMenu();
             Menu.PrintBookData();
 
-            if (Constants.isBackMenu == moveMenu() && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
+            if (Constants.isBackMenu == ChoiceMenu() && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
                 Menu.PrintUserMenu();
                 return;
             }
-            else if (Constants.isBackMenu == moveMenu() && Constants.isAdminSearching == goingUserOrAdmin) // 관리자모드용 책찾기
+            else if (Constants.isBackMenu == ChoiceMenu() && Constants.isAdminSearching == goingUserOrAdmin) // 관리자모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -63,7 +63,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool moveMenu()
+        public bool ChoiceMenu()
         {
             int Y = Constants.SEARCH_Y;
 

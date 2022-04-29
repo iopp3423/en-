@@ -43,7 +43,7 @@ namespace LibruryDatabase.Controls
         public void InputBookTitleandBookNumber(string id) // 책 제목, 책 번호 
         {
             string bookNumber;
-            bool alreadyBorrow;
+            bool isAlreadyBorrow;
 
 
             Console.Clear();

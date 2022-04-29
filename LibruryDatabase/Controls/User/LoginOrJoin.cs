@@ -27,7 +27,7 @@ namespace LibruryDatabase.Controls
             Menu.JoinOrLogin();
 
 
-            if (Constants.isBack == moveMenu()) // 마우스 함수
+            if (Constants.isBack == ChoiceMenu()) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -36,7 +36,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool moveMenu()
+        public bool ChoiceMenu()
         {
             int Y = Constants.FIRSTY;
             int goingJoin = Constants.USER_Y;
@@ -112,14 +112,14 @@ namespace LibruryDatabase.Controls
             string age;
             string callNumber;
             string address;           
-            bool overlapCheck;
+            bool isOverlapCheck;
 
 
             id = InputId();
          
-            overlapCheck = UserData.Get().CheckIdOverlap(id); // 데베에서 id 중복 확인
+            isOverlapCheck = UserData.Get().CheckIdOverlap(id); // 데베에서 id 중복 확인
 
-            if (overlapCheck == Constants.isSucess)
+            if (isOverlapCheck == Constants.isSucess)
             {
                 Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -188,7 +188,7 @@ namespace LibruryDatabase.Controls
         {
             string id;
             string password;
-            bool overlapCheck;
+            bool isOverlapCheck;
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintLogin();
@@ -196,9 +196,9 @@ namespace LibruryDatabase.Controls
             id = InputId();
             password = InputPassword();
 
-            overlapCheck = UserData.Get().CheckLogin(id, password); //데베에서 회원 유무 확인
+            isOverlapCheck = UserData.Get().CheckLogin(id, password); //데베에서 회원 유무 확인
 
-            if (overlapCheck == Constants.isSucess) GoUser.StartBookmenu(id, password);
+            if (isOverlapCheck == Constants.isSucess) GoUser.StartBookmenu(id, password);
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");

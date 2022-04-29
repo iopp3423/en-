@@ -44,7 +44,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintLoginUser(id, password);
             Menu.PrintUserInformation();
 
-            if (Constants.isBack == moveMenu(id)) // 마우스 함수
+            if (Constants.isBack == ChoiceMenu(id)) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -52,7 +52,7 @@ namespace LibruryDatabase.Controls
                 return;
             }
         }
-        public bool moveMenu(string id)
+        public bool ChoiceMenu(string id)
         {
             int Y = Constants.GOING_PHONE;
 
