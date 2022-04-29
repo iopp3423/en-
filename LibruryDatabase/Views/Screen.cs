@@ -456,7 +456,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("가격 :");
         }
 
-        public bool EntranceAfterReturnMenu()
+        public bool IsGoingBackMenu()
         {
             while (Constants.isPassing) // 메뉴 입장한 후 뒤로가기
             {

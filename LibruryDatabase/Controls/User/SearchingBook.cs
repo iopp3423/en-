@@ -19,7 +19,7 @@ namespace LibruryDatabase.Controls
         Screen Menu = new Screen();
 
 
-        public bool GoReturnMenu() //이전 메뉴로 돌아가기
+        public bool IsGoingReturnMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -47,14 +47,14 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchMenu();
             Menu.PrintBookData();
 
-            if (Constants.isBackMenu == ChoiceMenu() && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
+            if (Constants.isBackMenu == IsSelectingMenu() && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
                 Menu.PrintUserMenu();
                 return;
             }
-            else if (Constants.isBackMenu == ChoiceMenu() && Constants.isAdminSearching == goingUserOrAdmin) // 관리자모드용 책찾기
+            else if (Constants.isBackMenu == IsSelectingMenu() && Constants.isAdminSearching == goingUserOrAdmin) // 관리자모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -63,7 +63,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool ChoiceMenu()
+        public bool IsSelectingMenu()
         {
             int Y = Constants.SEARCH_Y;
 
@@ -93,7 +93,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.NAME_SEARCH_Y) { SearchName();  } // 작가로찾기
                             if (Y == Constants.PUBLISH_Y) { SearchPublishName();} // 출판사로찾기
                             if (Y == Constants.BOOK_Y) { SearchBookName();} // 책이름으로찾기
-                            return GoReturnMenu();
+                            return IsGoingReturnMenu();
                         }
                      case ConsoleKey.Escape:
                         {                           

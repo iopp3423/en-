@@ -43,7 +43,6 @@ namespace LibruryDatabase.Utility
         public const string minusBook = "UPDATE book SET quantity = quantity - 1 WHERE number =  ('{0}')";
         public const string plusBook = "UPDATE book SET quantity = quantity + 1 WHERE number =  ('{0}')";
 
-        //////////////////////////////////////////////////////////////////
 
 
 

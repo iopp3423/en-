@@ -27,7 +27,7 @@ namespace LibruryDatabase.Controls
             Menu.JoinOrLogin();
 
 
-            if (Constants.isBack == ChoiceMenu()) // 마우스 함수
+            if (Constants.isBack == IsSelectingMenu()) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -36,7 +36,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool ChoiceMenu()
+        public bool IsSelectingMenu()
         {
             int Y = Constants.FIRSTY;
             int goingJoin = Constants.USER_Y;
@@ -117,7 +117,7 @@ namespace LibruryDatabase.Controls
 
             id = InputId();
          
-            isOverlapCheck = UserData.Get().CheckIdOverlap(id); // 데베에서 id 중복 확인
+            isOverlapCheck = UserData.Get().IsCheckingIdOverlap(id); // 데베에서 id 중복 확인
 
             if (isOverlapCheck == Constants.isSucess)
             {
@@ -196,7 +196,7 @@ namespace LibruryDatabase.Controls
             id = InputId();
             password = InputPassword();
 
-            isOverlapCheck = UserData.Get().CheckLogin(id, password); //데베에서 회원 유무 확인
+            isOverlapCheck = UserData.Get().IsCheckingLogin(id, password); //데베에서 회원 유무 확인
 
             if (isOverlapCheck == Constants.isSucess) GoUser.StartBookmenu(id, password);
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);

@@ -15,7 +15,7 @@ namespace LibruryDatabase.Controls
     {
         Screen Menu = new Screen();
 
-        public void ChoiceMenu() //이전 메뉴로 돌아가기
+        public void IsSelectingMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -57,7 +57,7 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 정보 입력 : Enter                                      뒤로가기 : ESC");
             Console.ResetColor();
-            if (Menu.EntranceAfterReturnMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             bookName = InputBookName(movingInputY++);
             author = InputAuthor(movingInputY++);
@@ -73,7 +73,7 @@ namespace LibruryDatabase.Controls
             Console.Write("도서가 등록되었습니다. 뒤로가기 : ESC   종료 : F5");
             Console.ResetColor();
 
-            ChoiceMenu(); 
+            IsSelectingMenu(); 
         }
 
         string InputBookName(int bookNameY)

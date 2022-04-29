@@ -19,7 +19,7 @@ namespace LibruryDatabase.Models
             return User;
         }
 
-        public bool LoginCheck(string id, string password) // 관리자 아이디로그인 체크
+        public bool IsLoginCheck(string id, string password) // 관리자 아이디로그인 체크
         {
 
 
@@ -64,7 +64,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public bool CheckIdOverlap(string id) // 데베에서 중복아이디 있는지 체크
+        public bool IsCheckingIdOverlap(string id) // 데베에서 중복아이디 있는지 체크
         {
 
 
@@ -85,7 +85,7 @@ namespace LibruryDatabase.Models
 
         }
 
-        public bool CheckLogin(string id, string password) // 데베에서 회원 유무 확인
+        public bool IsCheckingLogin(string id, string password) // 데베에서 회원 유무 확인
         {
 
 
@@ -142,7 +142,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public bool CheckExistenceId(string id) // 아이디 존재유무
+        public bool IsCheckingExistenceId(string id) // 아이디 존재유무
         {
 
 
@@ -161,7 +161,7 @@ namespace LibruryDatabase.Models
             return Constants.isFail;
         }
 
-        public bool CheckExistenceUser(string name) // 회원이름이 존재하는지 체크
+        public bool IsCheckingExistenceUser(string name) // 회원이름이 존재하는지 체크
         {
 
 

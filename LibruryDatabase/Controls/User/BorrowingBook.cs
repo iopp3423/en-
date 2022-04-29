@@ -88,17 +88,17 @@ namespace LibruryDatabase.Controls
                     break;
                 }
 
-                if (BookData.Get().CheckReturnBook(id, bookNumber) == Constants.isPassing) BookData.Get().RemoveRetuenBookInformation(id, bookNumber); // 반납한 책 확인 후 제거
+                if (BookData.Get().IsCheckReturnBook(id, bookNumber) == Constants.isPassing) BookData.Get().RemoveRetuenBookInformation(id, bookNumber); // 반납한 책 확인 후 제거
 
                
-                if (BookData.Get().CheckBookExistence(bookNumber) == Constants.isFail) 
+                if (BookData.Get().IsCheckingBookExistence(bookNumber) == Constants.isFail) 
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("존재하지 않는 책입니다. 뒤로가기 : ESC      프로그램 종료 : F5"); 
                     Console.ResetColor(); GoBackMenu(); 
                     return; 
                 }
-                if (BookData.Get().CheckBookQuantity(bookNumber) == Constants.isFail) 
+                if (BookData.Get().IsCheckongBookQuantity(bookNumber) == Constants.isFail) 
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write("도서 수량이 부족합니다. 뒤로가기 : ESC       프로그램 종료 : F5"); 
@@ -106,11 +106,11 @@ namespace LibruryDatabase.Controls
                     GoBackMenu(); 
                     return; 
                 }
-                
 
-                alreadyBorrow = BookData.Get().CheckBookOverlap(id, bookNumber); // 책 대여 체크
 
-                if (alreadyBorrow == Constants.isFail)
+                isAlreadyBorrow = BookData.Get().IsCheckingBookOverlap(id, bookNumber); // 책 대여 체크
+
+                if (isAlreadyBorrow == Constants.isFail)
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);

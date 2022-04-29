@@ -14,7 +14,7 @@ namespace LibruryDatabase.Controls
     internal class ReturnBook
     {
         Screen Menu = new Screen();
-        public void ChoiceMenu() //이전 메뉴로 돌아가기
+        public void IsSelectingMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -68,7 +68,7 @@ namespace LibruryDatabase.Controls
 
            ClearCurrentLine(Constants.CURRENT_LOCATION);
             bookNumber = InputBookNumber();
-            isAlreadyBorrow = BookData.Get().CheckAlreadyBorrowBook(id, bookNumber);
+            isAlreadyBorrow = BookData.Get().IsCheckingAlreadyBorrowBook(id, bookNumber);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
             if (isAlreadyBorrow == Constants.isFail)
@@ -76,12 +76,12 @@ namespace LibruryDatabase.Controls
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("대여하지 않은 도서입니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                 Console.ResetColor();
-                ChoiceMenu();
+                IsSelectingMenu();
                 return;
             }
 
             
-            isCheckAlreadyReturn = BookData.Get().CheckUserBorrowedBook(id, bookNumber);
+            isCheckAlreadyReturn = BookData.Get().IsCheckingUserBorrowedBook(id, bookNumber);
 
             if (isCheckAlreadyReturn == Constants.isPassing)
             {
@@ -91,7 +91,7 @@ namespace LibruryDatabase.Controls
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("이미 반납하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
                 Console.ResetColor();
-                ChoiceMenu();
+                IsSelectingMenu();
             }
             else
             {
@@ -103,7 +103,7 @@ namespace LibruryDatabase.Controls
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
                 Console.ResetColor();
-                ChoiceMenu();
+                IsSelectingMenu();
             }
             
             

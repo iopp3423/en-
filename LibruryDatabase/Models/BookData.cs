@@ -69,7 +69,7 @@ namespace LibruryDatabase.Models
         }
 
  
-        public bool CheckBookOverlap(string id, string bookNumber) // 데베에서 책 대여했는지 체크
+        public bool IsCheckingBookOverlap(string id, string bookNumber) // 데베에서 책 대여했는지 체크
         {
 
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
@@ -90,7 +90,7 @@ namespace LibruryDatabase.Models
 
         }
 
-        public bool CheckReturnBook(string id, string bookNumber) // 데베에서 책 대여했는지 체크
+        public bool IsCheckReturnBook(string id, string bookNumber) // 데베에서 책 대여했는지 체크
         {
 
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
@@ -192,7 +192,7 @@ namespace LibruryDatabase.Models
         }
 
 
-        public bool CheckBookQuantity(string bookNumber) // 책 수량 체크
+        public bool IsCheckongBookQuantity(string bookNumber) // 책 수량 체크
         {
 
 
@@ -210,7 +210,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public bool CheckAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크
+        public bool IsCheckingAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크
         {
 
             
@@ -231,7 +231,7 @@ namespace LibruryDatabase.Models
         }
 
 
-        public bool CheckUserBorrowedBook(string id, string bookNumber) // 데베에서 책 이미반납했는지 체크
+        public bool IsCheckingUserBorrowedBook(string id, string bookNumber) // 데베에서 책 이미반납했는지 체크
         {
 
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
@@ -266,7 +266,7 @@ namespace LibruryDatabase.Models
 
         }
 
-        public bool CheckBookExistence(string bookNumber) // 데베에 책 있는지 체크
+        public bool IsCheckingBookExistence(string bookNumber) // 데베에 책 있는지 체크
         {
             
 
@@ -285,7 +285,7 @@ namespace LibruryDatabase.Models
             return Constants.isFail;
         }
 
-        public bool CheckUserBorrowedBook(string id) // 유저가 대여한 책이 있는지 체크
+        public bool IsCheckingUserBorrowedBook(string id) // 유저가 대여한 책이 있는지 체크
         {
             bool isCheckingBook = Constants.isPassing;
            

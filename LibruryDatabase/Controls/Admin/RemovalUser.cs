@@ -15,7 +15,7 @@ namespace LibruryDatabase.Controls
     {
 
         Screen Menu = new Screen();
-        public void ChoiceMenu() //이전 메뉴로 돌아가기
+        public void IsSelectingMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -53,12 +53,12 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("회원삭제 : Enter                                          뒤로가기 : ESC");
             Console.ResetColor();
-            if (Menu.EntranceAfterReturnMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.INPUT_NAME_X, Constants.INPUT_NAME_Y);
 
             name = InputName(); // 이름 입력
-            isExistenceUsername = UserData.Get().CheckExistenceUser(name); //이름 회원목록에 있는지 조사
+            isExistenceUsername = UserData.Get().IsCheckingExistenceUser(name); //이름 회원목록에 있는지 조사
             if (isExistenceUsername == Constants.isFail) // 회원목록에 없음
             {
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -67,7 +67,7 @@ namespace LibruryDatabase.Controls
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("회원목록에 없습니다.              뒤로가기 : ESC         프로그램 종료 : F5");
                 Console.ResetColor();
-                ChoiceMenu();
+                IsSelectingMenu();
                 return;
             }
            
@@ -76,24 +76,24 @@ namespace LibruryDatabase.Controls
             Console.Write("삭제하실 유저 id를 입력하세요 :");
             id = InputId(); // 아이디 입력
 
-            isExistenceId = UserData.Get().CheckExistenceId(id); //id 회원목록에 있는지 조사
+            isExistenceId = UserData.Get().IsCheckingExistenceId(id); //id 회원목록에 있는지 조사
             if (isExistenceId == Constants.isFail) 
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("회원목록에 없습니다.             뒤로가기 : ESC         프로그램 종료 : F5");
                 Console.ResetColor();
-                ChoiceMenu(); 
+                IsSelectingMenu(); 
                 return; 
             } 
 
-            isExistenceUsername = BookData.Get().CheckUserBorrowedBook(id);// 해당 id 반납하지 않은 책 조사
+            isExistenceUsername = BookData.Get().IsCheckingUserBorrowedBook(id);// 해당 id 반납하지 않은 책 조사
 
             if (isExistenceUsername == Constants.isFail)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5");
                 Console.ResetColor();
-                ChoiceMenu();
+                IsSelectingMenu();
                 return;
             }
                
@@ -102,7 +102,7 @@ namespace LibruryDatabase.Controls
             Console.ResetColor();
 
             UserData.Get().RemoveUserInformation(id); // 유저 삭제
-            ChoiceMenu();
+            IsSelectingMenu();
                         
         }
 

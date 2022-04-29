@@ -28,7 +28,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintLogin();
             id = InputId(); // 아이디 입력
             password = InputPassword(); // 비밀번호 입력
-            isCheckingLogin = UserData.Get().LoginCheck(id, password); // 아이디 비밀번호 확인
+            isCheckingLogin = UserData.Get().IsLoginCheck(id, password); // 아이디 비밀번호 확인
 
             if (isCheckingLogin == Constants.isSucess) goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
 

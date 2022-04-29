@@ -15,7 +15,7 @@ namespace LibruryDatabase.Controls
     {
         Screen Menu = new Screen();
 
-        public bool GoReturnMenu() //이전 메뉴로 돌아가기
+        public bool IsGoingReturnMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -44,7 +44,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintLoginUser(id, password);
             Menu.PrintUserInformation();
 
-            if (Constants.isBack == ChoiceMenu(id)) // 마우스 함수
+            if (Constants.isBack == IsChoosingMenu(id)) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -52,7 +52,7 @@ namespace LibruryDatabase.Controls
                 return;
             }
         }
-        public bool ChoiceMenu(string id)
+        public bool IsChoosingMenu(string id)
         {
             int Y = Constants.GOING_PHONE;
 
@@ -82,7 +82,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.GOING_PHONE) { ModifyPhoneNumber(id); } 
                             if (Y == Constants.GOING_PASSWORD) {  ModifyPassword(id); } 
                             if (Y == Constants.GOING_ADDRESS) { ModifyAddress(id); }
-                            return GoReturnMenu();
+                            return IsGoingReturnMenu();
                         }
                      case ConsoleKey.Escape:
                         {

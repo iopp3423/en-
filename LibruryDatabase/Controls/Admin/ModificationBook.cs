@@ -49,7 +49,7 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 수정 : Enter                                          뒤로가기 : ESC");
             Console.ResetColor();
-            if (Menu.EntranceAfterReturnMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
             SearchBookName(); // 책 제목 검색
