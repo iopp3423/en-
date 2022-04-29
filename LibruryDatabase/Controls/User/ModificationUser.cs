@@ -109,8 +109,7 @@ namespace LibruryDatabase.Controls
             callNumber = InputCallNumber(); // 입력받기
             UserData.Get().ModifyPhone(callNumber, id); // 정보 변경
 
-            Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
-            Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
+            ModifyAfterMessage();// 안내메시지
         }
 
         public void ModifyPassword(string id) // 비밀번호
@@ -120,8 +119,7 @@ namespace LibruryDatabase.Controls
             password = InputPasswordCheck();// 입력받기
             UserData.Get().ModifyPassword(password, id); // 정보 변경
 
-            Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
-            Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
+            ModifyAfterMessage();// 안내메시지
         }
 
         public void ModifyAddress(string id) // 주소
@@ -131,8 +129,7 @@ namespace LibruryDatabase.Controls
             address = InputAddress();// 입력받기
             UserData.Get().ModifyAddress(address, id); // 정보 변경
 
-            Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
-            Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
+            ModifyAfterMessage();// 안내메시지
         }
 
 
@@ -198,6 +195,14 @@ namespace LibruryDatabase.Controls
 
             }
             return address;
+        }
+
+        public void ModifyAfterMessage()
+        {
+            Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
+            Console.ResetColor();
         }
 
         public void ClearCurrentLine(int number) // 줄 지우기

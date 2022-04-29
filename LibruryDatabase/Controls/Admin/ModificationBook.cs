@@ -58,7 +58,10 @@ namespace LibruryDatabase.Controls
             number = InputNumber(); // 수정메뉴 입력
             receiveInput = modificationMenu(number); // 가격 or 수량           
             BookData.Get().ModifyBookInformation(receiveInput, number, keyInput); // 데베에서 책 수정
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("수정이 완료되었습니다.  뒤로가기 : ESC                 프로그램 종료 : F5");
+            Console.ResetColor();
             GoBackMenu();
         }
 
@@ -159,12 +162,5 @@ namespace LibruryDatabase.Controls
             return bookNumber;
         }
 
-        public void ClearCurrentLine(int number) // 줄 지우기
-        {
-            int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop - number);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
-        }
     }
 }

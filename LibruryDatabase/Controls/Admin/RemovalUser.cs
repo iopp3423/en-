@@ -51,7 +51,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintUserData(); //유저목록 출력           
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("회원정보 수정 : Enter                                      뒤로가기 : ESC");
+            Console.Write("회원삭제 : Enter                                          뒤로가기 : ESC");
             Console.ResetColor();
             if (Menu.EntranceAfterReturnMenu() == Constants.BACK_MENU) return;// 입장 후 뒤로가기 메뉴
 
@@ -63,33 +63,47 @@ namespace LibruryDatabase.Controls
             {
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                ClearCurrentLine(Constants.CURRENT_LOCATION);
-                Console.Write("회원목록에 없습니다.  뒤로가기 : ESC         프로그램 종료 : F5");
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("회원목록에 없습니다.              뒤로가기 : ESC         프로그램 종료 : F5");
+                Console.ResetColor();
                 moveMenu();
-            }
-
-            else if (existenceUsername == Constants.PASS) // 이름이 회원목록에 있음
-            {
-                Console.Clear();
-                Menu.PrintSearchUser(name); // 이름맞는 사람 출력
-
-                Console.Write("삭제하실 유저 id를 입력하세요 :");
-                id = InputId(); // 아이디 입력
-
-                existenceId = UserData.Get().CheckExistenceId(id); //id 회원목록에 있는지 조사
-                if (existenceId == Constants.FAIL) { Console.Write("회원목록에 없습니다.  뒤로가기 : ESC         프로그램 종료 : F5"); moveMenu(); return; } // return;안쓰면 밑에 문장 실행됨 
-
-                existenceUsername = BookData.Get().CheckUserBorrowedBook(id);// 해당 id 반납하지 않은 책 조사
-
-                if (existenceUsername == Constants.FAIL) { Console.Write("반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5"); moveMenu(); }
-                else if (existenceUsername == Constants.PASS)
-                {
-                    Console.Write("삭제되었습니다.    뒤로가기 : ESC                 프로그램 종료 : F5");
-                    UserData.Get().RemoveUserInformation(id); // 유저 삭제
-                    moveMenu();
-                }
-
+                return;
             }
            
+            Console.Clear();
+            Menu.PrintSearchUser(name); // 이름맞는 사람 출력
+            Console.Write("삭제하실 유저 id를 입력하세요 :");
+            id = InputId(); // 아이디 입력
+
+            existenceId = UserData.Get().CheckExistenceId(id); //id 회원목록에 있는지 조사
+            if (existenceId == Constants.FAIL) 
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("회원목록에 없습니다.             뒤로가기 : ESC         프로그램 종료 : F5");
+                Console.ResetColor();
+                moveMenu(); 
+                return; 
+            } 
+
+            existenceUsername = BookData.Get().CheckUserBorrowedBook(id);// 해당 id 반납하지 않은 책 조사
+
+            if (existenceUsername == Constants.FAIL)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5");
+                Console.ResetColor();
+                moveMenu();
+                return;
+            }
+               
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("삭제되었습니다.                      뒤로가기 : ESC       프로그램 종료 : F5");
+            Console.ResetColor();
+
+            UserData.Get().RemoveUserInformation(id); // 유저 삭제
+            moveMenu();
+                        
         }
 
 

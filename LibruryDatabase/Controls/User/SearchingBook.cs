@@ -116,7 +116,9 @@ namespace LibruryDatabase.Controls
         {
             if (Constants.SEARCH_RESULT_BOOK == Constants.FAIL) // 책 정보 없으면
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("찾으시는 책이 없습니다. 뒤로가기 ESC");
+                Console.ResetColor();
             }
             else Console.Write("뒤로가기 : ESC, 프로그램 종료 : F5");
            

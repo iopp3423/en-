@@ -145,11 +145,5 @@ namespace LibruryDatabase.Utility
         //회원관리 이름입력 위치
         public const int INPUT_NAME_Y = 5;
         public const int INPUT_NAME_X = 20;
-
-
-        //query문 모음
-
-
-
     }
 }

@@ -473,6 +473,7 @@ namespace LibruryDatabase.Views
             }
             return Constants.PASS;
         }
+
         public void ClearCurrentLine(int number) // 줄 지우기
         {
             int currentLineCursor = Console.CursorTop;

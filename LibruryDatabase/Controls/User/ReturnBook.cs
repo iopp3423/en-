@@ -49,7 +49,10 @@ namespace LibruryDatabase.Controls
             Console.Clear();                 
             Menu.PrintBorrowBookData(id);
 
-            Console.Write("입력 : Enter                                  뒤로가기 : ESC");                     
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("반납 : Enter                                  뒤로가기 : ESC");
+            Console.ResetColor();
+
             while (Constants.PASS)
             {
                 Constants.cursor = Console.ReadKey(true);
@@ -70,7 +73,9 @@ namespace LibruryDatabase.Controls
 
             if (AlreadyBorrow == Constants.FAIL)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("대여하지 않은 도서입니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
+                Console.ResetColor();
                 moveMenu();
                 return;
             }
@@ -81,8 +86,11 @@ namespace LibruryDatabase.Controls
             if (checkAlreadyReturn == Constants.PASS)
             {
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-               ClearCurrentLine(Constants.CURRENT_LOCATION);
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("이미 반납하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
+                Console.ResetColor();
                 moveMenu();
             }
             else
@@ -90,8 +98,11 @@ namespace LibruryDatabase.Controls
                 BookData.Get().ReturnBook(bookNumber); // 책 반납
                 BookData.Get().PlusBook(bookNumber); // 책 수량 증가
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-               ClearCurrentLine(Constants.CURRENT_LOCATION);
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
+                Console.ResetColor();
                 moveMenu();
             }
             

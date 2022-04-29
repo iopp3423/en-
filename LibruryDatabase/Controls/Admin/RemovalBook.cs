@@ -60,12 +60,16 @@ namespace LibruryDatabase.Controls
 
             if (BookExitence == Constants.FAIL)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("존재하지 않는 책입니다.  뒤로가기 : ESC    프로그램 종료 : F5");
+                Console.ResetColor();
             }
             else if (BookExitence == Constants.PASS)
             {
                 BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("책이 삭제되었습니다.  뒤로가기 : ESC    프로그램 종료 : F5");
+                Console.ResetColor();
             }
 
             GoBackMenu();
@@ -96,12 +100,6 @@ namespace LibruryDatabase.Controls
             return bookNumber;         
         }
 
-        public void ClearCurrentLine(int number) // 줄 지우기
-        {
-            int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop - number);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
-        }
+        
     }
 }
