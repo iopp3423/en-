@@ -94,7 +94,7 @@
     <Compile Include="Controls\RemovalUser.cs" />
     <Compile Include="Controls\ModificationUser.cs" />
     <Compile Include="Controls\RemovalBook.cs" />
-    <Compile Include="Controls\SearchingBook.cs" />
+    <Compile Include="Controls\User\SearchingBook.cs" />
     <Compile Include="Controls\StartConnection.cs" />
     <Compile Include="Models\BookData.cs" />
     <Compile Include="Utility\Constants.cs" />
