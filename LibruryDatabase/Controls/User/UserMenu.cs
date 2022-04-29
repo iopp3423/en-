@@ -66,10 +66,10 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == searchingY) { Console.Clear(); BookSearching.SearchBook(Constants.isUserSearching); } // 도서찾기
-                            if (Y == borrowingY) { Console.Clear(); BookBorrowing.InputBookTitleandBookNumber(id); } // 도서대여
-                            if (Y == checkingY) { Console.Clear();  ReturnBook.ShowBorrowBook(id); } // 도서확인
-                            if (Y == riviseingY) { Console.Clear(); UserModification.ModifyUserInformation(id, password); } // 회원정보수정
+                            if (Y == Constants.SEARCH_BOOK) { Console.Clear(); BookSearching.SearchBook(Constants.isUserSearching); } // 도서찾기
+                            if (Y == Constants.BORROW_BOOK) { Console.Clear(); BookBorrowing.InputBookTitleandBookNumber(id); } // 도서대여
+                            if (Y == Constants.CHECK_BOOK) { Console.Clear();  ReturnBook.ShowBorrowBook(id); } // 도서확인
+                            if (Y == Constants.RIVISE_USER) { Console.Clear(); UserModification.ModifyUserInformation(id, password); } // 회원정보수정
                             break;
                         }
                      case ConsoleKey.Escape:
