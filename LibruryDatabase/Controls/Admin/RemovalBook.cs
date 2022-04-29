@@ -42,7 +42,7 @@ namespace LibruryDatabase.Controls
         public void RemoveBook()
         {
             string bookNumber;
-            bool BookExitence;
+            bool isBookExitence;
             Console.Clear();
             Menu.PrintSearchBookName();
             Menu.PrintBookData(); // 책 목록 프린트
@@ -50,21 +50,21 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 제거 : Enter                                         뒤로가기 : ESC");
             Console.ResetColor();
-            if (Menu.EntranceAfterReturnMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
             SearchBookName(); // 책 제목 검색
 
             bookNumber = InputBookNumber();
-            BookExitence = BookData.Get().CheckBookExistence(bookNumber);// 도서관에 책 있는지 체크
+            isBookExitence = BookData.Get().IsCheckingBookExistence(bookNumber);// 도서관에 책 있는지 체크
 
-            if (BookExitence == Constants.isFail)
+            if (isBookExitence == Constants.isFail)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write("존재하지 않는 책입니다.  뒤로가기 : ESC    프로그램 종료 : F5");
                 Console.ResetColor();
             }
-            else if (BookExitence == Constants.isPassing)
+            else if (isBookExitence == Constants.isPassing)
             {
                 BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
                 Console.ForegroundColor = ConsoleColor.Green;
