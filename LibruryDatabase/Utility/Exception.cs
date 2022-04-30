@@ -14,7 +14,6 @@ namespace LibruryDatabase.Utility
         public const string PW_CHECK = @"^[0-9a-zA-Z]{4,10}$";// 비밀번호
         public const string NAME_CHECK = @"^[가-힣]{2,5}$"; // 이름
         public const string AGE_CHECK = @"^[1-9]{1}1?[0-9]?[0-9]?$"; // 나이
-
         public const string ADDRESS_CHECK = @"^(([가-힣]+(d|d(,|.)d|)+(읍|면|동|가|리))(^구|)((d(~|-)d|d)(가|리|)|))([ ](산(d(~|-)d|d))|)|(([가-힣]|(d(~|-)d)|d)+(로|길))$"; // 주소
         public const string AUTHOR_CHECK = @"^[a-zA-Z가-힣]{2,8}$"; //작가
         public const string PUBLISH_CHECK = @"^[가-힣]{2,8}$"; // 출판사

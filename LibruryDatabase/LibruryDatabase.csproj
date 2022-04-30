@@ -86,7 +86,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Admin\AddingBook.cs" />
+    <Compile Include="Controls\Admin\BookAdition.cs" />
     <Compile Include="Controls\Admin\AdminMenu.cs" />
     <Compile Include="Controls\User\BorrowingBook.cs" />
     <Compile Include="Controls\User\ReturnBook.cs" />

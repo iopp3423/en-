@@ -11,7 +11,7 @@ using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Controls
 { 
-    internal class AddingBook
+    internal class BookAdition
     {
         Screen Menu = new Screen();
 
