@@ -21,7 +21,7 @@ namespace LibruryDatabase.Utility
         public const string BorrrowBookUserquery = "SELECT * FROM borrowmember";
         public const string AdminSearchQuery = "SELECT * FROM admin";
         public const string borrowUserQuery = "SELECT * FROM borrowmember WHERE id = ('{0}')";
-        public const string addingBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}')";
+        public const string addingBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'));";
         public const string DeleteQuery = "DELETE FROM book WHERE number = ('{0}')";
         public const string ModifyQuantityQuery = "UPDATE book SET quantity = ('{0}') WHERE number = ('{1}')";
         public const string ModifyPriceQuery = "UPDATE book SET price = ('{0}') WHERE number = ('{1}')";

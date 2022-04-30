@@ -128,9 +128,9 @@ namespace LibruryDatabase.Models
         public void SearchBook(string id, string number) // 로그인한 유저 아이디값, 책 번호 전달받음
         {
 
-            string bookName = null;
-            string author = null;
-            string publish = null;
+            string bookName = " ";
+            string author = " ";
+            string publish = " ";
 
 
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
