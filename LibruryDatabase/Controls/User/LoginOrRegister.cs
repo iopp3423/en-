@@ -12,11 +12,11 @@ using MySql.Data.MySqlClient;
 
 namespace LibruryDatabase.Controls
 {
-    internal class LoginOrJoin
+    class LoginOrRegister
     {
-
-        Screen Menu = new Screen(); // 뷰 클래스 객체생성
+        //Screen Menu = new Screen(); // 뷰 클래스 객체생성
         UserMenu GoUser = new UserMenu();
+        
         public string id;
         public string password;
         public string passswordCheck;
@@ -27,14 +27,27 @@ namespace LibruryDatabase.Controls
         bool isOverlapCheck;
 
 
-        public void JoinOrLogin() // 회원가입 or 로그인 화면
+        public Screen Menu;
+
+        public LoginOrRegister()
+        {
+        }
+
+        public LoginOrRegister(Screen InputMenu)
+        {
+            this.Menu = InputMenu;
+        }
+        
+
+        
+        public void RegisterOrLogin() // 회원가입 or 로그인 화면
         {           
 
             Console.Clear();
             Menu.PrintMain();
-            Menu.JoinOrLogin();
+            Menu.RegisterOrLogin();
 
-
+                /*
             if (Constants.isBack == IsSelectingMenu()) // 마우스 함수
             {
                 Console.Clear();
@@ -42,12 +55,14 @@ namespace LibruryDatabase.Controls
                 Menu.PrintUserOrAdmin();
                 return;
             }
+                */
         }
+        
 
         public bool IsSelectingMenu()
         {
             int Y = Constants.FIRSTY;
-            int goingJoin = Constants.USER_Y;
+            int goingRegister = Constants.USER_Y;
             int goingLogin = Constants.ADMIN_Y;
 
             while (Constants.isEntrancing) // 참이면
@@ -73,7 +88,7 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == goingJoin) { Console.Clear(); JoinMember(); } // 회원가입
+                            if (Y == goingRegister) { Console.Clear(); RegisterMember(); } // 회원가입
                             if (Y == goingLogin) { Console.Clear(); UserLogin(); } // 로그인
                             break;
                         }
@@ -107,12 +122,12 @@ namespace LibruryDatabase.Controls
                 }
         }
         
-        public void JoinMember() // 회원가입
+        public void RegisterMember() // 회원가입
         {
            
             Console.Clear();
-            Menu.JoinPrint();          
-            Menu.PrintJoinMember();        
+            Menu.RegisterPrint();          
+            Menu.PrintRegisterMember();        
             /*
             string id;
             string password;
@@ -141,7 +156,7 @@ namespace LibruryDatabase.Controls
                     Constants.cursor = Console.ReadKey(true);
                     switch (Constants.cursor.Key)
                     {
-                        case ConsoleKey.Enter: JoinMember(); break;
+                        case ConsoleKey.Enter: RegisterMember(); break;
                         case ConsoleKey.Escape: return;
                         default: continue;
                     }
@@ -162,7 +177,7 @@ namespace LibruryDatabase.Controls
                     Constants.cursor = Console.ReadKey(true);
                     switch (Constants.cursor.Key)
                     {
-                        case ConsoleKey.Enter: JoinMember(); break;
+                        case ConsoleKey.Enter: RegisterMember(); break;
                          case ConsoleKey.Escape: return;
                         default: continue;
                     }

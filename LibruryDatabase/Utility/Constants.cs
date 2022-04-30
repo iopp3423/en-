@@ -73,7 +73,7 @@ namespace LibruryDatabase.Utility
         public const int ADMIN_Y = 11;
         public const int START_UP_Y = 10;
         public const int START_DOWN_Y = 11;
-        public const int JOIN_X = 0;
+        public const int Register_X = 0;
         public const int ID_Y = 10;
         public const int PW_Y = 11;
         public const int PW_CHECK_Y = 12;

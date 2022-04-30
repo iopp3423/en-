@@ -11,7 +11,7 @@ namespace SejongTimeTable.Controls
 {
     internal class TimeTable //: Logging
     {
-        Printing MenuView = new Printing();
+        //Printing MenuView = new Printing();
         Regex MenuCheck = new Regex(Constants.MENU);
         Regex GradeCheck = new Regex(Constants.GRADE_CHECK);
         Regex SubjectCheck = new Regex(Constants.SUBJECT_NAME);
@@ -21,15 +21,17 @@ namespace SejongTimeTable.Controls
        //List<ClassVO> DistinctSearch = new List<ClassVO>();
 
         public ClassVO MyTable; // 엑셀값
+        public Printing MenuView;
 
         
         public TimeTable()
         {
 
         }
-        public TimeTable(ClassVO MyTable)
+        public TimeTable(ClassVO MyTable, Printing MenuView)
         {
             this.MyTable = MyTable;
+            this.MenuView = MenuView;
         }
 
         string menu;

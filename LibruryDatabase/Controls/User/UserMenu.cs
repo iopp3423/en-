@@ -30,7 +30,7 @@ namespace LibruryDatabase.Controls
             {
                 Console.Clear();
                 Menu.PrintMain();
-                Menu.JoinOrLogin();
+                Menu.RegisterOrLogin();
                 return;
             }
         }

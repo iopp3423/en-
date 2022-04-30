@@ -99,11 +99,11 @@
     <Compile Include="Models\BookData.cs" />
     <Compile Include="Utility\Constants.cs" />
     <Compile Include="Controls\Admin\Admin.cs" />
-    <Compile Include="Controls\User\LoginOrJoin.cs" />
+    <Compile Include="Controls\User\LoginOrRegister.cs" />
     <Compile Include="Controls\User\UserMenu.cs" />
     <Compile Include="Utility\Exception.cs" />
     <Compile Include="Models\UserData.cs" />
-    <Compile Include="Start.cs" />
+    <Compile Include="OpenLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Screen.cs" />
   </ItemGroup>

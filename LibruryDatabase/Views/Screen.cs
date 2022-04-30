@@ -8,8 +8,11 @@ using LibruryDatabase.Utility;
 
 namespace LibruryDatabase.Views
 {
-    internal class Screen
+    public class Screen
     {
+
+        
+
        public void PrintMain()
         {
             Console.WriteLine(string.Format("{0,42}", "★          ★★★   ★★★★     ★★★★   ★★★★   ★★★★   ★   ★"));
@@ -56,7 +59,7 @@ namespace LibruryDatabase.Views
             Console.ResetColor();
         }
 
-        public void PrintJoinMember()
+        public void PrintRegisterMember()
         {
             Console.WriteLine("ID(영어, 숫자 포함(8~10자) :");
             Console.WriteLine("PW(영어, 숫자 포함(4~10자) :");
@@ -68,7 +71,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("주소(천안시동남구신부동) :");
         }
 
-        public void JoinPrint()
+        public void RegisterPrint()
         {
             Console.WriteLine(string.Format("{0,35}", "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"));
             Console.WriteLine(string.Format("{0,41}", "★                                                                  ★"));
@@ -84,7 +87,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("\n");
         }
 
-        public void JoinOrLogin()
+        public void RegisterOrLogin()
         {
             Console.WriteLine(string.Format("  》회원가입"));
             Console.WriteLine(string.Format("  》로그인"));

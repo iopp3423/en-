@@ -9,13 +9,28 @@ using LibruryDatabase.Utility;
 
 namespace LibruryDatabase.Controls
 {
-    internal class StartConnection
+    class StartConnection
     {
-        
+        /*
         Screen Menu = new Screen(); // 뷰 클래스 객체생성
-        LoginOrJoin UserLibruary = new LoginOrJoin();
+        SearchingBook BookSearching = new SearchingBook();
+        BorrowingBook BookBorrowing = new BorrowingBook();
+        ModificationUser UserModification = new ModificationUser();
+        ReturnBook ReturnBook = new ReturnBook();
+        */
+        Screen Menu = new Screen();
+        SearchingBook BookSearching = new SearchingBook();
+        LoginOrRegister UserLibruary = new LoginOrRegister();
         Admin AdminLibruary = new Admin();
-        
+
+        public StartConnection()
+        {
+            BookSearching = new SearchingBook(Menu);
+            UserLibruary = new LoginOrRegister(Menu);
+        }
+
+
+     
 
         public void StartMenu() // 유저 or 관리자
         {
@@ -53,7 +68,7 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == goingUser) { Console.Clear(); UserLibruary.JoinOrLogin(); }
+                            if (Y == goingUser) { Console.Clear(); UserLibruary.RegisterOrLogin(); }
                             if (Y == goingAdmin) { Console.Clear(); AdminLibruary.LoginAdmin(); }
                             break;
                         }

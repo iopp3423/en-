@@ -7,7 +7,7 @@ using LibruryDatabase.Utility;
 
 namespace LibruryDatabase
 {
-    internal class Start
+    internal class OpenLibrary
     {
         
         static void Main(string[] args)
