@@ -125,7 +125,7 @@ namespace LibruryDatabase.Controls
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
            ClearCurrentLine(Constants.CURRENT_LOCATION);
-            Console.Write("수정할 가격을 입력해주세요(숫자만) :");
+            Console.Write("수정할 가격을 입력해주세요(1000~, 숫자만) :");
 
             while (Constants.isPassing)
             {            
