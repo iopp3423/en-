@@ -17,6 +17,14 @@ namespace LibruryDatabase.Controls
 
         Screen Menu = new Screen(); // 뷰 클래스 객체생성
         UserMenu GoUser = new UserMenu();
+        public string id;
+        public string password;
+        public string passswordCheck;
+        string name;
+        string age;
+        string callNumber;
+        string address;
+        bool isOverlapCheck;
 
 
         public void JoinOrLogin() // 회원가입 or 로그인 화면
@@ -104,15 +112,17 @@ namespace LibruryDatabase.Controls
            
             Console.Clear();
             Menu.JoinPrint();          
-            Menu.PrintJoinMember();            
+            Menu.PrintJoinMember();        
+            /*
             string id;
             string password;
             string passswordCheck;
             string name;
             string age;
             string callNumber;
-            string address;           
+            string address;                      
             bool isOverlapCheck;
+            */
 
 
             id = InputId();
@@ -186,9 +196,11 @@ namespace LibruryDatabase.Controls
 
         public void UserLogin() // 로그인
         {
+            /*
             string id;
-            string password;
+            string password;           
             bool isOverlapCheck;
+            */
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintLogin();
@@ -196,9 +208,12 @@ namespace LibruryDatabase.Controls
             id = InputId();
             password = InputPassword();
 
+            
             isOverlapCheck = UserData.Get().IsCheckingLogin(id, password); //데베에서 회원 유무 확인
 
+            
             if (isOverlapCheck == Constants.isSucess) GoUser.StartBookmenu(id, password);
+
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC 두 번");
@@ -214,12 +229,13 @@ namespace LibruryDatabase.Controls
                     default: continue;
                 }
             }
+            
         }
 
 
         public string InputId() // id 입력
         {
-            string id;
+            //string id;
 
             while (Constants.isLogin)
             {
@@ -246,7 +262,7 @@ namespace LibruryDatabase.Controls
              
         public string InputPassword() // 비밀번호 입력
         {
-            string password;
+            //string password;
 
             while (Constants.isLogin)
             {
@@ -272,7 +288,7 @@ namespace LibruryDatabase.Controls
 
         string InputPasswordCheck() // 비밀번호확인 입력
         {
-            string password;
+            //string password;
 
             while (Constants.isLogin)
             {
@@ -297,20 +313,20 @@ namespace LibruryDatabase.Controls
 
         string ReadPassword() // 비밀번호 *처리
         {
-            string password = "";
+            string passwordChangeStar = "";
             ConsoleKeyInfo info = Console.ReadKey(true);
             while (info.Key != ConsoleKey.Enter)
             {
                 if (info.Key != ConsoleKey.Backspace)
                 {
                     Console.Write("*");
-                    password += info.KeyChar;
+                    passwordChangeStar += info.KeyChar;
                 }
                 else if (info.Key == ConsoleKey.Backspace)
                 {
-                    if (!string.IsNullOrEmpty(password))
+                    if (!string.IsNullOrEmpty(passwordChangeStar))
                     {
-                        password = password.Substring(Constants.CURRENT_LOCATION, password.Length - Constants.ONE);
+                        passwordChangeStar = passwordChangeStar.Substring(Constants.CURRENT_LOCATION, password.Length - Constants.ONE);
                         int passwordX = Console.CursorLeft;
                         Console.SetCursorPosition(passwordX - Constants.ONE, Console.CursorTop);
                         Console.Write(" ");
@@ -320,13 +336,13 @@ namespace LibruryDatabase.Controls
                 info = Console.ReadKey(true);
             }
             Console.WriteLine();
-            return password;
+            return passwordChangeStar;
         }
 
 
         string InputName() // 이름입력
         {
-            string name;
+            //string name;
 
             while (Constants.isLogin)
             {
@@ -350,7 +366,7 @@ namespace LibruryDatabase.Controls
 
         string InputCallNumber() // 전화번호
         {
-            string callNumber;
+            //string callNumber;
 
             while (Constants.isLogin)
             {
@@ -375,7 +391,7 @@ namespace LibruryDatabase.Controls
 
         string InputAddress() // 주소
         {
-            string address;
+            //string address;
 
             while (Constants.isLogin)
             {
@@ -402,7 +418,7 @@ namespace LibruryDatabase.Controls
 
         string InputAge() // 나이입력
         {
-            string age;
+            //string age;
 
             while (Constants.isLogin)
             {

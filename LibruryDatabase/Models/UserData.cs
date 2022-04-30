@@ -88,9 +88,9 @@ namespace LibruryDatabase.Models
         public bool IsCheckingLogin(string id, string password) // 데베에서 회원 유무 확인
         {
 
-
             using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
             {
+                
                 user.Open();
                 MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
@@ -100,6 +100,7 @@ namespace LibruryDatabase.Models
                     if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.isSucess;
                 }
                 user.Close();
+                
             }
             return Constants.isFail;
 
