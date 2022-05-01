@@ -55,9 +55,12 @@ namespace LibruryDatabase.Controls
             string number;
             string receiveInput;
             string keyInput;
+            string bookName;
+
             Console.Clear();
             Menu.PrintSearchBookName();
             Menu.PrintBookData(); // 책 목록 프린트
+
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 수정 : Enter                                          뒤로가기 : ESC");
@@ -65,13 +68,21 @@ namespace LibruryDatabase.Controls
             if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
-            SearchBookName("관리자"); // 책 제목 검색
+            SearchBookName(Constants.isFail, "관리자"); // 책 제목 검색
+
 
             keyInput = InputBookNumber(); // 책 번호 입력받기
             number = InputNumber(); // 수정메뉴 입력
             receiveInput = modificationMenu(number); // 가격 or 수량           
 
+
             BookData.Get().ModifyBookInformation(receiveInput, number, keyInput); // 데베에서 책 수정
+
+
+            bookName = BookData.Get().BringBookname(keyInput);// 해당 책 정보가져오기
+            if (number == Constants.REVISE_BOOK_QUANTITY) LogData.Get().StoreLog("관리자", "수량수정", bookName); // 로그에 저장
+            else LogData.Get().StoreLog("관리자", "가격수정", bookName); // 로그에 저장
+
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("수정이 완료되었습니다.  뒤로가기 : ESC                 프로그램 종료 : F5");

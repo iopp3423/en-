@@ -27,9 +27,6 @@ namespace LibruryDatabase.Controls
         }
 
 
-
-
-
         public void IsSelectingMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
@@ -82,6 +79,7 @@ namespace LibruryDatabase.Controls
             price = InputPrice(movingInputY);
 
             BookData.Get().StoreBookInformation(bookName, author, publisher, publishDay, quantity, price); // 책 데베 추가
+            LogData.Get().StoreLog("관리자", "도서추가", bookName); // 로그에 저장
 
             Console.SetCursorPosition(Console.CursorLeft, Constants.ERROR_Y);
             Console.ForegroundColor = ConsoleColor.Green;

@@ -116,9 +116,10 @@ namespace LibruryDatabase.Controls
         public void ModifyPhoneNumber(string id)  // 전화번호
         {
             string callNumber;
-           ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기          
+            ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기          
             callNumber = InputCallNumber(); // 입력받기
             UserData.Get().ModifyPhone(callNumber, id); // 정보 변경
+            LogData.Get().StoreLog(id, "번호변경", callNumber); // 로그에 저장
 
             ModifyAfterMessage();// 안내메시지
         }
@@ -129,6 +130,7 @@ namespace LibruryDatabase.Controls
            ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기   
             password = InputPasswordCheck();// 입력받기
             UserData.Get().ModifyPassword(password, id); // 정보 변경
+            LogData.Get().StoreLog(id, "비밀번호변경", password); // 로그에 저장
 
             ModifyAfterMessage();// 안내메시지
         }
@@ -138,7 +140,9 @@ namespace LibruryDatabase.Controls
             string address;
            ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기 
             address = InputAddress();// 입력받기
+
             UserData.Get().ModifyAddress(address, id); // 정보 변경
+            LogData.Get().StoreLog(id, "주소변경", address); // 로그에 저장
 
             ModifyAfterMessage();// 안내메시지
         }

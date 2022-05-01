@@ -61,14 +61,14 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchMenu();
             Menu.PrintBookData();
 
-            if (Constants.isBackMenu == IsSelectingMenu(id) && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
+            if (Constants.isBackMenu == IsSelectingMenu(id, Constants.isPassing) && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
                 Menu.PrintUserMenu();
                 return;
             }
-            else if (Constants.isBackMenu == IsSelectingMenu(id) && Constants.isAdminSearching == goingUserOrAdmin) // 관리자모드용 책찾기
+            else if (Constants.isBackMenu == IsSelectingMenu(id, Constants.isFail) && Constants.isAdminSearching == goingUserOrAdmin) // 관리자모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -77,7 +77,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool IsSelectingMenu(string id)
+        public bool IsSelectingMenu(string id, bool UserOrAdminSearch)
         {
             int Y = Constants.SEARCH_Y;
 
@@ -104,9 +104,9 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.NAME_SEARCH_Y) { SearchName(id);  } // 작가로찾기
-                            if (Y == Constants.PUBLISH_Y) { SearchPublishName(id);} // 출판사로찾기
-                            if (Y == Constants.BOOK_Y) { SearchBookName(id);} // 책이름으로찾기
+                            if (Y == Constants.NAME_SEARCH_Y) { SearchName(UserOrAdminSearch, id);  } // 작가로찾기
+                            if (Y == Constants.PUBLISH_Y) { SearchPublishName(UserOrAdminSearch, id);} // 출판사로찾기
+                            if (Y == Constants.BOOK_Y) { SearchBookName(UserOrAdminSearch, id);} // 책이름으로찾기
                             
                             return IsGoingReturnMenu();
                         }
@@ -140,7 +140,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        public void SearchName(string id) // 작가로 찾기
+        public void SearchName(bool goingUserOrAdmin, string id) // 작가로 찾기
         {
             //string name;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
@@ -166,16 +166,24 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchAuthor(name); // 출력
             BookExistenceCheck();
 
-            nameResult = BookData.Get().BringSearchResult(name);// 해당 책 이름가져오기
-            name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-            LogData.Get().StoreLog(name, "작가로검색", nameResult); // 로그에 저장
+            if (goingUserOrAdmin == Constants.isPassing)
+            {
+                nameResult = BookData.Get().BringSearchResult(name);// 해당 책 이름가져오기
+                name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
+                LogData.Get().StoreLog(name, "작가로 검색", nameResult); // 로그에 저장
+            }
+            else
+            {
+                nameResult = BookData.Get().BringSearchResult(name);// 해당 책 이름가져오기
+                LogData.Get().StoreLog(name, "관리자 작가 검색", nameResult); // 로그에 저장
+            }
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             
         }
        
 
-        public void SearchPublishName(string id) // 출판사로 찾기
+        public void SearchPublishName(bool goingUserOrAdmin, string id) // 출판사로 찾기
         {
             string publish;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
@@ -199,15 +207,23 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchPublish(publish);//출력          
             BookExistenceCheck();
 
-            nameResult = BookData.Get().BringSearchResult(publish);// 해당 책 이름가져오기
-            name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-            LogData.Get().StoreLog(name, "출판사로검색", nameResult); // 로그에 저장
+            if (goingUserOrAdmin == Constants.isPassing)
+            {
+                nameResult = BookData.Get().BringSearchResult(publish);// 해당 책 이름가져오기
+                name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
+                LogData.Get().StoreLog(name, "출판사로 검색", nameResult); // 로그에 저장
+            }
+            else
+            {
+                nameResult = BookData.Get().BringSearchResult(publish);// 해당 책 이름가져오기
+                LogData.Get().StoreLog(name, "관리자 출판사 검색", nameResult); // 로그에 저장
+            }
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
         }
 
 
-        public void SearchBookName(string id) // 책제목으로 찾기
+        public void SearchBookName(bool goingUserOrAdmin, string id) // 책제목으로 찾기
         {
             string bookName;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
@@ -231,9 +247,18 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchBookName(bookName);// 출력            
             BookExistenceCheck();
 
-            nameResult = BookData.Get().BringSearchResult(bookName);// 해당 책 이름가져오기
-            name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-            LogData.Get().StoreLog(name, "출판사로검색", nameResult); // 로그에 저장
+            if (goingUserOrAdmin == Constants.isPassing)
+            {
+                nameResult = BookData.Get().BringSearchResult(bookName);// 해당 책 이름가져오기
+                name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
+                LogData.Get().StoreLog(name, "책 제목 검색", nameResult); // 로그에 저장
+            }
+            else
+            {
+                nameResult = BookData.Get().BringSearchResult(bookName);// 해당 책 이름가져오기
+                LogData.Get().StoreLog(name, "관리자 책 제목 검색", nameResult); // 로그에 저장
+            }
+            
 
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);           

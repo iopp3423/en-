@@ -44,7 +44,12 @@ namespace LibruryDatabase.Controls
             password = InputPassword(); // 비밀번호 입력
             isCheckingLogin = UserData.Get().IsLoginCheck(id, password); // 아이디 비밀번호 확인
 
-            if (isCheckingLogin == Constants.isSucess) goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
+            if (isCheckingLogin == Constants.isSucess)
+            {
+
+                LogData.Get().StoreLog("관리자", "도서관","로그인"); // 로그에 저장
+                goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
+            }
 
             else if (isCheckingLogin == Constants.isFail)
             {

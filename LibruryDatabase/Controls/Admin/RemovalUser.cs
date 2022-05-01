@@ -113,6 +113,8 @@ namespace LibruryDatabase.Controls
             Console.Write("삭제되었습니다.                      뒤로가기 : ESC       프로그램 종료 : F5");
             Console.ResetColor();
 
+
+            LogData.Get().StoreLog("관리자", "회원삭제", id); // 로그에 저장
             UserData.Get().RemoveUserInformation(id); // 유저 삭제
             IsSelectingMenu();
                         

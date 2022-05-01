@@ -81,7 +81,7 @@ namespace LibruryDatabase.Controls
             }
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
-            SearchBookName(id); // 책 제목 검색
+            SearchBookName(Constants.isPassing, id); // 책 제목 검색
 
             if (Constants.SEARCH_RESULT_BOOK == Constants.isPassing) // 목록에 책이 있으면 진행
             {

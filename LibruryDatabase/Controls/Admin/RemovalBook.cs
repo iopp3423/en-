@@ -56,6 +56,8 @@ namespace LibruryDatabase.Controls
         {
             string bookNumber;
             bool isBookExitence;
+            string bookName;
+
             Console.Clear();
             Print.PrintSearchBookName();
             Print.PrintBookData(); // 책 목록 프린트
@@ -67,7 +69,7 @@ namespace LibruryDatabase.Controls
             if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
-            SearchBookName("관리자"); // 책 제목 검색
+            SearchBookName(Constants.isFail, "관리자"); // 책 제목 검색
 
             bookNumber = InputBookNumber();
             isBookExitence = BookData.Get().IsCheckingBookExistence(bookNumber);// 도서관에 책 있는지 체크
@@ -80,7 +82,10 @@ namespace LibruryDatabase.Controls
             }
             else if (isBookExitence == Constants.isPassing)
             {
+                bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
+                LogData.Get().StoreLog("관리자", "도서삭제", bookName); // 로그에 저장
                 BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
+                
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("책이 삭제되었습니다.  뒤로가기 : ESC    프로그램 종료 : F5");

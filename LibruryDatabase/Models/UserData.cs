@@ -159,7 +159,7 @@ namespace LibruryDatabase.Models
                 user.Open();
                 
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.updateAddressQuery,user, id), user);
-                Command.ExecuteNonQuery(); // 
+                Command.ExecuteNonQuery();  
             }
         }
 
