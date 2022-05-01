@@ -20,8 +20,7 @@ namespace LibruryDatabase.Utility
         public const string SearchMemberQuery = "SELECT * FROM member";
         public const string BorrrowBookUserquery = "SELECT * FROM borrowmember";
         public const string AdminSearchQuery = "SELECT * FROM admin";
-        public const string borrowUserQuery = "SELECT * FROM borrowmember WHERE id = ('{0}')";
-        public const string addingBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'));";
+        public const string borrowUserQuery = "SELECT * FROM borrowmember WHERE id = ('{0}')";        
         public const string DeleteQuery = "DELETE FROM book WHERE number = ('{0}')";
         public const string ModifyQuantityQuery = "UPDATE book SET quantity = ('{0}') WHERE number = ('{1}')";
         public const string ModifyPriceQuery = "UPDATE book SET price = ('{0}') WHERE number = ('{1}')";
@@ -42,9 +41,11 @@ namespace LibruryDatabase.Utility
         public const string borrowQuery = "INSERT INTO borrowmember(id, number, bookname, author, publish, borrowbook, returnbook) VALUES( ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'), ('{6}'));";
         public const string minusBook = "UPDATE book SET quantity = quantity - 1 WHERE number =  ('{0}')";
         public const string plusBook = "UPDATE book SET quantity = quantity + 1 WHERE number =  ('{0}')";
+        public const string addingBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'));";
 
-
-
+        //로그관련
+        public const string logQuery = "INSERT INTO LOG(TIME, name, record, log) VALUES(  ('{0}'),  ('{1}'), ('{2}'), ('{3}'));";
+        
 
 
         public const string REVISE_BOOK_QUANTITY = "1";

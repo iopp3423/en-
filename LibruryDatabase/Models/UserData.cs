@@ -106,6 +106,26 @@ namespace LibruryDatabase.Models
 
         }
 
+        public string Bringname(string id) // 데베에서 회원 이름 가져오기
+        {
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+
+                user.Open();
+                MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
+                MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (userData.Read())
+                {
+                    if (userData["id"].ToString() == id) return userData["name"].ToString();
+                }
+                user.Close();
+
+            }
+            return id;
+        }
+
         public void ModifyPhone(string callNumber, string id)// 전화번호 데베에서 변경
         {
 

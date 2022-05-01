@@ -195,6 +195,8 @@ namespace LibruryDatabase.Controls
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("회원가입이 완료되었습니다. Enter : 로그인 이동, 뒤로가기 : ESC 두 번");
             Console.ResetColor();
+            name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
+            LogData.Get().StoreLog(name, "도서관", "회원가입"); // 로그에 저장
 
 
             while (Constants.isEntrancing)
@@ -226,9 +228,14 @@ namespace LibruryDatabase.Controls
 
             
             isOverlapCheck = UserData.Get().IsCheckingLogin(id, password); //데베에서 회원 유무 확인
-
             
-            if (isOverlapCheck == Constants.isSucess) GoUser.StartBookmenu(id, password);
+
+            if (isOverlapCheck == Constants.isSucess)
+            {
+                name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
+                LogData.Get().StoreLog(name, "도서관", "로그인"); // 로그에 기록
+                GoUser.StartBookmenu(id, password);
+            }
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
             Console.ForegroundColor = ConsoleColor.Red;

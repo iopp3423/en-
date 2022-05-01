@@ -15,17 +15,14 @@ namespace LibruryDatabase
         static void Main(string[] args)
         {
             StartConnection Start = new StartConnection();
-            //Start.StartMenu();
+            Start.StartMenu();
 
 
 
             //관리자 id = enen1234, pw = enen4321
 
-            fn_LogWrite("으으음 저장도나");
-
-
-
-            void fn_LogWrite(string str)
+            /*
+            void LogWrite(string log)
             {
                 string DirectotyPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Log";
                 string FilePath = DirectotyPath + "\\Log_" + DateTime.Today.ToString("MMdd") + ".log";
@@ -39,24 +36,25 @@ namespace LibruryDatabase
 
                 if (!file.Exists)
                 {
-                    using (StreamWriter sw = new StreamWriter(FilePath))
+                    using (StreamWriter writer = new StreamWriter(FilePath))
                     {
-                        temp = string.Format("[{0}] {1}", DateTime.Now, str);
-                        sw.WriteLine(temp);
-                        sw.Close();
+                        temp = string.Format("[{0}] {1}", DateTime.Now, log);
+                        writer.WriteLine(temp);
+                        writer.Close();
                     }
                 }
                 else
                 {
-                    using (StreamWriter sw = File.AppendText(FilePath))
+                    using (StreamWriter writer = File.AppendText(FilePath))
                     {
-                        temp = string.Format("[{0}] {1}", DateTime.Now, str);
-                        sw.WriteLine(temp);
-                        sw.Close();
+                        temp = string.Format("[{0}] {1}", DateTime.Now, log);
+                        writer.WriteLine(temp);
+                        writer.Close();
                     }
                 }
 
             }
+            */
         }
     }
 }
