@@ -13,9 +13,23 @@ namespace LibruryDatabase.Controls
 {
     internal class Admin : LoginOrRegister
     {
-        Screen Menu = new Screen();
+        //Screen Menu = new Screen();
         AdminMenu goingMenu= new AdminMenu();
+     
+        public Screen Print;
+
+        public Admin()
+        {
+
+        }
+
+        public Admin(Screen Menu) : base(Menu)
+        {
+            this.Print = Menu;
+            goingMenu = new AdminMenu(Print);
+        }
         
+
 
         public void LoginAdmin() // 관리자 로그인
         {
@@ -24,8 +38,8 @@ namespace LibruryDatabase.Controls
             bool isCheckingLogin;
 
             Console.Clear();
-            Menu.PrintMain();
-            Menu.PrintLogin();
+            Print.PrintMain();
+            Print.PrintLogin();
             id = InputId(); // 아이디 입력
             password = InputPassword(); // 비밀번호 입력
             isCheckingLogin = UserData.Get().IsLoginCheck(id, password); // 아이디 비밀번호 확인
@@ -49,8 +63,8 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Escape:
                         {
                             Console.Clear();
-                            Menu.PrintMain();
-                            Menu.PrintUserOrAdmin();
+                            Print.PrintMain();
+                            Print.PrintUserOrAdmin();
                             return;
                         }
                     default: continue;

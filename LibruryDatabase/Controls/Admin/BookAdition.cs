@@ -13,7 +13,22 @@ namespace LibruryDatabase.Controls
 { 
     internal class BookAdition
     {
-        Screen Menu = new Screen();
+        //Screen Menu = new Screen();
+
+        public Screen Menu;
+
+        public BookAdition()
+        {
+        }
+
+        public BookAdition(Screen Menu)
+        {
+            this.Menu = Menu;
+        }
+
+
+
+
 
         public void IsSelectingMenu() //이전 메뉴로 돌아가기
         {

@@ -13,7 +13,20 @@ namespace LibruryDatabase.Controls
 {
     internal class RemovalBook : SearchingBook
     {
-        Screen Menu = new Screen();
+        //Screen Menu = new Screen();
+
+        public Screen Print;
+
+        public RemovalBook()
+        {
+
+        }
+
+        public RemovalBook(Screen Menu) : base(Menu)
+        {
+            this.Print = Menu;
+        }
+
         public void GoBackMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
@@ -24,8 +37,8 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Escape:
                         {
                             Console.Clear();
-                            Menu.PrintMain();
-                            Menu.PrintAdminMenu();
+                            Print.PrintMain();
+                            Print.PrintAdminMenu();
                             return;
                         }
                     case ConsoleKey.F5: // 종료
@@ -44,14 +57,14 @@ namespace LibruryDatabase.Controls
             string bookNumber;
             bool isBookExitence;
             Console.Clear();
-            Menu.PrintSearchBookName();
-            Menu.PrintBookData(); // 책 목록 프린트
+            Print.PrintSearchBookName();
+            Print.PrintBookData(); // 책 목록 프린트
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 제거 : Enter                                         뒤로가기 : ESC");
             Console.ResetColor();
 
-            if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
             SearchBookName(); // 책 제목 검색

@@ -27,22 +27,20 @@ namespace LibruryDatabase.Controls
         string address;
         bool isOverlapCheck;
 
-
-
-
         public Screen Menu;
 
-        public LoginOrRegister()
+        public LoginOrRegister() // 왜 안쓰면 터질까
         {
+            
         }
 
         public LoginOrRegister(Screen InputMenu)
         {
             this.Menu = InputMenu;
+            GoUser = new UserMenu(Menu);           
         }
-        
 
-        
+
         public void RegisterOrLogin() // 회원가입 or 로그인 화면
         {           
 

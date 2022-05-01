@@ -14,7 +14,19 @@ namespace LibruryDatabase.Controls
     internal class RemovalUser
     {
 
-        Screen Menu = new Screen();
+        //Screen Menu = new Screen();
+
+        public Screen Menu;
+
+        public RemovalUser()
+        {
+        }
+
+        public RemovalUser(Screen Menu)
+        {
+            this.Menu = Menu;
+        }
+
         public void IsSelectingMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)

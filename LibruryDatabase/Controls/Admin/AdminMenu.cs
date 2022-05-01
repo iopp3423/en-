@@ -11,22 +11,40 @@ namespace LibruryDatabase.Controls
 {
     internal class AdminMenu : SearchingBook
     {
+        //Screen Menu = new Screen();
         RemovalBook removing = new RemovalBook();
         BookAdition adding = new BookAdition();
         ModificationBook modify = new ModificationBook();
-        RemovalUser member = new RemovalUser();
-        Screen Menu = new Screen();
+        RemovalUser member = new RemovalUser();  
+        
+        Screen Print;
+
+        public AdminMenu(Screen Menu) : base(Menu)
+        {
+            this.Print = Menu;
+            removing = new RemovalBook(Print);
+            adding = new BookAdition(Print);
+            modify = new ModificationBook(Print);
+            member = new RemovalUser(Print);
+        }
+
+        public AdminMenu() 
+        {
+            
+        }
+
+
         public void ChooseMenu()
         {
             Console.Clear();
-            Menu.PrintMain();
-            Menu.PrintAdminMenu();
+            Print.PrintMain();
+            Print.PrintAdminMenu();
 
             if (Constants.isBack == IsSelectingAdminMenu()) // 컨트롤러
             {
                 Console.Clear();
-                Menu.PrintMain();
-                Menu.PrintReturnMenu();
+                Print.PrintMain();
+                Print.PrintReturnMenu();
                 return;
             }
         }
@@ -68,7 +86,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.CURRENT_BOOK) // 대여상황
                             { 
                                 Console.Clear();
-                                Menu.PrintCurrentBorrowBook();
+                                Print.PrintCurrentBorrowBook();
                                 Console.ForegroundColor = ConsoleColor.Green;
                                 Console.Write("뒤로가기 : ESC                                프로그램 종료 : F5");
                                 Console.ResetColor();
@@ -102,8 +120,8 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Escape:
                         {
                             Console.Clear();
-                            Menu.PrintMain();
-                            Menu.PrintAdminMenu();
+                            Print.PrintMain();
+                            Print.PrintAdminMenu();
                             return;
                         }
                     case ConsoleKey.F5: // 종료

@@ -13,16 +13,18 @@ namespace LibruryDatabase.Controls
 {
     internal class BorrowingBook : SearchingBook
     {
-        public Screen Menu;
+
+        public Screen Print;
 
         public BorrowingBook()
         {
         }
 
-        public BorrowingBook(Screen Menu)
+        public BorrowingBook(Screen Menu) : base(Menu)
         {
-            this.Menu = Menu;
+           this.Print = Menu;
         }
+        
 
         public void GoBackMenu() //이전 메뉴로 돌아가기
         {
@@ -34,8 +36,8 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Escape:
                         {
                             Console.Clear();
-                            Menu.PrintMain();
-                            Menu.PrintUserMenu();
+                            Print.PrintMain();
+                            Print.PrintUserMenu();
                             return;
                         }
                     case ConsoleKey.F5: // 종료
@@ -56,8 +58,8 @@ namespace LibruryDatabase.Controls
 
 
             Console.Clear();
-            Menu.PrintSearchBookName();
-            Menu.PrintBookData(); // 책 목록 프린트
+            Print.PrintSearchBookName();
+            Print.PrintBookData(); // 책 목록 프린트
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("대여 : Enter                                  뒤로가기 : ESC");
@@ -69,8 +71,8 @@ namespace LibruryDatabase.Controls
                 if (Constants.cursor.Key == ConsoleKey.Escape)
                 {
                     Console.Clear();
-                    Menu.PrintMain();
-                    Menu.PrintUserMenu();
+                    Print.PrintMain();
+                    Print.PrintUserMenu();
                     return;
                 }
                 else if (Constants.cursor.Key == ConsoleKey.Enter) break;

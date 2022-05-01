@@ -12,7 +12,20 @@ namespace LibruryDatabase.Controls
 {
     internal class ModificationBook : SearchingBook
     {
-        Screen Menu = new Screen();
+        //Screen Menu = new Screen();
+
+        public Screen Menu;
+
+        public ModificationBook()
+        {
+        }
+
+        public ModificationBook(Screen Menu) : base(Menu)
+        {
+            this.Menu = Menu;
+        }
+
+
         public void GoBackMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)

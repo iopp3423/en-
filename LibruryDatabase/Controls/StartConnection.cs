@@ -11,22 +11,14 @@ namespace LibruryDatabase.Controls
 {
     class StartConnection
     {
-        /*
-        Screen Menu = new Screen(); // 뷰 클래스 객체생성
-        SearchingBook BookSearching = new SearchingBook();
-        BorrowingBook BookBorrowing = new BorrowingBook();
-        ModificationUser UserModification = new ModificationUser();
-        ReturnBook ReturnBook = new ReturnBook();
-        */
         Screen Menu = new Screen();
         LoginOrRegister UserLibruary = new LoginOrRegister(); //아오 이걸로 전달했어야함, 아마 북 서치는 전달하면 터질텐데 이 클래스에서 북 서치 인스턴스를 쓰지 않아서 그럴듯 북 서치 인스턴스를 쓰는 클래스에서 전달해야할듯
-
         Admin AdminLibruary = new Admin();
 
         public StartConnection()
-        {
-           
+        {      
             UserLibruary = new LoginOrRegister(Menu);
+            AdminLibruary = new Admin(Menu);
         }
 
 
