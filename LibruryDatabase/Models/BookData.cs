@@ -336,8 +336,8 @@ namespace LibruryDatabase.Models
                 while (bookData.Read())
                 {
                     if (bookData["author"].ToString().Contains(name)) { return bookData["author"].ToString(); }
-                    //else if (bookData["publish"].ToString().Contains(name)) { return bookData["publish"].ToString(); }
-                    //else if (bookData["name"].ToString().Contains(name)) { return bookData["name"].ToString(); }
+                    else if (bookData["publish"].ToString().Contains(name)) { return bookData["publish"].ToString(); }
+                    else if (bookData["name"].ToString().Contains(name)) { return bookData["name"].ToString(); }
                 }
                 user.Close();
             }

@@ -106,7 +106,7 @@ namespace LibruryDatabase.Controls
                         {
                             if (Y == Constants.NAME_SEARCH_Y) { SearchName(id);  } // 작가로찾기
                             if (Y == Constants.PUBLISH_Y) { SearchPublishName(id);} // 출판사로찾기
-                            if (Y == Constants.BOOK_Y) { SearchBookName();} // 책이름으로찾기
+                            if (Y == Constants.BOOK_Y) { SearchBookName(id);} // 책이름으로찾기
                             
                             return IsGoingReturnMenu();
                         }
@@ -168,9 +168,7 @@ namespace LibruryDatabase.Controls
 
             nameResult = BookData.Get().BringSearchResult(name);// 해당 책 이름가져오기
             name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-            LogData.Get().StoreLog(name, "도서검색", nameResult); // 로그에 저장
-
-
+            LogData.Get().StoreLog(name, "작가로검색", nameResult); // 로그에 저장
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             
@@ -200,11 +198,16 @@ namespace LibruryDatabase.Controls
 
             Menu.PrintSearchPublish(publish);//출력          
             BookExistenceCheck();
+
+            nameResult = BookData.Get().BringSearchResult(publish);// 해당 책 이름가져오기
+            name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
+            LogData.Get().StoreLog(name, "출판사로검색", nameResult); // 로그에 저장
+
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
         }
 
 
-        public void SearchBookName() // 책제목으로 찾기
+        public void SearchBookName(string id) // 책제목으로 찾기
         {
             string bookName;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
@@ -227,6 +230,12 @@ namespace LibruryDatabase.Controls
 
             Menu.PrintSearchBookName(bookName);// 출력            
             BookExistenceCheck();
+
+            nameResult = BookData.Get().BringSearchResult(bookName);// 해당 책 이름가져오기
+            name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
+            LogData.Get().StoreLog(name, "출판사로검색", nameResult); // 로그에 저장
+
+
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);           
         }
 

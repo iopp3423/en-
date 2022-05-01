@@ -67,7 +67,7 @@ namespace LibruryDatabase.Controls
             if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
-            SearchBookName(); // 책 제목 검색
+            SearchBookName("관리자"); // 책 제목 검색
 
             bookNumber = InputBookNumber();
             isBookExitence = BookData.Get().IsCheckingBookExistence(bookNumber);// 도서관에 책 있는지 체크
