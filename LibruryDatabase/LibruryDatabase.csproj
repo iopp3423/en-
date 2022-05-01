@@ -102,6 +102,7 @@
     <Compile Include="Controls\StartConnection.cs" />
     <Compile Include="Models\BookData.cs" />
     <Compile Include="Models\LogData.cs" />
+    <Compile Include="Models\LogVO.cs" />
     <Compile Include="test.cs" />
     <Compile Include="text2.cs" />
     <Compile Include="Utility\Constants.cs" />

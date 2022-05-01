@@ -25,7 +25,7 @@ namespace LibruryDatabase.Models
             using (MySqlConnection logRecord = new MySqlConnection(Constants.getQuery))
             {
                 logRecord.Open();
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.logQuery, DateTime.Now, name, record, log), logRecord);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.InsertlogQuery, DateTime.Now, name, record, log), logRecord);
                 Command.ExecuteNonQuery();
             }
         }

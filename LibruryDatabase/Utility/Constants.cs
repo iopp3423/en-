@@ -44,8 +44,9 @@ namespace LibruryDatabase.Utility
         public const string addingBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'));";
 
         //로그관련
-        public const string logQuery = "INSERT INTO LOG(TIME, name, record, log) VALUES(  ('{0}'),  ('{1}'), ('{2}'), ('{3}'));";
-        
+        public const string InsertlogQuery = "INSERT INTO LOG(TIME, name, record, log) VALUES(  ('{0}'),  ('{1}'), ('{2}'), ('{3}'));";
+        public const string logQuery = "SELECT * FROM LOG";
+
 
 
         public const string REVISE_BOOK_QUANTITY = "1";

@@ -15,7 +15,12 @@ namespace LibruryDatabase
         static void Main(string[] args)
         {
             StartConnection Start = new StartConnection();
-            Start.StartMenu();
+            text2 test = new text2();
+
+            test.storelog();
+            //Start.StartMenu();
+
+
 
 
 
