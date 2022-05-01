@@ -91,7 +91,7 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.REMOVE_BOOK) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.RIVISE_USER) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:
@@ -99,6 +99,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.SEARCH_BOOK) { ReviseLog(); IsGoingReturnMenu(); return Constants.isFail; } // 로그수정
                             if (Y == Constants.ADD_BOOK) { ResetLog(); IsGoingReturnMenu(); return Constants.isFail; } // 로그초기화
                             if (Y == Constants.REMOVE_BOOK) { StoreLog(); IsGoingReturnMenu(); return Constants.isFail; } // 로그저장
+                            if (Y == Constants.RIVISE_USER) { RemoveFile(); IsGoingReturnMenu(); return Constants.isFail; } // 회원정보수정
                             break;
                         }
                     case ConsoleKey.Escape:
@@ -166,14 +167,6 @@ namespace LibruryDatabase.Controls
 
         }
 
-        public void Remove()
-        {
-            ClearCurrentLine(Constants.CURRENT_LOCATION);
-            Print.PrintReMoveLogAfter();
-            LogData.Get().RemoveAllLog(); // 데베 로그 삭제
-            LogData.Get().PrintLog.Clear(); // 리스트 로그 삭제
-        }
-
         public void StoreLog()
         {
             Console.Clear();
@@ -207,6 +200,39 @@ namespace LibruryDatabase.Controls
 
         }
 
+        public void RemoveFile()
+        {
+            Console.Clear();
+            Print.PrintLog(); // 로그내역 출력  
+            Print.PrintRemoveFile();
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+
+            while (Constants.isEntrancing)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Enter:
+                        {
+                            RemoveDesktopFile();
+                            return;
+                        }
+                    case ConsoleKey.Escape:
+                        {
+                            
+                            return;
+                        }
+                    case ConsoleKey.F5: // 종료
+                        {
+                            Environment.Exit(Constants.EXIT);
+                            break;
+                        }
+                    default: continue;
+                }
+
+            }            
+        }
+
        
         string InputNumber() 
         {
@@ -229,6 +255,13 @@ namespace LibruryDatabase.Controls
             return Number;
         }
 
+        public void Remove()
+        {
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
+            Print.PrintReMoveLogAfter();
+            LogData.Get().RemoveAllLog(); // 데베 로그 삭제
+            LogData.Get().PrintLog.Clear(); // 리스트 로그 삭제
+        }
 
         public void ClearCurrentLine(int number) // 줄 지우기
         {
@@ -238,6 +271,16 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
         
+
+        public void RemoveDesktopFile()//데스크탑 파일 제거
+        {
+            
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Log";
+            Directory.Delete(desktopPath, recursive: Constants.isPassing);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
+            Print.PrintReMoveLogAfter();
+
+        }
 
 
         public void LogWrite() //바탕화면에 저장
