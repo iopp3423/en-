@@ -10,13 +10,15 @@ namespace LibruryDatabase.Models
 {
     internal class LogVO
     {
+        public string number;
         public string dateTime;
         public string name;
         public string record;
         public string log;
 
-        public LogVO(string dateTime, string name, string record, string log)
+        public LogVO(string number, string dateTime, string name, string record, string log)
         {
+            this.number = number;
             this.dateTime = dateTime;
             this.name = name;
             this.record = record;
@@ -27,30 +29,6 @@ namespace LibruryDatabase.Models
         {
 
         }
-
-        public void PrintUserData()
-        {
-            
-
-            using (MySqlConnection user = new MySqlConnection(Constants.logQuery))
-            {
-                user.Open();
-
-                //ExecuteReader를 이용하여
-                //연결 모드로 데이타 가져오기
-                MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
-                MySqlDataReader userInformation = Command.ExecuteReader();
-
-                while (userInformation.Read())
-                {
- 
-                    Console.WriteLine(userInformation["TIME"].ToString());
-                    Console.WriteLine(userInformation["name"].ToString());
-                    Console.WriteLine(userInformation["record"].ToString());   
-                    Console.WriteLine(userInformation["log"].ToString());         
-                }
-                userInformation.Close();
-            }
-        }
+       
     }
 }

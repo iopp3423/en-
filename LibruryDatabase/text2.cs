@@ -38,7 +38,7 @@ namespace LibruryDatabase
                     record = userInformation["record"].ToString();
                     log = userInformation["log"].ToString();
 
-                    Log.Add(new LogVO(time, name, record, log));
+                    //Log.Add(new LogVO(time, name, record, log));
                 }
                 userInformation.Close();
             }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using LibruryDatabase.Utility;
+using LibruryDatabase.Models;
 
 namespace LibruryDatabase.Views
 {
@@ -467,6 +468,33 @@ namespace LibruryDatabase.Views
             Console.WriteLine("출시일(YYYY/MM/DD) :");
             Console.WriteLine("수량(1~3자리 숫자):");
             Console.WriteLine("가격 :");
+        }
+
+        public void PrintReviseLog()
+        {
+            Console.Write("삭제할 로그의 번호를 입력해주세요 :");
+        }
+
+        public void PrintLog()
+        {
+            foreach (LogVO x in LogData.Get().PrintLog)
+            {
+                Console.Write("번호   :");
+                Console.WriteLine(x.number);
+                Console.Write("시간   :");
+                Console.WriteLine(x.dateTime);
+                Console.Write("사용자 :");
+                Console.WriteLine(x.name);
+                Console.Write("내역   :");
+                Console.WriteLine(x.record);
+                Console.Write("로그   :");
+                Console.WriteLine(x.log);
+                Console.WriteLine("====================================================");
+            }
+        }
+        public void PrintReMoveLogAfter()
+        {
+            Console.Write("로그가 삭제되었습니다.  뒤로가기 : ESC          프로그램 종료 : F5");
         }
 
         public bool IsGoingBackMenu()
