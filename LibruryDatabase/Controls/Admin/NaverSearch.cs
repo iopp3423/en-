@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibruryDatabase.Controls.Admin
+namespace LibruryDatabase.Controls
 {
     internal class NaverSearch
     {

@@ -13,7 +13,7 @@ namespace LibruryDatabase.Controls
 {
     internal class Admin : LoginOrRegister
     {
-        //Screen Menu = new Screen();
+
         AdminMenu goingMenu= new AdminMenu();
      
         public Screen Print;

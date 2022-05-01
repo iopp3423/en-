@@ -16,50 +16,16 @@ namespace LibruryDatabase
         {
             StartConnection Start = new StartConnection();
             text2 test = new text2();
+            //test test1 = new test();
 
             //test.storelog();
-            Start.StartMenu();
+            test.naver();
+            //test1.naver();
 
-
-
-
-
+            //Start.StartMenu();
             //관리자 id = enen1234, pw = enen4321
 
-            /*
-            void LogWrite(string log)
-            {
-                string DirectotyPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Log";
-                string FilePath = DirectotyPath + "\\Log_" + DateTime.Today.ToString("MMdd") + ".log";
-                string temp;
-
-                DirectoryInfo directory = new DirectoryInfo(DirectotyPath);
-                FileInfo file = new FileInfo(FilePath);
-
-
-                if (!directory.Exists) Directory.CreateDirectory(DirectotyPath);
-
-                if (!file.Exists)
-                {
-                    using (StreamWriter writer = new StreamWriter(FilePath))
-                    {
-                        temp = string.Format("[{0}] {1}", DateTime.Now, log);
-                        writer.WriteLine(temp);
-                        writer.Close();
-                    }
-                }
-                else
-                {
-                    using (StreamWriter writer = File.AppendText(FilePath))
-                    {
-                        temp = string.Format("[{0}] {1}", DateTime.Now, log);
-                        writer.WriteLine(temp);
-                        writer.Close();
-                    }
-                }
-
-            }
-            */
+           
         }
     }
 }
