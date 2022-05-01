@@ -75,7 +75,7 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.LOG_MANAGE) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.NABER_SEARCH) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:
@@ -87,6 +87,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
                             if (Y == Constants.CURRENT_BOOK) { PrintCurrentBook(); break; }// 대여상황
                             if (Y == Constants.LOG_MANAGE) { Log.PrintLogMenu();break; } // 로그
+                            if( Y == Constants.NABER_SEARCH) { break; }
                             break;
                         }
                      case ConsoleKey.Escape:

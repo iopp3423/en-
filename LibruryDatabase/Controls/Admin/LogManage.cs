@@ -147,7 +147,7 @@ namespace LibruryDatabase.Controls
                 {
                     case ConsoleKey.Enter:
                         {
-                            Remove();
+                            RemoveListandDatabase();
                             return;
                         }
                     case ConsoleKey.Escape:
@@ -255,7 +255,7 @@ namespace LibruryDatabase.Controls
             return Number;
         }
 
-        public void Remove()
+        public void RemoveListandDatabase()
         {
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintReMoveLogAfter();
@@ -274,53 +274,15 @@ namespace LibruryDatabase.Controls
 
         public void RemoveDesktopFile()//데스크탑 파일 제거
         {
-            
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Log";
-            Directory.Delete(desktopPath, recursive: Constants.isPassing);
+            LogData.Get().RemoveDesktopFile();
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintReMoveLogAfter();
-
         }
 
 
         public void LogWrite() //바탕화면에 저장
         {
-            string DirectotyPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Log";
-            string FilePath = DirectotyPath + "\\Log_" + DateTime.Today.ToString("MMdd") + ".log";
-            string temp;
-
-            DirectoryInfo directory = new DirectoryInfo(DirectotyPath);
-            FileInfo file = new FileInfo(FilePath);
-
-
-            if (!directory.Exists) Directory.CreateDirectory(DirectotyPath);
-
-            if (!file.Exists)
-            {
-                using (StreamWriter writer = new StreamWriter(FilePath))
-                {
-                    foreach (LogVO x in LogData.Get().PrintLog)
-                    {
-                        temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
-                        writer.WriteLine(temp);
-                        
-                    }
-                    writer.Close();
-                }            
-            }
-            else
-            {
-                using (StreamWriter writer = File.AppendText(FilePath))
-                {
-                    foreach (LogVO x in LogData.Get().PrintLog)
-                    {
-                        temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
-                        writer.WriteLine(temp);
-                      
-                    }
-                    writer.Close();
-                }
-            }
+            LogData.Get().LogWrite();
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintStoreAfter();
         }

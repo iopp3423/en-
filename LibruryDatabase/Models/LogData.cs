@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using LibruryDatabase.Utility;
+using System.IO;
 
 namespace LibruryDatabase.Models
 {
@@ -85,7 +86,55 @@ namespace LibruryDatabase.Models
                 Command.ExecuteNonQuery();
             }
         }
-        
+
+        public void RemoveDesktopFile()//데스크탑 파일 제거
+        {
+
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Log";
+            Directory.Delete(desktopPath, recursive: Constants.isPassing);          
+        }
+
+
+
+        public void LogWrite() //바탕화면에 로그 저장
+        {
+            string DirectotyPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Log";
+            string FilePath = DirectotyPath + "\\Log_" + DateTime.Today.ToString("MMdd") + ".log";
+            string temp;
+
+            DirectoryInfo directory = new DirectoryInfo(DirectotyPath);
+            FileInfo file = new FileInfo(FilePath);
+
+
+            if (!directory.Exists) Directory.CreateDirectory(DirectotyPath);
+
+            if (!file.Exists)
+            {
+                using (StreamWriter writer = new StreamWriter(FilePath))
+                {
+                    foreach (LogVO x in LogData.Get().PrintLog)
+                    {
+                        temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
+                        writer.WriteLine(temp);
+
+                    }
+                    writer.Close();
+                }
+            }
+            else
+            {
+                using (StreamWriter writer = File.AppendText(FilePath))
+                {
+                    foreach (LogVO x in LogData.Get().PrintLog)
+                    {
+                        temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
+                        writer.WriteLine(temp);
+
+                    }
+                    writer.Close();
+                }
+            }
+        }
 
     }
 }
