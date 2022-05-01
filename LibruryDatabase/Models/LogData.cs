@@ -76,5 +76,16 @@ namespace LibruryDatabase.Models
             }
         }
 
+        public void RemoveAllLog()
+        {
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.RemoveAllLog), book);
+                Command.ExecuteNonQuery();
+            }
+        }
+        
+
     }
 }

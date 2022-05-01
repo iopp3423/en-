@@ -497,6 +497,15 @@ namespace LibruryDatabase.Views
             Console.Write("로그가 삭제되었습니다.  뒤로가기 : ESC          프로그램 종료 : F5");
         }
 
+        public void PrintRemoveAllData()
+        {
+            Console.Write("전체 로그데이터를  삭제하시겠습니까?   YES : Enter          뒤로가기 : ESC");
+        }
+        public void PrintStoreData()
+        {
+            Console.Write("로그파일을 저장하시겠습니까?           YES : Enter          뒤로가기 : ESC");
+        }
+
         public bool IsGoingBackMenu()
         {
             while (Constants.isPassing) // 메뉴 입장한 후 뒤로가기

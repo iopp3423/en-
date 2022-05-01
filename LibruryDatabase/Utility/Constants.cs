@@ -47,6 +47,7 @@ namespace LibruryDatabase.Utility
         public const string InsertlogQuery = "INSERT INTO LOG(TIME, name, record, log) VALUES(  ('{0}'),  ('{1}'), ('{2}'), ('{3}'));";
         public const string logQuery = "SELECT * FROM LOG";
         public const string LogDeleteQuery = "DELETE FROM LOG WHERE number = ('{0}')";
+        public const string RemoveAllLog = "TRUNCATE LOG;";
 
 
 

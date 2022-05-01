@@ -30,6 +30,7 @@ namespace LibruryDatabase.Controls
 
         public void PrintLogMenu() // 로그메뉴 프린트
         {
+            LogData.Get().PrintLog.Clear(); // 리스트에 저장된 로그값 재 조회시 수정된 값 적용하기 위해 전체 데이터 삭제 후 저장
             LogData.Get().Storelog(); // 로그 리스트에 저장
             Console.Clear();
             Print.PrintMain();
@@ -89,16 +90,14 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.REVISE_BOOK) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.REMOVE_BOOK) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:
                         {
                             if (Y == Constants.SEARCH_BOOK) { ReviseLog(); IsGoingReturnMenu(); return Constants.isFail; } // 로그수정
-                            if (Y == Constants.ADD_BOOK) { } // 로그초기화
-                            if (Y == Constants.REMOVE_BOOK) { } // 로그저장
-                            if (Y == Constants.REVISE_BOOK) { } // 로그삭제
-                            //return IsGoingReturnMenu();
+                            if (Y == Constants.ADD_BOOK) { ResetLog(); IsGoingReturnMenu(); return Constants.isFail; } // 로그초기화
+                            if (Y == Constants.REMOVE_BOOK) { StoreLog(); IsGoingReturnMenu(); return Constants.isFail; } // 로그저장
                             break;
                         }
                     case ConsoleKey.Escape:
@@ -129,24 +128,86 @@ namespace LibruryDatabase.Controls
             LogData.Get().RemoveLog(number); // 로그 삭제           
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             ClearCurrentLine(Constants.CURRENT_LOCATION);
-            Print.PrintReMoveLogAfter();
+            Print.PrintReMoveLogAfter(); // 로그 삭제 후 안내메시지
     
         }
         public void ResetLog()
         {
+            Console.Clear();
+            Print.PrintLog(); // 로그내역 출력
+            Print.PrintRemoveAllData(); // 로그제거설명
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+            
+            while (Constants.isEntrancing)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Enter:
+                        {
+                            Remove();
+                            return;
+                        }
+                    case ConsoleKey.Escape:
+                        {                       
+                            return;
+                        }
+                    case ConsoleKey.F5: // 종료
+                        {
+                            Environment.Exit(Constants.EXIT);
+                            break;
+                        }
+                    default: continue;
+                }
+
+            }
+
 
         }
+
+        public void Remove()
+        {
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
+            Print.PrintReMoveLogAfter();
+            LogData.Get().RemoveAllLog(); // 데베 로그 삭제
+            LogData.Get().PrintLog.Clear(); // 리스트 로그 삭제
+        }
+
         public void StoreLog()
         {
+            Console.Clear();
+            Print.PrintLog(); // 로그내역 출력  
+            Print.PrintStoreData();
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
 
-        }
-        public void RemoveLog()
-        {
+            while (Constants.isEntrancing)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Enter:
+                        {
+                            
+                            return;
+                        }
+                    case ConsoleKey.Escape:
+                        {
+                            return;
+                        }
+                    case ConsoleKey.F5: // 종료
+                        {
+                            Environment.Exit(Constants.EXIT);
+                            break;
+                        }
+                    default: continue;
+                }
+
+            }
 
         }
 
        
-        string InputNumber() //
+        string InputNumber() 
         {
             string Number;
 
