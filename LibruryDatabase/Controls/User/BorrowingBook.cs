@@ -138,9 +138,9 @@ namespace LibruryDatabase.Controls
                 BookData.Get().SearchBook(id, bookNumber);
                 BookData.Get().MinusBook(bookNumber); // 책 수량 감소
 
-                bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보
+                bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
                 name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, "책 대여", bookName); // 로그에 저장
+                LogData.Get().StoreLog(name, "도서 대여", bookName); // 로그에 저장
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("대여하였습니다. 뒤로가기 : ESC     프로그램 종료 : F5");

@@ -80,7 +80,7 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.isAdminSearching); break; } // 관리자 도서검색
+                            if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.isAdminSearching, "3312341"); break; } // 관리자 도서검색
                             if (Y == Constants.ADD_BOOK) { adding.AddBook(); break; } // 책 추가 클래스 이동
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동

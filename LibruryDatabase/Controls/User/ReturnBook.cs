@@ -56,6 +56,8 @@ namespace LibruryDatabase.Controls
             string bookNumber;
             bool isCheckAlreadyReturn;
             bool isAlreadyBorrow;
+            string bookName;
+            string name;
 
                       
             Console.Clear();                 
@@ -108,6 +110,11 @@ namespace LibruryDatabase.Controls
             
             BookData.Get().ReturnBook(bookNumber); // 책 반납
             BookData.Get().PlusBook(bookNumber); // 책 수량 증가
+
+            bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
+            name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
+            LogData.Get().StoreLog(name, "도서 반납", bookName); // 로그에 저장
+
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             ClearCurrentLine(Constants.CURRENT_LOCATION);
 

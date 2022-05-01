@@ -322,5 +322,26 @@ namespace LibruryDatabase.Models
             }
             return bookNumber;
         }
+
+        public string BringSearchResult(string name) // 데베에 책 있는지 체크
+        {
+
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.SearchBookQuery), user);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
+                {
+                    if (bookData["author"].ToString().Contains(name)) { return bookData["author"].ToString(); }
+                    //else if (bookData["publish"].ToString().Contains(name)) { return bookData["publish"].ToString(); }
+                    //else if (bookData["name"].ToString().Contains(name)) { return bookData["name"].ToString(); }
+                }
+                user.Close();
+            }
+            return name;
+        }
     }
 }
