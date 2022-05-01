@@ -15,9 +15,13 @@ namespace LibruryDatabase.Controls
         RemovalBook removing = new RemovalBook();
         BookAdition adding = new BookAdition();
         ModificationBook modify = new ModificationBook();
-        RemovalUser member = new RemovalUser();  
-        
+        RemovalUser member = new RemovalUser();      
         Screen Print;
+
+        public AdminMenu()
+        {
+
+        }
 
         public AdminMenu(Screen Menu) : base(Menu)
         {
@@ -26,11 +30,6 @@ namespace LibruryDatabase.Controls
             adding = new BookAdition(Print);
             modify = new ModificationBook(Print);
             member = new RemovalUser(Print);
-        }
-
-        public AdminMenu() 
-        {
-            
         }
 
 
