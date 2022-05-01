@@ -10,12 +10,13 @@ using Newtonsoft.Json.Linq;
 
 namespace LibruryDatabase
 {
-       
+       /*
         public class APIExamSearchBlog
         {
             static void Main(string[] args)
             {
-                string query = "%EC%A3%BC%EC%8B%9D&display=10&start=1"; // 검색할 문자열
+                string query = "%EC%A3%BC%EC%8B%9D&display=100&start=1"; // 검색할 문자열
+
                 string url = "https://openapi.naver.com/v1/search/book?query=" + query; // 결과가 JSON 포맷
                                                                                        
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -43,8 +44,9 @@ namespace LibruryDatabase
                     Console.WriteLine("Error 발생=" + status);
                 }
             }
-
+       
       
     }
+       */
     
 }

@@ -445,6 +445,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("  》도서수정 ");
             Console.WriteLine("  》회원관리 ");
             Console.WriteLine("  》대여상황 ");
+            Console.WriteLine("  》로그관리 ");
         }
         public void PrintReturnMenu()
         {

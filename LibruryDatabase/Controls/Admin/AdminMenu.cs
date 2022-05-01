@@ -15,7 +15,9 @@ namespace LibruryDatabase.Controls
         RemovalBook removing = new RemovalBook();
         BookAdition adding = new BookAdition();
         ModificationBook modify = new ModificationBook();
-        RemovalUser member = new RemovalUser();      
+        RemovalUser member = new RemovalUser();
+        LogManage Log = new LogManage();
+
         Screen Print;
 
         public AdminMenu()
@@ -30,6 +32,7 @@ namespace LibruryDatabase.Controls
             adding = new BookAdition(Print);
             modify = new ModificationBook(Print);
             member = new RemovalUser(Print);
+            Log = new LogManage(Print);
         }
 
 
@@ -72,7 +75,7 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.CURRENT_BOOK) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.LOG_MANAGE) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:
@@ -82,15 +85,8 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
-                            if (Y == Constants.CURRENT_BOOK) // 대여상황
-                            { 
-                                Console.Clear();
-                                Print.PrintCurrentBorrowBook();
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.Write("뒤로가기 : ESC                                프로그램 종료 : F5");
-                                Console.ResetColor();
-                                GoBackMenu(); 
-                            } 
+                            if (Y == Constants.CURRENT_BOOK) { PrintCurrentBook(); break; }// 대여상황
+                            if (Y == Constants.LOG_MANAGE) { }
                             break;
                         }
                      case ConsoleKey.Escape:
@@ -132,6 +128,15 @@ namespace LibruryDatabase.Controls
                 }
 
             }
+        }
+        public void PrintCurrentBook()
+        {
+            Console.Clear();
+            Print.PrintCurrentBorrowBook();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("뒤로가기 : ESC                                프로그램 종료 : F5");
+            Console.ResetColor();
+            GoBackMenu();
         }
     }
 }

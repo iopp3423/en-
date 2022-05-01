@@ -120,6 +120,7 @@ namespace LibruryDatabase.Utility
         public const int REVISE_BOOK = 13;
         public const int USER_MANAGE = 14;
         public const int CURRENT_BOOK = 15;
+        public const int LOG_MANAGE = 16;
 
         //AddingBook에서 좌표 
         public const int BOOK_NAME_X = 29;

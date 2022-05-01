@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using LibruryDatabase.Utility;
 
-/*
+
 namespace LibruryDatabase
 {
     internal class OpenLibrary
@@ -14,16 +14,10 @@ namespace LibruryDatabase
         static void Main(string[] args)
         {          
             StartConnection Start = new StartConnection();
-            test testC = new test();
-            //Start.StartMenu();
+            Start.StartMenu();
             //관리자 id = enen1234, pw = enen4321
-
-
-
-
 
         }
     
     }
 }
-*/
