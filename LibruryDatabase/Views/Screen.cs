@@ -489,12 +489,12 @@ namespace LibruryDatabase.Views
                 Console.WriteLine(x.record);
                 Console.Write("로그   :");
                 Console.WriteLine(x.log);
-                Console.WriteLine("====================================================");
+                Console.WriteLine("=======================================================================");
             }
         }
         public void PrintReMoveLogAfter()
         {
-            Console.Write("로그가 삭제되었습니다.  뒤로가기 : ESC          프로그램 종료 : F5");
+            Console.Write("로그가 삭제되었습니다.              뒤로가기 : ESC          프로그램 종료 : F5");
         }
 
         public void PrintRemoveAllData()
@@ -504,6 +504,11 @@ namespace LibruryDatabase.Views
         public void PrintStoreData()
         {
             Console.Write("로그파일을 저장하시겠습니까?           YES : Enter          뒤로가기 : ESC");
+        }
+
+        public void PrintStoreAfter()
+        {
+            Console.Write("로그파일이 저장되었습니다?         뒤로가기 : ESC          프로그램 종료 : F5  ");
         }
 
         public bool IsGoingBackMenu()
