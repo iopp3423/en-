@@ -18,6 +18,15 @@ namespace LibruryDatabase.Controls
         ModificationUser UserModification = new ModificationUser();
         ReturnBook ReturnBook = new ReturnBook();
 
+        public UserMenu()
+        {
+            BookSearching = new SearchingBook(Menu);
+            BookBorrowing = new BorrowingBook(Menu);
+            UserModification = new ModificationUser(Menu);
+            ReturnBook = new ReturnBook(Menu);
+        }
+
+
         public void StartBookmenu(string id, string password) // id, pw정보 저장
         {
 

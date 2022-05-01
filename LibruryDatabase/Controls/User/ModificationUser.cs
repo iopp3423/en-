@@ -13,7 +13,18 @@ namespace LibruryDatabase.Controls
 {
     internal class ModificationUser
     {
-        Screen Menu = new Screen();
+        //Screen Menu = new Screen();
+
+        public Screen Menu;
+
+        public ModificationUser()
+        {
+        }
+
+        public ModificationUser(Screen Menu)
+        {
+            this.Menu = Menu;
+        }
 
         public bool IsGoingReturnMenu() //이전 메뉴로 돌아가기
         {

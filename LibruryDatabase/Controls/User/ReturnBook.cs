@@ -13,7 +13,18 @@ namespace LibruryDatabase.Controls
 {
     internal class ReturnBook
     {
-        Screen Menu = new Screen();
+        //Screen Menu = new Screen();
+
+        public Screen Menu;
+
+        public ReturnBook()
+        {
+        }
+
+        public ReturnBook(Screen Menu)
+        {
+            this.Menu = Menu;
+        }
 
         public void IsSelectingMenu() //이전 메뉴로 돌아가기
         {

@@ -13,7 +13,16 @@ namespace LibruryDatabase.Controls
 {
     internal class BorrowingBook : SearchingBook
     {
-        Screen Menu = new Screen();
+        public Screen Menu;
+
+        public BorrowingBook()
+        {
+        }
+
+        public BorrowingBook(Screen Menu)
+        {
+            this.Menu = Menu;
+        }
 
         public void GoBackMenu() //이전 메뉴로 돌아가기
         {

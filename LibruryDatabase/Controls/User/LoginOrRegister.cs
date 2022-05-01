@@ -16,6 +16,7 @@ namespace LibruryDatabase.Controls
     {
         //Screen Menu = new Screen(); // 뷰 클래스 객체생성
         UserMenu GoUser = new UserMenu();
+
         
         public string id;
         public string password;
@@ -25,6 +26,8 @@ namespace LibruryDatabase.Controls
         string callNumber;
         string address;
         bool isOverlapCheck;
+
+
 
 
         public Screen Menu;
@@ -47,7 +50,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintMain();
             Menu.RegisterOrLogin();
 
-                /*
+                
             if (Constants.isBack == IsSelectingMenu()) // 마우스 함수
             {
                 Console.Clear();
@@ -55,7 +58,7 @@ namespace LibruryDatabase.Controls
                 Menu.PrintUserOrAdmin();
                 return;
             }
-                */
+                
         }
         
 

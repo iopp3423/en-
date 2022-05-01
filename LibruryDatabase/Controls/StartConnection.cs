@@ -19,13 +19,13 @@ namespace LibruryDatabase.Controls
         ReturnBook ReturnBook = new ReturnBook();
         */
         Screen Menu = new Screen();
-        SearchingBook BookSearching = new SearchingBook();
-        LoginOrRegister UserLibruary = new LoginOrRegister();
+        LoginOrRegister UserLibruary = new LoginOrRegister(); //아오 이걸로 전달했어야함, 아마 북 서치는 전달하면 터질텐데 이 클래스에서 북 서치 인스턴스를 쓰지 않아서 그럴듯 북 서치 인스턴스를 쓰는 클래스에서 전달해야할듯
+
         Admin AdminLibruary = new Admin();
 
         public StartConnection()
         {
-            BookSearching = new SearchingBook(Menu);
+           
             UserLibruary = new LoginOrRegister(Menu);
         }
 
