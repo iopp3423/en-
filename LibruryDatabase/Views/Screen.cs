@@ -447,6 +447,14 @@ namespace LibruryDatabase.Views
             Console.WriteLine("  》대여상황 ");
             Console.WriteLine("  》로그관리 ");
         }
+
+        public void PrintLogMenu()
+        {
+            Console.WriteLine("  》로그수정 ");
+            Console.WriteLine("  》로그초기화 ");
+            Console.WriteLine("  》로그저장 ");
+            Console.WriteLine("  》로그삭제 ");
+        }
         public void PrintReturnMenu()
         {
             Console.WriteLine("유저 or 관리자 모드 : ESC, 관리자 로그인 : ENTER");

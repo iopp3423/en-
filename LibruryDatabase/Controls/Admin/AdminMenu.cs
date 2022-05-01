@@ -86,7 +86,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
                             if (Y == Constants.CURRENT_BOOK) { PrintCurrentBook(); break; }// 대여상황
-                            if (Y == Constants.LOG_MANAGE) { }
+                            if (Y == Constants.LOG_MANAGE) { Log.PrintLogMenu();break; }
                             break;
                         }
                      case ConsoleKey.Escape:
