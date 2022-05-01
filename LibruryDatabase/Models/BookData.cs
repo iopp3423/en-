@@ -303,5 +303,24 @@ namespace LibruryDatabase.Models
                 return isCheckingBook;
             }
         }
+
+        public string BringBookname(string bookNumber) // 데베에 책 있는지 체크
+        {
+
+
+            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
+            {
+                user.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowedIdQuery, bookNumber), user);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
+                {
+                    if (bookData["number"].ToString() == bookNumber) return bookData["name"].ToString();
+                }
+                user.Close();
+            }
+            return bookNumber;
+        }
     }
 }
