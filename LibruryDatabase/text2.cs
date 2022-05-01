@@ -9,13 +9,14 @@ using LibruryDatabase.Models;
 
 namespace LibruryDatabase
 {
+
     internal class text2
     {
         public List<LogVO> Log = new List<LogVO>();
-        string time;
-        string name;
-        string record;
-        string log;
+        private string time;
+        private string name;
+        private string record;
+        private string log;
 
         public void storelog()
         {

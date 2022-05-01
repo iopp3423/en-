@@ -12,7 +12,13 @@ namespace LibruryDatabase.Controls
 {
     internal class LogManage
     {
+
         public Screen Print;
+        public List<LogVO> Log = new List<LogVO>(); // Log리스트 생성
+        private string time;
+        private string name;
+        private string record;
+        private string log;
 
         public LogManage()
         {
@@ -68,10 +74,10 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.SEARCH_BOOK) {  } // 로그수정
+                            if (Y == Constants.SEARCH_BOOK) { } // 로그수정
                             if (Y == Constants.ADD_BOOK) { } // 로그초기화
                             if (Y == Constants.REMOVE_BOOK) { } // 로그저장
-                            if (Y == Constants.REVISE_BOOK) {  } // 로그삭제
+                            if (Y == Constants.REVISE_BOOK) { } // 로그삭제
                             break;
                         }
                     case ConsoleKey.Escape:
@@ -89,7 +95,14 @@ namespace LibruryDatabase.Controls
 
                 }
             }
-        }   
+        }
 
-    }
+
+        public void ReviseLog()
+        {
+
+        }
+
+
+    }  
 }

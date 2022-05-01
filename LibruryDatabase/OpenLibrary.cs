@@ -17,8 +17,8 @@ namespace LibruryDatabase
             StartConnection Start = new StartConnection();
             text2 test = new text2();
 
-            test.storelog();
-            //Start.StartMenu();
+            //test.storelog();
+            Start.StartMenu();
 
 
 
