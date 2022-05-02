@@ -15,7 +15,7 @@ namespace LibruryDatabase.Models
     {
 
         public List<NaverBookVO> NaverBook = new List<NaverBookVO>();
-
+        public List<NaverBookVO> UserRequestBook = new List<NaverBookVO>();       
 
         private static BookData Book;
         public static BookData Get()
@@ -25,8 +25,8 @@ namespace LibruryDatabase.Models
 
             return Book;
         }
-        
 
+        public string isbn;
 
 
         public void StoreBookInformation(string bookName, string author, string publish, string publishDay, string quantity, string price) // 책 추가
@@ -311,7 +311,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public string BringBookname(string bookNumber) // 데베에 책 있는지 체크
+        public string BringBookname(string bookNumber) // 이름가져오기
         {
 
 
@@ -353,7 +353,7 @@ namespace LibruryDatabase.Models
 
 
 
-        public void StoreNaverBookToList(string keyword, string display)
+        public void StoreNaverBookToList(string keyword, string display, bool isAdmin)
         {
 
             string query = string.Format("{0}&display={1}", keyword, display); //쿼리 만들기
@@ -393,7 +393,8 @@ namespace LibruryDatabase.Models
                     string description = ParseJson["items"][index]["description"].ToString();
                     description = description.Replace("&quot;", "\""); //HTML 태그 변경
 
-                    NaverBook.Add(new NaverBookVO(title, author, price, publisher, isbn, description));
+                    if(isAdmin == Constants.isPassing) NaverBook.Add(new NaverBookVO(title, author, price, publisher, isbn, description)); //관리자 출력 리스트에 저장
+                    else if(isAdmin == Constants.isFail) UserRequestBook.Add(new NaverBookVO(title, author, price, publisher, isbn, description));
                 }
             }
             else

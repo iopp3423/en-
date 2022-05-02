@@ -12,8 +12,6 @@ namespace LibruryDatabase.Controls
 {
     internal class ModificationBook : SearchingBook
     {
-        //Screen Menu = new Screen();
-
         public Screen Print;
         public MessageScreen Message;
 

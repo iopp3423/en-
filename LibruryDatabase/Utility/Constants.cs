@@ -96,6 +96,7 @@ namespace LibruryDatabase.Utility
         public const int BORROW_BOOK = 11;
         public const int CHECK_BOOK = 12;
         public const int RIVISE_USER = 13;
+        public const int REQUEST_BOOK = 14;
         public const int SEARCH_X = 0;
         public const int SEARCH_Y = 2;
         public const int PW_FAIL_X = 4;
@@ -156,5 +157,7 @@ namespace LibruryDatabase.Utility
         //회원관리 이름입력 위치
         public const int INPUT_NAME_Y = 5;
         public const int INPUT_NAME_X = 20;
+
+        public const int REQUEST_X = 30;
     }
 }

@@ -17,6 +17,7 @@ namespace LibruryDatabase.Controls
         BorrowingBook BookBorrowing = new BorrowingBook();
         ModificationUser UserModification = new ModificationUser();
         ReturnBook ReturnBook = new ReturnBook();
+        RequestBook Request = new RequestBook();
 
         public Screen Menu;
         public MessageScreen PrintMessage;
@@ -34,6 +35,7 @@ namespace LibruryDatabase.Controls
             BookBorrowing = new BorrowingBook(Menu,PrintMessage);
             UserModification = new ModificationUser(Menu, PrintMessage);
             ReturnBook = new ReturnBook(Menu, PrintMessage);
+            Request = new RequestBook(Menu, PrintMessage);
         }
 
         
@@ -79,7 +81,7 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.RIVISE_USER) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.REQUEST_BOOK) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:
@@ -88,6 +90,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.BORROW_BOOK) { Console.Clear(); BookBorrowing.InputBookTitleandBookNumber(id); } // 도서대여
                             if (Y == Constants.CHECK_BOOK) { Console.Clear();  ReturnBook.ShowBorrowBook(id); } // 도서확인
                             if (Y == Constants.RIVISE_USER) { Console.Clear(); UserModification.ModifyUserInformation(id, password); } // 회원정보수정
+                            if (Y == Constants.REQUEST_BOOK) { Console.Clear(); Request.RequestAddBook(); } // 회원정보수정                          
                             break;
                         }
                      case ConsoleKey.Escape:

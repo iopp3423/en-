@@ -93,6 +93,7 @@
     <Compile Include="Controls\Admin\AdminMenu.cs" />
     <Compile Include="Controls\Admin\LogManage.cs" />
     <Compile Include="Controls\Admin\NaverSearch.cs" />
+    <Compile Include="Controls\User\RequestBook.cs" />
     <Compile Include="Controls\User\BorrowingBook.cs" />
     <Compile Include="Controls\User\ReturnBook.cs" />
     <Compile Include="Controls\Admin\ModificationBook.cs" />

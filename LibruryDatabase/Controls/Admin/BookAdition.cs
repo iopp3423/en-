@@ -13,8 +13,6 @@ namespace LibruryDatabase.Controls
 { 
     internal class BookAdition
     {
-        //Screen Menu = new Screen();
-
         public Screen Menu;
         public MessageScreen Message;
 
@@ -107,9 +105,7 @@ namespace LibruryDatabase.Controls
                 break;
             }
             Menu.PrintInputMessage();
-            return bookName;
-
-           
+            return bookName;         
         }
         
         string InputAuthor(int authorY)//작가입력

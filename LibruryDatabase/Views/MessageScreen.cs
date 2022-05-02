@@ -149,9 +149,25 @@ namespace LibruryDatabase.Views
         {
             return "삭제되었습니다.                      뒤로가기 : ESC       프로그램 종료 : F5";
         }
+        public void PrintAddisbn()
+        {
+            Console.Write("추가하실 도서의 isbn을 입력해주세요 : ");
+        }
+        public void PrintNoneIsbnMessage()
+        {
+            Console.Write("맞는 isbn이 없습니다. 다시 입력해주세요.");
+        }
+
+
+
+
+
+
+
+
+
 
         //관리자 관련
-
         public string PrintBackOrExit()
         {
             return "뒤로가기 : ESC                                프로그램 종료 : F5";
@@ -235,6 +251,10 @@ namespace LibruryDatabase.Views
         public void PrintRemoveBookNumberMessage()
         {
             Console.Write("삭제할 책 번호 :");
+        }
+        public void PrintReInputTitleMessage()
+        {
+            Console.Write("다시 입력해주세요(영어 한글제한없음) :");
         }
 
 

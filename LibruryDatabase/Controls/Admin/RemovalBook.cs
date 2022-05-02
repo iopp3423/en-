@@ -13,7 +13,6 @@ namespace LibruryDatabase.Controls
 {
     internal class RemovalBook : SearchingBook
     {
-        //Screen Menu = new Screen();
 
         public Screen Print;
         public MessageScreen Message;

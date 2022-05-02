@@ -13,9 +13,6 @@ namespace LibruryDatabase.Controls
 
     internal class RemovalUser
     {
-
-        //Screen Menu = new Screen();
-
         public Screen Menu;
         public MessageScreen Message;
 
