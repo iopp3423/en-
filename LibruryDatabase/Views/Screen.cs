@@ -481,6 +481,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("출시일(YYYY/MM/DD) :");
             Console.WriteLine("수량(1~3자리 숫자):");
             Console.WriteLine("가격 :");
+            Console.WriteLine("ISBN :");
         }
 
         public void PrintReviseLog()

@@ -26,6 +26,15 @@ namespace LibruryDatabase.Controls
             this.Message = message;
         }
 
+        string bookName;
+        string author;
+        string publisher;
+        string publishDay;
+        string quantity;
+        string bookprice;
+        string price;
+        string isbn;
+
 
         public void IsSelectingMenu() //이전 메뉴로 돌아가기
         {
@@ -54,12 +63,7 @@ namespace LibruryDatabase.Controls
 
         public void AddBook()
         {
-            string bookName;
-            string author;
-            string publisher;
-            string publishDay;
-            string quantity;
-            string price;
+            
             int movingInputY = Constants.BOOK_NAME_Y;
 
             Console.Clear();
@@ -74,9 +78,10 @@ namespace LibruryDatabase.Controls
             publisher = InputPublisher(movingInputY++);
             publishDay = InputPublishDay(movingInputY++);
             quantity = InputQuantity(movingInputY++);
-            price = InputPrice(movingInputY);
+            bookprice = InputPrice(movingInputY++);
+            isbn = InputISBN(movingInputY);
 
-            BookData.Get().StoreBookInformation(bookName, author, publisher, publishDay, quantity, price); // 책 데베 추가
+            BookData.Get().StoreBookInformation(bookName, author, publisher, publishDay, quantity, bookprice); // 책 데베 추가
             LogData.Get().StoreLog("관리자", "도서추가", bookName); // 로그에 저장
 
             Console.SetCursorPosition(Console.CursorLeft, Constants.ERROR_Y);
@@ -87,7 +92,7 @@ namespace LibruryDatabase.Controls
 
         string InputBookName(int bookNameY)//책이름입력
         {
-            string bookName;
+    
 
             while (Constants.isPassing)
             {
@@ -110,7 +115,7 @@ namespace LibruryDatabase.Controls
         
         string InputAuthor(int authorY)//작가입력
         {
-            string author;
+         
 
             while (Constants.isPassing)
             {
@@ -134,7 +139,7 @@ namespace LibruryDatabase.Controls
 
         string InputPublisher(int publisherY)//출판사입력
         {
-            string publisher;
+         
 
             while (Constants.isPassing)
             {
@@ -158,7 +163,7 @@ namespace LibruryDatabase.Controls
 
         string InputPublishDay(int publishDayY)//출판일자입력
         {
-            string publishDay;
+  
 
             while (Constants.isPassing)
             {
@@ -182,7 +187,7 @@ namespace LibruryDatabase.Controls
 
         string InputQuantity(int quantityY)//수량입력
         {
-            string quantity;
+  
 
             while (Constants.isPassing)
             {
@@ -206,13 +211,13 @@ namespace LibruryDatabase.Controls
 
         string InputPrice(int bookPriceY)//가격입력
         {
-            string bookPrice;
+     
 
             while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.BOOK_PRICE_X, bookPriceY);
-                bookPrice = Console.ReadLine();
-                if (Constants.isFail == Regex.IsMatch(bookPrice, Utility.Exception.PRICE))
+                price = Console.ReadLine();
+                if (Constants.isFail == Regex.IsMatch(price, Utility.Exception.PRICE))
                 {
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -222,8 +227,30 @@ namespace LibruryDatabase.Controls
                 }
                 break;
             }
-            return bookPrice;
+            return price;
         }
+
+        string InputISBN(int ISBNY)//isbn입력
+        {
+            while (Constants.isPassing)
+            {
+                Console.SetCursorPosition(Constants.BOOK_PRICE_X, ISBNY);
+                isbn = Console.ReadLine();
+
+                if (Constants.isFail == Regex.IsMatch(isbn, Utility.Exception.ISBN))
+                {
+                    Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+                    Message.PrintAddisbn();
+                    Menu.PrintLoginErrorMessage(); 
+                    continue;
+                }
+                break;
+            }
+            return isbn;
+        }
+
 
         public void ClearCurrentLine(int number) // 줄 지우기
         {

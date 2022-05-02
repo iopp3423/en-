@@ -29,21 +29,62 @@ namespace LibruryDatabase.Controls
             this.Message = message;
         }
 
+        public void IsSelectingMenu() //이전 메뉴로 돌아가기
+        {
+            while (Constants.isEntrancing)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Escape:
+                        {
+                            Console.Clear();
+                            Menu.PrintMain();
+                            Menu.PrintUserMenu();
+                            return;
+                        }
+                    case ConsoleKey.F5: // 종료
+                        {
+                            Environment.Exit(Constants.EXIT);
+                            break;
+                        }
+                    default: continue;
+                }
+
+            }
+        }
+
         public void RequestAddBook() // 유저 책 요청 메서드
         {
             Menu.PrintMain();
             Message.PrintBookTitle();
 
+            Message.GreenColor(Message.PrintContinueRequestmessage());
+
+            while (Constants.isPassing) // 뒤로가기
+            {
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    Menu.PrintMain();
+                    Menu.PrintUserMenu();
+                    return;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter) break;
+            }
+
+            ClearCurrentLine(Constants.CURRENT_LOCATION); // 안내메시지 제거 후
+            Message.PrintBookTitle(); // 입력메시지 출력
 
             BookData.Get().NaverBook.Clear(); // 리스트 비우기
-
-
+         
             bookName = InputBookName(); //책제목입력
             BookData.Get().StoreNaverBookToList(bookName, Constants.ADD_BOOK.ToString(), Constants.isPassing); // 리스트에 저장
                                                                                                          
             Console.WriteLine("\n\n");
 
-            Menu.PrintRequestBook();//도서출력
+            Menu.PrintRequestBook();//도서출력          
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             isbn = InputISBN();
