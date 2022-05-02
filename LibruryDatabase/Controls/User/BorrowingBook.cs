@@ -138,7 +138,7 @@ namespace LibruryDatabase.Controls
 
                     bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
                     name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                    LogData.Get().StoreLog(name, "도서 대여", bookName); // 로그에 저장
+                    LogData.Get().StoreLog(name, Constants.BORROW, bookName) ; // 로그에 저장
 
                     messagePrint.GreenColor(messagePrint.PrintDoneBorrowMessage());
                     GoBackMenu();

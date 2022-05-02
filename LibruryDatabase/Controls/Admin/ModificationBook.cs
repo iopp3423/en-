@@ -67,7 +67,7 @@ namespace LibruryDatabase.Controls
             if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
-            SearchBookName(Constants.isFail, "관리자"); // 책 제목 검색
+            SearchBookName(Constants.isFail, Constants.ADMIN); // 책 제목 검색
 
 
             keyInput = InputBookNumber(); // 책 번호 입력받기
@@ -79,8 +79,8 @@ namespace LibruryDatabase.Controls
 
 
             bookName = BookData.Get().BringBookname(keyInput);// 해당 책 정보가져오기
-            if (number == Constants.REVISE_BOOK_QUANTITY) LogData.Get().StoreLog("관리자", "수량수정", bookName); // 로그에 저장
-            else LogData.Get().StoreLog("관리자", "가격수정", bookName); // 로그에 저장
+            if (number == Constants.REVISE_BOOK_QUANTITY) LogData.Get().StoreLog(Constants.ADMIN, Constants.REVISE_QUANTITY, bookName); // 로그에 저장
+            else LogData.Get().StoreLog(Constants.ADMIN, Constants.REVISE_PRICE, bookName); // 로그에 저장
 
             Message.GreenColor(Message.PrintReviseAfterMessage());
             GoBackMenu();

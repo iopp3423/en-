@@ -184,7 +184,7 @@ namespace LibruryDatabase.Controls
             message.GreenColor(message.PrintDoneRegister());
 
             name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-            LogData.Get().StoreLog(name, "도서관", "회원가입"); // 로그에 저장
+            LogData.Get().StoreLog(name, Constants.LIBRARY, Constants.REGISTER); // 로그에 저장
 
 
             while (Constants.isEntrancing)
@@ -216,7 +216,7 @@ namespace LibruryDatabase.Controls
             if (isOverlapCheck == Constants.isSucess)
             {
                 name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, "도서관", "로그인"); // 로그에 기록
+                LogData.Get().StoreLog(name, Constants.LIBRARY, Constants.LOGIN); // 로그에 기록
                 GoUser.StartBookmenu(id, password);
             }
 
@@ -314,6 +314,8 @@ namespace LibruryDatabase.Controls
 
         string ReadPassword() // 비밀번호 *처리
         {
+            string password;
+
             string passwordChangeStar = "";
             ConsoleKeyInfo info = Console.ReadKey(true);
             while (info.Key != ConsoleKey.Enter)
@@ -327,7 +329,7 @@ namespace LibruryDatabase.Controls
                 {
                     if (!string.IsNullOrEmpty(passwordChangeStar))
                     {
-                        passwordChangeStar = passwordChangeStar.Substring(Constants.CURRENT_LOCATION, password.Length - Constants.ONE);
+                        passwordChangeStar = passwordChangeStar.Substring(Constants.CURRENT_LOCATION, passwordChangeStar.Length - Constants.ONE);
                         int passwordX = Console.CursorLeft;
                         Console.SetCursorPosition(passwordX - Constants.ONE, Console.CursorTop);
                         Console.Write(" ");

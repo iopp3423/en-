@@ -165,5 +165,25 @@ namespace LibruryDatabase.Utility
         public const int INPUT_NAME_X = 20;
 
         public const int REQUEST_X = 30;
+
+
+        //로그
+        public const string ADMIN = "관리자";
+        public const string REMOVE = "도서삭제";
+        public const string REMOVE_USER = "회원삭제";
+        public const string REVISE_QUANTITY = "수량수정";
+        public const string REVISE_PRICE = "가격수정";
+        public const string ADD = "도서추가";
+        public const string BOOK_LIST = "도서목록";
+        public const string OPEN_LIST = "열람";
+        public const string LIBRARY = "도서관";
+        public const string LOGIN = "로그인";
+        public const string BORROW = "도서 대여";
+        public const string REGISTER = "회원가입";
+        public const string RETURN = "도서 반납";
+        public const string SEARCH_TITLE = "책 제목 검색";
+        public const string SEARCH_PUBLISHER = "출판사로 검색";
+        public const string SEARCH_AUTHOR = "작가로 검색";
+
     }
 }

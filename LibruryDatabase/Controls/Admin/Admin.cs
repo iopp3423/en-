@@ -49,7 +49,7 @@ namespace LibruryDatabase.Controls
             if (isCheckingLogin == Constants.isSucess)
             {
 
-                LogData.Get().StoreLog("관리자", "도서관","로그인"); // 로그에 저장
+                LogData.Get().StoreLog(Constants.ADMIN, Constants.LIBRARY,Constants.LOGIN); // 로그에 저장
                 goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
             }
 

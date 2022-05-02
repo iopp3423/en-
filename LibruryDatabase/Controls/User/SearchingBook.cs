@@ -168,12 +168,12 @@ namespace LibruryDatabase.Controls
             {
                 nameResult = BookData.Get().BringSearchResult(name);// 해당 책 이름가져오기
                 name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, "작가로 검색", nameResult); // 로그에 저장
+                LogData.Get().StoreLog(name, Constants.SEARCH_AUTHOR, nameResult); // 로그에 저장
             }
             else
             {
                 nameResult = BookData.Get().BringSearchResult(name);// 해당 책 이름가져오기
-                LogData.Get().StoreLog(name, "관리자 작가 검색", nameResult); // 로그에 저장
+                LogData.Get().StoreLog(name, Constants.ADMIN + Constants.SEARCH_AUTHOR, nameResult); // 로그에 저장
             }
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
@@ -209,12 +209,12 @@ namespace LibruryDatabase.Controls
             {
                 nameResult = BookData.Get().BringSearchResult(publish);// 해당 책 이름가져오기
                 name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, "출판사로 검색", nameResult); // 로그에 저장
+                LogData.Get().StoreLog(name, Constants.SEARCH_PUBLISHER, nameResult); // 로그에 저장
             }
             else
             {
                 nameResult = BookData.Get().BringSearchResult(publish);// 해당 책 이름가져오기
-                LogData.Get().StoreLog(name, "관리자 출판사 검색", nameResult); // 로그에 저장
+                LogData.Get().StoreLog(name, Constants.ADMIN + Constants.SEARCH_PUBLISHER, nameResult); // 로그에 저장
             }
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
@@ -249,12 +249,12 @@ namespace LibruryDatabase.Controls
             {
                 nameResult = BookData.Get().BringSearchResult(bookName);// 해당 책 이름가져오기
                 name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, "책 제목 검색", nameResult); // 로그에 저장
+                LogData.Get().StoreLog(name, Constants.SEARCH_TITLE, nameResult); // 로그에 저장
             }
             else
             {
                 nameResult = BookData.Get().BringSearchResult(bookName);// 해당 책 이름가져오기
-                LogData.Get().StoreLog(name, "관리자 책 제목 검색", nameResult); // 로그에 저장
+                LogData.Get().StoreLog(name, Constants.ADMIN + Constants.SEARCH_TITLE, nameResult); // 로그에 저장
             }
             
 

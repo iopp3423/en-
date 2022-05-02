@@ -81,8 +81,8 @@ namespace LibruryDatabase.Controls
             bookprice = InputPrice(movingInputY++);
             isbn = InputISBN(movingInputY);
 
-            BookData.Get().StoreBookInformation(bookName, author, publisher, publishDay, quantity, bookprice); // 책 데베 추가
-            LogData.Get().StoreLog("관리자", "도서추가", bookName); // 로그에 저장
+            BookData.Get().StoreBookUserRequest(bookName, author, publisher, publishDay, bookprice, isbn, quantity); // book db에 정보 저장
+            LogData.Get().StoreLog(Constants.ADMIN, Constants.ADD, bookName); // 로그에 저장
 
             Console.SetCursorPosition(Console.CursorLeft, Constants.ERROR_Y);
             Message.GreenColor(Message.PrintDoneBookRegister());
@@ -242,7 +242,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                     ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                    Message.PrintAddisbn();
+                    Message.PrintIsbnMessage();
                     Menu.PrintLoginErrorMessage(); 
                     continue;
                 }

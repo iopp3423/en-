@@ -104,7 +104,7 @@ namespace LibruryDatabase.Controls
 
             Message.GreenColor(Message.PrintRemoveUserMessage());
 
-            LogData.Get().StoreLog("관리자", "회원삭제", id); // 로그에 저장
+            LogData.Get().StoreLog(Constants.ADMIN, Constants.REMOVE_USER , id); // 로그에 저장
             UserData.Get().RemoveUserInformation(id); // 유저 삭제
             IsSelectingMenu();
                         

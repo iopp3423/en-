@@ -27,17 +27,6 @@ namespace LibruryDatabase.Models
         }
 
 
-        public void StoreBookInformation(string bookName, string author, string publish, string publishDay, string quantity, string price) // 책 추가
-        {
-           
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
-                book.Open();
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.addingBookQuery,bookName, author, publish, publishDay, price, quantity), book);
-                Command.ExecuteNonQuery();
-            }
-        }
-
         public void RemoveBookInformation(string bookNumber) // 책 제거
         {
 

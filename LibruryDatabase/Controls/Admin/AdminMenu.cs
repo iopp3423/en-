@@ -85,7 +85,7 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.isAdminSearching, "관리자"); break; } // 관리자 도서검색
+                            if (Y == Constants.SEARCH_BOOK) { SearchBook(Constants.isAdminSearching, Constants.ADMIN); break; } // 관리자 도서검색
                             if (Y == Constants.ADD_BOOK) { adding.AddBook(); break; } // 책 추가 클래스 이동
                             if (Y == Constants.REMOVE_BOOK) { removing.RemoveBook(); break; } // 책 제거 클래스 이동
                             if (Y == Constants.REVISE_BOOK) { modify.ModifyBook(); break; } // 책 수정 클래스 이동
@@ -138,7 +138,7 @@ namespace LibruryDatabase.Controls
         public void PrintCurrentBook()
         {
             Console.Clear();
-            LogData.Get().StoreLog("관리자", "도서목록", "열람");
+            LogData.Get().StoreLog(Constants.ADMIN, Constants.BOOK_LIST, Constants.OPEN_LIST);
             Print.PrintCurrentBorrowBook();
             PrintMessage.GreenColor(PrintMessage.PrintBackOrExit());
             GoBackMenu();

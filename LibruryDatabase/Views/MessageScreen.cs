@@ -268,7 +268,10 @@ namespace LibruryDatabase.Views
         {
             return "입력 : Enter                뒤로가기 : ESC";
         }
-
+        public void PrintIsbnMessage()
+        {
+            Console.WriteLine("ISBN :");
+        }
 
 
 
