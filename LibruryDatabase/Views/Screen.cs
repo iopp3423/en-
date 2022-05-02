@@ -213,37 +213,26 @@ namespace LibruryDatabase.Views
         public void PrintSearchUser(string name)
         {
             Console.WriteLine("=======================================================================");
-
-            
-            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
-            {
-                user.Open();
-
-                //ExecuteReader를 이용하여
-                //연결 모드로 데이타 가져오기
-                MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
-                MySqlDataReader userInformation = Command.ExecuteReader();
-
-                while (userInformation.Read())
+            { 
+                foreach (UserVO data in UserData.Get().userData)
                 {
-                    if (userInformation["name"].ToString().Contains(name))
+                    if (data.name.Contains(name))
                     {
                         Console.Write("아이디 :");
-                        Console.WriteLine(userInformation["id"].ToString());
+                        Console.WriteLine(data.id);
                         Console.Write("비밀번호 :");
-                        Console.WriteLine(userInformation["pw"].ToString());
+                        Console.WriteLine(data.password);
                         Console.Write("이름 :");
-                        Console.WriteLine(userInformation["name"].ToString());
+                        Console.WriteLine(data.name);
                         Console.Write("전화번호 :");
-                        Console.WriteLine(userInformation["phone"].ToString());
+                        Console.WriteLine(data.phone);
                         Console.Write("나이 :");
-                        Console.WriteLine(userInformation["age"].ToString());
+                        Console.WriteLine(data.age);
                         Console.Write("주소 :");
-                        Console.WriteLine(userInformation["address"].ToString());
+                        Console.WriteLine(data.address);
                         Console.WriteLine("=======================================================================");
                     }
                 }
-                userInformation.Close();
             }
         }
 
