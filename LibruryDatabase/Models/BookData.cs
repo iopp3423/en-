@@ -355,8 +355,6 @@ namespace LibruryDatabase.Models
 
         public void StoreNaverBookToList(string keyword, string display)
         {
-            //string keyword = "자료구조";
-            //string display = "20";
 
             string query = string.Format("{0}&display={1}", keyword, display); //쿼리 만들기
             string url = "https://openapi.naver.com/v1/search/book.json?query=";
@@ -403,5 +401,18 @@ namespace LibruryDatabase.Models
                 Console.WriteLine("Error 발생=" + status);
             }
         }
+
+        public void StoreNaverBook(string title, string author, string price, string publisher, string isbn, string description) // 책 추가
+        {
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.NaverBookQuery, title, author, price, publisher, isbn, description), book);
+                Command.ExecuteNonQuery();
+               
+            }
+        }
+
     }
 }

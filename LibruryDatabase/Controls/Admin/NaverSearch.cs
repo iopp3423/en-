@@ -221,12 +221,20 @@ namespace LibruryDatabase.Controls
             }
             else
             {
-                Console.WriteLine();
                 BookData.Get().StoreNaverBookToList(title, quantity);
+
+                foreach (NaverBookVO book in BookData.Get().NaverBook) // 데베에 저장
+                {
+                    BookData.Get().StoreNaverBook(book.title, book.author, book.price, book.publisher, book.isbn, RemoveSpecialCharacterFromString(book.description));
+                }
                 Print.PrintNaverBook();
+                
             }
         }
-
+        public string RemoveSpecialCharacterFromString(string str)
+        {
+            return Regex.Replace(str, @"[^a-zA-Z0-9가-힣]", string.Empty, RegexOptions.Singleline);
+        }
 
 
 

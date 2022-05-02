@@ -525,6 +525,7 @@ namespace LibruryDatabase.Views
 
         public void PrintNaverBook()
         {
+            Console.Write("\n\n");
             foreach (NaverBookVO book in BookData.Get().NaverBook)
             {
                 Console.Write("책 제목 :");

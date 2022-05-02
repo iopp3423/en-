@@ -52,6 +52,8 @@ namespace LibruryDatabase.Utility
         //네이버 아이디 비밀번호
         public const string NAVER_ID ="wIcEQfjn2NsKuQmIlo2S";
         public const string NAVER_PASSWORD = "ocXHc9Sh_7";
+        public const string NaverBookQuery = "INSERT INTO naver(title,author,price,publisher,isbn,description) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'));";
+        
 
 
 

@@ -77,7 +77,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public void RemoveAllLog()
+        public void RemoveAllLog() // 전체 로그데이터 제거
         {
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
