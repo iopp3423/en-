@@ -14,12 +14,12 @@ namespace LibruryDatabase.Controls
     internal class NaverSearch
     {
         public Screen Print;
-        public MessageScreen PrintMessage;
+        public MessageScreen Message;
 
         public NaverSearch(Screen Menu, MessageScreen message)
         {
             this.Print = Menu;
-            this.PrintMessage = message;
+            this.Message = message;
         }
         public NaverSearch()
         {
@@ -155,7 +155,7 @@ namespace LibruryDatabase.Controls
             while (Constants.isEntrancing) // 책 예외처리
             {
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
-                Console.Write("  입력 (영어,한글 2~8자) :");
+                Message.PrintInputBookName();
 
                 title = Console.ReadLine();
 
@@ -163,7 +163,7 @@ namespace LibruryDatabase.Controls
                 {
 
                     Console.SetCursorPosition(Constants.CURRENT_BOOK, Constants.SEARCH_BOOK- Constants.BEFORE_INPUT_LOCATION);
-                    Console.Write("잘못입력하셨습니다.  재입력 : Enter      뒤로가기 : F5");
+                    Message.RedColor(Message.PrintErrorInputMessage());
 
                     if (ReEnter() == Constants.isBackMenu) return; // esc-> 뒤로가기 enter -> 재입력
 
@@ -188,13 +188,13 @@ namespace LibruryDatabase.Controls
             while (Constants.isEntrancing) // 책 예외처리
             {
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
-                Console.Write("  출력할 도서 수 입력    :");
+                Message.PrintBookQunatityInput();
                 quantity = Console.ReadLine();
 
                 if (Constants.isFail == Regex.IsMatch(quantity, Utility.Exception.QUANTITY)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.CURRENT_BOOK, Constants.SEARCH_BOOK - Constants.BEFORE_INPUT_LOCATION);
-                    Console.Write("잘못입력하셨습니다.  재입력 : Enter      뒤로가기 : F5");
+                    Message.RedColor(Message.PrintErrorInputMessage());
 
                     if (ReEnter() == Constants.isBackMenu) return;// esc-> 뒤로가기 enter -> 재입력
 
@@ -217,7 +217,7 @@ namespace LibruryDatabase.Controls
             if (title == "" || quantity == "")
             {
                 Console.SetCursorPosition(Constants.CURRENT_BOOK, Constants.SEARCH_BOOK - Constants.BEFORE_INPUT_LOCATION);
-                Console.Write("누락된 입력이있습니다.  재입력 : Enter      뒤로가기 : F5");
+                Message.RedColor(Message.PrintNoneInput());
                 if (ReEnter() == Constants.isBackMenu) return;// esc-> 뒤로가기 enter -> 재입력
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
             }

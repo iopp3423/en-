@@ -132,12 +132,9 @@ namespace LibruryDatabase.Controls
         {
             if (Constants.SEARCH_RESULT_BOOK == Constants.isFail) // 책 정보 없으면
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("찾으시는 책이 없습니다. 뒤로가기 ESC");
-                Console.ResetColor();
+                message.RedColor(message.PrintNoBookMessage());
             }
-            else Console.Write("뒤로가기 : ESC, 프로그램 종료 : F5");
-           
+            else message.PrintBack();
         }
 
 
@@ -146,7 +143,7 @@ namespace LibruryDatabase.Controls
             //string name;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
             ClearCurrentLine(Constants.CURRENT_LOCATION);
-            Console.Write("입력 (영어,한글 2~8자) :");
+            message.PrintAuthorInput();
 
             while (Constants.isEntrancing) // 책 예외처리
             {
@@ -156,7 +153,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.isFail == Regex.IsMatch(name, Utility.Exception.AUTHOR_CHECK)) // 정규식에 맞지 않으면
                 {
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    message.PrintReEnterMessage(); continue;
                 }
                 break;
             }
@@ -189,7 +186,7 @@ namespace LibruryDatabase.Controls
             string publish;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
             ClearCurrentLine(Constants.CURRENT_LOCATION);
-            Console.Write("입력 (한글 2~8자) :");
+            message.PrintpublishInput();
 
             while (Constants.isEntrancing)
             {
@@ -198,7 +195,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.isFail == Regex.IsMatch(publish, Utility.Exception.PUBLISH_CHECK))// 정규식에 맞지 않으면
                 {
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    message.PrintReEnterMessage(); continue;
                 }
                 break;
             }
@@ -229,7 +226,7 @@ namespace LibruryDatabase.Controls
             string bookName;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
             ClearCurrentLine(Constants.CURRENT_LOCATION);
-            Console.Write("책 제목 (한글, 영어 2~10자) :");
+            message.PrintBookTitle();
 
             while (Constants.isEntrancing)
             {
@@ -239,7 +236,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.isFail == Regex.IsMatch(bookName, Utility.Exception.TITLE_CHECK))// 정규식에 맞지 않으면
                 {
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    message.PrintReEnterMessage(); continue;
                 }
                 break;
             }

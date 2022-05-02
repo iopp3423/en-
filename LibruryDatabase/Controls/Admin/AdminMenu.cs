@@ -139,9 +139,7 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             LogData.Get().StoreLog("관리자", "도서목록", "열람");
             Print.PrintCurrentBorrowBook();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("뒤로가기 : ESC                                프로그램 종료 : F5");
-            Console.ResetColor();
+            PrintMessage.GreenColor(PrintMessage.PrintBackOrExit());
             GoBackMenu();
         }
     }

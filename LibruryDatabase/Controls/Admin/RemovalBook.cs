@@ -16,7 +16,7 @@ namespace LibruryDatabase.Controls
         //Screen Menu = new Screen();
 
         public Screen Print;
-        public MessageScreen PrintMessage;
+        public MessageScreen Message;
 
         public RemovalBook()
         {
@@ -26,7 +26,7 @@ namespace LibruryDatabase.Controls
         public RemovalBook(Screen Menu, MessageScreen message) : base(Menu, message)
         {
             this.Print = Menu;
-            this.PrintMessage = message;
+            this.Message = message;
         }
 
         public void GoBackMenu() //이전 메뉴로 돌아가기
@@ -64,9 +64,7 @@ namespace LibruryDatabase.Controls
             Print.PrintSearchBookName();
             Print.PrintBookData(); // 책 목록 프린트
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("책 제거 : Enter                                         뒤로가기 : ESC");
-            Console.ResetColor();
+            Message.GreenColor(Message.PrintChooseRemoveBook()); // 안내메시지
 
             if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
@@ -78,20 +76,16 @@ namespace LibruryDatabase.Controls
 
             if (isBookExitence == Constants.isFail)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("존재하지 않는 책입니다.  뒤로가기 : ESC    프로그램 종료 : F5");
-                Console.ResetColor();
+                Message.RedColor(Message.PrintNoneBook());
             }
             else if (isBookExitence == Constants.isPassing)
             {
                 bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
                 LogData.Get().StoreLog("관리자", "도서삭제", bookName); // 로그에 저장
                 BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
-                
 
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("책이 삭제되었습니다.  뒤로가기 : ESC    프로그램 종료 : F5");
-                Console.ResetColor();
+
+                Message.GreenColor(Message.PrintRemoveBookMessage());
             }
 
             GoBackMenu();
@@ -103,7 +97,7 @@ namespace LibruryDatabase.Controls
         {
             string bookNumber;
             ClearCurrentLine(Constants.CURRENT_LOCATION);
-            Console.Write("삭제할 책 번호 :");
+            Message.PrintRemoveBookNumberMessage();
 
             while (Constants.isPassing)
             {           
@@ -115,7 +109,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                    Console.Write("다시 입력해주세요 :"); continue;
+                    Message.PrintReEnterMessage(); continue;
                 }
                 break;
             }

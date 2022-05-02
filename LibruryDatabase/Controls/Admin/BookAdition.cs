@@ -16,7 +16,7 @@ namespace LibruryDatabase.Controls
         //Screen Menu = new Screen();
 
         public Screen Menu;
-        public MessageScreen PrintMessage;
+        public MessageScreen Message;
 
         public BookAdition()
         {
@@ -25,7 +25,7 @@ namespace LibruryDatabase.Controls
         public BookAdition(Screen Menu, MessageScreen message)
         {
             this.Menu = Menu;
-            this.PrintMessage = message;
+            this.Message = message;
         }
 
 
@@ -68,9 +68,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintMain();                
             Menu.PrintAddBook();
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("책 정보 입력 : Enter                                      뒤로가기 : ESC");
-            Console.ResetColor();
+            Message.GreenColor(Message.PrintInputOrBackMessage());
             if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             bookName = InputBookName(movingInputY++);
@@ -84,14 +82,12 @@ namespace LibruryDatabase.Controls
             LogData.Get().StoreLog("관리자", "도서추가", bookName); // 로그에 저장
 
             Console.SetCursorPosition(Console.CursorLeft, Constants.ERROR_Y);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("도서가 등록되었습니다. 뒤로가기 : ESC   종료 : F5");
-            Console.ResetColor();
+            Message.GreenColor(Message.PrintDoneBookRegister());
 
             IsSelectingMenu(); 
         }
 
-        string InputBookName(int bookNameY)
+        string InputBookName(int bookNameY)//책이름입력
         {
             string bookName;
 
@@ -105,7 +101,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                     ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                    Console.WriteLine("책 제목(영어, 한글 2~10자) :");
+                    Message.PrintBookTitle();
                     Menu.PrintLoginErrorMessage(); continue;
                 }
                 break;
@@ -116,7 +112,7 @@ namespace LibruryDatabase.Controls
            
         }
         
-        string InputAuthor(int authorY)
+        string InputAuthor(int authorY)//작가입력
         {
             string author;
 
@@ -130,7 +126,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                    Console.WriteLine("작가(영어, 한글 2~8자) :");
+                    Message.PrintAuthorInputMessage();
                     Menu.PrintLoginErrorMessage(); continue;
                 }
                 break;
@@ -140,7 +136,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputPublisher(int publisherY)
+        string InputPublisher(int publisherY)//출판사입력
         {
             string publisher;
 
@@ -154,7 +150,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                    Console.WriteLine("출판사(영어 한글 2~8자):");
+                    Message.PrintPublisherInputMessage();
                     Menu.PrintLoginErrorMessage(); continue;
                 }
                 break;
@@ -164,7 +160,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputPublishDay(int publishDayY)
+        string InputPublishDay(int publishDayY)//출판일자입력
         {
             string publishDay;
 
@@ -178,7 +174,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                    Console.WriteLine("출시일(YYYY/MM/DD) :");
+                    Message.PrintPublishDayInput();
                     Menu.PrintLoginErrorMessage(); continue;
                 }
                 break;
@@ -188,7 +184,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputQuantity(int quantityY)
+        string InputQuantity(int quantityY)//수량입력
         {
             string quantity;
 
@@ -202,7 +198,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                    Console.WriteLine("수량(1~3자리 숫자):");
+                    Message.PrintQuantityInputMessage();
                     Menu.PrintLoginErrorMessage(); continue;
                 }
                 break;
@@ -212,7 +208,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputPrice(int bookPriceY)
+        string InputPrice(int bookPriceY)//가격입력
         {
             string bookPrice;
 
@@ -225,7 +221,7 @@ namespace LibruryDatabase.Controls
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                    Console.WriteLine("가격 :");
+                    Message.PrintPriceInputMessage();
                     Menu.PrintLoginErrorMessage(); continue;
                 }
                 break;

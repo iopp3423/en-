@@ -56,9 +56,7 @@ namespace LibruryDatabase.Controls
             else if (isCheckingLogin == Constants.isFail)
             {
                 Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("회원정보가 일치하지 않습니다. 재입력 : Enter, 뒤로가기 : ESC");
-                Console.ResetColor();
+                PrintMessage.RedColor(PrintMessage.PrintErrorUserInformation());
             }
 
             while (Constants.isEntrancing) // 관리자 불일치시 재입력 컨트롤러

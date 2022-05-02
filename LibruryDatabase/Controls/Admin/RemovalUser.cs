@@ -17,7 +17,7 @@ namespace LibruryDatabase.Controls
         //Screen Menu = new Screen();
 
         public Screen Menu;
-        public MessageScreen PrintMessage;
+        public MessageScreen Message;
 
         public RemovalUser()
         {
@@ -26,7 +26,7 @@ namespace LibruryDatabase.Controls
         public RemovalUser(Screen Menu, MessageScreen message)
         {
             this.Menu = Menu;
-            this.PrintMessage = message;
+            this.Message = message;
         }
 
         public void IsSelectingMenu() //이전 메뉴로 돌아가기
@@ -64,9 +64,8 @@ namespace LibruryDatabase.Controls
             Menu.PrintInputUserName();
             Menu.PrintUserData(); //유저목록 출력           
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("회원삭제 : Enter                                          뒤로가기 : ESC");
-            Console.ResetColor();
+            Message.GreenColor(Message.PrintChooseRemoveUserMessage());
+
             if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.INPUT_NAME_X, Constants.INPUT_NAME_Y);
@@ -78,24 +77,21 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("회원목록에 없습니다.              뒤로가기 : ESC         프로그램 종료 : F5");
-                Console.ResetColor();
+
+                Message.RedColor(Message.PrintNoneUserMessage());
                 IsSelectingMenu();
                 return;
             }
            
             Console.Clear();
             Menu.PrintSearchUser(name); // 이름맞는 사람 출력
-            Console.Write("삭제하실 유저 id를 입력하세요 :");
+            Message.PrintRemoveUserInputMessage();
             id = InputId(); // 아이디 입력
 
             isExistenceId = UserData.Get().IsCheckingExistenceId(id); //id 회원목록에 있는지 조사
             if (isExistenceId == Constants.isFail) 
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("회원목록에 없습니다.             뒤로가기 : ESC         프로그램 종료 : F5");
-                Console.ResetColor();
+                Message.RedColor(Message.PrintNoneuser());
                 IsSelectingMenu(); 
                 return; 
             } 
@@ -104,17 +100,12 @@ namespace LibruryDatabase.Controls
 
             if (isExistenceUsername == Constants.isFail)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5");
-                Console.ResetColor();
+                Message.RedColor(Message.PrintNoneReturnBookMessage());
                 IsSelectingMenu();
                 return;
             }
-               
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("삭제되었습니다.                      뒤로가기 : ESC       프로그램 종료 : F5");
-            Console.ResetColor();
 
+            Message.GreenColor(Message.PrintRemoveUserMessage());
 
             LogData.Get().StoreLog("관리자", "회원삭제", id); // 로그에 저장
             UserData.Get().RemoveUserInformation(id); // 유저 삭제
@@ -134,7 +125,7 @@ namespace LibruryDatabase.Controls
                 {                   
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("다시 입력해주세요 :"); continue;
+                    Message.PrintReEnterMessage(); continue;
                 }
                 break;
             }
@@ -155,7 +146,7 @@ namespace LibruryDatabase.Controls
                 {
                    ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Console.Write("id를 다시 입력해주세요 :"); continue;
+                    Message.PrintReEnterMessage(); continue;
                 }
                 return id;
             }

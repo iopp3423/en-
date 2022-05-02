@@ -17,7 +17,7 @@ namespace LibruryDatabase.Controls
     {
 
         public Screen Print;
-        public MessageScreen PrintMessage;
+        public MessageScreen Message;
 
         public LogManage()
         {
@@ -27,7 +27,7 @@ namespace LibruryDatabase.Controls
         public LogManage(Screen Menu, MessageScreen message)
         {
             this.Print = Menu;
-            this.PrintMessage = message;
+            this.Message = message;
         }
 
 
@@ -250,7 +250,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.isFail == Regex.IsMatch(Number, Utility.Exception.QUANTITY))
                 {
                     ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    Message.PrintReEnterMessage(); continue;
                 }
                 break;
             }

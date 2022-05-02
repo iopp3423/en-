@@ -8,6 +8,7 @@ namespace LibruryDatabase.Views
 {
     internal class MessageScreen
     {
+        //유저 관련 
         public string PrintAlreadyId()
         {
             return "이미 존재하는 ID 입니다. 재입력 : Enter, 뒤로가기 : ESC 두 번";
@@ -51,6 +52,18 @@ namespace LibruryDatabase.Views
         public void PrintInputAgeMessage()
         {
             Console.WriteLine("나이 :");
+        }
+        public void PrintAuthorInput()
+        {
+            Console.Write("입력 (영어,한글 2~8자) :");
+        }
+        public void PrintpublishInput()
+        {
+            Console.Write("입력 (한글 2~8자) :");
+        }
+        public void PrintBookTitle()
+        {
+            Console.Write("책 제목 (한글, 영어 2~10자) :");
         }
         public string PrintBorrowBookMessage()
         {
@@ -104,6 +117,129 @@ namespace LibruryDatabase.Views
         {
             Console.Write("반납할 책 번호를 입력해주세요 : ");
         }
+        public string PrintNoBookMessage()
+        {
+            return "찾으시는 책이 없습니다. 뒤로가기 ESC";
+        }
+        public void PrintBack()
+        {
+            Console.Write("뒤로가기 : ESC                프로그램 종료 : F5");
+        }
+        public string PrintChooseRemoveUserMessage()
+        {
+            return "회원삭제 : Enter                                          뒤로가기 : ESC";
+        }
+        public string PrintNoneUserMessage()
+        {
+            return "회원목록에 없습니다.              뒤로가기 : ESC         프로그램 종료 : F5";
+        }
+        public void PrintRemoveUserInputMessage()
+        {
+            Console.Write("삭제하실 유저 id를 입력하세요 :");
+        }
+        public string PrintNoneuser()
+        {
+            return "회원목록에 없습니다.             뒤로가기 : ESC         프로그램 종료 : F5";
+        }
+        public string PrintNoneReturnBookMessage()
+        {
+            return "반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5";
+        }
+        public string PrintRemoveUserMessage()
+        {
+            return "삭제되었습니다.                      뒤로가기 : ESC       프로그램 종료 : F5";
+        }
+
+        //관리자 관련
+
+        public string PrintBackOrExit()
+        {
+            return "뒤로가기 : ESC                                프로그램 종료 : F5";
+        }
+        public string PrintInputOrBackMessage()
+        {
+            return "책 정보 입력 : Enter                                      뒤로가기 : ESC";
+        }
+        public string PrintDoneBookRegister()
+        {
+            return "도서가 등록되었습니다. 뒤로가기 : ESC   종료 : F5";
+        }
+        public void PrintAuthorInputMessage()
+        {
+            Console.WriteLine("작가(영어, 한글 2~8자) :");
+        }
+        public void PrintPublisherInputMessage()
+        {
+            Console.WriteLine("출판사(영어 한글 2~8자):");
+        }
+        public void PrintPublishDayInput()
+        {
+            Console.WriteLine("출시일(YYYY/MM/DD) :");
+        }
+        public void PrintQuantityInputMessage()
+        {
+            Console.WriteLine("수량(1~3자리 숫자):");
+        }
+        public void PrintPriceInputMessage()
+        {
+            Console.WriteLine("가격 :");
+        }
+        public string PrintReviseBookInput()
+        {
+            return "책 수정 : Enter                                          뒤로가기 : ESC";
+        }
+        public string PrintReviseAfterMessage()
+        {
+            return "수정이 완료되었습니다.  뒤로가기 : ESC                 프로그램 종료 : F5";
+        }
+        public void PrintChooseReviseInput()
+        {
+            Console.Write("책 수량 수정 1번, 책 가격 수정 2번 입력:");
+        }
+        public void PrintInputQuantity()
+        {
+            Console.Write("수정할 수량을 입력해주세요(숫자만) :");
+        }
+        public void PrintInputPrice()
+        {
+            Console.Write("수정할 가격을 입력해주세요(1000~, 숫자만) :");
+        }
+        public void PrintInputBookNumber()
+        {
+            Console.Write("책 번호를 입력해주세요 :");
+        }
+        public void PrintInputBookName()
+        {
+            Console.Write("  입력 (영어,한글 2~8자) :");
+        }
+        public string PrintErrorInputMessage()
+        {
+            return "잘못입력하셨습니다.  재입력 : Enter      뒤로가기 : F5";
+        }
+        public void PrintBookQunatityInput()
+        {
+            Console.Write("  출력할 도서 수 입력    :");
+        }
+        public string PrintNoneInput()
+        {
+            return "누락된 입력이있습니다.  재입력 : Enter      뒤로가기 : F5";
+        }
+        public string PrintChooseRemoveBook()
+        {
+            return "책 제거 : Enter                                         뒤로가기 : ESC";
+        }
+        public string PrintRemoveBookMessage()
+        {
+            return "책이 삭제되었습니다.  뒤로가기 : ESC    프로그램 종료 : F5";
+        }
+        public void PrintRemoveBookNumberMessage()
+        {
+            Console.Write("삭제할 책 번호 :");
+        }
+
+
+
+
 
         public void GreenColor(string message)
         {
