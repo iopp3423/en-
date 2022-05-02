@@ -26,8 +26,6 @@ namespace LibruryDatabase.Models
             return Book;
         }
 
-        public string isbn;
-
 
         public void StoreBookInformation(string bookName, string author, string publish, string publishDay, string quantity, string price) // 책 추가
         {
@@ -433,6 +431,17 @@ namespace LibruryDatabase.Models
             {
                 book.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.addUserBookQuery, bookName, author, publish, publishDay, price, isbn, quantity), book);
+                Command.ExecuteNonQuery();
+            }
+        }
+
+        public void StoreRequestBook(string bookName, string author, string publish, string publishDay, string price, string isbn, string quantity) // 유저요청 책 추가
+        {
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.requestBookQuery, bookName, author, publish, publishDay, price, isbn, quantity), book);
                 Command.ExecuteNonQuery();
             }
         }

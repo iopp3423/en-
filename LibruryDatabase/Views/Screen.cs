@@ -576,6 +576,7 @@ namespace LibruryDatabase.Views
            
         }
 
+        /*
         public void PrintRequestBookList()
         {
             Console.Write("\n\n");
@@ -599,6 +600,7 @@ namespace LibruryDatabase.Views
                 }
             }
         }
+        */
 
 
         public bool IsGoingBackMenu()

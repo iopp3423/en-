@@ -133,7 +133,6 @@ namespace LibruryDatabase.Controls
                         }
                     default: continue;
                 }
-
             }
         }
         public void PrintCurrentBook()

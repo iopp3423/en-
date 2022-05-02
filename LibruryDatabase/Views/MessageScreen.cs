@@ -260,6 +260,10 @@ namespace LibruryDatabase.Views
         {
             return "입력되었습니다.         뒤로가기 : ESC         프로그램 종료 : F5";
         }
+        public string BackPrint()
+        {
+            return "        뒤로가기 : ESC";
+        }
 
 
 

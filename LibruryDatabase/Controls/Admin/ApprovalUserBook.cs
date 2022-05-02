@@ -30,11 +30,11 @@ namespace LibruryDatabase.Controls
         public void ApproveUserRequest()
         {
             Console.Clear();
-            Menu.PrintRequestBookList();
+            //Menu.PrintRequestBookList();
             isbn = InputISBN();
             Checkisbn(isbn);
 
-            IsSelectingMenu();
+            IsSelectingMenu(); // 뒤로가기
         }
 
 
@@ -46,7 +46,8 @@ namespace LibruryDatabase.Controls
             {
                 if (Isbn == book.isbn)
                 {
-                    BookData.Get().StoreBookUserRequest(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString());
+                    BookData.Get().StoreBookUserRequest(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString()); // 책에 정보 저장
+                    isNoneisbn = Constants.isPassing;
                 }
             }
             if (isNoneisbn == Constants.isFail)

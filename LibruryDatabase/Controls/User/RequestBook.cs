@@ -29,14 +29,13 @@ namespace LibruryDatabase.Controls
             this.Message = message;
         }
 
-        public void RequestAddBook()
+        public void RequestAddBook() // 유저 책 요청 메서드
         {
             Menu.PrintMain();
             Message.PrintBookTitle();
 
             bookName = InputBookName(); //책제목입력
 
-            //BookData.Get().NaverBook.Clear(); // 리스트 비우기
             BookData.Get().StoreNaverBookToList(bookName, Constants.ADD_BOOK.ToString(), Constants.isFail); // 리스트에 저장            
             Console.WriteLine("\n\n");
 
@@ -46,7 +45,9 @@ namespace LibruryDatabase.Controls
             isbn = InputISBN();
 
             Checkisbn(isbn);
-            Console.Write(BookData.Get().isbn);
+
+            Message.GreenColor(Message.BackPrint());
+            GoBackMenu();
 
         }
 
@@ -96,18 +97,20 @@ namespace LibruryDatabase.Controls
             return isbn;
         }
 
-        public void Checkisbn(string Isbn) // isbn 체크 후 bookdata에 저장 -- 수정해야함
+
+        public void Checkisbn(string Isbn) //isbn 체크
         {
             bool isNoneisbn = Constants.isFail;
 
             foreach (NaverBookVO book in BookData.Get().UserRequestBook)
             {
-                if (Isbn == book.isbn)
+                if (Isbn == book.isbn) // db에 저장
                 {
-                    BookData.Get().isbn = Isbn; // 싱글톤 isbn에 저장 - 고쳐야할듯
+                    BookData.Get().StoreRequestBook(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString());
                     isNoneisbn = Constants.isPassing;
                     break;
                 }
+
             }
             if (isNoneisbn == Constants.isFail)
             {
@@ -122,6 +125,31 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
+        }
+
+        public void GoBackMenu() //이전 메뉴로 돌아가기
+        {
+            while (Constants.isEntrancing)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Escape:
+                        {
+                            Console.Clear();
+                            Menu.PrintMain();
+                            Menu.PrintUserMenu();
+                            return;
+                        }
+                    case ConsoleKey.F5: // 종료
+                        {
+                            Environment.Exit(Constants.EXIT);
+                            break;
+                        }
+                    default: continue;
+                }
+
+            }
         }
     }
 }
