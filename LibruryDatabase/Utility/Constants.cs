@@ -52,7 +52,7 @@ namespace LibruryDatabase.Utility
         //네이버 아이디 비밀번호
         public const string NAVER_ID ="wIcEQfjn2NsKuQmIlo2S";
         public const string NAVER_PASSWORD = "ocXHc9Sh_7";
-        public const string NaverBookQuery = "INSERT INTO naver(title,author,price,publisher,isbn,description) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'));";
+        public const string NaverBookQuery = "INSERT INTO naver(title,author,price,publisher,publishday,isbn,description) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'), ('{4}'), ('{5}'),  ('{6}'));";
         public const string RemoveAllNaverBook = "TRUNCATE naver;";
 
 
@@ -134,6 +134,7 @@ namespace LibruryDatabase.Utility
         public const int CURRENT_BOOK = 15;
         public const int LOG_MANAGE = 16;
         public const int NABER_SEARCH = 17;
+        public const int REQUEST = 18;
 
         //AddingBook에서 좌표 
         public const int BOOK_NAME_X = 29;

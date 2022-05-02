@@ -98,7 +98,7 @@ namespace LibruryDatabase.Controls
             return isbn;
         }
 
-        public void Checkisbn(string Isbn) // isbn 체크 후 bookdata에 저장
+        public void Checkisbn(string Isbn) // isbn 체크 후 bookdata에 저장 -- 수정해야함
         {
             bool isNoneisbn = Constants.isFail;
 

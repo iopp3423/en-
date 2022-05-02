@@ -256,6 +256,10 @@ namespace LibruryDatabase.Views
         {
             Console.Write("다시 입력해주세요(영어 한글제한없음) :");
         }
+        public string PrintDoneInput()
+        {
+            return "입력되었습니다.         뒤로가기 : ESC         프로그램 종료 : F5";
+        }
 
 
 

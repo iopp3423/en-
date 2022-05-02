@@ -12,16 +12,18 @@ namespace LibruryDatabase.Models
         public string author;
         public string price;
         public string publisher;
+        public string publishday;
         public string isbn;
         public string description;
 
 
-        public NaverBookVO(string title, string author, string price, string publisher, string isbn, string description)
+        public NaverBookVO(string title, string author, string price, string publisher, string publishday, string isbn, string description)
         {
             this.title = title;
             this.author = author;
             this.price = price;
             this.publisher = publisher;
+            this.publishday = publishday;
             this.isbn = isbn;
             this.description = description;
         }

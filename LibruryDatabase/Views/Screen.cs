@@ -458,10 +458,12 @@ namespace LibruryDatabase.Views
             Console.WriteLine("  》대여상황 ");
             Console.WriteLine("  》로그관리 ");
             Console.WriteLine("  》네이버도서 ");
+            Console.WriteLine("  》유저요청");
         }
 
         public void PrintLogMenu()
         {
+
             Console.WriteLine("  》로그수정 ");
             Console.WriteLine("  》로그초기화 ");
             Console.WriteLine("  》로그저장 ");
@@ -540,6 +542,8 @@ namespace LibruryDatabase.Views
                 Console.WriteLine(book.price);
                 Console.Write("출판사  :");
                 Console.WriteLine(book.publisher);
+                Console.Write("출시일  :");
+                Console.WriteLine(book.publishday);
                 Console.Write("isbn    :");
                 Console.WriteLine(book.isbn);
                 Console.Write("책 설명 :");
@@ -561,13 +565,39 @@ namespace LibruryDatabase.Views
                 Console.WriteLine(book.price);
                 Console.Write("출판사  :");
                 Console.WriteLine(book.publisher);
+                Console.Write("출시일  :");
+                Console.WriteLine(book.publishday);
                 Console.Write("isbn    :");
                 Console.WriteLine(book.isbn);
                 Console.Write("책 설명 :");
                 Console.WriteLine(book.description);
                 Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
             }
+           
+        }
 
+        public void PrintRequestBookList()
+        {
+            Console.Write("\n\n");
+            foreach (NaverBookVO book in BookData.Get().UserRequestBook)
+            {
+                if (book.isbn == BookData.Get().isbn)
+                {
+                    Console.Write("책 제목 :");
+                    Console.WriteLine(book.title);
+                    Console.Write("책 저자 :");
+                    Console.WriteLine(book.author);
+                    Console.Write("책 가격 :");
+                    Console.WriteLine(book.price);
+                    Console.Write("출판사  :");
+                    Console.WriteLine(book.publisher);
+                    Console.Write("isbn    :");
+                    Console.WriteLine(book.isbn);
+                    Console.Write("책 설명 :");
+                    Console.WriteLine(book.description);
+                    Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                }
+            }
         }
 
 

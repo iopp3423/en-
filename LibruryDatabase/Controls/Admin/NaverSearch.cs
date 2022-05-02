@@ -227,10 +227,12 @@ namespace LibruryDatabase.Controls
                 BookData.Get().RemoveAllNaverBook(); // 데베 비우기
                 BookData.Get().NaverBook.Clear(); // 리스트 비우기
                 BookData.Get().StoreNaverBookToList(title, quantity, Constants.isPassing); // 관리자 리스트에 저장
+                
                 foreach (NaverBookVO book in BookData.Get().NaverBook) // 데베에 저장
                 {
-                    BookData.Get().StoreNaverBook(book.title, book.author, book.price, book.publisher, book.isbn, RemoveSpecialCharacterFromString(book.description));
+                    BookData.Get().StoreNaverBook(book.title, book.author, book.price, book.publisher, book.publishday, book.isbn, RemoveSpecialCharacterFromString(book.description));
                 }
+                
                 Print.PrintNaverBook();
                 
             }

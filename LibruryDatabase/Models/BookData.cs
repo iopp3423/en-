@@ -390,11 +390,12 @@ namespace LibruryDatabase.Models
                     string author = ParseJson["items"][index]["author"].ToString();
                     string publisher = ParseJson["items"][index]["publisher"].ToString();
                     string isbn = ParseJson["items"][index]["isbn"].ToString();
+                    string publishday = ParseJson["items"][index]["pubdate"].ToString();                   
                     string description = ParseJson["items"][index]["description"].ToString();
                     description = description.Replace("&quot;", "\""); //HTML 태그 변경
 
-                    if(isAdmin == Constants.isPassing) NaverBook.Add(new NaverBookVO(title, author, price, publisher, isbn, description)); //관리자 출력 리스트에 저장
-                    else if(isAdmin == Constants.isFail) UserRequestBook.Add(new NaverBookVO(title, author, price, publisher, isbn, description));
+                    if(isAdmin == Constants.isPassing) NaverBook.Add(new NaverBookVO(title, author, price, publisher, publishday,isbn, description)); //관리자 출력 리스트에 저장
+                    else if(isAdmin == Constants.isFail) UserRequestBook.Add(new NaverBookVO(title, author, price, publisher, publishday, isbn, description));
                 }
             }
             else
@@ -403,13 +404,13 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public void StoreNaverBook(string title, string author, string price, string publisher, string isbn, string description) // 책 추가
+        public void StoreNaverBook(string title, string author, string price, string publisher, string publishday, string isbn, string description) // 책 추가
         {
 
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.NaverBookQuery, title, author, price, publisher, isbn, description), book);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.NaverBookQuery, title, author, price, publisher, publishday, isbn, description), book);
                 Command.ExecuteNonQuery();
                
             }

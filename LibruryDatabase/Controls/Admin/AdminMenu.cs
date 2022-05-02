@@ -17,6 +17,7 @@ namespace LibruryDatabase.Controls
         RemovalUser member = new RemovalUser();
         LogManage Log = new LogManage();
         NaverSearch naver = new NaverSearch();
+        ApprovalUserBook book = new ApprovalUserBook();
 
         Screen Print;
         MessageScreen PrintMessage;
@@ -36,6 +37,7 @@ namespace LibruryDatabase.Controls
             member = new RemovalUser(Print, PrintMessage);
             Log = new LogManage(Print, PrintMessage);
             naver = new NaverSearch(Print, PrintMessage);
+            book = new ApprovalUserBook(Print, PrintMessage);
         }
 
 
@@ -78,7 +80,7 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.NABER_SEARCH) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.REQUEST) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:
@@ -91,6 +93,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.CURRENT_BOOK) { PrintCurrentBook(); break; }// 대여상황
                             if (Y == Constants.LOG_MANAGE) { Log.PrintLogMenu();break; } // 로그
                             if( Y == Constants.NABER_SEARCH) { naver.SearchNaverBook(); break; } // 네이버도서
+                            if (Y == Constants.REQUEST) { book.ApproveUserRequest(); break; } // 유저요청
                             break;
                         }
                      case ConsoleKey.Escape:
