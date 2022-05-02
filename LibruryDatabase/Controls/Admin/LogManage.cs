@@ -120,7 +120,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        public void ReviseLog()
+        public void ReviseLog() // 로그삭제
         {
             string number;
             Console.Clear();           
@@ -133,7 +133,7 @@ namespace LibruryDatabase.Controls
             Print.PrintReMoveLogAfter(); // 로그 삭제 후 안내메시지
     
         }
-        public void ResetLog()
+        public void ResetLog() // 전체 로그데이터 삭제
         {
             Console.Clear();
             Print.PrintLog(); // 로그내역 출력
@@ -167,7 +167,7 @@ namespace LibruryDatabase.Controls
 
         }
 
-        public void StoreLog()
+        public void StoreLog() // 로그저장
         {
             Console.Clear();
             Print.PrintLog(); // 로그내역 출력  
@@ -200,7 +200,7 @@ namespace LibruryDatabase.Controls
 
         }
 
-        public void RemoveFile()
+        public void RemoveFile() // 로그파일삭제
         {
             Console.Clear();
             Print.PrintLog(); // 로그내역 출력  
@@ -234,7 +234,7 @@ namespace LibruryDatabase.Controls
         }
 
        
-        string InputNumber() 
+        string InputNumber()  // 번호입력
         {
             string Number;
 
@@ -255,7 +255,7 @@ namespace LibruryDatabase.Controls
             return Number;
         }
 
-        public void RemoveListandDatabase()
+        public void RemoveListandDatabase() // 데베에 저장된 로그 삭제
         {
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintReMoveLogAfter();

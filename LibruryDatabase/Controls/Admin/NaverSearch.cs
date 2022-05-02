@@ -221,8 +221,9 @@ namespace LibruryDatabase.Controls
             }
             else
             {
-                BookData.Get().StoreNaverBookToList(title, quantity);
-
+                BookData.Get().RemoveAllNaverBook(); // 데베 비우기
+                BookData.Get().NaverBook.Clear(); // 리스트 비우기
+                BookData.Get().StoreNaverBookToList(title, quantity); // 리스트에 저장
                 foreach (NaverBookVO book in BookData.Get().NaverBook) // 데베에 저장
                 {
                     BookData.Get().StoreNaverBook(book.title, book.author, book.price, book.publisher, book.isbn, RemoveSpecialCharacterFromString(book.description));
@@ -230,14 +231,12 @@ namespace LibruryDatabase.Controls
                 Print.PrintNaverBook();
                 
             }
+            
         }
-        public string RemoveSpecialCharacterFromString(string str)
+        public string RemoveSpecialCharacterFromString(string description) // 책 설명 특수문자 제거
         {
-            return Regex.Replace(str, @"[^a-zA-Z0-9가-힣]", string.Empty, RegexOptions.Singleline);
+            return Regex.Replace(description, Utility.Exception.DESCRIPTION, string.Empty, RegexOptions.Singleline);
         }
-
-
-
 
 
         public void ClearCurrentLine(int number) // 줄 지우기

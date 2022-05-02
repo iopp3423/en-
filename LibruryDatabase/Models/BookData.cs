@@ -414,5 +414,15 @@ namespace LibruryDatabase.Models
             }
         }
 
+        public void RemoveAllNaverBook() // 전체 로그데이터 제거
+        {
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.RemoveAllNaverBook), book);
+                Command.ExecuteNonQuery();
+            }
+        }
+
     }
 }

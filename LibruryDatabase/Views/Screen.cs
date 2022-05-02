@@ -133,6 +133,10 @@ namespace LibruryDatabase.Views
             Console.WriteLine("────────────────────────────────────────────────────────────────────────");
         }
 
+        public void SearchAftermessage()
+        {
+            Console.Write("뒤로가기 : ESC         프로그램 종료 : F5");
+        }
 
         public void PrintUserData() 
         {
