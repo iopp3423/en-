@@ -435,7 +435,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public void StoreRequestBook(string bookName, string author, string publish, string publishDay, string price, string isbn, string quantity) // 유저요청 책 추가
+        public void StoreRequestBook(string bookName, string author, string publish, string publishDay, string price, string isbn, string quantity) // 유저가 입력한 isbn db 저장
         {
 
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
@@ -446,7 +446,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public void PrintSearchBookName()
+        public void PrintSearchBookName() // 리스트에 유저가 isbn입력한 책 데이터 저장
         {
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
@@ -459,6 +459,17 @@ namespace LibruryDatabase.Models
                     UserRequestBook.Add(new NaverBookVO(bookData["name"].ToString(), bookData["author"].ToString(), bookData["publish"].ToString(), bookData["publishday"].ToString(), bookData["price"].ToString(), bookData["isbn"].ToString(), bookData["quantity"].ToString()));
                 }
                 book.Close();
+            }
+        }
+
+        public void RemoveBookData(string isbn) // 유저가 요청한 책 추가한 후 제거
+        {
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.revomeBookQuery, isbn), book);
+                Command.ExecuteNonQuery();
             }
         }
 

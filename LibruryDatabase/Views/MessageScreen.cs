@@ -264,6 +264,10 @@ namespace LibruryDatabase.Views
         {
             return "        뒤로가기 : ESC";
         }
+        public string PrintContinueRequestmessage()
+        {
+            return "진행 : Enter                                 뒤로가기 : ESC";
+        }
 
 
 

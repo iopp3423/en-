@@ -45,7 +45,8 @@ namespace LibruryDatabase.Utility
         public const string addUserBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,isbn,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'), ('{6}'));";
         public const string requestBookQuery = "INSERT INTO requestbook(name,author,publish,publishDay,price,isbn,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'), ('{6}'));";
         public const string StoreQuey = "Select * FROM requestbook";
-        
+        public const string revomeBookQuery = "DELETE FROM requestbook WHERE isbn = ('{0}')";
+
 
         //로그관련
         public const string InsertlogQuery = "INSERT INTO LOG(TIME, name, record, log) VALUES(  ('{0}'),  ('{1}'), ('{2}'), ('{3}'));";
