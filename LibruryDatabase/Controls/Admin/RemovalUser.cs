@@ -17,14 +17,16 @@ namespace LibruryDatabase.Controls
         //Screen Menu = new Screen();
 
         public Screen Menu;
+        public MessageScreen PrintMessage;
 
         public RemovalUser()
         {
         }
 
-        public RemovalUser(Screen Menu)
+        public RemovalUser(Screen Menu, MessageScreen message)
         {
             this.Menu = Menu;
+            this.PrintMessage = message;
         }
 
         public void IsSelectingMenu() //이전 메뉴로 돌아가기

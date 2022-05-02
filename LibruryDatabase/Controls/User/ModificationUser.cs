@@ -16,14 +16,16 @@ namespace LibruryDatabase.Controls
         //Screen Menu = new Screen();
 
         public Screen Menu;
+        public MessageScreen Print;
 
         public ModificationUser()
         {
         }
 
-        public ModificationUser(Screen Menu)
+        public ModificationUser(Screen Menu, MessageScreen message)
         {
             this.Menu = Menu;
+            this.Print = message;
         }
 
         public bool IsGoingReturnMenu() //이전 메뉴로 돌아가기
@@ -154,14 +156,14 @@ namespace LibruryDatabase.Controls
 
             while (Constants.isLogin)
             {
-                Console.Write("핸드폰 번호(01x - xxxx - xxxx) :");
+                Print.PrintInutCallNumberMessage();
                 callNumber = Console.ReadLine();
 
                 if (Constants.isFail == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PHONE); //커서 조정
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    Print.PrintReEnterMessage(); continue;
                 }
                 break;
             }
@@ -174,7 +176,7 @@ namespace LibruryDatabase.Controls
 
             while (Constants.isLogin)
             {
-                Console.Write("유저 PW(영어, 숫자 포함(4~10자) :");
+                Print.PrintPasswordInputMessage();
                 password = Console.ReadLine();
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PASSWORD);
 
@@ -182,7 +184,7 @@ namespace LibruryDatabase.Controls
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PASSWORD); //커서 조정
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    Print.PrintReEnterMessage(); continue;
                 }
                 break;
             }
@@ -192,7 +194,7 @@ namespace LibruryDatabase.Controls
         string InputAddress() // 주소입력
         {
             string address;
-            Console.Write("주소 :");
+            Print.PrintInputAddressMessage();
             while (Constants.isLogin)
             {            
                 address = Console.ReadLine();
@@ -202,7 +204,7 @@ namespace LibruryDatabase.Controls
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
                     ClearCurrentLine(Constants.CURRENT_LOCATION);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    Print.PrintReEnterMessage(); continue;
                 }
 
                 break;
@@ -211,12 +213,10 @@ namespace LibruryDatabase.Controls
             return address;
         }
 
-        public void ModifyAfterMessage()
+        public void ModifyAfterMessage() // 정보 수정 후 메시지
         {
             Console.SetCursorPosition(Constants.DONE_REVISE_X, Constants.DONE_REVISE_Y);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
-            Console.ResetColor();
+            Print.GreenColor(Print.PrintReviseInformation());
         }
 
         public void ClearCurrentLine(int number) // 줄 지우기

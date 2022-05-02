@@ -15,13 +15,15 @@ namespace LibruryDatabase.Controls
         //Screen Menu = new Screen();
 
         public Screen Print;
+        public MessageScreen PrintMessage;
 
         public ModificationBook()
         {
         }
 
-        public ModificationBook(Screen Menu) : base(Menu)
+        public ModificationBook(Screen Menu, MessageScreen message) : base(Menu, message)
         {
+            this.PrintMessage = message;
             this.Print = Menu;
         }
 

@@ -16,15 +16,17 @@ namespace LibruryDatabase.Controls
         //Screen Menu = new Screen();
 
         public Screen Print;
+        public MessageScreen PrintMessage;
 
         public RemovalBook()
         {
 
         }
 
-        public RemovalBook(Screen Menu) : base(Menu)
+        public RemovalBook(Screen Menu, MessageScreen message) : base(Menu, message)
         {
             this.Print = Menu;
+            this.PrintMessage = message;
         }
 
         public void GoBackMenu() //이전 메뉴로 돌아가기

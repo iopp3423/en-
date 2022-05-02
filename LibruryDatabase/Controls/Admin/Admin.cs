@@ -17,16 +17,18 @@ namespace LibruryDatabase.Controls
         AdminMenu goingMenu= new AdminMenu();
      
         public Screen Print;
+        public MessageScreen PrintMessage;
 
         public Admin()
         {
 
         }
 
-        public Admin(Screen Menu) : base(Menu)
+        public Admin(Screen Menu, MessageScreen message) : base(Menu, message)
         {
             this.Print = Menu;
-            goingMenu = new AdminMenu(Print);
+            this.PrintMessage = message;
+            goingMenu = new AdminMenu(Print, PrintMessage);
         }
         
 

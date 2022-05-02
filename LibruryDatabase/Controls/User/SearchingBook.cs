@@ -16,19 +16,20 @@ namespace LibruryDatabase.Controls
 {
     internal class SearchingBook
     {
-        //Screen Menu = new Screen();
         string nameResult;
         string name;
 
         public Screen Menu;
+        public MessageScreen message;
 
         public SearchingBook()
         {
         }
 
-        public SearchingBook(Screen Menu)
+        public SearchingBook(Screen Menu, MessageScreen message)
         {
             this.Menu = Menu;
+            this.message = message;
         }
 
         

@@ -17,15 +17,17 @@ namespace LibruryDatabase.Controls
     {
 
         public Screen Print;
+        public MessageScreen PrintMessage;
 
         public LogManage()
         {
 
         }
 
-        public LogManage(Screen Menu)
+        public LogManage(Screen Menu, MessageScreen message)
         {
             this.Print = Menu;
+            this.PrintMessage = message;
         }
 
 

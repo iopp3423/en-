@@ -575,5 +575,9 @@ namespace LibruryDatabase.Views
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
+
+
+
+
     }
 }

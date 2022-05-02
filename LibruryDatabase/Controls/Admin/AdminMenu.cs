@@ -20,21 +20,23 @@ namespace LibruryDatabase.Controls
         NaverSearch naver = new NaverSearch();
 
         Screen Print;
+        MessageScreen PrintMessage;
 
         public AdminMenu()
         {
 
         }
 
-        public AdminMenu(Screen Menu) : base(Menu)
+        public AdminMenu(Screen Menu, MessageScreen message) : base(Menu, message)
         {
             this.Print = Menu;
-            removing = new RemovalBook(Print);
-            adding = new BookAdition(Print);
-            modify = new ModificationBook(Print);
-            member = new RemovalUser(Print);
-            Log = new LogManage(Print);
-            naver = new NaverSearch(Print);
+            this.PrintMessage = message;
+            removing = new RemovalBook(Print, PrintMessage);
+            adding = new BookAdition(Print, PrintMessage);
+            modify = new ModificationBook(Print, PrintMessage);
+            member = new RemovalUser(Print, PrintMessage);
+            Log = new LogManage(Print, PrintMessage);
+            naver = new NaverSearch(Print, PrintMessage);
         }
 
 

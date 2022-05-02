@@ -14,10 +14,12 @@ namespace LibruryDatabase.Controls
     internal class NaverSearch
     {
         public Screen Print;
+        public MessageScreen PrintMessage;
 
-        public NaverSearch(Screen Menu)
+        public NaverSearch(Screen Menu, MessageScreen message)
         {
             this.Print = Menu;
+            this.PrintMessage = message;
         }
         public NaverSearch()
         {

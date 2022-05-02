@@ -19,19 +19,21 @@ namespace LibruryDatabase.Controls
         ReturnBook ReturnBook = new ReturnBook();
 
         public Screen Menu;
+        public MessageScreen PrintMessage;
 
         public UserMenu()
         {
 
         }
 
-        public UserMenu(Screen InputMenu)
+        public UserMenu(Screen InputMenu, MessageScreen message)
         {
             this.Menu = InputMenu;
-            BookSearching = new SearchingBook(Menu);
-            BookBorrowing = new BorrowingBook(Menu);
-            UserModification = new ModificationUser(Menu);
-            ReturnBook = new ReturnBook(Menu);
+            this.PrintMessage = message;
+            BookSearching = new SearchingBook(Menu, PrintMessage);
+            BookBorrowing = new BorrowingBook(Menu,PrintMessage);
+            UserModification = new ModificationUser(Menu, PrintMessage);
+            ReturnBook = new ReturnBook(Menu, PrintMessage);
         }
 
         

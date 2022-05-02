@@ -13,17 +13,19 @@ namespace LibruryDatabase.Controls
 {
     internal class ReturnBook
     {
-        //Screen Menu = new Screen();
 
         public Screen Menu;
+        public MessageScreen Message;
 
         public ReturnBook()
         {
         }
 
-        public ReturnBook(Screen Menu)
+        public ReturnBook(Screen Menu, MessageScreen message)
+
         {
             this.Menu = Menu;
+            this.Message = message;
         }
 
         public void IsSelectingMenu() //이전 메뉴로 돌아가기
@@ -63,9 +65,8 @@ namespace LibruryDatabase.Controls
             Console.Clear();                 
             Menu.PrintBorrowBookData(id);
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("반납 : Enter                                  뒤로가기 : ESC");
-            Console.ResetColor();
+            Message.GreenColor(Message.PrintReturnBookMessage());
+
 
             while (Constants.isPassing)
             {
@@ -80,16 +81,14 @@ namespace LibruryDatabase.Controls
                 else if (Constants.cursor.Key == ConsoleKey.Enter) break;
             }
 
-           ClearCurrentLine(Constants.CURRENT_LOCATION);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
             bookNumber = InputBookNumber();
             isAlreadyBorrow = BookData.Get().IsCheckingAlreadyBorrowBook(id, bookNumber);
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
             if (isAlreadyBorrow == Constants.isFail)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("대여하지 않은 도서입니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
-                Console.ResetColor();
+                Message.RedColor(Message.PrintNoBorrowBookMessage());
                 IsSelectingMenu();
                 return;
             }
@@ -101,9 +100,7 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("이미 반납하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ");
-                Console.ResetColor();
+                Message.RedColor(Message.PrintAlreadyReturn());
                 IsSelectingMenu();
                 return;
             }
@@ -119,7 +116,7 @@ namespace LibruryDatabase.Controls
             ClearCurrentLine(Constants.CURRENT_LOCATION);
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5");
+            Message.GreenColor(Message.PrintReturnBook());
             Console.ResetColor();
             IsSelectingMenu();
                                
@@ -130,7 +127,7 @@ namespace LibruryDatabase.Controls
         {
             string bookNumber;
 
-            Console.Write("반납할 책 번호를 입력해주세요 : ");
+            Message.PrintInputReturnBookNumber();
             while (Constants.isEntrancing) // 책 번호 입력
             {
 
@@ -140,7 +137,7 @@ namespace LibruryDatabase.Controls
                 {
                    ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                    Console.Write("다시 입력해주세요:"); continue;
+                    Message.PrintReEnterMessage(); continue;
                 }
                 break;
             }
