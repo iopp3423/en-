@@ -15,7 +15,7 @@ namespace LibruryDatabase
 
     internal class text2
     {
-        public List<NaverBookVO> Book = new List<NaverBookVO>();
+        public List<NaverBookVO> NaverBook = new List<NaverBookVO>();
 
         public string title;
         public string author;
@@ -26,33 +26,18 @@ namespace LibruryDatabase
 
         public void naver()
         {
-
-            string parseJson;
-
-
-            string keyword = "컴퓨터";
+            string keyword = "자료구조";
             string display = "20";
-            string sort = "C#";
 
 
-            string query = string.Format("?query={0}&display={1}sort={2}", keyword, display, sort); //쿼리 만들기
-
-            
-
-            string sortquery = string.Format("&sort={0}", "경제"); //쿼리 만들기
+            string query = string.Format("{0}&display={1}", keyword, display); //쿼리 만들기
+            string url = "https://openapi.naver.com/v1/search/book.json?query=";
 
 
-
-            string url = "https://openapi.naver.com/v1/search/book.json?query=%EC%A3%BC%EC%8B%9D";
-
-        
-            string startquery = string.Format("{0}&display={1}&sort=sim", sort, display); //쿼리 만들기
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + startquery);
-
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + query);
 
             request.Headers.Add("X-Naver-Client-Id", Constants.NAVER_ID); // 클라이언트 아이디
-            request.Headers.Add("X-Naver-Client-Secret", Constants.NAVER_PASSWORD);       // 클라이언트 시크릿
+            request.Headers.Add("X-Naver-Client-Secret", Constants.NAVER_PASSWORD);// 클라이언트 시크릿
 
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -71,89 +56,19 @@ namespace LibruryDatabase
 
                 JObject ParseJson = JObject.Parse(text);
                 
-                //var countsOfDisplay = Convert.ToInt32(ParseJson["display"]);
-
-
-
-                for (int i = 0; i < int.Parse(display); i++)
-                {
-                    
-                    string title = ParseJson["items"][i]["title"].ToString();
-                    title = title.Replace("&quot;", "\""); //HTML 태그 변경
-
-                    string description = ParseJson["items"][i]["description"].ToString();
+                for (int index = Constants.CURRENT_LOCATION; index < int.Parse(display); index++)
+                {                
+                    string title = ParseJson["items"][index]["title"].ToString();
+                    title = title.Replace("&quot;", "\""); //HTML 태그 변경              
+                    string price = ParseJson["items"][index]["price"].ToString();
+                    string author = ParseJson["items"][index]["author"].ToString();
+                    string publisher = ParseJson["items"][index]["publisher"].ToString();
+                    string isbn = ParseJson["items"][index]["isbn"].ToString();
+                    string description = ParseJson["items"][index]["description"].ToString();
                     description = description.Replace("&quot;", "\""); //HTML 태그 변경
 
-                    string price = ParseJson["items"][i]["price"].ToString();
-                    string author = ParseJson["items"][i]["author"].ToString();
-                    string publisher = ParseJson["items"][i]["publisher"].ToString();
-                    string isbn = ParseJson["items"][i]["isbn"].ToString();
-
-                    //뉴스 제목, 본문, 링크를 리스트 뷰에 추가
-                    Console.Write("제목 : ");
-                    Console.WriteLine(title);
-                   
-                    Console.Write("가격 : ");
-                    Console.WriteLine(price);
-                    Console.Write("작가 : ");
-                    Console.WriteLine(author);
-                    Console.Write("출판사 : ");
-                    Console.WriteLine(publisher);
-                    Console.Write("isbn : ");
-                    Console.WriteLine(isbn);
-                    Console.Write("설명 : ");
-                    Console.WriteLine(description);
-                    Console.WriteLine("=====================================================");
-
+                    NaverBook.Add(new NaverBookVO(title, author, price, publisher, isbn, description));
                 }
-
-
-
-                //string url = "https://openapi.naver.com/v1/search/book.json?query=%EC%A3%BC%EC%8B%9D&" + startquery;
-
-
-
-                //string url = "https://openapi.naver.com/v1/search/book.json?query=%EC%A3%BC%EC%8B%9D&" + query;
-
-                //string query = "%EC%A3%BC%EC%8B%9D&display=10&start=1"; // 검색할 문자열
-                //string url = "https://openapi.naver.com/v1/search/book?query=" + query; // 결과가 JSON 포맷
-
-                /*
-                JObject obj = JObject.Parse(text);
-                Console.WriteLine(obj["items"][0]["title"].ToString());
-                Console.WriteLine(obj["items"][0]["author"].ToString());
-                Console.WriteLine(obj["items"][0]["price"].ToString());
-                Console.WriteLine(obj["items"][0]["publisher"].ToString());
-                Console.WriteLine(obj["items"][0]["isbn"].ToString());
-                Console.WriteLine(obj["items"][0]["description"].ToString());
-                //Console.WriteLine(text);
-                */
-
-
-
-
-                /* 리스트에 저장
-                title = obj["items"][0]["title"].ToString();
-                author = obj["items"][0]["author"].ToString();
-                price = obj["items"][0]["price"].ToString();
-                publisher = obj["items"][0]["publisher"].ToString();
-                isbn = obj["items"][0]["isbn"].ToString();
-                description = obj["items"][0]["description"].ToString();
-
-
-                Book.Add(new NaverBookVO(title, author, price, publisher, isbn, description));
-
-                foreach (NaverBookVO x in Book)
-                {
-                    Console.WriteLine(x.title);
-                    Console.WriteLine(x.author);
-                    Console.WriteLine(x.price);
-                    Console.WriteLine(x.publisher);
-                    Console.WriteLine(x.isbn);
-                    Console.WriteLine(x.description);
-                }
-                */
-
             }
             else
             {
@@ -161,6 +76,53 @@ namespace LibruryDatabase
             }
         }
 
+
+
+
+        //string url = "https://openapi.naver.com/v1/search/book.json?query=%EC%A3%BC%EC%8B%9D&" + startquery;
+
+
+
+        //string url = "https://openapi.naver.com/v1/search/book.json?query=%EC%A3%BC%EC%8B%9D&" + query;
+
+        //string query = "%EC%A3%BC%EC%8B%9D&display=10&start=1"; // 검색할 문자열
+        //string url = "https://openapi.naver.com/v1/search/book?query=" + query; // 결과가 JSON 포맷
+
+        /*
+        JObject obj = JObject.Parse(text);
+        Console.WriteLine(obj["items"][0]["title"].ToString());
+        Console.WriteLine(obj["items"][0]["author"].ToString());
+        Console.WriteLine(obj["items"][0]["price"].ToString());
+        Console.WriteLine(obj["items"][0]["publisher"].ToString());
+        Console.WriteLine(obj["items"][0]["isbn"].ToString());
+        Console.WriteLine(obj["items"][0]["description"].ToString());
+        //Console.WriteLine(text);
+        */
+
+
+
+
+        /* 리스트에 저장
+        title = obj["items"][0]["title"].ToString();
+        author = obj["items"][0]["author"].ToString();
+        price = obj["items"][0]["price"].ToString();
+        publisher = obj["items"][0]["publisher"].ToString();
+        isbn = obj["items"][0]["isbn"].ToString();
+        description = obj["items"][0]["description"].ToString();
+
+
+        Book.Add(new NaverBookVO(title, author, price, publisher, isbn, description));
+
+        foreach (NaverBookVO x in Book)
+        {
+            Console.WriteLine(x.title);
+            Console.WriteLine(x.author);
+            Console.WriteLine(x.price);
+            Console.WriteLine(x.publisher);
+            Console.WriteLine(x.isbn);
+            Console.WriteLine(x.description);
+        }
+        */
 
         /*
         public List<LogVO> Log = new List<LogVO>();

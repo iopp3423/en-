@@ -68,7 +68,6 @@ namespace LibruryDatabase.Views
             Console.WriteLine("유저 이름(2~5자) :");
             Console.WriteLine("나이 :");
             Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
-            //Console.WriteLine("주소 :");  
             Console.WriteLine("주소(천안시동남구신부동) :");
         }
 
@@ -522,6 +521,28 @@ namespace LibruryDatabase.Views
         {
             Console.Write("로그파일을 제거하시겠습니까?    YES : Enter        뒤로가기 : ESC ");
         }
+
+
+        public void PrintNaverBook()
+        {
+            foreach (NaverBookVO book in BookData.Get().NaverBook)
+            {
+                Console.Write("책 제목 :");
+                Console.WriteLine(book.title);
+                Console.Write("책 저자 :");
+                Console.WriteLine(book.author);
+                Console.Write("책 가격 :");
+                Console.WriteLine(book.price);
+                Console.Write("출판사  :");
+                Console.WriteLine(book.publisher);
+                Console.Write("isbn    :");
+                Console.WriteLine(book.isbn);
+                Console.Write("책 설명 :");
+                Console.WriteLine(book.description);
+                Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+            }
+    }
+
 
         public bool IsGoingBackMenu()
         {

@@ -24,6 +24,9 @@ namespace LibruryDatabase.Controls
 
         }
 
+        private string title = "";
+        private string quantity="";
+
 
         public void SearchNaverBook() // 네이버 기본화면
         {
@@ -120,11 +123,11 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.SEARCH_BOOK) { if(SearchTitle() == SearchTitle()) return Constants.isBackMenu; } // 제목입력
-                            if (Y == Constants.BORROW_BOOK) { } // 출력할 도서 수량 입력
-                            if (Y == Constants.CHECK_BOOK) { } // 검색
-
-                            return IsGoingReturnMenu();
+                            if (Y == Constants.SEARCH_BOOK) { SearchTitle(); } // 제목입력
+                            if (Y == Constants.BORROW_BOOK) { InputPrintBookQuantity(); } // 출력할 도서 수량 입력
+                            if (Y == Constants.CHECK_BOOK) { SearchBook(); } // 검색
+                            break;
+                            //return IsGoingReturnMenu();
                         }
                     case ConsoleKey.Escape:
                         {
@@ -144,33 +147,29 @@ namespace LibruryDatabase.Controls
         }
 
 
-        public bool SearchTitle() // 작가로 찾기
+        public void SearchTitle() // 작가로 입력
         {
-            string title;
-
-           
+          
             while (Constants.isEntrancing) // 책 예외처리
             {
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
-                Console.Write("입력 (영어,한글 2~8자) :");
+                Console.Write("  입력 (영어,한글 2~8자) :");
 
                 title = Console.ReadLine();
-                Console.SetCursorPosition(Constants.SEARCH_X, Constants.SEARCH_BOOK);
 
                 if (Constants.isFail == Regex.IsMatch(title, Utility.Exception.AUTHOR_CHECK)) // 정규식에 맞지 않으면
                 {
 
-                    Console.SetCursorPosition(15, Constants.SEARCH_BOOK- Constants.BEFORE_INPUT_LOCATION);
+                    Console.SetCursorPosition(Constants.CURRENT_BOOK, Constants.SEARCH_BOOK- Constants.BEFORE_INPUT_LOCATION);
                     Console.Write("잘못입력하셨습니다.  재입력 : Enter      뒤로가기 : F5");
 
-                    if (ReEnter() == Constants.isBackMenu) return Constants.isBackMenu;
+                    if (ReEnter() == Constants.isBackMenu) return; // esc-> 뒤로가기 enter -> 재입력
 
-                    else
+                    else //enter
                     {
 
                         ClearCurrentLine(Constants.CURRENT_LOCATION);
-
-                        Console.SetCursorPosition(24, Constants.SEARCH_BOOK);
+                        Console.SetCursorPosition(Console.CursorLeft, Constants.SEARCH_BOOK);
                         continue;
                     }
                 }
@@ -178,10 +177,58 @@ namespace LibruryDatabase.Controls
                 break;
             }
 
+        }
 
-            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+        public void InputPrintBookQuantity() // 출력권수
+        {
+
+
+            while (Constants.isEntrancing) // 책 예외처리
+            {
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
+                Console.Write("  출력할 도서 수 입력    :");
+                quantity = Console.ReadLine();
+
+                if (Constants.isFail == Regex.IsMatch(quantity, Utility.Exception.QUANTITY)) // 정규식에 맞지 않으면
+                {
+                    Console.SetCursorPosition(Constants.CURRENT_BOOK, Constants.SEARCH_BOOK - Constants.BEFORE_INPUT_LOCATION);
+                    Console.Write("잘못입력하셨습니다.  재입력 : Enter      뒤로가기 : F5");
+
+                    if (ReEnter() == Constants.isBackMenu) return;// esc-> 뒤로가기 enter -> 재입력
+
+                    else //enter
+                    {
+
+                        ClearCurrentLine(Constants.CURRENT_LOCATION);
+                        Console.SetCursorPosition(Console.CursorLeft, Constants.SEARCH_BOOK+1);
+                        continue;
+                    }
+                }
+
+                break;
+            }
 
         }
+
+        public void SearchBook() // 도서출력
+        {
+            if (title == "" || quantity == "")
+            {
+                Console.SetCursorPosition(Constants.CURRENT_BOOK, Constants.SEARCH_BOOK - Constants.BEFORE_INPUT_LOCATION);
+                Console.Write("누락된 입력이있습니다.  재입력 : Enter      뒤로가기 : F5");
+                if (ReEnter() == Constants.isBackMenu) return;// esc-> 뒤로가기 enter -> 재입력
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
+            }
+            else
+            {
+                Console.WriteLine();
+                BookData.Get().StoreNaverBookToList(title, quantity);
+                Print.PrintNaverBook();
+            }
+        }
+
+
+
 
 
 

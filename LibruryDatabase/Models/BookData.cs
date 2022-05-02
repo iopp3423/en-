@@ -5,11 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using LibruryDatabase.Utility;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using System.Net;
 
 namespace LibruryDatabase.Models
 {
     internal class BookData
     {
+
+        public List<NaverBookVO> NaverBook = new List<NaverBookVO>();
+
+
         private static BookData Book;
         public static BookData Get()
         {
@@ -345,5 +352,56 @@ namespace LibruryDatabase.Models
         }
 
 
+
+        public void StoreNaverBookToList(string keyword, string display)
+        {
+            //string keyword = "자료구조";
+            //string display = "20";
+
+            string query = string.Format("{0}&display={1}", keyword, display); //쿼리 만들기
+            string url = "https://openapi.naver.com/v1/search/book.json?query=";
+
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + query);
+
+            request.Headers.Add("X-Naver-Client-Id", Constants.NAVER_ID); // 클라이언트 아이디
+            request.Headers.Add("X-Naver-Client-Secret", Constants.NAVER_PASSWORD);// 클라이언트 시크릿
+
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            string status = response.StatusCode.ToString();
+
+            if (status == "OK")
+            {
+                Stream stream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                string text = reader.ReadToEnd();
+
+                text = text.Replace("<b>", "");
+                text = text.Replace("</b>", "");
+                text = text.Replace("&lt;", "<");
+                text = text.Replace("&gt;", ">");
+
+                JObject ParseJson = JObject.Parse(text);
+
+                for (int index = Constants.CURRENT_LOCATION; index < int.Parse(display); index++)
+                {
+                    string title = ParseJson["items"][index]["title"].ToString();
+                    title = title.Replace("&quot;", "\""); //HTML 태그 변경              
+                    string price = ParseJson["items"][index]["price"].ToString();
+                    string author = ParseJson["items"][index]["author"].ToString();
+                    string publisher = ParseJson["items"][index]["publisher"].ToString();
+                    string isbn = ParseJson["items"][index]["isbn"].ToString();
+                    string description = ParseJson["items"][index]["description"].ToString();
+                    description = description.Replace("&quot;", "\""); //HTML 태그 변경
+
+                    NaverBook.Add(new NaverBookVO(title, author, price, publisher, isbn, description));
+                }
+            }
+            else
+            {
+                Console.WriteLine("Error 발생=" + status);
+            }
+        }
     }
 }
