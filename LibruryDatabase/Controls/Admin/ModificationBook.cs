@@ -14,7 +14,7 @@ namespace LibruryDatabase.Controls
     {
         //Screen Menu = new Screen();
 
-        public Screen Menu;
+        public Screen Print;
 
         public ModificationBook()
         {
@@ -22,7 +22,7 @@ namespace LibruryDatabase.Controls
 
         public ModificationBook(Screen Menu) : base(Menu)
         {
-            this.Menu = Menu;
+            this.Print = Menu;
         }
 
 
@@ -36,8 +36,8 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Escape:
                         {
                             Console.Clear();
-                            Menu.PrintMain();
-                            Menu.PrintAdminMenu();
+                            Print.PrintMain();
+                            Print.PrintAdminMenu();
                             return;
                         }
                     case ConsoleKey.F5: // 종료
@@ -58,14 +58,14 @@ namespace LibruryDatabase.Controls
             string bookName;
 
             Console.Clear();
-            Menu.PrintSearchBookName();
-            Menu.PrintBookData(); // 책 목록 프린트
+            Print.PrintSearchBookName();
+            Print.PrintBookData(); // 책 목록 프린트
 
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("책 수정 : Enter                                          뒤로가기 : ESC");
             Console.ResetColor();
-            if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
             SearchBookName(Constants.isFail, "관리자"); // 책 제목 검색

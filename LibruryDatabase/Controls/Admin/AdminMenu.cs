@@ -17,6 +17,7 @@ namespace LibruryDatabase.Controls
         ModificationBook modify = new ModificationBook();
         RemovalUser member = new RemovalUser();
         LogManage Log = new LogManage();
+        NaverSearch naver = new NaverSearch();
 
         Screen Print;
 
@@ -33,6 +34,7 @@ namespace LibruryDatabase.Controls
             modify = new ModificationBook(Print);
             member = new RemovalUser(Print);
             Log = new LogManage(Print);
+            naver = new NaverSearch(Print);
         }
 
 
@@ -87,7 +89,7 @@ namespace LibruryDatabase.Controls
                             if (Y == Constants.USER_MANAGE) { member.ModifyMember(); break; } // 회원관리 클래스 이동
                             if (Y == Constants.CURRENT_BOOK) { PrintCurrentBook(); break; }// 대여상황
                             if (Y == Constants.LOG_MANAGE) { Log.PrintLogMenu();break; } // 로그
-                            if( Y == Constants.NABER_SEARCH) { break; }
+                            if( Y == Constants.NABER_SEARCH) { naver.SearchNaverBook(); break; } // 네이버도서
                             break;
                         }
                      case ConsoleKey.Escape:

@@ -19,10 +19,10 @@ namespace LibruryDatabase
             //test test1 = new test();
 
             //test.storelog();
-            test.naver();
+            //test.naver();
             //test1.naver();
 
-            //Start.StartMenu();
+            Start.StartMenu();
             //관리자 id = enen1234, pw = enen4321
 
            

@@ -49,6 +49,10 @@ namespace LibruryDatabase.Utility
         public const string LogDeleteQuery = "DELETE FROM LOG WHERE number = ('{0}')";
         public const string RemoveAllLog = "TRUNCATE LOG;";
 
+        //네이버 아이디 비밀번호
+        public const string NAVER_ID ="wIcEQfjn2NsKuQmIlo2S";
+        public const string NAVER_PASSWORD = "ocXHc9Sh_7";
+
 
 
         public const string REVISE_BOOK_QUANTITY = "1";

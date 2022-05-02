@@ -103,6 +103,13 @@ namespace LibruryDatabase.Views
 
         }
 
+        public void PrintNaverSearch()
+        {
+            Console.WriteLine("  》:책제목으로찾기");
+            Console.WriteLine("  》:검색할 도서권수");
+            Console.WriteLine("  》:검색");
+        }
+
         public void PrintSearchMenu()
         {
             Console.Write("원하시는 검색 메뉴 -> Enter -> 검색                       뒤로가기 : ESC ");
@@ -447,6 +454,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("  》회원관리 ");
             Console.WriteLine("  》대여상황 ");
             Console.WriteLine("  》로그관리 ");
+            Console.WriteLine("  》네이버도서 ");
         }
 
         public void PrintLogMenu()
