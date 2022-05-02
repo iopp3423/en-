@@ -11,8 +11,6 @@ namespace LibruryDatabase.Controls
 {
     internal class UserMenu
     {
-
-        //Screen Menu = new Screen(); // 뷰 클래스 객체생성
         SearchingBook BookSearching = new SearchingBook();
         BorrowingBook BookBorrowing = new BorrowingBook();
         ModificationUser UserModification = new ModificationUser();

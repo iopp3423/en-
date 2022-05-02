@@ -14,7 +14,6 @@ namespace LibruryDatabase.Controls
 {
     class LoginOrRegister
     {
-        //Screen Menu = new Screen(); // 뷰 클래스 객체생성
         UserMenu GoUser = new UserMenu();      
 
         public string id;
@@ -44,8 +43,7 @@ namespace LibruryDatabase.Controls
 
         public void RegisterOrLogin() // 회원가입 or 로그인 화면
         {
-            BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
-
+           
             Console.Clear();
             Menu.PrintMain();
             Menu.RegisterOrLogin();

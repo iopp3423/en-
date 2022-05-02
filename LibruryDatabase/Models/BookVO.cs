@@ -10,20 +10,20 @@ namespace LibruryDatabase.Models
     {
         public string title;
         public string author;
-        public string price;
         public string publisher;
         public string publishday;
+        public string price;
         public string isbn;
         public string quantity;
 
 
-        public BookVO(string title, string author, string price, string publisher, string publishday, string isbn, string quantity)
+        public BookVO(string title, string author,  string publisher, string publishday, string price, string isbn, string quantity)
         {
             this.title = title;
-            this.author = author;
-            this.price = price;
+            this.author = author;          
             this.publisher = publisher;
             this.publishday = publishday;
+            this.price = price;
             this.isbn = isbn;
             this.quantity = quantity;
         }

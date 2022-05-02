@@ -10,6 +10,8 @@ namespace LibruryDatabase.Models
 {
     internal class UserData
     {
+        public List<UserVO> userData = new List<UserVO>();
+
         private static UserData User;
         public static UserData Get()
         {
@@ -200,6 +202,25 @@ namespace LibruryDatabase.Models
             }
             return Constants.isFail;
 
+        }
+
+        public void StoreUserData()
+        {
+            using (MySqlConnection userInformation = new MySqlConnection(Constants.getQuery))
+            {
+                userInformation.Open();
+
+                //ExecuteReader를 이용하여
+                //연결 모드로 데이타 가져오기
+                MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, userInformation);
+                MySqlDataReader user = Command.ExecuteReader();
+
+                while (user.Read())
+                {
+                    userData.Add(new UserVO(user["id"].ToString(), user["pw"].ToString(), user["name"].ToString(), user["phone"].ToString(), user["age"].ToString(), user["address"].ToString()));
+                }
+                userInformation.Close();
+            }
         }
     }
 }

@@ -108,6 +108,7 @@
     <Compile Include="Models\LogData.cs" />
     <Compile Include="Models\LogVO.cs" />
     <Compile Include="Models\NaverBookVO.cs" />
+    <Compile Include="Models\UserVO.cs" />
     <Compile Include="Utility\Constants.cs" />
     <Compile Include="Controls\Admin\Admin.cs" />
     <Compile Include="Controls\User\LoginOrRegister.cs" />
