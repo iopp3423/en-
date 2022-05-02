@@ -15,9 +15,8 @@ namespace LibruryDatabase.Controls
     class LoginOrRegister
     {
         //Screen Menu = new Screen(); // 뷰 클래스 객체생성
-        UserMenu GoUser = new UserMenu();
+        UserMenu GoUser = new UserMenu();      
 
-        
         public string id;
         public string password;
         public string passswordCheck;
@@ -44,7 +43,8 @@ namespace LibruryDatabase.Controls
 
 
         public void RegisterOrLogin() // 회원가입 or 로그인 화면
-        {           
+        {
+            BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
 
             Console.Clear();
             Menu.PrintMain();
@@ -314,8 +314,6 @@ namespace LibruryDatabase.Controls
 
         string ReadPassword() // 비밀번호 *처리
         {
-            string password;
-
             string passwordChangeStar = "";
             ConsoleKeyInfo info = Console.ReadKey(true);
             while (info.Key != ConsoleKey.Enter)

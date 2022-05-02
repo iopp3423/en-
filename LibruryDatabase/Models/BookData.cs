@@ -15,7 +15,8 @@ namespace LibruryDatabase.Models
     {
 
         public List<NaverBookVO> NaverBook = new List<NaverBookVO>();
-        public List<NaverBookVO> UserRequestBook = new List<NaverBookVO>();       
+        public List<NaverBookVO> UserRequestBook = new List<NaverBookVO>();
+        public List<BookVO> bookData = new List<BookVO>();
 
         private static BookData Book;
         public static BookData Get()
@@ -461,6 +462,26 @@ namespace LibruryDatabase.Models
                 Command.ExecuteNonQuery();
             }
         }
+
+        public void StoreBookData() // 책 데이터 리스트에 저장
+        {
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
+                MySqlDataReader Data = Command.ExecuteReader(); // 데이터 읽기
+
+                while (Data.Read())
+                {
+                    bookData.Add(new BookVO(Data["name"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["publishday"].ToString(), Data["price"].ToString(), Data["isbn"].ToString(), Data["quantity"].ToString()));
+                }
+                Data.Close();
+
+                
+            } 
+        }
+        
 
     }
 }

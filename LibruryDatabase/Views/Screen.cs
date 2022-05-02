@@ -175,32 +175,27 @@ namespace LibruryDatabase.Views
 
         public void PrintBookData() // 책 데이터 출력
         {
-           
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
-                book.Open();
-                MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
-                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
 
-                while (bookData.Read())
-                {
-                    Console.Write("책 번호 :");
-                    Console.WriteLine(bookData["number"].ToString());
-                    Console.Write("책 제목 :");
-                    Console.WriteLine(bookData["name"].ToString());
-                    Console.Write("책 저자 :");
-                    Console.WriteLine(bookData["author"].ToString());
-                    Console.Write("출판사  :");
-                    Console.WriteLine(bookData["publish"].ToString());
-                    Console.Write("책 가격 :");
-                    Console.WriteLine(bookData["price"].ToString());
-                    Console.Write("책 수량 :");
-                    Console.WriteLine(bookData["quantity"].ToString());
-                    Console.WriteLine("===============================================================");
-                }
-                bookData.Close();
+            foreach (BookVO data in BookData.Get().bookData)
+            {
+                Console.Write("책 제목   :");
+                Console.WriteLine(data.title);
+                Console.Write("책 저자   :");
+                Console.WriteLine(data.author);
+                Console.Write("출판사    :");
+                Console.WriteLine(data.publisher);
+                Console.Write("출시일    :");
+                Console.WriteLine(data.publishday);
+                Console.Write("책 가격   :");
+                Console.WriteLine(data.price);
+                Console.Write("isbn      :");
+                Console.WriteLine(data.isbn);
+                Console.Write("책 수량   :");
+                Console.WriteLine(data.quantity);
+                Console.WriteLine("=======================================================================");
             }
-        }
+          
+    }
 
 
         public void PrintLoginUser(string id, string password)
@@ -343,100 +338,79 @@ namespace LibruryDatabase.Views
 
         public void PrintSearchAuthor(string name)
         {
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            foreach (BookVO data in BookData.Get().bookData)
             {
-                book.Open();
-
-                MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
-                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (bookData.Read())
+                if (data.author.Contains(name) == Constants.isPassing)
                 {
-                    if (bookData["author"].ToString().Contains(name))
-                    {
-                        Console.Write("책 번호 :");
-                        Console.WriteLine(bookData["number"].ToString());
-                        Console.Write("책 제목 :");
-                        Console.WriteLine(bookData["name"].ToString());
-                        Console.Write("책 저자 :");
-                        Console.WriteLine(bookData["author"].ToString());
-                        Console.Write("출판사  :");
-                        Console.WriteLine(bookData["publish"].ToString());
-                        Console.Write("책 가격 :");
-                        Console.WriteLine(bookData["price"].ToString());
-                        Console.Write("책 수량 :");
-                        Console.WriteLine(bookData["quantity"].ToString());
-                        Console.WriteLine("=============================================================================");
-                        Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
-                    }
-
+                    Console.Write("책 제목   :");
+                    Console.WriteLine(data.title);
+                    Console.Write("책 저자   :");
+                    Console.WriteLine(data.author);
+                    Console.Write("출판사    :");
+                    Console.WriteLine(data.publisher);
+                    Console.Write("출시일    :");
+                    Console.WriteLine(data.publishday);
+                    Console.Write("책 가격   :");
+                    Console.WriteLine(data.price);
+                    Console.Write("isbn      :");
+                    Console.WriteLine(data.isbn);
+                    Console.Write("책 수량   :");
+                    Console.WriteLine(data.quantity);
+                    Console.WriteLine("=======================================================================");
+                    Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                 }
-                book.Close();
             }
         }
 
         public void PrintSearchPublish(string publish)
         {
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            foreach (BookVO data in BookData.Get().bookData)
             {
-                book.Open();
-
-                MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
-                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (bookData.Read())
+                if (data.publisher.Contains(publish) == Constants.isPassing)
                 {
-                    if (bookData["publish"].ToString().Contains(publish))
-                    {
-                        Console.Write("책 번호 :");
-                        Console.WriteLine(bookData["number"].ToString());
-                        Console.Write("책 제목 :");
-                        Console.WriteLine(bookData["name"].ToString());
-                        Console.Write("책 저자 :");
-                        Console.WriteLine(bookData["author"].ToString());
-                        Console.Write("출판사  :");
-                        Console.WriteLine(bookData["publish"].ToString());
-                        Console.Write("책 가격 :");
-                        Console.WriteLine(bookData["price"].ToString());
-                        Console.Write("책 수량 :");
-                        Console.WriteLine(bookData["quantity"].ToString());
-                        Console.WriteLine("=============================================================================");
-                        Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
-                    }
+                    Console.Write("책 제목   :");
+                    Console.WriteLine(data.title);
+                    Console.Write("책 저자   :");
+                    Console.WriteLine(data.author);
+                    Console.Write("출판사    :");
+                    Console.WriteLine(data.publisher);
+                    Console.Write("출시일    :");
+                    Console.WriteLine(data.publishday);
+                    Console.Write("책 가격   :");
+                    Console.WriteLine(data.price);
+                    Console.Write("isbn      :");
+                    Console.WriteLine(data.isbn);
+                    Console.Write("책 수량   :");
+                    Console.WriteLine(data.quantity);
+                    Console.WriteLine("=======================================================================");
+                    Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                 }
-                book.Close();
             }
         }
 
         public void PrintSearchBookName(string bookName)
         {
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            foreach (BookVO data in BookData.Get().bookData)
             {
-                book.Open();
-                MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
-                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (bookData.Read())
+                if (data.title.Contains(bookName) == Constants.isPassing)
                 {
-                    if (bookData["name"].ToString().Contains(bookName))
-                    {
-                        Console.Write("책 번호 :");
-                        Console.WriteLine(bookData["number"].ToString());
-                        Console.Write("책 제목 :");
-                        Console.WriteLine(bookData["name"].ToString());
-                        Console.Write("책 저자 :");
-                        Console.WriteLine(bookData["author"].ToString());
-                        Console.Write("출판사  :");
-                        Console.WriteLine(bookData["publish"].ToString());
-                        Console.Write("책 가격 :");
-                        Console.WriteLine(bookData["price"].ToString());
-                        Console.Write("책 수량 :");
-                        Console.WriteLine(bookData["quantity"].ToString());
-                        Console.WriteLine("============================================================================");
-                        Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
-                    }
+                    Console.Write("책 제목   :");
+                    Console.WriteLine(data.title);
+                    Console.Write("책 저자   :");
+                    Console.WriteLine(data.author);
+                    Console.Write("출판사    :");
+                    Console.WriteLine(data.publisher);
+                    Console.Write("출시일    :");
+                    Console.WriteLine(data.publishday);
+                    Console.Write("책 가격   :");
+                    Console.WriteLine(data.price);
+                    Console.Write("isbn      :");
+                    Console.WriteLine(data.isbn);
+                    Console.Write("책 수량   :");
+                    Console.WriteLine(data.quantity);
+                    Console.WriteLine("=======================================================================");
+                    Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                 }
-                book.Close();
             }
         }
 
