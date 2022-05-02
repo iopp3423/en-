@@ -32,8 +32,29 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             Menu.PrintRequestBookList();
             isbn = InputISBN();
+            Checkisbn(isbn);
+
             IsSelectingMenu();
         }
+
+
+        public void Checkisbn(string Isbn) // isbn 체크 후 bookdata에 저장 -- 수정해야함
+        {
+            bool isNoneisbn = Constants.isFail;
+
+            foreach (NaverBookVO book in BookData.Get().UserRequestBook)
+            {
+                if (Isbn == book.isbn)
+                {
+                    BookData.Get().StoreBookUserRequest(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString());
+                }
+            }
+            if (isNoneisbn == Constants.isFail)
+            {
+                Message.PrintNoneIsbnMessage(); //isbn없음 메시지 출력
+            }
+        }
+
 
         string InputISBN()//isbn입력
         {

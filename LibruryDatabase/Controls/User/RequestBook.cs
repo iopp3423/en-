@@ -76,8 +76,6 @@ namespace LibruryDatabase.Controls
 
         string InputISBN()//isbn입력
         {
-
-
             while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.REQUEST_X, Constants.SEARCH_BOOK);
@@ -106,7 +104,7 @@ namespace LibruryDatabase.Controls
             {
                 if (Isbn == book.isbn)
                 {
-                    BookData.Get().isbn = Isbn;
+                    BookData.Get().isbn = Isbn; // 싱글톤 isbn에 저장 - 고쳐야할듯
                     isNoneisbn = Constants.isPassing;
                     break;
                 }

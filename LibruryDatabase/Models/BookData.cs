@@ -426,5 +426,16 @@ namespace LibruryDatabase.Models
             }
         }
 
+        public void StoreBookUserRequest(string bookName, string author, string publish, string publishDay, string price, string isbn, string quantity) // 유저요청 책 추가
+        {
+
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.addUserBookQuery, bookName, author, publish, publishDay, price, isbn, quantity), book);
+                Command.ExecuteNonQuery();
+            }
+        }
+
     }
 }
