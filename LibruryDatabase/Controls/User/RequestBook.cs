@@ -34,9 +34,13 @@ namespace LibruryDatabase.Controls
             Menu.PrintMain();
             Message.PrintBookTitle();
 
-            bookName = InputBookName(); //책제목입력
 
-            BookData.Get().StoreNaverBookToList(bookName, Constants.ADD_BOOK.ToString(), Constants.isFail); // 리스트에 저장            
+            BookData.Get().NaverBook.Clear(); // 리스트 비우기
+
+
+            bookName = InputBookName(); //책제목입력
+            BookData.Get().StoreNaverBookToList(bookName, Constants.ADD_BOOK.ToString(), Constants.isPassing); // 리스트에 저장
+                                                                                                         
             Console.WriteLine("\n\n");
 
             Menu.PrintRequestBook();//도서출력
@@ -102,7 +106,7 @@ namespace LibruryDatabase.Controls
         {
             bool isNoneisbn = Constants.isFail;
 
-            foreach (NaverBookVO book in BookData.Get().UserRequestBook)
+            foreach (NaverBookVO book in BookData.Get().NaverBook)
             {
                 if (Isbn == book.isbn) // db에 저장
                 {

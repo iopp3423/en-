@@ -393,7 +393,7 @@ namespace LibruryDatabase.Models
                     description = description.Replace("&quot;", "\""); //HTML 태그 변경
 
                     if(isAdmin == Constants.isPassing) NaverBook.Add(new NaverBookVO(title, author, price, publisher, publishday,isbn, description)); //관리자 출력 리스트에 저장
-                    else if(isAdmin == Constants.isFail) UserRequestBook.Add(new NaverBookVO(title, author, price, publisher, publishday, isbn, description));
+                    else if(isAdmin == Constants.isFail) UserRequestBook.Add(new NaverBookVO(title, author, price, publisher, publishday, isbn, description)); // 유저 출력 리스트에 저장
                 }
             }
             else
@@ -402,7 +402,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public void StoreNaverBook(string title, string author, string price, string publisher, string publishday, string isbn, string description) // 책 추가
+        public void StoreNaverBook(string title, string author, string price, string publisher, string publishday, string isbn, string description) // db책 추가
         {
 
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
@@ -443,6 +443,22 @@ namespace LibruryDatabase.Models
                 book.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.requestBookQuery, bookName, author, publish, publishDay, price, isbn, quantity), book);
                 Command.ExecuteNonQuery();
+            }
+        }
+
+        public void PrintSearchBookName()
+        {
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(Constants.StoreQuey, book);
+                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+                while (bookData.Read())
+                {
+                    UserRequestBook.Add(new NaverBookVO(bookData["name"].ToString(), bookData["author"].ToString(), bookData["publish"].ToString(), bookData["publishday"].ToString(), bookData["price"].ToString(), bookData["isbn"].ToString(), bookData["quantity"].ToString()));
+                }
+                book.Close();
             }
         }
 

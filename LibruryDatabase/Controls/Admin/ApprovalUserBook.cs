@@ -27,10 +27,11 @@ namespace LibruryDatabase.Controls
             this.Message = message;
         }
 
-        public void ApproveUserRequest()
+        public void ApproveUserRequest() // 책 저장 메서드
         {
             Console.Clear();
-            //Menu.PrintRequestBookList();
+            BookData.Get().PrintSearchBookName(); // 유저 isbn입력한 데베 리스트에 저장
+            Menu.PrintRequestBookList();
             isbn = InputISBN();
             Checkisbn(isbn);
 
