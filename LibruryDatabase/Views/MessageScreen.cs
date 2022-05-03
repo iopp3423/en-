@@ -43,11 +43,11 @@ namespace LibruryDatabase.Views
         }
         public void PrintInutCallNumberMessage()
         {
-            Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
+            Console.Write("핸드폰 번호(01x-xxxx-xxxx) :");
         }
         public void PrintInputAddressMessage()
         {
-            Console.WriteLine("주소 :");
+            Console.Write("주소 :");
         }
         public void PrintInputAgeMessage()
         {

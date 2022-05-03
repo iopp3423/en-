@@ -8,6 +8,7 @@ namespace LibruryDatabase.Models
 {
     internal class BookVO
     {
+        public string number;
         public string title;
         public string author;
         public string publisher;
@@ -17,8 +18,9 @@ namespace LibruryDatabase.Models
         public string quantity;
 
 
-        public BookVO(string title, string author,  string publisher, string publishday, string price, string isbn, string quantity)
+        public BookVO(string number, string title, string author,  string publisher, string publishday, string price, string isbn, string quantity)
         {
+            this.number = number;
             this.title = title;
             this.author = author;          
             this.publisher = publisher;

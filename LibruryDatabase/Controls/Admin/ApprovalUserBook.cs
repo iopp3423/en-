@@ -29,40 +29,29 @@ namespace LibruryDatabase.Controls
 
         public void ApproveUserRequest() // 책 저장 메서드
         {
+            bool checkIsbn; 
+
             Console.Clear();
 
             BookData.Get().UserRequestBook.Clear(); // 재조회시 초기화
-            BookData.Get().PrintSearchBookName(); // 유저 isbn입력한 데베 리스트에 저장
+            BookData.Get().PrintSearchBookName(); // 유저 isbn입력한 책 데베에 저장
             Menu.PrintRequestBookList();// 유저가 isbn입력한 책 정보 출력
 
             Message.GreenColor(Message.PrintContinueRequestmessage()); // 안내메시지
             if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
-            isbn = InputISBN();
-            Checkisbn(isbn);
+            isbn = InputISBN(); // isbn 입력
+
+            checkIsbn = BookData.Get().Checkisbn(isbn); // isbn 체크 후 리스트에 저장
+
+            if (checkIsbn == Constants.isFail)
+            {
+                Message.PrintNoneIsbnMessage(); //isbn없음 메시지 출력
+            }
 
             IsSelectingMenu(); // 뒤로가기
         }
 
-
-        public void Checkisbn(string Isbn) // isbn 체크 후 bookdata에 저장 -- 수정해야함
-        {
-            bool isNoneisbn = Constants.isFail;
-
-            foreach (NaverBookVO book in BookData.Get().UserRequestBook)
-            {
-                if (Isbn == book.isbn)
-                {
-                    BookData.Get().StoreBookUserRequest(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString()); // 책에 정보 저장
-                    BookData.Get().RemoveBookData(book.isbn); // 추가한 책 제거
-                    isNoneisbn = Constants.isPassing;
-                }
-            }
-            if (isNoneisbn == Constants.isFail)
-            {
-                Message.PrintNoneIsbnMessage(); //isbn없음 메시지 출력
-            }
-        }
 
 
         string InputISBN()//isbn입력

@@ -164,6 +164,8 @@ namespace LibruryDatabase.Views
 
             foreach (BookVO data in BookData.Get().bookData)
             {
+                Console.Write("책 번호   :");
+                Console.WriteLine(data.number);
                 Console.Write("책 제목   :");
                 Console.WriteLine(data.title);
                 Console.Write("책 저자   :");
@@ -240,8 +242,7 @@ namespace LibruryDatabase.Views
 
         public void PrintBorrowBookData(string id) // 대여한 책 데이터 출력
         {
-            
-
+           /*
             using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
             {
                 book.Open();
@@ -266,46 +267,60 @@ namespace LibruryDatabase.Views
                 }
                 bookData.Close();
             }
-        }
+           */
 
-        public void PrintCurrentBorrowBook() // 대여상황
-        {
-            
-
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            foreach (BorrowUserVO data in BookData.Get().borrow)
             {
-                book.Open();
-                MySqlCommand Command = new MySqlCommand(Constants.OrderQuery, book);
-                MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
-
-                while (bookData.Read())
+                if (data.id.Contains(id))
                 {
-                    Console.Write("아이디  :");
-                    Console.WriteLine(bookData["id"].ToString());
                     Console.Write("책 번호 :");
-                    Console.WriteLine(bookData["number"].ToString());
+                    Console.WriteLine(data.number);
                     Console.Write("책 제목 :");
-                    Console.WriteLine(bookData["bookname"].ToString());
+                    Console.WriteLine(data.title);
                     Console.Write("책 저자 :");
-                    Console.WriteLine(bookData["author"].ToString());
+                    Console.WriteLine(data.author);
                     Console.Write("출판사  :");
-                    Console.WriteLine(bookData["publish"].ToString());
+                    Console.WriteLine(data.publish);
                     Console.Write("대여날짜:");
-                    Console.WriteLine(bookData["borrowbook"].ToString());
+                    Console.WriteLine(data.borrowbook);
                     Console.Write("반납날짜:");
-                    Console.WriteLine(bookData["returnbook"].ToString());
-                    Console.WriteLine("===============================================================");
+                    Console.WriteLine(data.returnbook);
+                    Console.WriteLine("=======================================================================");
                 }
-                bookData.Close();
             }
         }
 
-        public void PrintSearchAuthor(string name)
+        public void PrintCurrentBorrowBook() // 대여상황
+        {           
+            foreach (BorrowUserVO data in BookData.Get().borrow)
+            {
+
+                Console.Write("아이디  :");
+                Console.WriteLine(data.id);
+                Console.Write("책 번호 :");
+                Console.WriteLine(data.number);
+                Console.Write("책 제목 :");
+                Console.WriteLine(data.title);
+                Console.Write("책 저자 :");
+                Console.WriteLine(data.author);
+                Console.Write("출판사  :");
+                Console.WriteLine(data.publish);
+                Console.Write("대여날짜:");
+                Console.WriteLine(data.borrowbook);
+                Console.Write("반납날짜:");
+                Console.WriteLine(data.returnbook);
+                Console.WriteLine("=======================================================================");              
+            }          
+        }
+
+        public void PrintSearchAuthor(string name) // 작가로 검색
         {
             foreach (BookVO data in BookData.Get().bookData)
             {
                 if (data.author.Contains(name) == Constants.isPassing)
                 {
+                    Console.Write("책 번호   :");
+                    Console.WriteLine(data.number);
                     Console.Write("책 제목   :");
                     Console.WriteLine(data.title);
                     Console.Write("책 저자   :");
@@ -324,15 +339,18 @@ namespace LibruryDatabase.Views
                     Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                 }
             }
+           
         }
 
-        public void PrintSearchPublish(string publish)
+        public void PrintSearchPublish(string publish) // 출판사로 검색
         {
 
             foreach (BookVO data in BookData.Get().bookData)
             {
                 if (data.publisher.Contains(publish) == Constants.isPassing)
                 {
+                    Console.Write("책 번호   :");
+                    Console.WriteLine(data.number);
                     Console.Write("책 제목   :");
                     Console.WriteLine(data.title);
                     Console.Write("책 저자   :");
@@ -353,12 +371,14 @@ namespace LibruryDatabase.Views
             }
         }
 
-        public void PrintSearchBookName(string bookName)
+        public void PrintSearchBookName(string bookName) // 책 제목으로 검색
         {
             foreach (BookVO data in BookData.Get().bookData)
             {
                 if (data.title.Contains(bookName) == Constants.isPassing)
                 {
+                    Console.Write("책 번호   :");
+                    Console.WriteLine(data.number);
                     Console.Write("책 제목   :");
                     Console.WriteLine(data.title);
                     Console.Write("책 저자   :");

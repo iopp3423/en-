@@ -82,6 +82,9 @@ namespace LibruryDatabase.Controls
             isbn = InputISBN(movingInputY);
 
             BookData.Get().StoreBookUserRequest(bookName, author, publisher, publishDay, bookprice, isbn, quantity); // book db에 정보 저장
+            BookData.Get().bookData.Clear(); // 리스트 초기화
+            BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
+
             LogData.Get().StoreLog(Constants.ADMIN, Constants.ADD, bookName); // 로그에 저장
 
             Console.SetCursorPosition(Console.CursorLeft, Constants.ERROR_Y);

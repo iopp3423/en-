@@ -13,7 +13,9 @@ namespace LibruryDatabase.Controls
 {
     internal class ModificationUser
     {
-        //Screen Menu = new Screen();
+        string callNumber;
+        string password;
+        string address;
 
         public Screen Menu;
         public MessageScreen Print;
@@ -117,10 +119,10 @@ namespace LibruryDatabase.Controls
 
         public void ModifyPhoneNumber(string id)  // 전화번호
         {
-            string callNumber;
-            ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기          
+            ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기
             callNumber = InputCallNumber(); // 입력받기
             UserData.Get().ModifyPhone(callNumber, id); // 정보 변경
+            ClearandStore();// 리스트 초기화 후 저장
             LogData.Get().StoreLog(id, "번호변경", callNumber); // 로그에 저장
 
             ModifyAfterMessage();// 안내메시지
@@ -128,10 +130,10 @@ namespace LibruryDatabase.Controls
 
         public void ModifyPassword(string id) // 비밀번호
         {
-            string password;
-           ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기   
+            ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기   
             password = InputPasswordCheck();// 입력받기
             UserData.Get().ModifyPassword(password, id); // 정보 변경
+            ClearandStore();// 리스트 초기화 후 저장
             LogData.Get().StoreLog(id, "비밀번호변경", password); // 로그에 저장
 
             ModifyAfterMessage();// 안내메시지
@@ -139,11 +141,13 @@ namespace LibruryDatabase.Controls
 
         public void ModifyAddress(string id) // 주소
         {
-            string address;
-           ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기 
+            
+            ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기 
             address = InputAddress();// 입력받기
 
+            Console.Write(address);
             UserData.Get().ModifyAddress(address, id); // 정보 변경
+            ClearandStore();// 리스트 초기화 후 저장
             LogData.Get().StoreLog(id, "주소변경", address); // 로그에 저장
 
             ModifyAfterMessage();// 안내메시지
@@ -152,17 +156,16 @@ namespace LibruryDatabase.Controls
 
         string InputCallNumber() // 전화번호입력
         {
-            string callNumber;
 
             while (Constants.isLogin)
             {
                 Print.PrintInutCallNumberMessage();
                 callNumber = Console.ReadLine();
-
+                Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PHONE);
                 if (Constants.isFail == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PHONE); //커서 조정
-                   ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Print.PrintReEnterMessage(); continue;
                 }
                 break;
@@ -172,7 +175,6 @@ namespace LibruryDatabase.Controls
 
         string InputPasswordCheck() // 비밀번호 입력
         {
-            string password;
 
             while (Constants.isLogin)
             {
@@ -193,10 +195,11 @@ namespace LibruryDatabase.Controls
 
         string InputAddress() // 주소입력
         {
-            string address;
-            Print.PrintInputAddressMessage();
+
+           
             while (Constants.isLogin)
-            {            
+            {
+                Print.PrintInputAddressMessage();
                 address = Console.ReadLine();
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
 
@@ -225,6 +228,12 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
+        }
+
+        public void ClearandStore()
+        {
+            UserData.Get().userData.Clear();
+            UserData.Get().StoreUserData(); // 저장
         }
     }
 }

@@ -67,7 +67,6 @@ namespace LibruryDatabase.Controls
 
             messagePrint.GreenColor(messagePrint.PrintBorrowBookMessage());
 
-
             while (Constants.isPassing) // 뒤로가기 or 입력
             {
                 Constants.cursor = Console.ReadKey(true);
@@ -133,8 +132,10 @@ namespace LibruryDatabase.Controls
 
                 else
                 {
-                    BookData.Get().SearchBook(id, bookNumber);// 책대여
+                    BookData.Get().SearchBook(id, bookNumber);// 책대여                   
                     BookData.Get().MinusBook(bookNumber); // 책 수량 감소
+                    BookData.Get().borrow.Clear(); // 리스트에 책 초기화
+                    BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
 
                     bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
                     name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기

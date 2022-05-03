@@ -31,6 +31,8 @@ namespace LibruryDatabase.Controls
         {
             BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
             UserData.Get().StoreUserData(); // 리스트에 유저 데이터 저장
+            BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
+
             Console.SetWindowSize(Constants.CONSOLE_SIZE_WIDTH, Constants.CONSOLE_SIZE_HDIGHT); // 콘솔크기 지정
             Console.Clear();
             Menu.PrintMain();

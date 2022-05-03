@@ -17,6 +17,7 @@ namespace LibruryDatabase.Models
         public List<NaverBookVO> NaverBook = new List<NaverBookVO>();
         public List<NaverBookVO> UserRequestBook = new List<NaverBookVO>();
         public List<BookVO> bookData = new List<BookVO>();
+        public List<BorrowUserVO> borrow = new List<BorrowUserVO>();
 
         private static BookData Book;
         public static BookData Get()
@@ -474,14 +475,45 @@ namespace LibruryDatabase.Models
 
                 while (Data.Read())
                 {
-                    bookData.Add(new BookVO(Data["name"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["publishday"].ToString(), Data["price"].ToString(), Data["isbn"].ToString(), Data["quantity"].ToString()));
+                    bookData.Add(new BookVO(Data["number"].ToString(),Data["name"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["publishday"].ToString(), Data["price"].ToString(), Data["isbn"].ToString(), Data["quantity"].ToString()));
                 }
                 Data.Close();
 
                 
             } 
         }
-        
+
+        public void AddBorrowBookToList() // 책 대여 유저 리스트에 저장
+        {
+            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
+            {
+                book.Open();
+                MySqlCommand Command = new MySqlCommand(Constants.BorrrowBookUserquery, book);
+                MySqlDataReader Data = Command.ExecuteReader(); // 데이터 읽기
+
+                while (Data.Read())
+                {
+                    borrow.Add(new BorrowUserVO(Data["id"].ToString(), Data["number"].ToString(), Data["bookname"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["borrowbook"].ToString(), Data["returnbook"].ToString()));
+                }
+                Data.Close();
+            }
+        }
+
+        public bool Checkisbn(string Isbn) // 리스트에 저장
+        {
+            bool isNoneisbn = Constants.isFail;
+
+            foreach (NaverBookVO book in BookData.Get().UserRequestBook)
+            {
+                if (Isbn == book.isbn)
+                {
+                    BookData.Get().StoreBookUserRequest(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString()); // 리스트에 책 정보 저장
+                    BookData.Get().RemoveBookData(book.isbn); // 추가한 책 제거
+                    isNoneisbn = Constants.isPassing;
+                }
+            }
+            return isNoneisbn;
+        }
 
     }
 }

@@ -76,6 +76,7 @@ namespace LibruryDatabase.Controls
 
 
             BookData.Get().ModifyBookInformation(receiveInput, number, keyInput); // 데베에서 책 수정
+            RemoveAndStore(); // 리스트 다시 저장
 
 
             bookName = BookData.Get().BringBookname(keyInput);// 해당 책 정보가져오기
@@ -183,5 +184,11 @@ namespace LibruryDatabase.Controls
             return bookNumber;
         }
 
+
+        public void RemoveAndStore()
+        {
+            BookData.Get().bookData.Clear(); // 리스트 초기화
+            BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
+        }
     }
 }

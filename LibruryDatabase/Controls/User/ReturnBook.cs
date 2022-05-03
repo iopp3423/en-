@@ -107,6 +107,8 @@ namespace LibruryDatabase.Controls
             
             BookData.Get().ReturnBook(bookNumber); // 책 반납
             BookData.Get().PlusBook(bookNumber); // 책 수량 증가
+            BookData.Get().borrow.Clear(); // 리스트 비우기
+            BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
 
             bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
             name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
@@ -115,9 +117,8 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-            Console.ForegroundColor = ConsoleColor.Green;
+
             Message.GreenColor(Message.PrintReturnBook());
-            Console.ResetColor();
             IsSelectingMenu();
                                
         }

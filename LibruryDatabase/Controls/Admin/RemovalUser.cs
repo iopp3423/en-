@@ -72,8 +72,7 @@ namespace LibruryDatabase.Controls
             if (isExistenceUsername == Constants.isFail) // 회원목록에 없음
             {
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-               ClearCurrentLine(Constants.CURRENT_LOCATION);
-
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                 Message.RedColor(Message.PrintNoneUserMessage());
                 IsSelectingMenu();
@@ -106,6 +105,8 @@ namespace LibruryDatabase.Controls
 
             LogData.Get().StoreLog(Constants.ADMIN, Constants.REMOVE_USER , id); // 로그에 저장
             UserData.Get().RemoveUserInformation(id); // 유저 삭제
+            UserData.Get().userData.Clear(); // 리스트 초기화
+            UserData.Get().StoreUserData(); // 리스트에 북 데이터 저장
             IsSelectingMenu();
                         
         }

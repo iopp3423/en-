@@ -47,8 +47,8 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             Menu.PrintMain();
             Menu.RegisterOrLogin();
+          
 
-                
             if (Constants.isBack == IsSelectingMenu()) // 마우스 함수
             {
                 Console.Clear();
@@ -128,7 +128,27 @@ namespace LibruryDatabase.Controls
            
             Console.Clear();
             Menu.RegisterPrint();          
-            Menu.PrintRegisterMember();        
+            Menu.PrintRegisterMember();
+
+            message.GreenColor(message.PrintContinueRequestmessage());
+
+            while (Constants.isPassing) // 입장 후 뒤로가기 or 입력
+            {
+
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    Menu.PrintMain();
+                    Menu.PrintUserOrAdmin();
+                    return;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter)
+                {
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    break;
+                }
+            }
 
 
             id = InputId();
@@ -178,6 +198,9 @@ namespace LibruryDatabase.Controls
 
 
             UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
+            UserData.Get().userData.Clear();//초기화
+            UserData.Get().StoreUserData(); // 리스트에저장
+
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             message.GreenColor(message.PrintDoneRegister());
 
