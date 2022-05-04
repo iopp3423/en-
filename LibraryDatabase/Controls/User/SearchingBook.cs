@@ -128,7 +128,6 @@ namespace LibruryDatabase.Controls
 
         public void SearchName(bool goingUserOrAdmin, string id) // 작가로 찾기
         {
-            //string name;
             Constants.SEARCH_RESULT_BOOK = Constants.isFail;
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             message.PrintAuthorInput();

@@ -15,7 +15,7 @@ namespace LibruryDatabase.Controls
     {
 
         public Screen Print;
-        public MessageScreen messagePrint;
+        public MessageScreen Message;
 
         public BorrowingBook()
         {
@@ -24,7 +24,7 @@ namespace LibruryDatabase.Controls
         public BorrowingBook(Screen Menu, MessageScreen message) : base(Menu, message)
         {
            this.Print = Menu;
-           this.messagePrint = message;
+           this.Message = message;
         }
         
 
@@ -54,13 +54,14 @@ namespace LibruryDatabase.Controls
             bool isAlreadyBorrow;
             string bookName;
             string name;
+            string returnDay = DateTime.Today.AddDays(14).ToString("yyyy/MM/dd");
 
 
             Console.Clear();
             Print.PrintSearchBookName();
             Print.PrintBookData(); // 책 목록 프린트
 
-            messagePrint.GreenColor(messagePrint.PrintBorrowBookMessage());
+            Message.GreenColor(Message.PrintBorrowBookMessage());
 
             while (Constants.isPassing) // 뒤로가기 or 입력
             {
@@ -84,7 +85,7 @@ namespace LibruryDatabase.Controls
                 while (Constants.isEntrancing) // 책 번호 입력
                 {
 
-                    messagePrint.PrintBorrowBookNumberMessage();
+                    Message.PrintBorrowBookNumberMessage();
                     bookNumber = Console.ReadLine();
 
                     if (Constants.isFail == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK)) // 정규식에 맞지 않으면
@@ -95,37 +96,29 @@ namespace LibruryDatabase.Controls
                         continue;
                     }
                     break;
-                }
-
-               
-                if (BookData.Get().IsCheckingBookExistence(bookNumber) == Constants.isFail) //책 존재 체크
-                {
-                    messagePrint.RedColor(messagePrint.PrintNoneBook());
-                    GoBackMenu();
-                    return; 
-                }
+                }             
 
                 if (BookData.Get().IsCheckongBookQuantity(bookNumber) == Constants.isFail) //책 수량체크
                 {
-                    messagePrint.RedColor(messagePrint.PrintNoneQuantity());
+                    Message.RedColor(Message.PrintNoneQuantity());
                     GoBackMenu(); 
                     return; 
                 }
 
 
                 isAlreadyBorrow = BookData.Get().IsCheckingBookOverlap(id, bookNumber); // 책 대여 체크
-
                 if (isAlreadyBorrow == Constants.isPassing)
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                     ClearCurrentLine(Constants.CURRENT_LOCATION);
 
-                    messagePrint.RedColor(messagePrint.PrintAlreadyBorrowMessage());
+                    Message.RedColor(Message.PrintAlreadyBorrowMessage());
                     GoBackMenu();
                 }
 
                 else
                 {
+                    Message.GreenColor("반납기한은" + returnDay + "입니다.");
                     BookData.Get().SearchBook(id, bookNumber);// 데베책대여                   
                     BookData.Get().MinusBook(bookNumber); // 데베책 수량 감소
                     BookData.Get().borrow.Clear(); // 리스트에 대여한 유저 책 초기화
@@ -137,15 +130,11 @@ namespace LibruryDatabase.Controls
                     name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
                     LogData.Get().StoreLog(name, Constants.BORROW, bookName) ; // 로그에 저장
 
-                    messagePrint.GreenColor(messagePrint.PrintDoneBorrowMessage());
+                    Message.GreenColor(Message.PrintDoneBorrowMessage());
                     GoBackMenu();
-                    
                 }
             }
-            GoBackMenu();
-            return;
-
-
+            else if (Constants.SEARCH_RESULT_BOOK == Constants.isFail) GoBackMenu();
         }
 
 

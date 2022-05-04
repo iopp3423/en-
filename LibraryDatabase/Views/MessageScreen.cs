@@ -87,7 +87,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintDoneBorrowMessage()
         {
-            return "대여하였습니다. 뒤로가기 : ESC";
+            return "뒤로가기 : ESC";
         }
         public string PrintReviseInformation()
         {
