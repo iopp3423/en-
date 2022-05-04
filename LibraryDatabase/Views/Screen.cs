@@ -135,7 +135,7 @@ namespace LibruryDatabase.Views
 
         public void SearchAftermessage()
         {
-            Console.Write("뒤로가기 : ESC         프로그램 종료 : F5");
+            Console.Write("뒤로가기 : ESC");
         }
 
         public void PrintUserData()  // 유저목록 출력
@@ -427,6 +427,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("  》로그초기화 ");
             Console.WriteLine("  》로그저장 ");
             Console.WriteLine("  》로그파일삭제 ");
+            Console.WriteLine("  》로그확인 ");
         }
         public void PrintReturnMenu()
         {
@@ -467,21 +468,21 @@ namespace LibruryDatabase.Views
         }
         public void PrintReMoveLogAfter()
         {
-            Console.Write("로그가 삭제되었습니다.              뒤로가기 : ESC        프로그램 종료 : F5");
+            Console.Write("로그가 삭제되었습니다.              뒤로가기 : ESC");
         }
 
         public void PrintRemoveAllData()
         {
-            Console.Write("전체 로그데이터를  삭제하시겠습니까?   YES : Enter        뒤로가기 : ESC");
+            Console.Write("전체 로그데이터를  삭제하시겠습니까?   YES : Enter");
         }
         public void PrintStoreData()
         {
-            Console.Write("로그파일을 저장하시겠습니까?           YES : Enter        뒤로가기 : ESC");
+            Console.Write("로그파일을 저장하시겠습니까?           YES : Enter");
         }
 
         public void PrintStoreAfter()
         {
-            Console.Write("로그파일이 저장되었습니다.  뒤로가기 : ESC          프로그램 종료 : F5  ");
+            Console.Write("로그파일이 저장되었습니다.  뒤로가기 : ESC");
         }
         public void PrintRemoveFile()
         {

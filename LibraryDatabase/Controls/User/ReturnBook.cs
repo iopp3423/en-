@@ -28,7 +28,7 @@ namespace LibruryDatabase.Controls
             this.Message = message;
         }
 
-        public void SelectingMenu() //이전 메뉴로 돌아가기
+        public void SelectMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -84,7 +84,7 @@ namespace LibruryDatabase.Controls
             if (isAlreadyBorrow == Constants.isFail)
             {
                 Message.RedColor(Message.PrintNoBorrowBookMessage());
-                SelectingMenu();
+                SelectMenu();
                 return;
             }
           
@@ -96,7 +96,7 @@ namespace LibruryDatabase.Controls
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                 Message.RedColor(Message.PrintAlreadyReturn());
-                SelectingMenu();
+                SelectMenu();
                 return;
             }
             
@@ -114,7 +114,7 @@ namespace LibruryDatabase.Controls
 
 
             Message.GreenColor(Message.PrintReturnBook());
-            SelectingMenu();
+            SelectMenu();
                                
         }
 

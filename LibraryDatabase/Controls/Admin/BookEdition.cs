@@ -36,7 +36,7 @@ namespace LibruryDatabase.Controls
         string isbn;
 
 
-        public void SelectingMenu() //이전 메뉴로 돌아가기
+        public void SelectMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -85,7 +85,7 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Console.CursorLeft, Constants.ERROR_Y);
             Message.GreenColor(Message.PrintDoneBookRegister());
 
-            SelectingMenu(); 
+            SelectMenu(); 
         }
 
         public string InputBookName(int bookNameY)//책이름입력

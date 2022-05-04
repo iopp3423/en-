@@ -49,7 +49,7 @@ namespace LibruryDatabase.Controls
             Menu.RegisterOrLogin();
           
 
-            if (Constants.isBack == SelectingMenu()) // 마우스 함수
+            if (Constants.isBack == SelectMenu()) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -60,7 +60,7 @@ namespace LibruryDatabase.Controls
         }
         
 
-        public bool SelectingMenu()
+        public bool SelectMenu()
         {
             int Y = Constants.FIRSTY;
             int goingRegister = Constants.USER_Y;

@@ -38,7 +38,7 @@ namespace LibruryDatabase.Controls
 
 
 
-            if (Constants.isBackMenu == SelectingMenu()) //  책찾기
+            if (Constants.isBackMenu == SelectMenu()) //  책찾기
             {
                 Console.Clear();
                 Print.PrintMain();
@@ -88,7 +88,7 @@ namespace LibruryDatabase.Controls
 
 
 
-        public bool SelectingMenu()
+        public bool SelectMenu()
         {
             int Y = Constants.SEARCH_BOOK;
 

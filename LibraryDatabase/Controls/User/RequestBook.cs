@@ -29,7 +29,7 @@ namespace LibruryDatabase.Controls
             this.Message = message;
         }
 
-        public void SelectingMenu() //이전 메뉴로 돌아가기
+        public void SelectMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {

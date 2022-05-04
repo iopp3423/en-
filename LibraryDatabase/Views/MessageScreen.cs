@@ -75,23 +75,23 @@ namespace LibruryDatabase.Views
         }
         public string PrintNoneBook()
         {
-            return "존재하지 않는 책입니다. 뒤로가기 : ESC      프로그램 종료 : F5"; 
+            return "존재하지 않는 책입니다. 뒤로가기 : ESC"; 
         }
         public string PrintNoneQuantity()
         {
-            return "도서 수량이 부족합니다. 뒤로가기 : ESC       프로그램 종료 : F5";
+            return "도서 수량이 부족합니다. 뒤로가기 : ESC";
         }
         public string PrintAlreadyBorrowMessage()
         {
-            return "이미 대여하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ";
+            return "이미 대여하셨습니다. 뒤로가기 : ESC";
         }
         public string PrintDoneBorrowMessage()
         {
-            return "대여하였습니다. 뒤로가기 : ESC     프로그램 종료 : F5";
+            return "대여하였습니다. 뒤로가기 : ESC";
         }
         public string PrintReviseInformation()
         {
-            return "정보가 변경되었습니다. 뒤로가기 : ESC, 프로그램 종료 : F5";
+            return "정보가 변경되었습니다. 뒤로가기 : ESC";
         }
         public void PrintReEnterMessage()
         {
@@ -103,15 +103,15 @@ namespace LibruryDatabase.Views
         }
         public string PrintNoBorrowBookMessage()
         {
-            return "대여하지 않은 도서입니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ";
+            return "대여하지 않은 도서입니다. 뒤로가기 : ESC";
         }
         public string PrintAlreadyReturn()
         {
-            return "이미 반납하셨습니다. 뒤로가기 : ESC, 프로그램 종료 : F5 ";
+            return "이미 반납하셨습니다. 뒤로가기 : ESC";
         }
         public string PrintReturnBook()
         {
-            return "도서를 반납하였습니다. 뒤로가기 : ESC, 프로그램 종료 : F5";
+            return "도서를 반납하였습니다. 뒤로가기 : ESC";
         }
         public void PrintInputReturnBookNumber()
         {
@@ -123,7 +123,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintBack()
         {
-            Console.Write("뒤로가기 : ESC                프로그램 종료 : F5");
+            Console.Write("뒤로가기 : ESC");
         }
         public string PrintChooseRemoveUserMessage()
         {
@@ -131,7 +131,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintNoneUserMessage()
         {
-            return "회원목록에 없습니다.              뒤로가기 : ESC         프로그램 종료 : F5";
+            return "회원목록에 없습니다.              뒤로가기 : ESC";
         }
         public void PrintRemoveUserInputMessage()
         {
@@ -139,15 +139,15 @@ namespace LibruryDatabase.Views
         }
         public string PrintNoneuser()
         {
-            return "회원목록에 없습니다.             뒤로가기 : ESC         프로그램 종료 : F5";
+            return "회원목록에 없습니다.             뒤로가기 : ES";
         }
         public string PrintNoneReturnBookMessage()
         {
-            return "반납하지 않은 도서가 있습니다.   뒤로가기 : ESC      프로그램 종료 : F5";
+            return "반납하지 않은 도서가 있습니다.   뒤로가기 : ESC";
         }
         public string PrintRemoveUserMessage()
         {
-            return "삭제되었습니다.                      뒤로가기 : ESC       프로그램 종료 : F5";
+            return "삭제되었습니다.                      뒤로가기 : ESC";
         }
         public void PrintAddisbn()
         {
@@ -170,7 +170,7 @@ namespace LibruryDatabase.Views
         //관리자 관련
         public string PrintBackOrExit()
         {
-            return "뒤로가기 : ESC                                프로그램 종료 : F5";
+            return "뒤로가기 : ESC";
         }
         public string PrintInputOrBackMessage()
         {
@@ -178,7 +178,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintDoneBookRegister()
         {
-            return "도서가 등록되었습니다. 뒤로가기 : ESC   종료 : F5";
+            return "도서가 등록되었습니다. 뒤로가기 : ESC";
         }
         public void PrintAuthorInputMessage()
         {
@@ -206,7 +206,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintReviseAfterMessage()
         {
-            return "수정이 완료되었습니다.  뒤로가기 : ESC                 프로그램 종료 : F5";
+            return "수정이 완료되었습니다.  뒤로가기 : ESC";
         }
         public void PrintChooseReviseInput()
         {
@@ -230,7 +230,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintErrorInputMessage()
         {
-            return "잘못입력하셨습니다.  재입력 : Enter      뒤로가기 : F5";
+            return "잘못입력하셨습니다.  재입력 : Enter";
         }
         public void PrintBookQunatityInput()
         {
@@ -238,7 +238,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintNoneInput()
         {
-            return "누락된 입력이있습니다.  재입력 : Enter      뒤로가기 : F5";
+            return "누락된 입력이있습니다.  재입력 : Enter";
         }
         public string PrintChooseRemoveBook()
         {
@@ -246,7 +246,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintRemoveBookMessage()
         {
-            return "책이 삭제되었습니다.  뒤로가기 : ESC    프로그램 종료 : F5";
+            return "책이 삭제되었습니다.  뒤로가기 : ESC";
         }
         public void PrintRemoveBookNumberMessage()
         {
@@ -258,7 +258,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintDoneInput()
         {
-            return "입력되었습니다.         뒤로가기 : ESC         프로그램 종료 : F5";
+            return "입력되었습니다.         뒤로가기 : ESC";
         }
         public string BackPrint()
         {

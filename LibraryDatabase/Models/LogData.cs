@@ -62,8 +62,6 @@ namespace LibruryDatabase.Models
                     PrintLog.Add(new LogVO(number, time, name, record, log));
                 }
                 userInformation.Close();
-                     
-
         }
 
         public void RemoveLog(string number) // 로그 제거

@@ -35,9 +35,7 @@ namespace LibruryDatabase.Controls
         {
             LogData.Get().PrintLog.Clear(); // 리스트에 저장된 로그값 재 조회시 수정된 값 적용하기 위해 전체 데이터 삭제 후 저장
             LogData.Get().Storelog(); // 로그 리스트에 저장
-            Console.Clear();
-            Print.PrintMain();
-            Print.PrintLogMenu();
+            PrintMenu(); // 로그메뉴화면 출력
 
 
             if (Constants.isBack == SelectLogMenu()) // 컨트롤러
@@ -88,15 +86,16 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.DownArrow:
                         {
                             Y++;
-                            if (Y > Constants.RIVISE_USER) Y--; // 선택 외의 화면으로 커서 못나감
+                            if (Y > Constants.VERIFICATION_LOG) Y--; // 선택 외의 화면으로 커서 못나감
                             break;
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.SEARCH_BOOK) { ReviseLog(); IsGoingReturnMenu(); return Constants.isFail; } // 로그수정
-                            if (Y == Constants.ADD_BOOK) { ResetLog(); IsGoingReturnMenu(); return Constants.isFail; } // 로그초기화
-                            if (Y == Constants.REMOVE_BOOK) { StoreLog(); IsGoingReturnMenu(); return Constants.isFail; } // 로그저장
-                            if (Y == Constants.RIVISE_USER) { RemoveFile(); IsGoingReturnMenu(); return Constants.isFail; } // 회원정보수정
+                            if (Y == Constants.SEARCH_BOOK) { ReviseLog(); IsGoingReturnMenu(); PrintMenu(); } // 로그수정
+                            if (Y == Constants.ADD_BOOK) { ResetLog(); PrintMenu();} // 로그초기화
+                            if (Y == Constants.REMOVE_BOOK) { StoreLog(); IsGoingReturnMenu(); PrintMenu(); } // 로그저장
+                            if (Y == Constants.RIVISE_USER) { RemoveFile(); IsGoingReturnMenu(); PrintMenu(); } // 로그파일삭제
+                            if (Y == Constants.VERIFICATION_LOG) { VerifyLog(); PrintMenu(); } // 로그확인
                             break;
                         }
                     case ConsoleKey.Escape:
@@ -113,11 +112,31 @@ namespace LibruryDatabase.Controls
         public void ReviseLog() // 로그삭제
         {
             string number;
-            Console.Clear();           
+            Console.Clear();
+            Message.GreenColor(" >> 입력 : Enter                                   뒤로가기 : F5");
+            Console.WriteLine();
             Print.PrintLog(); // 로그내역 출력
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
+
+            while (Constants.isPassing)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+                    return;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter)
+                {                   
+                    break;
+                }
+            }
+
             number = InputNumber(); // 로그번호 입력
             Print.PrintReviseLog(); // 삭제할 로그 설명 프린트
-            LogData.Get().RemoveLog(number); // 로그 삭제           
+            LogData.Get().RemoveLog(number); // 로그 삭제
+            LogData.Get().PrintLog.Clear();
+            LogData.Get().Storelog();
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintReMoveLogAfter(); // 로그 삭제 후 안내메시지
@@ -146,10 +165,7 @@ namespace LibruryDatabase.Controls
                         }
                     default: continue;
                 }
-
             }
-
-
         }
 
         public void StoreLog() // 로그저장
@@ -171,6 +187,7 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Escape:
                         {
+                           
                             return;
                         }
                     default: continue;
@@ -208,12 +225,35 @@ namespace LibruryDatabase.Controls
             }            
         }
 
+        public void VerifyLog() // 전체 로그내역 조회
+        {
+            Console.Clear();
+            Print.PrintLog(); // 로그내역 출력
+
+            while (Constants.isEntrancing)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                switch (Constants.cursor.Key)
+                {
+                    case ConsoleKey.Escape:
+                        {
+                            return;
+                        }
+                    default: continue;
+                }
+
+            }
+
+
+        }
+
 
         public string InputNumber()  // 번호입력
         {
             string Number;
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.CURRENT_LOCATION);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintReviseLog();
             while (Constants.isPassing)
             {
@@ -260,6 +300,13 @@ namespace LibruryDatabase.Controls
             LogData.Get().LogWrite();
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintStoreAfter();
+        }
+
+        public void PrintMenu()
+        {
+            Console.Clear();
+            Print.PrintMain();
+            Print.PrintLogMenu();
         }
     }  
 }

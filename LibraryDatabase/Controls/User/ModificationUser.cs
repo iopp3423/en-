@@ -14,8 +14,8 @@ namespace LibruryDatabase.Controls
     internal class ModificationUser
     {
         private string callNumber;
-        string password;
-        string address;
+        private string password;
+        private string address;
 
         public Screen Menu;
         public MessageScreen Print;
@@ -40,11 +40,6 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Escape:
                         {
                             return Constants.isBackMenu;
-                        }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
                         }
                     default: continue;
                 }
@@ -103,13 +98,6 @@ namespace LibruryDatabase.Controls
                         {
                             return Constants.isBackMenu;
                         }
-
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
-
                     default: break;
 
                 }

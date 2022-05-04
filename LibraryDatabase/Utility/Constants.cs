@@ -101,6 +101,7 @@ namespace LibruryDatabase.Utility
         public const int BORROW_BOOK = 11;
         public const int CHECK_BOOK = 12;
         public const int RIVISE_USER = 13;
+        public const int VERIFICATION_LOG = 14;
         public const int REQUEST_BOOK = 14;
         public const int SEARCH_X = 0;
         public const int SEARCH_Y = 2;
