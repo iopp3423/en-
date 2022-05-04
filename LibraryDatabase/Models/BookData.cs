@@ -206,7 +206,6 @@ namespace LibruryDatabase.Models
         public bool IsCheckingAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크
         {
 
-
             MySqlConnection user = new MySqlConnection(Constants.getQuery);
            
                 user.Open();
@@ -304,7 +303,7 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["returnbook"].ToString() == " ") isCheckingBook = Constants.isFail; // 책을 대여했는데 한 권이라도 반납하지 않는 책이 있는경우
+                    if (userData["borrowbook"].ToString() != " ") isCheckingBook = Constants.isFail; // 책을 대여했는데 한 권이라도 반납하지 않는 책이 있는경우
                 }
                 user.Close();
                 return isCheckingBook;
