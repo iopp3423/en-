@@ -49,7 +49,7 @@ namespace LibruryDatabase.Controls
             Menu.RegisterOrLogin();
           
 
-            if (Constants.isBack == IsSelectingMenu()) // 마우스 함수
+            if (Constants.isBack == SelectingMenu()) // 마우스 함수
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -60,7 +60,7 @@ namespace LibruryDatabase.Controls
         }
         
 
-        public bool IsSelectingMenu()
+        public bool SelectingMenu()
         {
             int Y = Constants.FIRSTY;
             int goingRegister = Constants.USER_Y;
@@ -97,13 +97,6 @@ namespace LibruryDatabase.Controls
                         {
                             return Constants.isBackMenu;
                         }
-
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
-
                     default: break;
 
                 }
@@ -309,7 +302,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputPasswordCheck() // 비밀번호확인 입력
+        public string InputPasswordCheck() // 비밀번호확인 입력
         {
 
             while (Constants.isLogin)
@@ -333,7 +326,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string ReadPassword() // 비밀번호 *처리
+        public string ReadPassword() // 비밀번호 *처리
         {
             string passwordChangeStar = "";
             ConsoleKeyInfo info = Console.ReadKey(true);
@@ -362,7 +355,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputName() // 이름입력
+        public string InputName() // 이름입력
         {
 
             while (Constants.isLogin)
@@ -383,9 +376,9 @@ namespace LibruryDatabase.Controls
             }
             Menu.PrintInputMessage();
             return name;
-        }   
+        }
 
-        string InputCallNumber() // 전화번호
+        public string InputCallNumber() // 전화번호
         {
 
             while (Constants.isLogin)
@@ -409,7 +402,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputAddress() // 주소
+        public string InputAddress() // 주소
         {
 
             while (Constants.isLogin)
@@ -435,7 +428,7 @@ namespace LibruryDatabase.Controls
             return address;
         }
 
-        string InputAge() // 나이입력
+        public string InputAge() // 나이입력
         {
 
             while (Constants.isLogin)

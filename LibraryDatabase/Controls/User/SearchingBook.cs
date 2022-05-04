@@ -57,14 +57,14 @@ namespace LibruryDatabase.Controls
             Menu.PrintSearchMenu();
             Menu.PrintBookData();
 
-            if (Constants.isBackMenu == IsSelectingMenu(id, Constants.isPassing) && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
+            if (Constants.isBackMenu == SelectingMenu(id, Constants.isPassing) && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
                 Menu.PrintUserMenu();
                 return;
             }
-            else if (Constants.isBackMenu == IsSelectingMenu(id, Constants.isFail) && Constants.isAdminSearching == goingUserOrAdmin) // 관리자모드용 책찾기
+            else if (Constants.isBackMenu == SelectingMenu(id, Constants.isFail) && Constants.isAdminSearching == goingUserOrAdmin) // 관리자모드용 책찾기
             {
                 Console.Clear();
                 Menu.PrintMain();
@@ -73,7 +73,7 @@ namespace LibruryDatabase.Controls
             }
         }
 
-        public bool IsSelectingMenu(string id, bool UserOrAdminSearch)
+        public bool SelectingMenu(string id, bool UserOrAdminSearch)
         {
             int Y = Constants.SEARCH_Y;
 

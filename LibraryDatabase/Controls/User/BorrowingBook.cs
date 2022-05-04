@@ -42,11 +42,6 @@ namespace LibruryDatabase.Controls
                             Print.PrintUserMenu();
                             return;
                         }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
                     default: continue;
                 }
 

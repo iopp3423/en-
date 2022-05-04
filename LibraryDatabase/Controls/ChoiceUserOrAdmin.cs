@@ -71,12 +71,6 @@ namespace LibruryDatabase.Controls
                             if (Y == goingAdmin) { Console.Clear(); AdminLibruary.LoginAdmin(); }
                             break;
                         }
-
-                    case ConsoleKey.F5: // 종료
-                        {
-                            return;
-                        }
-
                     default: break;
 
                 }

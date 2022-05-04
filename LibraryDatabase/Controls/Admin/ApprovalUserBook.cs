@@ -49,7 +49,7 @@ namespace LibruryDatabase.Controls
                 Message.PrintNoneIsbnMessage(); //isbn없음 메시지 출력
             }
 
-            IsSelectingMenu(); // 뒤로가기
+            SelectingMenu(); // 뒤로가기
         }
 
 
@@ -91,7 +91,7 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
 
-        public void IsSelectingMenu() //이전 메뉴로 돌아가기
+        public void SelectingMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {

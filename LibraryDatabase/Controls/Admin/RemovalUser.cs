@@ -26,7 +26,7 @@ namespace LibruryDatabase.Controls
             this.Message = message;
         }
 
-        public void IsSelectingMenu() //이전 메뉴로 돌아가기
+        public void SelectingMenu() //이전 메뉴로 돌아가기
         {
             while (Constants.isEntrancing)
             {
@@ -70,7 +70,7 @@ namespace LibruryDatabase.Controls
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                 Message.RedColor(Message.PrintNoneUserMessage());
-                IsSelectingMenu();
+                SelectingMenu();
                 return;
             }
            
@@ -83,7 +83,7 @@ namespace LibruryDatabase.Controls
             if (isExistenceId == Constants.isFail) 
             {
                 Message.RedColor(Message.PrintNoneuser());
-                IsSelectingMenu(); 
+                SelectingMenu(); 
                 return; 
             } 
 
@@ -92,7 +92,7 @@ namespace LibruryDatabase.Controls
             if (isExistenceUsername == Constants.isFail)
             {
                 Message.RedColor(Message.PrintNoneReturnBookMessage());
-                IsSelectingMenu();
+                SelectingMenu();
                 return;
             }
 
@@ -102,7 +102,7 @@ namespace LibruryDatabase.Controls
             UserData.Get().RemoveUserInformation(id); // 유저 삭제
             UserData.Get().userData.Clear(); // 리스트 초기화
             UserData.Get().StoreUserData(); // 리스트에 북 데이터 저장
-            IsSelectingMenu();
+            SelectingMenu();
                         
         }
 
