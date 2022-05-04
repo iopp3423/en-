@@ -447,11 +447,11 @@ namespace LibruryDatabase.Views
 
         public void PrintRemoveAllData()
         {
-            Console.Write("전체 로그데이터를  삭제하시겠습니까?   YES : Enter");
+            Console.Write("  》전체 로그데이터를  삭제하시겠습니까?   YES : Enter\n\n");
         }
         public void PrintStoreData()
         {
-            Console.Write("로그파일을 저장하시겠습니까?           YES : Enter");
+            Console.Write("  》로그파일을 저장하시겠습니까?           YES : Enter\n\n");
         }
 
         public void PrintStoreAfter()
@@ -460,7 +460,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintRemoveFile()
         {
-            Console.Write("로그파일을 제거하시겠습니까?    YES : Enter        뒤로가기 : ESC ");
+            Console.Write("  》로그파일을 제거하시겠습니까?    YES : Enter        뒤로가기 : ESC \n\n");
         }
 
 

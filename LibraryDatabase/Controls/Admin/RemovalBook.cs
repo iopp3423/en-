@@ -71,22 +71,21 @@ namespace LibruryDatabase.Controls
             {
                 Message.RedColor(Message.PrintNoneBook());
             }
+
             else if (isBookExitence == Constants.isPassing)
             {
                 bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
                 LogData.Get().StoreLog(Constants.ADMIN, Constants.REMOVE, bookName); // 로그에 저장
+
                 BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
                 BookData.Get().bookData.Clear(); // 리스트 초기화
                 BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
-
 
                 Message.GreenColor(Message.PrintRemoveBookMessage());
             }
 
             GoBackMenu();
         }
-
-
 
         public string InputBookNumber() // 책 번호 입력
         {

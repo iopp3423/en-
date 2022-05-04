@@ -91,7 +91,7 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.SEARCH_BOOK) { ReviseLog(); IsGoingReturnMenu(); PrintMenu(); } // 로그수정
+                            if (Y == Constants.SEARCH_BOOK) { ReviseLog();  PrintMenu(); } // 로그수정
                             if (Y == Constants.ADD_BOOK) { ResetLog(); PrintMenu();} // 로그초기화
                             if (Y == Constants.REMOVE_BOOK) { StoreLog(); IsGoingReturnMenu(); PrintMenu(); } // 로그저장
                             if (Y == Constants.RIVISE_USER) { RemoveFile(); IsGoingReturnMenu(); PrintMenu(); } // 로그파일삭제
@@ -148,22 +148,23 @@ namespace LibruryDatabase.Controls
                     continue;
                 }
             }
+
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             LogData.Get().RemoveLog(number); // 로그 삭제
-            LogData.Get().PrintLog.Clear();
-            LogData.Get().Storelog();
+            LogData.Get().PrintLog.Clear(); // 로그 리스트 초기화
+            LogData.Get().Storelog(); // 로그 리스트 저장
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintReMoveLogAfter(); // 로그 삭제 후 안내메시지
-    
+            IsGoingReturnMenu();
         }
         public void ResetLog() // 전체 로그데이터 삭제
         {
             Console.Clear();
-            Print.PrintLog(); // 로그내역 출력
             Print.PrintRemoveAllData(); // 로그제거설명
-            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-            
+            Print.PrintLog(); // 로그내역 출력          
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
+
             while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
@@ -172,7 +173,7 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Enter:
                         {
                             RemoveListandDatabase();
-                            return;
+                            break;
                         }
                     case ConsoleKey.Escape:
                         {                       
@@ -186,9 +187,9 @@ namespace LibruryDatabase.Controls
         public void StoreLog() // 로그저장
         {
             Console.Clear();
-            Print.PrintLog(); // 로그내역 출력  
             Print.PrintStoreData();
-            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+            Print.PrintLog(); // 로그내역 출력             
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
 
             while (Constants.isEntrancing)
             {
@@ -201,8 +202,7 @@ namespace LibruryDatabase.Controls
                             return;
                         }
                     case ConsoleKey.Escape:
-                        {
-                           
+                        {                         
                             return;
                         }
                     default: continue;
@@ -215,9 +215,9 @@ namespace LibruryDatabase.Controls
         public void RemoveFile() // 로그파일삭제
         {
             Console.Clear();
-            Print.PrintLog(); // 로그내역 출력  
-            Print.PrintRemoveFile();
-            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+            Print.PrintRemoveFile();           
+            Print.PrintLog(); // 로그내역 출력
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
 
             while (Constants.isEntrancing)
             {
@@ -227,6 +227,9 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Enter:
                         {
                             RemoveDesktopFile();
+                            RemoveListandDatabase(); // 로그 데이터 삭제
+                            LogData.Get().PrintLog.Clear(); // 로그 리스트 초기화
+                            LogData.Get().Storelog(); // 로그 리스트 저장
                             return;
                         }
                     case ConsoleKey.Escape:
@@ -243,7 +246,9 @@ namespace LibruryDatabase.Controls
         public void VerifyLog() // 전체 로그내역 조회
         {
             Console.Clear();
+            Message.GreenColor("   >>뒤로가기 : ESC\n\n");
             Print.PrintLog(); // 로그내역 출력
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
 
             while (Constants.isEntrancing)
             {

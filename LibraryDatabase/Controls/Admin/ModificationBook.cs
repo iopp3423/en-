@@ -78,6 +78,7 @@ namespace LibruryDatabase.Controls
             if (number == Constants.REVISE_BOOK_QUANTITY) LogData.Get().StoreLog(Constants.ADMIN, Constants.REVISE_QUANTITY, bookName); // 로그에 저장
             else LogData.Get().StoreLog(Constants.ADMIN, Constants.REVISE_PRICE, bookName); // 로그에 저장
 
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
             Message.GreenColor(Message.PrintReviseAfterMessage());
             GoBackMenu();
         }
