@@ -54,7 +54,7 @@ namespace LibruryDatabase.Controls
 
 
 
-        string InputISBN()//isbn입력
+        public string InputISBN()//isbn입력
         {
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
             Message.PrintAddisbn();
@@ -104,11 +104,6 @@ namespace LibruryDatabase.Controls
                             Menu.PrintMain();
                             Menu.PrintAdminMenu();
                             return;
-                        }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
                         }
                     default: continue;
                 }

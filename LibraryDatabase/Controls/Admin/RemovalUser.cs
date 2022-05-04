@@ -40,11 +40,6 @@ namespace LibruryDatabase.Controls
                             Menu.PrintAdminMenu();
                             return;
                         }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
                     default: continue;
                 }
 
@@ -112,7 +107,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputName() // 이름입력
+        public string InputName() // 이름입력
         {
             string name;
 

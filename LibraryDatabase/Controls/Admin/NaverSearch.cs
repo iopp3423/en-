@@ -58,11 +58,6 @@ namespace LibruryDatabase.Controls
                         {
                             return Constants.isBackMenu;
                         }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
                     default: continue;
                 }
 
@@ -83,11 +78,6 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Escape:
                         {
                             return Constants.isFail;
-                        }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
                         }
                     default: continue;
                 }
@@ -135,13 +125,6 @@ namespace LibruryDatabase.Controls
                         {
                             return Constants.isBackMenu;
                         }
-
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
-
                     default: break;
 
                 }

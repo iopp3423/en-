@@ -40,11 +40,6 @@ namespace LibruryDatabase.Controls
                             Print.PrintAdminMenu();
                             return;
                         }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
                     default: continue;
                 }
 
@@ -87,7 +82,7 @@ namespace LibruryDatabase.Controls
             GoBackMenu();
         }
 
-        string InputNumber() // 수정메뉴 입력
+        public string InputNumber() // 수정메뉴 입력
         {
             string modificatioNumber;
 
@@ -109,16 +104,16 @@ namespace LibruryDatabase.Controls
             return modificatioNumber;
         }
 
-        
-        string modificationMenu(string number)//메뉴
+
+        public string modificationMenu(string number)//메뉴
         {
             string Input = number; // 초기화
             if (int.Parse(number) == Constants.GO_QUANTITY) Input = InputQuantity(); // 수량입력받기
             else if (int.Parse(number) == Constants.GO_PRICE) Input = InputPrice(); // 가격입력받기
             return Input;
         }
-        
-        string InputQuantity() // 수량입력
+
+        public string InputQuantity() // 수량입력
         {
             string quantity;
 
@@ -140,7 +135,7 @@ namespace LibruryDatabase.Controls
             return quantity;
         }
 
-        string InputPrice() // 가격입력
+        public string InputPrice() // 가격입력
         {
             string bookPrice;
 
@@ -163,7 +158,7 @@ namespace LibruryDatabase.Controls
             return bookPrice;
         }
 
-        string InputBookNumber()//책 번호 입력받기
+        public string InputBookNumber()//책 번호 입력받기
         {
             string bookNumber;
 

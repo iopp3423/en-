@@ -43,11 +43,6 @@ namespace LibruryDatabase.Controls
                             Menu.PrintUserMenu();
                             return;
                         }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
                     default: continue;
                 }
 
@@ -185,11 +180,6 @@ namespace LibruryDatabase.Controls
                             Menu.PrintMain();
                             Menu.PrintUserMenu();
                             return;
-                        }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
                         }
                     default: continue;
                 }

@@ -50,11 +50,6 @@ namespace LibruryDatabase.Controls
                             Menu.PrintAdminMenu();
                             return;
                         }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
                     default: continue;
                 }
 
@@ -93,7 +88,7 @@ namespace LibruryDatabase.Controls
             IsSelectingMenu(); 
         }
 
-        string InputBookName(int bookNameY)//책이름입력
+        public string InputBookName(int bookNameY)//책이름입력
         {
     
 
@@ -115,8 +110,8 @@ namespace LibruryDatabase.Controls
             Menu.PrintInputMessage();
             return bookName;         
         }
-        
-        string InputAuthor(int authorY)//작가입력
+
+        public string InputAuthor(int authorY)//작가입력
         {
          
 
@@ -140,7 +135,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputPublisher(int publisherY)//출판사입력
+        public string InputPublisher(int publisherY)//출판사입력
         {
          
 
@@ -164,7 +159,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputPublishDay(int publishDayY)//출판일자입력
+        public string InputPublishDay(int publishDayY)//출판일자입력
         {
   
 
@@ -188,7 +183,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputQuantity(int quantityY)//수량입력
+        public string InputQuantity(int quantityY)//수량입력
         {
   
 
@@ -212,7 +207,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputPrice(int bookPriceY)//가격입력
+        public string InputPrice(int bookPriceY)//가격입력
         {
      
 
@@ -233,7 +228,7 @@ namespace LibruryDatabase.Controls
             return price;
         }
 
-        string InputISBN(int ISBNY)//isbn입력
+        public string InputISBN(int ISBNY)//isbn입력
         {
             while (Constants.isPassing)
             {

@@ -41,11 +41,6 @@ namespace LibruryDatabase.Controls
                             Print.PrintAdminMenu();
                             return;
                         }
-                    case ConsoleKey.F5: // 종료
-                        {
-                            Environment.Exit(Constants.EXIT);
-                            break;
-                        }
                     default: continue;
                 }
 
@@ -93,7 +88,7 @@ namespace LibruryDatabase.Controls
 
 
 
-        private string InputBookNumber() // 책 번호 입력
+        public string InputBookNumber() // 책 번호 입력
         {
             string bookNumber;
             ClearCurrentLine(Constants.CURRENT_LOCATION);
