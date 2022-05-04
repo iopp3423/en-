@@ -72,17 +72,16 @@ namespace LibruryDatabase.Models
             
                 user.Open();
 
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowIdQuery,id), user);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowIdQuery, id), user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
 
                 while (userData.Read())
                 {
-                    if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() != " ") return Constants.isSucess;// 대여하고 반납함
-                    else if (userData["number"].ToString() == bookNumber && userData["borrowbook"].ToString() != " " && userData["returnbook"].ToString() == " ") return Constants.isFail; // 대여하고 반납안함
+                    if (userData["number"].ToString() == bookNumber) return Constants.isSucess;// 대여함
                 }
                 user.Close();
             
-            return Constants.isSucess;
+            return Constants.isFail;
 
         }
 
@@ -111,9 +110,9 @@ namespace LibruryDatabase.Models
 
             MySqlConnection book = new MySqlConnection(Constants.getQuery);
             
-                book.Open();
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.revomeReturnBook,id,bookNumber), book);
-                Command.ExecuteNonQuery();
+            book.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.revomeReturnBook,id,bookNumber), book);
+            Command.ExecuteNonQuery();
             
         }
         
@@ -274,8 +273,6 @@ namespace LibruryDatabase.Models
 
         public bool IsCheckingBookExistence(string bookNumber) // 데베에 책 있는지 체크
         {
-
-
             MySqlConnection user = new MySqlConnection(Constants.getQuery);
             
                 user.Open();             

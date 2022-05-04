@@ -57,7 +57,7 @@ namespace LibruryDatabase.Controls
             string name;
 
                       
-            Console.Clear();                 
+            Console.Clear();
             Menu.PrintBorrowBookData(id);
 
             Message.GreenColor(Message.PrintReturnBookMessage());
@@ -92,9 +92,10 @@ namespace LibruryDatabase.Controls
             {
 
                 BookData.Get().RemoveRetuenBookInformation(id, bookNumber);// 책 반납
-                //BookData.Get().RemoveBorrowBook(bookNumber);
                 BookData.Get().PlusBook(bookNumber); // 책 수량 증가
-                BookData.Get().borrow.Clear(); // 리스트 비우기
+                BookData.Get().borrow.Clear(); // 리스트에 대여한 유저 책 초기화
+                BookData.Get().bookData.Clear(); // 북 리스트 초기화
+                BookData.Get().StoreBookData(); // 리스트에 책 리스트 저장
                 BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
 
                 bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
