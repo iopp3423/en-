@@ -133,5 +133,14 @@ namespace LibruryDatabase.Models
             }
         }
 
+        public bool VerifyLogExistence(string Number)
+        {
+            foreach (LogVO x in LogData.Get().PrintLog)
+            {
+                if (x.number == Number) return Constants.isPassing;
+            }
+            return Constants.isFail;
+        }
+
     }
 }

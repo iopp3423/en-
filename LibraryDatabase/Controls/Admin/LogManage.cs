@@ -132,8 +132,23 @@ namespace LibruryDatabase.Controls
                 }
             }
 
-            number = InputNumber(); // 로그번호 입력
-            Print.PrintReviseLog(); // 삭제할 로그 설명 프린트
+            while (Constants.isPassing)
+            {
+                number = InputNumber(); // 로그번호 입력
+                if (!LogData.Get().VerifyLogExistence(number)) Message.RedColor("없는 로그입니다. 재입력 : Enter 뒤로가기 : ESC");
+                else break;
+
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    return;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter)
+                {
+                    continue;
+                }
+            }
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
             LogData.Get().RemoveLog(number); // 로그 삭제
             LogData.Get().PrintLog.Clear();
             LogData.Get().Storelog();
