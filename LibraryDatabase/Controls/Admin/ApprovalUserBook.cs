@@ -12,8 +12,8 @@ namespace LibruryDatabase.Controls
 {
     internal class ApprovalUserBook
     {
-        public Screen Menu;
-        public MessageScreen Message;
+        private Screen Menu;
+        private MessageScreen Message;
 
         string isbn;
 

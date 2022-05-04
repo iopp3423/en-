@@ -17,8 +17,8 @@ namespace LibruryDatabase.Controls
         ReturnBook ReturnBook = new ReturnBook();
         RequestBook Request = new RequestBook();
 
-        public Screen Menu;
-        public MessageScreen PrintMessage;
+        private Screen Menu;
+        private MessageScreen PrintMessage;
 
         public UserMenu()
         {

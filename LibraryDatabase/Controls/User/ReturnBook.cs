@@ -14,8 +14,8 @@ namespace LibruryDatabase.Controls
     internal class ReturnBook
     {
 
-        public Screen Menu;
-        public MessageScreen Message;
+        private Screen Menu;
+        private MessageScreen Message;
 
         public ReturnBook()
         {

@@ -14,16 +14,16 @@ namespace LibruryDatabase.Controls
 {
     class LoginOrRegister
     {
-        UserMenu GoUser = new UserMenu();      
+        UserMenu GoUser = new UserMenu();
 
-        public string id;
-        public string password;
-        public string passswordCheck;
-        string name;
-        string age;
-        string callNumber;
-        string address;
-        bool isOverlapCheck;
+        private string id;
+        private string password;
+        private string passswordCheck;
+        private string name;
+        private string age;
+        private string callNumber;
+        private string address;
+        private bool isOverlapCheck;
 
         public Screen Menu;
         public MessageScreen message;

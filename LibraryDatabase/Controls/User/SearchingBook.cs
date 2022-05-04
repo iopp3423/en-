@@ -19,8 +19,8 @@ namespace LibruryDatabase.Controls
         private string nameResult;
         private string name;
 
-        public Screen Menu;
-        public MessageScreen message;
+        private Screen Menu;
+        private MessageScreen message;
 
         public SearchingBook()
         {

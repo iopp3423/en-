@@ -13,8 +13,8 @@ namespace LibruryDatabase.Controls
 {
     internal class NaverSearch
     {
-        public Screen Print;
-        public MessageScreen Message;
+        private Screen Print;
+        private MessageScreen Message;
 
         public NaverSearch(Screen Menu, MessageScreen message)
         {
@@ -117,9 +117,8 @@ namespace LibruryDatabase.Controls
                         {
                             if (Y == Constants.SEARCH_BOOK) { SearchTitle(); } // 제목입력
                             if (Y == Constants.BORROW_BOOK) { InputPrintBookQuantity(); } // 출력할 도서 수량 입력
-                            if (Y == Constants.CHECK_BOOK) { SearchBook(); } // 검색
+                            if (Y == Constants.CHECK_BOOK) { SearchBook(); return Constants.isBackMenu; } // 검색
                             break;
-                            //return IsGoingReturnMenu();
                         }
                     case ConsoleKey.Escape:
                         {

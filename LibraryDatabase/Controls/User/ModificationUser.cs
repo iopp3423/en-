@@ -17,8 +17,8 @@ namespace LibruryDatabase.Controls
         private string password;
         private string address;
 
-        public Screen Menu;
-        public MessageScreen Print;
+        private Screen Menu;
+        private MessageScreen Print;
 
         public ModificationUser()
         {

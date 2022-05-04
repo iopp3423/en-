@@ -16,8 +16,8 @@ namespace LibruryDatabase.Controls
     internal class LogManage
     {
 
-        public Screen Print;
-        public MessageScreen Message;
+        private Screen Print;
+        private MessageScreen Message;
 
         public LogManage()
         {

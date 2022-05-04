@@ -19,8 +19,8 @@ namespace LibruryDatabase.Controls
         NaverSearch naver = new NaverSearch();
         ApprovalUserBook book = new ApprovalUserBook();
 
-        Screen Print;
-        MessageScreen PrintMessage;
+        private Screen Print;
+        private MessageScreen PrintMessage;
 
         public AdminMenu()
         {

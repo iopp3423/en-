@@ -14,8 +14,8 @@ namespace LibruryDatabase.Controls
     internal class BorrowingBook : SearchingBook
     {
 
-        public Screen Print;
-        public MessageScreen Message;
+        private Screen Print;
+        private MessageScreen Message;
 
         public BorrowingBook()
         {

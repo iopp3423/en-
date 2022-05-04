@@ -13,10 +13,10 @@ namespace LibruryDatabase.Controls
 {
     internal class RequestBook
     {
-        public Screen Menu;
-        public MessageScreen Message;
-        string bookName;
-        string isbn;
+        private  Screen Menu;
+        private  MessageScreen Message;
+        private string bookName;
+        private string isbn;
 
         public RequestBook()
         {

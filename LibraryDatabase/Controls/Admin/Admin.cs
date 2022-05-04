@@ -15,9 +15,9 @@ namespace LibruryDatabase.Controls
     {
 
         AdminMenu goingMenu= new AdminMenu();
-     
-        public Screen Print;
-        public MessageScreen PrintMessage;
+
+        private Screen Print;
+        private MessageScreen PrintMessage;
 
         public Admin()
         {

@@ -12,8 +12,8 @@ namespace LibruryDatabase.Controls
 {
     internal class ModificationBook : SearchingBook
     {
-        public Screen Print;
-        public MessageScreen Message;
+        private Screen Print;
+        private MessageScreen Message;
 
         public ModificationBook()
         {

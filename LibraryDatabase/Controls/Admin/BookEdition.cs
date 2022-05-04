@@ -13,8 +13,8 @@ namespace LibruryDatabase.Controls
 { 
     internal class BookEdition
     {
-        public Screen Menu;
-        public MessageScreen Message;
+        private Screen Menu;
+        private MessageScreen Message;
 
         public BookEdition()
         {
