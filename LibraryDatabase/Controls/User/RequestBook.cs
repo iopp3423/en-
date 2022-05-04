@@ -73,10 +73,10 @@ namespace LibruryDatabase.Controls
             Message.PrintBookTitle(); // 입력메시지 출력
 
             BookData.Get().NaverBook.Clear(); // 리스트 비우기
-         
+
             bookName = InputBookName(); //책제목입력
             BookData.Get().StoreNaverBookToList(bookName, Constants.ADD_BOOK.ToString(), Constants.isPassing); // 리스트에 저장
-                                                                                                         
+
             Console.WriteLine("\n\n");
 
             Menu.PrintRequestBook();//도서출력          
@@ -84,11 +84,19 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             isbn = InputISBN();
 
-            Checkisbn(isbn);
+            if (Checkisbn(isbn))
+            {
+                Message.GreenColor(Message.BackPrint());
+                GoBackMenu();
+            }
 
-            Message.GreenColor(Message.BackPrint());
-            GoBackMenu();
-
+            else if (!Checkisbn(isbn))
+            {
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
+                Message.RedColor(Message.PrintNoneIsbnMessage());
+                SelectMenu();
+            }//isbn없음 메시지 출력
+           
         }
 
         public string InputBookName()//책이름입력
@@ -138,7 +146,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        public void Checkisbn(string Isbn) //isbn 체크
+        public bool Checkisbn(string Isbn) //isbn 체크
         {
             bool isNoneisbn = Constants.isFail;
 
@@ -148,14 +156,10 @@ namespace LibruryDatabase.Controls
                 {
                     BookData.Get().StoreRequestBook(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString());
                     isNoneisbn = Constants.isPassing;
-                    break;
+                    return isNoneisbn;
                 }
-
             }
-            if (isNoneisbn == Constants.isFail)
-            {
-                Message.PrintNoneIsbnMessage(); //isbn없음 메시지 출력
-            }
+            return isNoneisbn;                        
         }
 
 

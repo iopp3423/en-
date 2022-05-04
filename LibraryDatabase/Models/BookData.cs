@@ -546,6 +546,15 @@ namespace LibruryDatabase.Models
 
         }
 
+        public bool CheckBookNumber(string bookNumber)
+        {
+            foreach (BookVO data in BookData.Get().bookData)
+            {
+                if (data.number == bookNumber) return Constants.isPassing;
+            }
+            return Constants.isFail;
+        }
+
 
     }
 }

@@ -67,7 +67,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintBorrowBookMessage()
         {
-            return "대여 : Enter                                  뒤로가기 : ESC"; 
+            return "   》대여 : Enter                                  뒤로가기 : ESC\n"; 
         }
         public void PrintBorrowBookNumberMessage()
         {
@@ -153,9 +153,9 @@ namespace LibruryDatabase.Views
         {
             Console.Write("추가하실 도서의 isbn을 입력해주세요 : ");
         }
-        public void PrintNoneIsbnMessage()
+        public string PrintNoneIsbnMessage()
         {
-            Console.Write("맞는 isbn이 없습니다. 뒤로가기 : ESC");
+            return "맞는 isbn이 없습니다. 뒤로가기 : ESC";
         }
 
 
@@ -170,7 +170,7 @@ namespace LibruryDatabase.Views
         //관리자 관련
         public string PrintBackOrExit()
         {
-            return "뒤로가기 : ESC";
+            return "   》뒤로가기 : ESC\n";
         }
         public string PrintInputOrBackMessage()
         {
@@ -202,7 +202,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintReviseBookInput()
         {
-            return "책 수정 : Enter                                          뒤로가기 : ESC";
+            return "   》책 수정 : Enter                                          뒤로가기 : ESC\n\n";
         }
         public string PrintReviseAfterMessage()
         {
@@ -242,7 +242,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintChooseRemoveBook()
         {
-            return "책 제거 : Enter                                         뒤로가기 : ESC";
+            return "   》책 제거 : Enter                                         뒤로가기 : ESC\n\n";
         }
         public string PrintRemoveBookMessage()
         {

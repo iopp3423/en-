@@ -58,10 +58,11 @@ namespace LibruryDatabase.Controls
 
 
             Console.Clear();
-            Print.PrintSearchBookName();
-            Print.PrintBookData(); // 책 목록 프린트
-
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOKNAME_LINE);
             Message.GreenColor(Message.PrintBorrowBookMessage());
+            Print.PrintBookData(); // 책 목록 프린트
+            Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
+
 
             while (Constants.isPassing) // 뒤로가기 or 입력
             {
@@ -73,18 +74,22 @@ namespace LibruryDatabase.Controls
                     Print.PrintUserMenu();
                     return;
                 }
-                else if (Constants.cursor.Key == ConsoleKey.Enter) break;
+                else if (Constants.cursor.Key == ConsoleKey.Enter)
+                {
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    break;
+                }
             }
 
 
-            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             SearchBookName(Constants.isPassing, id); // 책 제목 검색
 
             if (Constants.SEARCH_RESULT_BOOK == Constants.isPassing) // 목록에 책이 있으면 진행
             {
                 while (Constants.isEntrancing) // 책 번호 입력
                 {
-
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     Message.PrintBorrowBookNumberMessage();
                     bookNumber = Console.ReadLine();
 
@@ -116,7 +121,7 @@ namespace LibruryDatabase.Controls
                     GoBackMenu();
                 }
 
-                else
+                else if (BookData.Get().CheckBookNumber(bookNumber))
                 {
                     Message.GreenColor("반납기한은" + returnDay + "입니다.");
                     BookData.Get().SearchBook(id, bookNumber);// 데베책대여                   
@@ -128,9 +133,14 @@ namespace LibruryDatabase.Controls
 
                     bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
                     name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                    LogData.Get().StoreLog(name, Constants.BORROW, bookName) ; // 로그에 저장
+                    LogData.Get().StoreLog(name, Constants.BORROW, bookName); // 로그에 저장
 
                     Message.GreenColor(Message.PrintDoneBorrowMessage());
+                    GoBackMenu();
+                }
+                else
+                {
+                    Message.RedColor("없는 도서입니다. 뒤로가기 : ESC");
                     GoBackMenu();
                 }
             }

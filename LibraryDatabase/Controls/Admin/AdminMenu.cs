@@ -126,9 +126,10 @@ namespace LibruryDatabase.Controls
         public void PrintCurrentBook()
         {
             Console.Clear();
+            PrintMessage.GreenColor(PrintMessage.PrintBackOrExit());
             LogData.Get().StoreLog(Constants.ADMIN, Constants.BOOK_LIST, Constants.OPEN_LIST);
             Print.PrintCurrentBorrowBook();
-            PrintMessage.GreenColor(PrintMessage.PrintBackOrExit());
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
             GoBackMenu();
         }
     }

@@ -54,11 +54,12 @@ namespace LibruryDatabase.Controls
 
             Console.Clear();
             Print.PrintSearchBookName();
-            Print.PrintBookData(); // 책 목록 프린트
-
-
-
+            Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
             Message.GreenColor(Message.PrintReviseBookInput());
+            Print.PrintBookData(); // 책 목록 프린트
+            Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
+
+
             if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);

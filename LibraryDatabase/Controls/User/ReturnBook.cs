@@ -51,7 +51,6 @@ namespace LibruryDatabase.Controls
         public void ShowBorrowBook(string id)
         {
             string bookNumber;
-            bool isCheckAlreadyReturn;
             bool isAlreadyBorrow;
             string bookName;
             string name;

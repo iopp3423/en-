@@ -55,9 +55,10 @@ namespace LibruryDatabase.Controls
 
             Console.Clear();
             Print.PrintSearchBookName();
+            Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
+            Message.GreenColor(Message.PrintChooseRemoveBook()); // 안내메시지           
             Print.PrintBookData(); // 책 목록 프린트
-
-            Message.GreenColor(Message.PrintChooseRemoveBook()); // 안내메시지
+            Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
 
             if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 

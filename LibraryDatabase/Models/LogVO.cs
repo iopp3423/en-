@@ -16,6 +16,11 @@ namespace LibruryDatabase.Models
         public string record;
         public string log;
 
+        public LogVO()
+        {
+
+        }
+
         public LogVO(string number, string dateTime, string name, string record, string log)
         {
             this.number = number;
@@ -25,10 +30,7 @@ namespace LibruryDatabase.Models
             this.log = log;
         }
 
-        public LogVO()
-        {
-
-        }
+        
        
     }
 }

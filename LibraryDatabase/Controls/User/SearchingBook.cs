@@ -20,7 +20,7 @@ namespace LibruryDatabase.Controls
         private string name;
 
         private Screen Menu;
-        private MessageScreen message;
+        MessageScreen message;
 
         public SearchingBook()
         {

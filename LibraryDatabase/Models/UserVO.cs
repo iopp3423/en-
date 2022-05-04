@@ -15,7 +15,10 @@ namespace LibruryDatabase.Models
         public string age;
         public string address;
 
+        public UserVO()
+        {
 
+        }
 
         public UserVO(string id, string password, string name, string phone, string age, string address)
         {
@@ -26,10 +29,6 @@ namespace LibruryDatabase.Models
             this.age = age;
             this.address = address;
         }
-
-        public UserVO()
-        {
-
-        }
+          
     }
 }

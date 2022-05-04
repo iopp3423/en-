@@ -16,6 +16,10 @@ namespace LibruryDatabase.Models
         public string isbn;
         public string description;
 
+        public NaverBookVO()
+        {
+
+        }
 
         public NaverBookVO(string title, string author, string price, string publisher, string publishday, string isbn, string description)
         {
@@ -28,10 +32,7 @@ namespace LibruryDatabase.Models
             this.description = description;
         }
 
-        public NaverBookVO()
-        {
-
-        }
+       
 
     }
 }

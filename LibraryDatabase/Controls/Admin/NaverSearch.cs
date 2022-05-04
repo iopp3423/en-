@@ -27,7 +27,7 @@ namespace LibruryDatabase.Controls
         }
 
         private string title = "";
-        private string quantity="";
+        private string quantity="10";
         private string isbn = "";
 
         public void SearchNaverBook() // 네이버 기본화면
@@ -196,7 +196,7 @@ namespace LibruryDatabase.Controls
 
         public void SearchBook() // 도서출력
         {
-            if (title == "" || quantity == "")
+            if (title == "")
             {
                 Console.SetCursorPosition(Constants.CURRENT_BOOK, Constants.SEARCH_BOOK - Constants.BEFORE_INPUT_LOCATION);
                 Message.RedColor(Message.PrintNoneInput());

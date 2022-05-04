@@ -18,6 +18,11 @@ namespace LibruryDatabase.Models
         public string quantity;
 
 
+        public BookVO()
+        {
+
+        }
+
         public BookVO(string number, string title, string author,  string publisher, string publishday, string price, string isbn, string quantity)
         {
             this.number = number;
@@ -28,11 +33,6 @@ namespace LibruryDatabase.Models
             this.price = price;
             this.isbn = isbn;
             this.quantity = quantity;
-        }
-
-        public BookVO()
-        {
-
         }
 
     }
