@@ -253,17 +253,23 @@ namespace LibruryDatabase.Controls
 
         public string InputId() // id 입력
         {
-
             while (Constants.isLogin)
             {
                 Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
                 id = Console.ReadLine();
-           
+
+                if (CheckNull(id))
+                {
+                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    message.PrintIdInputMessage();
+                    Menu.PrintLoginErrorMessage();
+                    continue; // 널값이면 건너뛰기
+                }
                 if (Constants.isFail == Regex.IsMatch(id, Utility.Exception.ID_CHECK)) // 정규식에 맞지 않으면
                 {
 
                     Console.SetCursorPosition(Constants.ID_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                   ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     message.PrintIdInputMessage();
                     Menu.PrintLoginErrorMessage(); continue;
@@ -286,6 +292,13 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.PW_X, Constants.PW_Y);
                 password = ReadPassword();
 
+                if (CheckNull(password))
+                {
+                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    message.PrintIdInputMessage();
+                    Menu.PrintLoginErrorMessage();
+                    continue; // 널값이면 건너뛰기
+                }
                 if (Constants.isFail == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.PW_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -311,7 +324,14 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.PW_CHECK_X, Constants.PW_CHECK_Y);
                 passswordCheck = ReadPassword();
 
-               if (Constants.isFail == Regex.IsMatch(passswordCheck, Utility.Exception.PW_CHECK))
+                if (CheckNull(passswordCheck))
+                {
+                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    message.PrintPasswordCheckMessage();
+                    Menu.PrintLoginErrorMessage();
+                    continue; // 널값이면 건너뛰기
+                }
+                if (Constants.isFail == Regex.IsMatch(passswordCheck, Utility.Exception.PW_CHECK))
                 {
                     Console.SetCursorPosition(Constants.PW_CHECK_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
@@ -363,6 +383,13 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.NAME_X, Constants.NAME_Y);
                 name = Console.ReadLine();
 
+                if (CheckNull(name))
+                {
+                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    message.PrintInputNameMessage();
+                    Menu.PrintLoginErrorMessage(); 
+                    continue;
+                }
                 if (Constants.isFail == Regex.IsMatch(name, Utility.Exception.NAME_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.NAME_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -386,13 +413,21 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.NUMBER_X, Constants.NUMBER_Y);
                 callNumber = Console.ReadLine();
 
+                if (CheckNull(callNumber))
+                {
+                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    message.PrintInutCallNumberMessage();
+                    Menu.PrintLoginErrorMessage(); 
+                    continue;
+                }
                 if (Constants.isFail == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.NUMBER_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     message.PrintInutCallNumberMessage();
-                    Menu.PrintLoginErrorMessage(); continue;
+                    Menu.PrintLoginErrorMessage(); 
+                    continue;
                     
                 }
                 break;
@@ -410,6 +445,13 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.ADDRESS_X, Constants.ADDRESS_Y);
                 address = Console.ReadLine();
 
+                if (CheckNull(address))
+                {
+                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    message.PrintInputAddressMessage();
+                    Menu.PrintLoginErrorMessage(); 
+                    continue;
+                }
                 if (Constants.isFail == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
                 {
                      Console.SetCursorPosition(Constants.ADDRESS_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -436,6 +478,14 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.AGE_X, Constants.AGE_Y);
                 age = Console.ReadLine();
 
+                if (CheckNull(age))
+                {
+                    Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+                    message.PrintInputAgeMessage();
+                    Menu.PrintLoginErrorMessage(); 
+                    continue;
+                }
+
                 if (Constants.isFail == Regex.IsMatch(age, Utility.Exception.AGE_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.AGE_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -459,6 +509,15 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
 
+        public bool CheckNull(string checkNull)
+        {
+            if (string.IsNullOrEmpty(checkNull))
+            {
+                ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
+                return Constants.isPassing;
+            }
+            return Constants.isFail;
+        }
     }
 
 }

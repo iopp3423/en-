@@ -47,7 +47,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintInputAddressMessage()
         {
-            Console.Write("주소 :");
+            Console.Write("주소(천안시동남구신부동) :");
         }
         public void PrintInputAgeMessage()
         {

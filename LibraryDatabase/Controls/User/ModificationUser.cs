@@ -149,6 +149,14 @@ namespace LibruryDatabase.Controls
             {
                 Print.PrintInutCallNumberMessage();
                 callNumber = Console.ReadLine();
+
+                if (CheckNull(callNumber))
+                {
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PHONE); //커서 조정
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    continue;
+                }
+
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PHONE);
                 if (Constants.isFail == Regex.IsMatch(callNumber, Utility.Exception.NUMBER_CHECK)) // 정규식에 맞지 않으면
                 {
@@ -168,6 +176,14 @@ namespace LibruryDatabase.Controls
             {
                 Print.PrintPasswordInputMessage();
                 password = Console.ReadLine();
+
+                if (CheckNull(password))
+                {
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PASSWORD); //커서 조정
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    continue;
+                }
+
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_PASSWORD);
 
                 if (Constants.isFail == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
@@ -189,6 +205,13 @@ namespace LibruryDatabase.Controls
             {
                 Print.PrintInputAddressMessage();
                 address = Console.ReadLine();
+
+                if (CheckNull(address))
+                {
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    continue;
+                }
                 Console.SetCursorPosition(Constants.FIRSTX, Constants.GOING_ADDRESS);
 
                 if (Constants.isFail == Regex.IsMatch(address, Utility.Exception.ADDRESS_CHECK)) // 정규식에 맞지 않으면
@@ -222,6 +245,17 @@ namespace LibruryDatabase.Controls
         {
             UserData.Get().userData.Clear();
             UserData.Get().StoreUserData(); // 저장
+        }
+
+
+        public bool CheckNull(string checkNull) // null값 체크
+        {
+            if (string.IsNullOrEmpty(checkNull))
+            {
+                ClearCurrentLine(Constants.BEFORE_INPUT_LOCATION);
+                return Constants.isPassing;
+            }
+            return Constants.isFail;
         }
     }
 }
