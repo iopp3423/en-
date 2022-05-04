@@ -213,8 +213,9 @@ namespace LibruryDatabase.Controls
                 Message.GreenColor("   >>Enter : 도서대여              뒤로가기 : ESC\n\n");
                 foreach (NaverBookVO book in BookData.Get().NaverBook) // 데베에 저장
                 {
-                    BookData.Get().StoreNaverBook(book.title, book.author, book.price, book.publisher, book.publishday, book.isbn, RemoveSpecialCharacterFromString(book.description));
+                    BookData.Get().StoreNaverBook(book.title, book.author, book.publisher, book.publishday, book.price,  book.isbn, RemoveSpecialCharacterFromString(book.description));
                 }
+
                 Print.PrintNaverBook();
                 Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
                 InputOrBack();
@@ -233,7 +234,7 @@ namespace LibruryDatabase.Controls
             {
                 if (book.isbn == isbn)
                 {
-                    BookData.Get().StoreBookUserRequest(book.title, book.author, book.price, book.publisher, book.publishday, book.isbn, quantity); // book db에 추가
+                    BookData.Get().StoreBookUserRequest(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, quantity); // book db에 추가
                     BookData.Get().StoreNaverBookData(); // book 리스트에 저장
                 }
             }
