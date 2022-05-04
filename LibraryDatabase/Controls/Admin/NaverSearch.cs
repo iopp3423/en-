@@ -28,7 +28,7 @@ namespace LibruryDatabase.Controls
 
         private string title = "";
         private string quantity="";
-
+        private string isbn = "";
 
         public void SearchNaverBook() // 네이버 기본화면
         {
@@ -210,17 +210,53 @@ namespace LibruryDatabase.Controls
                 BookData.Get().RemoveAllNaverBook(); // 데베 비우기
                 BookData.Get().NaverBook.Clear(); // 리스트 비우기
                 BookData.Get().StoreNaverBookToList(title, quantity, Constants.isPassing); // 관리자 리스트에 저장
-                
+
+                Message.GreenColor("Enter : 도서대여              뒤로가기 : ESC");
                 foreach (NaverBookVO book in BookData.Get().NaverBook) // 데베에 저장
                 {
                     BookData.Get().StoreNaverBook(book.title, book.author, book.price, book.publisher, book.publishday, book.isbn, RemoveSpecialCharacterFromString(book.description));
-                }
-                
-                Print.PrintNaverBook();
-                
+                }            
+                Print.PrintNaverBook();                
             }
             
         }
+
+        public void BorrowNaverBook() // 네이버 도서 저장
+        {
+            isbn = InputISBN();
+
+
+        }
+
+        public string InputISBN()//isbn입력
+        {
+
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
+            Message.PrintAddisbn();
+
+            while (Constants.isPassing)
+            {
+                isbn = Console.ReadLine();
+
+                if (Constants.isFail == Regex.IsMatch(isbn, Utility.Exception.ISBN))
+                {
+                    Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    Message.PrintReEnterMessage();
+                    continue;
+                }
+                break;
+            }
+
+            Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
+
+            Message.GreenColor(Message.PrintDoneInput());
+            return isbn;
+        }
+
+
+
         public string RemoveSpecialCharacterFromString(string description) // 책 설명 특수문자 제거
         {
             return Regex.Replace(description, Utility.Exception.DESCRIPTION, string.Empty, RegexOptions.Singleline);

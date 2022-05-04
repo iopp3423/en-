@@ -24,7 +24,7 @@ namespace LibruryDatabase.Utility
         public const string PRICE = @"^[1-9]{1}[0-9]{3,6}$"; // 가격 
         public const string MODIFICATION_BOOK = @"^[1-2]{1}$";
         public const string DESCRIPTION = @"[^a-zA-Z0-9가-힣]$";
-        public const string ISBN = @"^[a-zA-Z0-9\s]{23,24}$";
+        public const string ISBN = @"^[a-zA-Z0-9\s]{24}$";
       
     }    
 }

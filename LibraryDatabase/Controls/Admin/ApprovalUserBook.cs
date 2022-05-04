@@ -46,6 +46,7 @@ namespace LibruryDatabase.Controls
 
             if (checkIsbn == Constants.isFail)
             {
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Message.PrintNoneIsbnMessage(); //isbn없음 메시지 출력
             }
 
@@ -72,6 +73,7 @@ namespace LibruryDatabase.Controls
                 }
                 break;
             }
+
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
             ClearCurrentLine(Constants.CURRENT_LOCATION);
 

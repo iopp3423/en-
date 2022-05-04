@@ -155,7 +155,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintNoneIsbnMessage()
         {
-            Console.Write("맞는 isbn이 없습니다. 다시 입력해주세요.");
+            Console.Write("맞는 isbn이 없습니다. 뒤로가기 : ESC");
         }
 
 
