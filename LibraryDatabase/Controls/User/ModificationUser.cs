@@ -13,7 +13,7 @@ namespace LibruryDatabase.Controls
 {
     internal class ModificationUser
     {
-        string callNumber;
+        private string callNumber;
         string password;
         string address;
 
@@ -154,7 +154,7 @@ namespace LibruryDatabase.Controls
         }
 
 
-        string InputCallNumber() // 전화번호입력
+        public string InputCallNumber() // 전화번호입력
         {
 
             while (Constants.isLogin)
@@ -173,7 +173,7 @@ namespace LibruryDatabase.Controls
             return callNumber;
         }
 
-        string InputPasswordCheck() // 비밀번호 입력
+        public string InputPasswordCheck() // 비밀번호 입력
         {
 
             while (Constants.isLogin)
@@ -193,7 +193,7 @@ namespace LibruryDatabase.Controls
             return password;
         }
 
-        string InputAddress() // 주소입력
+        public string InputAddress() // 주소입력
         {
 
            

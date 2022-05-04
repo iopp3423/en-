@@ -96,7 +96,7 @@ namespace LibruryDatabase.Controls
 
         }
 
-        string InputBookName()//책이름입력
+        public string InputBookName()//책이름입력
         {
 
 
@@ -120,7 +120,7 @@ namespace LibruryDatabase.Controls
             return bookName;
         }
 
-        string InputISBN()//isbn입력
+        public string InputISBN()//isbn입력
         {
             while (Constants.isPassing)
             {
