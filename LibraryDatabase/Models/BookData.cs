@@ -257,9 +257,6 @@ namespace LibruryDatabase.Models
                 book.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.returnBookQuery,returnDay,bookNumber), book);
                 Command.ExecuteNonQuery();
-                
-            
-
         }
 
         public bool IsCheckingBookExistence(string bookNumber) // 데베에 책 있는지 체크
@@ -459,7 +456,7 @@ namespace LibruryDatabase.Models
             MySqlConnection book = new MySqlConnection(Constants.getQuery);
             
                 book.Open();
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.revomeBookQuery, isbn), book);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.removeBookQuery, isbn), book);
                 Command.ExecuteNonQuery();
             
         }
@@ -513,6 +510,15 @@ namespace LibruryDatabase.Models
                 }
             }
             return isNoneisbn;
+        }
+
+        public void RemoveBorrowBook(string bookNumber)
+        {
+            MySqlConnection book = new MySqlConnection(Constants.getQuery);
+
+            book.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.RemoveBorrowBookQuery, bookNumber), book);
+            Command.ExecuteNonQuery();
         }
 
     }

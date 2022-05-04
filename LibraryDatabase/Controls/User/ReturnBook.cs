@@ -100,7 +100,8 @@ namespace LibruryDatabase.Controls
                 return;
             }
             
-            BookData.Get().ReturnBook(bookNumber); // 책 반납
+            //BookData.Get().ReturnBook(bookNumber); // 책 반납
+            BookData.Get().RemoveBorrowBook(bookNumber);// 책 반납
             BookData.Get().PlusBook(bookNumber); // 책 수량 증가
             BookData.Get().borrow.Clear(); // 리스트 비우기
             BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장

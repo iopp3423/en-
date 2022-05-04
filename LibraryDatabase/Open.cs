@@ -16,7 +16,7 @@ namespace LibruryDatabase
         {
             ChoiceUserOrAdmin Start = new ChoiceUserOrAdmin();
             Start.StartMenu();
-            //관리자 id = enen1234, pw = enen4321         
-        }
+            //관리자 id = enen1234, pw = enen4321        
+        }       
     }
 }
