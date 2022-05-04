@@ -25,6 +25,7 @@ namespace LibruryDatabase.Utility
         public const string MODIFICATION_BOOK = @"^[1-2]{1}$";
         public const string DESCRIPTION = @"[^a-zA-Z0-9가-힣]$";
         public const string ISBN = @"^[a-zA-Z0-9\s]{24}$";
-      
+        public const string INPUT = @"[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+$";
+
     }    
 }
