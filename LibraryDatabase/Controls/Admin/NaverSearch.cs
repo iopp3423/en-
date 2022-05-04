@@ -210,22 +210,37 @@ namespace LibruryDatabase.Controls
                 BookData.Get().RemoveAllNaverBook(); // 데베 비우기
                 BookData.Get().NaverBook.Clear(); // 리스트 비우기
                 BookData.Get().StoreNaverBookToList(title, quantity, Constants.isPassing); // 관리자 리스트에 저장
-
-                Message.GreenColor("Enter : 도서대여              뒤로가기 : ESC");
+                Console.Clear();
+                Message.GreenColor("   >>Enter : 도서대여              뒤로가기 : ESC\n\n");
                 foreach (NaverBookVO book in BookData.Get().NaverBook) // 데베에 저장
                 {
                     BookData.Get().StoreNaverBook(book.title, book.author, book.price, book.publisher, book.publishday, book.isbn, RemoveSpecialCharacterFromString(book.description));
-                }            
-                Print.PrintNaverBook();                
+                }
+                Print.PrintNaverBook();
+                Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
+                InputOrBack();
+                return;
             }
             
         }
 
-        public void BorrowNaverBook() // 네이버 도서 저장
+        public void BorrowNaverBook() // 네이버 도서추가
         {
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
             isbn = InputISBN();
+            quantity = InputQuantity();
 
-
+            foreach (NaverBookVO book in BookData.Get().NaverBook) // 데베에 저장
+            {
+                if (book.isbn == isbn)
+                {
+                    BookData.Get().StoreBookUserRequest(book.title, book.author, book.price, book.publisher, book.publishday, book.isbn, quantity); // book db에 추가
+                    BookData.Get().StoreNaverBookData(); // book 리스트에 저장
+                }
+            }
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
+            Message.GreenColor("도서가 추가되었습니다.    뒤로가기 : F5");
+            IsGoingReturnMenu();
         }
 
         public string InputISBN()//isbn입력
@@ -248,6 +263,8 @@ namespace LibruryDatabase.Controls
                 break;
             }
 
+            
+
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
             ClearCurrentLine(Constants.CURRENT_LOCATION);
 
@@ -255,6 +272,26 @@ namespace LibruryDatabase.Controls
             return isbn;
         }
 
+        public string InputQuantity() // 수량입력
+        {
+
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
+            Message.PrintQuantityInputMessage();
+            while (Constants.isPassing)
+            {
+                quantity = Console.ReadLine();
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
+
+                if (Constants.isFail == Regex.IsMatch(quantity, Utility.Exception.QUANTITY))
+                {
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    Message.PrintReEnterMessage(); continue;
+                }
+                break;
+            }
+            return quantity;
+        }
 
 
         public string RemoveSpecialCharacterFromString(string description) // 책 설명 특수문자 제거
@@ -271,5 +308,22 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
 
+        public void InputOrBack()
+        {
+            while (Constants.isEntrancing)
+            {
+                Constants.cursor = Console.ReadKey(true);
+                if(Constants.cursor.Key == ConsoleKey.Enter)
+                {
+                    BorrowNaverBook();
+                    break;
+                }
+                else if(Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    break;
+                }
+                    
+            }
+        }
     }
 }

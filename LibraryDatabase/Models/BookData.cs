@@ -8,6 +8,7 @@ using LibruryDatabase.Utility;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace LibruryDatabase.Models
 {
@@ -412,7 +413,7 @@ namespace LibruryDatabase.Models
             
         }
 
-        public void RemoveAllNaverBook() // 전체 로그데이터 제거
+        public void RemoveAllNaverBook() 
         {
             MySqlConnection book = new MySqlConnection(Constants.getQuery);
             
@@ -438,9 +439,9 @@ namespace LibruryDatabase.Models
 
             MySqlConnection book = new MySqlConnection(Constants.getQuery);
             
-                book.Open();
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.requestBookQuery, bookName, author, publish, publishDay, price, isbn, quantity), book);
-                Command.ExecuteNonQuery();
+            book.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.requestBookQuery, bookName, author, publish, publishDay, price, isbn, quantity), book);
+            Command.ExecuteNonQuery();
             
         }
 
@@ -456,8 +457,7 @@ namespace LibruryDatabase.Models
                 {
                     UserRequestBook.Add(new NaverBookVO(bookData["name"].ToString(), bookData["author"].ToString(), bookData["publish"].ToString(), bookData["publishday"].ToString(), bookData["price"].ToString(), bookData["isbn"].ToString(), bookData["quantity"].ToString()));
                 }
-                book.Close();
-            
+                book.Close();          
         }
 
         public void RemoveBookData(string isbn) // 유저가 요청한 책 추가한 후 제거
@@ -485,24 +485,21 @@ namespace LibruryDatabase.Models
                     bookData.Add(new BookVO(Data["number"].ToString(),Data["name"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["publishday"].ToString(), Data["price"].ToString(), Data["isbn"].ToString(), Data["quantity"].ToString()));
                 }
                 Data.Close();
-
-                
-            
         }
 
         public void AddBorrowBookToList() // 책 대여 유저 리스트에 저장
         {
             MySqlConnection book = new MySqlConnection(Constants.getQuery);
             
-                book.Open();
-                MySqlCommand Command = new MySqlCommand(Constants.BorrrowBookUserquery, book);
-                MySqlDataReader Data = Command.ExecuteReader(); // 데이터 읽기
+            book.Open();
+            MySqlCommand Command = new MySqlCommand(Constants.BorrrowBookUserquery, book);
+            MySqlDataReader Data = Command.ExecuteReader(); // 데이터 읽기
 
-                while (Data.Read())
-                {
-                    borrow.Add(new BorrowUserVO(Data["id"].ToString(), Data["number"].ToString(), Data["bookname"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["borrowbook"].ToString(), Data["returnbook"].ToString()));
-                }
-                Data.Close();
+            while (Data.Read())
+            {
+                borrow.Add(new BorrowUserVO(Data["id"].ToString(), Data["number"].ToString(), Data["bookname"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["borrowbook"].ToString(), Data["returnbook"].ToString()));
+            }
+            Data.Close();
             
         }
 
@@ -514,8 +511,8 @@ namespace LibruryDatabase.Models
             {
                 if (Isbn == book.isbn)
                 {
-                    BookData.Get().StoreBookUserRequest(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString()); // 리스트에 책 정보 저장
-                    BookData.Get().RemoveBookData(book.isbn); // 추가한 책 제거
+                    StoreBookUserRequest(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString()); // 리스트에 책 정보 저장
+                    RemoveBookData(book.isbn); // 추가한 책 제거
                     isNoneisbn = Constants.isPassing;
                 }
             }
@@ -530,6 +527,25 @@ namespace LibruryDatabase.Models
             MySqlCommand Command = new MySqlCommand(String.Format(Constants.RemoveBorrowBookQuery, bookNumber), book);
             Command.ExecuteNonQuery();
         }
+
+
+        public void StoreNaverBookData() // 네이버 검색 후 추가한 책 리스트에 저장
+        {
+
+            MySqlConnection book = new MySqlConnection(Constants.getQuery);
+
+            book.Open();
+            MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, book);
+            MySqlDataReader Data = Command.ExecuteReader(); // 데이터 읽기
+
+            while (Data.Read())
+            {
+                bookData.Add(new BookVO(Data["number"].ToString(), Data["name"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["publishday"].ToString(), Data["price"].ToString(), Data["isbn"].ToString(), Data["quantity"].ToString()));
+            }
+            Data.Close();
+
+        }
+
 
     }
 }

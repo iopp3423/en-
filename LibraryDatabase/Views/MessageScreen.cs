@@ -194,7 +194,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintQuantityInputMessage()
         {
-            Console.WriteLine("수량(1~3자리 숫자):");
+            Console.Write("수량(1~3자리 숫자):");
         }
         public void PrintPriceInputMessage()
         {
