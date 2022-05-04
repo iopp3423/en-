@@ -31,19 +31,19 @@ namespace LibruryDatabase.Models
         public void StoreLog(string name, string record, string log) // 로그 추가
         {
 
-            using (MySqlConnection logRecord = new MySqlConnection(Constants.getQuery))
-            {
-                logRecord.Open();
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.InsertlogQuery, DateTime.Now, name, record, log), logRecord);
-                Command.ExecuteNonQuery();
-            }
+            MySqlConnection logRecord = new MySqlConnection(Constants.getQuery);
+            
+            logRecord.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.InsertlogQuery, DateTime.Now, name, record, log), logRecord);
+            Command.ExecuteNonQuery();
+            
         }
 
         public void Storelog()
         {
 
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 user.Open();
 
                 //ExecuteReader를 이용하여
@@ -62,34 +62,33 @@ namespace LibruryDatabase.Models
                     PrintLog.Add(new LogVO(number, time, name, record, log));
                 }
                 userInformation.Close();
-            }          
+                     
 
         }
 
         public void RemoveLog(string number) // 로그 제거
         {
 
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection book = new MySqlConnection(Constants.getQuery);
+            
                 book.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.LogDeleteQuery, number), book);
                 Command.ExecuteNonQuery();
-            }
+            
         }
 
         public void RemoveAllLog() // 전체 로그데이터 제거
         {
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection book = new MySqlConnection(Constants.getQuery);
+            
                 book.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.RemoveAllLog), book);
                 Command.ExecuteNonQuery();
-            }
+            
         }
 
         public void RemoveDesktopFile()//데스크탑 파일 제거
         {
-
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Log";
             Directory.Delete(desktopPath, recursive: Constants.isPassing);          
         }
@@ -110,29 +109,29 @@ namespace LibruryDatabase.Models
 
             if (!file.Exists)
             {
-                using (StreamWriter writer = new StreamWriter(FilePath))
+                StreamWriter writer = new StreamWriter(FilePath);
+                
+                foreach (LogVO x in LogData.Get().PrintLog)
                 {
-                    foreach (LogVO x in LogData.Get().PrintLog)
-                    {
-                        temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
-                        writer.WriteLine(temp);
+                    temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
+                    writer.WriteLine(temp);
 
-                    }
-                    writer.Close();
                 }
+                writer.Close();
+                
             }
             else
             {
-                using (StreamWriter writer = File.AppendText(FilePath))
+                StreamWriter writer = File.AppendText(FilePath);
+                
+                foreach (LogVO x in LogData.Get().PrintLog)
                 {
-                    foreach (LogVO x in LogData.Get().PrintLog)
-                    {
-                        temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
-                        writer.WriteLine(temp);
+                    temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
+                    writer.WriteLine(temp);
 
-                    }
-                    writer.Close();
                 }
+                writer.Close();
+                
             }
         }
 

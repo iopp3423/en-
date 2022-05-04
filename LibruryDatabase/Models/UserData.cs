@@ -25,8 +25,8 @@ namespace LibruryDatabase.Models
         {
 
 
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 user.Open();
 
                 MySqlCommand Command = new MySqlCommand(Constants.AdminSearchQuery, user);
@@ -37,20 +37,20 @@ namespace LibruryDatabase.Models
                     if (userData["id"].ToString() == id && userData["pw"].ToString() == password) return Constants.isSucess;
                 }
                 user.Close();
-            }
+            
             return Constants.isFail;
 
         }
 
         public void StoreUserInformation(string id, string pw, string name, string phone, string age, string address) // 데이터베이스에 회원정보 저장
-        {           
+        {
 
-            using (MySqlConnection user = new MySqlConnection (Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 user.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.insertUserQuery,id,pw,name,phone,age,address), user);
                 Command.ExecuteNonQuery();
-            }
+            
 
         }
 
@@ -58,20 +58,20 @@ namespace LibruryDatabase.Models
         {
 
 
-            using (MySqlConnection book = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection book = new MySqlConnection(Constants.getQuery);
+            
                 book.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteUserQuery,userId), book);
                 Command.ExecuteNonQuery();
-            }
+            
         }
 
         public bool IsCheckingIdOverlap(string id) // 데베에서 중복아이디 있는지 체크
         {
 
 
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 user.Open();
 
                 MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
@@ -82,7 +82,7 @@ namespace LibruryDatabase.Models
                     if (userData["id"].ToString() == id) return Constants.isSucess;
                 }
                 user.Close();
-            }
+            
             return Constants.isFail;
 
         }
@@ -90,8 +90,8 @@ namespace LibruryDatabase.Models
         public bool IsCheckingLogin(string id, string password) // 데베에서 회원 유무 확인
         {
 
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 
                 user.Open();
                 MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
@@ -103,7 +103,7 @@ namespace LibruryDatabase.Models
                 }
                 user.Close();
                 
-            }
+            
             return Constants.isFail;
 
         }
@@ -111,8 +111,8 @@ namespace LibruryDatabase.Models
         public string Bringname(string id) // 데베에서 회원 이름 가져오기
         {
 
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
 
                 user.Open();
                 MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
@@ -124,7 +124,7 @@ namespace LibruryDatabase.Models
                 }
                 user.Close();
 
-            }
+            
             return id;
         }
 
@@ -132,45 +132,45 @@ namespace LibruryDatabase.Models
         {
 
 
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 user.Open();
                
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePhoneQuery,callNumber, id), user);
                 Command.ExecuteNonQuery();
-            }
+            
         }
 
         public void ModifyPassword(string password, string id) // 비밀번호 데베에서 변경
         {
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 user.Open();
 
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePwQuery,password, id), user);
                 Command.ExecuteNonQuery(); 
-            }
+            
         }
 
         public void ModifyAddress(string address, string id)// 주소 데베에서 변경
         {
 
 
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 user.Open();
                 
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.updateAddressQuery,user, id), user);
                 Command.ExecuteNonQuery();  
-            }
+            
         }
 
         public bool IsCheckingExistenceId(string id) // 아이디 존재유무
         {
 
 
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 user.Open();
                 MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
@@ -180,7 +180,7 @@ namespace LibruryDatabase.Models
                     if (userData["id"].ToString() == id) return Constants.isPassing;
                 }
                 user.Close();
-            }
+            
             return Constants.isFail;
         }
 
@@ -188,8 +188,8 @@ namespace LibruryDatabase.Models
         {
 
 
-            using (MySqlConnection user = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+            
                 user.Open();
                 MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, user);
                 MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
@@ -199,15 +199,15 @@ namespace LibruryDatabase.Models
                     if (userData["name"].ToString().Contains(name)) return Constants.isSucess;
                 }
                 user.Close();
-            }
+            
             return Constants.isFail;
 
         }
 
         public void StoreUserData()
         {
-            using (MySqlConnection userInformation = new MySqlConnection(Constants.getQuery))
-            {
+            MySqlConnection userInformation = new MySqlConnection(Constants.getQuery);
+            
                 userInformation.Open();
 
                 //ExecuteReader를 이용하여
@@ -220,7 +220,7 @@ namespace LibruryDatabase.Models
                     userData.Add(new UserVO(user["id"].ToString(), user["pw"].ToString(), user["name"].ToString(), user["phone"].ToString(), user["age"].ToString(), user["address"].ToString()));
                 }
                 userInformation.Close();
-            }
+            
         }
     }
 }
