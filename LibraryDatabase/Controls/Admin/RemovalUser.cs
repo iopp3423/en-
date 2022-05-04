@@ -87,7 +87,7 @@ namespace LibruryDatabase.Controls
                 return; 
             } 
 
-            isExistenceUsername = BookData.Get().IsCheckingUserBorrowedBook(id);// 해당 id 반납하지 않은 책 조사
+            isExistenceUsername = BookData.Get().IsCheckingBorrowedBook(id);// 해당 id 반납하지 않은 책 조사
 
             if (isExistenceUsername == Constants.isFail)
             {
@@ -96,14 +96,17 @@ namespace LibruryDatabase.Controls
                 return;
             }
 
-            Message.GreenColor(Message.PrintRemoveUserMessage());
+            else
+            {
+                Message.GreenColor(Message.PrintRemoveUserMessage());
 
-            LogData.Get().StoreLog(Constants.ADMIN, Constants.REMOVE_USER , id); // 로그에 저장
-            UserData.Get().RemoveUserInformation(id); // 유저 삭제
-            UserData.Get().userData.Clear(); // 리스트 초기화
-            UserData.Get().StoreUserData(); // 리스트에 북 데이터 저장
-            SelectMenu();
-                        
+                LogData.Get().StoreLog(Constants.ADMIN, Constants.REMOVE_USER, id); // 로그에 저장
+                UserData.Get().RemoveUserInformation(id); // 유저 삭제
+                UserData.Get().RemoveBorrowmember(id); // 대여목록 아이디 제거
+                UserData.Get().userData.Clear(); // 리스트 초기화
+                UserData.Get().StoreUserData(); // 리스트에 북 데이터 저장
+                SelectMenu();
+            }          
         }
 
 

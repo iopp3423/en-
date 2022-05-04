@@ -116,10 +116,7 @@ namespace LibruryDatabase.Models
                 Command.ExecuteNonQuery();
             
         }
-
-
-
-
+        
 
         public void SearchBook(string id, string number) // 로그인한 유저 아이디값, 책 번호 전달받음
         {
@@ -152,12 +149,12 @@ namespace LibruryDatabase.Models
         public void AddBorrowBook(string id, string number, string bookName, string author, string publish) // 로그인한 유저 책 대여
         {
             string borrowDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
-
+            string returnDay = DateTime.Today.AddDays(14).ToString("yyyy/MM/dd");
 
             MySqlConnection book = new MySqlConnection(Constants.getQuery);
             
                 book.Open();
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowQuery,id,number,bookName,author,publish,borrowDay,' '), book);
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowQuery,id,number,bookName,author,publish,borrowDay, returnDay), book);
                 Command.ExecuteNonQuery();
                      
         }
@@ -238,12 +235,29 @@ namespace LibruryDatabase.Models
 
                 while (userData.Read())
                 {
-                    if (userData["number"].ToString() == bookNumber && userData["returnbook"].ToString() != " ") return Constants.isSucess; // 해당 번호 책 반납했는지 체크                                     
+                    if (userData["number"].ToString() == bookNumber) return Constants.isFail; // 해당 번호 책 반납안함                                   
                 }
-                user.Close();
+            user.Close();
             
-            return Constants.isFail;
+            return Constants.isSucess; // 반납함
+        }
 
+        public bool IsCheckingBorrowedBook(string id) // 대여한 책이 있는지
+        {
+
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+
+            user.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.BorrrowBookUserquery, id), user);
+            MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+            while (userData.Read())
+            {
+                if (userData["id"].ToString() == id) return Constants.isFail; // 아이디가 있으면 반납 안함                                
+            }
+            user.Close();
+
+            return Constants.isSucess; // 반납함
         }
 
         public void ReturnBook(string bookNumber) // 로그인한 유저 책 반납

@@ -65,6 +65,16 @@ namespace LibruryDatabase.Models
                 Command.ExecuteNonQuery();
             
         }
+        public void RemoveBorrowUser(string userId) // 유저 삭제
+        {
+
+
+            MySqlConnection book = new MySqlConnection(Constants.getQuery);
+
+            book.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteUserQuery, userId), book);
+            Command.ExecuteNonQuery();
+        }
 
         public bool IsCheckingIdOverlap(string id) // 데베에서 중복아이디 있는지 체크
         {
@@ -221,6 +231,16 @@ namespace LibruryDatabase.Models
                 }
                 userInformation.Close();
             
+        }
+
+        public void RemoveBorrowmember(string id) // 대여목록에 있는 아이디 제거
+        {
+
+            MySqlConnection book = new MySqlConnection(Constants.getQuery);
+
+            book.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.RemoveBorrowmember, id), book);
+            Command.ExecuteNonQuery();
         }
     }
 }
