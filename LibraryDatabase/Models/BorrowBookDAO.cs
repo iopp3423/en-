@@ -93,8 +93,61 @@ namespace LibruryDatabase.Models
 
         }
 
+        public bool IsCheckingBookOverlap(string id, string bookNumber) // 데베에서 책 대여했는지 체크 true면 대여목록에 책 있음
+        {
 
-       
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowIdQuery, id), conn);
+            MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+            while (userData.Read())
+            {
+                if (userData["number"].ToString() == bookNumber)
+                {
+                    conn.Close();
+                    return Constants.isSucess;// 대여함
+                }
+            }
+            conn.Close();
+            return Constants.isFail;
+        }
+
+        public void BorrowBook(string id, string number) // 로그인한 유저 아이디값, 책 번호 전달받음
+        {
+
+            string bookName = " ";
+            string author = " ";
+            string publish = " ";
+
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.SearchDataQuery, number), conn);
+            MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+            while (bookData.Read())
+            {
+                bookName = (bookData["name"].ToString());
+                author = (bookData["author"].ToString());
+                publish = (bookData["publish"].ToString());
+            }
+            conn.Close();
+
+
+            AddBorrowBook(id, number, bookName, author, publish); // 책 대여 함수에 데이터 전송
+        }
+
+
+
+        public void AddBorrowBook(string id, string number, string bookName, string author, string publish) // 로그인한 유저 책 대여
+        {
+            string borrowDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
+            string returnDay = DateTime.Today.AddDays(Constants.RETURNDAY).ToString("yyyy/MM/dd");
+
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowQuery, id, number, bookName, author, publish, borrowDay, returnDay), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+        }
+
 
 
         public void close()

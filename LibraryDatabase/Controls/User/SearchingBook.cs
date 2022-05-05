@@ -55,7 +55,7 @@ namespace LibruryDatabase.Controls
         {
             Console.Clear();
             Menu.PrintSearchMenu();
-            Menu.PrintBookData();
+            //Menu.PrintBookData();
 
             if (Constants.isBackMenu == SelectingMenu(id, Constants.isPassing) && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
             {

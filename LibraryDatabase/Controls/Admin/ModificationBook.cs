@@ -56,7 +56,7 @@ namespace LibruryDatabase.Controls
             Print.PrintSearchBookName();
             Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
             Message.GreenColor(Message.PrintReviseBookInput());
-            Print.PrintBookData(); // 책 목록 프린트
+            //Print.PrintBookData(); // 책 목록 프린트
             Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
 
 

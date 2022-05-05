@@ -98,7 +98,6 @@ namespace LibruryDatabase.Controls
             bookNumber = InputBookNumber();
 
             isAlreadyBorrow = borrowBookDao.IsCheckingAlreadyBorrowBook(id, bookNumber); // 해당 아이디로 true면 대여한 책 있음
-            //isAlreadyBorrow = BookData.Get().IsCheckingAlreadyBorrowBook(id, bookNumber); // 해당 아이디로 true면 대여한 책 있음
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
@@ -115,24 +114,13 @@ namespace LibruryDatabase.Controls
                 borrowBookDao.RemoveRetuenBookInformation(id, bookNumber); // db에서 해당 아이디에 있는 책 제거(반납)
                 bookDao.PlusBook(bookNumber); // 반납 시 책 수량 1 증가
 
-                //BookData.Get().RemoveRetuenBookInformation(id, bookNumber);// 책 반납
-                //BookData.Get().PlusBook(bookNumber); // 책 수량 증가
-                //BookData.Get().borrow.Clear(); // 리스트에 대여한 유저 책 초기화
-                //BookData.Get().bookData.Clear(); // 북 리스트 초기화
-                //BookData.Get().StoreBookData(); // 리스트에 책 리스트 저장
-                //BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
-                //bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
-
                 bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
-                bookDao.close(); // db닫기
+                bookDao.close(); // db닫기 위치 애매함 나중에 수정
                 logDao.StoreLog(id, Constants.RETURN, bookName);// 로그에 저장
 
-                //name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                //LogData.Get().StoreLog(name, Constants.RETURN, bookName); // 로그에 저장
 
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
-
 
                 Message.GreenColor(Message.PrintReturnBook());
                 SelectMenu();

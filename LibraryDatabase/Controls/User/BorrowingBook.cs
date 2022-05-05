@@ -16,6 +16,14 @@ namespace LibruryDatabase.Controls
 
         private Screen Print;
         private MessageScreen Message;
+        private LogDAO logDao;
+        private LogDTO logDto;
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
+        private BookDAO bookDao;
+        private BookDTO bookDto;
 
         public BorrowingBook()
         {
@@ -25,6 +33,14 @@ namespace LibruryDatabase.Controls
         {
            this.Print = Menu;
            this.Message = message;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
+            borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
+            bookDao = new BookDAO();
         }
         
 
@@ -53,14 +69,18 @@ namespace LibruryDatabase.Controls
             string bookNumber;
             bool isAlreadyBorrow;
             string bookName;
-            string name;
-            string returnDay = DateTime.Today.AddDays(14).ToString("yyyy/MM/dd");
+            string returnDay = DateTime.Today.AddDays(Constants.RETURNDAY).ToString("yyyy/MM/dd");
+
+            memberDao.connection(); // db 연결
+            logDao.connection(); // db연결
+            borrowBookDao.connection(); // db연결
+            bookDao.connection(); // db연결
 
 
             Console.Clear();
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOKNAME_LINE);
             Message.GreenColor(Message.PrintBorrowBookMessage());
-            Print.PrintBookData(); // 책 목록 프린트
+            Print.PrintBookData(bookDao.StoreBookReturn()); // 책 목록 프린트
             Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
 
 
@@ -101,17 +121,20 @@ namespace LibruryDatabase.Controls
                         continue;
                     }
                     break;
-                }             
+                }
 
-                if (BookData.Get().IsCheckongBookQuantity(bookNumber) == Constants.isFail) //책 수량체크
+                //BookData.Get().IsCheckongBookQuantity(bookNumber) == Constants.isFail
+                if (bookDao.IsCheckongBookQuantity(bookNumber) == Constants.isFail) //책 수량체크
                 {
                     Message.RedColor(Message.PrintNoneQuantity());
                     GoBackMenu(); 
                     return; 
                 }
 
+                //isAlreadyBorrow = BookData.Get().IsCheckingBookOverlap(id, bookNumber); // 책 대여 체크
 
-                isAlreadyBorrow = BookData.Get().IsCheckingBookOverlap(id, bookNumber); // 책 대여 체크
+                isAlreadyBorrow = borrowBookDao.IsCheckingBookOverlap(id, bookNumber); // 책 대여 체크
+
                 if (isAlreadyBorrow == Constants.isPassing)
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -121,19 +144,25 @@ namespace LibruryDatabase.Controls
                     GoBackMenu();
                 }
 
-                else if (BookData.Get().CheckBookNumber(bookNumber))
+                else if (bookDao.CheckBookNumber(bookNumber))
                 {
                     Message.GreenColor("반납기한은" + returnDay + "입니다.");
-                    BookData.Get().SearchBook(id, bookNumber);// 데베책대여                   
-                    BookData.Get().MinusBook(bookNumber); // 데베책 수량 감소
-                    BookData.Get().borrow.Clear(); // 리스트에 대여한 유저 책 초기화
-                    BookData.Get().bookData.Clear(); // 북 리스트 초기화
-                    BookData.Get().StoreBookData(); // 리스트에 책 리스트 저장
-                    BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
+                    borrowBookDao.BorrowBook(id, bookNumber); // borrowmember db 책 대여
+                    bookDao.MinusBook(bookNumber);
+                    //BookData.Get().SearchBook(id, bookNumber);// 데베책대여                   
+                    //BookData.Get().MinusBook(bookNumber); // 데베책 수량 감소
 
-                    bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
-                    name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                    LogData.Get().StoreLog(name, Constants.BORROW, bookName); // 로그에 저장
+                    //BookData.Get().borrow.Clear(); // 리스트에 대여한 유저 책 초기화
+                    //BookData.Get().bookData.Clear(); // 북 리스트 초기화
+                    //BookData.Get().StoreBookData(); // 리스트에 책 리스트 저장
+                    //BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
+                    //bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
+
+                    bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
+                    bookDao.close(); // db닫기 위치 애매함 나중에 수정
+                    logDao.StoreLog(id, Constants.BORROW, bookName); // db에 로그 내역 저장
+
+                    //LogData.Get().StoreLog(id, Constants.BORROW, bookName); // 로그에 저장
 
                     Message.GreenColor(Message.PrintDoneBorrowMessage());
                     GoBackMenu();

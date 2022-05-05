@@ -116,7 +116,9 @@ namespace LibruryDatabase.Utility
         public const int PUBLISH_LINE = 3;
         public const int BOOKNAME_LINE = 4;
         public const int EXIT = 1;
-    
+        public const int RETURNDAY = 14;
+
+
 
 
 

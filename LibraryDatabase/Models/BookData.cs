@@ -149,7 +149,7 @@ namespace LibruryDatabase.Models
         public void AddBorrowBook(string id, string number, string bookName, string author, string publish) // 로그인한 유저 책 대여
         {
             string borrowDay = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
-            string returnDay = DateTime.Today.AddDays(14).ToString("yyyy/MM/dd");
+            string returnDay = DateTime.Today.AddDays(Constants.RETURNDAY).ToString("yyyy/MM/dd");
 
             MySqlConnection book = new MySqlConnection(Constants.getQuery);
             

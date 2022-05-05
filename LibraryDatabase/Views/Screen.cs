@@ -162,27 +162,27 @@ namespace LibruryDatabase.Views
         }
 
 
-        public void PrintBookData() // 책 데이터 출력
+        public void PrintBookData(List<BookDTO> book) // 책 데이터 출력
         {
 
-            foreach (BookVO data in BookData.Get().bookData)
+            foreach (BookDTO data in book)
             {
                 Console.Write("책 번호   :");
-                Console.WriteLine(data.number);
+                Console.WriteLine(data.Number);
                 Console.Write("책 제목   :");
-                Console.WriteLine(data.title);
+                Console.WriteLine(data.Title);
                 Console.Write("책 저자   :");
-                Console.WriteLine(data.author);
+                Console.WriteLine(data.Author);
                 Console.Write("출판사    :");
-                Console.WriteLine(data.publisher);
+                Console.WriteLine(data.Publisher);
                 Console.Write("출시일    :");
-                Console.WriteLine(data.publishday);
+                Console.WriteLine(data.Publishday);
                 Console.Write("책 가격   :");
-                Console.WriteLine(data.price);
+                Console.WriteLine(data.Price);
                 Console.Write("isbn      :");
-                Console.WriteLine(data.isbn);
+                Console.WriteLine(data.Isbn);
                 Console.Write("책 수량   :");
-                Console.WriteLine(data.quantity);
+                Console.WriteLine(data.Quantity);
                 Console.WriteLine("=======================================================================");
             }
           

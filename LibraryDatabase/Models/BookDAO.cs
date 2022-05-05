@@ -18,6 +18,24 @@ namespace LibruryDatabase.Models
             return conn;
         }
 
+        public List<BookDTO> StoreBookReturn() // 도서대여한 회원정보 리턴
+        {
+            List<BookDTO> book = new List<BookDTO>();
+
+            conn.Open();
+            //ExecuteReader를 이용하여
+            //연결 모드로 데이타 가져오기
+            MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, conn);
+            MySqlDataReader Data = Command.ExecuteReader();
+
+            while (Data.Read())
+            {
+                book.Add(new BookDTO(Data["number"].ToString(), Data["name"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["publishday"].ToString(), Data["price"].ToString(), Data["isbn"].ToString(), Data["quantity"].ToString()));
+            }
+            conn.Close();
+            return book;
+        }
+
         public void PlusBook(string bookNumber) // 책 반납시 해당 책 갯수 1 증가
         {
             conn.Open();
@@ -42,6 +60,56 @@ namespace LibruryDatabase.Models
             conn.Close();
             return bookData["name"].ToString();
         }
+
+        public bool IsCheckongBookQuantity(string bookNumber) // 책 수량 체크
+        {
+
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowedIdQuery, bookNumber), conn);
+            MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+            while (bookData.Read())
+            {
+                if (bookData["quantity"].ToString() == Constants.NONE_BOOK)
+                {
+                    conn.Close();
+                    return Constants.isFail;
+                }
+            }
+            conn.Close();
+            return Constants.isPassing;
+
+        }
+
+        public void MinusBook(string bookNumber) // 책 대여시 해당 책 갯수 1 감소
+        {
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.minusBook, bookNumber), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public bool CheckBookNumber(string bookNumber)
+        {
+            conn.Open();
+            //ExecuteReader를 이용하여
+            //연결 모드로 데이타 가져오기
+            MySqlCommand Command = new MySqlCommand(Constants.SearchBookQuery, conn);
+            MySqlDataReader Data = Command.ExecuteReader();
+
+            while (Data.Read())
+            {
+                if(Data["number"].ToString() == bookNumber)
+                {
+                    conn.Close();
+                    return Constants.isPassing;
+                }
+            }
+            conn.Close();
+            return Constants.isFail;
+        }
+
+
         public void close()
         {
             conn.Close();
