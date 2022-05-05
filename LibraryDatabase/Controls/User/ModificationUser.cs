@@ -16,6 +16,11 @@ namespace LibruryDatabase.Controls
         private string callNumber;
         private string password;
         private string address;
+        private LogDAO logDao;
+        private LogDTO logDto;
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+
 
         private Screen Menu;
         private MessageScreen Print;
@@ -28,6 +33,10 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = Menu;
             this.Print = message;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
         }
 
         public bool IsGoingReturnMenu() //이전 메뉴로 돌아가기
@@ -107,11 +116,19 @@ namespace LibruryDatabase.Controls
 
         public void ModifyPhoneNumber(string id)  // 전화번호
         {
+            memberDao.connection(); // db연결
+            logDao.connection(); // db연결
+
             ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기
             callNumber = InputCallNumber(); // 입력받기
-            UserData.Get().ModifyPhone(callNumber, id); // 정보 변경
+            memberDao.ModifyPhone(callNumber, id); // db에서 전화번호 변경
+
+            //UserData.Get().ModifyPhone(callNumber, id); // 정보 변경
             ClearandStore();// 리스트 초기화 후 저장
-            LogData.Get().StoreLog(id, "번호변경", callNumber); // 로그에 저장
+
+            logDao.StoreLog(id, "번호변경", callNumber);// 로그에 저장
+            //LogData.Get().StoreLog(id, "번호변경", callNumber); // 로그에 저장
+
 
             ModifyAfterMessage();// 안내메시지
         }
@@ -120,9 +137,13 @@ namespace LibruryDatabase.Controls
         {
             ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기   
             password = InputPasswordCheck();// 입력받기
-            UserData.Get().ModifyPassword(password, id); // 정보 변경
+
+            memberDao.ModifyPassword(password, id);
+            //UserData.Get().ModifyPassword(password, id); // 정보 변경
             ClearandStore();// 리스트 초기화 후 저장
-            LogData.Get().StoreLog(id, "비밀번호변경", password); // 로그에 저장
+
+            logDao.StoreLog(id, "비밀번호변경", password);// 로그에 저장
+            //LogData.Get().StoreLog(id, "비밀번호변경", password); // 로그에 저장
 
             ModifyAfterMessage();// 안내메시지
         }
@@ -133,10 +154,12 @@ namespace LibruryDatabase.Controls
             ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기 
             address = InputAddress();// 입력받기
 
-            Console.Write(address);
-            UserData.Get().ModifyAddress(address, id); // 정보 변경
+            memberDao.ModifyAddress(address, id);
+            //UserData.Get().ModifyAddress(address, id); // 정보 변경
             ClearandStore();// 리스트 초기화 후 저장
-            LogData.Get().StoreLog(id, "주소변경", address); // 로그에 저장
+
+            logDao.StoreLog(id, "주소변경", address);// 로그에 저장
+            //LogData.Get().StoreLog(id, "주소변경", address); // 로그에 저장
 
             ModifyAfterMessage();// 안내메시지
         }

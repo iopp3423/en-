@@ -155,8 +155,7 @@ namespace LibruryDatabase.Controls
 
             memberDto.Id = InputId();
 
-            isOverlapCheck = memberDao.IsCheckingIdOverlap(id);
-            //isOverlapCheck = UserData.Get().IsCheckingIdOverlap(id); // 데베에서 id 중복 확인
+            isOverlapCheck = memberDao.IsCheckingIdOverlap(id); // db에 중복 id 있으면 true
 
             if (isOverlapCheck == Constants.isSucess)
             {
@@ -211,7 +210,6 @@ namespace LibruryDatabase.Controls
             message.GreenColor(message.PrintDoneRegister());
 
             logDao.StoreLog(id, Constants.LIBRARY, Constants.REGISTER); // db에 로그 내역 저장
-
 
             while (Constants.isEntrancing)
             {

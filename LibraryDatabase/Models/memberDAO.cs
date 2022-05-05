@@ -89,6 +89,34 @@ namespace LibruryDatabase.Models
         }
 
 
+        public void ModifyPhone(string callNumber, string id)// 전화번호 db에서 변경
+        {
+
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePhoneQuery, callNumber, id), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+
+        }
+
+        public void ModifyPassword(string password, string id) // 비밀번호 db에서 변경
+        { 
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePwQuery, password, id), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public void ModifyAddress(string address, string id)// 주소 db에서 변경
+        {
+
+
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.updateAddressQuery, address, id), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+
+        }
 
     }
 }

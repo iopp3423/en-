@@ -140,7 +140,7 @@ namespace LibruryDatabase.Models
             
             return id;
         }
-
+        /*
         public void ModifyPhone(string callNumber, string id)// 전화번호 데베에서 변경
         {
 
@@ -150,8 +150,7 @@ namespace LibruryDatabase.Models
                 user.Open();
                
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.updatePhoneQuery,callNumber, id), user);
-                Command.ExecuteNonQuery();
-            
+                Command.ExecuteNonQuery();            
         }
 
         public void ModifyPassword(string password, string id) // 비밀번호 데베에서 변경
@@ -177,6 +176,7 @@ namespace LibruryDatabase.Models
                 Command.ExecuteNonQuery();  
             
         }
+        */
 
         public bool IsCheckingExistenceId(string id) // 아이디 존재유무
         {
