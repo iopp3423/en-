@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using LibruryDatabase.Utility;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using System.Net;
+using System.Text.RegularExpressions;
 
 namespace LibruryDatabase.Models
 {
@@ -36,6 +40,115 @@ namespace LibruryDatabase.Models
             return book;
         }
 
+        public List<BookDTO> StoreNaverBookReturn() // 네이버도서목록 리턴
+        {
+            List<BookDTO> naverBook = new List<BookDTO>();
+
+            conn.Open();
+            //ExecuteReader를 이용하여
+            //연결 모드로 데이타 가져오기
+            MySqlCommand Command = new MySqlCommand(Constants.naverQuery, conn);
+            MySqlDataReader Data = Command.ExecuteReader();
+            while (Data.Read())
+            {
+                naverBook.Add(new BookDTO(Data["number"].ToString(),Data["title"].ToString(), Data["author"].ToString(), Data["publisher"].ToString(), Data["publishday"].ToString(), Data["price"].ToString(), Data["isbn"].ToString(), Data["description"].ToString()));
+            }
+            conn.Close();
+            return naverBook;
+        }
+
+        public void StoreNaverBook(string keyword, string display)
+        {
+            conn.Open();
+            string query = string.Format("{0}&display={1}", keyword, display); //쿼리 만들기
+            string url = "https://openapi.naver.com/v1/search/book.json?query=";
+
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + query);
+
+            request.Headers.Add("X-Naver-Client-Id", Constants.NAVER_ID); // 클라이언트 아이디
+            request.Headers.Add("X-Naver-Client-Secret", Constants.NAVER_PASSWORD);// 클라이언트 시크릿
+
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            string status = response.StatusCode.ToString();
+
+            if (status == "OK")
+            {
+                Stream stream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(stream, Encoding.UTF8);
+                string text = reader.ReadToEnd();
+
+                text = text.Replace("<b>", "");
+                text = text.Replace("</b>", "");
+                text = text.Replace("&lt;", "<");
+                text = text.Replace("&gt;", ">");
+
+                JObject ParseJson = JObject.Parse(text);
+
+                for (int index = Constants.CURRENT_LOCATION; index < int.Parse(display); index++)
+                {
+                    string title = ParseJson["items"][index]["title"].ToString();
+                    title = title.Replace("&quot;", "\""); //HTML 태그 변경              
+                    string price = ParseJson["items"][index]["price"].ToString();
+                    string author = ParseJson["items"][index]["author"].ToString();
+                    string publisher = ParseJson["items"][index]["publisher"].ToString();
+                    string isbn = ParseJson["items"][index]["isbn"].ToString();
+                    string publishday = ParseJson["items"][index]["pubdate"].ToString();
+                    string description = ParseJson["items"][index]["description"].ToString();
+                    description = description.Replace("&quot;", "\""); //HTML 태그 변경
+                  
+                    MySqlCommand Command = new MySqlCommand(String.Format(Constants.NaverBookQuery, title, author, price, publisher, publishday, isbn, RemoveSpecialCharacterFromString(description)), conn);
+                    Command.ExecuteNonQuery();                   
+                }
+                
+            }
+            else
+            {
+                Console.WriteLine("Error 발생=" + status);
+            }
+            conn.Close();
+        }
+
+        public string RemoveSpecialCharacterFromString(string description) // 책 설명 특수문자 제거
+        {
+            return Regex.Replace(description, Utility.Exception.DESCRIPTION, string.Empty, RegexOptions.Singleline);
+        }
+
+        public bool CheckNaverBookNumber(string bookNumber) // true면 검색 후 입력한 네이버 도서번호가 있음
+        {
+            conn.Open();
+            //ExecuteReader를 이용하여
+            //연결 모드로 데이타 가져오기
+            MySqlCommand Command = new MySqlCommand(Constants.naverQuery, conn);
+            MySqlDataReader Data = Command.ExecuteReader();
+            while (Data.Read())
+            {
+                if(Data["number"].ToString() == bookNumber)
+                {
+                    conn.Close();
+                    return Constants.isPassing;
+                }
+            }
+            conn.Close();
+            return Constants.isFail;
+        }
+
+        public void RemoveAllNaverBook() // naver db 초기화
+        {
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.RemoveAllNaverBook), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public void InsertRequestBook(string bookNumber) // request db에 책 추가
+        {
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.requestQuery, bookNumber), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+        }
         public void PlusBook(string bookNumber) // 책 반납시 해당 책 갯수 1 증가
         {
             conn.Open();
@@ -63,8 +176,6 @@ namespace LibruryDatabase.Models
 
         public string BringSearchResult(string name) // 데베에 책 있는지 체크
         {
-
-
             MySqlConnection user = new MySqlConnection(Constants.getQuery);
 
             user.Open();

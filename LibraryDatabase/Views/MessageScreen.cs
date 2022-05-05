@@ -149,11 +149,11 @@ namespace LibruryDatabase.Views
         {
             return "삭제되었습니다.                      뒤로가기 : ESC";
         }
-        public void PrintAddisbn()
+        public void PrintAddbookNumber()
         {
-            Console.Write("추가하실 도서의 isbn을 입력해주세요 : ");
+            Console.Write("추가하실 도서의 번호 입력해주세요 : ");
         }
-        public string PrintNoneIsbnMessage()
+        public string PrintNoneNumberMessage()
         {
             return "맞는 isbn이 없습니다. 뒤로가기 : ESC";
         }

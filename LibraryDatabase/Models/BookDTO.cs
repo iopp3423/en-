@@ -16,6 +16,7 @@ namespace LibruryDatabase.Models
         public string price;
         public string isbn;
         public string quantity;
+        public string description;
 
 
         public BookDTO()
@@ -75,6 +76,11 @@ namespace LibruryDatabase.Models
         {
             get { return quantity; }
             set { quantity = value; }
+        }
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
         }
     }
 }

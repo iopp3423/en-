@@ -410,8 +410,7 @@ namespace LibruryDatabase.Models
                 book.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.NaverBookQuery, title, author, price, publisher, publishday, isbn, description), book);
                 Command.ExecuteNonQuery();
-               
-            
+                      
         }
 
         public void RemoveAllNaverBook() 
@@ -420,8 +419,7 @@ namespace LibruryDatabase.Models
             
                 book.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.RemoveAllNaverBook), book);
-                Command.ExecuteNonQuery();
-            
+                Command.ExecuteNonQuery();   
         }
 
         public void StoreBookUserRequest(string bookName, string author, string publish, string publishDay, string price, string isbn, string quantity) // 유저요청 책 추가

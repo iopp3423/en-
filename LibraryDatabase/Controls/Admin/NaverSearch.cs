@@ -247,7 +247,7 @@ namespace LibruryDatabase.Controls
         {
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
-            Message.PrintAddisbn();
+            Message.PrintAddbookNumber();
 
             while (Constants.isPassing)
             {

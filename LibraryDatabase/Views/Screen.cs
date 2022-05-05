@@ -513,31 +513,31 @@ namespace LibruryDatabase.Views
             }
         
         }
-        public void PrintRequestBook()
+        public void PrintRequestBook(List<BookDTO> book)
         {
             Console.Write("\n\n");
-            foreach (NaverBookVO book in BookData.Get().NaverBook)
+            foreach (BookDTO data in book)
             {
+                Console.Write("책 번호 :");
+                Console.WriteLine(data.Number);
                 Console.Write("책 제목 :");
-                Console.WriteLine(book.title);
+                Console.WriteLine(data.Title);
                 Console.Write("책 저자 :");
-                Console.WriteLine(book.author);
+                Console.WriteLine(data.Author);
                 Console.Write("책 가격 :");
-                Console.WriteLine(book.price);
+                Console.WriteLine(data.Price);
                 Console.Write("출판사  :");
-                Console.WriteLine(book.publisher);
+                Console.WriteLine(data.Publisher);
                 Console.Write("출시일  :");
-                Console.WriteLine(book.publishday);
+                Console.WriteLine(data.Publishday);
                 Console.Write("isbn    :");
-                Console.WriteLine(book.isbn);
+                Console.WriteLine(data.Isbn);
                 Console.Write("책 설명 :");
-                Console.WriteLine(book.description);
+                Console.WriteLine(data.Description);
                 Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
             }
-           
         }
 
-        
         public void PrintRequestBookList()
         {
             Console.Write("\n\n");

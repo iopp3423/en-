@@ -16,7 +16,16 @@ namespace LibruryDatabase.Controls
         private  Screen Menu;
         private  MessageScreen Message;
         private string bookName;
-        private string isbn;
+        private string bookNumber;
+
+        private LogDAO logDao;
+        private LogDTO logDto;
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
+        private BookDAO bookDao;
+        private BookDTO bookDto;
 
         public RequestBook()
         {
@@ -27,6 +36,14 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = Menu;
             this.Message = message;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
+            borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
+            bookDao = new BookDAO();
         }
 
         public void SelectMenu() //이전 메뉴로 돌아가기
@@ -51,6 +68,11 @@ namespace LibruryDatabase.Controls
 
         public void RequestAddBook() // 유저 책 요청 메서드
         {
+            memberDao.connection(); // db 연결
+            logDao.connection(); // db연결
+            borrowBookDao.connection(); // db연결
+            bookDao.connection(); // db연결
+
             Menu.PrintMain();
             Message.PrintBookTitle();
             Message.GreenColor(Message.PrintContinueRequestmessage());
@@ -74,34 +96,37 @@ namespace LibruryDatabase.Controls
             BookData.Get().NaverBook.Clear(); // 리스트 비우기
 
             bookName = InputBookName(); //책제목입력
+            bookDao.RemoveAllNaverBook(); // 네이버 db 초기화
+            bookDao.StoreNaverBook(bookName, Constants.ADD_BOOK.ToString()); // db에 네이버 검색한 책 저장
+
             BookData.Get().StoreNaverBookToList(bookName, Constants.ADD_BOOK.ToString(), Constants.isPassing); // 리스트에 저장
 
             Console.WriteLine("\n\n");
 
-            Menu.PrintRequestBook();//도서출력          
+            Menu.PrintRequestBook(bookDao.StoreNaverBookReturn());//도서출력          
+
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-            isbn = InputISBN();
+            bookNumber = InputbookNumber();
 
-            if (Checkisbn(isbn))
+            if (bookDao.CheckNaverBookNumber(bookNumber))// 도서번호 맞게 입력하면
             {
                 Message.GreenColor(Message.BackPrint());
+                bookDao.InsertRequestBook(bookNumber);
                 GoBackMenu();
             }
 
-            else if (!Checkisbn(isbn))
+            else if (!bookDao.CheckNaverBookNumber(bookNumber))// 도서번호 잘못 입력하면
             {
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
-                Message.RedColor(Message.PrintNoneIsbnMessage());
+                Message.RedColor(Message.PrintNoneNumberMessage());
                 SelectMenu();
-            }//isbn없음 메시지 출력
+            }
            
         }
 
         public string InputBookName()//책이름입력
         {
-
-
             while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.REQUEST_X, Constants.SEARCH_BOOK);
@@ -122,16 +147,16 @@ namespace LibruryDatabase.Controls
             return bookName;
         }
 
-        public string InputISBN()//isbn입력
+        public string InputbookNumber()//책 번호 입력
         {
             while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.REQUEST_X, Constants.SEARCH_BOOK);
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
-                Message.PrintAddisbn();
-                isbn = Console.ReadLine();
+                Message.PrintAddbookNumber();
+                bookNumber = Console.ReadLine();
 
-                if (Constants.isFail == Regex.IsMatch(isbn, Utility.Exception.ISBN))
+                if (Constants.isFail == Regex.IsMatch(bookNumber, Utility.Exception.BOOKNUMBER_CHECK))
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                     Menu.PrintLoginErrorMessage();
@@ -140,26 +165,8 @@ namespace LibruryDatabase.Controls
                 break;
             }
             Menu.PrintInputMessage();
-
-            return isbn;
-        }
-
-
-        public bool Checkisbn(string Isbn) //isbn 체크
-        {
-            bool isNoneisbn = Constants.isFail;
-
-            foreach (NaverBookVO book in BookData.Get().NaverBook)
-            {
-                if (Isbn == book.isbn) // db에 저장
-                {
-                    BookData.Get().StoreRequestBook(book.title, book.author, book.publisher, book.publishday, book.price, book.isbn, Constants.ADD_BOOK.ToString());
-                    isNoneisbn = Constants.isPassing;
-                    return isNoneisbn;
-                }
-            }
-            return isNoneisbn;                        
-        }
+            return bookNumber;
+        }      
 
 
         public void ClearCurrentLine(int number) // 줄 지우기
