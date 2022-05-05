@@ -79,6 +79,7 @@ namespace LibruryDatabase.Models
             Command.ExecuteNonQuery();
         }
 
+        /*
         public bool IsCheckingIdOverlap(string id) // 데베에서 중복아이디 있는지 체크
         {
 
@@ -99,6 +100,7 @@ namespace LibruryDatabase.Models
             return Constants.isFail;
 
         }
+        */
 
         public bool IsCheckingLogin(string id, string password) // 데베에서 회원 유무 확인
         {
@@ -217,7 +219,7 @@ namespace LibruryDatabase.Models
 
         }
 
-        public void StoreUserData()
+        public void StoreUserData() /// 옮겼음
         {
             MySqlConnection userInformation = new MySqlConnection(Constants.getQuery);
             
@@ -232,8 +234,7 @@ namespace LibruryDatabase.Models
                 {
                     userData.Add(new UserVO(user["id"].ToString(), user["pw"].ToString(), user["name"].ToString(), user["phone"].ToString(), user["age"].ToString(), user["address"].ToString()));
                 }
-                userInformation.Close();
-            
+                userInformation.Close();    
         }
 
         public void RemoveBorrowmember(string id) // 대여목록에 있는 아이디 제거

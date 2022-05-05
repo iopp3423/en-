@@ -57,9 +57,10 @@ namespace LibruryDatabase.Controls
 
         public void ModifyUserInformation(string id, string password)
         {
+            memberDao.connection();
             Console.Clear();
             Menu.PrintMain();
-            Menu.PrintLoginUser(id, password);
+            Menu.PrintLoginUser(memberDao.StoreUserDataToList(),id, password); // 로그인한 아이디 비밀번호 출력
             Menu.PrintUserInformation();
 
             if (Constants.isBack == IsChoosingMenu(id)) // 마우스 함수
@@ -266,8 +267,7 @@ namespace LibruryDatabase.Controls
 
         public void ClearandStore()
         {
-            UserData.Get().userData.Clear();
-            UserData.Get().StoreUserData(); // 저장
+            memberDao.StoreUserDataToList(); // 저장
         }
 
 

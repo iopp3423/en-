@@ -21,6 +21,26 @@ namespace LibruryDatabase.Models
             return conn;
         }
 
+
+        public List<memberDTO> StoreUserDataToList() // 회원정보 리턴
+        {
+            List<memberDTO> member = new List<memberDTO>();
+
+            conn.Open();
+            //ExecuteReader를 이용하여
+            //연결 모드로 데이타 가져오기
+            MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, conn);
+            MySqlDataReader user = Command.ExecuteReader();
+
+            while (user.Read())
+            {     
+                member.Add(new memberDTO(user["id"].ToString(), user["pw"].ToString(), user["name"].ToString(), user["phone"].ToString(), user["age"].ToString(), user["address"].ToString()));             
+            }
+            conn.Close();
+            return member;        
+        }
+
+
         public bool Login(string id, string password) // 관리자 아이디 로그인
         {
             conn.Open();

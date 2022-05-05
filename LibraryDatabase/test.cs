@@ -11,19 +11,19 @@ namespace LibruryDatabase
 {
     internal class test
     {
-        private memberDAO dao;
-        private memberDTO dto;
+        private memberDAO memberDao;
+        private memberDTO memverDto;
 
         public test()
         {
-            dao = new memberDAO();
+           memberDao = new memberDAO();
         }
 
         public void login()
         {
             string id;
             string pw;
-            dao.connection();
+            memberDao.connection();
 
             id = Console.ReadLine();
             pw = Console.ReadLine();
@@ -36,9 +36,12 @@ namespace LibruryDatabase
             Console.WriteLine(dto.Id);
             Console.WriteLine(dto.Password);
 
-            Console.WriteLine(dao.Login(id, pw));
+            Console.WriteLine(memberDao.Login(id, pw));
         }      
 
+       
     }
+
+    
     
 }

@@ -21,6 +21,7 @@ namespace LibruryDatabase.Models
             return conn;
         }
 
+        
         public void StoreLog(string id, string record, string log) // 로그 추가
         {
 
@@ -72,7 +73,6 @@ namespace LibruryDatabase.Models
                     return Constants.isSucess;
                 }
             }
-
             conn.Close();
             return Constants.isFail;
         }

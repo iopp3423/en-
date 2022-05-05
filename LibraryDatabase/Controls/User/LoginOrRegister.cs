@@ -227,6 +227,7 @@ namespace LibruryDatabase.Controls
         public void UserLogin() // 로그인
         {
             memberDao.connection();
+            logDao.connection();
 
             Console.Clear();
             Menu.PrintMain();

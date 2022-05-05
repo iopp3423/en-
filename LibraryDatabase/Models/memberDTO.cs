@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibruryDatabase.Models
 {
-    internal class memberDTO
+    public class memberDTO
     {
         private string id;
         private string password;

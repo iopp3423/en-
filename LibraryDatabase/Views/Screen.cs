@@ -11,7 +11,14 @@ namespace LibruryDatabase.Views
 {
     public class Screen
     {
+        private memberDAO memberDao;
+        private memberDTO memberDto;
 
+        public Screen()
+        {
+            memberDao = new memberDAO();
+            memberDao = new memberDAO();
+        }
         
 
        public void PrintMain()
@@ -186,8 +193,10 @@ namespace LibruryDatabase.Views
     }
 
 
-        public void PrintLoginUser(string id, string password)
+        public void PrintLoginUser(List<memberDTO>members, string id, string password)
         {
+
+            /*
             Console.WriteLine("====================================================================");
            
             foreach (UserVO data in UserData.Get().userData)
@@ -207,6 +216,27 @@ namespace LibruryDatabase.Views
                     Console.Write("주소 :");
                     Console.WriteLine(data.address);
                     Console.WriteLine("=======================================================================");
+                }
+            }
+            */
+            Console.WriteLine("====================================================================");
+            foreach (memberDTO data in members)
+            {
+                if (data.Id.Contains(id) && data.Password.Contains(password))
+                {
+                    Console.Write("아이디 :");
+                    Console.WriteLine(data.Id);
+                    Console.Write("비밀번호 :");
+                    Console.WriteLine(data.Password);
+                    Console.Write("이름 :");
+                    Console.WriteLine(data.Name);
+                    Console.Write("전화번호 :");
+                    Console.WriteLine(data.Phone);
+                    Console.Write("나이 :");
+                    Console.WriteLine(data.Age);
+                    Console.Write("주소 :");
+                    Console.WriteLine(data.Address);
+                    Console.WriteLine("====================================================================");
                 }
             }
         }
