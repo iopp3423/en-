@@ -16,6 +16,16 @@ namespace LibruryDatabase.Controls
 
         private Screen Menu;
         private MessageScreen Message;
+        private LogDAO logDao;
+        private LogDTO logDto;
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
+        private BookDAO bookDao;
+        private BookDTO bookDto;
+
+
 
         public ReturnBook()
         {
@@ -26,6 +36,14 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = Menu;
             this.Message = message;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
+            borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
+            bookDao = new BookDAO();
         }
 
         public void SelectMenu() //이전 메뉴로 돌아가기
@@ -53,12 +71,13 @@ namespace LibruryDatabase.Controls
             string bookNumber;
             bool isAlreadyBorrow;
             string bookName;
-            string name;
 
-                      
+            borrowBookDao.connection(); // db 연결
+            bookDao.connection(); // db연결
+            logDao.connection(); // db연결
+
             Console.Clear();
-            Menu.PrintBorrowBookData(id);
-
+            Menu.PrintBorrowBookData(borrowBookDao.StoreBorrowBookmemberReturn(), id);// db에서 책 대여한 유저목록 전달
             Message.GreenColor(Message.PrintReturnBookMessage());
 
 
@@ -77,7 +96,10 @@ namespace LibruryDatabase.Controls
 
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             bookNumber = InputBookNumber();
-            isAlreadyBorrow = BookData.Get().IsCheckingAlreadyBorrowBook(id, bookNumber);
+
+            isAlreadyBorrow = borrowBookDao.IsCheckingAlreadyBorrowBook(id, bookNumber); // 해당 아이디로 true면 대여한 책 있음
+            //isAlreadyBorrow = BookData.Get().IsCheckingAlreadyBorrowBook(id, bookNumber); // 해당 아이디로 true면 대여한 책 있음
+
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
             if (isAlreadyBorrow == Constants.isFail) // 대여목록에 책이 없음
@@ -90,16 +112,23 @@ namespace LibruryDatabase.Controls
             else // 대여목록에 책 있으면
             {
 
-                BookData.Get().RemoveRetuenBookInformation(id, bookNumber);// 책 반납
-                BookData.Get().PlusBook(bookNumber); // 책 수량 증가
-                BookData.Get().borrow.Clear(); // 리스트에 대여한 유저 책 초기화
-                BookData.Get().bookData.Clear(); // 북 리스트 초기화
-                BookData.Get().StoreBookData(); // 리스트에 책 리스트 저장
-                BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
+                borrowBookDao.RemoveRetuenBookInformation(id, bookNumber); // db에서 해당 아이디에 있는 책 제거(반납)
+                bookDao.PlusBook(bookNumber); // 반납 시 책 수량 1 증가
 
-                bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
-                name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, Constants.RETURN, bookName); // 로그에 저장
+                //BookData.Get().RemoveRetuenBookInformation(id, bookNumber);// 책 반납
+                //BookData.Get().PlusBook(bookNumber); // 책 수량 증가
+                //BookData.Get().borrow.Clear(); // 리스트에 대여한 유저 책 초기화
+                //BookData.Get().bookData.Clear(); // 북 리스트 초기화
+                //BookData.Get().StoreBookData(); // 리스트에 책 리스트 저장
+                //BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
+                //bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
+
+                bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
+                bookDao.close(); // db닫기
+                logDao.StoreLog(id, Constants.RETURN, bookName);// 로그에 저장
+
+                //name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
+                //LogData.Get().StoreLog(name, Constants.RETURN, bookName); // 로그에 저장
 
                 Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
                 ClearCurrentLine(Constants.CURRENT_LOCATION);

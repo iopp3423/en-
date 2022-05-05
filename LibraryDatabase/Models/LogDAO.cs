@@ -10,7 +10,7 @@ using System.IO;
 
 namespace LibruryDatabase.Models
 {
-    internal class LogDAO
+    public class LogDAO
     {
 
         private MySqlConnection conn;

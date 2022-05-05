@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibruryDatabase.Models
 {
-    internal class BorrowBookDTO
+    public class BorrowBookDTO
     {
         public string id;
         public string number;

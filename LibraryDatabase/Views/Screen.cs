@@ -266,10 +266,10 @@ namespace LibruryDatabase.Views
 
 
 
-        public void PrintBorrowBookData(string id) // 대여한 책 데이터 출력
+        public void PrintBorrowBookData(List<BorrowBookDTO> member, string id) // 대여한 책 데이터 출력
         {
 
-            foreach (BorrowUserVO data in BookData.Get().borrow)
+            foreach (BorrowBookDTO data in member)
             {
                 if (data.id.Contains(id))
                 {

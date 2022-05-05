@@ -203,7 +203,7 @@ namespace LibruryDatabase.Models
             
         }
 
-        public bool IsCheckingAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크
+        public bool IsCheckingAlreadyBorrowBook(string id, string bookNumber) // 대여한 책인지 체크 
         {
 
             MySqlConnection user = new MySqlConnection(Constants.getQuery);

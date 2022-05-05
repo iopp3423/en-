@@ -103,7 +103,9 @@
     <Compile Include="Controls\Admin\RemovalBook.cs" />
     <Compile Include="Controls\User\SearchingBook.cs" />
     <Compile Include="Controls\ChoiceUserOrAdmin.cs" />
+    <Compile Include="Models\BookDAO.cs" />
     <Compile Include="Models\BookData.cs" />
+    <Compile Include="Models\BookDTO.cs" />
     <Compile Include="Models\BookVO.cs" />
     <Compile Include="Models\BorrowBookDAO.cs" />
     <Compile Include="Models\BorrowBookDTO.cs" />

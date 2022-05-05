@@ -9,7 +9,7 @@ using LibruryDatabase.Utility;
 
 namespace LibruryDatabase.Models
 {
-    internal class BorrowBookDAO
+    public class BorrowBookDAO
     {
         private MySqlConnection conn;
 
@@ -17,6 +17,24 @@ namespace LibruryDatabase.Models
         {
             conn = Connection.getConnection();
             return conn;
+        }
+
+        public List<BorrowBookDTO> StoreBorrowBookmemberReturn() // 도서대여한 회원정보 리턴
+        {
+            List<BorrowBookDTO> member = new List<BorrowBookDTO>();
+
+            conn.Open();
+            //ExecuteReader를 이용하여
+            //연결 모드로 데이타 가져오기
+            MySqlCommand Command = new MySqlCommand(Constants.BorrrowBookUserquery, conn);
+            MySqlDataReader Data = Command.ExecuteReader();
+
+            while (Data.Read())
+            {
+                member.Add(new BorrowBookDTO(Data["id"].ToString(), Data["number"].ToString(), Data["bookname"].ToString(), Data["author"].ToString(), Data["publish"].ToString(), Data["borrowbook"].ToString(), Data["returnbook"].ToString()));
+            }
+            conn.Close();
+            return member;           
         }
 
         public void RemoveBorrowmember(string id) // 대여목록에 있는 아이디 db에서 제거
@@ -30,7 +48,6 @@ namespace LibruryDatabase.Models
 
         public bool IsCheckingBorrowedBook(string id) // 대여한 책이 있으면 False, 없으면 true
         {
-
             conn.Open();
             MySqlCommand Command = new MySqlCommand(Constants.BorrrowBookUserquery, conn);
             MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
@@ -47,40 +64,43 @@ namespace LibruryDatabase.Models
             return Constants.isSucess; // 반납함
         }
 
-
-        /*
-        public bool Login(string id, string password) // 관리자 아이디 로그인
+        public bool IsCheckingAlreadyBorrowBook(string id, string bookNumber) // db에서 검사 후 true면 대여한 책 있는 유저
         {
+
             conn.Open();
-            MySqlCommand Command = new MySqlCommand(Constants.AdminSearchQuery, conn);
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowUserQuery, id), conn);
             MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
 
             while (userData.Read())
             {
-                if (userData["id"].ToString() == id && userData["pw"].ToString() == password)
+                if (userData["number"].ToString() == bookNumber)
                 {
                     conn.Close();
                     return Constants.isSucess;
                 }
             }
             conn.Close();
-
             return Constants.isFail;
         }
 
-        public void StoreUserInformation(string id, string pw, string name, string phone, string age, string address) // db 회원가입 정보 저장
+        public void RemoveRetuenBookInformation(string id, string bookNumber) // 해당 아이디에서 반납한 책 제거 
         {
+
             conn.Open();
-            MySqlCommand Command = new MySqlCommand(String.Format(Constants.insertUserQuery, id, pw, name, phone, age, address), conn);
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.revomeReturnBook, id, bookNumber), conn);
             Command.ExecuteNonQuery();
             conn.Close();
+
         }
-        */
+
+
+       
 
 
         public void close()
         {
             conn.Close();
         }
+
     }
 }
