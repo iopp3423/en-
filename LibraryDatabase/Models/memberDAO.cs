@@ -129,8 +129,6 @@ namespace LibruryDatabase.Models
 
         public void ModifyAddress(string address, string id)// 주소 db에서 변경
         {
-
-
             conn.Open();
             MySqlCommand Command = new MySqlCommand(String.Format(Constants.updateAddressQuery, address, id), conn);
             Command.ExecuteNonQuery();
@@ -138,5 +136,56 @@ namespace LibruryDatabase.Models
 
         }
 
+        public bool IsCheckingExistenceUser(string name) // 회원이름이 존재하는지 체크
+        {
+
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, conn);
+            MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+            while (userData.Read())
+            {
+                if (userData["name"].ToString().Contains(name))
+                {
+                    conn.Close();
+                    return Constants.isSucess;
+                }
+            }
+            conn.Close();
+            return Constants.isFail;
+
+        }
+
+        public bool IsCheckingExistenceId(string id) // 아이디 존재하면 true, 없으면 false
+        {
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, conn);
+            MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
+
+            while (userData.Read())
+            {
+                if (userData["id"].ToString() == id)
+                {
+                    conn.Close();
+                    return Constants.isPassing;
+                }
+            }
+            conn.Close();
+            return Constants.isFail;
+        }
+
+        public void RemoveUserInformation(string userId) // db 에서유저 삭제
+        {
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteUserQuery, userId), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+        }
+
+
+        public void close()
+        {
+            conn.Close();
+        }
     }
 }

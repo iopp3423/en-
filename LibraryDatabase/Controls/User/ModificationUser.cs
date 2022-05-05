@@ -55,13 +55,16 @@ namespace LibruryDatabase.Controls
             }
         }
 
+
         public void ModifyUserInformation(string id, string password)
         {
-            memberDao.connection();
+            memberDao.connection(); // db 연결
             Console.Clear();
             Menu.PrintMain();
-            Menu.PrintLoginUser(memberDao.StoreUserDataToList(),id, password); // 로그인한 아이디 비밀번호 출력
+            Menu.PrintLoginUser(memberDao.StoreUserDataToList(),id, password); // 로그인한 아이디 비밀번호 screen으로 보내서 출력
             Menu.PrintUserInformation();
+
+            memberDao.close(); // db닫기
 
             if (Constants.isBack == IsChoosingMenu(id)) // 마우스 함수
             {
@@ -130,6 +133,8 @@ namespace LibruryDatabase.Controls
             logDao.StoreLog(id, "번호변경", callNumber);// 로그에 저장
             //LogData.Get().StoreLog(id, "번호변경", callNumber); // 로그에 저장
 
+            memberDao.close(); // db닫기
+            logDao.close(); // db닫기
 
             ModifyAfterMessage();// 안내메시지
         }
@@ -146,6 +151,9 @@ namespace LibruryDatabase.Controls
             logDao.StoreLog(id, "비밀번호변경", password);// 로그에 저장
             //LogData.Get().StoreLog(id, "비밀번호변경", password); // 로그에 저장
 
+            memberDao.close(); // db닫기
+            logDao.close(); // db닫기
+
             ModifyAfterMessage();// 안내메시지
         }
 
@@ -161,6 +169,9 @@ namespace LibruryDatabase.Controls
 
             logDao.StoreLog(id, "주소변경", address);// 로그에 저장
             //LogData.Get().StoreLog(id, "주소변경", address); // 로그에 저장
+
+            memberDao.close(); // db닫기
+            logDao.close(); // db닫기
 
             ModifyAfterMessage();// 안내메시지
         }

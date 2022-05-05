@@ -53,7 +53,6 @@ namespace LibruryDatabase.Controls
         {
             Menu.PrintMain();
             Message.PrintBookTitle();
-
             Message.GreenColor(Message.PrintContinueRequestmessage());
 
             while (Constants.isPassing) // 뒤로가기

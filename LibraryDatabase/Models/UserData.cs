@@ -237,6 +237,7 @@ namespace LibruryDatabase.Models
                 userInformation.Close();    
         }
 
+        /*
         public void RemoveBorrowmember(string id) // 대여목록에 있는 아이디 제거
         {
 
@@ -246,6 +247,7 @@ namespace LibruryDatabase.Models
             MySqlCommand Command = new MySqlCommand(String.Format(Constants.RemoveBorrowmember, id), book);
             Command.ExecuteNonQuery();
         }
+        */
     }
 }
 

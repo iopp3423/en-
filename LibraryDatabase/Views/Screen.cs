@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+﻿using LibruryDatabase.Models;
 using LibruryDatabase.Utility;
-using LibruryDatabase.Models;
+using System;
+using System.Collections.Generic;
 
 namespace LibruryDatabase.Views
 {
@@ -145,22 +141,22 @@ namespace LibruryDatabase.Views
             Console.Write("뒤로가기 : ESC");
         }
 
-        public void PrintUserData()  // 유저목록 출력
+        public void PrintUserData(List<memberDTO> member)  // 유저목록 출력
         {
-            foreach (UserVO data in UserData.Get().userData)
+            foreach (memberDTO data in member)
             {
                 Console.Write("아이디 :");
-                Console.WriteLine(data.id);
+                Console.WriteLine(data.Id);
                 Console.Write("비밀번호 :");
-                Console.WriteLine(data.password);
+                Console.WriteLine(data.Password);
                 Console.Write("이름 :");
-                Console.WriteLine(data.name);
+                Console.WriteLine(data.Name);
                 Console.Write("전화번호 :");
-                Console.WriteLine(data.phone);
+                Console.WriteLine(data.Phone);
                 Console.Write("나이 :");
-                Console.WriteLine(data.age);
+                Console.WriteLine(data.Age);
                 Console.Write("주소 :");
-                Console.WriteLine(data.address);
+                Console.WriteLine(data.Address);
                 Console.WriteLine("=======================================================================");
             }
         }
@@ -193,7 +189,7 @@ namespace LibruryDatabase.Views
     }
 
 
-        public void PrintLoginUser(List<memberDTO>members, string id, string password)
+        public void PrintLoginUser(List<memberDTO>member, string id, string password)
         {
 
             /*
@@ -220,7 +216,7 @@ namespace LibruryDatabase.Views
             }
             */
             Console.WriteLine("====================================================================");
-            foreach (memberDTO data in members)
+            foreach (memberDTO data in member)
             {
                 if (data.Id.Contains(id) && data.Password.Contains(password))
                 {
@@ -242,26 +238,26 @@ namespace LibruryDatabase.Views
         }
 
 
-        public void PrintSearchUser(string name)
+        public void PrintSearchUser(List<memberDTO> member, string name)
         {
             Console.WriteLine("=======================================================================");
             { 
-                foreach (UserVO data in UserData.Get().userData)
+                foreach (memberDTO data in member)
                 {
-                    if (data.name.Contains(name))
+                    if (data.Name.Contains(name))
                     {
                         Console.Write("아이디 :");
-                        Console.WriteLine(data.id);
+                        Console.WriteLine(data.Id);
                         Console.Write("비밀번호 :");
-                        Console.WriteLine(data.password);
+                        Console.WriteLine(data.Password);
                         Console.Write("이름 :");
-                        Console.WriteLine(data.name);
+                        Console.WriteLine(data.Name);
                         Console.Write("전화번호 :");
-                        Console.WriteLine(data.phone);
+                        Console.WriteLine(data.Phone);
                         Console.Write("나이 :");
-                        Console.WriteLine(data.age);
+                        Console.WriteLine(data.Age);
                         Console.Write("주소 :");
-                        Console.WriteLine(data.address);
+                        Console.WriteLine(data.Address);
                         Console.WriteLine("=======================================================================");
                     }
                 }

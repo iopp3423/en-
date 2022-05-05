@@ -241,6 +241,7 @@ namespace LibruryDatabase.Models
             return Constants.isSucess; // 반납함
         }
 
+        /*
         public bool IsCheckingBorrowedBook(string id) // 대여한 책이 있는지
         {
 
@@ -258,6 +259,7 @@ namespace LibruryDatabase.Models
 
             return Constants.isSucess; // 반납함
         }
+        */
 
         public void ReturnBook(string bookNumber) // 로그인한 유저 책 반납
         {

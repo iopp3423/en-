@@ -211,6 +211,9 @@ namespace LibruryDatabase.Controls
 
             logDao.StoreLog(id, Constants.LIBRARY, Constants.REGISTER); // db에 로그 내역 저장
 
+            memberDao.close(); // db닫기
+            logDao.close(); // db닫기
+
             while (Constants.isEntrancing)
             {
                 Constants.cursor = Console.ReadKey(true);
@@ -221,13 +224,13 @@ namespace LibruryDatabase.Controls
                     default: continue;
                 }
             }
-           
+            
         }
 
         public void UserLogin() // 로그인
         {
-            memberDao.connection();
-            logDao.connection();
+            memberDao.connection(); // db연결
+            logDao.connection(); // db연결
 
             Console.Clear();
             Menu.PrintMain();
@@ -243,6 +246,9 @@ namespace LibruryDatabase.Controls
                 logDao.StoreLog(id, Constants.LIBRARY, Constants.LOGIN); // db에 로그 내역 저장
                 GoUser.StartBookmenu(id, password); // 유저메뉴
             }
+
+            memberDao.close(); // db닫기
+            logDao.close(); // db닫기
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
             message.RedColor(message.PrintErrorUserInformation()); // 회원불일치 메시지

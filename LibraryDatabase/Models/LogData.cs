@@ -133,7 +133,7 @@ namespace LibruryDatabase.Models
             }
         }
 
-        public bool VerifyLogExistence(string Number)
+        public bool VerifyLogExistence(string Number) // 로그존재확인
         {
             foreach (LogVO x in LogData.Get().PrintLog)
             {

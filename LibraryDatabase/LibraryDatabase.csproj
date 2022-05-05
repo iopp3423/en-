@@ -105,6 +105,8 @@
     <Compile Include="Controls\ChoiceUserOrAdmin.cs" />
     <Compile Include="Models\BookData.cs" />
     <Compile Include="Models\BookVO.cs" />
+    <Compile Include="Models\BorrowBookDAO.cs" />
+    <Compile Include="Models\BorrowBookDTO.cs" />
     <Compile Include="Models\BorrowUserVO.cs" />
     <Compile Include="Models\Connection.cs" />
     <Compile Include="Models\LogDAO.cs" />
