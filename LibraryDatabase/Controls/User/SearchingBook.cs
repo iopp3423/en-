@@ -250,20 +250,27 @@ namespace LibruryDatabase.Controls
             }
             Console.Clear();
 
+            bookDao.connection();
             Menu.PrintSearchBookName(bookDao.StoreBookReturn(),bookName);// 출력            
+            bookDao.close();
             BookExistenceCheck();
-
+            
             if (goingUserOrAdmin == Constants.isPassing)
-            { 
+            {
                 nameResult = bookDao.BringSearchResult(bookName); // 해당 책 제목 가져오기
                 bookDao.close(); // db닫기 위치 애매함 나중에 수정
+                logDao.connection();
                 logDao.StoreLog(id, Constants.SEARCH_TITLE, nameResult); // db에 로그 내역 저장
+                logDao.close();
             }
             else
             {
                 nameResult = bookDao.BringSearchResult(bookName); // 해당 책 제목 가져오기
                 bookDao.close(); // db닫기 위치 애매함 나중에 수정
+
+                logDao.connection();
                 logDao.StoreLog(id, Constants.ADMIN + Constants.SEARCH_TITLE, nameResult); // db에 로그 내역 저장
+                logDao.close();
             }
             
 

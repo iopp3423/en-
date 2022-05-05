@@ -16,6 +16,15 @@ namespace LibruryDatabase.Controls
 
         private Screen Print;
         private MessageScreen Message;
+        private LogDAO logDao;
+        private LogDTO logDto;
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
+        private BookDAO bookDao;
+        private BookDTO bookDto;
+
         public RemovalBook()
         {
 
@@ -25,6 +34,14 @@ namespace LibruryDatabase.Controls
         {
             this.Print = Menu;
             this.Message = message;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
+            borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
+            bookDao = new BookDAO();
         }
 
         public void GoBackMenu() //이전 메뉴로 돌아가기
@@ -50,14 +67,18 @@ namespace LibruryDatabase.Controls
         public void RemoveBook()
         {
             string bookNumber;
-            bool isBookExitence;
             string bookName;
+
+            memberDao.connection(); // db 연결
+            logDao.connection(); // db연결
+            borrowBookDao.connection(); // db연결
+            bookDao.connection(); // db연결
 
             Console.Clear();
             Print.PrintSearchBookName();
             Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
             Message.GreenColor(Message.PrintChooseRemoveBook()); // 안내메시지           
-            //Print.PrintBookData(); // 책 목록 프린트
+            Print.PrintBookData(bookDao.StoreBookReturn()); // 책 목록 프린트
             Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
 
             if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
@@ -66,22 +87,24 @@ namespace LibruryDatabase.Controls
             SearchBookName(Constants.isFail, Constants.ADMIN); // 책 제목 검색
 
             bookNumber = InputBookNumber();
-            isBookExitence = BookData.Get().IsCheckingBookExistence(bookNumber);// 도서관에 책 있는지 체크
+            //isBookExitence = BookData.Get().IsCheckingBookExistence(bookNumber);// 도서관에 책 있는지 체크
 
-            if (isBookExitence == Constants.isFail)
+            if (!bookDao.IsCheckingBookExistence(bookNumber)) //  도서관에 책 존재 x
             {
                 Message.RedColor(Message.PrintNoneBook());
             }
 
-            else if (isBookExitence == Constants.isPassing)
+            else if (bookDao.IsCheckingBookExistence(bookNumber)) //도서관에 책 존재 o
             {
-                bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
-                LogData.Get().StoreLog(Constants.ADMIN, Constants.REMOVE, bookName); // 로그에 저장
+                bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
+                bookDao.close(); // db닫기 위치 애매함 나중에 수정
+                logDao.StoreLog(Constants.ADMIN, Constants.REMOVE, bookName); // db에 로그 내역 저장
 
-                BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제
-                BookData.Get().bookData.Clear(); // 리스트 초기화
-                BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
+                 //bookDao.RemoveBookInformation(bookNumber); // 책 삭제
 
+                //BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제              
+                //BookData.Get().bookData.Clear(); // 리스트 초기화
+                //BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
                 Message.GreenColor(Message.PrintRemoveBookMessage());
             }
 

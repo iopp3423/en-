@@ -93,13 +93,9 @@ namespace LibruryDatabase.Controls
             ClearCurrentLine(Constants.CURRENT_LOCATION); // 안내메시지 제거 후
             Message.PrintBookTitle(); // 입력메시지 출력
 
-            BookData.Get().NaverBook.Clear(); // 리스트 비우기
-
             bookName = InputBookName(); //책제목입력
             bookDao.RemoveAllNaverBook(); // 네이버 db 초기화
             bookDao.StoreNaverBook(bookName, Constants.ADD_BOOK.ToString()); // db에 네이버 검색한 책 저장
-
-            BookData.Get().StoreNaverBookToList(bookName, Constants.ADD_BOOK.ToString(), Constants.isPassing); // 리스트에 저장
 
             Console.WriteLine("\n\n");
 

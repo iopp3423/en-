@@ -82,7 +82,6 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.INPUT_NAME_X, Constants.INPUT_NAME_Y);
 
             name = InputName(); // 이름 입력
-            //isExistenceUsername = UserData.Get().IsCheckingExistenceUser(name); //이름 회원목록에 있는지 조사
 
             isExistenceUsername = memberDao.IsCheckingExistenceUser(name);//이름 회원목록에 있는지 조사
 
@@ -102,7 +101,6 @@ namespace LibruryDatabase.Controls
 
             id = InputId(); // 아이디 입력
 
-            //isExistenceId = UserData.Get().IsCheckingExistenceId(id); //id 회원목록에 있는지 조사
 
             isExistenceId = memberDao.IsCheckingExistenceId(id); //id 회원목록에 있는지 조사
 
@@ -114,7 +112,6 @@ namespace LibruryDatabase.Controls
             }
 
             isExistenceUsername = borrowBookDao.IsCheckingBorrowedBook(id); // false면 해당 id  반납안한 책 있음 
-            //isExistenceUsername = BookData.Get().IsCheckingBorrowedBook(id);// 해당 id 반납하지 않은 책 조사
 
             if (isExistenceUsername == Constants.isFail)
             {
@@ -128,17 +125,10 @@ namespace LibruryDatabase.Controls
                 Message.GreenColor(Message.PrintRemoveUserMessage());
 
                 logDao.StoreLog(Constants.ADMIN, Constants.REMOVE_USER, id); // db에 로그 내역 저장
-                //LogData.Get().StoreLog(Constants.ADMIN, Constants.REMOVE_USER, id); // 로그에 저장
-
 
                 memberDao.RemoveUserInformation(id);// db 유저 삭제
                 borrowBookDao.RemoveBorrowmember(id); // 대여한 id db에서 제거
 
-                //UserData.Get().RemoveUserInformation(id); // 유저 삭제
-                //UserData.Get().RemoveBorrowmember(id); // 대여목록 아이디 제거
-
-                //UserData.Get().userData.Clear(); // 리스트 초기화
-                //UserData.Get().StoreUserData(); // 리스트에 북 데이터 저장
                 SelectMenu();
             }
 

@@ -221,7 +221,35 @@ namespace LibruryDatabase.Models
             conn.Close();
         }
 
-        public bool CheckBookNumber(string bookNumber)
+        public bool IsCheckingBookExistence(string bookNumber) // 데베에 책 있는지 체크
+        {
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.borrowedIdQuery, bookNumber), conn);
+            MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+            while (bookData.Read())
+            {
+                if (bookData["number"].ToString() == bookNumber)
+                {
+                    conn.Close();
+                    return Constants.isSucess;
+                }
+            }
+            conn.Close();
+            return Constants.isFail;
+        }
+
+
+        public void RemoveBookInformation(string bookNumber) // 책 제거
+        {
+
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteQuery, bookNumber), conn);
+            Command.ExecuteNonQuery();
+
+        }
+
+        public bool CheckBookNumber(string bookNumber) // 책번호 존재여부
         {
             conn.Open();
             //ExecuteReader를 이용하여
