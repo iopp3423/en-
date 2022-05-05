@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibruryDatabase.Models
 {
-    internal class LogDTO
+    public class LogDTO
     {
         public string number;
         public string dateTime;

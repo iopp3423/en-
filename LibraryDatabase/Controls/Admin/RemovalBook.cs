@@ -100,11 +100,7 @@ namespace LibruryDatabase.Controls
                 bookDao.close(); // db닫기 위치 애매함 나중에 수정
                 logDao.StoreLog(Constants.ADMIN, Constants.REMOVE, bookName); // db에 로그 내역 저장
 
-                 //bookDao.RemoveBookInformation(bookNumber); // 책 삭제
-
-                //BookData.Get().RemoveBookInformation(bookNumber); // 책 삭제              
-                //BookData.Get().bookData.Clear(); // 리스트 초기화
-                //BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
+                bookDao.RemoveBookInformation(bookNumber); // 책 삭제
                 Message.GreenColor(Message.PrintRemoveBookMessage());
             }
 

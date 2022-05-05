@@ -449,20 +449,20 @@ namespace LibruryDatabase.Views
             Console.Write("삭제할 로그의 번호를 입력해주세요 :");
         }
 
-        public void PrintLog()
+        public void PrintLog(List<LogDTO> log)
         {
-            foreach (LogVO x in LogData.Get().PrintLog)
+            foreach (LogDTO data in log)
             {
                 Console.Write("번호   :");
-                Console.WriteLine(x.number);
+                Console.WriteLine(data.Number);
                 Console.Write("시간   :");
-                Console.WriteLine(x.dateTime);
+                Console.WriteLine(data.DateTime);
                 Console.Write("사용자 :");
-                Console.WriteLine(x.name);
+                Console.WriteLine(data.Id);
                 Console.Write("내역   :");
-                Console.WriteLine(x.record);
+                Console.WriteLine(data.Record);
                 Console.Write("로그   :");
-                Console.WriteLine(x.log);
+                Console.WriteLine(data.Log);
                 Console.WriteLine("=======================================================================");
             }
         }

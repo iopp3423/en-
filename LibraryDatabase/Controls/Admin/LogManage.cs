@@ -18,6 +18,14 @@ namespace LibruryDatabase.Controls
 
         private Screen Print;
         private MessageScreen Message;
+        private LogDAO logDao;
+        private LogDTO logDto;
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
+        private BookDAO bookDao;
+        private BookDTO bookDto;
 
         public LogManage()
         {
@@ -28,13 +36,27 @@ namespace LibruryDatabase.Controls
         {
             this.Print = Menu;
             this.Message = message;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
+            borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
+            bookDao = new BookDAO();
         }
 
 
         public void PrintLogMenu() // 로그메뉴 프린트
         {
+            memberDao.connection(); // db 연결
+            logDao.connection(); // db연결
+            borrowBookDao.connection(); // db연결
+            bookDao.connection(); // db연결
+
             LogData.Get().PrintLog.Clear(); // 리스트에 저장된 로그값 재 조회시 수정된 값 적용하기 위해 전체 데이터 삭제 후 저장
             LogData.Get().Storelog(); // 로그 리스트에 저장
+
             PrintMenu(); // 로그메뉴화면 출력
 
 
@@ -115,7 +137,7 @@ namespace LibruryDatabase.Controls
             Console.Clear();
             Message.GreenColor(" >> 입력 : Enter                                   뒤로가기 : F5");
             Console.WriteLine();
-            Print.PrintLog(); // 로그내역 출력
+            Print.PrintLog(logDao.StoreLogReturn()); // 로그내역 출력
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
 
             while (Constants.isPassing)
@@ -135,7 +157,8 @@ namespace LibruryDatabase.Controls
             while (Constants.isPassing)
             {
                 number = InputNumber(); // 로그번호 입력
-                if (!LogData.Get().VerifyLogExistence(number)) Message.RedColor("없는 로그입니다. 재입력 : Enter 뒤로가기 : ESC");
+                //if (!LogData.Get().VerifyLogExistence(number)) Message.RedColor("없는 로그입니다. 재입력 : Enter 뒤로가기 : ESC");
+                if (!logDao.VerifyLogExistence(number)) Message.RedColor("없는 로그입니다. 재입력 : Enter 뒤로가기 : ESC");
                 else break;
 
                 Constants.cursor = Console.ReadKey(true);
@@ -150,7 +173,8 @@ namespace LibruryDatabase.Controls
             }
 
             ClearCurrentLine(Constants.CURRENT_LOCATION);
-            LogData.Get().RemoveLog(number); // 로그 삭제
+            //LogData.Get().RemoveLog(number); // 로그 삭제
+            logDao.RemoveLog(number);// 로그 삭제
             LogData.Get().PrintLog.Clear(); // 로그 리스트 초기화
             LogData.Get().Storelog(); // 로그 리스트 저장
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
@@ -162,7 +186,7 @@ namespace LibruryDatabase.Controls
         {
             Console.Clear();
             Print.PrintRemoveAllData(); // 로그제거설명
-            Print.PrintLog(); // 로그내역 출력          
+            Print.PrintLog(logDao.StoreLogReturn()); // 로그내역 출력
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
 
             while (Constants.isEntrancing)
@@ -172,7 +196,7 @@ namespace LibruryDatabase.Controls
                 {
                     case ConsoleKey.Enter:
                         {
-                            RemoveListandDatabase();
+                            RemoveDatabase();
                             break;
                         }
                     case ConsoleKey.Escape:
@@ -188,7 +212,7 @@ namespace LibruryDatabase.Controls
         {
             Console.Clear();
             Print.PrintStoreData();
-            Print.PrintLog(); // 로그내역 출력             
+            Print.PrintLog(logDao.StoreLogReturn()); // 로그내역 출력   
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
 
             while (Constants.isEntrancing)
@@ -215,8 +239,8 @@ namespace LibruryDatabase.Controls
         public void RemoveFile() // 로그파일삭제
         {
             Console.Clear();
-            Print.PrintRemoveFile();           
-            Print.PrintLog(); // 로그내역 출력
+            Print.PrintRemoveFile();
+            Print.PrintLog(logDao.StoreLogReturn()); // 로그내역 출력
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
 
             while (Constants.isEntrancing)
@@ -227,9 +251,9 @@ namespace LibruryDatabase.Controls
                     case ConsoleKey.Enter:
                         {
                             RemoveDesktopFile();
-                            RemoveListandDatabase(); // 로그 데이터 삭제
-                            LogData.Get().PrintLog.Clear(); // 로그 리스트 초기화
-                            LogData.Get().Storelog(); // 로그 리스트 저장
+                            RemoveDatabase(); // 로그 데이터 삭제
+                            //LogData.Get().PrintLog.Clear(); // 로그 리스트 초기화
+                            //LogData.Get().Storelog(); // 로그 리스트 저장
                             return;
                         }
                     case ConsoleKey.Escape:
@@ -247,7 +271,7 @@ namespace LibruryDatabase.Controls
         {
             Console.Clear();
             Message.GreenColor("   >>뒤로가기 : ESC\n\n");
-            Print.PrintLog(); // 로그내역 출력
+            Print.PrintLog(logDao.StoreLogReturn()); // 로그내역 출력
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
 
             while (Constants.isEntrancing)
@@ -290,12 +314,14 @@ namespace LibruryDatabase.Controls
             return Number;
         }
 
-        public void RemoveListandDatabase() // 데베에 저장된 로그 삭제
+        public void RemoveDatabase() // 데베에 저장된 로그 삭제
         {
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintReMoveLogAfter();
-            LogData.Get().RemoveAllLog(); // 데베 로그 삭제
-            LogData.Get().PrintLog.Clear(); // 리스트 로그 삭제
+            logDao.RemoveAllLog(); //db 로그 삭제
+
+            //LogData.Get().RemoveAllLog(); // 데베 로그 삭제
+            //LogData.Get().PrintLog.Clear(); // 리스트 로그 삭제
         }
 
         public void ClearCurrentLine(int number) // 줄 지우기
@@ -309,7 +335,8 @@ namespace LibruryDatabase.Controls
 
         public void RemoveDesktopFile()//데스크탑 파일 제거
         {
-            LogData.Get().RemoveDesktopFile();
+            //LogData.Get().RemoveDesktopFile();
+            logDao.RemoveDesktopFile();
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintReMoveLogAfter();
         }
@@ -317,7 +344,8 @@ namespace LibruryDatabase.Controls
 
         public void LogWrite() //바탕화면에 저장
         {
-            LogData.Get().LogWrite();
+            //LogData.Get().LogWrite();
+            logDao.LogWrite();
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Print.PrintStoreAfter();
         }
