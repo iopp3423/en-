@@ -202,10 +202,6 @@ namespace LibruryDatabase.Controls
 
             memberDao.StoreUserInformation(memberDto.Id, memberDto.Password, memberDto.Name, memberDto.Phone,memberDto.Age,memberDto.Address); // db에 회원가입정보 저장
 
-            //UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
-            //UserData.Get().userData.Clear();//초기화
-            //UserData.Get().StoreUserData(); // 리스트에저장
-
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             message.GreenColor(message.PrintDoneRegister());
 

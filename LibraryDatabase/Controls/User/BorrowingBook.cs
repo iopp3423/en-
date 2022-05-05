@@ -123,15 +123,12 @@ namespace LibruryDatabase.Controls
                     break;
                 }
 
-                //BookData.Get().IsCheckongBookQuantity(bookNumber) == Constants.isFail
                 if (bookDao.IsCheckongBookQuantity(bookNumber) == Constants.isFail) //책 수량체크
                 {
                     Message.RedColor(Message.PrintNoneQuantity());
                     GoBackMenu(); 
                     return; 
                 }
-
-                //isAlreadyBorrow = BookData.Get().IsCheckingBookOverlap(id, bookNumber); // 책 대여 체크
 
                 isAlreadyBorrow = borrowBookDao.IsCheckingBookOverlap(id, bookNumber); // 책 대여 체크
 
@@ -148,21 +145,11 @@ namespace LibruryDatabase.Controls
                 {
                     Message.GreenColor("반납기한은" + returnDay + "입니다.");
                     borrowBookDao.BorrowBook(id, bookNumber); // borrowmember db 책 대여
-                    bookDao.MinusBook(bookNumber);
-                    //BookData.Get().SearchBook(id, bookNumber);// 데베책대여                   
-                    //BookData.Get().MinusBook(bookNumber); // 데베책 수량 감소
-
-                    //BookData.Get().borrow.Clear(); // 리스트에 대여한 유저 책 초기화
-                    //BookData.Get().bookData.Clear(); // 북 리스트 초기화
-                    //BookData.Get().StoreBookData(); // 리스트에 책 리스트 저장
-                    //BookData.Get().AddBorrowBookToList(); // 리스트에 책 저장 유저 저장
-                    //bookName = BookData.Get().BringBookname(bookNumber);// 해당 책 정보가져오기
+                    bookDao.MinusBook(bookNumber); //db 책 수량 1 감소
 
                     bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
                     bookDao.close(); // db닫기 위치 애매함 나중에 수정
                     logDao.StoreLog(id, Constants.BORROW, bookName); // db에 로그 내역 저장
-
-                    //LogData.Get().StoreLog(id, Constants.BORROW, bookName); // 로그에 저장
 
                     Message.GreenColor(Message.PrintDoneBorrowMessage());
                     GoBackMenu();

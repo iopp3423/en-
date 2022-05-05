@@ -18,7 +18,7 @@ namespace LibruryDatabase.Models
             return conn;
         }
 
-        public List<BookDTO> StoreBookReturn() // 도서대여한 회원정보 리턴
+        public List<BookDTO> StoreBookReturn() // 도서목록 리턴
         {
             List<BookDTO> book = new List<BookDTO>();
 
@@ -59,6 +59,27 @@ namespace LibruryDatabase.Models
             }
             conn.Close();
             return bookData["name"].ToString();
+        }
+
+        public string BringSearchResult(string name) // 데베에 책 있는지 체크
+        {
+
+
+            MySqlConnection user = new MySqlConnection(Constants.getQuery);
+
+            user.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.SearchBookQuery), user);
+            MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
+
+            while (bookData.Read())
+            {
+                if (bookData["author"].ToString().Contains(name)) { return bookData["author"].ToString(); }
+                else if (bookData["publish"].ToString().Contains(name)) { return bookData["publish"].ToString(); }
+                else if (bookData["name"].ToString().Contains(name)) { return bookData["name"].ToString(); }
+            }
+            user.Close();
+
+            return name;
         }
 
         public bool IsCheckongBookQuantity(string bookNumber) // 책 수량 체크

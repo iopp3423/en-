@@ -313,7 +313,6 @@ namespace LibruryDatabase.Models
         public string BringBookname(string bookNumber) // 이름가져오기
         {
 
-
             MySqlConnection user = new MySqlConnection(Constants.getQuery);
             
                 user.Open();

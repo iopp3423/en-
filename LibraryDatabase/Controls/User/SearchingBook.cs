@@ -18,6 +18,14 @@ namespace LibruryDatabase.Controls
     {
         private string nameResult;
         private string name;
+        private LogDAO logDao;
+        private LogDTO logDto;
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
+        private BookDAO bookDao;
+        private BookDTO bookDto;
 
         private Screen Menu;
         MessageScreen message;
@@ -30,6 +38,14 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = Menu;
             this.message = message;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
+            borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
+            bookDao = new BookDAO();
         }
 
         
@@ -53,9 +69,14 @@ namespace LibruryDatabase.Controls
 
         public void SearchBook(bool goingUserOrAdmin, string id)
         {
+            memberDao.connection(); // db 연결
+            logDao.connection(); // db연결
+            borrowBookDao.connection(); // db연결
+            bookDao.connection(); // db연결
+
             Console.Clear();
             Menu.PrintSearchMenu();
-            //Menu.PrintBookData();
+            Menu.PrintBookData(bookDao.StoreBookReturn()); // 책 목록 출력
 
             if (Constants.isBackMenu == SelectingMenu(id, Constants.isPassing) && Constants.isUserSearching == goingUserOrAdmin) // 유저모드용 책찾기
             {
@@ -148,19 +169,18 @@ namespace LibruryDatabase.Controls
 
 
             Console.Clear();
-            Menu.PrintSearchAuthor(name); // 출력
+            Menu.PrintSearchAuthor(bookDao.StoreBookReturn(), name); // 출력
             BookExistenceCheck();
 
             if (goingUserOrAdmin == Constants.isPassing)
             {
-                nameResult = BookData.Get().BringSearchResult(name);// 해당 책 이름가져오기
-                name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, Constants.SEARCH_AUTHOR, nameResult); // 로그에 저장
+                nameResult = bookDao.BringSearchResult(name); // 해당 책 제목 가져오기
+                logDao.StoreLog(id, Constants.SEARCH_AUTHOR, nameResult); // db에 로그 내역 저장
             }
             else
             {
-                nameResult = BookData.Get().BringSearchResult(name);// 해당 책 이름가져오기
-                LogData.Get().StoreLog(name, Constants.ADMIN + Constants.SEARCH_AUTHOR, nameResult); // 로그에 저장
+                nameResult = bookDao.BringSearchResult(name); // 해당 책 제목 가져오기
+                logDao.StoreLog(id, Constants.ADMIN + Constants.SEARCH_AUTHOR, nameResult); // db에 로그 내역 저장
             }
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
@@ -189,19 +209,20 @@ namespace LibruryDatabase.Controls
 
             Console.Clear();
 
-            Menu.PrintSearchPublish(publish);//출력          
+            Menu.PrintSearchPublish(bookDao.StoreBookReturn(),publish);//출력          
             BookExistenceCheck();
 
             if (goingUserOrAdmin == Constants.isPassing)
             {
-                nameResult = BookData.Get().BringSearchResult(publish);// 해당 책 이름가져오기
-                name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, Constants.SEARCH_PUBLISHER, nameResult); // 로그에 저장
+                nameResult = bookDao.BringSearchResult(publish); // 해당 책 제목 가져오기
+                bookDao.close(); // db닫기 위치 애매함 나중에 수정
+                logDao.StoreLog(id, Constants.SEARCH_PUBLISHER, nameResult); // db에 로그 내역 저장
             }
             else
             {
-                nameResult = BookData.Get().BringSearchResult(publish);// 해당 책 이름가져오기
-                LogData.Get().StoreLog(name, Constants.ADMIN + Constants.SEARCH_PUBLISHER, nameResult); // 로그에 저장
+                nameResult = bookDao.BringSearchResult(publish); // 해당 책 제목 가져오기
+                bookDao.close(); // db닫기 위치 애매함 나중에 수정
+                logDao.StoreLog(id, Constants.ADMIN + Constants.SEARCH_PUBLISHER, nameResult); // db에 로그 내역 저장
             }
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
@@ -229,19 +250,20 @@ namespace LibruryDatabase.Controls
             }
             Console.Clear();
 
-            Menu.PrintSearchBookName(bookName);// 출력            
+            Menu.PrintSearchBookName(bookDao.StoreBookReturn(),bookName);// 출력            
             BookExistenceCheck();
 
             if (goingUserOrAdmin == Constants.isPassing)
-            {
-                nameResult = BookData.Get().BringSearchResult(bookName);// 해당 책 이름가져오기
-                name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, Constants.SEARCH_TITLE, nameResult); // 로그에 저장
+            { 
+                nameResult = bookDao.BringSearchResult(bookName); // 해당 책 제목 가져오기
+                bookDao.close(); // db닫기 위치 애매함 나중에 수정
+                logDao.StoreLog(id, Constants.SEARCH_TITLE, nameResult); // db에 로그 내역 저장
             }
             else
             {
-                nameResult = BookData.Get().BringSearchResult(bookName);// 해당 책 이름가져오기
-                LogData.Get().StoreLog(name, Constants.ADMIN + Constants.SEARCH_TITLE, nameResult); // 로그에 저장
+                nameResult = bookDao.BringSearchResult(bookName); // 해당 책 제목 가져오기
+                bookDao.close(); // db닫기 위치 애매함 나중에 수정
+                logDao.StoreLog(id, Constants.ADMIN + Constants.SEARCH_TITLE, nameResult); // db에 로그 내역 저장
             }
             
 

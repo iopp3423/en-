@@ -127,11 +127,9 @@ namespace LibruryDatabase.Controls
             callNumber = InputCallNumber(); // 입력받기
             memberDao.ModifyPhone(callNumber, id); // db에서 전화번호 변경
 
-            //UserData.Get().ModifyPhone(callNumber, id); // 정보 변경
             ClearandStore();// 리스트 초기화 후 저장
 
             logDao.StoreLog(id, "번호변경", callNumber);// 로그에 저장
-            //LogData.Get().StoreLog(id, "번호변경", callNumber); // 로그에 저장
 
             memberDao.close(); // db닫기
             logDao.close(); // db닫기
@@ -145,11 +143,8 @@ namespace LibruryDatabase.Controls
             password = InputPasswordCheck();// 입력받기
 
             memberDao.ModifyPassword(password, id);
-            //UserData.Get().ModifyPassword(password, id); // 정보 변경
-            ClearandStore();// 리스트 초기화 후 저장
 
             logDao.StoreLog(id, "비밀번호변경", password);// 로그에 저장
-            //LogData.Get().StoreLog(id, "비밀번호변경", password); // 로그에 저장
 
             memberDao.close(); // db닫기
             logDao.close(); // db닫기
@@ -164,11 +159,9 @@ namespace LibruryDatabase.Controls
             address = InputAddress();// 입력받기
 
             memberDao.ModifyAddress(address, id);
-            //UserData.Get().ModifyAddress(address, id); // 정보 변경
             ClearandStore();// 리스트 초기화 후 저장
 
             logDao.StoreLog(id, "주소변경", address);// 로그에 저장
-            //LogData.Get().StoreLog(id, "주소변경", address); // 로그에 저장
 
             memberDao.close(); // db닫기
             logDao.close(); // db닫기

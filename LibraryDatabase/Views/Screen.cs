@@ -313,28 +313,28 @@ namespace LibruryDatabase.Views
             }          
         }
 
-        public void PrintSearchAuthor(string name) // 작가로 검색
+        public void PrintSearchAuthor(List<BookDTO> book, string name) // 작가로 검색
         {
-            foreach (BookVO data in BookData.Get().bookData)
+            foreach (BookDTO data in book)
             {
-                if (data.author.Contains(name) == Constants.isPassing)
+                if (data.Author.Contains(name) == Constants.isPassing)
                 {
                     Console.Write("책 번호   :");
-                    Console.WriteLine(data.number);
+                    Console.WriteLine(data.Number);
                     Console.Write("책 제목   :");
-                    Console.WriteLine(data.title);
+                    Console.WriteLine(data.Title);
                     Console.Write("책 저자   :");
-                    Console.WriteLine(data.author);
+                    Console.WriteLine(data.Author);
                     Console.Write("출판사    :");
-                    Console.WriteLine(data.publisher);
+                    Console.WriteLine(data.Publisher);
                     Console.Write("출시일    :");
-                    Console.WriteLine(data.publishday);
+                    Console.WriteLine(data.Publishday);
                     Console.Write("책 가격   :");
-                    Console.WriteLine(data.price);
+                    Console.WriteLine(data.Price);
                     Console.Write("isbn      :");
-                    Console.WriteLine(data.isbn);
+                    Console.WriteLine(data.Isbn);
                     Console.Write("책 수량   :");
-                    Console.WriteLine(data.quantity);
+                    Console.WriteLine(data.Quantity);
                     Console.WriteLine("=======================================================================");
                     Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                 }
@@ -342,57 +342,57 @@ namespace LibruryDatabase.Views
            
         }
 
-        public void PrintSearchPublish(string publish) // 출판사로 검색
+        public void PrintSearchPublish(List<BookDTO> book, string publish) // 출판사로 검색
         {
 
-            foreach (BookVO data in BookData.Get().bookData)
+            foreach (BookDTO data in book)
             {
-                if (data.publisher.Contains(publish) == Constants.isPassing)
+                if (data.Publisher.Contains(publish) == Constants.isPassing)
                 {
                     Console.Write("책 번호   :");
-                    Console.WriteLine(data.number);
+                    Console.WriteLine(data.Number);
                     Console.Write("책 제목   :");
-                    Console.WriteLine(data.title);
+                    Console.WriteLine(data.Title);
                     Console.Write("책 저자   :");
-                    Console.WriteLine(data.author);
+                    Console.WriteLine(data.Author);
                     Console.Write("출판사    :");
-                    Console.WriteLine(data.publisher);
+                    Console.WriteLine(data.Publisher);
                     Console.Write("출시일    :");
-                    Console.WriteLine(data.publishday);
+                    Console.WriteLine(data.Publishday);
                     Console.Write("책 가격   :");
-                    Console.WriteLine(data.price);
+                    Console.WriteLine(data.Price);
                     Console.Write("isbn      :");
-                    Console.WriteLine(data.isbn);
+                    Console.WriteLine(data.Isbn);
                     Console.Write("책 수량   :");
-                    Console.WriteLine(data.quantity);
+                    Console.WriteLine(data.Quantity);
                     Console.WriteLine("=======================================================================");
                     Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                 }
             }
         }
 
-        public void PrintSearchBookName(string bookName) // 책 제목으로 검색
+        public void PrintSearchBookName(List<BookDTO> book, string bookName) // 책 제목으로 검색
         {
-            foreach (BookVO data in BookData.Get().bookData)
+            foreach (BookDTO data in book)
             {
-                if (data.title.Contains(bookName) == Constants.isPassing)
+                if (data.Title.Contains(bookName) == Constants.isPassing)
                 {
                     Console.Write("책 번호   :");
-                    Console.WriteLine(data.number);
+                    Console.WriteLine(data.Number);
                     Console.Write("책 제목   :");
-                    Console.WriteLine(data.title);
+                    Console.WriteLine(data.Title);
                     Console.Write("책 저자   :");
-                    Console.WriteLine(data.author);
+                    Console.WriteLine(data.Author);
                     Console.Write("출판사    :");
-                    Console.WriteLine(data.publisher);
+                    Console.WriteLine(data.Publisher);
                     Console.Write("출시일    :");
-                    Console.WriteLine(data.publishday);
+                    Console.WriteLine(data.Publishday);
                     Console.Write("책 가격   :");
-                    Console.WriteLine(data.price);
+                    Console.WriteLine(data.Price);
                     Console.Write("isbn      :");
-                    Console.WriteLine(data.isbn);
+                    Console.WriteLine(data.Isbn);
                     Console.Write("책 수량   :");
-                    Console.WriteLine(data.quantity);
+                    Console.WriteLine(data.Quantity);
                     Console.WriteLine("=======================================================================");
                     Constants.SEARCH_RESULT_BOOK = Constants.isPassing;
                 }
