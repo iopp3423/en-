@@ -13,6 +13,7 @@ namespace LibruryDatabase.Controls
 {
     internal class Admin : LoginOrRegister
     {
+        private memberDAO memberDao;
 
         AdminMenu goingMenu= new AdminMenu();
 
@@ -21,7 +22,7 @@ namespace LibruryDatabase.Controls
 
         public Admin()
         {
-
+           
         }
 
         public Admin(Screen Menu, MessageScreen message) : base(Menu, message)
@@ -29,8 +30,8 @@ namespace LibruryDatabase.Controls
             this.Print = Menu;
             this.PrintMessage = message;
             goingMenu = new AdminMenu(Print, PrintMessage);
+            memberDao = new memberDAO();
         }
-        
 
 
         public void LoginAdmin() // 관리자 로그인
@@ -39,16 +40,18 @@ namespace LibruryDatabase.Controls
             string password;
             bool isCheckingLogin;
 
+            memberDao.connection(); // 연결
+
             Console.Clear();
             Print.PrintMain();
             Print.PrintLogin();
+
             id = InputId(); // 아이디 입력
             password = InputPassword(); // 비밀번호 입력
-            isCheckingLogin = UserData.Get().IsLoginCheck(id, password); // 아이디 비밀번호 확인
+            isCheckingLogin = memberDao.Login(id, password); // db에서 아이디 비밀번호 확인
 
             if (isCheckingLogin == Constants.isSucess)
             {
-
                 LogData.Get().StoreLog(Constants.ADMIN, Constants.LIBRARY,Constants.LOGIN); // 로그에 저장
                 goingMenu.ChooseMenu(); // 정보 맞으면 메뉴이동
             }

@@ -11,9 +11,9 @@ namespace LibruryDatabase.Controls
 {
     class ChoiceUserOrAdmin
     {
+
         Screen Menu = new Screen();
         MessageScreen message = new MessageScreen();
-
         LoginOrRegister UserLibruary = new LoginOrRegister(); 
         Admin AdminLibruary = new Admin();
 
@@ -22,6 +22,7 @@ namespace LibruryDatabase.Controls
         {      
             UserLibruary = new LoginOrRegister(Menu, message);
             AdminLibruary = new Admin(Menu, message);
+
         }
 
 

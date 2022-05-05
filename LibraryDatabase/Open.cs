@@ -15,10 +15,16 @@ namespace LibruryDatabase
         static void Main(string[] args)
         {
             ChoiceUserOrAdmin Start = new ChoiceUserOrAdmin();
-            //Start.StartMenu();
+            test test1 = new test();
+            Start.StartMenu();
             //관리자 id = enen1234, pw = enen4321
 
 
+            //test1.login();
+
+
+
+            /*
             string passwordChangeStar = "";
             ConsoleKeyInfo info = Console.ReadKey(true);
             while (info.Key != ConsoleKey.Enter)
@@ -36,8 +42,6 @@ namespace LibruryDatabase
                         int passwordX = Console.CursorLeft;
                         Console.SetCursorPosition(passwordX - Constants.ONE, Console.CursorTop);
                         Console.Write(" ");
-                        Console.SetCursorPosition(passwordX-1 - Constants.ONE, Console.CursorTop);
-                        Console.Write(" ");
                         Console.SetCursorPosition(passwordX - Constants.ONE, Console.CursorTop);
                     }
                 }
@@ -48,6 +52,7 @@ namespace LibruryDatabase
                 info = Console.ReadKey(true);
             }
             Console.WriteLine();
+            */
         }       
     }
 }

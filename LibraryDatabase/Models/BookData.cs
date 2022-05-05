@@ -35,9 +35,9 @@ namespace LibruryDatabase.Models
 
             MySqlConnection book = new MySqlConnection(Constants.getQuery);
             
-                book.Open();
-                MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteQuery, bookNumber), book);
-                Command.ExecuteNonQuery();
+            book.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteQuery, bookNumber), book);
+            Command.ExecuteNonQuery();
             
         }
 

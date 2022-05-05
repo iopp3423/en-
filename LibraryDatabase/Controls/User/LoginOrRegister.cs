@@ -15,6 +15,10 @@ namespace LibruryDatabase.Controls
     class LoginOrRegister
     {
         UserMenu GoUser = new UserMenu();
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private LogDAO logDao;
+        private LogDTO logDto;
 
         private string id;
         private string password;
@@ -37,7 +41,11 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = InputMenu;
             this.message = message;
-            GoUser = new UserMenu(Menu, message);           
+            GoUser = new UserMenu(Menu, message);
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            logDao = new LogDAO();
+            logDto = new LogDTO();
         }
 
 
@@ -118,7 +126,9 @@ namespace LibruryDatabase.Controls
         
         public void RegisterMember() // 회원가입
         {
-           
+            memberDao.connection(); // db연결
+            logDao.connection(); // db연결 이게 맞나..
+
             Console.Clear();
             Menu.RegisterPrint();          
             Menu.PrintRegisterMember();
@@ -143,10 +153,10 @@ namespace LibruryDatabase.Controls
                 }
             }
 
+            memberDto.Id = InputId();
 
-            id = InputId();
-         
-            isOverlapCheck = UserData.Get().IsCheckingIdOverlap(id); // 데베에서 id 중복 확인
+            isOverlapCheck = memberDao.IsCheckingIdOverlap(id);
+            //isOverlapCheck = UserData.Get().IsCheckingIdOverlap(id); // 데베에서 id 중복 확인
 
             if (isOverlapCheck == Constants.isSucess)
             {
@@ -167,7 +177,7 @@ namespace LibruryDatabase.Controls
 
             password = InputPassword();
             passswordCheck = InputPasswordCheck();
-
+            
             if (password != passswordCheck)
             {
                 Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
@@ -184,21 +194,23 @@ namespace LibruryDatabase.Controls
                     }
                 }
             }
-            name = InputName();
-            age = InputAge();
-            callNumber = InputCallNumber();
-            address = InputAddress();
+            memberDto.Password = password;
+            memberDto.Name = InputName();
+            memberDto.Age = InputAge();
+            memberDto.Phone = InputCallNumber();
+            memberDto.Address = InputAddress();
 
 
-            UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
-            UserData.Get().userData.Clear();//초기화
-            UserData.Get().StoreUserData(); // 리스트에저장
+            memberDao.StoreUserInformation(memberDto.Id, memberDto.Password, memberDto.Name, memberDto.Phone,memberDto.Age,memberDto.Address); // db에 회원가입정보 저장
+
+            //UserData.Get().StoreUserInformation(id, password, name, callNumber, age, address);// 데이터베이스에 정보 추가
+            //UserData.Get().userData.Clear();//초기화
+            //UserData.Get().StoreUserData(); // 리스트에저장
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             message.GreenColor(message.PrintDoneRegister());
 
-            name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-            LogData.Get().StoreLog(name, Constants.LIBRARY, Constants.REGISTER); // 로그에 저장
+            logDao.StoreLog(id, Constants.LIBRARY, Constants.REGISTER); // db에 로그 내역 저장
 
 
             while (Constants.isEntrancing)
@@ -216,26 +228,25 @@ namespace LibruryDatabase.Controls
 
         public void UserLogin() // 로그인
         {
-            
+            memberDao.connection();
+
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintLogin();
 
             id = InputId();
             password = InputPassword();
-          
-            isOverlapCheck = UserData.Get().IsCheckingLogin(id, password); //데베에서 회원 유무 확인
-            
 
+            isOverlapCheck = memberDao.IsCheckingLogin(id, password); // db에 id, pw 같은 회원 있는지
+         
             if (isOverlapCheck == Constants.isSucess)
             {
-                name = UserData.Get().Bringname(id);// 해당 id 이름 가져오기
-                LogData.Get().StoreLog(name, Constants.LIBRARY, Constants.LOGIN); // 로그에 기록
-                GoUser.StartBookmenu(id, password);
+                logDao.StoreLog(id, Constants.LIBRARY, Constants.LOGIN); // db에 로그 내역 저장
+                GoUser.StartBookmenu(id, password); // 유저메뉴
             }
 
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.ERROR_Y);
-            message.RedColor(message.PrintErrorUserInformation());
+            message.RedColor(message.PrintErrorUserInformation()); // 회원불일치 메시지
 
             while (Constants.isEntrancing)
             {

@@ -6,19 +6,28 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using LibruryDatabase.Utility;
 using System.IO;
-using Newtonsoft.Json.Linq;
-using System.Net;
+
 
 namespace LibruryDatabase.Models
 {
-    internal class memberDAO
+    internal class LogDAO
     {
+
         private MySqlConnection conn;
 
         public MySqlConnection connection()
         {
             conn = Connection.getConnection();
             return conn;
+        }
+
+        public void StoreLog(string id, string record, string log) // 로그 추가
+        {
+
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.InsertlogQuery, DateTime.Now, id, record, log), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
         }
 
         public bool Login(string id, string password) // 관리자 아이디 로그인
@@ -68,27 +77,8 @@ namespace LibruryDatabase.Models
             return Constants.isFail;
         }
 
-        public bool IsCheckingIdOverlap(string id) // db에서 중복아이디 있으면 true, 없으면 false
-        {
 
 
-            conn.Open();
-            MySqlCommand Command = new MySqlCommand(Constants.SearchMemberQuery, conn);
-            MySqlDataReader userData = Command.ExecuteReader(); // 데이터 읽기
-
-            while (userData.Read())
-            {
-                if (userData["id"].ToString() == id)
-                {
-                    conn.Close();
-                    return Constants.isSucess;
-                }
-            }
-            conn.Close();
-            return Constants.isFail;
-        }
-
-
-
-    }
+     }
+    
 }

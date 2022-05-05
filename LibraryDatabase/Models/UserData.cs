@@ -21,6 +21,7 @@ namespace LibruryDatabase.Models
             return User;
         }
 
+        /*
         public bool IsLoginCheck(string id, string password) // 관리자 아이디로그인 체크
         {
 
@@ -41,7 +42,9 @@ namespace LibruryDatabase.Models
             return Constants.isFail;
 
         }
+        */
 
+        /*
         public void StoreUserInformation(string id, string pw, string name, string phone, string age, string address) // 데이터베이스에 회원정보 저장
         {
 
@@ -50,9 +53,9 @@ namespace LibruryDatabase.Models
                 user.Open();
                 MySqlCommand Command = new MySqlCommand(String.Format(Constants.insertUserQuery,id,pw,name,phone,age,address), user);
                 Command.ExecuteNonQuery();
-            
-
+           
         }
+        */
 
         public void RemoveUserInformation(string userId) // 유저 삭제
         {
