@@ -27,7 +27,7 @@ namespace LibruryDatabase.Controls
 
         public ChoiceUserOrAdmin()
         {      
-            UserLibruary = new LoginOrRegister(Menu, message, memberDao, memberDto, logDao, logDto, bookDao, bookDto, borrowBookDao, borrowBookDto);//하,,
+            UserLibruary = new LoginOrRegister(Menu, message, memberDao, memberDto, logDao, logDto, bookDao, bookDto, borrowBookDao, borrowBookDto);//하,,,?
             AdminLibruary = new Admin(Menu, message, memberDao, memberDto, logDao, logDto, bookDao, bookDto, borrowBookDao, borrowBookDto);
         }
 

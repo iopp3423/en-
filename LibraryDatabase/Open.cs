@@ -15,11 +15,11 @@ namespace LibruryDatabase
         static void Main(string[] args)
         {
             ChoiceUserOrAdmin Start = new ChoiceUserOrAdmin();
-            Start.StartMenu();
+            //Start.StartMenu();
             //관리자 id = enen1234, pw = enen4321
 
-            //test a = new test();
-            //a.Print();
+            test a = new test();
+            a.Register();
             /*
             string passwordChangeStar = "";
             ConsoleKeyInfo info = Console.ReadKey(true);
