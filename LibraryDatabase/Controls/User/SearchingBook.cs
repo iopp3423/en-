@@ -121,11 +121,10 @@ namespace LibruryDatabase.Controls
                         }
                     case ConsoleKey.Enter:
                         {
-                            if (Y == Constants.NAME_SEARCH_Y) { SearchName(UserOrAdminSearch, id);  } // 작가로찾기
+                            if (Y == Constants.NAME_SEARCH_Y) { SearchName(UserOrAdminSearch, id); } // 작가로찾기
                             if (Y == Constants.PUBLISH_Y) { SearchPublishName(UserOrAdminSearch, id);} // 출판사로찾기
-                            if (Y == Constants.BOOK_Y) { SearchBookName(UserOrAdminSearch, id);} // 책이름으로찾기
-                            
-                            return IsGoingReturnMenu();
+                            if (Y == Constants.BOOK_Y) { SearchBookName(UserOrAdminSearch, id);} // 책이름으로찾기                          
+                            return Constants.isBackMenu;
                         }
                      case ConsoleKey.Escape:
                         {                           
@@ -142,8 +141,21 @@ namespace LibruryDatabase.Controls
             if (Constants.SEARCH_RESULT_BOOK == Constants.isFail) // 책 정보 없으면
             {
                 message.RedColor(message.PrintNoBookMessage());
+                while (Constants.isEntrancing)
+                {
+                    Constants.cursor = Console.ReadKey(true);
+                    if (ConsoleKey.Escape == Constants.cursor.Key) return;
+                }
             }
-            else message.PrintBack();
+            else
+            {
+                message.PrintBack();
+                while (Constants.isEntrancing)
+                {
+                    Constants.cursor = Console.ReadKey(true);
+                    if (ConsoleKey.Escape == Constants.cursor.Key) return;
+                }
+            }
         }
 
 
@@ -166,12 +178,8 @@ namespace LibruryDatabase.Controls
                 break;
             }
 
-
-
             Console.Clear();
             Menu.PrintSearchAuthor(bookDao.StoreBookReturn(), name); // 출력
-            BookExistenceCheck();
-
             if (goingUserOrAdmin == Constants.isPassing)
             {
                 nameResult = bookDao.BringSearchResult(name); // 해당 책 제목 가져오기
@@ -184,7 +192,7 @@ namespace LibruryDatabase.Controls
             }
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-            
+            BookExistenceCheck();
         }
        
 
@@ -210,7 +218,6 @@ namespace LibruryDatabase.Controls
             Console.Clear();
 
             Menu.PrintSearchPublish(bookDao.StoreBookReturn(),publish);//출력          
-            BookExistenceCheck();
 
             if (goingUserOrAdmin == Constants.isPassing)
             {
@@ -226,6 +233,7 @@ namespace LibruryDatabase.Controls
             }
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+            BookExistenceCheck();
         }
 
 
@@ -254,7 +262,6 @@ namespace LibruryDatabase.Controls
             bookDao.connection();
             Menu.PrintSearchBookName(bookDao.StoreBookReturn(),bookName);// 출력            
             bookDao.close();
-            BookExistenceCheck();
             
             if (goingUserOrAdmin == Constants.isPassing)
             {
@@ -275,7 +282,8 @@ namespace LibruryDatabase.Controls
                 logDao.close();
             }
             
-            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);           
+            Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
+            BookExistenceCheck();
         }
 
         public void ClearCurrentLine(int number) // 줄 지우기

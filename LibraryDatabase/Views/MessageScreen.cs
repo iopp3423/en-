@@ -230,7 +230,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintInputBookName()
         {
-            Console.Write("  입력 (영어,한글 2~8자) :");
+            Console.Write("  책 제목 (영어,한글 2~8자) :");
         }
         public string PrintErrorInputMessage()
         {
