@@ -183,8 +183,6 @@ namespace LibruryDatabase.Models
             conn.Close();
         }
 
-        ~memberDAO() { Console.WriteLine("위치도 맞춰줘야되나"); Console.ReadLine(); }
-
         public void close()
         {
             conn.Close();
