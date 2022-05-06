@@ -16,7 +16,8 @@ namespace LibruryDatabase.Utility
 
         //query문 모음
         //유저관련
-        public const string getQuery = "Server=localhost;Database=jojunhee;Uid=root;Pwd=0000;";
+        public const string 
+            Query = "Server=localhost;Database=jojunhee;Uid=root;Pwd=0000;";
         public const string SearchMemberQuery = "SELECT * FROM member";
         public const string BorrrowBookUserquery = "SELECT * FROM borrowmember";
         public const string AdminSearchQuery = "SELECT * FROM admin";

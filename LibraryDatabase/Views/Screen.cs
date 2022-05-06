@@ -8,11 +8,9 @@ namespace LibruryDatabase.Views
     public class Screen
     {
         private memberDAO memberDao;
-        private memberDTO memberDto;
 
         public Screen()
         {
-            memberDao = new memberDAO();
             memberDao = new memberDAO();
         }
         

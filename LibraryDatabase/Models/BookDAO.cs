@@ -193,10 +193,8 @@ namespace LibruryDatabase.Models
 
         public string BringSearchResult(string name) // 데베에 책 있는지 체크
         {
-            MySqlConnection user = new MySqlConnection(Constants.getQuery);
-
-            user.Open();
-            MySqlCommand Command = new MySqlCommand(String.Format(Constants.SearchBookQuery), user);
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.SearchBookQuery), conn);
             MySqlDataReader bookData = Command.ExecuteReader(); // 데이터 읽기
 
             while (bookData.Read())
@@ -205,7 +203,7 @@ namespace LibruryDatabase.Models
                 else if (bookData["publish"].ToString().Contains(name)) { return bookData["publish"].ToString(); }
                 else if (bookData["name"].ToString().Contains(name)) { return bookData["name"].ToString(); }
             }
-            user.Close();
+            conn.Close();
             return name;
         }
 

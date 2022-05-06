@@ -16,14 +16,12 @@ namespace LibruryDatabase.Controls
         MessageScreen message = new MessageScreen();
         LoginOrRegister UserLibruary = new LoginOrRegister(); 
         Admin AdminLibruary = new Admin();
-        List<memberDTO> member = new List<memberDTO>();
 
 
         public ChoiceUserOrAdmin()
         {      
             UserLibruary = new LoginOrRegister(Menu, message);
             AdminLibruary = new Admin(Menu, message);
-            member = new List<memberDTO>();
         }
 
 

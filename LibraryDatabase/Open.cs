@@ -15,14 +15,8 @@ namespace LibruryDatabase
         static void Main(string[] args)
         {
             ChoiceUserOrAdmin Start = new ChoiceUserOrAdmin();
-            test test1 = new test();
             Start.StartMenu();
             //관리자 id = enen1234, pw = enen4321
-
-
-            //test1.login();
-
-
 
             /*
             string passwordChangeStar = "";

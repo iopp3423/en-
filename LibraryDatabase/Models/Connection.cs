@@ -19,7 +19,7 @@ namespace LibruryDatabase.Models
         {
             if(dbconn == null)
             {
-                dbconn = new MySqlConnection(Constants.getQuery);
+                dbconn = new MySqlConnection(Constants.Query);
             }
             return dbconn;
         }
