@@ -20,9 +20,7 @@ namespace LibruryDatabase.Controls
         ApprovalUserBook book = new ApprovalUserBook();
 
         private LogDAO logDao;
-        private LogDTO logDto;
         private BorrowBookDAO borrowBookDao;
-        private BorrowBookDTO borrowBookDto;
 
         private Screen Print;
         private MessageScreen PrintMessage;
@@ -37,7 +35,6 @@ namespace LibruryDatabase.Controls
             this.Print = Menu;
             this.PrintMessage = message;
             logDao = new LogDAO();
-            logDto = new LogDTO();
             removing = new RemovalBook(Print, PrintMessage);
             adding = new BookEdition(Print, PrintMessage);
             modify = new ModificationBook(Print, PrintMessage);
@@ -45,7 +42,6 @@ namespace LibruryDatabase.Controls
             Log = new LogManage(Print, PrintMessage);
             naver = new NaverSearch(Print, PrintMessage);
             book = new ApprovalUserBook(Print, PrintMessage);
-            borrowBookDto = new BorrowBookDTO();
             borrowBookDao = new BorrowBookDAO();
 
         }

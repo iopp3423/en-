@@ -18,10 +18,6 @@ namespace LibruryDatabase.Controls
         private MessageScreen Message;
         private LogDAO logDao;
         private LogDTO logDto;
-        private memberDAO memberDao;
-        private memberDTO memberDto;
-        private BorrowBookDAO borrowBookDao;
-        private BorrowBookDTO borrowBookDto;
         private BookDAO bookDao;
         private BookDTO bookDto;
 
@@ -36,10 +32,6 @@ namespace LibruryDatabase.Controls
             this.Message = message;
             logDao = new LogDAO();
             logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            borrowBookDto = new BorrowBookDTO();
-            borrowBookDao = new BorrowBookDAO();
             bookDto = new BookDTO();
             bookDao = new BookDAO();
         }
@@ -69,9 +61,7 @@ namespace LibruryDatabase.Controls
             string bookNumber;
             string bookName;
 
-            memberDao.connection(); // db 연결
             logDao.connection(); // db연결
-            borrowBookDao.connection(); // db연결
             bookDao.connection(); // db연결
 
             Console.Clear();
@@ -87,22 +77,22 @@ namespace LibruryDatabase.Controls
             SearchBookName(Constants.isFail, Constants.ADMIN); // 책 제목 검색
 
             bookNumber = InputBookNumber();
-
-            if (!bookDao.IsCheckingBookExistence(bookNumber)) //  도서관에 책 존재 x
+            bookDto.Number = bookNumber;
+            if (!bookDao.IsCheckingBookExistence(bookDto.Number)) //  도서관에 책 존재 x
             {
                 Message.RedColor(Message.PrintNoneBook());
             }
 
-            else if (bookDao.IsCheckingBookExistence(bookNumber)) //도서관에 책 존재 o
+            else if (bookDao.IsCheckingBookExistence(bookDto.Number)) //도서관에 책 존재 o
             {
-                bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
+                bookName = bookDao.BringBookname(bookDto.Number); // 해당 책 제목 가져오기
                 bookDao.close(); // db닫기 위치 애매함 나중에 수정
-                logDao.StoreLog(Constants.ADMIN, Constants.REMOVE, bookName); // db에 로그 내역 저장
+                logDto.Log = bookName;
+                logDao.StoreLog(Constants.ADMIN, Constants.REMOVE, logDto.Log); // db에 로그 내역 저장
 
-                bookDao.RemoveBookInformation(bookNumber); // 책 삭제
+                bookDao.RemoveBookInformation(bookDto.Number); // 책 삭제
                 Message.GreenColor(Message.PrintRemoveBookMessage());
             }
-
             GoBackMenu();
         }
 

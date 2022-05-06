@@ -15,12 +15,6 @@ namespace LibruryDatabase.Controls
     {
         private Screen Print;
         private MessageScreen Message;
-        private LogDAO logDao;
-        private LogDTO logDto;
-        private memberDAO memberDao;
-        private memberDTO memberDto;
-        private BorrowBookDAO borrowBookDao;
-        private BorrowBookDTO borrowBookDto;
         private BookDAO bookDao;
         private BookDTO bookDto;
 
@@ -33,12 +27,6 @@ namespace LibruryDatabase.Controls
         {
             this.Print = Menu;
             this.Message = message;
-            logDao = new LogDAO();
-            logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            borrowBookDto = new BorrowBookDTO();
-            borrowBookDao = new BorrowBookDAO();
             bookDto = new BookDTO();
             bookDao = new BookDAO();
         }
@@ -150,9 +138,6 @@ namespace LibruryDatabase.Controls
 
         public void SearchTitle() // 제목 입력
         {
-            memberDao.connection(); // db 연결
-            logDao.connection(); // db연결
-            borrowBookDao.connection(); // db연결
             bookDao.connection(); // db연결
 
             while (Constants.isEntrancing) // 책 예외처리
@@ -172,7 +157,6 @@ namespace LibruryDatabase.Controls
 
                     else //enter
                     {
-
                         ClearCurrentLine(Constants.CURRENT_LOCATION);
                         Console.SetCursorPosition(Console.CursorLeft, Constants.SEARCH_BOOK);
                         continue;
@@ -224,13 +208,16 @@ namespace LibruryDatabase.Controls
 
             else
             {
+                bookDto.Title = title;
+                bookDto.Quantity = quantity;
                 bookDao.RemoveAllNaverBook(); // naver db 초기화
-                bookDao.StoreNaverBook(title, quantity);// naver db에 저장
+                bookDao.StoreNaverBook(bookDto.Title, bookDto.Quantity);// naver db에 저장
+
                 Console.Clear();
                 Message.GreenColor("   >>Enter : 도서대여              뒤로가기 : ESC\n\n");
                 Print.PrintRequestBook(bookDao.StoreNaverBookReturn()); // 네이버 검색한 도서 출력
                 Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
-                InputOrBack();
+                InputOrBack(); // 뒤로가기 or 도서등록
                 return;
             }
             
@@ -241,10 +228,12 @@ namespace LibruryDatabase.Controls
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             bookNumber = InputbookNumber();
 
-            if(bookDao.isCheckingNaverBookNumber(bookNumber)) // 입력한 책 번호가 검색내역에 있으면 진행
+            bookDto.Number = bookNumber;
+            if(bookDao.isCheckingNaverBookNumber(bookDto.Number)) // 입력한 책 번호가 검색내역에 있으면 진행
             {
                 quantity = InputQuantity();
-                bookDao.StoreNaverBookTobook(bookNumber, quantity); // book db에 추가
+                bookDto.Quantity = quantity;
+                bookDao.StoreNaverBookTobook(bookNumber, bookDto.Quantity); // book db에 추가
 
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Message.GreenColor("도서가 추가되었습니다.    뒤로가기 : ESC");

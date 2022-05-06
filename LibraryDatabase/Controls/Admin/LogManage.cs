@@ -20,12 +20,6 @@ namespace LibruryDatabase.Controls
         private MessageScreen Message;
         private LogDAO logDao;
         private LogDTO logDto;
-        private memberDAO memberDao;
-        private memberDTO memberDto;
-        private BorrowBookDAO borrowBookDao;
-        private BorrowBookDTO borrowBookDto;
-        private BookDAO bookDao;
-        private BookDTO bookDto;
 
         public LogManage()
         {
@@ -38,22 +32,12 @@ namespace LibruryDatabase.Controls
             this.Message = message;
             logDao = new LogDAO();
             logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            borrowBookDto = new BorrowBookDTO();
-            borrowBookDao = new BorrowBookDAO();
-            bookDto = new BookDTO();
-            bookDao = new BookDAO();
         }
 
 
         public void PrintLogMenu() // 로그메뉴 프린트
         {
-            memberDao.connection(); // db 연결
             logDao.connection(); // db연결
-            borrowBookDao.connection(); // db연결
-            bookDao.connection(); // db연결
-
             PrintMenu(); // 로그메뉴화면 출력
 
 
@@ -154,7 +138,8 @@ namespace LibruryDatabase.Controls
             while (Constants.isPassing)
             {
                 number = InputNumber(); // 로그번호 입력
-                if (!logDao.VerifyLogExistence(number)) Message.RedColor("없는 로그입니다. 재입력 : Enter 뒤로가기 : ESC");
+                logDto.Number = number;
+                if (!logDao.VerifyLogExistence(logDto.Number)) Message.RedColor("없는 로그입니다. 재입력 : Enter 뒤로가기 : ESC");
                 else break;
 
                 Constants.cursor = Console.ReadKey(true);
@@ -169,7 +154,7 @@ namespace LibruryDatabase.Controls
             }
 
             ClearCurrentLine(Constants.CURRENT_LOCATION);
-            logDao.RemoveLog(number);// 로그 삭제
+            logDao.RemoveLog(logDto.Number);// 로그 삭제
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
             ClearCurrentLine(Constants.CURRENT_LOCATION);
 

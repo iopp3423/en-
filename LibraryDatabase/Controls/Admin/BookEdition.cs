@@ -17,10 +17,6 @@ namespace LibruryDatabase.Controls
         private MessageScreen Message;
         private LogDAO logDao;
         private LogDTO logDto;
-        private memberDAO memberDao;
-        private memberDTO memberDto;
-        private BorrowBookDAO borrowBookDao;
-        private BorrowBookDTO borrowBookDto;
         private BookDAO bookDao;
         private BookDTO bookDto;
 
@@ -34,21 +30,9 @@ namespace LibruryDatabase.Controls
             this.Message = message;
             logDao = new LogDAO();
             logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            borrowBookDto = new BorrowBookDTO();
-            borrowBookDao = new BorrowBookDAO();
             bookDto = new BookDTO();
             bookDao = new BookDAO();
         }
-        private string bookName;
-        private string author;
-        private string publisher;
-        private string publishDay;
-        private string quantity;
-        private string bookprice;
-        private string price;
-        private string isbn;
 
 
         public void SelectMenu() //이전 메뉴로 돌아가기
@@ -75,9 +59,7 @@ namespace LibruryDatabase.Controls
         {            
             int movingInputY = Constants.BOOK_NAME_Y;
 
-            memberDao.connection(); // db 연결
             logDao.connection(); // db연결
-            borrowBookDao.connection(); // db연결
             bookDao.connection(); // db연결
 
             Console.Clear();
@@ -87,16 +69,18 @@ namespace LibruryDatabase.Controls
             Message.GreenColor(Message.PrintInputOrBackMessage());
             if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
-            bookName = InputBookName(movingInputY++);
-            author = InputAuthor(movingInputY++);
-            publisher = InputPublisher(movingInputY++);
-            publishDay = InputPublishDay(movingInputY++);
-            quantity = InputQuantity(movingInputY++);
-            bookprice = InputPrice(movingInputY++);
-            isbn = InputISBN(movingInputY);
+            bookDto.Title = InputBookName(movingInputY++);
+            bookDto.Author = InputAuthor(movingInputY++);
+            bookDto.Publisher = InputPublisher(movingInputY++);
+            bookDto.Publishday = InputPublishDay(movingInputY++);
+            bookDto.Quantity = InputQuantity(movingInputY++);
+            bookDto.Price = InputPrice(movingInputY++);
+            bookDto.Isbn = InputISBN(movingInputY);
 
-            bookDao.StoreReviseBook(bookName, author, publisher, publishDay, bookprice, isbn, quantity); // book db에 정보 저장
-            logDao.StoreLog(Constants.ADMIN, Constants.ADD, bookName); // db에 로그 내역 저장
+            
+            bookDao.StoreReviseBook(bookDto.Title, bookDto.Author, bookDto.Publisher, bookDto.Publishday, bookDto.Price, bookDto.Isbn, bookDto.Quantity); // book db에 정보 저장
+            logDto.Log = bookDto.Title;
+            logDao.StoreLog(Constants.ADMIN, Constants.ADD, logDto.Log); // db에 로그 내역 저장
 
             Console.SetCursorPosition(Console.CursorLeft, Constants.ERROR_Y);
             Message.GreenColor(Message.PrintDoneBookRegister());
@@ -106,7 +90,7 @@ namespace LibruryDatabase.Controls
 
         public string InputBookName(int bookNameY)//책이름입력
         {
-    
+            string bookName;
 
             while (Constants.isPassing)
             {
@@ -129,7 +113,8 @@ namespace LibruryDatabase.Controls
 
         public string InputAuthor(int authorY)//작가입력
         {
-        
+            string author;
+
             while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.AUTHOR_X, authorY);
@@ -152,7 +137,7 @@ namespace LibruryDatabase.Controls
 
         public string InputPublisher(int publisherY)//출판사입력
         {
-         
+            string publisher;
 
             while (Constants.isPassing)
             {
@@ -176,7 +161,7 @@ namespace LibruryDatabase.Controls
 
         public string InputPublishDay(int publishDayY)//출판일자입력
         {
-  
+            string publishDay;
 
             while (Constants.isPassing)
             {
@@ -200,7 +185,7 @@ namespace LibruryDatabase.Controls
 
         public string InputQuantity(int quantityY)//수량입력
         {
-  
+            string quantity;
 
             while (Constants.isPassing)
             {
@@ -210,7 +195,7 @@ namespace LibruryDatabase.Controls
                 if (Constants.isFail == Regex.IsMatch(quantity, Utility.Exception.QUANTITY))
                 {
                     Console.SetCursorPosition(Constants.PUBLISH_DAY_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                   ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     Message.PrintQuantityInputMessage();
                     Menu.PrintLoginErrorMessage(); continue;
@@ -224,7 +209,7 @@ namespace LibruryDatabase.Controls
 
         public string InputPrice(int bookPriceY)//가격입력
         {
-     
+            string price;
 
             while (Constants.isPassing)
             {
@@ -245,6 +230,9 @@ namespace LibruryDatabase.Controls
 
         public string InputISBN(int ISBNY)//isbn입력
         {
+
+            string isbn;
+
             while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.BOOK_PRICE_X, ISBNY);

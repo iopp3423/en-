@@ -15,12 +15,6 @@ namespace LibruryDatabase.Controls
         private string bookNumber;
         private Screen Menu;
         private MessageScreen Message;
-        private LogDAO logDao;
-        private LogDTO logDto;
-        private memberDAO memberDao;
-        private memberDTO memberDto;
-        private BorrowBookDAO borrowBookDao;
-        private BorrowBookDTO borrowBookDto;
         private BookDAO bookDao;
         private BookDTO bookDto;
 
@@ -32,12 +26,6 @@ namespace LibruryDatabase.Controls
         {         
             this.Menu = Menu;
             this.Message = message;
-            logDao = new LogDAO();
-            logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            borrowBookDto = new BorrowBookDTO();
-            borrowBookDao = new BorrowBookDAO();
             bookDto = new BookDTO();
             bookDao = new BookDAO();
         }
@@ -46,10 +34,6 @@ namespace LibruryDatabase.Controls
         {
             string quantity;
 
-
-            memberDao.connection(); // db 연결
-            logDao.connection(); // db연결
-            borrowBookDao.connection(); // db연결
             bookDao.connection(); // db연결
 
             Console.Clear();
@@ -60,8 +44,9 @@ namespace LibruryDatabase.Controls
             if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             bookNumber = InputBookNumber(); // 책 번호 입력
+            bookDto.Number = bookNumber;
 
-            if (!bookDao.isCheckingRequestBookNumber(bookNumber)) // 책이 없으면
+            if (!bookDao.isCheckingRequestBookNumber(bookDto.Number)) // 책이 없으면
             {
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Message.RedColor(Message.PrintNoneNumberMessage()); // 책 번호 없음 메시지 출력
@@ -72,7 +57,8 @@ namespace LibruryDatabase.Controls
             {
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
                 quantity = InputQuantity();
-                bookDao.StoreRequestBook(bookNumber, quantity); // book db에 저장
+                bookDto.Quantity = quantity;
+                bookDao.StoreRequestBook(bookNumber, bookDto.Quantity); // book db에 저장
                 bookDao.DeleteRequestStoreBook(bookNumber);
                 SelectMenu(); // 뒤로가기
             }
