@@ -18,6 +18,7 @@ namespace LibruryDatabase.Controls
         private memberDAO memberDao;
         private memberDTO memberDto;
         private LogDAO logDao;
+        private LogDTO logDto;
 
         private string id;
         private string password;
@@ -44,6 +45,7 @@ namespace LibruryDatabase.Controls
             memberDao = new memberDAO();
             memberDto = new memberDTO();
             logDao = new LogDAO();
+            logDto = new LogDTO();
         }
 
 

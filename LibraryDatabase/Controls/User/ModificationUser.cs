@@ -17,7 +17,9 @@ namespace LibruryDatabase.Controls
         private string password;
         private string address;
         private LogDAO logDao;
+        private LogDTO logDto;
         private memberDAO memberDao;
+        private memberDTO memberDto;
 
 
         private Screen Menu;
@@ -32,7 +34,9 @@ namespace LibruryDatabase.Controls
             this.Menu = Menu;
             this.Print = message;
             logDao = new LogDAO();
+            logDto = new LogDTO();
             memberDao = new memberDAO();
+            memberDto = new memberDTO();
         }
 
         public bool IsGoingReturnMenu() //이전 메뉴로 돌아가기

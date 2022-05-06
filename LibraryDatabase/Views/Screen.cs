@@ -188,31 +188,7 @@ namespace LibruryDatabase.Views
 
 
         public void PrintLoginUser(List<memberDTO>member, string id, string password)
-        {
-
-            /*
-            Console.WriteLine("====================================================================");
-           
-            foreach (UserVO data in UserData.Get().userData)
-            {
-                if(data.id.Contains(id) && data.password.Contains(password))
-                {
-                    Console.Write("아이디 :");
-                    Console.WriteLine(data.id);
-                    Console.Write("비밀번호 :");
-                    Console.WriteLine(data.password);
-                    Console.Write("이름 :");
-                    Console.WriteLine(data.name);
-                    Console.Write("전화번호 :");
-                    Console.WriteLine(data.phone);
-                    Console.Write("나이 :");
-                    Console.WriteLine(data.age);
-                    Console.Write("주소 :");
-                    Console.WriteLine(data.address);
-                    Console.WriteLine("=======================================================================");
-                }
-            }
-            */
+        {          
             Console.WriteLine("====================================================================");
             foreach (memberDTO data in member)
             {

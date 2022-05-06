@@ -17,9 +17,13 @@ namespace LibruryDatabase.Controls
         private Screen Print;
         private MessageScreen Message;
         private LogDAO logDao;
+        private LogDTO logDto;
         private memberDAO memberDao;
+        private memberDTO memberDto;
         private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
         private BookDAO bookDao;
+        private BookDTO bookDto;
 
         public BorrowingBook()
         {
@@ -30,8 +34,12 @@ namespace LibruryDatabase.Controls
            this.Print = Menu;
            this.Message = message;
             logDao = new LogDAO();
+            logDto = new LogDTO();
             memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
             borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
             bookDao = new BookDAO();
         }
         
@@ -137,7 +145,8 @@ namespace LibruryDatabase.Controls
                 {
                     Message.GreenColor("반납기한은" + returnDay + "입니다.");
                     borrowBookDao.BorrowBook(id, bookNumber); // borrowmember db 책 대여
-                    bookDao.MinusBook(bookNumber); //db 책 수량 1 감소
+                    borrowBookDto.Number = bookNumber;
+                    bookDao.MinusBook(borrowBookDto.Number); //db 책 수량 1 감소  이렇게 하는건가..
 
                     bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
                     bookDao.close(); // db닫기 위치 애매함 나중에 수정

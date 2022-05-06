@@ -15,9 +15,13 @@ namespace LibruryDatabase.Controls
         private Screen Print;
         private MessageScreen Message;
         private LogDAO logDao;
+        private LogDTO logDto;
         private memberDAO memberDao;
+        private memberDTO memberDto;
         private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
         private BookDAO bookDao;
+        private BookDTO bookDto;
 
         public ModificationBook()
         {
@@ -28,8 +32,12 @@ namespace LibruryDatabase.Controls
             this.Message = message;
             this.Print = Menu;
             logDao = new LogDAO();
+            logDto = new LogDTO();
             memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
             borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
             bookDao = new BookDAO();
         }
 
