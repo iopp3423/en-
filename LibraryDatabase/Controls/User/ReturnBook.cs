@@ -17,9 +17,6 @@ namespace LibruryDatabase.Controls
         private Screen Menu;
         private MessageScreen Message;
         private LogDAO logDao;
-        private LogDTO logDto;
-        private memberDAO memberDao;
-        private memberDTO memberDto;
         private BorrowBookDAO borrowBookDao;
         private BorrowBookDTO borrowBookDto;
         private BookDAO bookDao;
@@ -37,11 +34,8 @@ namespace LibruryDatabase.Controls
             this.Menu = Menu;
             this.Message = message;
             logDao = new LogDAO();
-            logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            borrowBookDto = new BorrowBookDTO();
             borrowBookDao = new BorrowBookDAO();
+            borrowBookDto = new BorrowBookDTO();
             bookDto = new BookDTO();
             bookDao = new BookDAO();
         }
@@ -97,7 +91,10 @@ namespace LibruryDatabase.Controls
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             bookNumber = InputBookNumber();
 
-            isAlreadyBorrow = borrowBookDao.IsCheckingAlreadyBorrowBook(id, bookNumber); // 해당 아이디로 true면 대여한 책 있음
+            borrowBookDto.Id = id;
+            borrowBookDto.Number = bookNumber;
+
+            isAlreadyBorrow = borrowBookDao.IsCheckingAlreadyBorrowBook(borrowBookDto.Id, borrowBookDto.Number); // 해당 아이디로 true면 대여한 책 있음
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
 
@@ -111,10 +108,12 @@ namespace LibruryDatabase.Controls
             else // 대여목록에 책 있으면
             {
 
-                borrowBookDao.RemoveRetuenBookInformation(id, bookNumber); // db에서 해당 아이디에 있는 책 제거(반납)
-                bookDao.PlusBook(bookNumber); // 반납 시 책 수량 1 증가
+                borrowBookDao.RemoveRetuenBookInformation(borrowBookDto.Id, borrowBookDto.Number); // db에서 해당 아이디에 있는 책 제거(반납)
 
-                bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
+                bookDto.Number = bookNumber;
+                bookDao.PlusBook(bookDto.Number); // 반납 시 책 수량 1 증가
+
+                bookName = bookDao.BringBookname(bookDto.Number); // 해당 책 제목 가져오기
                 bookDao.close(); // db닫기 위치 애매함 나중에 수정
                 logDao.StoreLog(id, Constants.RETURN, bookName);// 로그에 저장
 

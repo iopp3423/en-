@@ -18,8 +18,6 @@ namespace LibruryDatabase.Controls
         private MessageScreen Message;
         private LogDAO logDao;
         private LogDTO logDto;
-        private memberDAO memberDao;
-        private memberDTO memberDto;
         private BorrowBookDAO borrowBookDao;
         private BorrowBookDTO borrowBookDto;
         private BookDAO bookDao;
@@ -35,8 +33,6 @@ namespace LibruryDatabase.Controls
            this.Message = message;
             logDao = new LogDAO();
             logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
             borrowBookDto = new BorrowBookDTO();
             borrowBookDao = new BorrowBookDAO();
             bookDto = new BookDTO();
@@ -71,7 +67,6 @@ namespace LibruryDatabase.Controls
             string bookName;
             string returnDay = DateTime.Today.AddDays(Constants.RETURNDAY).ToString("yyyy/MM/dd");
 
-            memberDao.connection(); // db 연결
             logDao.connection(); // db연결
             borrowBookDao.connection(); // db연결
             bookDao.connection(); // db연결
@@ -123,14 +118,17 @@ namespace LibruryDatabase.Controls
                     break;
                 }
 
-                if (bookDao.IsCheckongBookQuantity(bookNumber) == Constants.isFail) //책 수량체크
+                bookDto.Number = bookNumber;
+                if (bookDao.IsCheckongBookQuantity(bookDto.Number) == Constants.isFail) //책 수량체크
                 {
                     Message.RedColor(Message.PrintNoneQuantity());
                     GoBackMenu(); 
                     return; 
                 }
 
-                isAlreadyBorrow = borrowBookDao.IsCheckingBookOverlap(id, bookNumber); // 책 대여 체크
+                borrowBookDto.Id = id;
+                borrowBookDto.Number = bookNumber;
+                isAlreadyBorrow = borrowBookDao.IsCheckingBookOverlap(borrowBookDto.Id, borrowBookDto.Number); // 책 대여 체크
 
                 if (isAlreadyBorrow == Constants.isPassing)
                 {
@@ -144,13 +142,16 @@ namespace LibruryDatabase.Controls
                 else if (bookDao.CheckBookNumber(bookNumber))
                 {
                     Message.GreenColor("반납기한은" + returnDay + "입니다.");
-                    borrowBookDao.BorrowBook(id, bookNumber); // borrowmember db 책 대여
+                    borrowBookDao.BorrowBook(borrowBookDto.Id, borrowBookDto.Number); // borrowmember db 책 대여
                     borrowBookDto.Number = bookNumber;
                     bookDao.MinusBook(borrowBookDto.Number); //db 책 수량 1 감소  이렇게 하는건가..
 
-                    bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
+                    bookDto.Number = bookNumber;
+                    bookName = bookDao.BringBookname(bookDto.Number); // 해당 책 제목 가져오기
                     bookDao.close(); // db닫기 위치 애매함 나중에 수정
-                    logDao.StoreLog(id, Constants.BORROW, bookName); // db에 로그 내역 저장
+                    logDto.Id = id;
+                    logDto.Log = bookName;
+                    logDao.StoreLog(logDto.Id, Constants.BORROW, logDto.Log); // db에 로그 내역 저장
 
                     Message.GreenColor(Message.PrintDoneBorrowMessage());
                     GoBackMenu();

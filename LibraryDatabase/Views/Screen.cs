@@ -483,7 +483,7 @@ namespace LibruryDatabase.Views
                 Console.Write("isbn    :");
                 Console.WriteLine(data.Isbn);
                 Console.Write("책 설명 :");
-                Console.WriteLine(data.Description);
+                Console.WriteLine(data.Quantity);
                 Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
             }
         }

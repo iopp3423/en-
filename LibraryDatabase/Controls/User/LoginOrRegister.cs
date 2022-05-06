@@ -127,7 +127,7 @@ namespace LibruryDatabase.Controls
         public void RegisterMember() // 회원가입
         {
             memberDao.connection(); // db연결
-            logDao.connection(); // db연결 이게 맞나..
+            logDao.connection(); // db연결 
 
             Console.Clear();
             Menu.RegisterPrint();          
@@ -154,6 +154,7 @@ namespace LibruryDatabase.Controls
             }
 
             memberDto.Id = InputId();
+            logDto.Id = memberDto.Id;
 
             isOverlapCheck = memberDao.IsCheckingIdOverlap(id); // db에 중복 id 있으면 true
 
@@ -205,7 +206,7 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.PW_FAIL_X, Constants.PW_FAIL_Y);
             message.GreenColor(message.PrintDoneRegister());
 
-            logDao.StoreLog(id, Constants.LIBRARY, Constants.REGISTER); // db에 로그 내역 저장
+            logDao.StoreLog(logDto.Id, Constants.LIBRARY, Constants.REGISTER); // db에 로그 내역 저장
 
             memberDao.close(); // db닫기
             logDao.close(); // db닫기
@@ -235,11 +236,15 @@ namespace LibruryDatabase.Controls
             id = InputId();
             password = InputPassword();
 
-            isOverlapCheck = memberDao.IsCheckingLogin(id, password); // db에 id, pw 같은 회원 있는지
+            memberDto.Id = id;
+            memberDto.Password = password;
+            logDto.Id = id;
+
+            isOverlapCheck = memberDao.IsCheckingLogin(memberDto.Id, memberDto.Password); // db에 id, pw 같은 회원 있는지
          
             if (isOverlapCheck == Constants.isSucess)
             {
-                logDao.StoreLog(id, Constants.LIBRARY, Constants.LOGIN); // db에 로그 내역 저장
+                logDao.StoreLog(logDto.Id, Constants.LIBRARY, Constants.LOGIN); // db에 로그 내역 저장
                 GoUser.StartBookmenu(id, password); // 유저메뉴
             }
 

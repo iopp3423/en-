@@ -59,6 +59,7 @@ namespace LibruryDatabase.Controls
         public void ModifyUserInformation(string id, string password)
         {
             memberDao.connection(); // db 연결
+
             Console.Clear();
             Menu.PrintMain();
             Menu.PrintLoginUser(memberDao.StoreUserDataToList(),id, password); // 로그인한 아이디 비밀번호 screen으로 보내서 출력
@@ -125,11 +126,15 @@ namespace LibruryDatabase.Controls
 
             ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기
             callNumber = InputCallNumber(); // 입력받기
-            memberDao.ModifyPhone(callNumber, id); // db에서 전화번호 변경
+            memberDto.Phone = callNumber;
+            memberDto.Id = id; // 로그인한 아이디
+            memberDao.ModifyPhone(memberDto.Phone, memberDto.Id); // db에서 전화번호 변경
 
             ClearandStore();// 리스트 초기화 후 저장
 
-            logDao.StoreLog(id, "번호변경", callNumber);// 로그에 저장
+            logDto.Id = id;
+            logDto.Log = callNumber;
+            logDao.StoreLog(logDto.Id, "번호변경", logDto.Log);// 로그에 저장
 
             memberDao.close(); // db닫기
             logDao.close(); // db닫기
@@ -142,9 +147,13 @@ namespace LibruryDatabase.Controls
             ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기   
             password = InputPasswordCheck();// 입력받기
 
-            memberDao.ModifyPassword(password, id);
+            memberDto.Id = id;
+            memberDto.Password = password;
+            memberDao.ModifyPassword(memberDto.Password, memberDto.Id);
 
-            logDao.StoreLog(id, "비밀번호변경", password);// 로그에 저장
+            logDto.Id = id;
+            logDto.Log = password;
+            logDao.StoreLog(logDto.Id, "비밀번호변경", logDto.Log);// 로그에 저장
 
             memberDao.close(); // db닫기
             logDao.close(); // db닫기
@@ -158,10 +167,14 @@ namespace LibruryDatabase.Controls
             ClearCurrentLine(Constants.CURRENT_LOCATION); // 현재 줄 지우기 
             address = InputAddress();// 입력받기
 
-            memberDao.ModifyAddress(address, id);
+            memberDto.Id = id;
+            memberDto.Address = address;
+            memberDao.ModifyAddress(memberDto.Id, memberDto.Address);
             ClearandStore();// 리스트 초기화 후 저장
 
-            logDao.StoreLog(id, "주소변경", address);// 로그에 저장
+            logDto.Id = id;
+            logDto.Log = address;
+            logDao.StoreLog(logDto.Id, "주소변경", logDto.Log);// 로그에 저장
 
             memberDao.close(); // db닫기
             logDao.close(); // db닫기

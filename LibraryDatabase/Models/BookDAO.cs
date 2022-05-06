@@ -161,9 +161,24 @@ namespace LibruryDatabase.Models
 
         public void InsertRequestBook(string bookNumber) // request db에 책 추가
         {
+            List<BookDTO> requestBook = new List<BookDTO>();
+
             conn.Open();
-            MySqlCommand Command = new MySqlCommand(String.Format(Constants.requestQuery, bookNumber), conn);
-            Command.ExecuteNonQuery();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.naverQuery, bookNumber), conn);
+            MySqlDataReader Data = Command.ExecuteReader();
+            while (Data.Read())
+            {//리스트에 임시저장
+                if (Data["number"].ToString() == bookNumber)
+                {
+                    requestBook.Add(new BookDTO(Data["number"].ToString(), Data["title"].ToString(), Data["author"].ToString(), Data["publisher"].ToString(), Data["publishday"].ToString(), Data["price"].ToString(), Data["isbn"].ToString(), Data["description"].ToString()));
+                }
+            }
+            conn.Close();
+
+            // requestbook db에 저장
+            conn.Open();
+            MySqlCommand Request = new MySqlCommand(String.Format(Constants.requestBookQuery, requestBook[0].Title, requestBook[0].Author, requestBook[0].Publisher, requestBook[0].Publishday, requestBook[0].Price, requestBook[0].Isbn, requestBook[0].Quantity), conn);
+            Request.ExecuteNonQuery();
             conn.Close();
         }
         public void PlusBook(string bookNumber) // 책 반납시 해당 책 갯수 1 증가

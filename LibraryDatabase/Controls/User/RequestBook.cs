@@ -18,12 +18,7 @@ namespace LibruryDatabase.Controls
         private string bookName;
         private string bookNumber;
 
-        private LogDAO logDao;
-        private LogDTO logDto;
-        private memberDAO memberDao;
-        private memberDTO memberDto;
-        private BorrowBookDAO borrowBookDao;
-        private BorrowBookDTO borrowBookDto;
+
         private BookDAO bookDao;
         private BookDTO bookDto;
 
@@ -36,12 +31,6 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = Menu;
             this.Message = message;
-            logDao = new LogDAO();
-            logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            borrowBookDto = new BorrowBookDTO();
-            borrowBookDao = new BorrowBookDAO();
             bookDto = new BookDTO();
             bookDao = new BookDAO();
         }
@@ -68,9 +57,6 @@ namespace LibruryDatabase.Controls
 
         public void RequestAddBook() // 유저 책 요청 메서드
         {
-            memberDao.connection(); // db 연결
-            logDao.connection(); // db연결
-            borrowBookDao.connection(); // db연결
             bookDao.connection(); // db연결
 
             Menu.PrintMain();
@@ -93,9 +79,9 @@ namespace LibruryDatabase.Controls
             ClearCurrentLine(Constants.CURRENT_LOCATION); // 안내메시지 제거 후
             Message.PrintBookTitle(); // 입력메시지 출력
 
-            bookName = InputBookName(); //책제목입력
             bookDao.RemoveAllNaverBook(); // 네이버 db 초기화
-            bookDao.StoreNaverBook(bookName, Constants.ADD_BOOK.ToString()); // db에 네이버 검색한 책 저장
+            bookDto.Title = InputBookName(); //책제목입력
+            bookDao.StoreNaverBook(bookDto.Title, Constants.ADD_BOOK.ToString()); // db에 네이버 검색한 책 저장
 
             Console.WriteLine("\n\n");
 
@@ -103,16 +89,16 @@ namespace LibruryDatabase.Controls
 
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-            bookNumber = InputbookNumber();
+            bookDto.Number = InputbookNumber(); // 도서번호 입력
 
-            if (bookDao.CheckNaverBookNumber(bookNumber))// 도서번호 맞게 입력하면
+            if (bookDao.CheckNaverBookNumber(bookDto.Number))// 도서번호 맞게 입력하면
             {
                 Message.GreenColor(Message.BackPrint());
-                bookDao.InsertRequestBook(bookNumber);
+                bookDao.InsertRequestBook(bookDto.Number);
                 GoBackMenu();
             }
 
-            else if (!bookDao.CheckNaverBookNumber(bookNumber))// 도서번호 잘못 입력하면
+            else if (!bookDao.CheckNaverBookNumber(bookDto.Number))// 도서번호 잘못 입력하면
             {
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
                 Message.RedColor(Message.PrintNoneNumberMessage());
