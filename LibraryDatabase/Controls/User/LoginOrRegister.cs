@@ -19,8 +19,8 @@ namespace LibruryDatabase.Controls
         private memberDTO memberDto;
         private LogDAO logDao;
         private LogDTO logDto;
-
-
+        private Screen Menu;
+        private MessageScreen message;
         private string id;
         private string password;
         private string passswordCheck;
@@ -30,8 +30,6 @@ namespace LibruryDatabase.Controls
         private string address;
         private bool isOverlapCheck;
 
-        private Screen Menu;
-        private MessageScreen message;
 
 
         public LoginOrRegister() 
@@ -40,13 +38,12 @@ namespace LibruryDatabase.Controls
         }
 
         public LoginOrRegister(Screen InputMenu, MessageScreen message, memberDAO MemberDao, memberDTO MemberDto, LogDAO LogDao, LogDTO LogDto
-                                                    ,BookDAO BookDao, BookDTO BookDto, BorrowBookDAO BorrowBookDao, BorrowBookDTO BorrowBookDto)
+                               ,BookDAO BookDao, BookDTO BookDto, BorrowBookDAO BorrowBookDao, BorrowBookDTO BorrowBookDto)
         {
             GoUser = new UserMenu(InputMenu, message, MemberDao, MemberDto, LogDao, LogDto, BookDao, BookDto, BorrowBookDao, BorrowBookDto);
 
             this.Menu = InputMenu;
             this.message = message;
-
             this.memberDao = MemberDao;
             this.memberDto = MemberDto;
             this.logDao = LogDao;

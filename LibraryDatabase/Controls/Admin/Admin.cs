@@ -17,11 +17,10 @@ namespace LibruryDatabase.Controls
         private memberDTO memberDto;
         private LogDAO logDao;
         private LogDTO logDto;
-
-        AdminMenu goingMenu= new AdminMenu();
-
         private Screen Print;
         private MessageScreen PrintMessage;
+
+        AdminMenu goingMenu= new AdminMenu();
 
         public Admin()
         {

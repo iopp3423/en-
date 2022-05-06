@@ -12,8 +12,7 @@ using LibruryDatabase.Models;
 namespace LibruryDatabase.Controls
 {
     internal class ReturnBook
-    {
-
+    { 
         private Screen Menu;
         private MessageScreen Message;
         private LogDAO logDao;
@@ -21,7 +20,6 @@ namespace LibruryDatabase.Controls
         private BorrowBookDTO borrowBookDto;
         private BookDAO bookDao;
         private BookDTO bookDto;
-
 
 
         public ReturnBook()
@@ -33,7 +31,6 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = Menu;
             this.Message = message;
-
             this.bookDto = BookDto;
             this.bookDao = BookDao;
             this.logDao = LogDao;

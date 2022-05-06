@@ -11,12 +11,10 @@ namespace LibruryDatabase.Controls
 {
     class ChoiceUserOrAdmin
     {
-
         Screen Menu = new Screen();
         MessageScreen message = new MessageScreen();
         LoginOrRegister UserLibruary = new LoginOrRegister(); 
         Admin AdminLibruary = new Admin();
-
         memberDAO memberDao = new memberDAO();
         memberDTO memberDto = new memberDTO();
         LogDAO logDao = new LogDAO();
@@ -33,8 +31,6 @@ namespace LibruryDatabase.Controls
             AdminLibruary = new Admin(Menu, message, memberDao, memberDto, logDao, logDto, bookDao, bookDto, borrowBookDao, borrowBookDto);
         }
 
-
-     
 
         public void StartMenu() // 유저 or 관리자
         {

@@ -20,8 +20,6 @@ namespace LibruryDatabase.Controls
         private LogDTO logDto;
         private memberDAO memberDao;
         private memberDTO memberDto;
-
-
         private Screen Menu;
         private MessageScreen Print;
 
@@ -33,7 +31,6 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = Menu;
             this.Print = message;
-
             this.memberDao = MemberDao;
             this.memberDto = MemberDto;
             this.logDao = LogDao;

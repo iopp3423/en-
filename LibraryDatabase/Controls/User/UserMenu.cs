@@ -15,7 +15,6 @@ namespace LibruryDatabase.Controls
         private memberDTO memberDto;
         private LogDAO logDao;
         private LogDTO logDto;
-
         private Screen Menu;
         private MessageScreen PrintMessage;
 
@@ -32,26 +31,22 @@ namespace LibruryDatabase.Controls
         }
 
         public UserMenu(Screen InputMenu, MessageScreen message, memberDAO MemberDao, memberDTO MemberDto, LogDAO LogDao, LogDTO LogDto
-                                                    , BookDAO BookDao, BookDTO BookDto, BorrowBookDAO BorrowBookDao, BorrowBookDTO BorrowBookDto)
+                        , BookDAO BookDao, BookDTO BookDto, BorrowBookDAO BorrowBookDao, BorrowBookDTO BorrowBookDto)
 
         {
-            BookSearching = new SearchingBook(InputMenu, message, LogDao, BookDao);
-            BookBorrowing = new BorrowingBook(InputMenu, message, LogDao, LogDto, BookDao, BookDto, BorrowBookDao, BorrowBookDto);
-            UserModification = new ModificationUser(InputMenu, message, MemberDao, MemberDto, LogDao, LogDto);
-            ReturnBook = new ReturnBook(InputMenu, message, BookDao, BookDto, LogDao, BorrowBookDao, BorrowBookDto);
-            Request = new RequestBook(InputMenu, message, BookDao, BookDto);
-
             this.Menu = InputMenu;
             this.PrintMessage = message;
             this.memberDao = MemberDao;
             this.memberDto = MemberDto;
             this.logDao = LogDao;
             this.logDto = LogDto;
+
+            BookSearching = new SearchingBook(InputMenu, message, LogDao, BookDao);
+            BookBorrowing = new BorrowingBook(InputMenu, message, LogDao, LogDto, BookDao, BookDto, BorrowBookDao, BorrowBookDto);
+            UserModification = new ModificationUser(InputMenu, message, MemberDao, MemberDto, LogDao, LogDto);
+            ReturnBook = new ReturnBook(InputMenu, message, BookDao, BookDto, LogDao, BorrowBookDao, BorrowBookDto);
+            Request = new RequestBook(InputMenu, message, BookDao, BookDto);          
         }
-
-        
-
-       
 
         public void StartBookmenu(string id, string password) // id, pw정보 저장
         {

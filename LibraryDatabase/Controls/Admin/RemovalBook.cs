@@ -16,7 +16,6 @@ namespace LibruryDatabase.Controls
 
         private Screen Print;
         private MessageScreen Message;
-
         private LogDAO logDao;
         private LogDTO logDto;
         private BookDAO bookDao;
@@ -31,7 +30,6 @@ namespace LibruryDatabase.Controls
         {
             this.Print = Menu;
             this.Message = message;
-
             this.logDao = LogDao;
             this.logDto = LogDto;
             this.bookDto = BookDto;

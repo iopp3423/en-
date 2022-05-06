@@ -30,7 +30,6 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = Menu;
             this.Message = message;
-
             this.logDao = LogDao;
             this.logDto = LogDto;
             this.memberDao = MemberDao;

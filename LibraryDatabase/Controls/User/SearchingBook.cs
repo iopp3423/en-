@@ -20,9 +20,8 @@ namespace LibruryDatabase.Controls
         private string name;
         private LogDAO logDao;
         private BookDAO bookDao;
-
         private Screen Menu;
-        MessageScreen message;
+        private MessageScreen message;
 
         public SearchingBook()
         {

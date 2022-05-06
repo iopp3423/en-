@@ -17,6 +17,9 @@ namespace LibruryDatabase.Controls
         private MessageScreen Message;
         private BookDAO bookDao;
         private BookDTO bookDto;
+        private string title = "";
+        private string quantity = "10";
+        private string bookNumber = "";
 
         public NaverSearch()
         {
@@ -30,10 +33,6 @@ namespace LibruryDatabase.Controls
             this.bookDto = BookDto;
             this.bookDao = BookDao;
         }
-
-        private string title = "";
-        private string quantity="10";
-        private string bookNumber = "";
 
         public void SearchNaverBook() // 네이버 기본화면
         {

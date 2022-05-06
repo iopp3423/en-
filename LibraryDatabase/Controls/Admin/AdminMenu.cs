@@ -11,18 +11,18 @@ namespace LibruryDatabase.Controls
 {
     internal class AdminMenu : SearchingBook
     {
+        private LogDAO logDao;
+        private BorrowBookDAO borrowBookDao;
+        private Screen Print;
+        private MessageScreen PrintMessage;
+
         RemovalBook removing = new RemovalBook();
         BookEdition adding = new BookEdition();
         ModificationBook modify = new ModificationBook();
         RemovalUser member = new RemovalUser();
         LogManage Log = new LogManage();
         NaverSearch naver = new NaverSearch();
-        ApprovalUserBook book = new ApprovalUserBook();
-
-        private LogDAO logDao;
-        private BorrowBookDAO borrowBookDao;
-        private Screen Print;
-        private MessageScreen PrintMessage;
+        ApprovalUserBook book = new ApprovalUserBook(); 
 
         public AdminMenu()
         {

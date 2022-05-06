@@ -13,7 +13,6 @@ namespace LibruryDatabase.Controls
 {
     internal class BorrowingBook : SearchingBook
     {
-
         private Screen Print;
         private MessageScreen Message;
         private LogDAO logDao;

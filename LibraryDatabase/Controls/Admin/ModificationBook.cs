@@ -27,7 +27,6 @@ namespace LibruryDatabase.Controls
         {
             this.Message = message;
             this.Print = Menu;
-
             this.logDao = LogDao;
             this.logDto = LogDto;
             this.bookDto = BookDto;

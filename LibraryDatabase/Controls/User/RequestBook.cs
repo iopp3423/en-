@@ -17,7 +17,6 @@ namespace LibruryDatabase.Controls
         private string bookNumber;
         private  Screen Menu;
         private  MessageScreen Message;
-
         private BookDAO bookDao;
         private BookDTO bookDto;
 
@@ -32,7 +31,6 @@ namespace LibruryDatabase.Controls
             this.Message = message;
             this.bookDto = BookDto;
             this.bookDao = BookDao;
-
         }
 
         public void SelectMenu() //이전 메뉴로 돌아가기
