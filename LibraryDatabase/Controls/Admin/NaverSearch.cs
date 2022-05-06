@@ -247,14 +247,14 @@ namespace LibruryDatabase.Controls
                 bookDao.StoreNaverBookTobook(bookNumber, quantity); // book db에 추가
 
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
-                Message.GreenColor("도서가 추가되었습니다.    뒤로가기 : F5");
+                Message.GreenColor("도서가 추가되었습니다.    뒤로가기 : ESC");
                 IsGoingReturnMenu();
                 return;
             }
             else
             {
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
-                Message.RedColor("없는 번호입니다.    뒤로가기 : F5");
+                Message.RedColor("없는 번호입니다.    뒤로가기 : ESC");
                 IsGoingReturnMenu();
                 return;
             }

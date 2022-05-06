@@ -92,8 +92,9 @@ namespace LibruryDatabase.Models
 
             if (!file.Exists)
             {
+                
                 StreamWriter writer = new StreamWriter(FilePath);
-
+                /*
                 foreach (LogVO x in LogData.Get().PrintLog)
                 {
                     temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
@@ -101,12 +102,26 @@ namespace LibruryDatabase.Models
 
                 }
                 writer.Close();
+                */
 
+                conn.Open();
+                //ExecuteReader를 이용하여
+                //연결 모드로 데이타 가져오기
+                MySqlCommand Command = new MySqlCommand(Constants.logQuery, conn);
+                MySqlDataReader Data = Command.ExecuteReader();
+
+                while (Data.Read())
+                {
+                    temp = string.Format("{0} {1} {2} {3} {4}", Data["number"].ToString(), Data["TIME"].ToString(), Data["name"].ToString(), Data["record"].ToString(), Data["log"].ToString());
+                    writer.WriteLine(temp);
+                }
+                conn.Close();
+                writer.Close();
             }
             else
             {
                 StreamWriter writer = File.AppendText(FilePath);
-
+                /*
                 foreach (LogVO x in LogData.Get().PrintLog)
                 {
                     temp = string.Format("{0} {1} {2} {3} {4}", x.number, x.dateTime, x.name, x.record, x.log);
@@ -114,7 +129,21 @@ namespace LibruryDatabase.Models
 
                 }
                 writer.Close();
+                */
 
+                conn.Open();
+                //ExecuteReader를 이용하여
+                //연결 모드로 데이타 가져오기
+                MySqlCommand Command = new MySqlCommand(Constants.logQuery, conn);
+                MySqlDataReader Data = Command.ExecuteReader();
+
+                while (Data.Read())
+                {
+                    temp = string.Format("{0} {1} {2} {3} {4}", Data["number"].ToString(), Data["TIME"].ToString(), Data["name"].ToString(), Data["record"].ToString(), Data["log"].ToString());
+                    writer.WriteLine(temp);
+                }
+                conn.Close();
+                writer.Close();
             }
         }
 

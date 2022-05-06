@@ -290,27 +290,27 @@ namespace LibruryDatabase.Views
             }
         }
 
-        public void PrintCurrentBorrowBook() // 대여상황
+        public void PrintCurrentBorrowBook(List<BorrowBookDTO> book) // 대여상황
         {           
-            foreach (BorrowUserVO data in BookData.Get().borrow)
+            foreach (BorrowBookDTO data in book)
             {
 
                 Console.Write("아이디  :");
-                Console.WriteLine(data.id);
+                Console.WriteLine(data.Id);
                 Console.Write("책 번호 :");
-                Console.WriteLine(data.number);
+                Console.WriteLine(data.Number);
                 Console.Write("책 제목 :");
-                Console.WriteLine(data.title);
+                Console.WriteLine(data.Title);
                 Console.Write("책 저자 :");
-                Console.WriteLine(data.author);
+                Console.WriteLine(data.Author);
                 Console.Write("출판사  :");
-                Console.WriteLine(data.publish);
+                Console.WriteLine(data.Publish);
                 Console.Write("대여날짜:");
-                Console.WriteLine(data.borrowbook);
+                Console.WriteLine(data.Borrowbook);
                 Console.Write("반납날짜:");
-                Console.WriteLine(data.returnbook);
+                Console.WriteLine(data.Returnbook);
                 Console.WriteLine("=======================================================================");              
-            }          
+            }
         }
 
         public void PrintSearchAuthor(List<BookDTO> book, string name) // 작가로 검색
@@ -489,30 +489,6 @@ namespace LibruryDatabase.Views
             Console.Write("  》로그파일을 제거하시겠습니까?    YES : Enter        뒤로가기 : ESC \n\n");
         }
 
-
-        public void PrintNaverBook()
-        {
-            Console.Write("\n\n");
-            foreach (NaverBookVO book in BookData.Get().NaverBook)
-            {
-                Console.Write("책 제목 :");
-                Console.WriteLine(book.title);
-                Console.Write("책 저자 :");
-                Console.WriteLine(book.author);
-                Console.Write("책 가격 :");
-                Console.WriteLine(book.price);
-                Console.Write("출판사  :");
-                Console.WriteLine(book.publisher);
-                Console.Write("출시일  :");
-                Console.WriteLine(book.publishday);
-                Console.Write("isbn    :");
-                Console.WriteLine(book.isbn);
-                Console.Write("책 설명 :");
-                Console.WriteLine(book.description);
-                Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
-            }
-        
-        }
         public void PrintRequestBook(List<BookDTO> book)
         {
             Console.Write("\n\n");

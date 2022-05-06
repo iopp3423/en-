@@ -49,6 +49,11 @@ namespace LibruryDatabase.Models
             get { return title; }
             set { title = value; }
         }
+        public string Author
+        {
+            get { return author; }
+            set { author = value; }
+        }
         public string Publish
         {
             get { return publish; }

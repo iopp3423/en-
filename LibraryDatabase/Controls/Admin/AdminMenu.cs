@@ -21,6 +21,9 @@ namespace LibruryDatabase.Controls
 
         private LogDAO logDao;
         private LogDTO logDto;
+        private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
+
         private Screen Print;
         private MessageScreen PrintMessage;
 
@@ -42,6 +45,9 @@ namespace LibruryDatabase.Controls
             Log = new LogManage(Print, PrintMessage);
             naver = new NaverSearch(Print, PrintMessage);
             book = new ApprovalUserBook(Print, PrintMessage);
+            borrowBookDto = new BorrowBookDTO();
+            borrowBookDao = new BorrowBookDAO();
+
         }
 
 
@@ -129,11 +135,13 @@ namespace LibruryDatabase.Controls
         }
         public void PrintCurrentBook()
         {
+            borrowBookDao.connection(); // db연결
+            logDao.connection(); // db연결
             Console.Clear();
             PrintMessage.GreenColor(PrintMessage.PrintBackOrExit());
             logDao.StoreLog(Constants.ADMIN, Constants.BOOK_LIST, Constants.OPEN_LIST); // db에 로그 내역 저장
 
-            Print.PrintCurrentBorrowBook();
+            Print.PrintCurrentBorrowBook(borrowBookDao.StoreBorrowBookmemberReturn());
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
             GoBackMenu();
         }

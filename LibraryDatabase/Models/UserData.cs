@@ -10,6 +10,7 @@ namespace LibruryDatabase.Models
 {
     internal class UserData
     {
+        /*
         public List<UserVO> userData = new List<UserVO>();
 
         private static UserData User;
@@ -100,7 +101,7 @@ namespace LibruryDatabase.Models
             return Constants.isFail;
 
         }
-        */
+        
 
         public bool IsCheckingLogin(string id, string password) // 데베에서 회원 유무 확인
         {
@@ -178,7 +179,7 @@ namespace LibruryDatabase.Models
                 Command.ExecuteNonQuery();  
             
         }
-        */
+        
 
         public bool IsCheckingExistenceId(string id) // 아이디 존재유무
         {
@@ -237,7 +238,7 @@ namespace LibruryDatabase.Models
                 userInformation.Close();    
         }
 
-        /*
+        
         public void RemoveBorrowmember(string id) // 대여목록에 있는 아이디 제거
         {
 

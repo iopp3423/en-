@@ -132,7 +132,7 @@ namespace LibruryDatabase.Controls
         {
             string number;
             Console.Clear();
-            Message.GreenColor(" >> 입력 : Enter                                   뒤로가기 : F5");
+            Message.GreenColor(" >> 입력 : Enter                                   뒤로가기 : ESC");
             Console.WriteLine();
             Print.PrintLog(logDao.StoreLogReturn()); // 로그내역 출력
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);

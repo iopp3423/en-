@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LibruryDatabase.Models
 {
     internal class NaverBookVO
-    {
+    {/*
         public string title;
         public string author;
         public string price;
@@ -33,6 +33,6 @@ namespace LibruryDatabase.Models
         }
 
        
-
+        */
     }
 }

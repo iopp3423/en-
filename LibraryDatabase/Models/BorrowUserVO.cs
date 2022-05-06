@@ -8,6 +8,7 @@ namespace LibruryDatabase.Models
 {
     internal class BorrowUserVO
     {
+        /*
         public string id;
         public string number;
         public string title;
@@ -34,6 +35,6 @@ namespace LibruryDatabase.Models
         }
 
         
-
+        */
     }
 }

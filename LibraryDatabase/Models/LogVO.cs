@@ -10,6 +10,7 @@ namespace LibruryDatabase.Models
 {
     internal class LogVO
     {
+        /*
         public string number;
         public string dateTime;
         public string name;
@@ -30,7 +31,7 @@ namespace LibruryDatabase.Models
             this.log = log;
         }
 
-        
-       
+        */
+
     }
 }

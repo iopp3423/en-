@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace LibruryDatabase.Models
 {
+    
     internal class UserVO
     {
+        /*
         public string id;
         public string password;
         public string name;
@@ -29,6 +31,7 @@ namespace LibruryDatabase.Models
             this.age = age;
             this.address = address;
         }
-          
+          */
     }
+
 }

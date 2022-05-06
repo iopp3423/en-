@@ -14,7 +14,7 @@ namespace LibruryDatabase.Models
 {
     internal class BookData
     {
-
+        /*
         public List<NaverBookVO> NaverBook = new List<NaverBookVO>();
         public List<NaverBookVO> UserRequestBook = new List<NaverBookVO>();
         public List<BookVO> bookData = new List<BookVO>();
@@ -259,7 +259,7 @@ namespace LibruryDatabase.Models
 
             return Constants.isSucess; // 반납함
         }
-        */
+        
 
         public void ReturnBook(string bookNumber) // 로그인한 유저 책 반납
         {
@@ -553,7 +553,8 @@ namespace LibruryDatabase.Models
             }
             return Constants.isFail;
         }
-
-
+        */
+        
     }
+    
 }

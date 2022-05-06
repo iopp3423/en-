@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibruryDatabase.Models
 {
+
     public class BookDTO
     {
         public string number;

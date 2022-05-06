@@ -11,6 +11,7 @@ namespace LibruryDatabase.Models
 {
     internal class LogData
     {
+        /*
         private string number;
         private string time;
         private string name;
@@ -141,6 +142,6 @@ namespace LibruryDatabase.Models
             }
             return Constants.isFail;
         }
-
+        */
     }
 }

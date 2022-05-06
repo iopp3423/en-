@@ -8,6 +8,7 @@ namespace LibruryDatabase.Models
 {
     internal class BookVO
     {
+        /*
         public string number;
         public string title;
         public string author;
@@ -35,5 +36,7 @@ namespace LibruryDatabase.Models
             this.quantity = quantity;
         }
 
+    }
+    */
     }
 }
