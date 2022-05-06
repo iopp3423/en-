@@ -16,6 +16,7 @@ namespace LibruryDatabase.Controls
         private memberDAO memberDao;
         private memberDTO memberDto;
         private LogDAO logDao;
+        private LogDTO logDto;
 
         AdminMenu goingMenu= new AdminMenu();
 
@@ -27,14 +28,18 @@ namespace LibruryDatabase.Controls
            
         }
 
-        public Admin(Screen Menu, MessageScreen message) : base(Menu, message)
+        public Admin(Screen InputMenu, MessageScreen message, memberDAO MemberDao, memberDTO MemberDto, LogDAO LogDao, LogDTO LogDto, BookDAO BookDao, BookDTO BookDto, BorrowBookDAO BorrowBookDao, BorrowBookDTO BorrowBookDto) 
+                        : base(InputMenu, message, MemberDao, MemberDto, LogDao, LogDto, BookDao, BookDto, BorrowBookDao, BorrowBookDto)
         {
-            this.Print = Menu;
+            goingMenu = new AdminMenu(InputMenu, message, MemberDao, MemberDto, LogDao, LogDto, BookDao, BookDto, BorrowBookDao, BorrowBookDto);
+
+            this.Print = InputMenu;
             this.PrintMessage = message;
-            goingMenu = new AdminMenu(Print, PrintMessage);
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            logDao = new LogDAO();
+          
+            this.memberDao = MemberDao;
+            this.memberDto = MemberDto;
+            this.logDao = LogDao;
+            this.logDto = LogDto;
         }
 
 

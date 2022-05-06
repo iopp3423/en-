@@ -22,12 +22,12 @@ namespace LibruryDatabase.Controls
         {
         }
 
-        public ApprovalUserBook(Screen Menu, MessageScreen message)
+        public ApprovalUserBook(Screen Menu, MessageScreen message, BookDAO BookDao, BookDTO BookDto)
         {         
             this.Menu = Menu;
             this.Message = message;
-            bookDto = new BookDTO();
-            bookDao = new BookDAO();
+            this.bookDto = BookDto;
+            this.bookDao = BookDao;
         }
 
         public void ApproveUserRequest() // 책 저장 메서드

@@ -88,6 +88,7 @@ namespace LibruryDatabase.Models
             return Constants.isFail;
         }
 
+
         public bool IsCheckingIdOverlap(string id) // db에서 중복아이디 있으면 true, 없으면 false
         {
 
@@ -182,6 +183,7 @@ namespace LibruryDatabase.Models
             conn.Close();
         }
 
+        ~memberDAO() { Console.WriteLine("위치도 맞춰줘야되나"); Console.ReadLine(); }
 
         public void close()
         {

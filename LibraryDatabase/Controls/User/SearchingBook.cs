@@ -28,12 +28,12 @@ namespace LibruryDatabase.Controls
         {
         }
 
-        public SearchingBook(Screen Menu, MessageScreen message)
+        public SearchingBook(Screen Menu, MessageScreen message, LogDAO LogDao, BookDAO BookDao)
         {
             this.Menu = Menu;
             this.message = message;
-            logDao = new LogDAO();
-            bookDao = new BookDAO();
+            this.logDao = LogDao;
+            this.bookDao = BookDao;          
         }
 
         

@@ -113,6 +113,7 @@
     <Compile Include="Models\memberDAO.cs" />
     <Compile Include="Models\memberDTO.cs" />
     <Compile Include="Open.cs" />
+    <Compile Include="test.cs" />
     <Compile Include="Utility\Constants.cs" />
     <Compile Include="Controls\Admin\Admin.cs" />
     <Compile Include="Controls\User\LoginOrRegister.cs" />

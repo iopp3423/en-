@@ -11,29 +11,42 @@ namespace LibruryDatabase.Controls
 {
     internal class UserMenu
     {
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private LogDAO logDao;
+        private LogDTO logDto;
+
+        private Screen Menu;
+        private MessageScreen PrintMessage;
+
         SearchingBook BookSearching = new SearchingBook();
         BorrowingBook BookBorrowing = new BorrowingBook();
         ModificationUser UserModification = new ModificationUser();
         ReturnBook ReturnBook = new ReturnBook();
         RequestBook Request = new RequestBook();
 
-        private Screen Menu;
-        private MessageScreen PrintMessage;
 
         public UserMenu()
         {
 
         }
 
-        public UserMenu(Screen InputMenu, MessageScreen message)
+        public UserMenu(Screen InputMenu, MessageScreen message, memberDAO MemberDao, memberDTO MemberDto, LogDAO LogDao, LogDTO LogDto
+                                                    , BookDAO BookDao, BookDTO BookDto, BorrowBookDAO BorrowBookDao, BorrowBookDTO BorrowBookDto)
+
         {
+            BookSearching = new SearchingBook(InputMenu, message, LogDao, BookDao);
+            BookBorrowing = new BorrowingBook(InputMenu, message, LogDao, LogDto, BookDao, BookDto, BorrowBookDao, BorrowBookDto);
+            UserModification = new ModificationUser(InputMenu, message, MemberDao, MemberDto, LogDao, LogDto);
+            ReturnBook = new ReturnBook(InputMenu, message, BookDao, BookDto, LogDao, BorrowBookDao, BorrowBookDto);
+            Request = new RequestBook(InputMenu, message, BookDao, BookDto);
+
             this.Menu = InputMenu;
             this.PrintMessage = message;
-            BookSearching = new SearchingBook(Menu, PrintMessage);
-            BookBorrowing = new BorrowingBook(Menu,PrintMessage);
-            UserModification = new ModificationUser(Menu, PrintMessage);
-            ReturnBook = new ReturnBook(Menu, PrintMessage);
-            Request = new RequestBook(Menu, PrintMessage);
+            this.memberDao = MemberDao;
+            this.memberDto = MemberDto;
+            this.logDao = LogDao;
+            this.logDto = LogDto;
         }
 
         

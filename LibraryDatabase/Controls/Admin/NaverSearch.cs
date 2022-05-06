@@ -23,12 +23,12 @@ namespace LibruryDatabase.Controls
 
         }
 
-        public NaverSearch(Screen Menu, MessageScreen message)
+        public NaverSearch(Screen Menu, MessageScreen message, BookDAO BookDao, BookDTO BookDto)
         {
             this.Print = Menu;
             this.Message = message;
-            bookDto = new BookDTO();
-            bookDao = new BookDAO();
+            this.bookDto = BookDto;
+            this.bookDao = BookDao;
         }
 
         private string title = "";

@@ -20,6 +20,7 @@ namespace LibruryDatabase.Controls
         private LogDAO logDao;
         private LogDTO logDto;
 
+
         private string id;
         private string password;
         private string passswordCheck;
@@ -29,23 +30,27 @@ namespace LibruryDatabase.Controls
         private string address;
         private bool isOverlapCheck;
 
-        public Screen Menu;
-        public MessageScreen message;
+        private Screen Menu;
+        private MessageScreen message;
 
-        public LoginOrRegister() // 왜 안쓰면 터질까
+
+        public LoginOrRegister() 
         {
             
         }
 
-        public LoginOrRegister(Screen InputMenu, MessageScreen message)
+        public LoginOrRegister(Screen InputMenu, MessageScreen message, memberDAO MemberDao, memberDTO MemberDto, LogDAO LogDao, LogDTO LogDto
+                                                    ,BookDAO BookDao, BookDTO BookDto, BorrowBookDAO BorrowBookDao, BorrowBookDTO BorrowBookDto)
         {
+            GoUser = new UserMenu(InputMenu, message, MemberDao, MemberDto, LogDao, LogDto, BookDao, BookDto, BorrowBookDao, BorrowBookDto);
+
             this.Menu = InputMenu;
             this.message = message;
-            GoUser = new UserMenu(Menu, message);
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            logDao = new LogDAO();
-            logDto = new LogDTO();
+
+            this.memberDao = MemberDao;
+            this.memberDto = MemberDto;
+            this.logDao = LogDao;
+            this.logDto = LogDto;
         }
 
 

@@ -23,14 +23,15 @@ namespace LibruryDatabase.Controls
         {
         }
 
-        public ModificationBook(Screen Menu, MessageScreen message) : base(Menu, message)
+        public ModificationBook(Screen Menu, MessageScreen message, LogDAO LogDao, LogDTO LogDto, BookDAO BookDao, BookDTO BookDto) : base(Menu, message, LogDao, BookDao)
         {
             this.Message = message;
             this.Print = Menu;
-            logDao = new LogDAO();
-            logDto = new LogDTO();
-            bookDto = new BookDTO();
-            bookDao = new BookDAO();
+
+            this.logDao = LogDao;
+            this.logDto = LogDto;
+            this.bookDto = BookDto;
+            this.bookDao = BookDao;
         }
 
 

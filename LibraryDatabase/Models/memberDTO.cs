@@ -62,6 +62,5 @@ namespace LibruryDatabase.Models
             set { address = value; }
         }
 
-        ~memberDTO() { } // 객체 소멸?? 음
     }
 }

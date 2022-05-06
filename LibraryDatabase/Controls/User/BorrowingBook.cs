@@ -27,16 +27,17 @@ namespace LibruryDatabase.Controls
         {
         }
 
-        public BorrowingBook(Screen Menu, MessageScreen message) : base(Menu, message)
+        public BorrowingBook(Screen Menu, MessageScreen message, LogDAO LogDao, LogDTO LogDto, BookDAO BookDao, BookDTO BookDto, BorrowBookDAO BorrowBookDao, BorrowBookDTO BorrowBookDto) 
+                            : base(Menu, message, LogDao, BookDao)
         {
-           this.Print = Menu;
-           this.Message = message;
-            logDao = new LogDAO();
-            logDto = new LogDTO();
-            borrowBookDto = new BorrowBookDTO();
-            borrowBookDao = new BorrowBookDAO();
-            bookDto = new BookDTO();
-            bookDao = new BookDAO();
+            this.Print = Menu;
+            this.Message = message;
+            this.logDao = LogDao;
+            this.logDto = LogDto;
+            this.bookDto = BookDto;
+            this.bookDao = BookDao;
+            this.borrowBookDao = BorrowBookDao;
+            this.borrowBookDto = BorrowBookDto;
         }
         
 

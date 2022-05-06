@@ -435,31 +435,6 @@ namespace LibruryDatabase.Views
             Console.Write("  》로그파일을 제거하시겠습니까?    YES : Enter        뒤로가기 : ESC \n\n");
         }
 
-        public void PrintRequestBook(List<BookDTO> book)
-        {
-            
-            foreach (BookDTO data in book)
-            {
-                Console.Write("책 번호 :");
-                Console.WriteLine(data.Number);
-                Console.Write("책 제목 :");
-                Console.WriteLine(data.Title);
-                Console.Write("책 저자 :");
-                Console.WriteLine(data.Author);
-                Console.Write("책 가격 :");
-                Console.WriteLine(data.Price);
-                Console.Write("출판사  :");
-                Console.WriteLine(data.Publisher);
-                Console.Write("출시일  :");
-                Console.WriteLine(data.Publishday);
-                Console.Write("isbn    :");
-                Console.WriteLine(data.Isbn);
-                Console.Write("책 설명 :");
-                Console.WriteLine(data.Quantity);
-                Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
-            }
-        }
-       
         public void PrintBookData(List<BookDTO> book) // 책 데이터 출력
         {
             foreach (BookDTO data in book)

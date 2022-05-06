@@ -28,16 +28,17 @@ namespace LibruryDatabase.Controls
         {
         }
 
-        public ReturnBook(Screen Menu, MessageScreen message)
+        public ReturnBook(Screen Menu, MessageScreen message, BookDAO BookDao, BookDTO BookDto, LogDAO LogDao, BorrowBookDAO borrowDao, BorrowBookDTO borrowDto)
 
         {
             this.Menu = Menu;
             this.Message = message;
-            logDao = new LogDAO();
-            borrowBookDao = new BorrowBookDAO();
-            borrowBookDto = new BorrowBookDTO();
-            bookDto = new BookDTO();
-            bookDao = new BookDAO();
+
+            this.bookDto = BookDto;
+            this.bookDao = BookDao;
+            this.logDao = LogDao;
+            this.borrowBookDao = borrowDao;
+            this.borrowBookDto = borrowDto;
         }
 
         public void SelectMenu() //이전 메뉴로 돌아가기

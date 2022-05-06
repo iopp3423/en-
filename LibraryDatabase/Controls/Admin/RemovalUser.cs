@@ -26,16 +26,17 @@ namespace LibruryDatabase.Controls
         {
         }
 
-        public RemovalUser(Screen Menu, MessageScreen message)
+        public RemovalUser(Screen Menu, MessageScreen message, LogDAO LogDao, LogDTO LogDto, memberDAO MemberDao, memberDTO MemberDto, BorrowBookDAO borrowBookDao, BorrowBookDTO borrowBookDto)
         {
             this.Menu = Menu;
             this.Message = message;
-            logDao = new LogDAO();
-            logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
-            borrowBookDto = new BorrowBookDTO();
-            borrowBookDao = new BorrowBookDAO();
+
+            this.logDao = LogDao;
+            this.logDto = LogDto;
+            this.memberDao = MemberDao;
+            this.memberDto = MemberDto;
+            this.borrowBookDao = borrowBookDao;
+            this.borrowBookDto = borrowBookDto;
         }
 
         public void SelectMenu() //이전 메뉴로 돌아가기

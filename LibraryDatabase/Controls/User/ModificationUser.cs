@@ -29,14 +29,15 @@ namespace LibruryDatabase.Controls
         {
         }
 
-        public ModificationUser(Screen Menu, MessageScreen message)
+        public ModificationUser(Screen Menu, MessageScreen message, memberDAO MemberDao, memberDTO MemberDto, LogDAO LogDao, LogDTO LogDto)
         {
             this.Menu = Menu;
             this.Print = message;
-            logDao = new LogDAO();
-            logDto = new LogDTO();
-            memberDao = new memberDAO();
-            memberDto = new memberDTO();
+
+            this.memberDao = MemberDao;
+            this.memberDto = MemberDto;
+            this.logDao = LogDao;
+            this.logDto = LogDto;
         }
 
         public bool IsGoingReturnMenu() //이전 메뉴로 돌아가기

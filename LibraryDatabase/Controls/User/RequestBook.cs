@@ -13,11 +13,10 @@ namespace LibruryDatabase.Controls
 {
     internal class RequestBook
     {
-        private  Screen Menu;
-        private  MessageScreen Message;
         private string bookName;
         private string bookNumber;
-
+        private  Screen Menu;
+        private  MessageScreen Message;
 
         private BookDAO bookDao;
         private BookDTO bookDto;
@@ -26,13 +25,14 @@ namespace LibruryDatabase.Controls
         {
         }
 
-        public RequestBook(Screen Menu, MessageScreen message)
+        public RequestBook(Screen Menu, MessageScreen message, BookDAO BookDao, BookDTO BookDto)
 
         {
             this.Menu = Menu;
             this.Message = message;
-            bookDto = new BookDTO();
-            bookDao = new BookDAO();
+            this.bookDto = BookDto;
+            this.bookDao = BookDao;
+
         }
 
         public void SelectMenu() //이전 메뉴로 돌아가기

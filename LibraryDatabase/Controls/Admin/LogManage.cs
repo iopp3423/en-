@@ -26,12 +26,13 @@ namespace LibruryDatabase.Controls
 
         }
 
-        public LogManage(Screen Menu, MessageScreen message)
+        public LogManage(Screen Menu, MessageScreen message, LogDAO LogDao, LogDTO LogDto)
         {
             this.Print = Menu;
             this.Message = message;
-            logDao = new LogDAO();
-            logDto = new LogDTO();
+            this.logDao = LogDao;
+            this.logDto = LogDto;
+
         }
 
 

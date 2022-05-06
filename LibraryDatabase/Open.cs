@@ -18,6 +18,8 @@ namespace LibruryDatabase
             Start.StartMenu();
             //관리자 id = enen1234, pw = enen4321
 
+            //test a = new test();
+            //a.Print();
             /*
             string passwordChangeStar = "";
             ConsoleKeyInfo info = Console.ReadKey(true);

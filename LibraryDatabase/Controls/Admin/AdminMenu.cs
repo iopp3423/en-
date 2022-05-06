@@ -21,7 +21,6 @@ namespace LibruryDatabase.Controls
 
         private LogDAO logDao;
         private BorrowBookDAO borrowBookDao;
-
         private Screen Print;
         private MessageScreen PrintMessage;
 
@@ -30,19 +29,21 @@ namespace LibruryDatabase.Controls
 
         }
 
-        public AdminMenu(Screen Menu, MessageScreen message) : base(Menu, message)
+        public AdminMenu(Screen Menu, MessageScreen message, memberDAO MemberDao, memberDTO MemberDto, LogDAO LogDao, LogDTO LogDto, BookDAO BookDao, BookDTO BookDto, BorrowBookDAO BorrowBookDao, BorrowBookDTO BorrowBookDto)
+                         : base(Menu, message, LogDao, BookDao)
         {
             this.Print = Menu;
             this.PrintMessage = message;
-            logDao = new LogDAO();
-            removing = new RemovalBook(Print, PrintMessage);
-            adding = new BookEdition(Print, PrintMessage);
-            modify = new ModificationBook(Print, PrintMessage);
-            member = new RemovalUser(Print, PrintMessage);
-            Log = new LogManage(Print, PrintMessage);
-            naver = new NaverSearch(Print, PrintMessage);
-            book = new ApprovalUserBook(Print, PrintMessage);
-            borrowBookDao = new BorrowBookDAO();
+            this.logDao = LogDao;
+            this.borrowBookDao = BorrowBookDao;
+
+            removing = new RemovalBook(Menu, message, LogDao, LogDto, BookDao, BookDto);
+            adding = new BookEdition(Menu, message, LogDao, LogDto, BookDao, BookDto);
+            modify = new ModificationBook(Menu, message, LogDao, LogDto, BookDao, BookDto);
+            Log = new LogManage(Menu, message, LogDao, LogDto);
+            member = new RemovalUser(Menu, message, LogDao, LogDto, MemberDao, MemberDto, BorrowBookDao, BorrowBookDto);
+            naver = new NaverSearch(Menu, message, BookDao, BookDto);
+            book = new ApprovalUserBook(Menu, message, BookDao, BookDto);
 
         }
 

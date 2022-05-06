@@ -17,11 +17,20 @@ namespace LibruryDatabase.Controls
         LoginOrRegister UserLibruary = new LoginOrRegister(); 
         Admin AdminLibruary = new Admin();
 
+        memberDAO memberDao = new memberDAO();
+        memberDTO memberDto = new memberDTO();
+        LogDAO logDao = new LogDAO();
+        LogDTO logDto = new LogDTO();
+        BookDAO bookDao = new BookDAO();
+        BookDTO bookDto = new BookDTO();
+        BorrowBookDAO borrowBookDao = new BorrowBookDAO();
+        BorrowBookDTO borrowBookDto = new BorrowBookDTO();
+
 
         public ChoiceUserOrAdmin()
         {      
-            UserLibruary = new LoginOrRegister(Menu, message);
-            AdminLibruary = new Admin(Menu, message);
+            UserLibruary = new LoginOrRegister(Menu, message, memberDao, memberDto, logDao, logDto, bookDao, bookDto, borrowBookDao, borrowBookDto);//하,,
+            AdminLibruary = new Admin(Menu, message, memberDao, memberDto, logDao, logDto, bookDao, bookDto, borrowBookDao, borrowBookDto);
         }
 
 

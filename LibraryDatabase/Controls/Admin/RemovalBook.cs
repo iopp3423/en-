@@ -16,6 +16,7 @@ namespace LibruryDatabase.Controls
 
         private Screen Print;
         private MessageScreen Message;
+
         private LogDAO logDao;
         private LogDTO logDto;
         private BookDAO bookDao;
@@ -26,14 +27,15 @@ namespace LibruryDatabase.Controls
 
         }
 
-        public RemovalBook(Screen Menu, MessageScreen message) : base(Menu, message)
+        public RemovalBook(Screen Menu, MessageScreen message, LogDAO LogDao, LogDTO LogDto, BookDAO BookDao, BookDTO BookDto) : base(Menu, message, LogDao, BookDao)
         {
             this.Print = Menu;
             this.Message = message;
-            logDao = new LogDAO();
-            logDto = new LogDTO();
-            bookDto = new BookDTO();
-            bookDao = new BookDAO();
+
+            this.logDao = LogDao;
+            this.logDto = LogDto;
+            this.bookDto = BookDto;
+            this.bookDao = BookDao;
         }
 
         public void GoBackMenu() //이전 메뉴로 돌아가기
