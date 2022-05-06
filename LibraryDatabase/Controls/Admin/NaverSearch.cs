@@ -224,14 +224,10 @@ namespace LibruryDatabase.Controls
 
             else
             {
-                //BookData.Get().RemoveAllNaverBook(); // 데베 비우기
-                //BookData.Get().NaverBook.Clear(); // 리스트 비우기
+                bookDao.RemoveAllNaverBook(); // naver db 초기화
                 bookDao.StoreNaverBook(title, quantity);// naver db에 저장
-
-                //BookData.Get().StoreNaverBookToList(title, quantity, Constants.isPassing); // 관리자 리스트에 저장
                 Console.Clear();
                 Message.GreenColor("   >>Enter : 도서대여              뒤로가기 : ESC\n\n");
-
                 Print.PrintRequestBook(bookDao.StoreNaverBookReturn()); // 네이버 검색한 도서 출력
                 Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
                 InputOrBack();
@@ -244,13 +240,25 @@ namespace LibruryDatabase.Controls
         {
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             bookNumber = InputbookNumber();
-            quantity = InputQuantity();
 
-            bookDao.StoreNaverBookTobook(bookNumber, quantity); // book db에 추가
+            if(bookDao.isCheckingNaverBookNumber(bookNumber)) // 입력한 책 번호가 검색내역에 있으면 진행
+            {
+                quantity = InputQuantity();
+                bookDao.StoreNaverBookTobook(bookNumber, quantity); // book db에 추가
 
-            ClearCurrentLine(Constants.CURRENT_LOCATION);
-            Message.GreenColor("도서가 추가되었습니다.    뒤로가기 : F5");
-            IsGoingReturnMenu();
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
+                Message.GreenColor("도서가 추가되었습니다.    뒤로가기 : F5");
+                IsGoingReturnMenu();
+                return;
+            }
+            else
+            {
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
+                Message.RedColor("없는 번호입니다.    뒤로가기 : F5");
+                IsGoingReturnMenu();
+                return;
+            }
+            
         }
 
         public string InputbookNumber()//책 번호입력

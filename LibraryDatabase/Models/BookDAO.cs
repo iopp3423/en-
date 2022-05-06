@@ -365,6 +365,26 @@ namespace LibruryDatabase.Models
             conn.Close();
         }
 
+        public bool isCheckingNaverBookNumber(string bookNumber) // 유저요청 책 책 번호 존재여부
+        {
+            conn.Open();
+            //ExecuteReader를 이용하여
+            //연결 모드로 데이타 가져오기
+            MySqlCommand Command = new MySqlCommand(Constants.naverQuery, conn);
+            MySqlDataReader Data = Command.ExecuteReader();
+
+            while (Data.Read())
+            {
+                if (Data["number"].ToString() == bookNumber)
+                {
+                    conn.Close();
+                    return Constants.isPassing;
+                }
+            }
+            conn.Close();
+            return Constants.isFail;
+        }
+
         public void StoreNaverBookTobook(string bookNumber, string quantity) // 네이버 검색한 책 데이터 book db저장
         {
             List<BookDTO> naverBook = new List<BookDTO>();
