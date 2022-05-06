@@ -155,7 +155,7 @@ namespace LibruryDatabase.Views
         }
         public string PrintNoneNumberMessage()
         {
-            return "맞는 isbn이 없습니다. 뒤로가기 : ESC";
+            return "맞는 책 번호가 없습니다. 뒤로가기 : ESC";
         }
 
 

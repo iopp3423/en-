@@ -62,7 +62,9 @@ namespace LibruryDatabase.Utility
         public const string NaverBookQuery = "INSERT INTO naver(title,author,price,publisher,publishday,isbn,description) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'), ('{4}'), ('{5}'),  ('{6}'));";
         public const string RemoveAllNaverBook = "TRUNCATE naver;";
         public const string naverQuery = "SELECT * FROM naver;";
-        public const string requestQuery = "INSERT INTO requestbook SELECT * FROM naver WHERE number = ('{0}')";
+        public const string requestQuery = "INSERT INTO requestbook SELECT * FROM naver WHERE number = ('{0}')"; 
+        public const string requestBookTobookQuery = "SELECT * FROM requestbook WHERE number = ('{0}')";
+        public const string userRequestQuery = "Select * FROM requestbook";
 
 
 

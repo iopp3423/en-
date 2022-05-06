@@ -99,7 +99,6 @@ namespace LibruryDatabase.Controls
 
             bookDao.ModifyBookInformation(receiveInput, number, bookNumber);// db에서 책 수정
 
-
             bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
             bookDao.close(); // db닫기 위치 애매함 나중에 수정
             if (number == Constants.REVISE_BOOK_QUANTITY) logDao.StoreLog(Constants.ADMIN, Constants.REVISE_QUANTITY, bookName); // 로그에 저장
