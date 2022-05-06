@@ -189,7 +189,6 @@ namespace LibruryDatabase.Models
                 else if (bookData["name"].ToString().Contains(name)) { return bookData["name"].ToString(); }
             }
             user.Close();
-
             return name;
         }
 
@@ -246,6 +245,7 @@ namespace LibruryDatabase.Models
             conn.Open();
             MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteQuery, bookNumber), conn);
             Command.ExecuteNonQuery();
+            conn.Close();
 
         }
 
@@ -267,6 +267,33 @@ namespace LibruryDatabase.Models
             }
             conn.Close();
             return Constants.isFail;
+        }
+
+        public void StoreReviseBook(string bookName, string author, string publish, string publishDay, string price, string isbn, string quantity) // 책 저장
+        {
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.addUserBookQuery, bookName, author, publish, publishDay, price, isbn, quantity), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        public void ModifyBookInformation(string bookInformation, string menu, string bookNumber) // 책 수정
+        {
+
+            if (menu == Constants.REVISE_BOOK_QUANTITY)
+            {
+                conn.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.ModifyQuantityQuery, bookInformation, bookNumber), conn);
+                Command.ExecuteNonQuery();
+                conn.Close();
+            }
+            else
+            {
+                conn.Open();
+                MySqlCommand Command = new MySqlCommand(String.Format(Constants.ModifyPriceQuery, bookInformation, bookNumber), conn);
+                Command.ExecuteNonQuery();
+                conn.Close();
+            }
         }
 
 

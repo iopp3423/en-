@@ -19,6 +19,8 @@ namespace LibruryDatabase.Controls
         NaverSearch naver = new NaverSearch();
         ApprovalUserBook book = new ApprovalUserBook();
 
+        private LogDAO logDao;
+        private LogDTO logDto;
         private Screen Print;
         private MessageScreen PrintMessage;
 
@@ -31,6 +33,8 @@ namespace LibruryDatabase.Controls
         {
             this.Print = Menu;
             this.PrintMessage = message;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
             removing = new RemovalBook(Print, PrintMessage);
             adding = new BookEdition(Print, PrintMessage);
             modify = new ModificationBook(Print, PrintMessage);
@@ -127,7 +131,8 @@ namespace LibruryDatabase.Controls
         {
             Console.Clear();
             PrintMessage.GreenColor(PrintMessage.PrintBackOrExit());
-            LogData.Get().StoreLog(Constants.ADMIN, Constants.BOOK_LIST, Constants.OPEN_LIST);
+            logDao.StoreLog(Constants.ADMIN, Constants.BOOK_LIST, Constants.OPEN_LIST); // db에 로그 내역 저장
+
             Print.PrintCurrentBorrowBook();
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
             GoBackMenu();

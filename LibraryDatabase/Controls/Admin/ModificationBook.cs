@@ -14,6 +14,14 @@ namespace LibruryDatabase.Controls
     {
         private Screen Print;
         private MessageScreen Message;
+        private LogDAO logDao;
+        private LogDTO logDto;
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
+        private BookDAO bookDao;
+        private BookDTO bookDto;
 
         public ModificationBook()
         {
@@ -23,6 +31,14 @@ namespace LibruryDatabase.Controls
         {
             this.Message = message;
             this.Print = Menu;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
+            borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
+            bookDao = new BookDAO();
         }
 
 
@@ -49,14 +65,19 @@ namespace LibruryDatabase.Controls
         {
             string number;
             string receiveInput;
-            string keyInput;
+            string bookNumber;
             string bookName;
+
+            memberDao.connection(); // db 연결
+            logDao.connection(); // db연결
+            borrowBookDao.connection(); // db연결
+            bookDao.connection(); // db연결
 
             Console.Clear();
             Print.PrintSearchBookName();
             Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
             Message.GreenColor(Message.PrintReviseBookInput());
-            //Print.PrintBookData(); // 책 목록 프린트
+            Print.PrintBookData(bookDao.StoreBookReturn()); // 책 목록 프린트
             Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
 
 
@@ -65,19 +86,24 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
             SearchBookName(Constants.isFail, Constants.ADMIN); // 책 제목 검색
 
-
-            keyInput = InputBookNumber(); // 책 번호 입력받기
+            bookNumber = InputBookNumber(); // 책 번호 입력받기
+            if(!bookDao.IsCheckingBookExistence(bookNumber))// 도서목록에 있는 책이면 진행
+            {
+                ClearCurrentLine(Constants.CURRENT_LOCATION);
+                Message.RedColor("도서목록에 없는 책입니다.  뒤로가기 : ESC");
+                GoBackMenu();
+                return;
+            }
             number = InputNumber(); // 수정메뉴 입력
             receiveInput = modificationMenu(number); // 가격 or 수량           
 
-
-            BookData.Get().ModifyBookInformation(receiveInput, number, keyInput); // 데베에서 책 수정
-            RemoveAndStore(); // 리스트 다시 저장
+            bookDao.ModifyBookInformation(receiveInput, number, bookNumber);// db에서 책 수정
 
 
-            bookName = BookData.Get().BringBookname(keyInput);// 해당 책 정보가져오기
-            if (number == Constants.REVISE_BOOK_QUANTITY) LogData.Get().StoreLog(Constants.ADMIN, Constants.REVISE_QUANTITY, bookName); // 로그에 저장
-            else LogData.Get().StoreLog(Constants.ADMIN, Constants.REVISE_PRICE, bookName); // 로그에 저장
+            bookName = bookDao.BringBookname(bookNumber); // 해당 책 제목 가져오기
+            bookDao.close(); // db닫기 위치 애매함 나중에 수정
+            if (number == Constants.REVISE_BOOK_QUANTITY) logDao.StoreLog(Constants.ADMIN, Constants.REVISE_QUANTITY, bookName); // 로그에 저장
+            else logDao.StoreLog(Constants.ADMIN, Constants.REVISE_PRICE, bookName); // 로그에 저장
 
             ClearCurrentLine(Constants.CURRENT_LOCATION);
             Message.GreenColor(Message.PrintReviseAfterMessage());
@@ -179,13 +205,6 @@ namespace LibruryDatabase.Controls
                 break;
             }
             return bookNumber;
-        }
-
-
-        public void RemoveAndStore()
-        {
-            BookData.Get().bookData.Clear(); // 리스트 초기화
-            BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
         }
     }
 }

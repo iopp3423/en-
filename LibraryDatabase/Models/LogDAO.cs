@@ -22,7 +22,7 @@ namespace LibruryDatabase.Models
         }
 
 
-        public List<LogDTO> StoreLogReturn() // 도서목록 리턴
+        public List<LogDTO> StoreLogReturn() // 로그목록 리턴
         {
             List<LogDTO> log = new List<LogDTO>();
 

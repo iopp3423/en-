@@ -15,6 +15,14 @@ namespace LibruryDatabase.Controls
     {
         private Screen Menu;
         private MessageScreen Message;
+        private LogDAO logDao;
+        private LogDTO logDto;
+        private memberDAO memberDao;
+        private memberDTO memberDto;
+        private BorrowBookDAO borrowBookDao;
+        private BorrowBookDTO borrowBookDto;
+        private BookDAO bookDao;
+        private BookDTO bookDto;
 
         public BookEdition()
         {
@@ -24,16 +32,23 @@ namespace LibruryDatabase.Controls
         {
             this.Menu = Menu;
             this.Message = message;
+            logDao = new LogDAO();
+            logDto = new LogDTO();
+            memberDao = new memberDAO();
+            memberDto = new memberDTO();
+            borrowBookDto = new BorrowBookDTO();
+            borrowBookDao = new BorrowBookDAO();
+            bookDto = new BookDTO();
+            bookDao = new BookDAO();
         }
-
-        string bookName;
-        string author;
-        string publisher;
-        string publishDay;
-        string quantity;
-        string bookprice;
-        string price;
-        string isbn;
+        private string bookName;
+        private string author;
+        private string publisher;
+        private string publishDay;
+        private string quantity;
+        private string bookprice;
+        private string price;
+        private string isbn;
 
 
         public void SelectMenu() //이전 메뉴로 돌아가기
@@ -57,9 +72,13 @@ namespace LibruryDatabase.Controls
         }
 
         public void AddBook()
-        {
-            
+        {            
             int movingInputY = Constants.BOOK_NAME_Y;
+
+            memberDao.connection(); // db 연결
+            logDao.connection(); // db연결
+            borrowBookDao.connection(); // db연결
+            bookDao.connection(); // db연결
 
             Console.Clear();
             Menu.PrintMain();                
@@ -76,11 +95,8 @@ namespace LibruryDatabase.Controls
             bookprice = InputPrice(movingInputY++);
             isbn = InputISBN(movingInputY);
 
-            BookData.Get().StoreBookUserRequest(bookName, author, publisher, publishDay, bookprice, isbn, quantity); // book db에 정보 저장
-            BookData.Get().bookData.Clear(); // 리스트 초기화
-            BookData.Get().StoreBookData(); // 리스트에 북 데이터 저장
-
-            LogData.Get().StoreLog(Constants.ADMIN, Constants.ADD, bookName); // 로그에 저장
+            bookDao.StoreReviseBook(bookName, author, publisher, publishDay, bookprice, isbn, quantity); // book db에 정보 저장
+            logDao.StoreLog(Constants.ADMIN, Constants.ADD, bookName); // db에 로그 내역 저장
 
             Console.SetCursorPosition(Console.CursorLeft, Constants.ERROR_Y);
             Message.GreenColor(Message.PrintDoneBookRegister());
@@ -113,8 +129,7 @@ namespace LibruryDatabase.Controls
 
         public string InputAuthor(int authorY)//작가입력
         {
-         
-
+        
             while (Constants.isPassing)
             {
                 Console.SetCursorPosition(Constants.AUTHOR_X, authorY);

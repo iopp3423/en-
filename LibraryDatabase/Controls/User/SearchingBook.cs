@@ -243,12 +243,13 @@ namespace LibruryDatabase.Controls
 
                 if (Constants.isFail == Regex.IsMatch(bookName, Utility.Exception.TITLE_CHECK))// 정규식에 맞지 않으면
                 {
-                   ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
                     message.PrintReEnterMessage(); continue;
                 }
                 break;
             }
             Console.Clear();
+
 
             bookDao.connection();
             Menu.PrintSearchBookName(bookDao.StoreBookReturn(),bookName);// 출력            
@@ -274,8 +275,6 @@ namespace LibruryDatabase.Controls
                 logDao.close();
             }
             
-
-
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);           
         }
 
