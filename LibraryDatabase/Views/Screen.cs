@@ -159,34 +159,6 @@ namespace LibruryDatabase.Views
             }
         }
 
-
-        public void PrintBookData(List<BookDTO> book) // 책 데이터 출력
-        {
-
-            foreach (BookDTO data in book)
-            {
-                Console.Write("책 번호   :");
-                Console.WriteLine(data.Number);
-                Console.Write("책 제목   :");
-                Console.WriteLine(data.Title);
-                Console.Write("책 저자   :");
-                Console.WriteLine(data.Author);
-                Console.Write("출판사    :");
-                Console.WriteLine(data.Publisher);
-                Console.Write("출시일    :");
-                Console.WriteLine(data.Publishday);
-                Console.Write("책 가격   :");
-                Console.WriteLine(data.Price);
-                Console.Write("isbn      :");
-                Console.WriteLine(data.Isbn);
-                Console.Write("책 수량   :");
-                Console.WriteLine(data.Quantity);
-                Console.WriteLine("=======================================================================");
-            }
-          
-    }
-
-
         public void PrintLoginUser(List<memberDTO>member, string id, string password)
         {          
             Console.WriteLine("====================================================================");
@@ -465,7 +437,7 @@ namespace LibruryDatabase.Views
 
         public void PrintRequestBook(List<BookDTO> book)
         {
-            Console.Write("\n\n");
+            
             foreach (BookDTO data in book)
             {
                 Console.Write("책 번호 :");
@@ -487,52 +459,31 @@ namespace LibruryDatabase.Views
                 Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
             }
         }
-
-        public void PrintUserRequest(List<BookDTO> book)
+       
+        public void PrintBookData(List<BookDTO> book) // 책 데이터 출력
         {
-            Console.Write("\n\n");
             foreach (BookDTO data in book)
             {
-                Console.Write("책 번호 :");
+                Console.Write("책 번호   :");
                 Console.WriteLine(data.Number);
-                Console.Write("책 제목 :");
+                Console.Write("책 제목   :");
                 Console.WriteLine(data.Title);
-                Console.Write("책 저자 :");
+                Console.Write("책 저자   :");
                 Console.WriteLine(data.Author);
-                Console.Write("책 가격 :");
-                Console.WriteLine(data.Price);
-                Console.Write("출판사  :");
+                Console.Write("출판사    :");
                 Console.WriteLine(data.Publisher);
-                Console.Write("출시일  :");
+                Console.Write("출시일    :");
                 Console.WriteLine(data.Publishday);
-                Console.Write("isbn    :");
+                Console.Write("책 가격   :");
+                Console.WriteLine(data.Price);
+                Console.Write("isbn      :");
                 Console.WriteLine(data.Isbn);
-                Console.Write("책 설명 :");
+                Console.Write("책 수량   :");
                 Console.WriteLine(data.Quantity);
-                Console.WriteLine(string.Format("{0,40}", "────────────────────────────────────────────────────────────────────────"));
+                Console.WriteLine("=======================================================================");
             }
+
         }
-        
-
-
-        public bool IsGoingBackMenu()
-        {
-            while (Constants.isPassing) // 메뉴 입장한 후 뒤로가기
-            {
-                Constants.cursor = Console.ReadKey(true);
-                if (Constants.cursor.Key == ConsoleKey.Escape)
-                {
-                    Console.Clear();
-                    PrintMain();
-                    PrintAdminMenu();
-                    Console.SetCursorPosition(Constants.FIRSTX, Constants.BOOK_NAME_Y);
-                    return Constants.isBackMenu;
-                }
-                else if (Constants.cursor.Key == ConsoleKey.Enter) {ClearCurrentLine(Constants.CURRENT_LOCATION); break; }
-            }
-            return Constants.isPassing;
-        }
-
 
         public void ClearCurrentLine(int number) // 줄 지우기
         {
@@ -541,9 +492,6 @@ namespace LibruryDatabase.Views
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
         }
-
-
-
 
     }
 }

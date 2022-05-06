@@ -115,11 +115,9 @@ namespace LibruryDatabase.Models
                     string description = ParseJson["items"][index]["description"].ToString();
                     description = description.Replace("&quot;", "\""); //HTML 태그 변경
 
-                    MySqlCommand Command = new MySqlCommand(String.Format(Constants.NaverBookQuery, RemoveSpecialCharacterFromString(title), author, price, publisher, publishday, isbn, RemoveSpecialCharacterFromString(description)), conn);
-                    //Console.WriteLine(RemoveSpecialCharacterFromString(description));                  
+                    MySqlCommand Command = new MySqlCommand(String.Format(Constants.NaverBookQuery, RemoveSpecialCharacterFromString(title), author, price, publisher, publishday, isbn, RemoveSpecialCharacterFromString(description)), conn);               
                     Command.ExecuteNonQuery();                   
                 }
-                //Console.ReadLine();
             }
             else
             {
@@ -131,7 +129,6 @@ namespace LibruryDatabase.Models
         public string RemoveSpecialCharacterFromString(string description) // 책 설명 특수문자 제거
         {
            return  Regex.Replace(description, @"[^a-zA-Z0-9가-힣]", "", RegexOptions.Singleline);
-            //return Regex.Replace(description, Utility.Exception.DESCRIPTION, string.Empty, RegexOptions.Singleline);
         }
 
         public bool CheckNaverBookNumber(string bookNumber) // true면 검색 후 입력한 네이버 도서번호가 있음

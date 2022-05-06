@@ -215,7 +215,7 @@ namespace LibruryDatabase.Controls
 
                 Console.Clear();
                 Message.GreenColor("   >>Enter : 도서대여              뒤로가기 : ESC\n\n");
-                Print.PrintRequestBook(bookDao.StoreNaverBookReturn()); // 네이버 검색한 도서 출력
+                Print.PrintBookData(bookDao.StoreNaverBookReturn()); // 네이버 검색한 도서 출력
                 Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.CURRENT_LOCATION);
                 InputOrBack(); // 뒤로가기 or 도서등록
                 return;

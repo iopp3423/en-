@@ -85,7 +85,7 @@ namespace LibruryDatabase.Controls
 
             Console.WriteLine("\n\n");
 
-            Menu.PrintRequestBook(bookDao.StoreNaverBookReturn());//도서출력          
+            Menu.PrintBookData(bookDao.StoreNaverBookReturn());//도서출력          
 
 
             Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);

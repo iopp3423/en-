@@ -74,7 +74,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintUserData(memberDao.StoreUserDataToList()); //유저목록 출력           
             Message.GreenColor(Message.PrintChooseRemoveUserMessage()); // 입장 후 안내메시지
 
-            if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
             Console.SetCursorPosition(Constants.INPUT_NAME_X, Constants.INPUT_NAME_Y);
 
             name = InputName(); // 이름 입력
@@ -176,6 +176,24 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
+        }
+
+        public bool IsGoingBackMenu()
+        {
+            while (Constants.isPassing) // 메뉴 입장한 후 뒤로가기
+            {
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    Menu.PrintMain();
+                    Menu.PrintAdminMenu();
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.BOOK_NAME_Y);
+                    return Constants.isBackMenu;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter) { ClearCurrentLine(Constants.CURRENT_LOCATION); break; }
+            }
+            return Constants.isPassing;
         }
     }
 }

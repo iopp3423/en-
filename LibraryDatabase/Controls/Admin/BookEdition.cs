@@ -67,7 +67,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintAddBook();
 
             Message.GreenColor(Message.PrintInputOrBackMessage());
-            if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             bookDto.Title = InputBookName(movingInputY++);
             bookDto.Author = InputAuthor(movingInputY++);
@@ -259,6 +259,24 @@ namespace LibruryDatabase.Controls
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Console.CursorTop - number);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, currentLineCursor);
+        }
+
+        public bool IsGoingBackMenu()
+        {
+            while (Constants.isPassing) // 메뉴 입장한 후 뒤로가기
+            {
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    Menu.PrintMain();
+                    Menu.PrintAdminMenu();
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.BOOK_NAME_Y);
+                    return Constants.isBackMenu;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter) { ClearCurrentLine(Constants.CURRENT_LOCATION); break; }
+            }
+            return Constants.isPassing;
         }
     }
 }

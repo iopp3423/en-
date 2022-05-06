@@ -38,10 +38,11 @@ namespace LibruryDatabase.Controls
 
             Console.Clear();
 
-            Menu.PrintUserRequest(bookDao.StoreRequestBookReturn());// 유저가 요청한 책 정보 출력
+            Console.WriteLine("\n");
+            Menu.PrintBookData(bookDao.StoreRequestBookReturn());// 유저가 요청한 책 정보 출력
 
             Message.GreenColor(Message.PrintContinueRequestmessage()); // 안내메시지
-            if (Menu.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             bookNumber = InputBookNumber(); // 책 번호 입력
             bookDto.Number = bookNumber;
@@ -141,6 +142,24 @@ namespace LibruryDatabase.Controls
                 }
 
             }
+        }
+
+        public bool IsGoingBackMenu()
+        {
+            while (Constants.isPassing) // 메뉴 입장한 후 뒤로가기
+            {
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    Menu.PrintMain();
+                    Menu.PrintAdminMenu();
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.BOOK_NAME_Y);
+                    return Constants.isBackMenu;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter) { ClearCurrentLine(Constants.CURRENT_LOCATION); break; }
+            }
+            return Constants.isPassing;
         }
     }
 }

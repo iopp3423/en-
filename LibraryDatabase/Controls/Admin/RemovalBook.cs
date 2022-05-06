@@ -71,7 +71,7 @@ namespace LibruryDatabase.Controls
             Print.PrintBookData(bookDao.StoreBookReturn()); // 책 목록 프린트
             Console.SetCursorPosition(Constants.SEARCH_X, Constants.BOOKNAME_LINE);
 
-            if (Print.IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
+            if (IsGoingBackMenu() == Constants.isBackMenu) return;// 입장 후 뒤로가기 메뉴
 
             Console.SetCursorPosition(Constants.CURRENT_LOCATION, Constants.BOOK_Y);
             SearchBookName(Constants.isFail, Constants.ADMIN); // 책 제목 검색
@@ -119,6 +119,23 @@ namespace LibruryDatabase.Controls
             return bookNumber;         
         }
 
-        
+        public bool IsGoingBackMenu()
+        {
+            while (Constants.isPassing) // 메뉴 입장한 후 뒤로가기
+            {
+                Constants.cursor = Console.ReadKey(true);
+                if (Constants.cursor.Key == ConsoleKey.Escape)
+                {
+                    Console.Clear();
+                    Print.PrintMain();
+                    Print.PrintAdminMenu();
+                    Console.SetCursorPosition(Constants.FIRSTX, Constants.BOOK_NAME_Y);
+                    return Constants.isBackMenu;
+                }
+                else if (Constants.cursor.Key == ConsoleKey.Enter) { ClearCurrentLine(Constants.CURRENT_LOCATION); break; }
+            }
+            return Constants.isPassing;
+        }
+
     }
 }
