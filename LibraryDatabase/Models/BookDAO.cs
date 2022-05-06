@@ -332,12 +332,7 @@ namespace LibruryDatabase.Models
             conn.Close();
             return Constants.isFail;
         }
-        /*
-            conn.Open();
-            MySqlCommand Command = new MySqlCommand(String.Format(Constants.requestBookTobookQuery,bookNumber, quantity), conn);
-            Command.ExecuteNonQuery();
-            conn.Close();
-            */
+
         public void StoreRequestBook(string bookNumber, string quantity) // 유저가 입력한 책 데이터 book db저장
         {
             List<BookDTO> requestBook = new List<BookDTO>();
@@ -359,23 +354,38 @@ namespace LibruryDatabase.Models
             MySqlCommand Request = new MySqlCommand(String.Format(Constants.addUserBookQuery, requestBook[0].Title, requestBook[0].Author, requestBook[0].Publisher, requestBook[0].Publishday, requestBook[0].Price, requestBook[0].Isbn, quantity), conn);
             Request.ExecuteNonQuery();
             conn.Close();
+        }
 
+        public void DeleteRequestStoreBook(string bookNumber)
+        {
             // 유저 요청 도서 추가 후 제거
             conn.Open();
             MySqlCommand remove = new MySqlCommand(String.Format(Constants.DeleteRequestQuery, bookNumber), conn);
             remove.ExecuteNonQuery();
             conn.Close();
-          
         }
 
-        public void RemoveRequestBook(string bookNumber) // 유저요청책 추가 후 db에서 제거
+        public void StoreNaverBookTobook(string bookNumber, string quantity) // 네이버 검색한 책 데이터 book db저장
         {
+            List<BookDTO> naverBook = new List<BookDTO>();
 
             conn.Open();
-            MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteRequestQuery, bookNumber), conn);
-            Command.ExecuteNonQuery();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.naverQuery, bookNumber), conn);
+            MySqlDataReader Data = Command.ExecuteReader();
+            while (Data.Read())
+            {//리스트에 임시저장
+                if (Data["number"].ToString() == bookNumber)
+                {
+                    naverBook.Add(new BookDTO(Data["number"].ToString(), Data["title"].ToString(), Data["author"].ToString(), Data["publisher"].ToString(), Data["publishday"].ToString(), Data["price"].ToString(), Data["isbn"].ToString(), quantity));
+                }
+            }
             conn.Close();
 
+            // book db에 저장
+            conn.Open();
+            MySqlCommand Request = new MySqlCommand(String.Format(Constants.addUserBookQuery, naverBook[0].Title, naverBook[0].Author, naverBook[0].Publisher, naverBook[0].Publishday, naverBook[0].Price, naverBook[0].Isbn, quantity), conn);
+            Request.ExecuteNonQuery();
+            conn.Close();
         }
 
         public void close()

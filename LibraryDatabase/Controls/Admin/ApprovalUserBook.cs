@@ -73,6 +73,7 @@ namespace LibruryDatabase.Controls
                 ClearCurrentLine(Constants.CURRENT_LOCATION);
                 quantity = InputQuantity();
                 bookDao.StoreRequestBook(bookNumber, quantity); // book db에 저장
+                bookDao.DeleteRequestStoreBook(bookNumber);
                 SelectMenu(); // 뒤로가기
             }
         }
