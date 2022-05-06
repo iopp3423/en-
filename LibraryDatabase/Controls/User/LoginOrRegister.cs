@@ -236,7 +236,7 @@ namespace LibruryDatabase.Controls
             Menu.PrintLogin();
 
             id = InputId();
-            if (id == "#")
+            if (id == "#") // 입력도중 뒤로가기 - 바꿔야할듯
             {
                 Console.Clear();
                 Menu.PrintMain();
