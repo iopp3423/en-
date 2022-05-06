@@ -157,6 +157,10 @@ namespace LibruryDatabase.Views
         {
             return "맞는 책 번호가 없습니다. 뒤로가기 : ESC";
         }
+        public void PrintQuantity()
+        {
+            Console.Write("추가하실 수량을 입력해주세요 :");
+        }
 
 
 

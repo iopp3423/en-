@@ -354,20 +354,29 @@ namespace LibruryDatabase.Models
             }
             conn.Close();
 
-            conn.Open();// book db에 저장
+            // book db에 저장
+            conn.Open();
             MySqlCommand Request = new MySqlCommand(String.Format(Constants.addUserBookQuery, requestBook[0].Title, requestBook[0].Author, requestBook[0].Publisher, requestBook[0].Publishday, requestBook[0].Price, requestBook[0].Isbn, quantity), conn);
             Request.ExecuteNonQuery();
             conn.Close();
-        }
-  
-        public void StoreRequestTobook(string bookName, string author, string publish, string publishDay, string price, string isbn, string quantity) // 책 저장
-        {
+
+            // 유저 요청 도서 추가 후 제거
             conn.Open();
-            MySqlCommand Command = new MySqlCommand(String.Format(Constants.addUserBookQuery, bookName, author, publish, publishDay, price, isbn, quantity), conn);
-            Command.ExecuteNonQuery();
+            MySqlCommand remove = new MySqlCommand(String.Format(Constants.DeleteRequestQuery, bookNumber), conn);
+            remove.ExecuteNonQuery();
             conn.Close();
+          
         }
 
+        public void RemoveRequestBook(string bookNumber) // 유저요청책 추가 후 db에서 제거
+        {
+
+            conn.Open();
+            MySqlCommand Command = new MySqlCommand(String.Format(Constants.DeleteRequestQuery, bookNumber), conn);
+            Command.ExecuteNonQuery();
+            conn.Close();
+
+        }
 
         public void close()
         {

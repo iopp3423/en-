@@ -48,6 +48,7 @@ namespace LibruryDatabase.Utility
         public const string StoreQuey = "Select * FROM requestbook";
         public const string removeBookQuery = "DELETE FROM requestbook WHERE isbn = ('{0}')";
         public const string RemoveBorrowBookQuery = "DELETE FROM borrowmember WHERE number = ('{0}')";
+        public const string DeleteRequestQuery = "DELETE FROM requestbook WHERE number = ('{0}')";
 
 
         //로그관련
