@@ -69,7 +69,7 @@ namespace LibruryDatabase.Views
             Console.WriteLine("유저 이름(2~5자) :");
             Console.WriteLine("나이 :");
             Console.WriteLine("핸드폰 번호(01x-xxxx-xxxx) :");
-            Console.WriteLine("주소(천안시동남구신부동) :");
+            Console.WriteLine("주소(천안천 8길) :");
         }
 
         public void RegisterPrint()

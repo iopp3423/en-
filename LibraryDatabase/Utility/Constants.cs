@@ -26,7 +26,6 @@ namespace LibruryDatabase.Utility
         public const string ModifyPriceQuery = "UPDATE book SET price = ('{0}') WHERE number = ('{1}')";
         public const string borrowIdQuery = "SELECT * FROM borrowmember WHERE id = ('{0}')";
         public const string SearchDataQuery = "SELECT name, author, publish FROM book WHERE number = ('{0}')";
-        public const string returnBookQuery = "UPDATE borrowmember SET returnbook = ('{0}') WHERE number = ('{1}')";
         public const string borrowedIdQuery = "SELECT * FROM book WHERE number = ('{0}')";
 
         //책 관련
@@ -38,15 +37,11 @@ namespace LibruryDatabase.Utility
         public const string updateAddressQuery = "UPDATE member SET  address = ('{0}') WHERE id = ('{1}')";
         public const string revomeReturnBook = "DELETE FROM borrowmember WHERE id = ('{0}') AND number =  ('{1}')";
         public const string RemoveBorrowmember = "DELETE FROM borrowmember WHERE id = ('{0}')";
-        public const string OrderQuery = "SELECT * FROM borrowmember ORDER BY id ASC";
         public const string borrowQuery = "INSERT INTO borrowmember(id, number, bookname, author, publish, borrowbook, returnbook) VALUES( ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'), ('{6}'));";
         public const string minusBook = "UPDATE book SET quantity = quantity - 1 WHERE number =  ('{0}')";
         public const string plusBook = "UPDATE book SET quantity = quantity + 1 WHERE number =  ('{0}')";
-        public const string addingBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'));";
-        public const string addUserBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,isbn,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'), ('{6}'));";
+         public const string addUserBookQuery = "INSERT INTO book(name,author,publish,publishDay,price,isbn,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'), ('{6}'));";
         public const string requestBookQuery = "INSERT INTO requestbook(name,author,publish,publishDay,price,isbn,quantity) VALUES(  ('{0}'),  ('{1}'),  ('{2}'),  ('{3}'),  ('{4}'),  ('{5}'), ('{6}'));";
-        public const string StoreQuey = "Select * FROM requestbook";
-        public const string removeBookQuery = "DELETE FROM requestbook WHERE isbn = ('{0}')";
         public const string RemoveBorrowBookQuery = "DELETE FROM borrowmember WHERE number = ('{0}')";
         public const string DeleteRequestQuery = "DELETE FROM requestbook WHERE number = ('{0}')";
 
@@ -64,7 +59,6 @@ namespace LibruryDatabase.Utility
         public const string RemoveAllNaverBook = "TRUNCATE naver;";
         public const string naverQuery = "SELECT * FROM naver;";
         public const string requestQuery = "INSERT INTO requestbook SELECT * FROM naver WHERE number = ('{0}')"; 
-        public const string requestBookTobookQuery = "SELECT * FROM requestbook WHERE number = ('{0}')";
         public const string userRequestQuery = "Select * FROM requestbook";
 
 
@@ -133,7 +127,7 @@ namespace LibruryDatabase.Utility
         public const int NAME_X = 18;
         public const int AGE_X = 7;
         public const int NUMBER_X = 28;
-        public const int ADDRESS_X = 26;
+        public const int ADDRESS_X = 18;
 
         public const int GOING_PHONE = 21;
         public const int GOING_PASSWORD = 22;
