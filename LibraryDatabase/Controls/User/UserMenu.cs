@@ -16,7 +16,7 @@ namespace LibruryDatabase.Controls
         private LogDAO logDao;
         private LogDTO logDto;
         private Screen Menu;
-        private MessageScreen PrintMessage;
+        private MessageScreen Message;
 
         SearchingBook BookSearching = new SearchingBook();
         BorrowingBook BookBorrowing = new BorrowingBook();
@@ -35,7 +35,7 @@ namespace LibruryDatabase.Controls
 
         {
             this.Menu = InputMenu;
-            this.PrintMessage = message;
+            this.Message = message;
             this.memberDao = MemberDao;
             this.memberDto = MemberDto;
             this.logDao = LogDao;
@@ -60,7 +60,8 @@ namespace LibruryDatabase.Controls
             {
                 Console.Clear();
                 Menu.PrintMain();
-                Menu.RegisterOrLogin();
+                Message.GreenColor("로그아웃 : ESC    재로그인 : Enter");
+                //Menu.RegisterOrLogin();
                 return;
             }
         }

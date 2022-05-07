@@ -42,7 +42,12 @@ namespace LibruryDatabase.Views
             Console.Write("PW(영어, 숫자 포함(4~10자) :");
 
         }
-
+        public void DeleteMessage()
+        {
+            Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
+            ClearCurrentLine(Constants.CURRENT_LOCATION);
+            Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
+        }
         public void PrintInputMessage()
         {
             Console.SetCursorPosition(Constants.ERROR_X, Constants.ERROR_Y);
@@ -377,7 +382,7 @@ namespace LibruryDatabase.Views
         }
         public void PrintReturnMenu()
         {
-            Console.WriteLine("유저 or 관리자 모드 : ESC, 관리자 로그인 : ENTER");
+            Console.WriteLine("로그아웃 : ESC, 관리자 로그인 : ENTER");
         }
         public void PrintAddBook()
         {

@@ -255,6 +255,7 @@ namespace LibruryDatabase.Controls
             {
                 logDao.StoreLog(logDto.Id, Constants.LIBRARY, Constants.LOGIN); // db에 로그 내역 저장
                 GoUser.StartBookmenu(id, password); // 유저메뉴
+                return;
             }
 
             memberDao.close(); // db닫기
@@ -284,7 +285,6 @@ namespace LibruryDatabase.Controls
                 Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
                 id = Console.ReadLine();
 
-
                 if (CheckNull(id))
                 {
                     Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
@@ -294,13 +294,11 @@ namespace LibruryDatabase.Controls
                 }
                 if (Constants.isFail == Regex.IsMatch(id, Utility.Exception.ID_CHECK)) // 정규식에 맞지 않으면
                 {
-
                     Console.SetCursorPosition(Constants.ID_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
                     ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     message.PrintIdInputMessage();
                     Menu.PrintLoginErrorMessage(); continue;
-                    
                 }
                 break;              
             }
@@ -311,11 +309,9 @@ namespace LibruryDatabase.Controls
 
              
         public string InputPassword() // 비밀번호 입력
-        {
-
+        {           
             while (Constants.isLogin)
             {
-
                 Console.SetCursorPosition(Constants.PW_X, Constants.PW_Y);
                 password = ReadPassword();
 
@@ -329,11 +325,10 @@ namespace LibruryDatabase.Controls
                 if (Constants.isFail == Regex.IsMatch(password, Utility.Exception.PW_CHECK)) // 정규식에 맞지 않으면
                 {
                     Console.SetCursorPosition(Constants.PW_X, Console.CursorTop - Constants.BEFORE_INPUT_LOCATION);
-                   ClearCurrentLine(Constants.CURRENT_LOCATION);
+                    ClearCurrentLine(Constants.CURRENT_LOCATION);
 
                     message.PrintPasswordInputMessage();
-                    Menu.PrintLoginErrorMessage(); continue;
-                    
+                    Menu.PrintLoginErrorMessage(); continue;  
                 }
                 break;
             }
