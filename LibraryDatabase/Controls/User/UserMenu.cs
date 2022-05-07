@@ -61,7 +61,6 @@ namespace LibruryDatabase.Controls
                 Console.Clear();
                 Menu.PrintMain();
                 Message.GreenColor("로그아웃 : ESC    재로그인 : Enter");
-                //Menu.RegisterOrLogin();
                 return;
             }
         }

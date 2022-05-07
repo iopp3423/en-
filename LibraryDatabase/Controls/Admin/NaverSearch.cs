@@ -175,7 +175,7 @@ namespace LibruryDatabase.Controls
                 Message.PrintBookQunatityInput();
                 quantity = Console.ReadLine();
 
-                if (Constants.isFail == Regex.IsMatch(quantity, Utility.Exception.QUANTITY)) // 정규식에 맞지 않으면
+                if (Constants.ONE > int.Parse(quantity) || int.Parse(quantity) > Constants.RIMIT)
                 {
                     Console.SetCursorPosition(Constants.CURRENT_BOOK, Constants.SEARCH_BOOK - Constants.BEFORE_INPUT_LOCATION);
                     Message.RedColor(Message.PrintErrorInputMessage());

@@ -67,6 +67,7 @@ namespace LibruryDatabase.Utility
         public const string REVISE_BOOK_QUANTITY = "1";
         public const string NONE_BOOK = "0";
         public const int ONE = 1;
+        public const int RIMIT = 100;
         public const int CONSOLE_SIZE_WIDTH = 75;
         public const int CONSOLE_SIZE_HDIGHT = 40;
         public const int CURRENT_LOCATION = 0;

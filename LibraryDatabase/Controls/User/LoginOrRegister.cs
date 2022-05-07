@@ -59,7 +59,7 @@ namespace LibruryDatabase.Controls
             Menu.RegisterOrLogin();
           
 
-            if (Constants.isBack == SelectMenu()) // 마우스 함수
+            if (Constants.isBack == SelectMenu()) // 뒤로가기
             {
                 Console.Clear();
                 Menu.PrintMain();
