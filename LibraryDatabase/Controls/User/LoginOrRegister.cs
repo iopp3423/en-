@@ -282,9 +282,8 @@ namespace LibruryDatabase.Controls
             while (Constants.isLogin)
             {
                 Console.SetCursorPosition(Constants.ID_X, Constants.ID_Y);
-                //id = Console.ReadLine();
-                id = Input();
-                if (id == "#") return "#";
+                id = Console.ReadLine();
+
 
                 if (CheckNull(id))
                 {
@@ -545,42 +544,6 @@ namespace LibruryDatabase.Controls
                 return Constants.isPassing;
             }
             return Constants.isFail;
-        }
-
-        public string Input()
-        {
-            string input = "";
-            ConsoleKeyInfo info = Console.ReadKey(true);
-            while (info.Key != ConsoleKey.Enter)
-            {
-                if (Constants.isPassing != Regex.IsMatch(info.KeyChar.ToString(), Utility.Exception.INPUT))
-                {
-                    Console.Write(info.KeyChar.ToString());
-                    input += info.KeyChar;
-                }
-                else if (info.Key == ConsoleKey.Backspace)
-                {
-                    if (!string.IsNullOrEmpty(input))
-                    {
-                        input = input.Substring(Constants.CURRENT_LOCATION, input.Length - Constants.ONE);
-                        int passwordX = Console.CursorLeft;
-                        Console.SetCursorPosition(passwordX - Constants.ONE, Console.CursorTop);
-                        Console.Write(" ");
-                        Console.SetCursorPosition(passwordX - Constants.ONE, Console.CursorTop);
-                    }
-                }
-                else if (info.Key == ConsoleKey.Escape)
-                {
-                    Console.Clear();
-                    Menu.PrintMain();
-                    Menu.RegisterOrLogin();
-                    return "#";
-                }
-                info = Console.ReadKey(true);
-
-            }
-            Console.WriteLine();
-            return input;
         }
     }
 
