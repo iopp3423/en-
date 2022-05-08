@@ -1,3 +1,3 @@
-module Enimage {
+module Open {
 	requires java.desktop;
 }

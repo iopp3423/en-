@@ -1,5 +1,4 @@
-package image;
-
+package open;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,9 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.FileReader;
 
-
 public class SearchingImage {
-		
 
 	public SearchingImage()
 	{
