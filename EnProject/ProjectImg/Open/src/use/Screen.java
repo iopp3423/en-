@@ -8,38 +8,51 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 
 public class Screen {
-	//private Image  image;
 	
+	JFrame frame;
+
 	
-	public Screen()
+	public Screen() {
+		initialize();
+	}
+	
+	public void initialize()
 	{
-		JFrame frame = new JFrame(); // 프레임 생성 
+		frame = new JFrame(); // 프레임 생성 
+		frame.setResizable(false); // 창 크기 조절 불가
+		//frame.setVisible(true); //창 뜨게하기 
+		frame.setPreferredSize(new Dimension(840, 840/12*9));
+		frame.setSize(840, 840/12*9);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
+		frame.setLocationRelativeTo(null); // 화면 나오는 위치  
+		
+		JPanel FirstPanel = new JPanel();
+		JPanel SearchPanel = new JPanel();
+		JPanel RecordPanel = new JPanel();
+		
+		frame.getContentPane().add(FirstPanel);
+		
 		JButton search = new JButton("검색하기");
-		JButton record = new JButton("기록보기");
-		JPanel panel = new JPanel();
-		JPanel button = new JPanel();
+		JButton record = new JButton("기록보기");		
 		JTextField Input = new JTextField(10);
 		
-		//this.image = image;
-		//setSize(new Dimension(image.getWidth(null), image.getHeight(null)));
-		//setLayout(null);
-		 	
-		button.add(search);
-		button.add(record);
+		JPanel panel = new JPanel();
+		JPanel button = new JPanel();
 		
-		panel.add(Input);
-		panel.add(button);
+		search.setBounds(300, 123, 100, 40); // 버튼위치
+		record.setBounds(60, 123, 100, 40); // 버튼위치 수
+		Input.setBounds(90, 123, 259, 40); // 버튼위치 수
 		
-		frame.add(panel);
+		FirstPanel.add(search);
+		FirstPanel.add(record);
+		FirstPanel.add(Input);
+		
+		FirstPanel.setVisible(true);
 		
 		
 		
@@ -61,12 +74,7 @@ public class Screen {
 			}
 				
 		});
-		frame.setResizable(false); // 창 크기 조절 불가
-		frame.setVisible(true); //창 뜨게하기 
-		frame.setPreferredSize(new Dimension(840, 840/12*9));
-		frame.setSize(840, 840/12*9);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
-		frame.setLocationRelativeTo(null); // 화면 나오는 위치  
+		
 		
 	
 	}
@@ -76,7 +84,6 @@ public class Screen {
 	{
 		JFrame frame = new JFrame(); // 프레임 생성 
 		String[] Choose = {"10", "20","30"};
-		
 		JButton search = new JButton("검색하기");
 		JButton back = new JButton("뒤로가기");
 		JPanel button = new JPanel();
@@ -96,13 +103,48 @@ public class Screen {
 		panel.add(button);
 		panel.add(comboBox);
 		
-		for(int i=0;i<10;i++)
-		{
-			JButton jb = new JButton(name[i]);
-			gridOne.setSize(300, 200);
-			gridOne.add(jb);
-		}
+		System.out.println(comboBox.getItemAt(comboBox.getSelectedIndex()));
+		
+			
+		comboBox.addItemListener(new ItemListener() {
 
+			public void itemStateChanged(ItemEvent e) {
+
+				JComboBox cb = (JComboBox) e.getSource(); //콤보박스 알아내기 
+
+				int index = cb.getSelectedIndex();
+				System.out.println(index);
+			}
+
+		});
+
+		
+		
+		if(comboBox.getItemAt(comboBox.getSelectedIndex()) == "10")
+		{ 	for(int i=0;i<10;i++)
+			{
+				JButton jb = new JButton(name[i]);
+				gridOne.setSize(300, 200);
+				gridOne.add(jb);
+			}
+		}
+		if(comboBox.getItemAt(comboBox.getSelectedIndex()) == "20")
+		{ 	for(int i=0;i<20;i++)
+			{
+				JButton jb = new JButton(name[i]);
+				gridTwo.setSize(300, 200);
+				gridTwo.add(jb);
+			}
+		}
+		if(comboBox.getItemAt(comboBox.getSelectedIndex()) == "30")
+		{ 	for(int i=0;i<30;i++)
+			{
+				JButton jb = new JButton(name[i]);
+				gridThree.setSize(300, 200);
+				gridThree.add(jb);
+			}
+		}
+		
 		panel.add(gridOne);
 		frame.add(panel);
 		
@@ -145,7 +187,7 @@ public class Screen {
 		
 		button.add(search);
 		button.add(back);
-		frame.add(title);
+		panel.add(title);
 		panel.add(button);
 		
 		frame.add(panel);
