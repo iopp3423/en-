@@ -63,14 +63,16 @@ public class Screen {
 		back.setBounds(600, 50, 100, 40); // 
 		SecondInput.setBounds(200,50, 300, 40); // 버튼위치 수d
 		comboBox.setBounds(700,50, 70, 40);
-		JPanel gridOne = new JPanel(new GridLayout(2,5));
+		JPanel gridOne = new JPanel(new GridLayout(2,5, 5, 5));
 		JPanel gridTwo = new JPanel(new GridLayout(4,5));
 		JPanel gridThree = new JPanel(new GridLayout(6,5));	
 		gridOne.setLayout(null);
-		gridOne.setLocation(100,100);
+		gridTwo.setLayout(null);
+		gridThree.setLayout(null);
 		
-		
-		String name[] = {"컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1"};
+		String name[] = {"컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1",
+				"컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1",
+				"컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1"};
 			
 		
 
@@ -78,7 +80,7 @@ public class Screen {
 		SearchPanel.add(Secondsearch); // 검색버튼 
 		SearchPanel.add(back);// 뒤로가기 버튼 
 		SearchPanel.add(comboBox);
-		SearchPanel.add(gridOne);
+		
 		
 			
 		comboBox.addItemListener(new ItemListener() {
@@ -88,42 +90,60 @@ public class Screen {
 				JComboBox cb = (JComboBox) e.getSource(); //콤보박스 알아내기 
 
 				int index = cb.getSelectedIndex();
-				System.out.println(index);
+				
+				if(index == 0)
+				{
+					for(int i=0;i<10;i++)
+					{
+						JButton jb = new JButton(name[i]);
+						gridOne.setSize(200, 200);
+						gridOne.add(jb);
+					}
+					SearchPanel.add(gridOne);
+					frame.getContentPane().removeAll();
+					frame.getContentPane().add(SearchPanel);
+					SearchPanel.setVisible(false);
+					SearchPanel.setVisible(true);
+					System.out.println("Hellowlrd");
+				}
+				if(index == 1)
+				{
+					for(int i=0;i<20;i++)
+					{
+						JButton jb = new JButton(name[i]);
+						gridTwo.setSize(300, 200);
+						gridTwo.add(jb);
+					}
+					SearchPanel.add(gridTwo);
+					frame.getContentPane().removeAll();
+					frame.getContentPane().add(SearchPanel);
+					SearchPanel.setVisible(false);
+					SearchPanel.setVisible(true);
+					System.out.println("Hellowlrd");
+				}
+				if(index == 2)
+				{
+					for(int i=0;i<20;i++)
+					{
+						JButton jb = new JButton(name[i]);
+						gridThree.setSize(300, 200);
+						gridThree.add(jb);
+					}
+					SearchPanel.add(gridThree);
+					frame.getContentPane().removeAll();
+					frame.getContentPane().add(SearchPanel);
+					SearchPanel.setVisible(false);
+					SearchPanel.setVisible(true);
+					System.out.println("Hellowlrd");
+				}
 			}
+			
 
 		});
 
+					
 		
-		
-		if(comboBox.getItemAt(comboBox.getSelectedIndex()) == "10")
-		{ 	for(int i=0;i<10;i++)
-			{
-				JButton jb = new JButton(name[i]);
-				gridOne.setSize(200, 200);
-				gridOne.add(jb);
-			}
-		}
-		
-		if(comboBox.getItemAt(comboBox.getSelectedIndex()) == "20")
-		{ 	for(int i=0;i<20;i++)
-			{
-				JButton jb = new JButton(name[i]);
-				gridTwo.setSize(300, 200);
-				gridTwo.add(jb);
-			}
-		}
-		if(comboBox.getItemAt(comboBox.getSelectedIndex()) == "30")
-		{ 	for(int i=0;i<30;i++)
-			{
-				JButton jb = new JButton(name[i]);
-				gridThree.setSize(300, 200);
-				gridThree.add(jb);
-			}
-		}
-				
-		
-		
-		back.addActionListener(new ActionListener(){
+		back.addActionListener(new ActionListener(){ // 뒤로가기 
 			public void actionPerformed(ActionEvent e) {
 				
 				SearchPanel.setVisible(false);
@@ -134,7 +154,7 @@ public class Screen {
 				
 		});
 		
-		
+		////////////////////////처음화면 
 		JButton Firstsearch = new JButton("검색하기");
 		JButton record = new JButton("기록보기");		
 		JTextField Input = new JTextField(10);
@@ -148,10 +168,6 @@ public class Screen {
 		FirstPanel.add(Firstsearch);
 		FirstPanel.add(record);
 		
-		
-		//SearchPanel.setVisible(true);
-		//FirstPanel.setVisible(true);
-	
 		
 		Firstsearch.addActionListener(new ActionListener(){ // 검색하기 
 			public void actionPerformed(ActionEvent e) {
