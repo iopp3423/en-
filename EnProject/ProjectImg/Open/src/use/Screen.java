@@ -61,12 +61,14 @@ public class Screen {
 		JPanel FirstPanel = new JPanel();
 		JPanel SearchPanel = new JPanel(new BorderLayout(100, 100));
 		JPanel RecordPanel = new JPanel();
-		JPanel Grid = new JPanel(new GridLayout(5,6));
-		JPanel center = new JPanel(new BorderLayout());
+		JPanel OneGrid = new JPanel(new GridLayout(2,5));
+		JPanel TwoGrid = new JPanel(new GridLayout(4,5));
+		JPanel ThreeGrid = new JPanel(new GridLayout(5,6));
+		JPanel center = new JPanel();
 		JPanel collectPanel = new JPanel(new FlowLayout());
 		
-		center.add(Grid);	
 		
+		center.add(ThreeGrid);	
 		FirstPanel.setLayout(null);
 		
 		frame.getContentPane().add(FirstPanel);	
@@ -93,24 +95,47 @@ public class Screen {
 
 		
 			
-		comboBox.addItemListener(new ItemListener() {
-
-			public void itemStateChanged(ItemEvent e) {
-
-				JComboBox cb = (JComboBox) e.getSource(); //콤보박스 알아내기 
-
-				int index = cb.getSelectedIndex();
-							
-			}
-			
-
+			comboBox.addActionListener(new ActionListener(){ // combo에 ActionListner를 설정합니다.
+		   public void actionPerformed(ActionEvent e){ // actionPerformed 메서드를 통해 이벤트 처리에 대한 동작을 구현합니다.
+		    JComboBox cb = (JComboBox) e.getSource(); // 동작이 일어날 소스를 JComboBox 형태로 받습니다.
+		    center.removeAll();
+		    int index = cb.getSelectedIndex(); // int 타입 index를 선언하고 콤보박스에서 선택된 번호 값으로 저장합니다.
+		    if(index == 0) center.add(OneGrid);
+		    else if(index == 1) center.add(TwoGrid);
+		    else center.add(ThreeGrid);		    
+		    SearchPanel.add(center);
+		    
+		   } 
+		  });
+		
+		Secondsearch.addActionListener(new ActionListener(){ // 검색하기 
+			public void actionPerformed(ActionEvent e) {
+				
+				SearchPanel.setVisible(false);
+				frame.getContentPane().removeAll();
+				
+				imageIcon = ImagePrint("30",SecondInput.getText()); // 파일 받아오기 	
+				for(int index = 0; index<30;index++)
+				{
+					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(120, 80, Image.SCALE_SMOOTH)));
+					
+					ThreeGrid.setSize(300, 200);
+					ThreeGrid.add(imageButton[index]);				
+				}
+				
+				center.removeAll();
+				center.add(ThreeGrid);
+				SearchPanel.add(center, BorderLayout.CENTER);
+				frame.getContentPane().add(SearchPanel);
+				SearchPanel.setVisible(true);			
+			}		
 		});
 
 					
-		
 		back.addActionListener(new ActionListener(){ // 뒤로가기 
 			public void actionPerformed(ActionEvent e) {
 				
+				center.removeAll();
 				SearchPanel.setVisible(false);
 				frame.getContentPane().removeAll();
 				frame.getContentPane().add(FirstPanel);	
@@ -141,35 +166,31 @@ public class Screen {
 				
 				FirstPanel.setVisible(false);
 				frame.getContentPane().removeAll();
-				imageIcon = ImagePrint("30",Input.getText()); // 파일 받아오기
-				
+				imageIcon = ImagePrint("30",Input.getText()); // 파일 받아오기 	
 				for(int index = 0; index<30;index++)
 				{
 					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(120, 80, Image.SCALE_SMOOTH)));
-					//imageButton[index].setPreferredSize(new Dimension(30, 30));
 					
-					Grid.setSize(300, 200);
-					Grid.add(imageButton[index]);				
+					ThreeGrid.setSize(300, 200);
+					ThreeGrid.add(imageButton[index]);				
 				}
 				
-				SearchPanel.add(Grid, BorderLayout.CENTER);
+				center.add(ThreeGrid);
+				SearchPanel.add(center, BorderLayout.CENTER);
 				frame.getContentPane().add(SearchPanel);
-				SearchPanel.setVisible(true);
-							
+				SearchPanel.setVisible(true);						
 			}
 				
 		});
 		
 		record.addActionListener(new ActionListener(){ // 기록보기 
 			public void actionPerformed(ActionEvent e) {
-
+				
 				FirstPanel.setVisible(false);
 				frame.getContentPane().removeAll();
 				frame.getContentPane().add(RecordPanel);
 				System.out.println(Input.getText());
 				RecordPanel.setVisible(true);
-				
-				
 			}
 				
 		});
@@ -177,38 +198,7 @@ public class Screen {
 	}
         
 
-		///// 기록 보기
-		/*
-		JButton search = new JButton("검색하기");
-		JButton back = new JButton("뒤로가기");
-		JPanel button = new JPanel();
-		JPanel panel = new JPanel();
-		JLabel title = new JLabel("로그 기록");
-		title.setSize(150, 150);
-		*/
-		//JTextField Input = new JTextField(10);
-		
-		
-		
-		//button.add(search);
-		//button.add(back);
-		//panel.add(title);
-		//panel.add(button);
-		
-		//frame.add(panel);
-		
-		
-		//back.addActionListener(new ActionListener(){
-			//public void actionPerformed(ActionEvent e) {
-				
-				//frame.setVisible(false);
-			//}
-				
-		//});
-		
-		
-		
-		public ImageIcon[] ImagePrint(String size, String name)
+		public ImageIcon[] ImagePrint(String size, String name) // api 가져오기
 		{					
 		    String temp;
 			String BASE_URL = "https://dapi.kakao.com/v2/search/image?sort=accuracy&page=1&size="+ size + "&query=" + name;
