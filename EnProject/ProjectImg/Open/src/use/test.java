@@ -15,17 +15,18 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import javax.imageio.ImageIO;
 
 
 
 public class test {
 
-	static final String BASE_URL = "https://dapi.kakao.com/v2/search/image?sort=accuracy&page=1&size=1&query=설현";
-	//"https://dapi.kakao.com/v2/search/image?sort=accuracy&page=1&size="+comboboxNumber+"&query="설현 "
-	//static final String AUTH_TOKEN = "AUTH_TOKEN 값";
-	//static String AUTH_KEY = "Bearer " + "AUTH_KEY 값";
-	public void testt()
+
+	public void testt(String size, String name)
 	{
+		size = "10";
+		String BASE_URL = "https://dapi.kakao.com/v2/search/image?sort=accuracy&page=1&size="+ size + "&query=" + name;
+		
 		JSONObject result = null;
 		/**
 		 *  REST API 호출하기
@@ -53,9 +54,7 @@ public class test {
 			// 데이터 입력 스트림에 담기
 			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
 			while(br.ready()) {
-				sb.append(br.readLine());	
-				System.out.println(sb);
-				
+				sb.append(br.readLine());					
 			}
 		
 			con.disconnect();
@@ -66,7 +65,6 @@ public class test {
 				
 			try {
 				result = (JSONObject) new JSONParser().parse(sb.toString());
-				System.out.println(result);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -79,17 +77,14 @@ public class test {
 			
 			// JSONObject에서 Array데이터를 get하여 JSONArray에 저장한다.
 			JSONArray array = (JSONArray) result.get("documents");
-			//System.out.println(array);
-			JSONObject arr = (JSONObject)array.get(0);
-			
-			System.out.println(arr.get("image_url"));
+
+				
 			out.append("데이터 출력하기 \n");
-			//for(int i=0; i<array.size(); i++) {
-			//	tmp = (JSONObject) array.get(i);
-			//	out.append("title("+i+") :"+ tmp.get("image_url") +"\n");
-			//	
-			//	out.append("\n");
-			//}
+			for(int i=0; i<array.size(); i++) {		
+				JSONObject arr = (JSONObject)array.get(i);
+				System.out.println(arr.get("image_url"));
+				out.append("\n");
+			}
 
 	
 	
