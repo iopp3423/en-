@@ -1,7 +1,9 @@
 package use;
 
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -57,54 +59,38 @@ public class Screen {
 		
 		
 		JPanel FirstPanel = new JPanel();
-		JPanel SearchPanel = new JPanel();
+		JPanel SearchPanel = new JPanel(new BorderLayout(100, 100));
 		JPanel RecordPanel = new JPanel();
 		JPanel Grid = new JPanel(new GridLayout(5,6));
+		JPanel center = new JPanel(new BorderLayout());
+		JPanel collectPanel = new JPanel(new FlowLayout());
+		
+		center.add(Grid);	
+		
 		FirstPanel.setLayout(null);
-		SearchPanel.setLayout(null);
 		
-
 		frame.getContentPane().add(FirstPanel);	
-		
-		//FirstPanel.setVisible(false);
-		//SearchPanel.setVisible(true);
-		
-		//frame.getContentPane().add(RecordPanel);		
-				
+					
 		
 		///////////////////////////////////////검색 패널 
 		String[] Choose = {"10", "20","30"};
 		JButton Secondsearch = new JButton("검색하기");
 		JButton back = new JButton("뒤로가기");
-		JTextField SecondInput = new JTextField(10);
+		JTextField SecondInput = new JTextField(15);
 		JComboBox comboBox = new JComboBox(Choose);
 		
 		Secondsearch.setBounds(500, 50, 100, 40); // 버튼위치
 		back.setBounds(600, 50, 100, 40); // 
-		SecondInput.setBounds(200,50, 300, 40); // 버튼위치 수d
+		SecondInput.setBounds(200,50, 300, 40); // 버튼위치 수
 		comboBox.setBounds(700,50, 70, 40);
 		
-		JPanel gridOne = new JPanel(new GridLayout(2,5, 5, 5));
-		JPanel gridTwo = new JPanel(new GridLayout(4,5));
-		JPanel gridThree = new JPanel(new GridLayout(6,5));	
-		JLabel imgLabel = new JLabel();
 		
-		
-		gridOne.setLayout(null);
-		gridTwo.setLayout(null);
-		gridThree.setLayout(null);
-		
-		String name[] = {"컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1",
-				"컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1",
-				"컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1","컴포턴트 1"};
-			
-		
+		collectPanel.add(SecondInput); // 입력창 
+		collectPanel.add(Secondsearch); // 검색버튼 
+		collectPanel.add(back);// 뒤로가기 버튼 
+		collectPanel.add(comboBox);
+		SearchPanel.add(collectPanel,BorderLayout.NORTH);
 
-		SearchPanel.add(SecondInput); // 입력창 
-		SearchPanel.add(Secondsearch); // 검색버튼 
-		SearchPanel.add(back);// 뒤로가기 버튼 
-		SearchPanel.add(comboBox);
-		
 		
 			
 		comboBox.addItemListener(new ItemListener() {
@@ -114,51 +100,7 @@ public class Screen {
 				JComboBox cb = (JComboBox) e.getSource(); //콤보박스 알아내기 
 
 				int index = cb.getSelectedIndex();
-				
-				if(index == 0)
-				{
-					for(int i=0;i<10;i++)
-					{
-						JButton jb = new JButton(name[i]);
-						gridOne.setSize(200, 200);
-						gridOne.add(jb);
-					}
-					
-					SearchPanel.add(gridOne);
-					frame.getContentPane().removeAll();
-					frame.getContentPane().add(SearchPanel);
-					SearchPanel.setVisible(false);
-					SearchPanel.setVisible(true);
-				}
-				if(index == 1)
-				{
-					for(int i=0;i<20;i++)
-					{
-						JButton jb = new JButton(name[i]);
-						gridTwo.setSize(300, 200);
-						gridTwo.add(jb);
-					}
-					SearchPanel.add(gridTwo);
-					frame.getContentPane().removeAll();
-					frame.getContentPane().add(SearchPanel);
-					SearchPanel.setVisible(false);
-					SearchPanel.setVisible(true);
-				}
-				if(index == 2)
-				{
-					for(int i=0;i<20;i++)
-					{
-						//JButton jb = new JButton(name[i]);
-						gridThree.setSize(300, 200);		
-						gridThree.add(imageButton[i]);
-					}
-					
-					frame.getContentPane().removeAll();
-					SearchPanel.add(gridThree);
-					frame.getContentPane().add(SearchPanel);
-					//SearchPanel.setVisible(false);
-					SearchPanel.setVisible(true);					
-				}
+							
 			}
 			
 
@@ -177,14 +119,12 @@ public class Screen {
 				
 		});
 		
+		
 		////////////////////////처음화면 
 		JButton Firstsearch = new JButton("검색하기");
 		JButton record = new JButton("기록보기");		
 		JTextField Input = new JTextField(10);
-		
-		
-		//URL url = new URL("http://www.ojc.asia/images/new_logo.gif");
-        //image3 = ImageIO.read(url);      
+		   
         
 				
 		Firstsearch.setBounds(500, 50, 100, 40); // 버튼위치
@@ -202,25 +142,20 @@ public class Screen {
 				FirstPanel.setVisible(false);
 				frame.getContentPane().removeAll();
 				imageIcon = ImagePrint("30",Input.getText()); // 파일 받아오기
+				
 				for(int index = 0; index<30;index++)
 				{
-					imageButton[index] = new JButton(imageIcon[index]);
+					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(120, 80, Image.SCALE_SMOOTH)));
+					//imageButton[index].setPreferredSize(new Dimension(30, 30));
+					
 					Grid.setSize(300, 200);
-					Grid.add(imageButton[index]);
+					Grid.add(imageButton[index]);				
 				}
-				/*
-				for(int i=0;i<20;i++)
-				{
-					JButton jb = new JButton(name[i]);
-					Grid.setSize(300, 200);
-					Grid.add(jb);
-				}
-				*/
-				SearchPanel.add(Grid);
+				
+				SearchPanel.add(Grid, BorderLayout.CENTER);
 				frame.getContentPane().add(SearchPanel);
 				SearchPanel.setVisible(true);
-				
-				
+							
 			}
 				
 		});
@@ -345,7 +280,6 @@ public class Screen {
 					try {
 						image = ImageIO.read(link); // 이미지로 저장 
 						imageicon[i] = new ImageIcon(image);
-						System.out.println(i);
 						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -353,8 +287,6 @@ public class Screen {
 					}
 					
 					
-					//System.out.println(temp);
-					out.append("\n");		
 				}		
 				return imageicon;
 
