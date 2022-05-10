@@ -47,8 +47,6 @@ public class Screen {
 	
 	public void initialize()
 	{
-		
-		
 		frame = new JFrame(); // 프레임 생성
 
 		frame.setSize(840, 840/12*9);
@@ -65,6 +63,7 @@ public class Screen {
 		JPanel TwoGrid = new JPanel(new GridLayout(4,5));
 		JPanel ThreeGrid = new JPanel(new GridLayout(5,6));
 		JPanel center = new JPanel();
+		JPanel Recovery = new JPanel();
 		JPanel collectPanel = new JPanel(new FlowLayout());
 		
 		
@@ -96,36 +95,86 @@ public class Screen {
 		
 			
 			comboBox.addActionListener(new ActionListener(){ // combo에 ActionListner를 설정합니다.
-		   public void actionPerformed(ActionEvent e){ // actionPerformed 메서드를 통해 이벤트 처리에 대한 동작을 구현합니다.
+		    public void actionPerformed(ActionEvent e){ // actionPerformed 메서드를 통해 이벤트 처리에 대한 동작을 구현합니다.
 		    JComboBox cb = (JComboBox) e.getSource(); // 동작이 일어날 소스를 JComboBox 형태로 받습니다.
-		    center.removeAll();
-		    int index = cb.getSelectedIndex(); // int 타입 index를 선언하고 콤보박스에서 선택된 번호 값으로 저장합니다.
-		    if(index == 0) center.add(OneGrid);
-		    else if(index == 1) center.add(TwoGrid);
-		    else center.add(ThreeGrid);		    
-		    SearchPanel.add(center);
 		    
+		    int index = cb.getSelectedIndex(); // int 타입 index를 선언하고 콤보박스에서 선택된 번호 값으로 저장합니다.
+		    frame.getContentPane().removeAll();
+		    if(index == 0) 
+		    	{
+			    	SearchPanel.setVisible(false);				
+		    		 for(int OneGridIndex = 0; OneGridIndex<10; OneGridIndex++)
+						{
+							OneGrid.setSize(300, 200);
+							OneGrid.add(imageButton[OneGridIndex]);	
+						}
+		    		 center.removeAll();
+		    		 center.add(OneGrid);
+		    		 SearchPanel.add(center,BorderLayout.CENTER);
+		    		 frame.getContentPane().add(SearchPanel);
+		    		 SearchPanel.setVisible(true);
+		    	}
+		    
+		    else if(index == 1)
+		    	{
+		    	SearchPanel.setVisible(false);				
+	    		 for(int TwoGridIndex = 0; TwoGridIndex<20;TwoGridIndex++)
+					{
+	    			 	TwoGrid.setSize(300, 200);
+	    			 	TwoGrid.add(imageButton[TwoGridIndex]);	
+					}
+	    		 center.removeAll();
+	    		 center.add(TwoGrid);
+	    		 SearchPanel.add(center,BorderLayout.CENTER);
+	    		 frame.getContentPane().add(SearchPanel);
+	    		 SearchPanel.setVisible(true);
+		    	}
+		    else 
+		    	{
+		    	SearchPanel.setVisible(false);				
+	    		 for(int ThreeGridIndex = 0; ThreeGridIndex<20;ThreeGridIndex++)
+					{
+	    			 	ThreeGrid.setSize(300, 200);
+	    			 	ThreeGrid.add(imageButton[ThreeGridIndex]);	
+					}
+	    		 center.removeAll();
+	    		 center.add(ThreeGrid);
+	    		 SearchPanel.add(center,BorderLayout.CENTER);
+	    		 frame.getContentPane().add(SearchPanel);
+	    		 SearchPanel.setVisible(true);
+		    	}
+		    //Recovery.add(center);
+		    //center.removeAll();
+		    //center.add(Recovery);
+		   // SearchPanel.add(center);
 		   } 
 		  });
 		
+			
 		Secondsearch.addActionListener(new ActionListener(){ // 검색하기 
 			public void actionPerformed(ActionEvent e) {
 				
 				SearchPanel.setVisible(false);
-				frame.getContentPane().removeAll();
+				//frame.getContentPane().removeAll();
+				ThreeGrid.removeAll();
 				
 				imageIcon = ImagePrint("30",SecondInput.getText()); // 파일 받아오기 	
 				for(int index = 0; index<30;index++)
 				{
-					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(120, 80, Image.SCALE_SMOOTH)));
+					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(100, 80, Image.SCALE_SMOOTH)));
 					
 					ThreeGrid.setSize(300, 200);
-					ThreeGrid.add(imageButton[index]);				
+					ThreeGrid.add(imageButton[index]);	
+					//TwoGrid.setSize(300, 200);
+					//TwoGrid.add(imageButton[index]);	
+					//OneGrid.setSize(300, 200);
+					//OneGrid.add(imageButton[index]);	
 				}
 				
+				frame.getContentPane().removeAll();
 				center.removeAll();
 				center.add(ThreeGrid);
-				SearchPanel.add(center, BorderLayout.CENTER);
+				SearchPanel.add(center, BorderLayout.CENTER);	
 				frame.getContentPane().add(SearchPanel);
 				SearchPanel.setVisible(true);			
 			}		
@@ -154,7 +203,7 @@ public class Screen {
 				
 		Firstsearch.setBounds(500, 50, 100, 40); // 버튼위치
 		record.setBounds(600, 50, 100, 40); // 
-		Input.setBounds(200, 50, 300, 40); // 버튼위치 수d
+		Input.setBounds(200, 50, 300, 40); // 버튼위치 수
 		
 		FirstPanel.add(Input);
 		FirstPanel.add(Firstsearch);
@@ -166,15 +215,21 @@ public class Screen {
 				
 				FirstPanel.setVisible(false);
 				frame.getContentPane().removeAll();
+				ThreeGrid.removeAll();
+				
 				imageIcon = ImagePrint("30",Input.getText()); // 파일 받아오기 	
 				for(int index = 0; index<30;index++)
 				{
-					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(120, 80, Image.SCALE_SMOOTH)));
+					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(100, 80, Image.SCALE_SMOOTH)));
 					
 					ThreeGrid.setSize(300, 200);
-					ThreeGrid.add(imageButton[index]);				
-				}
-				
+					ThreeGrid.add(imageButton[index]);	
+					//TwoGrid.setSize(300, 200);
+					//TwoGrid.add(imageButton[index]);	
+					//OneGrid.setSize(300, 200);
+					//OneGrid.add(imageButton[index]);
+				}				
+				center.removeAll();
 				center.add(ThreeGrid);
 				SearchPanel.add(center, BorderLayout.CENTER);
 				frame.getContentPane().add(SearchPanel);
