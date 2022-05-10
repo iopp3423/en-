@@ -10,6 +10,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -38,17 +40,24 @@ import javax.imageio.ImageIO;
 public class Screen {
 	
 	public JFrame frame;
+	public JFrame ImageFrame;
 	ImageIcon [] imageIcon = new ImageIcon[30];
 	JButton [] imageButton = new JButton[30];
 	
 	public Screen() {
 		initialize();
 	}
+	 
 	
 	public void initialize()
 	{
 		frame = new JFrame(); // 프레임 생성
-
+	    ImageFrame = new JFrame();
+	    
+	    ImageFrame.setSize(400,400); // 더블클릭 이미지 새 창 
+	    ImageFrame.setResizable(false); // 창 크기 조절 불가
+	    ImageFrame.setPreferredSize(new Dimension(400,400));
+	    
 		frame.setSize(840, 840/12*9);
 		frame.setResizable(false); // 창 크기 조절 불가
 		frame.setPreferredSize(new Dimension(840, 840/12*9));	
@@ -58,19 +67,22 @@ public class Screen {
 		
 		JPanel FirstPanel = new JPanel();
 		JPanel SearchPanel = new JPanel(new BorderLayout(100, 100));
-		JPanel RecordPanel = new JPanel();
 		JPanel OneGrid = new JPanel(new GridLayout(2,5));
 		JPanel TwoGrid = new JPanel(new GridLayout(4,5));
 		JPanel ThreeGrid = new JPanel(new GridLayout(5,6));
 		JPanel center = new JPanel();
-		JPanel Recovery = new JPanel();
 		JPanel collectPanel = new JPanel(new FlowLayout());
-		
-		
-		center.add(ThreeGrid);	
+		BorderLayout Border = new BorderLayout();
 		FirstPanel.setLayout(null);
+				
+		JPanel RecordPanel = new JPanel();
+		JLabel RecordTitle = new JLabel(" 검 색 기 록 ");
+		RecordPanel.setLayout(Border);
+		RecordPanel.add(RecordTitle, BorderLayout.NORTH);
 		
-		frame.getContentPane().add(FirstPanel);	
+		
+		center.add(ThreeGrid);		
+		frame.getContentPane().add(FirstPanel);		
 					
 		
 		///////////////////////////////////////검색 패널 
@@ -143,10 +155,6 @@ public class Screen {
 	    		 frame.getContentPane().add(SearchPanel);
 	    		 SearchPanel.setVisible(true);
 		    	}
-		    //Recovery.add(center);
-		    //center.removeAll();
-		    //center.add(Recovery);
-		   // SearchPanel.add(center);
 		   } 
 		  });
 		
@@ -162,13 +170,23 @@ public class Screen {
 				for(int index = 0; index<30;index++)
 				{
 					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(100, 80, Image.SCALE_SMOOTH)));
-					
 					ThreeGrid.setSize(300, 200);
-					ThreeGrid.add(imageButton[index]);	
-					//TwoGrid.setSize(300, 200);
-					//TwoGrid.add(imageButton[index]);	
-					//OneGrid.setSize(300, 200);
-					//OneGrid.add(imageButton[index]);	
+					ThreeGrid.add(imageButton[index]);		
+					
+					JLabel ImageLabel = new JLabel(imageIcon[index]);
+					
+					imageButton[index].addMouseListener(new MouseAdapter()
+					{
+					public void mouseClicked(MouseEvent e) {  
+						if (e.getClickCount() == 2) {					
+							ImageFrame.getContentPane().removeAll();
+							ImageFrame.getContentPane().add(ImageLabel);
+							ImageFrame.setVisible(false);
+							ImageFrame.setVisible(true);						
+						}
+		            }
+				});
+
 				}
 				
 				frame.getContentPane().removeAll();
@@ -194,6 +212,10 @@ public class Screen {
 		});
 		
 		
+
+
+		
+		
 		////////////////////////처음화면 
 		JButton Firstsearch = new JButton("검색하기");
 		JButton record = new JButton("기록보기");		
@@ -211,8 +233,7 @@ public class Screen {
 		
 		Firstsearch.addActionListener(new ActionListener(){ // 검색하기 
 			public void actionPerformed(ActionEvent e) {
-
-				
+			
 				FirstPanel.setVisible(false);
 				frame.getContentPane().removeAll();
 				ThreeGrid.removeAll();
@@ -221,21 +242,30 @@ public class Screen {
 				for(int index = 0; index<30;index++)
 				{
 					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(100, 80, Image.SCALE_SMOOTH)));
+														
 					
 					ThreeGrid.setSize(300, 200);
-					ThreeGrid.add(imageButton[index]);	
-					//TwoGrid.setSize(300, 200);
-					//TwoGrid.add(imageButton[index]);	
-					//OneGrid.setSize(300, 200);
-					//OneGrid.add(imageButton[index]);
-				}				
+					ThreeGrid.add(imageButton[index]);		
+					JLabel ImageLabel = new JLabel(imageIcon[index]);
+					
+					imageButton[index].addMouseListener(new MouseAdapter()
+					{
+					public void mouseClicked(MouseEvent e) {  
+						if (e.getClickCount() == 2) {					
+							ImageFrame.getContentPane().removeAll();
+							ImageFrame.getContentPane().add(ImageLabel);
+							ImageFrame.setVisible(true);						
+						}
+		            }
+				});
+
+				}
 				center.removeAll();
 				center.add(ThreeGrid);
 				SearchPanel.add(center, BorderLayout.CENTER);
 				frame.getContentPane().add(SearchPanel);
 				SearchPanel.setVisible(true);						
-			}
-				
+			}				
 		});
 		
 		record.addActionListener(new ActionListener(){ // 기록보기 
