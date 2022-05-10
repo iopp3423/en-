@@ -163,7 +163,7 @@ public class Screen {
 			public void actionPerformed(ActionEvent e) {
 				
 				SearchPanel.setVisible(false);
-				//frame.getContentPane().removeAll();
+				//frame.getContentPane().removeAll()
 				ThreeGrid.removeAll();
 				
 				imageIcon = ImagePrint("30",SecondInput.getText()); // 파일 받아오기 	
@@ -173,7 +173,7 @@ public class Screen {
 					ThreeGrid.setSize(300, 200);
 					ThreeGrid.add(imageButton[index]);		
 					
-					JLabel ImageLabel = new JLabel(imageIcon[index]);
+					JLabel ImageLabel = new JLabel(new ImageIcon(imageIcon[index].getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
 					
 					imageButton[index].addMouseListener(new MouseAdapter()
 					{
@@ -243,10 +243,10 @@ public class Screen {
 				{
 					imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(100, 80, Image.SCALE_SMOOTH)));
 														
-					
 					ThreeGrid.setSize(300, 200);
 					ThreeGrid.add(imageButton[index]);		
-					JLabel ImageLabel = new JLabel(imageIcon[index]);
+					
+					JLabel ImageLabel = new JLabel(new ImageIcon(imageIcon[index].getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
 					
 					imageButton[index].addMouseListener(new MouseAdapter()
 					{
