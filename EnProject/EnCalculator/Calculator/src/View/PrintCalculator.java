@@ -28,22 +28,33 @@ public class PrintCalculator extends JFrame{
 	{
 		frame();
 		frame = getContentPane(); // 프레임 컨텐트 얻기
-		frame.setLayout(new BorderLayout()); // 컨텐ㅌ 프레임  설정하기 
+		frame.setLayout(new BorderLayout()); // 컨텐트  프레임  설정하기 
 		
-		CalculatorPanel calculator = new CalculatorPanel();
+		CalculatorPanel calculator = new CalculatorPanel(); // 버튼 패널 
 		textPanel text = new textPanel();
 		
-		frame.add(text);
 		frame.add(calculator, BorderLayout.SOUTH);
+		frame.add(text, BorderLayout.EAST);
 		setVisible(true);
 	}
 			
 	class textPanel extends JPanel
 	{
-		public void textPanel()
+		public textPanel()
 		{
-			JLabel InputPanel = new JLabel("000000000");
+			JPanel panel = new JPanel(new GridLayout(3,1));
+			JLabel blankSpace = new JLabel(" ");
+			JLabel inputSpace = new JLabel("0");
 			
+			blankSpace.setFont(new Font("맑은 고딕", 0, 65));
+			
+			inputSpace.setFont(new Font("맑은 고닥", 0, 30));
+			inputSpace.setHorizontalAlignment(SwingConstants.RIGHT);
+			
+			
+			panel.add(blankSpace);
+			panel.add(inputSpace);
+			add(panel);
 			
 		}
 		
