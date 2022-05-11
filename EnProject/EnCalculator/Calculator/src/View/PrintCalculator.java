@@ -30,6 +30,7 @@ public class PrintCalculator extends JFrame{
 		frame = getContentPane(); // 프레임 컨텐트 얻기
 		frame.setLayout(new BorderLayout()); // 컨텐트  프레임  설정하기 
 		
+		
 		CalculatorPanel calculator = new CalculatorPanel(); // 버튼 패널 
 		textPanel text = new textPanel();
 		
@@ -46,10 +47,12 @@ public class PrintCalculator extends JFrame{
 			JLabel blankSpace = new JLabel(" ");
 			JLabel inputSpace = new JLabel("0");
 			
-			blankSpace.setFont(new Font("맑은 고딕", 0, 65));
+			blankSpace.setFont(new Font("맑은 고딕", 0, 65));		
 			
 			inputSpace.setFont(new Font("맑은 고닥", 0, 30));
 			inputSpace.setHorizontalAlignment(SwingConstants.RIGHT);
+			
+			//setBackground(Color.WHITE);
 			
 			
 			panel.add(blankSpace);
@@ -73,8 +76,8 @@ public class PrintCalculator extends JFrame{
 		
 			button[0] = new JButton("CE");
 			button[1] = new JButton("C");
-			button[2] = new JButton("지우기"); // 바꿔야
-			button[3] = new JButton("/");
+			button[2] = new JButton("←"); // 바꿔야
+			button[3] = new JButton("÷");
 			
 			button[4]  = new JButton("7");
 			button[5]  = new JButton("8");
@@ -91,14 +94,17 @@ public class PrintCalculator extends JFrame{
 			button[14]  = new JButton("3");
 			button[15] = new JButton("+");
 			
-			button[16]  = new JButton("+-");
+			button[16]  = new JButton("±");
 			button[17]  = new JButton("0");
 			button[18]  = new JButton(".");
 			button[19]  = new JButton("=");
 			
 			for(int index = 0; index<Constants.calculator; index++)
 			{
+				//button[index].setForeground(Color.green);
+				//button[index].setBackground(Color.orange);
 				button[index].setPreferredSize(new Dimension(75, 65));
+				//buttonPanel.setBackground(Color.GRAY);
 				buttonPanel.add(button[index]);
 				
 				
