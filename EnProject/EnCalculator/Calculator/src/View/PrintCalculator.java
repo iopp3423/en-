@@ -3,27 +3,15 @@ package View;
 import Exception.Constants;
 
 
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class PrintCalculator extends JFrame{
 
 	
 	private Container frame; // 프레임 
-
-	
-	public void GetCalculator()
-	{
-		panel();
-		frame();
-	}
 	
 	private void frame()
 	{
@@ -35,11 +23,125 @@ public class PrintCalculator extends JFrame{
 		setVisible(true);
 	}
 	
+	
+	public void GetCalculator()
+	{
+		frame();
+		frame = getContentPane(); // 프레임 컨텐트 얻기
+		frame.setLayout(new BorderLayout()); // 컨텐ㅌ 프레임  설정하기 
+		
+		CalculatorPanel calculator = new CalculatorPanel();
+		textPanel text = new textPanel();
+		
+		frame.add(text);
+		frame.add(calculator, BorderLayout.SOUTH);
+		setVisible(true);
+	}
+			
+	class textPanel extends JPanel
+	{
+		public void textPanel()
+		{
+			JLabel InputPanel = new JLabel("000000000");
+			
+			
+		}
+		
+	}
+	
+	
+	
+	
+	class CalculatorPanel extends JPanel
+	{
+		public CalculatorPanel()
+		{	
+			JPanel buttonPanel = new JPanel(new GridLayout(5,4));		
+			JButton [] button = new JButton[20];
+			add(buttonPanel); // 버튼 넣기 
+		
+			button[0] = new JButton("CE");
+			button[1] = new JButton("C");
+			button[2] = new JButton("지우기"); // 바꿔야
+			button[3] = new JButton("/");
+			
+			button[4]  = new JButton("7");
+			button[5]  = new JButton("8");
+			button[6]  = new JButton("9");
+			button[7]  = new JButton("X");
+			
+			button[8]  = new JButton("4");
+			button[9]  = new JButton("5");
+			button[10]  = new JButton("6");
+			button[11]  = new JButton("-");
+			
+			button[12]  = new JButton("1");
+			button[13]  = new JButton("2");
+			button[14]  = new JButton("3");
+			button[15] = new JButton("+");
+			
+			button[16]  = new JButton("+-");
+			button[17]  = new JButton("0");
+			button[18]  = new JButton(".");
+			button[19]  = new JButton("=");
+			
+			for(int index = 0; index<Constants.calculator; index++)
+			{
+				button[index].setPreferredSize(new Dimension(75, 65));
+				buttonPanel.add(button[index]);
+				
+				
+				button[index].addMouseListener(new MouseAdapter() // 마우스 클릭 이벤트 넣
+				{
+				public void mouseClicked(MouseEvent e) {  
+					if (e.getClickCount() == 1) {					
+						System.out.println("dd");
+					}
+	            }
+			});
+				
+				/*
+				button[index].addKeyListener(new KeyAdapter() {   // 이거 버튼에다 다는게 아니라 textfield에 다는게 맞을듯?
+					public void Keypressed(KeyEvent e) {
+						System.out.println("enter");
+						if(e.getKeyChar() == 'd')
+							{
+								System.out.println("enter");
+							}
+					}
+				});
+				*/
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	/*
 	private void panel()
 	{
-		frame = getContentPane(); // 프레임 컨텐트 얻
-		JPanel calculatorPanel = new JPanel(new GridLayout(5,4));
+		frame = getContentPane(); // 프레임 컨텐트 얻기 
+		frame.setLayout(new BorderLayout());	
+		JPanel textPanel = new JPanel(new GridLayout(3,1)); // 입력값 넣는 곳 
+		JPanel calculatorPanel = new JPanel(); // 키패드 넣는 곳 
+		JPanel buttonPanel = new JPanel(new GridLayout(5,4));
+		JTextField Text = new JTextField("ㅇ");
+		JLabel Label = new JLabel("dd");
+		JPanel panel = new JPanel();
 		JButton [] button = new JButton[20];
+		
+		Label.setHorizontalAlignment(SwingConstants.RIGHT);
+		textPanel.add(Label);
+		calculatorPanel.add(buttonPanel);
+		
+		
+		frame.add(textPanel, BorderLayout.EAST);
+		frame.add(buttonPanel, BorderLayout.SOUTH);
+		//frame.add(buttonPanel);
+		
 		button[0] = new JButton("CE");
 		button[1] = new JButton("C");
 		button[2] = new JButton("지우기");
@@ -63,20 +165,37 @@ public class PrintCalculator extends JFrame{
 		
 		for(int index = 0; index<Constants.calculator; index++)
 		{
+			button[index].setPreferredSize(new Dimension(50, 65));
+			buttonPanel.add(button[index]); // 버튼 넣기 
 			
 			button[index].addMouseListener(new MouseAdapter() // 마우스 클릭 이벤트 넣
 			{
 			public void mouseClicked(MouseEvent e) {  
 				if (e.getClickCount() == 1) {					
-					System.out.println("Hellow");
+					System.out.println("dd");
 				}
             }
 		});
 			
-			calculatorPanel.add(button[index]); // 버튼 넣
+			
+			button[index].addKeyListener(new KeyAdapter() {   // 이거 버튼에다 다는게 아니라 textfield에 다는게 맞을듯?
+				public void Keypressed(KeyEvent e) {
+					System.out.println("enter");
+					if(e.getKeyChar() == 'd')
+						{
+							System.out.println("enter");
+						}
+				}
+			});
+			
 		}
-		frame.add(calculatorPanel);
+		//Panel.add(textPanel, BorderLayout.NORTH);
+		//Panel.add(calculatorPanel, BorderLayout.SOUTH);
+		//frame.add(Panel);
+		//frame.add(calculatorPanel);
 	}
-	
+	*/
 	
 }
+
+
