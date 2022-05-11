@@ -1,5 +1,6 @@
 package View;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,11 +16,14 @@ public class CalculatorPanel extends JPanel
 {
 	public JButton [] button = new JButton[20];
 	public JPanel buttonPanel = new JPanel(new GridLayout(5,4));
+	public ActionListener listener; // 버튼에 마우스 이벤트 달아주는 객
 	
-	public CalculatorPanel()
+	public CalculatorPanel(ActionListener Listener)
 	{	
+		this.listener = Listener;
 		//JPanel buttonPanel = new JPanel(new GridLayout(5,4));		
 		add(buttonPanel); // 버튼 넣기 
+		
 	
 		button[0] = new JButton("CE");
 		button[1] = new JButton("C");
@@ -49,17 +53,17 @@ public class CalculatorPanel extends JPanel
 		for(int index = 0; index<Constants.calculator; index++)
 		{
 			//button[index].setForeground(Color.green);
-			//button[index].setBackground(Color.orange);
-			//buttonPanel.setBackground(Color.GRAY);
+
 			button[index].setPreferredSize(new Dimension(75, 65));
-			buttonPanel.add(button[index]);
 			
-			button[index].addActionListener(new ActionListener(){ // 검색하기 
-				public void actionPerformed(ActionEvent e) {									
-						System.out.println(e.getActionCommand()); // 키 값 누른 거 가져
-				}				
-			});
+			buttonPanel.setBackground(Color.LIGHT_GRAY);
+			buttonPanel.add(button[index]);
+			button[index].addActionListener(listener);
 			
 		}
 	}
+	
+	
+	
+
 }

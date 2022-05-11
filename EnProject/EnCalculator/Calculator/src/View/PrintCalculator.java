@@ -2,10 +2,6 @@ package View;
 
 import Exception.Constants;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 import java.awt.*;
@@ -14,6 +10,7 @@ public class PrintCalculator extends JFrame{
 
 	
 	private Container frame; // 프레임 
+	private CalculatorPanel calculator;
 	
 	private void frame()
 	{
@@ -26,13 +23,14 @@ public class PrintCalculator extends JFrame{
 	}
 	
 	
-	public void GetCalculator()
+	public void GetCalculator(CalculatorPanel calculatorPanel)
 	{
 		frame();
 		frame = getContentPane(); // 프레임 컨텐트 얻기
 		frame.setLayout(new BorderLayout()); // 컨텐트  프레임  설정하기 
 			
-		CalculatorPanel calculator = new CalculatorPanel(); // 버튼 패널 
+		this.calculator = calculatorPanel;
+		//CalculatorPanel calculator = new CalculatorPanel(); // 버튼 패널 
 		textPanel text = new textPanel(); 
 		
 		frame.add(calculator, BorderLayout.SOUTH);
