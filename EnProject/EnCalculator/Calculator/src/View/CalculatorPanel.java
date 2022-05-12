@@ -5,7 +5,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -14,17 +18,16 @@ import Exception.Constants;
 
 public class CalculatorPanel extends JPanel
 {
-	public JButton [] button = new JButton[20];
-	public JPanel buttonPanel = new JPanel(new GridLayout(5,4));
-	public ActionListener listener; // 버튼에 마우스 이벤트 달아주는 객
+	private  ActionListener listener; // 버튼에 마우스 이벤트 달아줌 
 	
 	public CalculatorPanel(ActionListener Listener)
 	{	
 		this.listener = Listener;
-		//JPanel buttonPanel = new JPanel(new GridLayout(5,4));		
+		JButton [] button = new JButton[20];
+		JPanel buttonPanel = new JPanel(new GridLayout(5,4));		
 		add(buttonPanel); // 버튼 넣기 
 		
-	
+ 
 		button[0] = new JButton("CE");
 		button[1] = new JButton("C");
 		button[2] = new JButton("←"); // 바꿔야
@@ -50,20 +53,33 @@ public class CalculatorPanel extends JPanel
 		button[18]  = new JButton(".");
 		button[19]  = new JButton("=");
 		
-		for(int index = 0; index<Constants.calculator; index++)
+		for(int index = 0; index<Constants.CALCULATOR; index++)
 		{
-			//button[index].setForeground(Color.green);
 
 			button[index].setPreferredSize(new Dimension(75, 65));
+			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
+			button[3].setBackground(Color.LIGHT_GRAY);
 			
 			buttonPanel.setBackground(Color.LIGHT_GRAY);
-			buttonPanel.add(button[index]);
-			button[index].addActionListener(listener);
+			buttonPanel.add(button[index]);	
 			
+			/*
+			button[index].addKeyListener(new KeyAdapter(){ // 키보드 입력 이벤트
+				public void keyPressed(KeyEvent e) {
+					char text = (e.getKeyChar());
+					System.out.println(text);
+					
+				}
+			});
+			*/
 		}
+		
+		
+		
+		
 	}
-	
-	
-	
+
 
 }
+
+
