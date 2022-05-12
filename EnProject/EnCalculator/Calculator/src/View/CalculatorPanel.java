@@ -58,7 +58,6 @@ public class CalculatorPanel extends JPanel
 
 			button[index].setPreferredSize(new Dimension(75, 65));
 			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
-			button[3].setBackground(Color.LIGHT_GRAY);
 			
 			buttonPanel.setBackground(Color.LIGHT_GRAY);
 			buttonPanel.add(button[index]);	

@@ -44,10 +44,11 @@ public class Calculator{
 			text = (e.getActionCommand());
 			//System.out.println(e.getActionCommand()); // 키 값 누른 거 출력 나중에 지우
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기
-			Delete();	
-			InputNumber();
+			Delete();	// 백스페이스 
+			InputNumber(); // 키패
+			Reset();// 초기화 
 		}
-		
+	 
 	};
 		
 	private void Delete()
@@ -55,14 +56,13 @@ public class Calculator{
 		if(text == "←") // 백스페이스 
 		{
 			System.out.println(text);
-				
 			 if (length == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
              {
 				 textPanel.inputSpace.setText("0");
              }
 			 else if(length != Constants.ONE) // 백스페이스 
 			 {
-				 String inputRecord = textPanel.inputSpace.getText().substring(length-Constants.ONE, length); // 문자열자르
+				 String inputRecord = textPanel.inputSpace.getText().substring(length-Constants.ONE, length); // 문자열자르기
 				 textPanel.inputSpace.setText(inputRecord);
 			 }
 		}
@@ -73,13 +73,20 @@ public class Calculator{
 		
 		if(text == "0")
 		{
-			System.out.println(text);
-			textPanel.inputSpace.setText("0");
+			if(length != Constants.ONE)
+			{
+				System.out.println(text);	
+				textPanel.inputSpace.setText("0");
+			}
 		}
 		if(text == "1")
 		{
 			System.out.println(text);
-			textPanel.inputSpace.setText("1");
+			System.out.println(length);
+			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText(""); // 제일 처음 입력 
+			
+			
+			
 		}
 		if(text == "2")
 		{
@@ -123,12 +130,22 @@ public class Calculator{
 		}
 	}
 	
-	private void Reset()
+	
+	private void Reset() // 초기
 	{
 		if(text == "C")
 		{
 			System.out.println(text);
-			textPanel.inputSpace.setText("9");
+			for(int index=length; index>Constants.ZERO;index--)
+			{
+				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
+	             {
+					 textPanel.inputSpace.setText("0");
+	             }
+				
+				String inputRecord = textPanel.inputSpace.getText().substring(index-Constants.ONE, index); // 문자열자르
+				textPanel.inputSpace.setText(inputRecord);
+			}
 		}
 	}
 }
