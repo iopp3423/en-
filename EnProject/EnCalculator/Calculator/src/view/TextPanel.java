@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 public class TextPanel extends JPanel
 {
 	public JLabel inputSpace;
+	public JLabel blankSpace;
 	
 	public TextPanel()
 	{
@@ -25,14 +26,14 @@ public class TextPanel extends JPanel
 		inputSpace = new JLabel("0");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		JLabel blankSpace = new JLabel("=");
+		blankSpace = new JLabel(" ");
 		JButton log = new JButton(new ImageIcon(image.getImage().getScaledInstance(30, 20, Image.SCALE_SMOOTH)));
 		
 
 		log.setFont(new Font("맑은 고딕", 0, 10));
 		log.setAlignmentX(RIGHT_ALIGNMENT);
 		
-		blankSpace.setFont(new Font("맑은 고딕", 0, 20));		// 중간 
+		blankSpace.setFont(new Font("맑은 고딕", 0, 10));		// 중간 
 		blankSpace.setAlignmentX(RIGHT_ALIGNMENT);
 		
 		inputSpace.setFont(new Font("맑은 고딕", 0, 35));  	// 마지

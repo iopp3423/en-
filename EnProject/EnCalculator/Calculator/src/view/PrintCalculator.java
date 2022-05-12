@@ -11,7 +11,7 @@ public class PrintCalculator extends JFrame{
 	
 	static public Container frame; // 프레임 
 	private CalculatorPanel calculator;
-	private TextPanel textPanel ;
+	private TextPanel textPanel;
 	
 	private void frame()
 	{
@@ -28,12 +28,14 @@ public class PrintCalculator extends JFrame{
 		frame();
 		frame = getContentPane(); // 프레임 컨텐트 얻기
 		frame.setLayout(new BorderLayout()); // 컨텐트  프레임  설정하기 
-			
-		this.calculator = calculatorPanel; // 버튼 + 이벤트 달아주는 객체 
-		this.textPanel = textPanel; // 입력패드 
 		
-		frame.add(calculator, BorderLayout.CENTER); // 키패드 
+		this.textPanel = textPanel; // 입력패드 
+		this.calculator = calculatorPanel; // 버튼 + 이벤트 달아주는 객체 
+		
+		
 		frame.add(textPanel, BorderLayout.NORTH); // 입력패드 
+		frame.add(calculator, BorderLayout.CENTER); // 키패드 
+		
 		setVisible(true);
 	}	
 }

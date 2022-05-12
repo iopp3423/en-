@@ -28,7 +28,7 @@ public class CalculatorPanel extends JPanel
  
 		button[0] = new JButton("CE");
 		button[1] = new JButton("C");
-		button[2] = new JButton("←"); // 바꿔야
+		button[2] = new JButton("\u232B"); // 바꿔야
 		button[3] = new JButton("÷");
 		
 		button[4]  = new JButton("7");
@@ -36,15 +36,15 @@ public class CalculatorPanel extends JPanel
 		button[6]  = new JButton("9");
 		button[7]  = new JButton("X");
 		
-		button[8]  = new JButton("4");
-		button[9]  = new JButton("5");
+		button[8]   = new JButton("4");
+		button[9]   = new JButton("5");
 		button[10]  = new JButton("6");
 		button[11]  = new JButton("-");
 		
 		button[12]  = new JButton("1");
 		button[13]  = new JButton("2");
 		button[14]  = new JButton("3");
-		button[15] = new JButton("+");
+		button[15]  = new JButton("+");
 		
 		button[16]  = new JButton("±");
 		button[17]  = new JButton("0");
@@ -54,29 +54,19 @@ public class CalculatorPanel extends JPanel
 		for(int index = 0; index<Constants.CALCULATOR; index++)
 		{
 
-			//button[index].setPreferredSize(new Dimension(75, 65));
-			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
-			
-			setBackground(Color.LIGHT_GRAY);
-			add(button[index]);	
+			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌		
+			add(button[index]);			
 			
 			/*
 			button[index].addKeyListener(new KeyAdapter(){ // 키보드 입력 이벤트
 				public void keyPressed(KeyEvent e) {
 					char text = (e.getKeyChar());
-					System.out.println(text);
-					
+					System.out.println(text);					
 				}
 			});
 			*/
-		}
-		
-		
-		
-		
+		}				
 	}
-
-
 }
 
 
