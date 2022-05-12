@@ -69,7 +69,7 @@ public class Calculator{
 	 
 	};
 		
-	private void Delete() // C
+	private void Delete() 
 	{
 		if(text == "\u232B") // 백스페이스 
 		{
@@ -93,21 +93,7 @@ public class Calculator{
 		
 		if(text == "0")
 		{
-			if (length == Constants.ONE && textPanel.inputSpace.getText() == "0")   
-            {
-				 textPanel.inputSpace.setText("0");
-            }
-			else
-			{
-				inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-				Record = text;// 키보드 입력한 순간 값  		
-				if(limit<Constants.LIMIT_INPUT)
-				{
-					newInput = inputRecord+Record; // 입력			 
-					textPanel.inputSpace.setText(newInput);
-				}
-				limit = newInput.length();
-			}
+			inputNumber();	
 			
 		}
 		if(text == "1")
@@ -151,32 +137,18 @@ public class Calculator{
 	
 	
 	private void inputNumber() // 키보드 입력 
-	{
-		
-		if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText(""); // 제일 처음 입력 
-			
-		inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-		Record += text;// 키보드 입력한 순간 값  	
-		System.out.println("Record= " + Record);
-		
-		if(limit<Constants.LIMIT_INPUT) //&& textPanel.blankSpace.getText() == "+")
-		{
-			int length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기	
-			int subLength = textPanel.blankSpace.getText().length();
-			
-			//newInput = inputRecord+Record; // 입력			 
-			textPanel.inputSpace.setText(Record);	
-			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기 
-			
-			//System.out.println("subLengtg = " + textPanel.blankSpace.getText().substring(Constants.ZERO,subLength-1));
-			System.out.println("number=" +  number);
-			
+	{		
+		Record += text;// 키보드 입력
+		if(limit<Constants.LIMIT_INPUT)
+		{				 
+			textPanel.inputSpace.setText(Record);
+			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기 		
 		}
 		limit = Record.length();
 	}
 	
 	
-	private void Reset() // 초기화 
+	private void Reset() // C
 	{
 		if(text == "C")
 		{
@@ -187,7 +159,7 @@ public class Calculator{
 				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
 	             {
 					 textPanel.inputSpace.setText("0");
-					 textPanel.blankSpace.setText("0"); // 중간 값 
+					 textPanel.blankSpace.setText(" "); // 중간 값 
 	             }
 			}
 		}
@@ -199,13 +171,8 @@ public class Calculator{
 		{
 			
 			if(dotCount == 0) {
-				
-				if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력 
-				
-				inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-				Record = text;// 키보드 입력한 순간 값
-				newInput = inputRecord + Record;
-				textPanel.inputSpace.setText(newInput);	
+				Record = text;// 키보드 입력한 값	
+				textPanel.inputSpace.setText(textPanel.inputSpace.getText() + Record);					
 				dotCount++;
 				
 			}	
@@ -218,35 +185,33 @@ public class Calculator{
 	private void division() // 나누기 
 	{
 		if(text=="÷")
-		{
-						
+		{					
+			math = text;
+			result += number;
+			number = 0;
+			Record="";
+			
 			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력 
 			
 			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-			Record = text;// 키보드 입력한 순간 값
-			newInput = inputRecord + Record;
-			textPanel.blankSpace.setText(newInput); // 중간 값 
-			
-			number = Double.parseDouble(inputRecord);
-			result /= number;
+			textPanel.blankSpace.setText(inputRecord + text); // 중간 값 
 		}
 			
 	}
 		
 	private void multyfly() // 곱하기 
 	{
-		if(text=="X")
+		if(text=="x")
 		{
-				
-			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력 
-					
-			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-			Record = text;// 키보드 입력한 순간 값
-			newInput = inputRecord + Record;
-			textPanel.blankSpace.setText(newInput); // 중간 값 
+			math = text;
+			result += number;
+			number = 0;
+			Record="";
 			
-			number = Double.parseDouble(inputRecord);
-			result *= number;
+			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력 
+			
+			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
+			textPanel.blankSpace.setText(inputRecord + text); // 중간 값 
 				
 		}
 	}
@@ -254,16 +219,15 @@ public class Calculator{
 	{
 		if(text=="-")
 		{
-		
+			math = text;
+			result += number;
+			number = 0;
+			Record="";
+			
 			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력 
 			
 			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-			Record = text;// 키보드 입력한 순간 값
-			newInput = inputRecord + Record;
-			textPanel.blankSpace.setText(newInput); // 중간 값 
-			
-			number = Double.parseDouble(inputRecord);
-			result -= number;
+			textPanel.blankSpace.setText(inputRecord + text); // 중간 값 
 			
 		}
 	}
@@ -271,23 +235,16 @@ public class Calculator{
 	
 		if(text=="+")
 		{
+			System.out.println(number);
 			math = text;
 			result += number;
 			number = 0;
 			Record="";
-			System.out.println("result ="+ result);
-			
+					
 			if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 
 			
-			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-			//Record = text;// 키보드 입력한 순간 값
-			//newInput = inputRecord + Record;
-			
-			textPanel.blankSpace.setText(inputRecord +  text); // 중간 값 
-			
-
-			//
-			
+			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 		
+			textPanel.blankSpace.setText(inputRecord +  text); // 중앙 화면
 		}
 	}
 	
@@ -298,9 +255,23 @@ public class Calculator{
 			
 			if(math == "+") {
 				math = "";
+				number = Constants.ZERO;
 				result = (Double.parseDouble(Record) + result);
 			}
-			System.out.println(result);
+			else if(math == "-") {
+				math = "";
+				result = (result - Double.parseDouble(Record));
+			}
+			else if(math == "÷") {
+				math = "";
+				result = (result / Double.parseDouble(Record));
+			}
+			else if(math == "x") {
+				math = "";
+				result = (result * Double.parseDouble(Record));
+			}
+			
+			System.out.println("result=" + result);
 		
 			if(textPanel.blankSpace.getText() != "" && textPanel.inputSpace.getText() != "" && textPanel.blankSpace.getText().contains(text) == false) {
 				if(result % 1.0 == 0) {

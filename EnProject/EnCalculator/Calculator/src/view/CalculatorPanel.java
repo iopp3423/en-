@@ -34,7 +34,7 @@ public class CalculatorPanel extends JPanel
 		button[4]  = new JButton("7");
 		button[5]  = new JButton("8");
 		button[6]  = new JButton("9");
-		button[7]  = new JButton("X");
+		button[7]  = new JButton("x");
 		
 		button[8]   = new JButton("4");
 		button[9]   = new JButton("5");
