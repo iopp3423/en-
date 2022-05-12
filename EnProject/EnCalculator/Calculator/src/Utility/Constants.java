@@ -1,4 +1,4 @@
-package Exception;
+package Utility;
 
 public class Constants {
 

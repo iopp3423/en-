@@ -1,8 +1,8 @@
-package View;
-
-import Exception.Constants;
+package view;
 
 import javax.swing.*;
+
+import Utility.Constants;
 
 import java.awt.*;
 
@@ -16,7 +16,7 @@ public class PrintCalculator extends JFrame{
 	private void frame()
 	{
 		setSize(300,500);
-		setResizable(false); // 창 크기 조절 불가 - 바꿔야
+		//setResizable(false); // 창 크기 조절 불가 - 바꿔야
 		setPreferredSize(new Dimension(300, 500));	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
 		setLocationRelativeTo(null); // 화면 나오는 위치
@@ -33,8 +33,8 @@ public class PrintCalculator extends JFrame{
 		this.calculator = calculatorPanel; // 버튼 + 이벤트 달아주는 객체 
 		this.textPanel = textPanel; // 입력패드 
 		
-		frame.add(calculator, BorderLayout.SOUTH); // 키패드 
-		frame.add(textPanel, BorderLayout.EAST); // 입력패드 
+		frame.add(calculator, BorderLayout.CENTER); // 키패드 
+		frame.add(textPanel, BorderLayout.NORTH); // 입력패드 
 		setVisible(true);
 	}	
 }

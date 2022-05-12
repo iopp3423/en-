@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Exception.Constants;
+import Utility.Constants;
 
 
 public class CalculatorPanel extends JPanel
@@ -24,9 +24,7 @@ public class CalculatorPanel extends JPanel
 	{	
 		this.listener = Listener;
 		JButton [] button = new JButton[20];
-		JPanel buttonPanel = new JPanel(new GridLayout(5,4));		
-		add(buttonPanel); // 버튼 넣기 
-		
+		setLayout(new GridLayout(5,4));		
  
 		button[0] = new JButton("CE");
 		button[1] = new JButton("C");
@@ -56,11 +54,11 @@ public class CalculatorPanel extends JPanel
 		for(int index = 0; index<Constants.CALCULATOR; index++)
 		{
 
-			button[index].setPreferredSize(new Dimension(75, 65));
+			//button[index].setPreferredSize(new Dimension(75, 65));
 			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
 			
-			buttonPanel.setBackground(Color.LIGHT_GRAY);
-			buttonPanel.add(button[index]);	
+			setBackground(Color.LIGHT_GRAY);
+			add(button[index]);	
 			
 			/*
 			button[index].addKeyListener(new KeyAdapter(){ // 키보드 입력 이벤트

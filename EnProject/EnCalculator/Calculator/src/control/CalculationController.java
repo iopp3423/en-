@@ -1,8 +1,8 @@
-package Control;
+package control;
 
-import Model.CalculationData;
-import Model.LogData;
-import View.PrintCalculator;
+import model.CalculationData;
+import model.LogData;
+import view.PrintCalculator;
 
 public class CalculationController{
 	

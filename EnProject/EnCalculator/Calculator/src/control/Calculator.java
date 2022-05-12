@@ -1,12 +1,14 @@
-package Control;
+package control;
 import java.awt.event.ActionEvent;
-import Model.CalculationData;
-import Model.LogData;
-import View.CalculatorPanel;
-import View.PrintCalculator;
-import View.TextPanel;
+
+import Utility.Constants;
+import model.CalculationData;
+import model.LogData;
+import view.CalculatorPanel;
+import view.PrintCalculator;
+import view.TextPanel;
+
 import java.awt.event.ActionListener;
-import Exception.Constants;
 
 
 
@@ -85,9 +87,20 @@ public class Calculator{
 			System.out.println(length);
 			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText(""); // 제일 처음 입력 
 			
+			String inputRecord = textPanel.inputSpace.getText();
+			String Record = text;
+			String newInput = inputRecord + Record;
+			int N = newInput.length();
 			
+			//newInput.setText(text);
 			
+			System.out.println(inputRecord);
+			System.out.println(Record );
+			System.out.println(newInput);
+			System.out.println(N);
+			textPanel.inputSpace.setText(newInput);				
 		}
+		
 		if(text == "2")
 		{
 			System.out.println(text);
