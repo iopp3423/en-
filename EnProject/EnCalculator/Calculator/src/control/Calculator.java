@@ -24,7 +24,7 @@ public class Calculator{
 	private String inputRecord;
 	private String Record = "";
 	private String newInput;
-	private String math;
+	private String math; 
 	private double result = 0;
 	private int length; // 길이 
 	private int limit; // 숫자 입력 제한 
@@ -73,6 +73,7 @@ public class Calculator{
 	{
 		if(text == "\u232B") // 백스페이스 
 		{
+		
 			 if (length == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
              {
 				 textPanel.inputSpace.setText("0");
@@ -179,6 +180,7 @@ public class Calculator{
 	{
 		if(text == "C")
 		{
+			Record = "";
 			dotCount=0;
 			for(int index=length; index>Constants.ZERO; index--)
 			{
@@ -269,19 +271,22 @@ public class Calculator{
 	
 		if(text=="+")
 		{
+			math = text;
 			result += number;
 			number = 0;
 			Record="";
+			System.out.println("result ="+ result);
+			
 			if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 
 			
 			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
 			//Record = text;// 키보드 입력한 순간 값
 			//newInput = inputRecord + Record;
 			
-			textPanel.blankSpace.setText(inputRecord + text); // 중간 값 
+			textPanel.blankSpace.setText(inputRecord +  text); // 중간 값 
 			
 
-			System.out.println("result ="+ result);
+			//
 			
 		}
 	}
@@ -291,15 +296,19 @@ public class Calculator{
 				
 		if(text == "=") {
 			
+			if(math == "+") {
+				math = "";
+				result = (Double.parseDouble(Record) + result);
+			}
 			System.out.println(result);
-
+		
 			if(textPanel.blankSpace.getText() != "" && textPanel.inputSpace.getText() != "" && textPanel.blankSpace.getText().contains(text) == false) {
-				if(result % 1 == 0) {
-					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text);
+				if(result % 1.0 == 0) {
+					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text + String.valueOf((int)result));
 					textPanel.inputSpace.setText(String.valueOf((int) result));
 				}
 				else {
-					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text);
+					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text + result);
 					textPanel.inputSpace.setText(String.valueOf(result));
 				}
 			}
