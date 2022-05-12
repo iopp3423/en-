@@ -16,7 +16,6 @@ public class PrintCalculator extends JFrame{
 	private void frame()
 	{
 		setSize(300,500);
-		//setResizable(false); // 창 크기 조절 불가 - 바꿔야
 		setPreferredSize(new Dimension(300, 500));	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
 		setLocationRelativeTo(null); // 화면 나오는 위치
