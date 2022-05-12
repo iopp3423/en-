@@ -23,7 +23,7 @@ public class Calculator{
 	private String text;
 	private int length; // 길이 
 	private int limit; // 숫자 입력 제한 
-	private int dotCount=Constants.ZERO;
+	private int dotCount = Constants.ZERO;
 	private String inputRecord;
 	private String Record;
 	private String newInput;
@@ -52,7 +52,7 @@ public class Calculator{
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기
 			
 			Delete();	// 백스페이스 
-			InputNumber(); // 키패
+			number(); // 키패
 			Reset();// 초기화 
 			inputDot(); // 소수점 
 		}
@@ -63,7 +63,6 @@ public class Calculator{
 	{
 		if(text == "←") // 백스페이스 
 		{
-			System.out.println(text);
 			 if (length == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
              {
 				 textPanel.inputSpace.setText("0");
@@ -77,7 +76,7 @@ public class Calculator{
 		}
 	}
 	
-	private void InputNumber()
+	private void number()
 	{
 		
 		if(text == "0")
@@ -156,9 +155,10 @@ public class Calculator{
 	private void inputNumber()
 	{
 		if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText(""); // 제일 처음 입력 
-		
+			
 		inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-		Record = text;// 키보드 입력한 순간 값  		
+		Record = text;// 키보드 입력한 순간 값  	
+		
 		if(limit<Constants.LIMIT_INPUT)
 		{
 			newInput = inputRecord+Record; // 입력			 
@@ -172,7 +172,7 @@ public class Calculator{
 	{
 		if(text == "C")
 		{
-			for(int index=length; index>Constants.ZERO;index--)
+			for(int index=length; index>Constants.ZERO; index--)
 			{
 				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
 	             {
@@ -186,32 +186,37 @@ public class Calculator{
 	{
 		if(text==".")
 		{
-			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력
 			
-			inputRecord = textPanel.inputSpace.getText();// 키패드 화면에 있던 값 
-			System.out.println(text );
-			System.out.println(newInput );
-			
-			System.out.println(textPanel.inputSpace.getText());
-
-			if(length != Constants.ONE) // 백스페이스 
-			 {
-				 String inputRecord = textPanel.inputSpace.getText().substring(length+Constants.ONE, length); // 문자열자르기
-				 textPanel.inputSpace.setText(inputRecord);
-			 }
-			
-			if(inputRecord == ".") {
-				System.out.println("dddd");
-			}
+			if(dotCount == 0) {
 				
-			else {
+				if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력 
+				
+				inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
 				Record = text;// 키보드 입력한 순간 값
 				newInput = inputRecord + Record;
 				length = newInput.length();
-			}
-			textPanel.inputSpace.setText(newInput);			
+				textPanel.inputSpace.setText(newInput);	
+				dotCount++;
+				
+				
+				/*
+				inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
+				Record = text;// 키보드 입력한 순간 값  	
+				
+				if(limit<Constants.LIMIT_INPUT)
+				{
+					newInput = inputRecord+Record; // 입력			 
+					textPanel.inputSpace.setText(newInput);
+				}
+				limit = newInput.length();
+				*/
+			}	
+
+			
 		}
 	}
+	
+	
 	
 }
 
