@@ -20,7 +20,6 @@ public class TextPanel extends JPanel
 	
 	public TextPanel()
 	{
-		//imageButton[index] = new JButton(new ImageIcon(imageIcon[index].getImage().getScaledInstance(100, 80, Image.SCALE_SMOOTH)));
 		ImageIcon image = new ImageIcon("/Users/jojunhui/Desktop/시계.png");
 		
 		inputSpace = new JLabel("0");
@@ -28,12 +27,10 @@ public class TextPanel extends JPanel
 		
 		JLabel blankSpace = new JLabel("=");
 		JButton log = new JButton(new ImageIcon(image.getImage().getScaledInstance(30, 20, Image.SCALE_SMOOTH)));
-		//JLabel imageLabel = new JLabel();
 		
-		//imageLabel.setSize(10,10);
+
 		log.setFont(new Font("맑은 고딕", 0, 10));
 		log.setAlignmentX(RIGHT_ALIGNMENT);
-		//log.add(imageLabel);
 		
 		blankSpace.setFont(new Font("맑은 고딕", 0, 20));		// 중간 
 		blankSpace.setAlignmentX(RIGHT_ALIGNMENT);

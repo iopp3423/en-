@@ -21,7 +21,12 @@ public class Calculator{
 	private CalculatorPanel calculatorPanel;
 	private TextPanel textPanel;
 	private String text;
-	private int length;
+	private int length; // 길이 
+	private int limit; // 숫자 입력 제한 
+	private int dotCount=Constants.ZERO;
+	private String inputRecord;
+	private String Record;
+	private String newInput;
 
 	public Calculator(CalculationData calculationData, LogData logData, PrintCalculator printCalculator)
 	{
@@ -49,6 +54,7 @@ public class Calculator{
 			Delete();	// 백스페이스 
 			InputNumber(); // 키패
 			Reset();// 초기화 
+			inputDot(); // 소수점 
 		}
 	 
 	};
@@ -75,76 +81,93 @@ public class Calculator{
 		
 		if(text == "0")
 		{
-			if(length != Constants.ONE)
+			if (length == Constants.ONE && textPanel.inputSpace.getText() == "0")   //글자가 없을 때 백스페이스 누르면 0으로 초기
+            {
+				 textPanel.inputSpace.setText("0");
+            }
+			else
 			{
-				System.out.println(text);	
-				textPanel.inputSpace.setText("0");
+				inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
+				Record = text;// 키보드 입력한 순간 값  		
+				if(limit<Constants.LIMIT_INPUT)
+				{
+					newInput = inputRecord+Record; // 입력			 
+					textPanel.inputSpace.setText(newInput);
+				}
+				limit = newInput.length();
 			}
 		}
 		if(text == "1")
 		{
-			System.out.println(text);
-			System.out.println(length);
-			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText(""); // 제일 처음 입력 
+			inputNumber();
 			
-			String inputRecord = textPanel.inputSpace.getText();
-			String Record = text;
-			String newInput = inputRecord + Record;
-			int N = newInput.length();
+			/*
+			dotCount++;
 			
-			//newInput.setText(text);
+			if(dotCount != 4 && limit <= 19) {
+				newInput = inputRecord+Record; // 입력			 
+				textPanel.inputSpace.setText(newInput);
+			}
 			
-			System.out.println(inputRecord);
-			System.out.println(Record );
-			System.out.println(newInput);
-			System.out.println(N);
-			textPanel.inputSpace.setText(newInput);				
+			else if (dotCount == 4 && limit <= 19){
+				dotCount = Constants.ZERO;
+				newInput = inputRecord+","+Record; // 입력
+				textPanel.inputSpace.setText(newInput);
+			}
+			*/
+									
 		}
 		
 		if(text == "2")
 		{
-			System.out.println(text);
-			textPanel.inputSpace.setText("2");
+			inputNumber();
 		}
 		if(text == "3")
 		{
-			System.out.println(text);
-			textPanel.inputSpace.setText("3");
+			inputNumber();
 		}
 		if(text == "4")
 		{
-			System.out.println(text);
-			textPanel.inputSpace.setText("4");
+			inputNumber();
 		}
 		if(text == "5")
 		{
-			System.out.println(text);
-			textPanel.inputSpace.setText("5");
+			inputNumber();
 		}
 		if(text == "6")
 		{
-			System.out.println(text);
-			textPanel.inputSpace.setText("6");
+			inputNumber();
 		}
 		if(text == "7")
 		{
-			System.out.println(text);
-			textPanel.inputSpace.setText("7");
+			inputNumber();
 		}
 		if(text == "8")
 		{
-			System.out.println(text);
-			textPanel.inputSpace.setText("8");
+			inputNumber();
 		}
 		if(text == "9")
 		{
-			System.out.println(text);
-			textPanel.inputSpace.setText("9");
+			inputNumber();
 		}
 	}
 	
+	private void inputNumber()
+	{
+		if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText(""); // 제일 처음 입력 
+		
+		inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
+		Record = text;// 키보드 입력한 순간 값  		
+		if(limit<Constants.LIMIT_INPUT)
+		{
+			newInput = inputRecord+Record; // 입력			 
+			textPanel.inputSpace.setText(newInput);
+		}
+		limit = newInput.length();
+	}
 	
-	private void Reset() // 초기
+	
+	private void Reset() // 초기화 
 	{
 		if(text == "C")
 		{
@@ -156,9 +179,22 @@ public class Calculator{
 					 textPanel.inputSpace.setText("0");
 	             }
 				
-				String inputRecord = textPanel.inputSpace.getText().substring(index-Constants.ONE, index); // 문자열자르
-				textPanel.inputSpace.setText(inputRecord);
+				//String inputRecord = textPanel.inputSpace.getText().substring(index-Constants.ONE, index); // 문자열자르
+				//textPanel.inputSpace.setText(inputRecord);
 			}
+		}
+	}
+	private void inputDot() // 소수점 
+	{
+		if(text==".")
+		{
+			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력
+			String inputRecord = textPanel.inputSpace.getText();
+			String Record = text;
+			String newInput = inputRecord + Record;
+			int N = newInput.length();
+			
+			textPanel.inputSpace.setText(newInput);			
 		}
 	}
 }
