@@ -240,30 +240,11 @@ public class Calculator{
 		if(text=="÷")
 		{				
 			if(centerProperty == " ") temp = number;
-			/*if(formula == "=") {// 방금 전 계산을 = 으로 했으면
-				 temp /= number;
-				 setCalculate();
-				 printCalculate();
-			}
-			else if(math == "÷") {// 방금 전 계산을 3/3/3 식으로 했다면 
-				 temp /= number;
-				 setCalculate();
-				 printCalculate();
-			}
-			else {
-				if(centerProperty == " ") temp = number;
-				else temp /= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456*/
-				
-			if(textPanel.blankSpace.getText().contains("+"))temp += number;
-			else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
-			else if(textPanel.blankSpace.getText().contains("*"))temp *= number;
-			else if(textPanel.blankSpace.getText().contains("/"))temp /= number;
+			calculate();
 			setCalculate();
-			 printCalculate();
-	
-			}
-		//}
-			
+			printCalculate();
+		}
+					
 	}
 		
 	private void multyfly() // 곱하기 
@@ -272,77 +253,35 @@ public class Calculator{
 		if(text=="x")
 		{
 			if(centerProperty == " ") temp = number;
-		
-			/*if(formula == "=") {// 방금 전 계산을 = 으로 했으면
-				 temp *= number;
-				 setCalculate();
-				 printCalculate();
-			}
-			else if(math == "x") {// 방금 전 계산을 3x3x3 식으로 했다면 
-				 temp *= number;
-				 setCalculate();
-				 printCalculate();
-			}
-			else {
-				if(centerProperty == " ") temp = number;
-				else temp *= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456*/
-				
-				if(textPanel.blankSpace.getText().contains("+"))temp += number;
-				else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
-				else if(textPanel.blankSpace.getText().contains("*"))temp *= number;
-				else if(textPanel.blankSpace.getText().contains("/"))temp /= number;
-			 setCalculate();
-			 printCalculate();
-			//}
-		//}
+			calculate();
+			setCalculate();
+			printCalculate();
 		}
+		
 	}
 	private void minus() // 빼기 
 	{
 		if(text=="-")
 		{
 			if(centerProperty == " ") temp = number;
-			/*if(formula == "=") {// 방금 전 계산을 = 으로 했으면
-				 temp -= number;
-				 setCalculate();
-				 printCalculate();
-			}
-			else if(math == "-") {// 방금 전 계산을 3-3-3 식으로 했으면 
-				 temp -= number;
-				 setCalculate();
-				 printCalculate();
-			}
-			
-			else {
-				if(centerProperty == " ") temp = number;
-				else temp -= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456*/
-			if(textPanel.blankSpace.getText().contains("+"))temp += number;
-			else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
-			else if(textPanel.blankSpace.getText().contains("*"))temp *= number;
-			else if(textPanel.blankSpace.getText().contains("/"))temp /= number;
+			calculate();
 			setCalculate();
 			printCalculate();
-			}
-		//}
-		
+		}
+				
 	}
 	private void plus(){ // 더하기 
 	
 		if(text=="+")
 		{	
 			if(centerProperty == " ") temp = number;
-			//else temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
-			
-			if(textPanel.blankSpace.getText().contains("+"))temp += number;
-			else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
-			else if(textPanel.blankSpace.getText().contains("*"))temp *= number;
-			else if(textPanel.blankSpace.getText().contains("/"))temp /= number;
+			calculate();
 			setCalculate();
 			printCalculate();
+		}
+			//else temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
 			
 			
-			//if(textPanel.blankSpace.getText().contains("+")) System.out.println("hello");
-		}	
 	}
 	
 	
@@ -410,6 +349,33 @@ public class Calculator{
 		formula = ""; // "=" 초기
 		math = text; // math 에 부호 넣어주
 	}
+	
+	public void calculate()
+	{
+		if(textPanel.blankSpace.getText().contains("+"))temp += number;
+		else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
+		else if(textPanel.blankSpace.getText().contains("x"))temp *= number;
+		else if(textPanel.blankSpace.getText().contains("÷"))temp /= number;
+	}
+	
+	
+	/* 기존 연산 로
+	if(formula == "=") {// 방금 전 계산을 = 으로 했으면
+		 temp /= number;
+		 setCalculate();
+		 printCalculate();
+	}
+	else if(math == "÷") {// 방금 전 계산을 3/3/3 식으로 했다면 
+		 temp /= number;
+		 setCalculate();
+		 printCalculate();
+	}
+	else {
+		if(centerProperty == " ") temp = number;
+		else temp /= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+	}*/
+	
+	
 	
 	/*
 	if(math == "+") {
