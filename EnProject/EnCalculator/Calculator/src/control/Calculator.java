@@ -239,7 +239,8 @@ public class Calculator{
 	{
 		if(text=="÷")
 		{				
-			if(formula == "=") {// 방금 전 계산을 = 으로 했으면
+			if(centerProperty == " ") temp = number;
+			/*if(formula == "=") {// 방금 전 계산을 = 으로 했으면
 				 temp /= number;
 				 setCalculate();
 				 printCalculate();
@@ -251,20 +252,28 @@ public class Calculator{
 			}
 			else {
 				if(centerProperty == " ") temp = number;
-				else temp /= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+				else temp /= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456*/
+				
+			if(textPanel.blankSpace.getText().contains("+"))temp += number;
+			else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
+			else if(textPanel.blankSpace.getText().contains("*"))temp *= number;
+			else if(textPanel.blankSpace.getText().contains("/"))temp /= number;
 			setCalculate();
 			 printCalculate();
 	
 			}
-		}
+		//}
 			
 	}
 		
 	private void multyfly() // 곱하기 
 	{
+		
 		if(text=="x")
 		{
-			if(formula == "=") {// 방금 전 계산을 = 으로 했으면
+			if(centerProperty == " ") temp = number;
+		
+			/*if(formula == "=") {// 방금 전 계산을 = 으로 했으면
 				 temp *= number;
 				 setCalculate();
 				 printCalculate();
@@ -276,18 +285,24 @@ public class Calculator{
 			}
 			else {
 				if(centerProperty == " ") temp = number;
-				else temp *= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+				else temp *= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456*/
+				
+				if(textPanel.blankSpace.getText().contains("+"))temp += number;
+				else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
+				else if(textPanel.blankSpace.getText().contains("*"))temp *= number;
+				else if(textPanel.blankSpace.getText().contains("/"))temp /= number;
 			 setCalculate();
 			 printCalculate();
-			}
+			//}
+		//}
 		}
-		
 	}
 	private void minus() // 빼기 
 	{
 		if(text=="-")
 		{
-			if(formula == "=") {// 방금 전 계산을 = 으로 했으면
+			if(centerProperty == " ") temp = number;
+			/*if(formula == "=") {// 방금 전 계산을 = 으로 했으면
 				 temp -= number;
 				 setCalculate();
 				 printCalculate();
@@ -300,11 +315,15 @@ public class Calculator{
 			
 			else {
 				if(centerProperty == " ") temp = number;
-				else temp -= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+				else temp -= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456*/
+			if(textPanel.blankSpace.getText().contains("+"))temp += number;
+			else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
+			else if(textPanel.blankSpace.getText().contains("*"))temp *= number;
+			else if(textPanel.blankSpace.getText().contains("/"))temp /= number;
 			setCalculate();
 			printCalculate();
 			}
-		}
+		//}
 		
 	}
 	private void plus(){ // 더하기 
@@ -312,15 +331,17 @@ public class Calculator{
 		if(text=="+")
 		{	
 			if(centerProperty == " ") temp = number;
-			else temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+			//else temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
 			
+			if(textPanel.blankSpace.getText().contains("+"))temp += number;
+			else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
+			else if(textPanel.blankSpace.getText().contains("*"))temp *= number;
+			else if(textPanel.blankSpace.getText().contains("/"))temp /= number;
 			setCalculate();
 			printCalculate();
-			if(textPanel.blankSpace.getText().contains("+")) System.out.println("hello");
-			//String input= textPanel.blankSpace.getText()contains("+") // 문자열자르기
-			//System.out.println(input);
-			//System.out.println(textPanel.blankSpace.getText());
-			System.out.println(textPanel.blankSpace.getText().length());
+			
+			
+			//if(textPanel.blankSpace.getText().contains("+")) System.out.println("hello");
 		}	
 	}
 	
