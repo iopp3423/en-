@@ -62,6 +62,7 @@ public class Calculator{
 			Delete();	// 백스페이스 
 			number(); // 키패
 			Reset();// 초기화 
+			ResetPart(); // 부분초기화(CE)
 			inputDot(); // 소수점 
 			division(); // 나누
 			multyfly(); // 곱하
@@ -192,6 +193,21 @@ public class Calculator{
 	             {
 					 textPanel.inputSpace.setText("0");
 					 textPanel.blankSpace.setText(" "); // 중간 값 
+	             }
+			}
+		}
+	}
+	private void ResetPart() // CE
+	{
+		if(text == "CE")
+		{
+			Record = "";
+			number = 0;
+			for(int index=length; index>Constants.ZERO; index--)
+			{
+				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
+	             {
+					 textPanel.inputSpace.setText("0");
 	             }
 			}
 		}
