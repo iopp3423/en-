@@ -27,8 +27,13 @@ public class TextPanel extends JPanel
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		blankSpace = new JLabel(" ");
-		JButton log = new JButton(new ImageIcon(image.getImage().getScaledInstance(30, 20, Image.SCALE_SMOOTH)));
-		
+		JButton log = new JButton(new ImageIcon(new ImageIcon("/Users/jojunhui/Desktop/시계.png").getImage().getScaledInstance(30, 20, Image.SCALE_SMOOTH)));
+		log.setBorderPainted(false); 
+		log.setFocusPainted(false); 
+		log.setContentAreaFilled(false);
+
+
+
 
 		log.setFont(new Font("맑은 고딕", 0, 10));
 		log.setAlignmentX(RIGHT_ALIGNMENT);
