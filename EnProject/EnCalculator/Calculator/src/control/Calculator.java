@@ -29,6 +29,7 @@ public class Calculator{
 	private double result = 0;
 	private double temp = 0;
 	private int length; // 길이 
+	private int inputLength;
 	private int limit; // 숫자 입력 제한 
 	private int dotCount = Constants.ZERO;
 	private double number = Constants.ZERO;
@@ -57,6 +58,7 @@ public class Calculator{
 			text = (e.getActionCommand()); // 입력한  값 가져오기 
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
 			
+			
 			Delete();	// 백스페이스 
 			number(); // 키패
 			Reset();// 초기화 
@@ -76,15 +78,34 @@ public class Calculator{
 		if(text == "\u232B") // 백스페이스 
 		{
 		
-			 if (length == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
+			if(formula == "=") { /// 계산하고 바로 지울 때 중간값만 지우기 
+				 for(int index=length; index>Constants.ZERO; index--)
+					{
+						if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
+			             {
+							 textPanel.blankSpace.setText(" "); // 중간 값 
+							 number = 0;
+			             }
+					}
+			 }
+			 
+			
+			 else if (length == Constants.ONE)   //글자수가 1일 때  백스페이스 누르면 0으로 초기
              {
 				 textPanel.inputSpace.setText("0");
+				 number = 0;
+				 Record = "0";
+				 System.out.println(number);
              }
-			 else if(length != Constants.ONE) // 백스페이스 
+			
+			 if(length != Constants.ONE) //글자수 1 아니면 
 			 {
-				 inputRecord = textPanel.inputSpace.getText().substring(Constants.ZERO,length-Constants.ONE); // 문자열자르기
+				 inputRecord = Record.substring(Constants.ZERO,length-Constants.ONE); // 문자열자르기
 				 textPanel.inputSpace.setText(inputRecord);
-				 textPanel.blankSpace.setText(inputRecord); // 중간 값 
+				 
+				 number = Double.parseDouble(inputRecord); //지운만큼 넘버값 줄이기 
+				 Record = inputRecord;
+				 System.out.println(number);
 			 }
 
 		}
@@ -140,13 +161,15 @@ public class Calculator{
 	
 	private void inputNumber() // 키보드 입력 
 	{		
-		Record += text;// 키보드 입력
-		//System.out.println("Record=" + Record);
-		if(limit<Constants.LIMIT_INPUT)
+		if(length == Constants.ONE && text == "0") {
+			textPanel.inputSpace.setText("0");
+		}
+			
+		else if(limit<Constants.LIMIT_INPUT)
 		{				 		
-			textPanel.inputSpace.setText(Record);
+			Record += text;// 키보드 입력
 			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
-			//System.out.println("number=" + number);
+			textPanel.inputSpace.setText(Record);
 			
 		}
 		limit = Record.length();
@@ -159,6 +182,7 @@ public class Calculator{
 		{
 			Record = "";
 			math = "";
+			formula = "";
 			dotCount=0;
 			result = 0;
 			temp = 0;
@@ -264,7 +288,7 @@ public class Calculator{
 	private void result(){
 				
 		if(text == "=") {
-			if(number == Constants.ZERO) {number = temp; System.out.println("Hello");} // 2X4=, = = = = = =
+			if(number == Constants.ZERO) number = temp; // 2X4=, 2+5= 형식 처리  
 			
 			if(math == "+") {
 				//math = "";
