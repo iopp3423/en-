@@ -1,4 +1,5 @@
 package control;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import Utility.Constants;
@@ -9,6 +10,10 @@ import view.PrintCalculator;
 import view.TextPanel;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
 
 
 
@@ -23,13 +28,11 @@ public class Calculator{
 	private String text;
 	private String inputRecord;
 	private String Record = "";
-	private String newInput;
 	private String math; 
 	private String formula;
 	private double result = 0;
 	private double temp = 0;
 	private int length; // 길이 
-	private int inputLength;
 	private int limit; // 숫자 입력 제한 
 	private int dotCount = Constants.ZERO;
 	private double number = Constants.ZERO;
@@ -40,8 +43,8 @@ public class Calculator{
 		this.calculationData = calculationData;
 		this.logData = logData;
 		this.printCalculator = printCalculator;
-		calculatorPanel = new CalculatorPanel(actionlistener);// 키패드 패널생성 
 		textPanel = new TextPanel();  //입력패드 생성 
+		calculatorPanel = new CalculatorPanel(actionlistener);
 		CallCalculator();// 계산기 출력 
 	}
 	
@@ -57,7 +60,6 @@ public class Calculator{
 		public void actionPerformed(ActionEvent e) {									
 			text = (e.getActionCommand()); // 입력한  값 가져오기 
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
-			
 			
 			Delete();	// 백스페이스 
 			number(); // 키패
