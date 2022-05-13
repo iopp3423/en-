@@ -235,16 +235,25 @@ public class Calculator{
 	
 		if(text=="+")
 		{
+			if(math == text) {
+				inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 		
+				textPanel.blankSpace.setText(inputRecord + text); // 중앙 화면
+			}
+			
+			else if(math != text) {
+				
 			System.out.println(number);
 			math = text;
 			result += number;
 			number = 0;
 			Record="";
-					
-			if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 
 			
 			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 		
-			textPanel.blankSpace.setText(inputRecord +  text); // 중앙 화면
+			textPanel.blankSpace.setText((int)(result) +  text); // 중앙 화면
+			}
+			if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 
+			
+			
 		}
 	}
 	
@@ -254,9 +263,11 @@ public class Calculator{
 		if(text == "=") {
 			
 			if(math == "+") {
-				math = "";
+				//math = "";
 				number = Constants.ZERO;
 				result = (Double.parseDouble(Record) + result);
+				System.out.println("Record= " + Record);
+				System.out.println("result= " + result);
 			}
 			else if(math == "-") {
 				math = "";
@@ -271,15 +282,15 @@ public class Calculator{
 				result = (result * Double.parseDouble(Record));
 			}
 			
-			System.out.println("result=" + result);
+		
 		
 			if(textPanel.blankSpace.getText() != "" && textPanel.inputSpace.getText() != "" && textPanel.blankSpace.getText().contains(text) == false) {
 				if(result % 1.0 == 0) {
-					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text + String.valueOf((int)result));
+					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text );
 					textPanel.inputSpace.setText(String.valueOf((int) result));
 				}
 				else {
-					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text + result);
+					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text );
 					textPanel.inputSpace.setText(String.valueOf(result));
 				}
 			}
