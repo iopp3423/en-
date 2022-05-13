@@ -146,7 +146,7 @@ public class Calculator{
 		{				 		
 			textPanel.inputSpace.setText(Record);
 			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
-			System.out.println("number=" + number);
+			//System.out.println("number=" + number);
 			
 		}
 		limit = Record.length();
@@ -194,17 +194,18 @@ public class Calculator{
 	{
 		if(text=="÷")
 		{					
-			formula = "";
-			math = text;
-			result += number;
-			number = 0;
-			Record="";
-			
-			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력 
-			
-			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-			textPanel.blankSpace.setText(inputRecord + text); // 중간 값 
-		}
+			//result += number;
+			formula = ""; // "=" 초기
+			math = text; // math 에 부호 넣어주
+			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+			number = 0; // number 초기화 
+			Record=""; // 입력값 초기화 
+				
+			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			}
+			//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
+		
 			
 	}
 		
@@ -212,84 +213,94 @@ public class Calculator{
 	{
 		if(text=="x")
 		{
-			formula = "";
-			math = text;
-			result += number;
-			number = 0;
-			Record="";
-			
-			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력 
-			
-			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-			textPanel.blankSpace.setText(inputRecord + text); // 중간 값 
+			//result += number;
+			formula = ""; // "=" 초기
+			math = text; // math 에 부호 넣어주기 
+			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+			number = 0; // number 초기화 
+			Record=""; // 입력값 초기화 
 				
-		}
+			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			}
+			//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
+		
+		
 	}
 	private void minus() // 빼기 
 	{
 		if(text=="-")
 		{
-			formula = "";
-			math = text;
-			result += number;
-			number = 0;
-			Record="";
-			
-			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0"); // 제일 처음 입력 
-			
-			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 
-			textPanel.blankSpace.setText(inputRecord + text); // 중간 값 
-			
-		}
+			//result += number;
+			formula = ""; // "=" 초기
+			math = text; // math 에 부호 넣어주
+			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+			number = 0; // number 초기화 
+			Record=""; // 입력값 초기화 
+				
+			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			}
+			//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
 	}
 	private void plus(){ // 더하기 
 	
 		if(text=="+")
 		{
-			formula = "";
-			System.out.println(number);
-			math = text;
-			temp += number;
 			//result += number;
-			number = 0;
-			Record="";
-			
-			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 		
+			formula = ""; // "=" 초기
+			math = text; // math 에 부호 넣어주
+			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+			number = 0; // number 초기화 
+			Record=""; // 입력값 초기화 
+				
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
 			}
-			if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
+			//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
 	}
 	
 	
 	private void result(){
 				
 		if(text == "=") {
+			if(number == Constants.ZERO) {number = temp; System.out.println("Hello");} // 2X4=, = = = = = =
 			
 			if(math == "+") {
 				//math = "";
 				if(formula !="=") result = temp + number;
 				else if(formula == "=") { //바로 = 이 눌리면 
-					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text );
+					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
 					temp = result;
 					result = result + number;
 				}
 			}
 			else if(math == "-") {
-				math = "";
-				result = (result - Double.parseDouble(Record));
+				if(formula !="=") result = temp - number;
+				else if(formula == "=") { //바로 = 이 눌리면 
+					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+					temp = result;
+					result = result - number;
+				}
 			}
 			else if(math == "÷") {
-				math = "";
-				result = (result / Double.parseDouble(Record));
+				if(formula !="=") result = temp / number;
+				else if(formula == "=") { //바로 = 이 눌리면 
+					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+					temp = result;
+					result = result / number;
+				}
 			}
 			else if(math == "x") {
-				math = "";
-				result = (result * Double.parseDouble(Record));
+				if(formula !="=") result = temp * number;
+				else if(formula == "=") { //바로 = 이 눌리면 
+					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+					temp = result;
+					result = result * number;
+				}
 			}
 			
 		
-			System.out.println(formula);
 			//if(textPanel.blankSpace.getText() != "" && textPanel.inputSpace.getText() != "") {
 				if(result % 1.0 == 0) {
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
