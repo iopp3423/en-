@@ -30,6 +30,7 @@ public class Calculator{
 	private String Record = "";
 	private String math; 
 	private String formula;
+	private String centerProperty;
 	private double result = 0;
 	private double temp = 0;
 	private int length; // 길이 
@@ -60,11 +61,11 @@ public class Calculator{
 		public void actionPerformed(ActionEvent e) {									
 			text = (e.getActionCommand()); // 입력한  값 가져오기 
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
-			
-			Delete();	// 백스페이스 
-			number(); // 키패
-			Reset();// 초기화 
-			ResetPart(); // 부분초기화(CE)
+			centerProperty = textPanel.blankSpace.getText();
+			delete();	// 백스페이스 
+			inputnumber(); // 키패
+			reset();// 초기화 
+			resetPart(); // 부분초기화(CE)
 			inputDot(); // 소수점 
 			division(); // 나누
 			multyfly(); // 곱하
@@ -76,7 +77,7 @@ public class Calculator{
 	 
 	};
 		
-	private void Delete() 
+	private void delete() 
 	{
 		if(text == "\u232B") // 백스페이스 
 		{
@@ -112,7 +113,7 @@ public class Calculator{
 		}
 	}
 	
-	private void number()
+	private void inputnumber()
 	{
 		
 		if(text == "0")
@@ -169,7 +170,6 @@ public class Calculator{
 	
 	private void inputNumber() // 키보드 입력 
 	{		
-		//if(textPanel.blankSpace.getText() == "0") textPanel.blankSpace.setText(""); // 제일 처음 입력 
 		if(limit<Constants.LIMIT_INPUT)
 		{				 		
 			Record += text;// 키보드 입력
@@ -180,7 +180,7 @@ public class Calculator{
 	}
 	
 	
-	private void Reset() // C
+	private void reset() // C
 	{
 		if(text == "C")
 		{
@@ -200,7 +200,7 @@ public class Calculator{
 			}
 		}
 	}
-	private void ResetPart() // CE
+	private void resetPart() // CE
 	{
 		if(text == "CE")
 		{
@@ -220,21 +220,18 @@ public class Calculator{
 	{
 		if(text==".")
 		{		
-			if(textPanel.inputSpace.getText() == "0") {
+			if(textPanel.inputSpace.getText() == "0" ) {
 				Record += "0" + text;// 키보드 입력한 값	
-				number += Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
 				textPanel.inputSpace.setText(Record);
 				dotCount++;		
 			}
 			
 			else if (dotCount == Constants.ZERO && textPanel.inputSpace.getText() != "0") {
 				Record += text;// 키보드 입력한 값	
-				//number += Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
 				textPanel.inputSpace.setText(Record);
 				dotCount++;		
 			}				
 		}
-		//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 
 	}
 	
 	
@@ -247,13 +244,14 @@ public class Calculator{
 				 setCalculate();
 				 printCalculate();
 			}
-			else if(math == "÷") {// 방금 전 계산을 3x3x3 식으로 했다면 
+			else if(math == "÷") {// 방금 전 계산을 3/3/3 식으로 했다면 
 				 temp /= number;
 				 setCalculate();
 				 printCalculate();
 			}
 			else {
-			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+				if(centerProperty == " ") temp = number;
+				else temp /= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
 			setCalculate();
 			 printCalculate();
 	
@@ -277,8 +275,9 @@ public class Calculator{
 				 printCalculate();
 			}
 			else {
-			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
-			setCalculate();
+				if(centerProperty == " ") temp = number;
+				else temp *= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+			 setCalculate();
 			 printCalculate();
 			}
 		}
@@ -300,7 +299,8 @@ public class Calculator{
 			}
 			
 			else {
-			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+				if(centerProperty == " ") temp = number;
+				else temp -= number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
 			setCalculate();
 			printCalculate();
 			}
@@ -311,14 +311,21 @@ public class Calculator{
 	
 		if(text=="+")
 		{	
-			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+			if(centerProperty == " ") temp = number;
+			else temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
+			
 			setCalculate();
-			printCalculate();	
+			printCalculate();
+			if(textPanel.blankSpace.getText().contains("+")) System.out.println("hello");
+			//String input= textPanel.blankSpace.getText()contains("+") // 문자열자르기
+			//System.out.println(input);
+			//System.out.println(textPanel.blankSpace.getText());
+			System.out.println(textPanel.blankSpace.getText().length());
 		}	
 	}
 	
 	
-	private void result(){
+	private void result(){ // 결
 				
 		if(text == "=") { // = 입력하면 
 			if(number == Constants.ZERO) number = temp; // 2X4=, 2+5= 형식 처리  
