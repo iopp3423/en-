@@ -117,7 +117,14 @@ public class Calculator{
 		
 		if(text == "0")
 		{
-			inputNumber();	
+			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0");
+			else if(limit<Constants.LIMIT_INPUT)
+			{				 		
+				Record += text;// 키보드 입력
+				number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
+				textPanel.inputSpace.setText(Record);		
+			}
+			limit = Record.length();	
 			
 		}
 		if(text == "1")
@@ -163,7 +170,6 @@ public class Calculator{
 	private void inputNumber() // 키보드 입력 
 	{		
 		//if(textPanel.blankSpace.getText() == "0") textPanel.blankSpace.setText(""); // 제일 처음 입력 
-			
 		if(limit<Constants.LIMIT_INPUT)
 		{				 		
 			Record += text;// 키보드 입력
@@ -214,7 +220,7 @@ public class Calculator{
 	{
 		if(text==".")
 		{		
-			if(dotCount == Constants.ZERO && textPanel.blankSpace.getText() == " ") {
+			if(textPanel.inputSpace.getText() == "0") {
 				Record += "0" + text;// 키보드 입력한 값	
 				number += Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
 				textPanel.inputSpace.setText(Record);
@@ -222,7 +228,7 @@ public class Calculator{
 				System.out.println("Hellolrod");
 			}
 			
-			else if (dotCount == 0 && textPanel.blankSpace.getText() != "0") {
+			else if (dotCount == Constants.ZERO && textPanel.blankSpace.getText() != "0") {
 				Record += text;// 키보드 입력한 값	
 				//number += Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
 				System.out.println("ㅇㅇㅇㅇㅇㅇ");
@@ -243,9 +249,9 @@ public class Calculator{
 				 temp /= number;
 				 number = 0;
 				 Record = "";
-				 formula = "";
-				 textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
-				textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+				 formula = "";     
+				 //textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+				//textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
 			}
 			else if(math == "÷") {// 방금 전 계산을 3x3x3 식으로 했다면 
 				math = text;

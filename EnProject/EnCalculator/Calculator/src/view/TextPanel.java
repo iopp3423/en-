@@ -33,7 +33,6 @@ public class TextPanel extends JPanel
 		log.setBorderPainted(false); 
 		log.setFocusPainted(false); 
 		log.setContentAreaFilled(false);
-		//log.setBackground(new Color(255, 255, 255));
 
 
 		log.setFont(new Font("맑은 고딕", Constants.ZERO, Constants.FONT_SIZE));
