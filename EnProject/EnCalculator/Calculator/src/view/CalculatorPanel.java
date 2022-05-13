@@ -133,7 +133,6 @@ public class CalculatorPanel extends JPanel
 				button[index].addMouseListener(numberMouse);
 			}
 			
-
 			add(button[index]);			
 			
 					

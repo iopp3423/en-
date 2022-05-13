@@ -87,7 +87,7 @@ public class Calculator{
 						if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
 			             {
 							 textPanel.blankSpace.setText(" "); // 중간 값 
-							 number = 0;
+							 number = Constants.ZERO;
 			             }
 					}
 			 }
@@ -96,9 +96,8 @@ public class Calculator{
 			 else if (length == Constants.ONE)   //글자수가 1일 때  백스페이스 누르면 0으로 초기
              {
 				 textPanel.inputSpace.setText("0");
-				 number = 0;
+				 number = Constants.ZERO;
 				 Record = "0";
-				 System.out.println(number);
              }
 			
 			 if(length != Constants.ONE) //글자수 1 아니면 
@@ -108,7 +107,6 @@ public class Calculator{
 				 
 				 number = Double.parseDouble(inputRecord); //지운만큼 넘버값 줄이기 
 				 Record = inputRecord;
-				 System.out.println(number);
 			 }
 
 		}
@@ -164,11 +162,9 @@ public class Calculator{
 	
 	private void inputNumber() // 키보드 입력 
 	{		
-		if(length == Constants.ONE && text == "0") {
-			textPanel.inputSpace.setText("0");
-		}
+		
 			
-		else if(limit<Constants.LIMIT_INPUT)
+		if(limit<Constants.LIMIT_INPUT)
 		{				 		
 			Record += text;// 키보드 입력
 			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
@@ -305,59 +301,79 @@ public class Calculator{
 	
 	private void result(){
 				
-		if(text == "=") {
+		if(text == "=") { // = 입력하면 
 			if(number == Constants.ZERO) number = temp; // 2X4=, 2+5= 형식 처리  
 			
-			if(math == "+") {
-				//math = "";
-				if(formula !="=") result = temp + number;
-				else if(formula == "=") { //바로 = 이 눌리면 
-					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
-					temp = result;
-					result = result + number;
-				}
-			}
-			else if(math == "-") {
-				if(formula !="=") result = temp - number;
-				else if(formula == "=") { //바로 = 이 눌리면 
-					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
-					temp = result;
-					result = result - number;
-				}
-			}
-			else if(math == "÷") {
-				if(formula !="=") result = temp / number;
-				else if(formula == "=") { //바로 = 이 눌리면 
-					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
-					temp = result;
-					result = result / number;
-				}
-			}
-			else if(math == "x") {
-				if(formula !="=") result = temp * number;
-				else if(formula == "=") { //바로 = 이 눌리면 
-					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
-					temp = result;
-					result = result * number;
-				}
-			}
+			 printResult();
 			
-		
-			//if(textPanel.blankSpace.getText() != "" && textPanel.inputSpace.getText() != "") {
 				if(result % 1.0 == 0) {
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
 					textPanel.inputSpace.setText(String.valueOf((int) result));
 				}
 				else {
-					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text );
-					textPanel.inputSpace.setText(String.valueOf(result));
+					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
+					textPanel.inputSpace.setText(String.valueOf((double) result));
 				}
-		//	}
-			formula = "=";
+
+		formula = "=";
+		}
+		
+	}
+	public void printResult()
+	{
+		if(formula !="=") {
+			if(math == "+")result = temp + number;
+			if(math == "-")result = temp - number;
+			if(math == "x")result = temp * number;
+			if(math == "÷")result = temp / number;
+		}
+		
+		else if(formula == "=") { //바로 = 이 눌리면 
+			textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+			temp = result;
+			if(math == "+") result = result + number;
+			if(math == "-") result = result - number;
+			if(math == "x") result = result * number;
+			if(math == "÷") result = result / number;
 		}
 		
 	}
 	
+	/*
+	if(math == "+") {
+		if(formula !="=") result = temp + number;
+		else if(formula == "=") { //바로 = 이 눌리면 
+			textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+			temp = result;
+			result = result + number;
+		}
+	}
+	
+	else if(math == "-") {
+		if(formula !="=") result = temp - number;
+		else if(formula == "=") { //바로 = 이 눌리면 
+			textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+			temp = result;
+			result = result - number;
+		}
+	}
+	else if(math == "÷") {
+		if(formula !="=") result = temp / number;
+		else if(formula == "=") { //바로 = 이 눌리면 
+			textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+			temp = result;
+			result = result / number;
+		}
+	}
+	else if(math == "x") {
+		if(formula !="=") result = temp * number;
+		else if(formula == "=") { //바로 = 이 눌리면 
+			textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+			temp = result;
+			result = result * number;
+		}
+	}
+		*/
 }
 
 
