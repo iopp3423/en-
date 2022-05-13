@@ -225,13 +225,11 @@ public class Calculator{
 				number += Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
 				textPanel.inputSpace.setText(Record);
 				dotCount++;		
-				System.out.println("Hellolrod");
 			}
 			
-			else if (dotCount == Constants.ZERO && textPanel.blankSpace.getText() != "0") {
+			else if (dotCount == Constants.ZERO && textPanel.inputSpace.getText() != "0") {
 				Record += text;// 키보드 입력한 값	
 				//number += Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
-				System.out.println("ㅇㅇㅇㅇㅇㅇ");
 				textPanel.inputSpace.setText(Record);
 				dotCount++;		
 			}				
