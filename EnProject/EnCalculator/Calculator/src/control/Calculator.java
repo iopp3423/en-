@@ -25,7 +25,9 @@ public class Calculator{
 	private String Record = "";
 	private String newInput;
 	private String math; 
+	private String formula;
 	private double result = 0;
+	private double temp = 0;
 	private int length; // 길이 
 	private int limit; // 숫자 입력 제한 
 	private int dotCount = Constants.ZERO;
@@ -139,10 +141,13 @@ public class Calculator{
 	private void inputNumber() // 키보드 입력 
 	{		
 		Record += text;// 키보드 입력
+		//System.out.println("Record=" + Record);
 		if(limit<Constants.LIMIT_INPUT)
-		{				 
+		{				 		
 			textPanel.inputSpace.setText(Record);
-			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기 		
+			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
+			System.out.println("number=" + number);
+			
 		}
 		limit = Record.length();
 	}
@@ -153,7 +158,10 @@ public class Calculator{
 		if(text == "C")
 		{
 			Record = "";
+			math = "";
 			dotCount=0;
+			result = 0;
+			temp = 0;
 			for(int index=length; index>Constants.ZERO; index--)
 			{
 				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
@@ -186,6 +194,7 @@ public class Calculator{
 	{
 		if(text=="÷")
 		{					
+			formula = "";
 			math = text;
 			result += number;
 			number = 0;
@@ -203,6 +212,7 @@ public class Calculator{
 	{
 		if(text=="x")
 		{
+			formula = "";
 			math = text;
 			result += number;
 			number = 0;
@@ -219,6 +229,7 @@ public class Calculator{
 	{
 		if(text=="-")
 		{
+			formula = "";
 			math = text;
 			result += number;
 			number = 0;
@@ -235,26 +246,19 @@ public class Calculator{
 	
 		if(text=="+")
 		{
-			if(math == text) {
-				inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 		
-				textPanel.blankSpace.setText(inputRecord + text); // 중앙 화면
-			}
-			
-			else if(math != text) {
-				
+			formula = "";
 			System.out.println(number);
 			math = text;
-			result += number;
+			temp += number;
+			//result += number;
 			number = 0;
 			Record="";
 			
 			inputRecord = textPanel.inputSpace.getText(); // 키패드 화면에 있던 값 		
-			textPanel.blankSpace.setText((int)(result) +  text); // 중앙 화면
+			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
 			}
-			if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 
-			
-			
-		}
+			if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
 	}
 	
 	
@@ -264,10 +268,12 @@ public class Calculator{
 			
 			if(math == "+") {
 				//math = "";
-				number = Constants.ZERO;
-				result = (Double.parseDouble(Record) + result);
-				System.out.println("Record= " + Record);
-				System.out.println("result= " + result);
+				if(formula !="=") result = temp + number;
+				else if(formula == "=") { //바로 = 이 눌리면 
+					textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text );
+					temp = result;
+					result = result + number;
+				}
 			}
 			else if(math == "-") {
 				math = "";
@@ -283,18 +289,18 @@ public class Calculator{
 			}
 			
 		
-		
-			if(textPanel.blankSpace.getText() != "" && textPanel.inputSpace.getText() != "" && textPanel.blankSpace.getText().contains(text) == false) {
+			System.out.println(formula);
+			//if(textPanel.blankSpace.getText() != "" && textPanel.inputSpace.getText() != "") {
 				if(result % 1.0 == 0) {
-					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text );
+					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
 					textPanel.inputSpace.setText(String.valueOf((int) result));
 				}
 				else {
 					textPanel.blankSpace.setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText() + text );
 					textPanel.inputSpace.setText(String.valueOf(result));
 				}
-			}
-			result = 0;
+		//	}
+			formula = "=";
 		}
 		
 	}
