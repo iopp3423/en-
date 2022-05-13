@@ -162,14 +162,13 @@ public class Calculator{
 	
 	private void inputNumber() // 키보드 입력 
 	{		
-		
+		//if(textPanel.blankSpace.getText() == "0") textPanel.blankSpace.setText(""); // 제일 처음 입력 
 			
 		if(limit<Constants.LIMIT_INPUT)
 		{				 		
 			Record += text;// 키보드 입력
 			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
-			textPanel.inputSpace.setText(Record);
-			
+			textPanel.inputSpace.setText(Record);		
 		}
 		limit = Record.length();
 	}
@@ -214,25 +213,50 @@ public class Calculator{
 	private void inputDot() // 소수점 
 	{
 		if(text==".")
-		{
+		{		
+			if(dotCount == Constants.ZERO && textPanel.blankSpace.getText() == " ") {
+				Record += "0" + text;// 키보드 입력한 값	
+				number += Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
+				textPanel.inputSpace.setText(Record);
+				dotCount++;		
+				System.out.println("Hellolrod");
+			}
 			
-			if(dotCount == 0) {
-				Record = text;// 키보드 입력한 값	
-				textPanel.inputSpace.setText(textPanel.inputSpace.getText() + Record);					
-				dotCount++;
-				
-			}	
-
-			
+			else if (dotCount == 0 && textPanel.blankSpace.getText() != "0") {
+				Record += text;// 키보드 입력한 값	
+				//number += Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
+				System.out.println("ㅇㅇㅇㅇㅇㅇ");
+				textPanel.inputSpace.setText(Record);
+				dotCount++;		
+			}				
 		}
+		//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 
 	}
 	
 	
 	private void division() // 나누기 
 	{
 		if(text=="÷")
-		{					
-			//result += number;
+		{				
+			if(formula == "=") {// 방금 전 계산을 = 으로 했으면
+				math = text;
+				 temp /= number;
+				 number = 0;
+				 Record = "";
+				 formula = "";
+				 textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+				textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			}
+			else if(math == "÷") {// 방금 전 계산을 3x3x3 식으로 했다면 
+				math = text;
+				 temp /= number;
+				 number = 0;
+				 Record = "";
+				 formula = "";
+				 textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+				textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			}
+			else {
 			formula = ""; // "=" 초기
 			math = text; // math 에 부호 넣어주
 			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
@@ -242,8 +266,7 @@ public class Calculator{
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
 			}
-			//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
-		
+		}
 			
 	}
 		
@@ -251,7 +274,25 @@ public class Calculator{
 	{
 		if(text=="x")
 		{
-			//result += number;
+			if(formula == "=") {// 방금 전 계산을 = 으로 했으면
+				math = text;
+				 temp *= number;
+				 number = 0;
+				 Record = "";
+				 formula = "";
+				 textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+				textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			}
+			else if(math == "x") {// 방금 전 계산을 3x3x3 식으로 했다면 
+				math = text;
+				 temp *= number;
+				 number = 0;
+				 Record = "";
+				 formula = "";
+				 textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+				textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			}
+			else {
 			formula = ""; // "=" 초기
 			math = text; // math 에 부호 넣어주기 
 			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
@@ -261,16 +302,34 @@ public class Calculator{
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
 			}
-			//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
-		
+		}
 		
 	}
 	private void minus() // 빼기 
 	{
 		if(text=="-")
 		{
-			//result += number;
-			formula = ""; // "=" 초기
+			if(formula == "=") {// 방금 전 계산을 = 으로 했으면
+				math = text;
+				 temp -= number;
+				 number = 0;
+				 Record = "";
+				 formula = "";
+				 textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+					textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			}
+			else if(math == "-") {// 방금 전 계산을 3-3-3 식으로 했다
+				math = text;
+				 temp -= number;
+				 number = 0;
+				 Record = "";
+				 formula = "";
+				 textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+				textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			}
+			
+			else {
+			formula = ""; // "=" 초기화 
 			math = text; // math 에 부호 넣어주
 			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
 			number = 0; // number 초기화 
@@ -279,13 +338,13 @@ public class Calculator{
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
 			}
-			//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
+		}
+		
 	}
 	private void plus(){ // 더하기 
 	
 		if(text=="+")
 		{
-			//result += number;
 			formula = ""; // "=" 초기
 			math = text; // math 에 부호 넣어주
 			temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
@@ -294,8 +353,7 @@ public class Calculator{
 				
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
-			}
-			//if(textPanel.blankSpace.getText() == "") textPanel.blankSpace.setText("0"); // 제일 처음 입력 	
+		}	
 	}
 	
 	
@@ -306,11 +364,11 @@ public class Calculator{
 			
 			 printResult();
 			
-				if(result % 1.0 == 0) {
+				if(result % 1.0 == 0) { // 정수형 출력 
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
 					textPanel.inputSpace.setText(String.valueOf((int) result));
 				}
-				else {
+				else { // 더블형 출력 
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
 					textPanel.inputSpace.setText(String.valueOf((double) result));
 				}
@@ -319,9 +377,11 @@ public class Calculator{
 		}
 		
 	}
+	
+	
 	public void printResult()
 	{
-		if(formula !="=") {
+		if(formula != "=") {
 			if(math == "+")result = temp + number;
 			if(math == "-")result = temp - number;
 			if(math == "x")result = temp * number;
@@ -336,6 +396,7 @@ public class Calculator{
 			if(math == "x") result = result * number;
 			if(math == "÷") result = result / number;
 		}
+		
 		
 	}
 	
