@@ -1,22 +1,12 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import Utility.Constants;
 
 
@@ -36,7 +26,7 @@ public class CalculatorPanel extends JPanel
  
 		button[0] = new JButton("CE");
 		button[1] = new JButton("C");
-		button[2] = new JButton("\u232B"); // 바꿔야
+		button[2] = new JButton("\u232B");
 		button[3] = new JButton("÷");
 		
 		button[4]  = new JButton("7");
@@ -104,9 +94,7 @@ public class CalculatorPanel extends JPanel
 		    public void mousePressed(MouseEvent e) { // 마우스클릭 
 		    	JButton button = (JButton)e.getSource();
 		    	button.setBackground(new Color(220, 237, 246));
-		    }
-		  
-		    
+		    }    
 		};
 		
 		for(int index = Constants.ZERO; index<Constants.CALCULATOR; index++)
@@ -123,7 +111,7 @@ public class CalculatorPanel extends JPanel
 				button[index].setBackground(new Color(220, 237, 246));
 				button[index].addMouseListener(formulaMouse);
 			}
-			else if(index == 19) { // = 기호 
+			else if(index == Constants.RESULT) { // = 기호 
 				button[index].setBackground(new Color(101, 156, 195));
 				button[index].addMouseListener(resultMouse);
 			}
@@ -134,16 +122,6 @@ public class CalculatorPanel extends JPanel
 			}
 			
 			add(button[index]);			
-			
-					
-			/*
-			button[index].addKeyListener(new KeyAdapter(){ // 키보드 입력 이벤트
-				public void keyPressed(KeyEvent e) {
-					char text = (e.getKeyChar());
-					System.out.println(text);					
-				}
-			});
-			*/
 		}	
 			
 		

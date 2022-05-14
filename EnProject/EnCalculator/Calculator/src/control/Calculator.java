@@ -1,19 +1,13 @@
 package control;
-
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import Utility.Constants;
-import model.CalculationData;
 import model.LogData;
 import view.CalculatorPanel;
 import view.PrintCalculator;
 import view.TextPanel;
 
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JButton;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +15,6 @@ import java.util.regex.Pattern;
 
 public class Calculator{
 
-	public CalculationData calculationData;
 	public LogData logData;
 	private PrintCalculator printCalculator;
 	private CalculatorPanel calculatorPanel;
@@ -41,9 +34,8 @@ public class Calculator{
 
 
 	
-	public Calculator(CalculationData calculationData, LogData logData, PrintCalculator printCalculator)
-	{
-		this.calculationData = calculationData;
+	public Calculator(LogData logData, PrintCalculator printCalculator)
+	{	
 		this.logData = logData;
 		this.printCalculator = printCalculator;
 		textPanel = new TextPanel();  //입력패드 생성 
@@ -63,7 +55,7 @@ public class Calculator{
 		public void actionPerformed(ActionEvent e) {									
 			text = (e.getActionCommand()); // 입력한  값 가져오기 
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
-			centerProperty = textPanel.blankSpace.getText();
+			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
 			delete();	// 백스페이스 
 			inputnumber(); // 키패
 			reset();// 초기화 
@@ -73,10 +65,8 @@ public class Calculator{
 			multyfly(); // 곱하
 			minus(); // 빼기 
 			plus(); // 더하기 
-			result(); // 결과 
-			
+			result(); // 결과 	
 		}
-	 
 	};
 		
 	private void delete() 
@@ -200,13 +190,16 @@ public class Calculator{
 		{		
 			if(textPanel.inputSpace.getText() == "0" ) {
 				Record += "0" + text;// 키보드 입력한 값	
-				textPanel.inputSpace.setText(Record);
+				textPanel.inputSpace.setText(setComma(Record));
 				dotCount++;		
+				System.out.println(Record);
+				System.out.println(setComma(Record));
+				System.out.println(dotCount);
 			}
 			
 			else if (dotCount == Constants.ZERO && textPanel.inputSpace.getText() != "0") {
 				Record += text;// 키보드 입력한 값	
-				textPanel.inputSpace.setText(Record);
+				textPanel.inputSpace.setText(setComma(Record));
 				dotCount++;		
 			}				
 		}
@@ -276,7 +269,7 @@ public class Calculator{
 					textPanel.inputSpace.setText(String.valueOf((double) result));
 				}
 
-		formula = "=";// formula 가 = 이면 바로 = 눌러서 계
+		formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한 
 		}
 		
 	}
@@ -304,7 +297,7 @@ public class Calculator{
 		
 	}
 	
-	public void printCalculate() // 화면에 값 출
+	public void printCalculate() // 화면에 값 출력 
 	{
 		if(temp % Constants.CHECK_DECIMAL == Constants.ZERO) {
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
@@ -334,17 +327,8 @@ public class Calculator{
 	}
 	
 	public String setComma(String number) { // ,찍기 
-        
-        //Null 체크
-        if(number == null || number.isEmpty()) return "0"; 
-    
-        //숫자형태가 아닌 문자열일경우 디폴트 0으로 반환 
-        String regex = Constants.decimal;
-        boolean isNumber = number.matches(regex);
-        if (!isNumber) return "0";             
-    
         String changeResult = number; //출력할 결과를 저장할 변수
-        Pattern pattern = Pattern.compile("(^[+-]?\\d+)(\\d{3})"); //정규표현식 
+        Pattern pattern = Pattern.compile(Constants.decimal); //정규표현식 
         Matcher regexMatcher = pattern.matcher(number); 
         
         while(regexMatcher.find()) {                

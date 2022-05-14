@@ -1,13 +1,11 @@
 package control;
 
-import model.CalculationData;
 import model.LogData;
 import view.PrintCalculator;
 
 public class CalculationController{
 	
-	CalculationData calculationData = new CalculationData();
 	LogData logData = new LogData();
 	PrintCalculator printCalculator = new PrintCalculator();
-	Calculator calculator = new Calculator(calculationData, logData, printCalculator);	
+	Calculator calculator = new Calculator(logData, printCalculator);	
 }
