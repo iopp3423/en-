@@ -1,12 +1,10 @@
-package control;
+package attach;
 import java.awt.event.ActionEvent;
 
 import Utility.Constants;
-import model.LogData;
 import view.CalculatorPanel;
 import view.PrintCalculator;
 import view.TextPanel;
-
 import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,13 +13,12 @@ import java.util.regex.Pattern;
 
 public class Calculator{
 
-	public LogData logData;
 	private PrintCalculator printCalculator;
 	private CalculatorPanel calculatorPanel;
 	private TextPanel textPanel;
 	private String text;
 	private String inputRecord;
-	private String Record = "";
+	private String record = "";
 	private String math; 
 	private String formula;
 	private String centerProperty;
@@ -34,19 +31,18 @@ public class Calculator{
 
 
 	
-	public Calculator(LogData logData, PrintCalculator printCalculator)
+	public Calculator(PrintCalculator printCalculator)
 	{	
-		this.logData = logData;
 		this.printCalculator = printCalculator;
 		textPanel = new TextPanel();  //입력패드 생성 
 		calculatorPanel = new CalculatorPanel(actionlistener);
-		CallCalculator();// 계산기 출력 
+		callCalculator();// 계산기 출력 
 	}
 	
 	
-	public void CallCalculator() // 계산기 출력 
+	public void callCalculator() // 계산기 출력 
 	{
-		printCalculator.GetCalculator(calculatorPanel, textPanel); // 계산기 출력	
+		printCalculator.getCalculator(calculatorPanel, textPanel); // 계산기 출력	
 	}
 	
 	
@@ -90,16 +86,16 @@ public class Calculator{
              {
 				 textPanel.inputSpace.setText("0");
 				 number = Constants.ZERO;
-				 Record = "0";
+				 record = "0";
              }
 			
 			 if(length != Constants.ONE) //글자수 1 아니면 
 			 {
-				 inputRecord = Record.substring(Constants.ZERO,length-Constants.ONE); // 문자열자르기
+				 inputRecord = record.substring(Constants.ZERO,length-Constants.ONE); // 문자열자르기
 				 textPanel.inputSpace.setText(inputRecord);
 				 
 				 number = Double.parseDouble(inputRecord); //지운만큼 넘버값 줄이기 
-				 Record = inputRecord;
+				 record = inputRecord;
 			 }
 
 		}
@@ -113,11 +109,11 @@ public class Calculator{
 			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0");
 			else if(limit<Constants.LIMIT_INPUT)
 			{				 		
-				Record += text;// 키보드 입력
-				number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
-				textPanel.inputSpace.setText(setComma(Record));			
+				record += text;// 키보드 입력
+				number = Double.parseDouble(record); //// 넘버에 입력값 넣어주기
+				textPanel.inputSpace.setText(setComma(record));			
 			}
-			limit = Record.length();	
+			limit = record.length();	
 			
 		}
 		switch(text) {
@@ -138,11 +134,11 @@ public class Calculator{
 	{		
 		if(limit<Constants.LIMIT_INPUT)
 		{				 		
-			Record += text;// 키보드 입력
-			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
-			textPanel.inputSpace.setText(setComma(Record));	//, 찍기 
+			record += text;// 키보드 입력
+			number = Double.parseDouble(record); //// 넘버에 입력값 넣어주기
+			textPanel.inputSpace.setText(setComma(record));	//, 찍기 
 		}
-		limit = Record.length();
+		limit = record.length();
 	}
 	
 	
@@ -150,7 +146,7 @@ public class Calculator{
 	{
 		if(text == "C")
 		{
-			Record = "";
+			record = "";
 			math = "";
 			formula = "";
 			dotCount=Constants.ZERO;
@@ -171,7 +167,7 @@ public class Calculator{
 	{
 		if(text == "CE")
 		{
-			Record = "";
+			record = "";
 			number = Constants.ZERO;
 			dotCount = Constants.ZERO;
 			for(int index=length; index>Constants.ZERO; index--)
@@ -189,17 +185,17 @@ public class Calculator{
 		if(text==".")
 		{		
 			if(textPanel.inputSpace.getText() == "0" ) {
-				Record += "0" + text;// 키보드 입력한 값	
-				textPanel.inputSpace.setText(setComma(Record));
+				record += "0" + text;// 키보드 입력한 값	
+				textPanel.inputSpace.setText(setComma(record));
 				dotCount++;		
-				System.out.println(Record);
-				System.out.println(setComma(Record));
+				System.out.println(record);
+				System.out.println(setComma(record));
 				System.out.println(dotCount);
 			}
 			
 			else if (dotCount == Constants.ZERO && textPanel.inputSpace.getText() != "0") {
-				Record += text;// 키보드 입력한 값	
-				textPanel.inputSpace.setText(setComma(Record));
+				record += text;// 키보드 입력한 값	
+				textPanel.inputSpace.setText(setComma(record));
 				dotCount++;		
 			}				
 		}
@@ -262,7 +258,7 @@ public class Calculator{
 			
 				if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
-					textPanel.inputSpace.setText(String.valueOf(String.valueOf((int)(result))));
+					textPanel.inputSpace.setText(setComma(String.valueOf(String.valueOf((int)(result)))));
 				}
 				else { // 더블형 출력 
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
@@ -297,7 +293,7 @@ public class Calculator{
 		
 	}
 	
-	public void printCalculate() // 화면에 값 출력 
+	private void printCalculate() // 화면에 값 출력 
 	{
 		if(temp % Constants.CHECK_DECIMAL == Constants.ZERO) {
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
@@ -309,16 +305,16 @@ public class Calculator{
 			}
 	}
 	
-	public void setCalculate() // 수식에 들어올 때 세
+	private void setCalculate() // 수식에 들어올 때 세
 	{
 		number = Constants.ZERO;; // number 초기화 
-		Record=""; // 입력값 초기화 
+		record=""; // 입력값 초기화 
 		dotCount = Constants.ZERO;
 		formula = ""; // "=" 초기
 		math = text; // math 에 부호 넣어주
 	}
 	
-	public void calculate()
+	private void calculate()
 	{
 		if(textPanel.blankSpace.getText().contains("+"))temp += number;
 		else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
@@ -326,9 +322,9 @@ public class Calculator{
 		else if(textPanel.blankSpace.getText().contains("÷"))temp /= number;
 	}
 	
-	public String setComma(String number) { // ,찍기 
+	private String setComma(String number) { // ,찍기 
         String changeResult = number; //출력할 결과를 저장할 변수
-        Pattern pattern = Pattern.compile(Constants.decimal); //정규표현식 
+        Pattern pattern = Pattern.compile("(^[+-]?\\d+)(\\d{3})"); //정규표현식 
         Matcher regexMatcher = pattern.matcher(number); 
         
         while(regexMatcher.find()) {                

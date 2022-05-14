@@ -23,7 +23,7 @@ public class PrintCalculator extends JFrame{
 	}
 	
 	
-	public void GetCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel)
+	public void getCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel)
 	{
 		frame();
 		setLayout(new BorderLayout()); // 프레임  설정하기 

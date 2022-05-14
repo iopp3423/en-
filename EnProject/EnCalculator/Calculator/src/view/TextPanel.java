@@ -30,9 +30,9 @@ public class TextPanel extends JPanel
 		
 		blankSpace = new JLabel(" ");
 		JButton log = new JButton(new ImageIcon(new ImageIcon("/Users/jojunhui/Desktop/시계.png").getImage().getScaledInstance(30, 20, Image.SCALE_SMOOTH)));
-		log.setBorderPainted(false); 
-		log.setFocusPainted(false); 
-		log.setContentAreaFilled(false);
+		log.setBorderPainted(false); //있어야 색 적용가능 
+		log.setFocusPainted(false); //있어야 색 적용가능 
+		log.setContentAreaFilled(false); //있어야 색 적용가능 
 
 
 		log.setFont(new Font("맑은 고딕", Constants.ZERO, Constants.FONT_SIZE));

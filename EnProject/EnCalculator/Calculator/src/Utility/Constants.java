@@ -11,6 +11,5 @@ public class Constants {
 	public static final double CHECK_DECIMAL = 1.0;
 	public static final int SCREEN_SIZE_WIDTH = 300;
 	public static final int SCREEN_SIZE_HEIGHT = 500;
-	public static final String decimal = "(^[+-]?\\\\d+)(\\\\d{3})";
 	public static final int RESULT = 19;
 }
