@@ -1,4 +1,5 @@
 package control;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 
@@ -12,9 +13,9 @@ import view.TextPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JButton;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 
@@ -31,12 +32,13 @@ public class Calculator{
 	private String math; 
 	private String formula;
 	private String centerProperty;
-	private double result = 0;
-	private double temp = 0;
+	private double result = Constants.ZERO;
+	private double temp = Constants.ZERO;
 	private int length; // 길이 
 	private int limit; // 숫자 입력 제한 
 	private int dotCount = Constants.ZERO;
 	private double number = Constants.ZERO;
+
 
 	
 	public Calculator(CalculationData calculationData, LogData logData, PrintCalculator printCalculator)
@@ -123,7 +125,8 @@ public class Calculator{
 			{				 		
 				Record += text;// 키보드 입력
 				number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
-				textPanel.inputSpace.setText(Record);		
+				textPanel.inputSpace.setText(setComma(Record));
+				
 			}
 			limit = Record.length();	
 			
@@ -174,7 +177,7 @@ public class Calculator{
 		{				 		
 			Record += text;// 키보드 입력
 			number = Double.parseDouble(Record); //// 넘버에 입력값 넣어주기
-			textPanel.inputSpace.setText(Record);		
+			textPanel.inputSpace.setText(setComma(Record));	//, 찍기 
 		}
 		limit = Record.length();
 	}
@@ -187,9 +190,9 @@ public class Calculator{
 			Record = "";
 			math = "";
 			formula = "";
-			dotCount=0;
-			result = 0;
-			temp = 0;
+			dotCount=Constants.ZERO;
+			result = Constants.ZERO;
+			temp = Constants.ZERO;
 			for(int index=length; index>Constants.ZERO; index--)
 			{
 				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
@@ -200,12 +203,13 @@ public class Calculator{
 			}
 		}
 	}
+	
 	private void resetPart() // CE
 	{
 		if(text == "CE")
 		{
 			Record = "";
-			number = 0;
+			number = Constants.ZERO;
 			for(int index=length; index>Constants.ZERO; index--)
 			{
 				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
@@ -278,10 +282,7 @@ public class Calculator{
 			calculate();
 			setCalculate();
 			printCalculate();
-		}
-			//else temp += number; // temp 에 입력값 넣어주기 ex) 10, 111, 456
-			
-			
+		}			
 	}
 	
 	
@@ -292,9 +293,10 @@ public class Calculator{
 			
 			 printResult();
 			
-				if(result % 1.0 == Constants.ZERO) { // 정수형 출력 
+				if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
-					textPanel.inputSpace.setText(String.valueOf((int) result));
+					//textPanel.inputSpace.setText(String.valueOf((int) result));
+					textPanel.inputSpace.setText(setComma(String.valueOf(result)));
 				}
 				else { // 더블형 출력 
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
@@ -317,8 +319,8 @@ public class Calculator{
 		}
 		
 		else if(formula == "=") { //바로 = 이 눌리면 
-			if(result % 1.0 == Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
-			else if(result % 1.0 != Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
+			if(result % Constants.CHECK_DECIMAL == Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
 			temp = result;
 			if(math == "+") result = result + number;
 			if(math == "-") result = result - number;
@@ -331,9 +333,10 @@ public class Calculator{
 	
 	public void printCalculate() // 화면에 값 출
 	{
-		if(temp % 1.0 == 0) {
+		System.out.println(temp);
+		if(temp % Constants.CHECK_DECIMAL == Constants.ZERO) {
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
-			textPanel.inputSpace.setText(String.valueOf((int) temp)); // 입력화면 
+			textPanel.inputSpace.setText(setComma(String.valueOf(String.valueOf((int) temp)))); // 입력화면 
 			}
 			else {
 				textPanel.blankSpace.setText((double)(temp) +  text); // 중앙 화면
@@ -358,8 +361,33 @@ public class Calculator{
 		else if(textPanel.blankSpace.getText().contains("÷"))temp /= number;
 	}
 	
-	
-	/* 기존 연산 로
+	public String setComma(String number) {
+        
+        //Null 체크
+        if(number == null || number.isEmpty()) return "0"; 
+    
+        //숫자형태가 아닌 문자열일경우 디폴트 0으로 반환 
+        String regex = "^[-+]?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][-+]?[0-9]+)?$";
+        boolean isNumber = number.matches(regex);
+        if (!isNumber) return "0";             
+    
+        String changeResult = number; //출력할 결과를 저장할 변수
+        Pattern pattern = Pattern.compile("(^[+-]?\\d+)(\\d{3})"); //정규표현식 
+        Matcher regexMatcher = pattern.matcher(number); 
+        
+        int cnt = 0;
+        while(regexMatcher.find()) {                
+        	changeResult = regexMatcher.replaceAll("$1,$2"); //치환 
+                                
+
+            //regexMatcher = p.matcher(strResult); 
+            regexMatcher.reset(changeResult); 
+        }        
+        return changeResult;
+    }
+
+
+	/* 기존 연산 로직 
 	if(formula == "=") {// 방금 전 계산을 = 으로 했으면
 		 temp /= number;
 		 setCalculate();

@@ -15,8 +15,8 @@ public class PrintCalculator extends JFrame{
 	
 	private void frame()
 	{
-		setSize(300,500);
-		setPreferredSize(new Dimension(300, 500));	
+		setSize(Constants.SCREEN_SIZE_WIDTH,Constants.SCREEN_SIZE_HEIGHT);
+		setPreferredSize(new Dimension(Constants.SCREEN_SIZE_WIDTH, Constants.SCREEN_SIZE_HEIGHT));	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
 		setLocationRelativeTo(null); // 화면 나오는 위치
 		setVisible(true);
@@ -26,8 +26,7 @@ public class PrintCalculator extends JFrame{
 	public void GetCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel)
 	{
 		frame();
-		//frame = getContentPane(); // 프레임 컨텐트 얻기
-		setLayout(new BorderLayout()); // 컨텐트  프레임  설정하기 
+		setLayout(new BorderLayout()); // 프레임  설정하기 
 		
 		this.textPanel = textPanel; // 입력패드 
 		this.calculator = calculatorPanel; // 버튼 + 이벤트 달아주는 객체 
