@@ -13,6 +13,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.swing.JScrollPane;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -22,6 +25,7 @@ public class Calculator{
 
 	private PrintCalculator printCalculator;
 	private CalculatorPanel calculatorPanel;
+	private JScrollPane scrollPane;
 	private TextPanel textPanel;
 	private RecordPanel recordPanel;
 	private String text;
@@ -46,16 +50,17 @@ public class Calculator{
 	public Calculator(PrintCalculator printCalculator)
 	{	
 		this.printCalculator = printCalculator;
-		textPanel = new TextPanel();  //입력패드 생성 
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
 		recordPanel = new RecordPanel();
+		scrollPane = new JScrollPane(recordPanel);
+		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성 
 		callCalculator();// 계산기 출력 
 	}
 	
 	
 	public void callCalculator() // 계산기 출력 
 	{
-		printCalculator.getCalculator(calculatorPanel, textPanel, recordPanel); // 계산기 출력	
+		printCalculator.getCalculator(calculatorPanel, textPanel, recordPanel, scrollPane); // 계산기 출력	
 	}
 	
 
@@ -80,6 +85,8 @@ public class Calculator{
 		}
 		
 	};
+	
+	
 	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {

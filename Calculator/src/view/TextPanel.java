@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -14,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import Utility.Constants;
@@ -24,7 +27,7 @@ public class TextPanel extends JPanel
 	public JLabel blankSpace;
 	public ComponentAdapter Resize;
 	
-	public TextPanel()
+	public TextPanel(CalculatorPanel calculatorPanel, JScrollPane scrollPane,PrintCalculator printCalculator)
 	{
 		ImageIcon image = new ImageIcon("/Users/jojunhui/Desktop/시계.png");
 	
@@ -47,6 +50,18 @@ public class TextPanel extends JPanel
 		inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, Constants.INPUT_FONT_SIZE));  	// 마지
 		inputSpace.setAlignmentX(RIGHT_ALIGNMENT);
 		
+		
+		log.addActionListener(new ActionListener(){ // 누른 키패드 가져오기
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Heelo");
+				//recordPanel.removeAll();
+				//calculatorPanel.removeAll();
+				calculatorPanel.setVisible(false);
+				printCalculator.frame.add(scrollPane);
+				scrollPane.setVisible(true);
+			}
+			
+		});
 		
 		add(log);
 		add(blankSpace);

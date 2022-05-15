@@ -7,36 +7,38 @@ import Utility.Constants;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 
-public class PrintCalculator extends JFrame{
+public class PrintCalculator{
 
 	
-	static public Container frame; // 프레임 
+	public JFrame frame;
 	private JScrollPane scrollPane;
 	
-	private void frame()
+	public void frameset()
 	{
-		setSize(Constants.SCREEN_SIZE_WIDTH,Constants.SCREEN_SIZE_HEIGHT);
-		setPreferredSize(new Dimension(Constants.SCREEN_SIZE_WIDTH, Constants.SCREEN_SIZE_HEIGHT));	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
-		setLocationRelativeTo(null); // 화면 나오는 위치
-		setVisible(true);
-		setMinimumSize(new Dimension(250, 250));
+		frame = new JFrame();
+		frame.setSize(Constants.SCREEN_SIZE_WIDTH,Constants.SCREEN_SIZE_HEIGHT);
+		frame.setPreferredSize(new Dimension(Constants.SCREEN_SIZE_WIDTH, Constants.SCREEN_SIZE_HEIGHT));	
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
+		frame.setLocationRelativeTo(null); // 화면 나오는 위치
+		frame.setVisible(true);
+		frame.setMinimumSize(new Dimension(250, 250));
 		
 	}
 	
 	
-	public void getCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel, RecordPanel recordPanel)
+	public void getCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel, RecordPanel recordPanel, JScrollPane scrollPane)
 	{
-		frame();
-		setLayout(new BorderLayout()); // 프레임  설정하기 
+		frameset();	
+		frame.setLayout(new BorderLayout()); // 프레임  설정하기 
+		//scrollPane = new JScrollPane(recordPanel);
+		frame.add(scrollPane);
+		frame.add(textPanel, BorderLayout.NORTH); // 입력패드 	
+		frame.add(calculatorPanel, BorderLayout.CENTER); // 키패드 
+		frame.setVisible(true);
 		
-		scrollPane = new JScrollPane(recordPanel);
-
-		add(textPanel, BorderLayout.NORTH); // 입력패드 
-		//add(calculatorPanel, BorderLayout.CENTER); // 키패드 
-		add(scrollPane);
-		//add(recordPanel, BorderLayout.CENTER);
-		setVisible(true);
+		textPanel.setVisible(true);
+		scrollPane.setVisible(false);
+		calculatorPanel.setVisible(true);
 
 	}
 }
