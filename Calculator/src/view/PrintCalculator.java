@@ -20,7 +20,7 @@ public class PrintCalculator extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
 		setLocationRelativeTo(null); // 화면 나오는 위치
 		setVisible(true);
-		
+		setMinimumSize(new Dimension(250, 250));
 	}
 	
 	
@@ -32,7 +32,7 @@ public class PrintCalculator extends JFrame{
 
 		add(textPanel, BorderLayout.NORTH); // 입력패드 
 		add(calculatorPanel, BorderLayout.CENTER); // 키패드 
-		add(recordPanel, BorderLayout.CENTER);
+		//add(recordPanel, BorderLayout.CENTER);
 		setVisible(true);
 
 	}

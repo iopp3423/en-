@@ -20,14 +20,50 @@ public class RecordPanel extends JPanel{
 
 	public RecordPanel() {
 		
-		String a = "A"+ "n" + "b";
-		JButton log = new JButton(a);
+		JButton log = new JButton("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+		JButton Log = new JButton("ffff");
+		JButton aog = new JButton("ffff");
+		JButton bog = new JButton("ffff");
+		JButton cog = new JButton("ffff");
+		JButton dog = new JButton("ffff");
+		JButton eog = new JButton("ffff");
+		JButton fog = new JButton("ffff");
+		JButton gog = new JButton("ffff");
+		JButton qog = new JButton("ffff");
+		JButton wog = new JButton("ffff");
+		JButton eog1 = new JButton("ffff");
+		JButton rog = new JButton("ffff");
+		JButton tog = new JButton("ffff");
+		JButton yog = new JButton("ffff");
+		
+		JPanel logPanel = new JPanel(new GridLayout(14,1));
 		setLayout(new BorderLayout());
 
+
 		scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	
-			
-		add(log);	
-		add(scrollPane); // 패널에 스크롤 넣어
+		scrollPane.add(logPanel);
+		logPanel.add(log);
+		logPanel.add(Log);
+		logPanel.add(aog);
+		logPanel.add(bog);
+		logPanel.add(cog);
+		logPanel.add(dog);
+		logPanel.add(eog1);
+		logPanel.add(fog);
+		logPanel.add(gog);
+		logPanel.add(qog);
+		logPanel.add(wog);
+		logPanel.add(eog);
+		logPanel.add(rog);
+		//add(log);
+		add(logPanel);
+		//add(scrollPane);
+		/*
+		logPanel.add(log);
+		logPanel.add(Log);
+		add(logPanel);
+		add(scrollPane,BorderLayout.EAST); // 패널에 스크롤 넣어
+		*/
+
 	}
 }
