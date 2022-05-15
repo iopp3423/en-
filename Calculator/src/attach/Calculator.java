@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import Utility.Constants;
 import view.CalculatorPanel;
 import view.PrintCalculator;
+import view.RecordPanel;
 import view.TextPanel;
 import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
@@ -19,6 +20,7 @@ public class Calculator{
 	private PrintCalculator printCalculator;
 	private CalculatorPanel calculatorPanel;
 	private TextPanel textPanel;
+	private RecordPanel recordPanel;
 	private String text;
 	private String inputRecord;
 	private String record = "";
@@ -42,13 +44,14 @@ public class Calculator{
 		this.printCalculator = printCalculator;
 		textPanel = new TextPanel();  //입력패드 생성 
 		calculatorPanel = new CalculatorPanel(actionlistener);
+		recordPanel = new RecordPanel();
 		callCalculator();// 계산기 출력 
 	}
 	
 	
 	public void callCalculator() // 계산기 출력 
 	{
-		printCalculator.getCalculator(calculatorPanel, textPanel); // 계산기 출력	
+		printCalculator.getCalculator(calculatorPanel, textPanel, recordPanel); // 계산기 출력	
 	}
 	
 	
@@ -71,7 +74,6 @@ public class Calculator{
 			result(); // 결과 	
 			changeSign(); // 부호변
 			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
-			System.out.println(Constants.SCREEN_SIZE_WIDTH);
 			fontsize+=Constants.ONE;
 		}
 	};
@@ -172,6 +174,8 @@ public class Calculator{
 			dotCount=Constants.ZERO;
 			result = Constants.ZERO;
 			temp = Constants.ZERO;
+			fontsize=9;
+			textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50)); 
 			for(int index=length; index>Constants.ZERO; index--)
 			{
 				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
@@ -191,6 +195,8 @@ public class Calculator{
 			record = "";
 			number = Constants.ZERO;
 			dotCount = Constants.ZERO;
+			fontsize=9;
+			textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50));
 			for(int index=length; index>Constants.ZERO; index--)
 			{
 				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
