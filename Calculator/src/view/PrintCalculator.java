@@ -5,6 +5,7 @@ import javax.swing.*;
 import Utility.Constants;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 
 public class PrintCalculator extends JFrame{
 
@@ -23,15 +24,16 @@ public class PrintCalculator extends JFrame{
 	}
 	
 	
-	public void getCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel, RecordPanel recordPanel)
+	public void getCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel, RecordPanel recordPanel, KeyAdapter keyAdapter)
 	{
 		frame();
 		setLayout(new BorderLayout()); // 프레임  설정하기 
 		
-
+		setFocusable(true);
+		addKeyListener(keyAdapter);
 		add(textPanel, BorderLayout.NORTH); // 입력패드 
 		add(calculatorPanel, BorderLayout.CENTER); // 키패드 
-		add(recordPanel, BorderLayout.CENTER);
+		//add(recordPanel, BorderLayout.CENTER);
 		setVisible(true);
 
 	}

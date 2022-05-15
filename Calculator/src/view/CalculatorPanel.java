@@ -1,8 +1,10 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -13,11 +15,12 @@ import Utility.Constants;
 public class CalculatorPanel extends JPanel
 {
 	private ActionListener listener; // 버튼에 마우스 이벤트 달아줌 
-	MouseAdapter formulaMouse;
-	MouseAdapter resultMouse;
-	MouseAdapter numberMouse;
+	private KeyAdapter adapter;
+	private MouseAdapter formulaMouse;
+	private MouseAdapter resultMouse;
+	private MouseAdapter numberMouse;
 	
-	public CalculatorPanel(ActionListener Listener)
+	public CalculatorPanel(ActionListener Listener, KeyAdapter keyAdapter)
 	{	
 		
 		this.listener = Listener;
@@ -101,13 +104,14 @@ public class CalculatorPanel extends JPanel
 		{
 			
 			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌	
+			button[index].addKeyListener(adapter);
+			((Component) listener).addKeyListener(adapter);
 			
 			button[index].setOpaque(true);//있어야 색 적용가능 
 			button[index].setBorderPainted(false);//있어야 색 적용가능 
 			
 			
 			if(index == 3 || index == 7 || index == 11 || index == 15 || index == 0 || index == 1 || index == 2) {// 숫자패드 제외
-				//button[index].setBackground(new Color(0xFF00FFFF, true)); //투명도 FF
 				button[index].setBackground(new Color(220, 237, 246));
 				button[index].addMouseListener(formulaMouse);
 			}

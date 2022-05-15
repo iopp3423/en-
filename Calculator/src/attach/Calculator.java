@@ -8,6 +8,9 @@ import view.PrintCalculator;
 import view.RecordPanel;
 import view.TextPanel;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.math.BigDecimal;
@@ -43,7 +46,7 @@ public class Calculator{
 	{	
 		this.printCalculator = printCalculator;
 		textPanel = new TextPanel();  //입력패드 생성 
-		calculatorPanel = new CalculatorPanel(actionlistener);
+		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
 		recordPanel = new RecordPanel();
 		callCalculator();// 계산기 출력 
 	}
@@ -51,14 +54,13 @@ public class Calculator{
 	
 	public void callCalculator() // 계산기 출력 
 	{
-		printCalculator.getCalculator(calculatorPanel, textPanel, recordPanel); // 계산기 출력	
+		printCalculator.getCalculator(calculatorPanel, textPanel, recordPanel, keyAdapter); // 계산기 출력	
 	}
 	
 	
 		
 	ActionListener actionlistener = new ActionListener(){ // 누른 키패드 가져오기
-		public void actionPerformed(ActionEvent e) {	
-			
+		public void actionPerformed(ActionEvent e) {				
 			text = (e.getActionCommand()); // 입력한  값 가져오기 
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
 			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
@@ -77,6 +79,27 @@ public class Calculator{
 			fontsize+=Constants.ONE;
 		}
 	};
+	
+	KeyAdapter keyAdapter = new KeyAdapter() {
+		public void keyPressed(KeyEvent e) {
+			switch(e.getKeyCode()) {
+			case KeyEvent.VK_0 : text = "0"; inputNumber(); break;
+			case KeyEvent.VK_1 : text = "1"; inputNumber(); break;
+			case KeyEvent.VK_2 : text = "2"; inputNumber(); break;
+			case KeyEvent.VK_3 : text = "3"; inputNumber(); break;
+			case KeyEvent.VK_4 : text = "4"; inputNumber(); break;
+			case KeyEvent.VK_5 : text = "5"; inputNumber(); break;
+			case KeyEvent.VK_6 : text = "6"; inputNumber(); break;
+			case KeyEvent.VK_7 : text = "7"; inputNumber(); break;
+			case KeyEvent.VK_8 : text = "8"; inputNumber(); break;
+			case KeyEvent.VK_9 : text = "9"; inputNumber(); break;
+			
+			}
+		}
+	};
+	
+	
+	
 		
 	private void delete() 
 	{
