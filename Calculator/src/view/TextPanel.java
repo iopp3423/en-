@@ -26,6 +26,7 @@ public class TextPanel extends JPanel
 	public JLabel inputSpace;
 	public JLabel blankSpace;
 	public ComponentAdapter Resize;
+	private int panelCount = Constants.ZERO;
 	
 	public TextPanel(CalculatorPanel calculatorPanel, JScrollPane scrollPane,PrintCalculator printCalculator)
 	{
@@ -51,14 +52,20 @@ public class TextPanel extends JPanel
 		inputSpace.setAlignmentX(RIGHT_ALIGNMENT);
 		
 		
-		log.addActionListener(new ActionListener(){ // 누른 키패드 가져오기
+		log.addActionListener(new ActionListener(){ // 화면 전
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Heelo");
-				//recordPanel.removeAll();
-				//calculatorPanel.removeAll();
+				if(panelCount % 2 == Constants.ZERO) {
 				calculatorPanel.setVisible(false);
 				printCalculator.frame.add(scrollPane);
 				scrollPane.setVisible(true);
+				panelCount++;
+				}
+				else {
+					calculatorPanel.setVisible(true);
+					printCalculator.frame.add(calculatorPanel);
+					scrollPane.setVisible(false);
+					panelCount++;
+				}
 			}
 			
 		});
