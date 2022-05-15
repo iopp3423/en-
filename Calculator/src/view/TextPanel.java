@@ -27,7 +27,7 @@ public class TextPanel extends JPanel
 	public TextPanel()
 	{
 		ImageIcon image = new ImageIcon("/Users/jojunhui/Desktop/시계.png");
-		
+	
 		inputSpace = new JLabel("0");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		

@@ -102,9 +102,9 @@ public class CalculatorPanel extends JPanel
 		
 		for(int index = Constants.ZERO; index<Constants.CALCULATOR; index++)
 		{
-			
+			button[index].addKeyListener(keyAdapter); // 버튼에 키보
 			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
-			button[index].addKeyListener(keyAdapter);
+
 			
 			button[index].setOpaque(true);//있어야 색 적용가능 
 			button[index].setBorderPainted(false);//있어야 색 적용가능 
@@ -120,11 +120,11 @@ public class CalculatorPanel extends JPanel
 			}
 			else { // 숫자패드
 				
-				button[index].setBackground(new Color(243, 249, 252)); 
+				button[index].setBackground(new Color(243, 249, 252));
 				button[index].addMouseListener(numberMouse);
 			}
-			setFocusable(true);
-			requestFocus();
+			//setFocusable(true);
+			//requestFocus();
 			add(button[index]);		
 		}	
 			
