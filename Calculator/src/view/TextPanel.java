@@ -48,7 +48,6 @@ public class TextPanel extends JPanel
 		inputSpace.setAlignmentX(RIGHT_ALIGNMENT);
 		
 		
-		
 		add(log);
 		add(blankSpace);
 		add(inputSpace);	

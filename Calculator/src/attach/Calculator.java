@@ -39,6 +39,7 @@ public class Calculator{
 	private int PlusCount = Constants.ZERO;
 	private int plusMinus = -Constants.ONE;
 	private int fontsize=9;
+	
 
 
 	
@@ -54,18 +55,17 @@ public class Calculator{
 	
 	public void callCalculator() // 계산기 출력 
 	{
-		printCalculator.getCalculator(calculatorPanel, textPanel, recordPanel, keyAdapter); // 계산기 출력	
+		printCalculator.getCalculator(calculatorPanel, textPanel, recordPanel,keyAdapter); // 계산기 출력	
 	}
 	
-	
-		
+
 	ActionListener actionlistener = new ActionListener(){ // 누른 키패드 가져오기
 		public void actionPerformed(ActionEvent e) {				
 			text = (e.getActionCommand()); // 입력한  값 가져오기 
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
 			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
 			delete();	// 백스페이스 
-			inputnumber(); // 키패
+			inputnumber(); // 키패드 
 			reset();// 초기화 
 			resetPart(); // 부분초기화(CE)
 			inputDot(); // 소수점 
@@ -78,23 +78,35 @@ public class Calculator{
 			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
 			fontsize+=Constants.ONE;
 		}
+		
 	};
 	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
-			switch(e.getKeyCode()) {
-			case KeyEvent.VK_0 : text = "0"; inputNumber(); break;
-			case KeyEvent.VK_1 : text = "1"; inputNumber(); break;
-			case KeyEvent.VK_2 : text = "2"; inputNumber(); break;
-			case KeyEvent.VK_3 : text = "3"; inputNumber(); break;
-			case KeyEvent.VK_4 : text = "4"; inputNumber(); break;
-			case KeyEvent.VK_5 : text = "5"; inputNumber(); break;
-			case KeyEvent.VK_6 : text = "6"; inputNumber(); break;
-			case KeyEvent.VK_7 : text = "7"; inputNumber(); break;
-			case KeyEvent.VK_8 : text = "8"; inputNumber(); break;
-			case KeyEvent.VK_9 : text = "9"; inputNumber(); break;
+			System.out.println(e.getKeyCode());
+			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
+			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
+			switch(e.getKeyCode()) {			
+			case 48 : text = "0"; inputNumber(); break;
+			case 49 : text = "1"; inputNumber(); break;
+			case 50: text = "2"; inputNumber(); break;
+			case 51 : text = "3"; inputNumber(); break;
+			case 52 : text = "4"; inputNumber(); break;
+			case 53 : text = "5"; inputNumber(); break;
+			case 54 : text = "6"; inputNumber(); break;
+			case 55 : text = "7"; inputNumber(); break;
+			case 56 : text = "8"; inputNumber(); break;
+			case 57 : text = "9"; inputNumber(); break;
+			case 107 : text = "+"; plus(); break;
+			case 109 : text = "-"; minus(); break;
+			case 10 : text = "="; result(); break;
+			case 47 : text = "÷"; division(); break;
+			case 106 : text = "x"; multyfly();  break;
+			case 8: text = "\u232B"; delete(); break;
 			
 			}
+			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
+			fontsize+=Constants.ONE;
 		}
 	};
 	

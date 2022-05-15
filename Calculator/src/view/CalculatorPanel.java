@@ -15,15 +15,15 @@ import Utility.Constants;
 public class CalculatorPanel extends JPanel
 {
 	private ActionListener listener; // 버튼에 마우스 이벤트 달아줌 
-	private KeyAdapter adapter;
+	private KeyAdapter keyAdapter;
 	private MouseAdapter formulaMouse;
 	private MouseAdapter resultMouse;
 	private MouseAdapter numberMouse;
 	
-	public CalculatorPanel(ActionListener Listener, KeyAdapter keyAdapter)
+	public CalculatorPanel(ActionListener Listener, KeyAdapter KeyAdapter)
 	{	
-		
 		this.listener = Listener;
+		this.keyAdapter = KeyAdapter;
 		JButton [] button = new JButton[20];
 		setLayout(new GridLayout(5,4, 1, 1));	
  
@@ -97,15 +97,14 @@ public class CalculatorPanel extends JPanel
 		    public void mousePressed(MouseEvent e) { // 마우스클릭 
 		    	JButton button = (JButton)e.getSource();
 		    	button.setBackground(new Color(220, 237, 246));
-		    }    
+		    }   
 		};
 		
 		for(int index = Constants.ZERO; index<Constants.CALCULATOR; index++)
 		{
 			
-			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌	
-			button[index].addKeyListener(adapter);
-			((Component) listener).addKeyListener(adapter);
+			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
+			button[index].addKeyListener(keyAdapter);
 			
 			button[index].setOpaque(true);//있어야 색 적용가능 
 			button[index].setBorderPainted(false);//있어야 색 적용가능 
@@ -124,8 +123,9 @@ public class CalculatorPanel extends JPanel
 				button[index].setBackground(new Color(243, 249, 252)); 
 				button[index].addMouseListener(numberMouse);
 			}
-			
-			add(button[index]);			
+			setFocusable(true);
+			requestFocus();
+			add(button[index]);		
 		}	
 			
 		

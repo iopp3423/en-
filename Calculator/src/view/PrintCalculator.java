@@ -29,8 +29,9 @@ public class PrintCalculator extends JFrame{
 		frame();
 		setLayout(new BorderLayout()); // 프레임  설정하기 
 		
-		setFocusable(true);
-		addKeyListener(keyAdapter);
+		//setFocusable(true);
+		//addKeyListener(keyAdapter);
+
 		add(textPanel, BorderLayout.NORTH); // 입력패드 
 		add(calculatorPanel, BorderLayout.CENTER); // 키패드 
 		//add(recordPanel, BorderLayout.CENTER);
