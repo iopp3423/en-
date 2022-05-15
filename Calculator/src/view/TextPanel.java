@@ -25,22 +25,30 @@ public class TextPanel extends JPanel
 {
 	public JLabel inputSpace;
 	public JLabel blankSpace;
+	public JButton logSet;
 	public ComponentAdapter Resize;
 	private int panelCount = Constants.ZERO;
 	
 	public TextPanel(CalculatorPanel calculatorPanel, JScrollPane scrollPane,PrintCalculator printCalculator)
 	{
-		ImageIcon image = new ImageIcon("/Users/jojunhui/Desktop/시계.png");
+
 	
 		inputSpace = new JLabel("0");
+		blankSpace = new JLabel(" ");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		blankSpace = new JLabel(" ");
+		logSet = new JButton(new ImageIcon(new ImageIcon("/Users/jojunhui/Desktop/쓰레기통.png").getImage().getScaledInstance(30, 25, Image.SCALE_SMOOTH)));
 		JButton log = new JButton(new ImageIcon(new ImageIcon("/Users/jojunhui/Desktop/시계.png").getImage().getScaledInstance(30, 20, Image.SCALE_SMOOTH)));
+		
+		logSet.setBorderPainted(false); 
+		logSet.setFocusPainted(false); 
+		logSet.setContentAreaFilled(false); 
+		
 		log.setBorderPainted(false); 
 		log.setFocusPainted(false); 
 		log.setContentAreaFilled(false); 
-
+	
+		logSet.setAlignmentX(RIGHT_ALIGNMENT);
 
 		log.setFont(new Font("맑은 고딕", Constants.ZERO, Constants.FONT_SIZE));
 		log.setAlignmentX(RIGHT_ALIGNMENT);
@@ -50,6 +58,9 @@ public class TextPanel extends JPanel
 		
 		inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, Constants.INPUT_FONT_SIZE));  	// 마지
 		inputSpace.setAlignmentX(RIGHT_ALIGNMENT);
+		
+		
+		
 		
 		
 		log.addActionListener(new ActionListener(){ // 화면 전
@@ -65,11 +76,13 @@ public class TextPanel extends JPanel
 					printCalculator.frame.add(calculatorPanel);
 					scrollPane.setVisible(false);
 					panelCount++;
+					System.out.println("\uD83D\uDDD1");
 				}
 			}
 			
 		});
 		
+		add(logSet);
 		add(log);
 		add(blankSpace);
 		add(inputSpace);	

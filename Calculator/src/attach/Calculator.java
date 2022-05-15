@@ -43,6 +43,7 @@ public class Calculator{
 	private int PlusCount = Constants.ZERO;
 	private int plusMinus = -Constants.ONE;
 	private int fontsize=9;
+	private int buttonSize = Constants.ZERO;
 	
 
 
@@ -51,9 +52,9 @@ public class Calculator{
 	{	
 		this.printCalculator = printCalculator;
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
-		recordPanel = new RecordPanel();
-		scrollPane = new JScrollPane(recordPanel);
-		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성 
+		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성
+		recordPanel = new RecordPanel(textPanel);
+		scrollPane = new JScrollPane(recordPanel); 
 		callCalculator();// 계산기 출력 
 	}
 	
@@ -331,6 +332,7 @@ public class Calculator{
 			calculate();
 			setCalculate();
 			printCalculate();
+			
 		}			
 	}
 	
@@ -351,7 +353,9 @@ public class Calculator{
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
 					textPanel.inputSpace.setText(String.valueOf((double) result));
 				}
-
+				
+				recordPanel.button[buttonSize++].setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText()); //로그 남기기 
+				
 		formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한
 		}
 		
@@ -376,7 +380,7 @@ public class Calculator{
 			if(math == "x") result = result * number;
 			if(math == "÷") result = result / number;
 		}
-		
+
 		
 	}
 	
@@ -385,14 +389,17 @@ public class Calculator{
 		if(temp % Constants.CHECK_DECIMAL == Constants.ZERO) {
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(setComma(String.valueOf(String.valueOf((int) temp)))); // 입력화면 
+			
 			}
 			else {
 				textPanel.blankSpace.setText((double)(temp) +  text); // 중앙 화면
 				textPanel.inputSpace.setText(String.valueOf((double) temp)); // 입력화면 
+			
 			}
+		
 	}
 	
-	private void setCalculate() // 수식에 들어올 때 세
+	private void setCalculate() // 수식에 들어올 때 세팅 
 	{
 		number = Constants.ZERO;; // number 초기화 
 		record=""; // 입력값 초기화 
@@ -402,13 +409,16 @@ public class Calculator{
 		PlusCount = Constants.ZERO;
 	}
 	
+	
 	private void calculate()
 	{
 		if(textPanel.blankSpace.getText().contains("+"))temp += number;
 		else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
 		else if(textPanel.blankSpace.getText().contains("x"))temp *= number;
 		else if(textPanel.blankSpace.getText().contains("÷"))temp /= number;
+	
 	}
+	
 	
 	private String setComma(String number) { // ,찍기 
         String changeResult = number; //출력할 결과를 저장할 변수

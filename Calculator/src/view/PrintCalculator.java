@@ -13,9 +13,8 @@ public class PrintCalculator{
 
 	
 	public JFrame frame;
+	private int size = Constants.ZERO;
 	private JScrollPane scrollPane;
-	private int smallSize = Constants.ZERO;
-	private int bigSize = Constants.ZERO;
 	
 	public void frameset()
 	{
@@ -44,15 +43,15 @@ public class PrintCalculator{
 		frame.addComponentListener(new ComponentAdapter() {  // 화면 수
 		    public void componentResized(ComponentEvent e) {
 
-		    	if(frame.getWidth() >= 600 &&  bigSize == Constants.ZERO) {
+		    	if(frame.getWidth() >= 600 &&  size == Constants.ZERO) {
 		    		scrollPane.setVisible(true);
-		    		bigSize = Constants.ONE;
-		    		System.out.println(bigSize);
+		    		size = Constants.ONE;
+		    		System.out.println(size);
 		    	}
-		    	if(frame.getWidth() < 600 && bigSize == Constants.ONE){
+		    	if(frame.getWidth() < 600 && size == Constants.ONE){
 		    		scrollPane.setVisible(false);   		
-		    		bigSize = Constants.ZERO;
-		    		System.out.println(bigSize);
+		    		size = Constants.ZERO;
+		    		System.out.println(size);
 		    	}		        
 		    }
 		});
