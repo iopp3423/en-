@@ -11,7 +11,7 @@ public class PrintCalculator extends JFrame{
 
 	
 	static public Container frame; // 프레임 
-
+	private JScrollPane scrollPane;
 	
 	private void frame()
 	{
@@ -21,6 +21,7 @@ public class PrintCalculator extends JFrame{
 		setLocationRelativeTo(null); // 화면 나오는 위치
 		setVisible(true);
 		setMinimumSize(new Dimension(250, 250));
+		
 	}
 	
 	
@@ -29,9 +30,11 @@ public class PrintCalculator extends JFrame{
 		frame();
 		setLayout(new BorderLayout()); // 프레임  설정하기 
 		
+		scrollPane = new JScrollPane(recordPanel);
 
 		add(textPanel, BorderLayout.NORTH); // 입력패드 
-		add(calculatorPanel, BorderLayout.CENTER); // 키패드 
+		//add(calculatorPanel, BorderLayout.CENTER); // 키패드 
+		add(scrollPane);
 		//add(recordPanel, BorderLayout.CENTER);
 		setVisible(true);
 
