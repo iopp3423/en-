@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -29,7 +30,7 @@ public class TextPanel extends JPanel
 	public ComponentAdapter Resize;
 	private int panelCount = Constants.ZERO;
 	
-	public TextPanel(CalculatorPanel calculatorPanel, JScrollPane scrollPane,PrintCalculator printCalculator)
+	public TextPanel(CalculatorPanel calculatorPanel, JScrollPane scrollPane,PrintCalculator printCalculator, RecordPanel recordPanel)
 	{
 
 	
@@ -48,6 +49,7 @@ public class TextPanel extends JPanel
 		log.setFocusPainted(false); 
 		log.setContentAreaFilled(false); 
 	
+		logSet.setFont(new Font("맑은 고딕", Constants.ZERO, Constants.FONT_SIZE));
 		logSet.setAlignmentX(RIGHT_ALIGNMENT);
 
 		log.setFont(new Font("맑은 고딕", Constants.ZERO, Constants.FONT_SIZE));
@@ -59,8 +61,8 @@ public class TextPanel extends JPanel
 		inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, Constants.INPUT_FONT_SIZE));  	// 마지
 		inputSpace.setAlignmentX(RIGHT_ALIGNMENT);
 		
-		
-		
+
+			
 		
 		
 		log.addActionListener(new ActionListener(){ // 화면 전
@@ -82,6 +84,19 @@ public class TextPanel extends JPanel
 			
 		});
 		
+		
+		logSet.addActionListener(new ActionListener(){ // 기록 초기화
+			public void actionPerformed(ActionEvent e) {
+				
+				for(int index=0; index<recordPanel.button.length; index++)
+				{
+					recordPanel.button[index].setText("");
+				}
+			}
+		});
+		
+		
+
 		add(logSet);
 		add(log);
 		add(blankSpace);

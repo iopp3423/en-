@@ -62,6 +62,7 @@ public class CalculatorPanel extends JPanel
 		        JButton button = (JButton)e.getSource();
 		        button.setBackground(new Color(243, 249, 252)); 
 		    }
+		    
 		    public void mousePressed(MouseEvent e) { // 마우스클릭 
 		    	JButton button = (JButton)e.getSource();
 		    	button.setBackground(new Color(243, 249, 252));

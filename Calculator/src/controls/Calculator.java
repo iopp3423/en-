@@ -1,4 +1,4 @@
-package attach;
+package controls;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 
@@ -52,9 +52,9 @@ public class Calculator{
 	{	
 		this.printCalculator = printCalculator;
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
-		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성
-		recordPanel = new RecordPanel(textPanel);
-		scrollPane = new JScrollPane(recordPanel); 
+		recordPanel = new RecordPanel();
+		scrollPane = new JScrollPane(recordPanel);
+		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성 
 		callCalculator();// 계산기 출력 
 	}
 	
@@ -97,7 +97,7 @@ public class Calculator{
 			switch(e.getKeyCode()) {			
 			case 48 : text = "0"; inputNumber(); break;
 			case 49 : text = "1"; inputNumber(); break;
-			case 50: text = "2"; inputNumber(); break;
+			case 50 : text = "2"; inputNumber(); break;
 			case 51 : text = "3"; inputNumber(); break;
 			case 52 : text = "4"; inputNumber(); break;
 			case 53 : text = "5"; inputNumber(); break;
@@ -329,7 +329,7 @@ public class Calculator{
 		if(text=="+")
 		{	
 			if(centerProperty == " ") temp = number;
-			calculate();
+			//calculate();
 			setCalculate();
 			printCalculate();
 			
@@ -347,7 +347,7 @@ public class Calculator{
 			
 				if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
-					textPanel.inputSpace.setText(setComma(String.valueOf(String.valueOf((int)(result)))));
+					textPanel.inputSpace.setText(setComma(String.valueOf(String.valueOf((double)(result)))));
 				}
 				else { // 더블형 출력 
 					if(formula != "=")textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );

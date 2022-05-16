@@ -40,6 +40,8 @@ public class PrintCalculator{
 		frame.add(calculatorPanel, BorderLayout.CENTER); // 키패드 
 		frame.setVisible(true);
 		
+		
+		
 		frame.addComponentListener(new ComponentAdapter() {  // 화면 수
 		    public void componentResized(ComponentEvent e) {
 

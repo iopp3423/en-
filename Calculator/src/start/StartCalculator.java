@@ -1,8 +1,8 @@
-package open;
+package start;
 
-import transmission.CalculationController;
+import controls.CalculationController;
 
-public class OpenCalculator {
+public class StartCalculator {
 
 	public static void main(String[] args) {
 		CalculationController calculationController = new CalculationController();

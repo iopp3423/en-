@@ -19,7 +19,7 @@ public class RecordPanel extends JPanel{
 
 	public JButton [] button;
 
-	public RecordPanel(TextPanel textPanel) {
+	public RecordPanel() {
 		
 		button = new JButton[40];
 
@@ -36,17 +36,7 @@ public class RecordPanel extends JPanel{
 			if(index == Constants.ZERO) button[index].setText("아직 기록이 없습니다.");
 			add(button[index]);
 		}
-
-
-		textPanel.logSet.addActionListener(new ActionListener(){ // 화면 전
-			public void actionPerformed(ActionEvent e) {
-				
-				for(int index=0; index<button.length; index++)
-				{
-					if(index == Constants.ZERO) button[index].setText("");
-				}
-			}
-		});
+		
 	}
 	
 }
