@@ -14,10 +14,7 @@ import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.math.BigDecimal;
-
 import javax.swing.JScrollPane;
-
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 
@@ -173,7 +170,7 @@ public class Calculator{
 				record += text;// 키보드 입력
 				number = Double.parseDouble(record); //// 넘버에 입력값 넣어주기
 				textPanel.inputSpace.setText(setComma(record));			
-				System.out.println("number="+number);
+				//System.out.println("number="+number);
 			}
 			limit = record.length();	
 			
@@ -189,8 +186,7 @@ public class Calculator{
 		case "8" : inputNumber();break;
 		case "9" : inputNumber();break;
 		}
-		//System.out.println(length);
-		
+
 	}
 	
 	
@@ -315,12 +311,6 @@ public class Calculator{
 			dotCount++;	
 		}	
 		
-		System.out.println(result);
-		System.out.println(record);
-		System.out.println(text);
-		System.out.println(temp);
-		System.out.println(math);
-		
 	}
 	
 	private void arithmaticCalculate()
@@ -346,7 +336,7 @@ public class Calculator{
 			if(result % Constants.CHECK_DECIMAL == Constants.ZERO && !formula.equals("=")) { // 정수형 출력 (중앙화면), // 바로 = 이 눌린게 아닐 때
 				textPanel.blankSpace.setText(String.valueOf((long) temp) + math + String.valueOf((int) number) + text );
 				textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
-				System.out.println(changeInt(String.valueOf((long)temp)));
+				//System.out.println(changeInt(String.valueOf((long)temp)));
 			}
 			
 			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO && !formula.equals("=")){ // 더블형 출력,  // 바로 = 이 눌린게 아닐 때 
@@ -356,8 +346,8 @@ public class Calculator{
 			/////////////////////////////////////////////////////////////////////////////////////////
 			
 			if(math.equals(text) && number % Constants.CHECK_DECIMAL == Constants.ZERO) { // 0.1 =====
-				textPanel.blankSpace.setText((int)number + text);
-				textPanel.inputSpace.setText(String.valueOf((int) number));
+				textPanel.blankSpace.setText((long)number + text);
+				textPanel.inputSpace.setText(String.valueOf((long) number));
 			}
 			
 			else if(math.equals(text) && number % Constants.CHECK_DECIMAL != Constants.ZERO) { // 0.1 =====
@@ -372,7 +362,7 @@ public class Calculator{
 			}
 			
 			recordPanel.button[buttonSize++].setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText()); //로그 남기기 
-			exceptionPrint();
+			exceptionPrint(); // 예외 문
 			
 			formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
 	}
