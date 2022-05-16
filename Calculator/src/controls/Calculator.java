@@ -300,18 +300,12 @@ public class Calculator{
 		
 		if (dotCount == Constants.ZERO && textPanel.inputSpace.getText() != "0") {
 			record += text;// 키보드 입력한 값	
-			System.out.println(record);
-			System.out.println(result);
-			System.out.println(text);
-			System.out.println(temp);
-			System.out.println(number);
-			
 			
 			textPanel.inputSpace.setText(setComma(record));
 			dotCount++;		
 		}
 		
-		if(result == Constants.ZERO) {
+		if(result == Constants.ZERO) { // 2.5 - negate. -> 0
 			textPanel.inputSpace.setText(setComma(String.valueOf((int)result)) + record);
 			dotCount++;	
 		}	
@@ -339,17 +333,14 @@ public class Calculator{
 		
 		printResult();
 		
-			if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
-				if(!formula.equals("=")) { // 바로 = 이 눌린게 아닐 때 
-					textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
-					textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
-				}
+			if(result % Constants.CHECK_DECIMAL == Constants.ZERO && !formula.equals("=")) { // 정수형 출력 (중앙화면), // 바로 = 이 눌린게 아닐 때
+				textPanel.blankSpace.setText(String.valueOf((long) temp) + math + String.valueOf((int) number) + text );
+				textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
 			}
-			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO){ // 더블형 출력 
-				if(!formula.equals("=")) { // 바로 = 이 눌린게 아닐 때 
-					textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
-					textPanel.inputSpace.setText(String.valueOf((double) result));
-				}
+			
+			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO && !formula.equals("=")){ // 더블형 출력,  // 바로 = 이 눌린게 아닐 때 
+				textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
+				textPanel.inputSpace.setText(String.valueOf((double) result));		
 			}
 			/////////////////////////////////////////////////////////////////////////////////////////
 			
@@ -365,8 +356,8 @@ public class Calculator{
 			
 			/////////////////////////////////////////////////////////////////////////////////////////
 		
-			if(textPanel.inputSpace.getText().contains("E")) { // e로 변환하기 - 한 번 더 봐야
-				textPanel.inputSpace.setText(setComma(String.valueOf((double)(changeDataType(result)))));
+			if(Double.toString(result).contains("E")) { // e로 변환하기 - 한 번 더 봐야
+				textPanel.inputSpace.setText(setComma(changeDataType(result)));
 			}
 			
 			recordPanel.button[buttonSize++].setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText()); //로그 남기기 
@@ -418,7 +409,7 @@ public class Calculator{
 	private void printCalculate() // 화면에 값 출력 
 	{
 		if(temp % Constants.CHECK_DECIMAL == Constants.ZERO) {
-			textPanel.blankSpace.setText((int)temp +  text); // 중앙 화면
+			textPanel.blankSpace.setText((long)temp +  text); // 중앙 화면
 			textPanel.inputSpace.setText(setComma(String.valueOf((long) temp))); // 입력화면 	
 			}
 		else {
@@ -439,7 +430,7 @@ public class Calculator{
 		pluscount = Constants.ZERO;
 	}
 	
-	public double changeDataType(double data) // 데이터 타입 변
+	public String changeDataType(double data) // 데이터 타입 변
 	{
 		//BigDecimal BigC = new BigDecimal(String.valueOf(data));
 		//BigDecimal BigD = new BigDecimal(String.valueOf( Data));
@@ -448,7 +439,7 @@ public class Calculator{
 		String result;	
 		result = String.format("%.14e",data);
 		System.out.println(result);
-		return Double.parseDouble(result);
+		return result;
 	}
 	
 	
