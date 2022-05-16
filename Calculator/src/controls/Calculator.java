@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.math.BigDecimal;
 
 import javax.swing.JScrollPane;
 
@@ -75,10 +76,6 @@ public class Calculator{
 			reset();// 초기화 
 			resetPart(); // 부분초기화(CE)
 			inputDot(); // 소수점 
-			//division(); // 나누
-			//multyfly(); // 곱하
-			//minus(); // 빼기 
-			//plus(); // 더하기
 			arithmaticCalculate();
 			result(); // 결과 	
 			changeSign(); // 부호변
@@ -126,7 +123,7 @@ public class Calculator{
 		
 	private void delete() 
 	{
-		if(text == "\u232B") // 백스페이스 
+		if(text.equals("\u232B")) // 백스페이스 
 		{
 		
 			pluscount = Constants.ZERO;
@@ -166,7 +163,7 @@ public class Calculator{
 	private void inputnumber()
 	{
 		
-		if(text == "0")
+		if(text.equals("0"))
 		{
 			if(textPanel.inputSpace.getText() == "0") {
 				textPanel.inputSpace.setText("0");
@@ -191,6 +188,7 @@ public class Calculator{
 		case "8" : inputNumber();break;
 		case "9" : inputNumber();break;
 		}
+		System.out.println(length);
 	}
 	
 	
@@ -215,8 +213,9 @@ public class Calculator{
 	
 	private void reset() // C
 	{
-		if(text == "C")
+		if(text.equals("C"))
 		{
+			limit = Constants.ZERO;
 			pluscount = Constants.ZERO;
 			record = "";
 			math = "";
@@ -239,7 +238,7 @@ public class Calculator{
 	
 	private void resetPart() // CE
 	{
-		if(text == "CE")
+		if(text.equals("CE"))
 		{
 			pluscount = Constants.ZERO;
 			record = "";
@@ -247,6 +246,7 @@ public class Calculator{
 			dotCount = Constants.ZERO;
 			fontsize=9;
 			textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50));
+			
 			for(int index=length; index>Constants.ZERO; index--)
 			{
 				if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
@@ -259,7 +259,7 @@ public class Calculator{
 	
 	public void changeSign()
 	{
-		if(text == "±")
+		if(text.equals("±"))
 		{
 			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0");
 			
@@ -279,7 +279,7 @@ public class Calculator{
 	
 	private void inputDot() // 소수점 
 	{
-		if(text==".")
+		if(text.equals("."))
 		{		
 			if(textPanel.inputSpace.getText() == "0" ) {
 				record += "0" + text;// 키보드 입력한 값	
@@ -318,18 +318,18 @@ public class Calculator{
 				if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
 					if(!formula.equals("=")) { // 바로 = 이 눌린게 아닐 때 
 						textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
-						textPanel.inputSpace.setText(setComma(String.valueOf((int)(result))));
+						textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
 					}
 				}
 				else { // 더블형 출력 
-					if(!formula.equals("=")) {
+					if(!formula.equals("=")) { // 바로 = 이 눌린게 아닐 때 
 						textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
 						textPanel.inputSpace.setText(String.valueOf((double) result));
 					}
 				}
 				
 				recordPanel.button[buttonSize++].setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText()); //로그 남기기 
-				
+				exceptionPrint();
 		formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한
 		}
 		
@@ -340,7 +340,7 @@ public class Calculator{
 	
 	public void printResult() // 결과값 출력(중앙 출력)
 	{
-		if(formula != "=") {
+		if(!formula.equals("=")) {
 			
 			if(math.equals("+"))result = temp + number;
 			if(math.equals("-"))result = temp - number;
@@ -358,16 +358,17 @@ public class Calculator{
 			if(math.equals("÷")) result = result / number;
 			textPanel.inputSpace.setText(setComma(String.valueOf((int)(result))));
 		}
-
+		exceptionPrint();
 		
 	}
 	
-	private void combineCalculate()
+	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
 	{
-		if(centerProperty == " ") temp = number;
+		if(centerProperty.equals(" ")) temp = number;
 		calculate();
 		setCalculate();
 		printCalculate();
+		changeDataType("9999999999999999.0", "9");
 	}
 	
 	
@@ -377,12 +378,11 @@ public class Calculator{
 			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(setComma(String.valueOf(String.valueOf((int) temp)))); // 입력화면 	
 			}
-			else {
-				textPanel.blankSpace.setText((double)(temp) +  text); // 중앙 화면
-				textPanel.inputSpace.setText(String.valueOf((double) temp)); // 입력화면 
-			
-			}
-		
+		else {
+			textPanel.blankSpace.setText((double)(temp) +  text); // 중앙 화면
+			textPanel.inputSpace.setText(String.valueOf((double) temp)); // 입력화면 	
+		}	
+		exceptionPrint();
 	}
 	
 	private void setCalculate() // 수식에 들어올 때 세팅 
@@ -395,14 +395,55 @@ public class Calculator{
 		pluscount = Constants.ZERO;
 	}
 	
+	public double changeDataType(String data, String Data) // 데이터 타입 변
+	{
+		//BigInteger bigNumber = new BigInteger(data);
+		BigDecimal BigC = new BigDecimal(String.valueOf(data));
+		BigDecimal BigD = new BigDecimal(String.valueOf( Data));
+		//BigInteger	Number = new BigInteger(Data);
+		BigDecimal mul =  BigC.multiply(BigD);
+
+		//int int_bigNum = bigNumber.intValue(); //BigIntger -> int
+		double double_bigNum = mul.doubleValue(); //BigIntger -> double	
+		//String String_bigNum = bigNumber.toString(); //BigIntger -> String	
+		
+		BigInteger op1 = new BigInteger("999999999999999");
+		BigInteger op2 = new BigInteger("9");
+		BigInteger sum = op1.multiply(op2);
+	
+		//a = sum.toString();
+		System.out.println(sum);
+		//System.out.println("BigDecimal = " + Double.parseDouble(a));
+		
+		double b = 999999999999999.0;
+		double c = 9;
+		String d;
+		d = String.format("%.14e", double_bigNum);
+		System.out.println(d);
+		System.out.println(double_bigNum);
+	
+		return double_bigNum;
+	}
+	
 	
 	private void calculate()
 	{
+		System.out.println("temp=" +temp);
+		System.out.println("number=" +number);
 		if(textPanel.blankSpace.getText().contains("+"))temp += number;
 		else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
 		else if(textPanel.blankSpace.getText().contains("x"))temp *= number;
 		else if(textPanel.blankSpace.getText().contains("÷"))temp /= number;
+		System.out.println("result=" +result);
+	}
 	
+	private void exceptionPrint()
+	{
+		String errorMessage = textPanel.inputSpace.getText();
+		switch(errorMessage) {
+		case "NaN" : textPanel.inputSpace.setText("정의되지 않은 결과입니다."); break;
+		case "Infinity" : textPanel.inputSpace.setText("0으로 나눌 수 없습니다."); break;
+		}
 	}
 	
 	
