@@ -80,14 +80,8 @@ public class Calculator{
 				case "." : inputDot(); break;
 				case "=" : result(); break;
 			}	
-			//delete();	// 백스페이스 
 			inputnumber(); // 키패드 
-			//reset();// 초기화 
-			//resetPart(); // 부분초기화(CE)
-			//inputDot(); // 소수점 
 			arithmaticCalculate();
-			//result(); // 결과 	
-			//changeSign(); // 부호변
 			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
 			fontsize+=Constants.ONE;
 		}
@@ -207,11 +201,11 @@ public class Calculator{
 			record += text;// 입력
 					
 			if(pluscount % 2 == 1) {
-				textPanel.inputSpace.setText("-" + setComma(record));
+				textPanel.inputSpace.setText("-" + setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
 				number = Double.parseDouble(record) * plusMinus; //// 넘버에 입력값 넣어주기
 			}
-			else if(textPanel.inputSpace.getText().equals("0")){
-				textPanel.inputSpace.setText("");
+			else if(textPanel.inputSpace.getText().equals("0")){ // 0밖에 없으
+				textPanel.inputSpace.setText("");  // 0 없애기  
 				textPanel.inputSpace.setText(setComma(record));
 				number = Double.parseDouble(record); //// 넘버에 입력값 넣어주기
 			}
@@ -315,6 +309,11 @@ public class Calculator{
 			
 			textPanel.inputSpace.setText(setComma(record));
 			dotCount++;		
+		}
+		
+		if(result == Constants.ZERO) {
+			textPanel.inputSpace.setText(setComma(String.valueOf((int)result)) + record);
+			dotCount++;	
 		}	
 
 		
@@ -389,18 +388,19 @@ public class Calculator{
 			}
 		}
 		
-		else if(formula.equals("=")) { //바로 = 이 눌리면 
+		else if(formula.equals("=")) { //계산 후 바로 = 이 눌리면 
 			
 			if(result % Constants.CHECK_DECIMAL == Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
 			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
-			temp = result;
 			
+			temp = result;		
 			switch(math) {
 			case "+" : result = temp + number; break;
 			case "-" : result = temp - number; break;
 			case "x" : result = temp * number;break;
 			case "÷" : result = temp / number; break;
 			}
+			
 			textPanel.inputSpace.setText(setComma(String.valueOf((double)(result))));
 		}
 		exceptionPrint();
