@@ -369,16 +369,16 @@ public class Calculator{
 	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
 	{
 		if(centerProperty.equals(" ")) temp = number;
+		printCalculate();
 		calculate();
 		setCalculate();
-		printCalculate();
 	}
 	
 	
 	private void printCalculate() // 화면에 값 출력 
 	{
 		if(temp % Constants.CHECK_DECIMAL == Constants.ZERO) {
-			textPanel.blankSpace.setText((int)(temp) +  text); // 중앙 화면
+			textPanel.blankSpace.setText(record +  text); // 중앙 화면
 			textPanel.inputSpace.setText(setComma(String.valueOf(String.valueOf((int) temp)))); // 입력화면 	
 			}
 		else {
