@@ -196,10 +196,15 @@ public class Calculator{
 	
 	private void inputNumber() // 입력 
 	{		
-		if(limit<Constants.LIMIT_INPUT)
-		{				 		
+		if(limit<Constants.LIMIT_INPUT) 
+		{	
+			if(formula.equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
+				reset();
+			}
+			
 			record += text;// 입력
 					
+			
 			if(pluscount % 2 == 1) {
 				textPanel.inputSpace.setText("-" + setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
 				number = Double.parseDouble(record) * plusMinus; //// 넘버에 입력값 넣어주기
@@ -398,7 +403,7 @@ public class Calculator{
 			case "÷" : result = temp / number; break;
 			}
 			
-			textPanel.inputSpace.setText(setComma(String.valueOf((double)(result))));
+			textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
 		}
 		exceptionPrint();
 	}
