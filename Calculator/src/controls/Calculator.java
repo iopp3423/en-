@@ -32,8 +32,8 @@ public class Calculator{
 	private String text;
 	private String inputRecord;
 	private String record = "";
-	private String math; 
-	private String formula;
+	private String math="="; 
+	private String formula="";
 	private String centerProperty;
 	private double result = Constants.ZERO;
 	private double temp = Constants.ZERO;
@@ -194,11 +194,11 @@ public class Calculator{
 	}
 	
 	
-	private void inputNumber() // 키보드 입력 
+	private void inputNumber() // 입력 
 	{		
 		if(limit<Constants.LIMIT_INPUT)
 		{				 		
-			record += text;// 키보드 입력
+			record += text;// 입력
 			
 			if(pluscount % 2 == 1) {
 				textPanel.inputSpace.setText("-" + setComma(record));
@@ -220,7 +220,7 @@ public class Calculator{
 			limit = Constants.ZERO;
 			pluscount = Constants.ZERO;
 			record = "";
-			math = "";
+			math = "=";
 			formula = "";
 			dotCount=Constants.ZERO;
 			result = Constants.ZERO;
@@ -263,7 +263,9 @@ public class Calculator{
 	{
 		if(text.equals("±"))
 		{
-			if(textPanel.inputSpace.getText() == "0") textPanel.inputSpace.setText("0");
+			if(textPanel.inputSpace.getText() == "0") {
+				textPanel.inputSpace.setText("0");
+			}
 			
 			else {
 			number *= plusMinus;	
@@ -313,14 +315,12 @@ public class Calculator{
 		if(text.equals("=")) { // = 입력하면 
 			pluscount = Constants.ZERO;
 			if(number == Constants.ZERO) number = temp; // 2X4=, 2+5= 형식 처리  
-			
-			 printResult();
-			//System.out.println(result);
+			printResult();
 			
 				if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
 					if(!formula.equals("=")) { // 바로 = 이 눌린게 아닐 때 
 						textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
-						textPanel.inputSpace.setText(setComma(String.valueOf((double)(result))));
+						textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
 					}
 				}
 				else { // 더블형 출력 
@@ -329,15 +329,27 @@ public class Calculator{
 						textPanel.inputSpace.setText(String.valueOf((double) result));
 					}
 				}
+				System.out.println(temp);
+				System.out.println(math);
+				System.out.println(number);
+				System.out.println(text);
+				System.out.println(result);
 				
-				
+				if(math.equals(text) && number % Constants.CHECK_DECIMAL == Constants.ZERO) { // 0.1 =====
+					textPanel.blankSpace.setText((int)number + text);
+					textPanel.inputSpace.setText(String.valueOf((int) number));
+				}
+				else if(math.equals(text) && number % Constants.CHECK_DECIMAL != Constants.ZERO) { // 0.1 =====
+					textPanel.blankSpace.setText(number + text);
+					textPanel.inputSpace.setText(String.valueOf((double) number));
+				}
 				
 				recordPanel.button[buttonSize++].setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText()); //로그 남기기 
 				
-				System.out.println(number);
-				System.out.println(math);
-				System.out.println(record);
-				if(math.equals("÷") && record.equals("0")) textPanel.inputSpace.setText("0으로 나눌 수 없습니다.");
+
+				if(math.equals("÷") && record.equals("0")) {
+					textPanel.inputSpace.setText("0으로 나눌 수 없습니다.");
+				}
 				
 				if(textPanel.inputSpace.getText().contains("E")) {
 					textPanel.inputSpace.setText(setComma(String.valueOf((double)(changeDataType(result)))));
@@ -361,6 +373,7 @@ public class Calculator{
 		}
 		
 		else if(formula.equals("=")) { //바로 = 이 눌리면 
+			
 			if(result % Constants.CHECK_DECIMAL == Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
 			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
 			temp = result;
@@ -372,7 +385,6 @@ public class Calculator{
 			textPanel.inputSpace.setText(setComma(String.valueOf((double)(result))));
 		}
 		exceptionPrint();
-		
 	}
 	
 	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
@@ -387,8 +399,8 @@ public class Calculator{
 	private void printCalculate() // 화면에 값 출력 
 	{
 		if(temp % Constants.CHECK_DECIMAL == Constants.ZERO) {
-			textPanel.blankSpace.setText(record +  text); // 중앙 화면
-			textPanel.inputSpace.setText(setComma(String.valueOf((double) temp))); // 입력화면 	
+			textPanel.blankSpace.setText((int)temp +  text); // 중앙 화면
+			textPanel.inputSpace.setText(setComma(String.valueOf((long) temp))); // 입력화면 	
 			}
 		else {
 			textPanel.blankSpace.setText((double)(temp) +  text); // 중앙 화면
@@ -424,13 +436,10 @@ public class Calculator{
 	
 	private void calculate()
 	{
-		System.out.println("temp=" +temp);
-		System.out.println("number=" +number);
 		if(textPanel.blankSpace.getText().contains("+"))temp += number;
 		else if(textPanel.blankSpace.getText().contains("-"))temp -= number;
 		else if(textPanel.blankSpace.getText().contains("x"))temp *= number;
 		else if(textPanel.blankSpace.getText().contains("÷"))temp /= number;
-		System.out.println("result=" +result);
 	}
 	
 	private void exceptionPrint()
