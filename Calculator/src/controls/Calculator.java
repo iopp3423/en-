@@ -313,12 +313,12 @@ public class Calculator{
 			if(number == Constants.ZERO) number = temp; // 2X4=, 2+5= 형식 처리  
 			
 			 printResult();
-			System.out.println(result);
+			//System.out.println(result);
 			
 				if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
 					if(!formula.equals("=")) { // 바로 = 이 눌린게 아닐 때 
 						textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
-						textPanel.inputSpace.setText(setComma(String.valueOf((double)(result))));
+						textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
 					}
 				}
 				else { // 더블형 출력 
@@ -327,6 +327,8 @@ public class Calculator{
 						textPanel.inputSpace.setText(String.valueOf((double) result));
 					}
 				}
+				
+				
 				
 				recordPanel.button[buttonSize++].setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText()); //로그 남기기 
 				
@@ -338,7 +340,6 @@ public class Calculator{
 		}
 		
 	}
-	
 	
 	
 	
@@ -355,12 +356,16 @@ public class Calculator{
 		else if(formula.equals("=")) { //바로 = 이 눌리면 
 			if(result % Constants.CHECK_DECIMAL == Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
 			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
+			System.out.println("temp= "+temp);
+			System.out.println("result=" + result);
+			System.out.println("number=" +number);
 			temp = result;
+			
 			if(math.equals("+")) result = result + number;
 			if(math.equals("-")) result = result - number;
 			if(math.equals("x")) result = result * number;
 			if(math.equals("÷")) result = result / number;
-			textPanel.inputSpace.setText(setComma(String.valueOf((int)(result))));
+			textPanel.inputSpace.setText(String.valueOf((double)(result)));
 		}
 		exceptionPrint();
 		
@@ -369,9 +374,9 @@ public class Calculator{
 	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
 	{
 		if(centerProperty.equals(" ")) temp = number;
-		printCalculate();
 		calculate();
 		setCalculate();
+		printCalculate();
 	}
 	
 	
@@ -379,19 +384,20 @@ public class Calculator{
 	{
 		if(temp % Constants.CHECK_DECIMAL == Constants.ZERO) {
 			textPanel.blankSpace.setText(record +  text); // 중앙 화면
-			textPanel.inputSpace.setText(setComma(String.valueOf(String.valueOf((int) temp)))); // 입력화면 	
+			textPanel.inputSpace.setText(setComma(String.valueOf((double) temp))); // 입력화면 	
 			}
 		else {
 			textPanel.blankSpace.setText((double)(temp) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(String.valueOf((double) temp)); // 입력화면 	
 		}	
 		exceptionPrint();
+		record=""; // 입력값 초기화 
 	}
 	
 	private void setCalculate() // 수식에 들어올 때 세팅 
 	{
 		number = Constants.ZERO;; // number 초기화 
-		record=""; // 입력값 초기화 
+		//record=""; // 입력값 초기화 
 		dotCount = Constants.ZERO;
 		formula = ""; // "=" 초기
 		math = text; // math 에 부호 넣어주
