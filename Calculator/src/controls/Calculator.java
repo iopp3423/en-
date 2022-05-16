@@ -150,7 +150,7 @@ public class Calculator{
 		
 		 if(length != Constants.ONE) //글자수 1 아니면 
 		 {
-			 inputRecord = record.substring(Constants.ZERO,length-Constants.ONE); // 문자열자르기
+			 inputRecord = record.substring(Constants.ZERO,record.length()-Constants.ONE); // 문자열자르기
 			 textPanel.inputSpace.setText(inputRecord);
 			 
 			 number = Double.parseDouble(inputRecord); //지운만큼 넘버값 줄이기 
