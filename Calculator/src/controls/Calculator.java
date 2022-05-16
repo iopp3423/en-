@@ -173,6 +173,7 @@ public class Calculator{
 				record += text;// 키보드 입력
 				number = Double.parseDouble(record); //// 넘버에 입력값 넣어주기
 				textPanel.inputSpace.setText(setComma(record));			
+				System.out.println("number="+number);
 			}
 			limit = record.length();	
 			
@@ -188,7 +189,8 @@ public class Calculator{
 		case "8" : inputNumber();break;
 		case "9" : inputNumber();break;
 		}
-		System.out.println(length);
+		//System.out.println(length);
+		
 	}
 	
 	
@@ -318,7 +320,7 @@ public class Calculator{
 				if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
 					if(!formula.equals("=")) { // 바로 = 이 눌린게 아닐 때 
 						textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
-						textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
+						textPanel.inputSpace.setText(setComma(String.valueOf((double)(result))));
 					}
 				}
 				else { // 더블형 출력 
@@ -331,6 +333,11 @@ public class Calculator{
 				
 				
 				recordPanel.button[buttonSize++].setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText()); //로그 남기기 
+				
+				System.out.println(number);
+				System.out.println(math);
+				System.out.println(record);
+				if(math.equals("÷") && record.equals("0")) textPanel.inputSpace.setText("0으로 나눌 수 없습니다.");
 				
 				if(textPanel.inputSpace.getText().contains("E")) {
 					textPanel.inputSpace.setText(setComma(String.valueOf((double)(changeDataType(result)))));
@@ -349,23 +356,20 @@ public class Calculator{
 			
 			if(math.equals("+"))result = temp + number;
 			if(math.equals("-"))result = temp - number;
-			if(math.equals("x"))result = temp * number;
+			if(math.equals("x"))result = temp * number;		
 			if(math.equals("÷"))result = temp / number;
 		}
 		
 		else if(formula.equals("=")) { //바로 = 이 눌리면 
 			if(result % Constants.CHECK_DECIMAL == Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
 			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
-			System.out.println("temp= "+temp);
-			System.out.println("result=" + result);
-			System.out.println("number=" +number);
 			temp = result;
 			
 			if(math.equals("+")) result = result + number;
 			if(math.equals("-")) result = result - number;
 			if(math.equals("x")) result = result * number;
 			if(math.equals("÷")) result = result / number;
-			textPanel.inputSpace.setText(String.valueOf((double)(result)));
+			textPanel.inputSpace.setText(setComma(String.valueOf((double)(result))));
 		}
 		exceptionPrint();
 		
@@ -410,10 +414,10 @@ public class Calculator{
 		//BigDecimal BigD = new BigDecimal(String.valueOf( Data));
 		//BigDecimal mul =  BigC.multiply(BigD);
 		//double double_bigNum = mul.doubleValue(); //BigIntger -> double	
-	
+		System.out.println("Heelo");
 		String result;	
-		result = String.format("%.15e",data);
-	
+		result = String.format("%.16e",data);
+		System.out.println(result);
 		return Double.parseDouble(result);
 	}
 	
