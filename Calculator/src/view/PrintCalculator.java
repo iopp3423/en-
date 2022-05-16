@@ -42,18 +42,19 @@ public class PrintCalculator{
 		
 		
 		
-		frame.addComponentListener(new ComponentAdapter() {  // 화면 수
+		frame.addComponentListener(new ComponentAdapter() {  // 화면 
 		    public void componentResized(ComponentEvent e) {
 
 		    	if(frame.getWidth() >= 600 &&  size == Constants.ZERO) {
-		    		scrollPane.setVisible(true);
+		    		frame.add(scrollPane,BorderLayout.EAST);
+					scrollPane.setVisible(true);
 		    		size = Constants.ONE;
-		    		System.out.println(size);
+		
 		    	}
 		    	if(frame.getWidth() < 600 && size == Constants.ONE){
 		    		scrollPane.setVisible(false);   		
 		    		size = Constants.ZERO;
-		    		System.out.println(size);
+
 		    	}		        
 		    }
 		});

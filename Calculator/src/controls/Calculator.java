@@ -89,7 +89,7 @@ public class Calculator{
 	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
-			System.out.println(e.getKeyCode());
+			//System.out.println(e.getKeyCode());
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
 			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
 			switch(e.getKeyCode()) {			
@@ -266,11 +266,11 @@ public class Calculator{
 	public void changeSign()
 	{
 		
-		if(textPanel.inputSpace.getText() == "0") {
+		if(textPanel.inputSpace.getText() == "0") { // 0 이면 +- 안붙
 			textPanel.inputSpace.setText("0");
 		}
 		
-		else if(textPanel.inputSpace.getText() != "0"){
+		else if(textPanel.inputSpace.getText() != "0"){ // 0이 아니면 
 			
 		number *= plusMinus;	
 		pluscount++;
@@ -293,13 +293,13 @@ public class Calculator{
 	private void inputDot() // 소수점 
 	{
 			
-		if(textPanel.inputSpace.getText().equals("0")) {
+		if(textPanel.inputSpace.getText().equals("0")) { // 0일 때 
 			record += "0" + text;// 키보드 입력한 값	
 			textPanel.inputSpace.setText(setComma(record));
 			dotCount++;		
 		}
 		
-		if (dotCount == Constants.ZERO && !(textPanel.inputSpace.getText().equals("0"))) {
+		if (dotCount == Constants.ZERO && !(textPanel.inputSpace.getText().equals("0"))) { // 0제외 
 			record += text;// 키보드 입력한 값	
 			
 			textPanel.inputSpace.setText(record);
