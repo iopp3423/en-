@@ -292,24 +292,29 @@ public class Calculator{
 	private void inputDot() // 소수점 
 	{
 			
-		if(textPanel.inputSpace.getText() == "0" ) {
+		if(textPanel.inputSpace.getText().equals("0")) {
 			record += "0" + text;// 키보드 입력한 값	
 			textPanel.inputSpace.setText(setComma(record));
 			dotCount++;		
 		}
 		
-		if (dotCount == Constants.ZERO && textPanel.inputSpace.getText() != "0") {
+		if (dotCount == Constants.ZERO && !(textPanel.inputSpace.getText().equals("0"))) {
 			record += text;// 키보드 입력한 값	
 			
-			textPanel.inputSpace.setText(setComma(record));
+			textPanel.inputSpace.setText(record);
 			dotCount++;		
 		}
 		
-		if(result == Constants.ZERO) { // 2.5 - negate. -> 0
-			textPanel.inputSpace.setText(setComma(String.valueOf((int)result)) + record);
+		if(result == Constants.ZERO && record.equals(".")) { // 2.5 - negate. -> 0
+			textPanel.inputSpace.setText(String.valueOf((int)result) + record);
 			dotCount++;	
 		}	
-
+		
+		System.out.println(result);
+		System.out.println(record);
+		System.out.println(text);
+		System.out.println(temp);
+		System.out.println(math);
 		
 	}
 	
@@ -336,6 +341,7 @@ public class Calculator{
 			if(result % Constants.CHECK_DECIMAL == Constants.ZERO && !formula.equals("=")) { // 정수형 출력 (중앙화면), // 바로 = 이 눌린게 아닐 때
 				textPanel.blankSpace.setText(String.valueOf((long) temp) + math + String.valueOf((int) number) + text );
 				textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
+				System.out.println(changeInt(String.valueOf((long)temp)));
 			}
 			
 			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO && !formula.equals("=")){ // 더블형 출력,  // 바로 = 이 눌린게 아닐 때 
@@ -440,6 +446,13 @@ public class Calculator{
 		result = String.format("%.14e",data);
 		System.out.println(result);
 		return result;
+	}
+	
+	private BigInteger changeInt(String index) {
+		
+		BigInteger bigNumber = new BigInteger(index);
+		
+		return bigNumber;
 	}
 	
 	
