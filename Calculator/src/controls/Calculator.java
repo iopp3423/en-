@@ -109,7 +109,7 @@ public class Calculator{
 			case 47 : text = "÷"; arithmaticCalculate(); break;
 			case 106 : text = "x"; arithmaticCalculate();  break;
 			case 8: text = "\u232B"; delete(); break;
-			
+			case 67: text = "C"; reset(); break;
 			}
 			if(length>8 && length<21) {
 				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
