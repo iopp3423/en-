@@ -75,11 +75,11 @@ public class Calculator{
 			reset();// 초기화 
 			resetPart(); // 부분초기화(CE)
 			inputDot(); // 소수점 
-			division(); // 나누
-			multyfly(); // 곱하
-			minus(); // 빼기 
-			plus(); // 더하기
-			//arithmaticCalculate();
+			//division(); // 나누
+			//multyfly(); // 곱하
+			//minus(); // 빼기 
+			//plus(); // 더하기
+			arithmaticCalculate();
 			result(); // 결과 	
 			changeSign(); // 부호변
 			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
@@ -106,11 +106,11 @@ public class Calculator{
 			case 55 : text = "7"; inputNumber(); break;
 			case 56 : text = "8"; inputNumber(); break;
 			case 57 : text = "9"; inputNumber(); break;
-			case 107 : text = "+"; plus(); break;
-			case 109 : text = "-"; minus(); break;
+			case 107 : text = "+"; arithmaticCalculate(); break;
+			case 109 : text = "-"; arithmaticCalculate(); break;
 			case 10 : text = "="; result(); break;
-			case 47 : text = "÷"; division(); break;
-			case 106 : text = "x"; multyfly();  break;
+			case 47 : text = "÷"; arithmaticCalculate(); break;
+			case 106 : text = "x"; arithmaticCalculate();  break;
 			case 8: text = "\u232B"; delete(); break;
 			
 			}
@@ -304,58 +304,11 @@ public class Calculator{
 		case "÷" : combineCalculate(); break;
 		}
 	}
-	
-	private void division() // 나누기 
-	{
-		if(text=="÷")
-		{				
-			if(centerProperty == " ") temp = number;
-			calculate();
-			setCalculate();
-			printCalculate();
-		}
-					
-	}
 		
-	private void multyfly() // 곱하기 
-	{
-		
-		if(text=="x")
-		{
-			if(centerProperty == " ") temp = number;
-			calculate();
-			setCalculate();
-			printCalculate();
-		}
-		
-	}
-	private void minus() // 빼기 
-	{
-		if(text=="-")
-		{
-			if(centerProperty == " ") temp = number;
-			calculate();
-			setCalculate();
-			printCalculate();
-		}
-				
-	}
-	private void plus(){ // 더하기 
-	
-		if(text=="+")
-		{	
-			if(centerProperty == " ") temp = number;
-			calculate();
-			setCalculate();
-			printCalculate();
-			
-		}			
-	}
-	
 	
 	private void result(){ // 결
 				
-		if(text == "=") { // = 입력하면 
+		if(text.equals("=")) { // = 입력하면 
 			pluscount = Constants.ZERO;
 			if(number == Constants.ZERO) number = temp; // 2X4=, 2+5= 형식 처리  
 			
@@ -363,13 +316,13 @@ public class Calculator{
 			System.out.println(result);
 			
 				if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
-					if(formula != "=") { // 바로 = 이 눌린게 아닐 때 
+					if(!formula.equals("=")) { // 바로 = 이 눌린게 아닐 때 
 						textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
 						textPanel.inputSpace.setText(setComma(String.valueOf((int)(result))));
 					}
 				}
 				else { // 더블형 출력 
-					if(formula != "=") {
+					if(!formula.equals("=")) {
 						textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
 						textPanel.inputSpace.setText(String.valueOf((double) result));
 					}
@@ -388,20 +341,21 @@ public class Calculator{
 	public void printResult() // 결과값 출력(중앙 출력)
 	{
 		if(formula != "=") {
-			if(math == "+")result = temp + number;
-			if(math == "-")result = temp - number;
-			if(math == "x")result = temp * number;
-			if(math == "÷")result = temp / number;
+			
+			if(math.equals("+"))result = temp + number;
+			if(math.equals("-"))result = temp - number;
+			if(math.equals("x"))result = temp * number;
+			if(math.equals("÷"))result = temp / number;
 		}
 		
-		else if(formula == "=") { //바로 = 이 눌리면 
+		else if(formula.equals("=")) { //바로 = 이 눌리면 
 			if(result % Constants.CHECK_DECIMAL == Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
 			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
 			temp = result;
-			if(math == "+") result = result + number;
-			if(math == "-") result = result - number;
-			if(math == "x") result = result * number;
-			if(math == "÷") result = result / number;
+			if(math.equals("+")) result = result + number;
+			if(math.equals("-")) result = result - number;
+			if(math.equals("x")) result = result * number;
+			if(math.equals("÷")) result = result / number;
 			textPanel.inputSpace.setText(setComma(String.valueOf((int)(result))));
 		}
 
