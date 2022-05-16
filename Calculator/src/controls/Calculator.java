@@ -145,7 +145,7 @@ public class Calculator{
              {
 				 textPanel.inputSpace.setText("0");
 				 number = Constants.ZERO;
-				 record = "0";
+				 record = "";
              }
 			
 			 if(length != Constants.ONE) //글자수 1 아니면 
@@ -199,10 +199,15 @@ public class Calculator{
 		if(limit<Constants.LIMIT_INPUT)
 		{				 		
 			record += text;// 입력
-			
+					
 			if(pluscount % 2 == 1) {
 				textPanel.inputSpace.setText("-" + setComma(record));
 				number = Double.parseDouble(record) * plusMinus; //// 넘버에 입력값 넣어주기
+			}
+			else if(textPanel.inputSpace.getText().equals("0")){
+				textPanel.inputSpace.setText("");
+				textPanel.inputSpace.setText(setComma(record));
+				number = Double.parseDouble(record); //// 넘버에 입력값 넣어주기
 			}
 			else {
 				textPanel.inputSpace.setText(setComma(record));
@@ -329,11 +334,7 @@ public class Calculator{
 						textPanel.inputSpace.setText(String.valueOf((double) result));
 					}
 				}
-				System.out.println(temp);
-				System.out.println(math);
-				System.out.println(number);
-				System.out.println(text);
-				System.out.println(result);
+				
 				
 				if(math.equals(text) && number % Constants.CHECK_DECIMAL == Constants.ZERO) { // 0.1 =====
 					textPanel.blankSpace.setText((int)number + text);
