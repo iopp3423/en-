@@ -318,7 +318,7 @@ public class Calculator{
 				if(result % Constants.CHECK_DECIMAL == Constants.ZERO) { // 정수형 출력 (중앙화면)
 					if(!formula.equals("=")) { // 바로 = 이 눌린게 아닐 때 
 						textPanel.blankSpace.setText(String.valueOf((int) temp) + math + String.valueOf((int) number) + text );
-						textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
+						textPanel.inputSpace.setText(setComma(String.valueOf((double)(result))));
 					}
 				}
 				else { // 더블형 출력 
@@ -329,6 +329,10 @@ public class Calculator{
 				}
 				
 				recordPanel.button[buttonSize++].setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText()); //로그 남기기 
+				
+				if(textPanel.inputSpace.getText().contains("E")) {
+					textPanel.inputSpace.setText(setComma(String.valueOf((double)(changeDataType(result)))));
+				}
 				exceptionPrint();
 		formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한
 		}
@@ -368,7 +372,6 @@ public class Calculator{
 		calculate();
 		setCalculate();
 		printCalculate();
-		changeDataType("9999999999999999.0", "9");
 	}
 	
 	
@@ -395,34 +398,17 @@ public class Calculator{
 		pluscount = Constants.ZERO;
 	}
 	
-	public double changeDataType(String data, String Data) // 데이터 타입 변
+	public double changeDataType(double data) // 데이터 타입 변
 	{
-		//BigInteger bigNumber = new BigInteger(data);
-		BigDecimal BigC = new BigDecimal(String.valueOf(data));
-		BigDecimal BigD = new BigDecimal(String.valueOf( Data));
-		//BigInteger	Number = new BigInteger(Data);
-		BigDecimal mul =  BigC.multiply(BigD);
-
-		//int int_bigNum = bigNumber.intValue(); //BigIntger -> int
-		double double_bigNum = mul.doubleValue(); //BigIntger -> double	
-		//String String_bigNum = bigNumber.toString(); //BigIntger -> String	
-		
-		BigInteger op1 = new BigInteger("999999999999999");
-		BigInteger op2 = new BigInteger("9");
-		BigInteger sum = op1.multiply(op2);
+		//BigDecimal BigC = new BigDecimal(String.valueOf(data));
+		//BigDecimal BigD = new BigDecimal(String.valueOf( Data));
+		//BigDecimal mul =  BigC.multiply(BigD);
+		//double double_bigNum = mul.doubleValue(); //BigIntger -> double	
 	
-		//a = sum.toString();
-		System.out.println(sum);
-		//System.out.println("BigDecimal = " + Double.parseDouble(a));
-		
-		double b = 999999999999999.0;
-		double c = 9;
-		String d;
-		d = String.format("%.14e", double_bigNum);
-		System.out.println(d);
-		System.out.println(double_bigNum);
+		String result;	
+		result = String.format("%.15e",data);
 	
-		return double_bigNum;
+		return Double.parseDouble(result);
 	}
 	
 	
