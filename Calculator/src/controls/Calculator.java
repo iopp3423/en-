@@ -272,17 +272,22 @@ public class Calculator{
 				textPanel.inputSpace.setText("0");
 			}
 			
-			else {
+			else if(textPanel.inputSpace.getText() != "0"){
+				
 			number *= plusMinus;	
 			pluscount++;
 			
-			if(pluscount % 2 == 1) {
-				textPanel.inputSpace.setText("-" + setComma(record));
+			if(pluscount % 2 == 1) { // 짝수면 플러스, 홀수면 마이너스 
+				if(record == "") textPanel.inputSpace.setText("-" + (String.valueOf((int)temp))); // 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
+				else if (record != "") textPanel.inputSpace.setText("-" + setComma(record)); //그냥 +-
 			}
+			
+			
 			else {
-				textPanel.inputSpace.setText(setComma(record));
-			}			
-			}
+				if(record == "") textPanel.inputSpace.setText(setComma(String.valueOf((int)temp)));// 짝이면서 2 -> 사칙연산 -> +-눌렀을 
+				else if (record != "") textPanel.inputSpace.setText(setComma(record));//그냥 +-
+			}	
+		}
 		}
 	}
 	
@@ -366,11 +371,12 @@ public class Calculator{
 	public void printResult() // 결과값 출력(중앙 출력)
 	{
 		if(!formula.equals("=")) {
-			
-			if(math.equals("+"))result = temp + number;
-			if(math.equals("-"))result = temp - number;
-			if(math.equals("x"))result = temp * number;		
-			if(math.equals("÷"))result = temp / number;
+			switch(math) {
+			case "+" : result = temp + number; break;
+			case "-" : result = temp - number; break;
+			case "x" : result = temp * number;break;
+			case "÷" : result = temp / number; break;
+			}
 		}
 		
 		else if(formula.equals("=")) { //바로 = 이 눌리면 
@@ -379,10 +385,12 @@ public class Calculator{
 			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
 			temp = result;
 			
-			if(math.equals("+")) result = result + number;
-			if(math.equals("-")) result = result - number;
-			if(math.equals("x")) result = result * number;
-			if(math.equals("÷")) result = result / number;
+			switch(math) {
+			case "+" : result = temp + number; break;
+			case "-" : result = temp - number; break;
+			case "x" : result = temp * number;break;
+			case "÷" : result = temp / number; break;
+			}
 			textPanel.inputSpace.setText(setComma(String.valueOf((double)(result))));
 		}
 		exceptionPrint();
@@ -427,9 +435,8 @@ public class Calculator{
 		//BigDecimal BigD = new BigDecimal(String.valueOf( Data));
 		//BigDecimal mul =  BigC.multiply(BigD);
 		//double double_bigNum = mul.doubleValue(); //BigIntger -> double	
-		System.out.println("Heelo");
 		String result;	
-		result = String.format("%.16e",data);
+		result = String.format("%.14e",data);
 		System.out.println(result);
 		return Double.parseDouble(result);
 	}
