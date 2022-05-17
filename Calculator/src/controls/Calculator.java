@@ -364,7 +364,7 @@ public class Calculator{
 				textPanel.inputSpace.setText(setComma(changeDataType(result)));
 			}
 			
-			recordPanel.button[buttonSize++].setText(textPanel.blankSpace.getText() + textPanel.inputSpace.getText()); //로그 남기기 
+			recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
 			exceptionPrint(); // 예외 문
 			
 			formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
