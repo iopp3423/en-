@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 
 import Utility.Constants;
+import models.inputData;
 import view.CalculatorPanel;
 import view.PrintCalculator;
 import view.RecordPanel;
@@ -46,7 +47,7 @@ public class Calculator{
 
 
 	
-	public Calculator(PrintCalculator printCalculator)
+	public Calculator(PrintCalculator printCalculator, inputData data)
 	{	
 		this.printCalculator = printCalculator;
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
@@ -79,6 +80,7 @@ public class Calculator{
 			}	
 			inputnumber(); // 키패드 
 			arithmaticCalculate();
+			
 			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
 			fontsize+=Constants.ONE;
 		}
@@ -111,6 +113,7 @@ public class Calculator{
 			case 8: text = "\u232B"; delete(); break;
 			case 67: text = "C"; reset(); break;
 			}
+			
 			if(length>8 && length<21) {
 				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
 			}
@@ -393,7 +396,7 @@ public class Calculator{
 			case "÷" : result = temp / number; break;
 			}
 			
-			textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
+			textPanel.inputSpace.setText(setComma(String.valueOf((long)(result)))); // 결과값 출력
 		}
 		exceptionPrint();
 	}
