@@ -249,7 +249,7 @@ public class testClass{
 	
 	private void reset() // C
 	{
-		number = "0ddddddd";
+		number = "0";
 		limit = Constants.RESET;
 		pluscount = Constants.RESET;
 		record = "";
@@ -367,7 +367,7 @@ public class testClass{
 				
 		if(math.equals(text)) { // 0.1 =====
 			textPanel.blankSpace.setText(number+ text);
-			textPanel.inputSpace.setText(number);
+			textPanel.inputSpace.setText(setComma(number));
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
 	
