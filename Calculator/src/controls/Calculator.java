@@ -36,16 +36,16 @@ public class Calculator{
 	private String math="="; 
 	private String formula="";
 	private String centerProperty;
-	private double result = Constants.ZERO;
-	private double temp = Constants.ZERO;
+	private double result = Constants.RESET;
+	private double temp = Constants.RESET;
 	private int length; // 길이 
 	private int limit; // 숫자 입력 제한 
-	private int dotCount = Constants.ZERO;
-	private double number = Constants.ZERO;
-	private int pluscount = Constants.ZERO;
+	private int dotCount = Constants.RESET;
+	private double number = Constants.RESET;
+	private int pluscount = Constants.RESET;
 	private int plusMinus = -Constants.ONE;
 	private int fontsize=9;
-	private int buttonSize = Constants.ZERO;
+	private int buttonSize = Constants.RESET;
 	
 
 
@@ -85,7 +85,7 @@ public class Calculator{
 			inputnumber(); // 키패드 
 			arithmaticCalculate();
 			
-			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
+			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50-fontsize));  	// 마지
 			fontsize+=Constants.ONE;
 		}
 		
@@ -119,7 +119,7 @@ public class Calculator{
 			}
 			
 			if(length>8 && length<21) {
-				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
+				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50-fontsize));  	// 마지
 			}
 			fontsize+=Constants.ONE;
 			
@@ -151,7 +151,7 @@ public class Calculator{
 			}
 			
 			if(length>8 && length<21) {
-				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
+				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50-fontsize));  	// 마지
 			}
 			fontsize+=Constants.ONE;
 			
@@ -163,16 +163,16 @@ public class Calculator{
 		
 	private void delete() 
 	{	
-		pluscount = Constants.ZERO;
+		pluscount = Constants.RESET;
 		
 		if(formula == "=") { /// 계산하고 바로 지울 때 중간값만 지우기 
 			
-			 for(int index=length; index>Constants.ZERO; index--)
+			 for(int index=length; index>Constants.RESET; index--)
 				{
 					if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
 		             {
 						 textPanel.blankSpace.setText(" "); // 중간 값 
-						 number = Constants.ZERO;
+						 number = Constants.RESET;
 		             }
 				}
 		 }
@@ -181,13 +181,13 @@ public class Calculator{
 		 else if (length == Constants.ONE)   //글자수가 1일 때  백스페이스 누르면 0으로 초기
          {
 			 textPanel.inputSpace.setText("0");
-			 number = Constants.ZERO;
+			 number = Constants.RESET;
 			 record = "";
          }
 		
 		 if(length != Constants.ONE) //글자수 1 아니면 
 		 {
-			 inputRecord = record.substring(Constants.ZERO,record.length()-Constants.ONE); // 문자열자르기
+			 inputRecord = record.substring(Constants.RESET,record.length()-Constants.ONE); // 문자열자르기
 			 textPanel.inputSpace.setText(inputRecord);
 			 
 			 number = Double.parseDouble(inputRecord); //지운만큼 넘버값 줄이기 
@@ -262,17 +262,17 @@ public class Calculator{
 	private void reset() // C
 	{
 		
-		limit = Constants.ZERO;
-		pluscount = Constants.ZERO;
+		limit = Constants.RESET;
+		pluscount = Constants.RESET;
 		record = "";
 		math = "=";
 		formula = "";
-		dotCount=Constants.ZERO;
-		result = Constants.ZERO;
-		temp = Constants.ZERO;
+		dotCount=Constants.RESET;
+		result = Constants.RESET;
+		temp = Constants.RESET;
 		fontsize=9;
-		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50)); 
-		for(int index=length; index>Constants.ZERO; index--)
+		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50)); 
+		for(int index=length; index>Constants.RESET; index--)
 		{
 			if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
              {
@@ -286,14 +286,14 @@ public class Calculator{
 	private void resetPart() // CE
 	{
 		
-		pluscount = Constants.ZERO;
+		pluscount = Constants.RESET;
 		record = "";
-		number = Constants.ZERO;
-		dotCount = Constants.ZERO;
+		number = Constants.RESET;
+		dotCount = Constants.RESET;
 		fontsize=9;
-		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50));
+		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50));
 		
-		for(int index=length; index>Constants.ZERO; index--)
+		for(int index=length; index>Constants.RESET; index--)
 		{
 			if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
              {
@@ -339,14 +339,14 @@ public class Calculator{
 			dotCount++;		
 		}
 		
-		if (dotCount == Constants.ZERO && !(textPanel.inputSpace.getText().equals("0"))) { // 0제외 
+		if (dotCount == Constants.RESET && !(textPanel.inputSpace.getText().equals("0"))) { // 0제외 
 			record += text;// 키보드 입력한 값	
 			
 			textPanel.inputSpace.setText(record);
 			dotCount++;		
 		}
 		
-		if(result == Constants.ZERO && record.equals(".")) { // 2.5 - negate. -> 0
+		if(result == Constants.RESET && record.equals(".")) { // 2.5 - negate. -> 0
 			textPanel.inputSpace.setText(String.valueOf((int)result) + record);
 			dotCount++;	
 		}	
@@ -367,30 +367,30 @@ public class Calculator{
 	private void result(){ // 결
 				
 		
-		pluscount = Constants.ZERO;
+		pluscount = Constants.RESET;
 		
-		if(number == Constants.ZERO) number = temp; // 2X4=, 2+5= 형식 처리  
+		if(number == Constants.RESET) number = temp; // 2X4=, 2+5= 형식 처리  
 		
 		printResult();
 		
-			if(result % Constants.CHECK_DECIMAL == Constants.ZERO && !formula.equals("=")) { // 정수형 출력 (중앙화면), // 바로 = 이 눌린게 아닐 때
+			if(result % Constants.CHECK_DECIMAL == Constants.RESET && !formula.equals("=")) { // 정수형 출력 (중앙화면), // 바로 = 이 눌린게 아닐 때
 				textPanel.blankSpace.setText(String.valueOf((long) temp) + math + String.valueOf((int) number) + text );
 				textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
 				//System.out.println(changeInt(String.valueOf((long)temp)));
 			}
 			
-			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO && !formula.equals("=")){ // 더블형 출력,  // 바로 = 이 눌린게 아닐 때 
+			else if(result % Constants.CHECK_DECIMAL != Constants.RESET && !formula.equals("=")){ // 더블형 출력,  // 바로 = 이 눌린게 아닐 때 
 				textPanel.blankSpace.setText(String.valueOf((double) temp) + math + String.valueOf((double) number) + text );
 				textPanel.inputSpace.setText(String.valueOf((double) result));		
 			}
 			/////////////////////////////////////////////////////////////////////////////////////////
 			
-			if(math.equals(text) && number % Constants.CHECK_DECIMAL == Constants.ZERO) { // 0.1 =====
+			if(math.equals(text) && number % Constants.CHECK_DECIMAL == Constants.RESET) { // 0.1 =====
 				textPanel.blankSpace.setText((long)number + text);
 				textPanel.inputSpace.setText(String.valueOf((long) number));
 			}
 			
-			else if(math.equals(text) && number % Constants.CHECK_DECIMAL != Constants.ZERO) { // 0.1 =====
+			else if(math.equals(text) && number % Constants.CHECK_DECIMAL != Constants.RESET) { // 0.1 =====
 				textPanel.blankSpace.setText(number + text);
 				textPanel.inputSpace.setText(String.valueOf((double) number));
 			}
@@ -427,8 +427,8 @@ public class Calculator{
 		
 		else if(formula.equals("=")) { //계산 후 바로 = 이 눌리면 
 			
-			if(result % Constants.CHECK_DECIMAL == Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
-			else if(result % Constants.CHECK_DECIMAL != Constants.ZERO)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
+			if(result % Constants.CHECK_DECIMAL == Constants.RESET)textPanel.blankSpace.setText(String.valueOf((int) result) + math + String.valueOf((int) number) + text);
+			else if(result % Constants.CHECK_DECIMAL != Constants.RESET)textPanel.blankSpace.setText(String.valueOf((double) result) + math + String.valueOf((double) number) + text);
 			
 			temp = result;		
 			switch(math) {
@@ -454,7 +454,7 @@ public class Calculator{
 	
 	private void printCalculate() // 화면에 값 출력 
 	{
-		if(temp % Constants.CHECK_DECIMAL == Constants.ZERO) {
+		if(temp % Constants.CHECK_DECIMAL == Constants.RESET) {
 			textPanel.blankSpace.setText((long)temp +  text); // 중앙 화면
 			textPanel.inputSpace.setText(setComma(String.valueOf((long) temp))); // 입력화면 	
 			}
@@ -468,12 +468,12 @@ public class Calculator{
 	
 	private void setCalculate() // 수식에 들어올 때 세팅 
 	{
-		number = Constants.ZERO;; // number 초기화 
+		number = Constants.RESET;; // number 초기화 
 		//record=""; // 입력값 초기화 
-		dotCount = Constants.ZERO;
+		dotCount = Constants.RESET;
 		formula = ""; // "=" 초기
 		math = text; // math 에 부호 넣어주
-		pluscount = Constants.ZERO;
+		pluscount = Constants.RESET;
 	}
 	
 	public String changeDataType(double data) // 데이터 타입 변

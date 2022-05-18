@@ -14,8 +14,7 @@ public class PrintCalculator{
 	
 	public JFrame frame;
 	public JPanel lastCalculatorPanel;
-	//public JPanel lastRecordPanel;
-	private int size = Constants.ZERO;
+	private int size = Constants.RESET;
 	private JScrollPane scrollPane;
 	
 	public void frameset()
@@ -62,7 +61,7 @@ public class PrintCalculator{
 		frame.addComponentListener(new ComponentAdapter() {  // 화면 
 		    public void componentResized(ComponentEvent e) {
 
-		    	if(frame.getWidth() >= 600 &&  size == Constants.ZERO) {
+		    	if(frame.getWidth() >= 600 &&  size == Constants.RESET) {
 		    		frame.add(scrollPane,BorderLayout.EAST);
 					scrollPane.setVisible(true);
 		    		size = Constants.ONE;
@@ -71,7 +70,7 @@ public class PrintCalculator{
 		    	if(frame.getWidth() < 600 && size == Constants.ONE){
 		    		lastCalculatorPanel.add(scrollPane, content);
 		    		scrollPane.setVisible(false);   		
-		    		size = Constants.ZERO;
+		    		size = Constants.RESET;
 
 		    	}		        
 		    }

@@ -11,8 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-
 import Utility.Constants;
+
 
 
 public class RecordPanel extends JPanel{
@@ -21,8 +21,8 @@ public class RecordPanel extends JPanel{
 
 	public RecordPanel() {
 		
+		
 		button = new JButton[40];
-
 		setLayout(new GridLayout(0,1,0,1));
 		
 
@@ -33,7 +33,7 @@ public class RecordPanel extends JPanel{
 			button[index].setHorizontalAlignment(SwingConstants.RIGHT); // 오른 배치 
 			button[index].setOpaque(true);//있어야 색 적용가능 
 			button[index].setBorderPainted(false);//있어야 색 적용가능 
-			if(index == Constants.ZERO) button[index].setText("아직 기록이 없습니다.");
+			if(index == Constants.RESET) button[index].setText("아직 기록이 없습니다.");
 			add(button[index]);
 		}
 		

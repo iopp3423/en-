@@ -30,7 +30,7 @@ public class TextPanel extends JPanel
 	public JLabel blankSpace;
 	public JButton logSet;
 	public ComponentAdapter Resize;
-	private int panelCount = Constants.ZERO;
+	private int panelCount = Constants.RESET;
 	
 	public TextPanel(CalculatorPanel calculatorPanel, JScrollPane scrollPane, PrintCalculator printCalculator, RecordPanel recordPanel)
 	{
@@ -52,16 +52,16 @@ public class TextPanel extends JPanel
 		log.setFocusPainted(false); 
 		log.setContentAreaFilled(false); 
 	
-		logSet.setFont(new Font("맑은 고딕", Constants.ZERO, Constants.FONT_SIZE));
+		logSet.setFont(new Font("맑은 고딕", Constants.RESET, Constants.FONT_SIZE));
 		logSet.setAlignmentX(RIGHT_ALIGNMENT);
 
-		log.setFont(new Font("맑은 고딕", Constants.ZERO, Constants.FONT_SIZE));
+		log.setFont(new Font("맑은 고딕", Constants.RESET, Constants.FONT_SIZE));
 		log.setAlignmentX(RIGHT_ALIGNMENT);
 		
-		blankSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, Constants.FONT_SIZE));		// 중간 
+		blankSpace.setFont(new Font("맑은 고딕",  Constants.RESET, Constants.FONT_SIZE));		// 중간 
 		blankSpace.setAlignmentX(RIGHT_ALIGNMENT);
 		
-		inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, Constants.INPUT_FONT_SIZE));  	// 마지
+		inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, Constants.INPUT_FONT_SIZE));  	// 마지
 		inputSpace.setAlignmentX(RIGHT_ALIGNMENT);
 		
 		//lastCalculatorPanel.add(scrollPane, content);
@@ -85,7 +85,7 @@ public class TextPanel extends JPanel
 		
 		log.addActionListener(new ActionListener(){ // 화면 전
 			public void actionPerformed(ActionEvent e) {
-				if(panelCount % 2 == Constants.ZERO) {
+				if(panelCount % 2 == Constants.RESET) {
 				calculatorPanel.setVisible(false);
 				scrollPane.setVisible(true);
 				panelCount++;

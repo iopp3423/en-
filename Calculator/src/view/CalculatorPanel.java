@@ -101,7 +101,7 @@ public class CalculatorPanel extends JPanel
 		    }   
 		};
 		
-		for(int index = Constants.ZERO; index<Constants.CALCULATOR; index++)
+		for(int index = Constants.RESET; index<Constants.CALCULATOR; index++)
 		{
 			button[index].addKeyListener(keyAdapter); // 버튼에 키보
 			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
