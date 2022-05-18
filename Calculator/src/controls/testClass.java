@@ -17,10 +17,10 @@ import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.math.BigDecimal;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 
 
@@ -38,14 +38,11 @@ public class testClass{
 	private String math="=";
 	private String formula="";
 	private String centerProperty;
-	//private double result = Constants.RESET;
 	private String result = "";
-	//private double temp = Constants.RESET;
 	private String temp;
 	private int length; // 길이 
 	private int limit; // 숫자 입력 제한 
 	private int dotCount = Constants.RESET;
-	//private double number = Constants.RESET;
 	private String number = "";
 	private int pluscount = Constants.RESET;
 	private int plusMinus = -Constants.ONE;
@@ -88,8 +85,7 @@ public class testClass{
 			inputdata(); // 키패드 
 			arithmaticCalculate();
 			
-			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50-fontsize));  	// 마지
-			fontsize+=Constants.ONE;
+			adjustFontSize();
 		}
 		
 	};
@@ -153,9 +149,7 @@ public class testClass{
 			case 27: text = "C"; reset(); break;
 			}
 			
-			if(length>8 && length<21) {
-				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50-fontsize));  	// 마지
-			}
+			adjustFontSize();
 			fontsize+=Constants.ONE;
 			
 		}
@@ -172,7 +166,7 @@ public class testClass{
 				{
 					if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
 		             {
-						 textPanel.blankSpace.setText(" "); // 중간 값 
+						 textPanel.blankSpace.setText(setComma(" ")); // 중간 값 
 						 number = "0";
 		             }
 				}
@@ -189,7 +183,7 @@ public class testClass{
 		 if(length != Constants.ONE) //글자수 1 아니면 
 		 {
 			 inputRecord = record.substring(Constants.RESET,record.length()-Constants.ONE); // 문자열자르기
-			 textPanel.inputSpace.setText(inputRecord);
+			 textPanel.inputSpace.setText(setComma(inputRecord));
 			 
 			 number = inputRecord; //지운만큼 넘버값 줄이기 
 			 record = inputRecord;
@@ -274,6 +268,7 @@ public class testClass{
 		temp = "0";;
 		fontsize=9;
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50)); 
+		
 		for(int index=length; index>Constants.RESET; index--)
 		{
 			if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
@@ -381,10 +376,9 @@ public class testClass{
 		/////////////////////////////////////////////////////////////////////////////////////////
 				
 		if(math.equals(text)) { // 0.1 =====
-			textPanel.blankSpace.setText(number + text);
+			textPanel.blankSpace.setText(number+ text);
 			textPanel.inputSpace.setText(number);
 		}
-		 	
 		/////////////////////////////////////////////////////////////////////////////////////////
 	
 		if(result.contains("E")) { // e로 변환하기 - 한 번 더 봐야
@@ -394,7 +388,8 @@ public class testClass{
 		recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
 		exceptionPrint(); // 예외 문
 		
-		System.out.println(temp);
+		//System.out.println(temp);
+		adjustFontSize();
 		formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
 	}
 	
@@ -429,6 +424,7 @@ public class testClass{
 		exceptionPrint();
 	}
 	
+	
 	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
 	{
 		if(centerProperty.equals(" ")) temp = number;
@@ -438,16 +434,14 @@ public class testClass{
 	}
 	
 	
+	
 	private void printCalculate() // 화면에 값 출력 
 	{
 
 		textPanel.blankSpace.setText(temp +  text); // 중앙 화면
-		//textPanel.inputSpace.setText(setComma(temp)); // 입력화면 	
 		textPanel.inputSpace.setText(setComma(temp)); // 입력화면 	
 		exceptionPrint();
 		record=""; // 입력값 초기화 
-		System.out.println(temp);
-		System.out.println(text);
 	}
 	
 	private void setCalculate() // 수식에 들어올 때 세팅 
@@ -460,13 +454,12 @@ public class testClass{
 		pluscount = Constants.RESET;
 	}
 	
-	private String changeDataType(double data) // 데이터 타입 변
+	private String changeDataType(String data) // 데이터 타입 변
 	{
 		//BigDecimal BigC = new BigDecimal(String.valueOf(data));
 		//BigDecimal BigD = new BigDecimal(String.valueOf( Data));
 		//BigDecimal mul =  BigC.multiply(BigD);
 		//double double_bigNum = mul.doubleValue(); //BigIntger -> double	
-		String result;	
 		result = String.format("%.14e",data);
 		System.out.println(result);
 		return result;
@@ -478,6 +471,8 @@ public class testClass{
 		else if(textPanel.blankSpace.getText().contains("-")) temp = calculation(temp, number, "-");
 		else if(textPanel.blankSpace.getText().contains("x")) temp = calculation(temp, number, "x");
 		else if(textPanel.blankSpace.getText().contains("÷")) temp = calculation(temp, number, "÷");
+		System.out.println(text);
+		System.out.println("Hhhhh");
 	}
 	
 	private void exceptionPrint()
@@ -513,16 +508,48 @@ public class testClass{
 		BigDecimal leftNumber = new BigDecimal(temp);
 		BigDecimal rightNumber = new BigDecimal(number);
 		BigDecimal result = new BigDecimal("0");
-		
+		BigDecimal set = new BigDecimal("1");
+		String checkLastChar;
+				
 		switch(operator) {  // 저장했던 연산
 		case "+": result = leftNumber.add(rightNumber);break;
 		case "-": result = leftNumber.subtract(rightNumber);break;
-		case "÷": result = leftNumber.divide(rightNumber);break;
-		case "x": result = leftNumber.multiply(rightNumber);break;				
+		case "÷": result = leftNumber.divide(rightNumber, 15, RoundingMode.HALF_EVEN);break;
+		case "x": result = leftNumber.multiply(rightNumber);break;		
 		}
-		return result.toString();
+
+		//set = result.setScale(6, RoundingMode.HALF_EVEN);
+
+		System.out.println("result=" + result);
+		checkLastChar = result.toString().substring(result.toString().length()-Constants.ONE);
+		
+		if(checkLastChar == "0") set = result.stripTrailingZeros(); // 끝자리가 0 이면 0 없애
+		else if(result.toString().contains(".")) set = result.setScale(15, RoundingMode.HALF_EVEN); // 아니면 반올림7
+		else set = result;
+		//set = result.setScale(6, RoundingMode.HALF_EVEN); // 아니면 반올림7
+		
+		System.out.println("set=" + set);
+		
+		return set.toString();
 	}
 	
+	public void adjustFontSize()
+	{
+		int fontlength = textPanel.inputSpace.getText().length();
+		switch(fontlength) {
+		case 9 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 42));break;
+		case 10 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 40));break;
+		case 11 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 38));break;
+		case 12 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 36));break;
+		case 13 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 34));break;
+		case 14 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 32));break;
+		case 15 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
+		case 16 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 28));break;
+		case 17 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 26));break;
+		case 18 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 24));break;
+		case 19 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 22));break;
+		}
+	}
 }
 	
 	
