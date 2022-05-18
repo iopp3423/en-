@@ -51,7 +51,7 @@ public class PrintCalculator{
 		content.gridy=1;   //버튼이 두개로 0,0 기준으로 생성
 		lastCalculatorPanel.add(calculatorPanel, content);
 		lastCalculatorPanel.add(scrollPane, content);
-        
+		scrollPane.setVisible(false);   
         
 		frame.setLayout(new BorderLayout()); // 프레임  설정하기 	
 		frame.add(lastCalculatorPanel, BorderLayout.CENTER); // 키패드 
