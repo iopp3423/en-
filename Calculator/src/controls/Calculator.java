@@ -82,7 +82,7 @@ public class Calculator{
 				case "." : inputDot(); break;
 				case "=" : result(); break;
 			}	
-			inputnumber(); // 키패드 
+			inputdata(); // 키패드 
 			arithmaticCalculate();
 			
 			if(length>8 && length<21) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50-fontsize));  	// 마지
@@ -197,7 +197,7 @@ public class Calculator{
 	}
 	
 	
-	private void inputnumber()
+	private void inputdata()
 	{
 		
 		if(text.equals("0"))

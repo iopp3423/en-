@@ -25,7 +25,7 @@ public class PrintCalculator{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
 		frame.setLocationRelativeTo(null); // 화면 나오는 위치
 		frame.setVisible(true);
-		frame.setMinimumSize(new Dimension(250, 250));
+		frame.setMinimumSize(new Dimension(250, 350));
 		Toolkit toolkit = Toolkit.getDefaultToolkit(); // 계산기 아이콘 변경
 		Image img = toolkit.getImage("/Users/jojunhui/Desktop/계산기.png");
 	    frame.setIconImage(img);
