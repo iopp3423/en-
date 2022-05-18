@@ -46,7 +46,6 @@ public class testClass{
 	private String number = "";
 	private int pluscount = Constants.RESET;
 	private int plusMinus = -Constants.ONE;
-	private int fontsize=9;
 	private int buttonSize = Constants.RESET;
 
 	
@@ -83,8 +82,7 @@ public class testClass{
 				case "=" : result(); break;
 			}	
 			inputdata(); // 키패드 
-			arithmaticCalculate();
-			
+			arithmaticCalculate();	
 			adjustFontSize();
 		}
 		
@@ -117,10 +115,7 @@ public class testClass{
 			case 27: text = "C"; reset(); break;
 			}
 			
-			if(length>8 && length<21) {
-				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50-fontsize));  	// 마지
-			}
-			fontsize+=Constants.ONE;
+			adjustFontSize();
 			
 		}
 	};
@@ -149,9 +144,7 @@ public class testClass{
 			case 27: text = "C"; reset(); break;
 			}
 			
-			adjustFontSize();
-			fontsize+=Constants.ONE;
-			
+			adjustFontSize();		
 		}
 	};
 	
@@ -234,8 +227,7 @@ public class testClass{
 			}
 			
 			record += text;// 입력
-			System.out.println(record);		
-			
+					
 			if(pluscount % 2 == 1) {
 				textPanel.inputSpace.setText("-" + setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
 				//number = record * plusMinus; //// 넘버에 입력값 넣어주기
@@ -257,7 +249,7 @@ public class testClass{
 	
 	private void reset() // C
 	{
-		
+		number = "0ddddddd";
 		limit = Constants.RESET;
 		pluscount = Constants.RESET;
 		record = "";
@@ -265,8 +257,7 @@ public class testClass{
 		formula = "";
 		dotCount=Constants.RESET;
 		result = "0";
-		temp = "0";;
-		fontsize=9;
+		temp = "0";
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50)); 
 		
 		for(int index=length; index>Constants.RESET; index--)
@@ -287,7 +278,6 @@ public class testClass{
 		record = "";
 		number = "0";
 		dotCount = Constants.RESET;
-		fontsize=9;
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50));
 		
 		for(int index=length; index>Constants.RESET; index--)
