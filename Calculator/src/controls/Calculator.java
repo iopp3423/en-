@@ -35,7 +35,7 @@ public class Calculator{
 	private String text;
 	private String inputRecord;
 	private String record = "";
-	private String math="="; 
+	private String math="=";
 	private String formula="";
 	private String centerProperty;
 	private double result = Constants.RESET;
@@ -48,8 +48,6 @@ public class Calculator{
 	private int plusMinus = -Constants.ONE;
 	private int fontsize=9;
 	private int buttonSize = Constants.RESET;
-	
-
 
 	
 	public Calculator(PrintCalculator printCalculator, inputData data)
@@ -377,7 +375,6 @@ public class Calculator{
 			if(result % Constants.CHECK_DECIMAL == Constants.RESET && !formula.equals("=")) { // 정수형 출력 (중앙화면), // 바로 = 이 눌린게 아닐 때
 				textPanel.blankSpace.setText(String.valueOf((long) temp) + math + String.valueOf((int) number) + text );
 				textPanel.inputSpace.setText(setComma(String.valueOf((long)(result))));
-				//System.out.println(changeInt(String.valueOf((long)temp)));
 			}
 			
 			else if(result % Constants.CHECK_DECIMAL != Constants.RESET && !formula.equals("=")){ // 더블형 출력,  // 바로 = 이 눌린게 아닐 때 
