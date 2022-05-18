@@ -161,8 +161,6 @@ public class Calculator{
 		}
 	};
 	
-	
-	
 		
 	private void delete() 
 	{	
@@ -406,8 +404,7 @@ public class Calculator{
 			
 			recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
 			exceptionPrint(); // 예외 문
-			operatorData.setResult("Hello world");
-			System.out.println(operatorData.getResult());
+			
 			
 			formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
 	}
