@@ -1,5 +1,6 @@
 package controls;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 
 import Utility.Constants;
@@ -15,6 +16,8 @@ import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.math.BigDecimal;
+
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.math.BigInteger;
 
@@ -50,6 +53,7 @@ public class Calculator{
 	public Calculator(PrintCalculator printCalculator, inputData data)
 	{	
 		this.printCalculator = printCalculator;
+		JPanel LastPanel = new JPanel(new GridBagLayout()); //텍스트,입력 패널 합치는 패널 
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
 		recordPanel = new RecordPanel();
 		scrollPane = new JScrollPane(recordPanel);

@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -30,10 +32,11 @@ public class TextPanel extends JPanel
 	public ComponentAdapter Resize;
 	private int panelCount = Constants.ZERO;
 	
-	public TextPanel(CalculatorPanel calculatorPanel, JScrollPane scrollPane,PrintCalculator printCalculator, RecordPanel recordPanel)
+	public TextPanel(CalculatorPanel calculatorPanel, JScrollPane scrollPane, PrintCalculator printCalculator, RecordPanel recordPanel)
 	{
-
-	
+		JPanel lastRecordPanel = new JPanel(new GridBagLayout());
+		GridBagConstraints recordcontent=new GridBagConstraints();
+		
 		inputSpace = new JLabel("0");
 		blankSpace = new JLabel(" ");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -61,7 +64,22 @@ public class TextPanel extends JPanel
 		inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, Constants.INPUT_FONT_SIZE));  	// 마지
 		inputSpace.setAlignmentX(RIGHT_ALIGNMENT);
 		
-
+		//lastCalculatorPanel.add(scrollPane, content);
+		
+				
+				recordcontent.fill=GridBagConstraints.BOTH; //여백 채우기
+				recordcontent.weighty=0.1;// 비율이 0.2:0.1이므로 버튼의 크기는 세로축으로 2배
+				recordcontent.weightx=1;
+				recordcontent.gridx=0;  
+				recordcontent.gridy=0;   //버튼이 두개로 0,0 기준으로 생성
+				//lastRecordPanel.add(textPanel, recordcontent);
+				recordcontent.weighty=0.2; // 비율이 0.2:0.1이므로 버튼의 크기는 세축으로 1배
+				recordcontent.weightx=1;
+				recordcontent.gridx=0;  
+				recordcontent.gridy=1;   //버튼이 두개로 0,0 기준으로 생성
+				lastRecordPanel.add(scrollPane, recordcontent);
+		        
+		
 			
 		
 		
@@ -69,20 +87,21 @@ public class TextPanel extends JPanel
 			public void actionPerformed(ActionEvent e) {
 				if(panelCount % 2 == Constants.ZERO) {
 				calculatorPanel.setVisible(false);
-				printCalculator.frame.add(scrollPane);
 				scrollPane.setVisible(true);
 				panelCount++;
 				}
 				else {
 					calculatorPanel.setVisible(true);
-					printCalculator.frame.add(calculatorPanel);
 					scrollPane.setVisible(false);
+					printCalculator.frame.add(printCalculator.lastCalculatorPanel);
+					
 					panelCount++;
 					System.out.println("\uD83D\uDDD1");
 				}
 			}
 			
 		});
+		
 		
 		
 		logSet.addActionListener(new ActionListener(){ // 기록 초기화
