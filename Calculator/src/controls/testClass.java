@@ -31,7 +31,7 @@ public class testClass{
 	private JScrollPane scrollPane;
 	private TextPanel textPanel;
 	private RecordPanel recordPanel;
-	private OperatorData operatorData;
+	private OperatorData Data;
 	private String text;
 	private String inputRecord;
 	private String record = "";
@@ -56,7 +56,7 @@ public class testClass{
 		recordPanel = new RecordPanel();
 		scrollPane = new JScrollPane(recordPanel);
 		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성 
-		operatorData = new OperatorData();
+		Data = new OperatorData();
 		callCalculator();// 계산기 출력 
 	}
 	
@@ -259,7 +259,8 @@ public class testClass{
 		math = "=";
 		formula = "";
 		dotCount=Constants.RESET;
-		result = "0";
+		//result = "0";
+		Data.setResult("0");
 		temp = "0";
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50)); 
 		
@@ -336,7 +337,13 @@ public class testClass{
 			dotCount++;		
 		}
 		
+		/*
 		if(result == "0" && record.equals(".")) { // 2.5 - negate. -> 0
+			textPanel.inputSpace.setText(result + record);
+			dotCount++;	
+		}
+		*/
+		if(Data.getResult() == "0" && record.equals(".")) { // 2.5 - negate. -> 0
 			textPanel.inputSpace.setText(result + record);
 			dotCount++;	
 		}	
@@ -354,7 +361,8 @@ public class testClass{
 		printResult();
 
 		textPanel.blankSpace.setText(temp + math + number + text );
-		textPanel.inputSpace.setText(setComma(result));
+		textPanel.inputSpace.setText(setComma(Data.getResult()));
+		//textPanel.inputSpace.setText(setComma(result));
 							
 		/////////////////////////////////////////////////////////////////////////////////////////
 				
@@ -364,9 +372,14 @@ public class testClass{
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
 	
+		if(Data.getResult().contains("E")) { // e로 변환하기 - 한 번 더 봐야
+			textPanel.inputSpace.setText(setComma(Data.getResult()));
+		}
+		/*
 		if(result.contains("E")) { // e로 변환하기 - 한 번 더 봐야
 			textPanel.inputSpace.setText(setComma(result));
 		}
+		*/
 		
 		recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
 		exceptionPrint(); // 예외 문
@@ -380,6 +393,30 @@ public class testClass{
 	public void printResult() // 결과값 출력(중앙 출력)
 	{
 		
+		if(!formula.equals("=")) { // 2x4 = 8 
+			switch(math) {
+			case "+" : Data.setResult(calculation(temp, number, "+")); break;
+			case "-" : Data.setResult(calculation(temp, number, "-")); break;
+			case "x" : Data.setResult(calculation(temp, number, "x"));break;
+			case "÷" : Data.setResult(calculation(temp, number, "÷")); break;
+			}
+		}
+		
+		if(formula.equals("=")) { //계산 후 바로 = 이 눌리면 
+			
+			textPanel.blankSpace.setText(result + math + number + text);
+			
+			temp = Data.getResult();		
+			switch(math) {
+			case "+" : Data.setResult(calculation(temp, number, "+")); break;
+			case "-" : Data.setResult(calculation(temp, number, "-")); break;
+			case "x" : Data.setResult(calculation(temp, number, "x"));break;
+			case "÷" : Data.setResult(calculation(temp, number, "÷")); break;
+			}
+			
+			textPanel.inputSpace.setText(setComma(Data.getResult())); // 결과값 출력
+		}
+		/*
 		if(!formula.equals("=")) { // 2x4 = 8 
 			switch(math) {
 			case "+" : result = calculation(temp, number, "+"); break;
@@ -403,6 +440,7 @@ public class testClass{
 			
 			textPanel.inputSpace.setText(setComma(result)); // 결과값 출력
 		}
+		*/
 		exceptionPrint();
 	}
 	
@@ -436,16 +474,16 @@ public class testClass{
 		pluscount = Constants.RESET;
 	}
 	
-	private String changeDataType(String data) // 데이터 타입 변
+	/*private String changeDataType(String data) // 데이터 타입 변
 	{
 		//BigDecimal BigC = new BigDecimal(String.valueOf(data));
 		//BigDecimal BigD = new BigDecimal(String.valueOf( Data));
 		//BigDecimal mul =  BigC.multiply(BigD);
 		//double double_bigNum = mul.doubleValue(); //BigIntger -> double	
 		result = String.format("%.14e",data);
-		System.out.println(result);
-		return result;
-	}
+		//System.out.println(result);
+		//return result;
+	}*/
 	
 	private void calculate()
 	{
