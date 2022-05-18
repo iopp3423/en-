@@ -32,7 +32,7 @@ public class PrintCalculator{
 	}
 	
 	
-	public void getCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel, RecordPanel recordPanel, JScrollPane scrollPane)
+	public void openCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel, RecordPanel recordPanel, JScrollPane scrollPane)
 	{
 		frameset();	
 		lastCalculatorPanel = new JPanel(new GridBagLayout()); //텍스트,입력 패널 합치는 패널 

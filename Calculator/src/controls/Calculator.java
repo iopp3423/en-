@@ -65,7 +65,7 @@ public class Calculator{
 	
 	public void callCalculator() // 계산기 출력 
 	{
-		printCalculator.getCalculator(calculatorPanel, textPanel, recordPanel, scrollPane); // 계산기 출력	
+		printCalculator.openCalculator(calculatorPanel, textPanel, recordPanel, scrollPane); // 계산기 출력	
 	}
 	
 

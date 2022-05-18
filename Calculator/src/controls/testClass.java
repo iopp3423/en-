@@ -63,7 +63,7 @@ public class testClass{
 	
 	public void callCalculator() // 계산기 출력 
 	{
-		printCalculator.getCalculator(calculatorPanel, textPanel, recordPanel, scrollPane); // 계산기 출력	
+		printCalculator.openCalculator(calculatorPanel, textPanel, recordPanel, scrollPane); // 계산기 출력	
 	}
 	
 
@@ -86,7 +86,6 @@ public class testClass{
 				case "÷" : combineCalculate(); break;
 			}	
 			inputdata(); // 키패드 
-			//arithmaticCalculate();	
 			adjustFontSize();
 		}
 		
@@ -110,11 +109,11 @@ public class testClass{
 			case 55 : text = "7"; inputNumber(); break;
 			case 56 : text = "8"; inputNumber(); break;
 			case 57 : text = "9"; inputNumber(); break;
-			case 107 : text = "+"; arithmaticCalculate(); break;
-			case 109 : text = "-"; arithmaticCalculate(); break;
+			case 107 : text = "+"; combineCalculate(); break;
+			case 109 : text = "-"; combineCalculate(); break;
 			case 10 : text = "="; result(); break;
-			case 47 : text = "÷"; arithmaticCalculate(); break;
-			case 106 : text = "x"; arithmaticCalculate();  break;
+			case 47 : text = "÷"; combineCalculate(); break;
+			case 106 : text = "x"; combineCalculate();  break;
 			case 8: text = "\u232B"; delete(); break;
 			case 27: text = "C"; reset(); break;
 			}
@@ -139,11 +138,11 @@ public class testClass{
 			case 55 : text = "7"; inputNumber(); break;
 			case 56 : text = "8"; inputNumber(); break;
 			case 57 : text = "9"; inputNumber(); break;
-			case 107 : text = "+"; arithmaticCalculate(); break;
-			case 109 : text = "-"; arithmaticCalculate(); break;
+			case 107 : text = "+"; combineCalculate(); break;
+			case 109 : text = "-"; combineCalculate(); break;
 			case 10 : text = "="; result(); break;
-			case 47 : text = "÷"; arithmaticCalculate(); break;
-			case 106 : text = "x"; arithmaticCalculate();  break;
+			case 47 : text = "÷"; combineCalculate(); break;
+			case 106 : text = "x"; combineCalculate();  break;
 			case 8: text = "\u232B"; delete(); break;
 			case 27: text = "C"; reset(); break;
 			}
@@ -344,16 +343,6 @@ public class testClass{
 		
 	}
 	
-	private void arithmaticCalculate()
-	{
-		switch(text) {
-		case "+" : combineCalculate(); break;
-		case "-" : combineCalculate(); break;
-		case "x" : combineCalculate(); break;
-		case "÷" : combineCalculate(); break;
-		}
-	}
-		
 	
 	private void result(){ // 결
 				
@@ -537,17 +526,17 @@ public class testClass{
 	{
 		int fontlength = textPanel.inputSpace.getText().length();
 		switch(fontlength) {
-		case 9 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 42));break;
-		case 10 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 40));break;
-		case 11 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 38));break;
-		case 12 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 36));break;
-		case 13 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 34));break;
-		case 14 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 32));break;
-		case 15 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
-		case 16 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 28));break;
-		case 17 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 26));break;
-		case 18 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 24));break;
-		case 19 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 22));break;
+		case 1 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 70));break;
+		case 10 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 54));break;
+		case 11 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 52));break;
+		case 12 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50));break;
+		case 13 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 47));break;
+		case 14 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 42));break;
+		case 15 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 38));break;
+		case 16 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 35));break;
+		case 17 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
+		case 18 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
+		case 19 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
 		}
 	}
 }
