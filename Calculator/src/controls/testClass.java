@@ -80,9 +80,13 @@ public class testClass{
 				case "±" : changeSign(); break;
 				case "." : inputDot(); break;
 				case "=" : result(); break;
+				case "x" : combineCalculate(); break;
+				case "+" : combineCalculate(); break;
+				case "-" : combineCalculate(); break;
+				case "÷" : combineCalculate(); break;
 			}	
 			inputdata(); // 키패드 
-			arithmaticCalculate();	
+			//arithmaticCalculate();	
 			adjustFontSize();
 		}
 		
@@ -461,7 +465,7 @@ public class testClass{
 		else if(textPanel.blankSpace.getText().contains("x")) temp = calculation(temp, number, "x");
 		else if(textPanel.blankSpace.getText().contains("÷")) temp = calculation(temp, number, "÷");
 		System.out.println(text);
-		System.out.println("Hhhhh");
+		System.out.println("---------");
 	}
 	
 	private void exceptionPrint()
