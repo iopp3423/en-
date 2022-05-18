@@ -420,7 +420,6 @@ public class testClass{
 			
 			textPanel.inputSpace.setText(setComma(result)); // 결과값 출력
 		}
-		System.out.println(temp);
 		exceptionPrint();
 	}
 	
@@ -511,15 +510,22 @@ public class testClass{
 		BigDecimal set = new BigDecimal("1");
 		String checkLastChar;
 				
-		switch(operator) {  // 저장했던 연산
-		case "+": result = leftNumber.add(rightNumber);break;
-		case "-": result = leftNumber.subtract(rightNumber);break;
-		case "÷": result = leftNumber.divide(rightNumber, 15, RoundingMode.HALF_EVEN);break;
-		case "x": result = leftNumber.multiply(rightNumber);break;		
+		//if(number == "0") return "0으로 나눌 수 없습니다.";
+		System.out.println(number);
+		
+		try{
+			switch(operator) {  // 저장했던 연산
+			case "+": result = leftNumber.add(rightNumber);break;
+			case "-": result = leftNumber.subtract(rightNumber);break;
+			case "÷": result = leftNumber.divide(rightNumber, 15, RoundingMode.HALF_EVEN);break;
+			case "x": result = leftNumber.multiply(rightNumber); break;	
+			}
+		}
+		catch (java.lang.ArithmeticException e){
 		}
 
-		//set = result.setScale(6, RoundingMode.HALF_EVEN);
-
+		
+		
 		System.out.println("result=" + result);
 		checkLastChar = result.toString().substring(result.toString().length()-Constants.ONE);
 		
