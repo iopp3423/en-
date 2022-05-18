@@ -38,8 +38,8 @@ public class testClass{
 	private String math="=";
 	private String formula="";
 	private String centerProperty;
-	private String result = "";
-	private String temp;
+	//private String result = "";
+	//private String temp;
 	private int length; // 길이 
 	private int limit; // 숫자 입력 제한 
 	private int dotCount = Constants.RESET;
@@ -261,7 +261,8 @@ public class testClass{
 		dotCount=Constants.RESET;
 		//result = "0";
 		Data.setResult("0");
-		temp = "0";
+		Data.setTemp("0");
+		//temp = "0";
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50)); 
 		
 		for(int index=length; index>Constants.RESET; index--)
@@ -308,13 +309,13 @@ public class testClass{
 		
 		if(pluscount % 2 == Constants.ONE) { // 짝수면 플러스, 홀수면 마이너스 
 			
-			if(record == "") textPanel.inputSpace.setText("-" + (temp)); // 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
+			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText("-" + setComma(record)); //그냥 +-
 		}
 		
 		
 		else {
-			if(record == "") textPanel.inputSpace.setText(setComma(temp));// 짝이면서 2 -> 사칙연산 -> +-눌렀을 
+			if(record == "") textPanel.inputSpace.setText(setComma(Data.getTemp()));// 짝이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText(setComma(record));//그냥 +-
 		}	
 	}
@@ -344,7 +345,7 @@ public class testClass{
 		}
 		*/
 		if(Data.getResult() == "0" && record.equals(".")) { // 2.5 - negate. -> 0
-			textPanel.inputSpace.setText(result + record);
+			textPanel.inputSpace.setText(Data.getResult() + record);
 			dotCount++;	
 		}	
 		
@@ -356,11 +357,11 @@ public class testClass{
 		
 		pluscount = Constants.RESET;
 		
-		if(number == "0") number = temp; // 2X4=, 2+5= 형식 처리  
+		if(number == "0") number = Data.getTemp(); // 2X4=, 2+5= 형식 처리  
 		
 		printResult();
 
-		textPanel.blankSpace.setText(temp + math + number + text );
+		textPanel.blankSpace.setText(Data.getTemp() + math + number + text );
 		textPanel.inputSpace.setText(setComma(Data.getResult()));
 		//textPanel.inputSpace.setText(setComma(result));
 							
@@ -395,23 +396,23 @@ public class testClass{
 		
 		if(!formula.equals("=")) { // 2x4 = 8 
 			switch(math) {
-			case "+" : Data.setResult(calculation(temp, number, "+")); break;
-			case "-" : Data.setResult(calculation(temp, number, "-")); break;
-			case "x" : Data.setResult(calculation(temp, number, "x"));break;
-			case "÷" : Data.setResult(calculation(temp, number, "÷")); break;
+			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
+			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
+			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
+			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
 		}
 		
 		if(formula.equals("=")) { //계산 후 바로 = 이 눌리면 
 			
-			textPanel.blankSpace.setText(result + math + number + text);
+			textPanel.blankSpace.setText(Data.getResult() + math + number + text);
 			
-			temp = Data.getResult();		
+			Data.setTemp(Data.getResult());		
 			switch(math) {
-			case "+" : Data.setResult(calculation(temp, number, "+")); break;
-			case "-" : Data.setResult(calculation(temp, number, "-")); break;
-			case "x" : Data.setResult(calculation(temp, number, "x"));break;
-			case "÷" : Data.setResult(calculation(temp, number, "÷")); break;
+			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
+			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
+			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
+			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
 			
 			textPanel.inputSpace.setText(setComma(Data.getResult())); // 결과값 출력
@@ -447,7 +448,7 @@ public class testClass{
 	
 	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
 	{
-		if(centerProperty.equals(" ")) temp = number;
+		if(centerProperty.equals(" ")) Data.setTemp(number);
 		calculate();
 		setCalculate();
 		printCalculate();
@@ -458,8 +459,8 @@ public class testClass{
 	private void printCalculate() // 화면에 값 출력 
 	{
 
-		textPanel.blankSpace.setText(temp +  text); // 중앙 화면
-		textPanel.inputSpace.setText(setComma(temp)); // 입력화면 	
+		textPanel.blankSpace.setText(Data.getTemp() +  text); // 중앙 화면
+		textPanel.inputSpace.setText(setComma(Data.getTemp())); // 입력화면 	
 		exceptionPrint();
 		record=""; // 입력값 초기화 
 	}
@@ -487,10 +488,10 @@ public class testClass{
 	
 	private void calculate()
 	{
-		if(textPanel.blankSpace.getText().contains("+")) temp = calculation(temp, number, "+");
-		else if(textPanel.blankSpace.getText().contains("-")) temp = calculation(temp, number, "-");
-		else if(textPanel.blankSpace.getText().contains("x")) temp = calculation(temp, number, "x");
-		else if(textPanel.blankSpace.getText().contains("÷")) temp = calculation(temp, number, "÷");
+		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
+		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
+		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
+		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
 		System.out.println(text);
 		System.out.println("---------");
 	}

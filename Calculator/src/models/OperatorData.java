@@ -4,6 +4,7 @@ public class OperatorData {
 
 	
 	private String result = "";
+	private String temp = "";
 	
 	
 	public void setResult(String result) { // = 저
@@ -12,6 +13,12 @@ public class OperatorData {
 	
 	public String getResult() {
 		return result;
+	}
+	public void setTemp(String temp) {
+		this.temp = temp;
+	}
+	public String getTemp() {
+		return temp;
 	}
 	
 	
