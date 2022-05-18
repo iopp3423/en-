@@ -121,6 +121,38 @@ public class Calculator{
 			
 		}
 	};
+	KeyAdapter keyoverride = new KeyAdapter() {
+		public void keyReleased(KeyEvent e) {
+			System.out.println(e.getKeyCode());
+			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
+			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
+			switch(e.getKeyCode()) {			
+			case 48 : text = "0"; inputNumber(); break;
+			case 49 : text = "1"; inputNumber(); break;
+			case 50 : text = "2"; inputNumber(); break;
+			case 51 : text = "3"; inputNumber(); break;
+			case 52 : text = "4"; inputNumber(); break;
+			case 53 : text = "5"; inputNumber(); break;
+			case 54 : text = "6"; inputNumber(); break;
+			case 55 : text = "7"; inputNumber(); break;
+			case 56 : text = "8"; inputNumber(); break;
+			case 57 : text = "9"; inputNumber(); break;
+			case 107 : text = "+"; arithmaticCalculate(); break;
+			case 109 : text = "-"; arithmaticCalculate(); break;
+			case 10 : text = "="; result(); break;
+			case 47 : text = "÷"; arithmaticCalculate(); break;
+			case 106 : text = "x"; arithmaticCalculate();  break;
+			case 8: text = "\u232B"; delete(); break;
+			case 27: text = "C"; reset(); break;
+			}
+			
+			if(length>8 && length<21) {
+				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
+			}
+			fontsize+=Constants.ONE;
+			
+		}
+	};
 	
 	
 	

@@ -34,12 +34,28 @@ public class PrintCalculator{
 	public void getCalculator(CalculatorPanel calculatorPanel, TextPanel textPanel, RecordPanel recordPanel, JScrollPane scrollPane)
 	{
 		frameset();	
-		frame.setLayout(new BorderLayout()); // 프레임  설정하기 
-		//scrollPane = new JScrollPane(recordPanel);
-		frame.add(scrollPane,BorderLayout.EAST);
+		JPanel LastPanel = new JPanel(new GridBagLayout()); //텍스트,입력 패널 합치는 패널 
+		GridBagConstraints content=new GridBagConstraints(); /// constraint 설
+		content.fill=GridBagConstraints.BOTH; //여백 채우기
+		content.weighty=0.1;// 비율이 0.2:0.1이므로 버튼의 크기는 세로축으로 2배
+		content.weightx=1;
+		content.gridx=0;  
+		content.gridy=0;   //버튼이 두개로 0,0 기준으로 생성
+		LastPanel.add(textPanel, content);
+		content.fill=GridBagConstraints.BOTH; //여백 채우기
+        content.weighty=0.2; // 비율이 0.2:0.1이므로 버튼의 크기는 세축으로 1배
+        content.weightx=1;
+        content.gridx=0;  
+		content.gridy=1;   //버튼이 두개로 0,0 기준으로 생성
+        LastPanel.add(calculatorPanel, content);
+        
+        
+		frame.setLayout(new BorderLayout()); // 프레임  설정하기 	
+		//frame.add(scrollPane,BorderLayout.EAST);
 		scrollPane.setVisible(false);
-		frame.add(textPanel, BorderLayout.NORTH); // 입력패드 	
-		frame.add(calculatorPanel, BorderLayout.CENTER); // 키패드 
+		//frame.add(textPanel, BorderLayout.NORTH); // 입력패드 	
+		//frame.add(calculatorPanel, BorderLayout.CENTER); // 키패드 
+		frame.add(LastPanel, BorderLayout.CENTER); // 키패드
 		frame.setVisible(true);
 		//frame.setFocusable(true); // 안되니까 나중에 확인하기 
 		//frame.requestFocus(); //얘랑 세트 
