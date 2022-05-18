@@ -126,8 +126,13 @@ public class CalculatorPanel extends JPanel
 			}
 			//setFocusable(true);
 			//requestFocus();
-			add(button[index]);		
+			button[index].setFocusable(true);
+			button[index].requestFocus();
+			add(button[index]);			
 		}	
+		setFocusable(true);
+		requestFocus();
+		//setFocusable(true);
 			
 		
 		

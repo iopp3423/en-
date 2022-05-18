@@ -91,7 +91,7 @@ public class Calculator{
 	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
-			//System.out.println(e.getKeyCode());
+			System.out.println(e.getKeyCode());
 			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
 			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
 			switch(e.getKeyCode()) {			
@@ -111,13 +111,14 @@ public class Calculator{
 			case 47 : text = "÷"; arithmaticCalculate(); break;
 			case 106 : text = "x"; arithmaticCalculate();  break;
 			case 8: text = "\u232B"; delete(); break;
-			case 67: text = "C"; reset(); break;
+			case 27: text = "C"; reset(); break;
 			}
 			
 			if(length>8 && length<21) {
 				textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.ZERO, 50-fontsize));  	// 마지
 			}
 			fontsize+=Constants.ONE;
+			
 		}
 	};
 	
@@ -369,6 +370,11 @@ public class Calculator{
 			
 			formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
 	}
+	
+
+	
+	
+	
 	
 	
 	
