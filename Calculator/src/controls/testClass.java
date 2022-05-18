@@ -377,17 +377,14 @@ public class testClass{
 
 		textPanel.blankSpace.setText(temp + math + number + text );
 		textPanel.inputSpace.setText(setComma(result));
-			
-					
+							
 		/////////////////////////////////////////////////////////////////////////////////////////
-		
-		/*
-		if(math.equals(text) && number % Constants.CHECK_DECIMAL == Constants.RESET) { // 0.1 =====
-			textPanel.blankSpace.setText((long)number + text);
-			textPanel.inputSpace.setText(String.valueOf((long) number));
+				
+		if(math.equals(text)) { // 0.1 =====
+			textPanel.blankSpace.setText(number + text);
+			textPanel.inputSpace.setText(number);
 		}
-		 */
-		
+		 	
 		/////////////////////////////////////////////////////////////////////////////////////////
 	
 		if(result.contains("E")) { // e로 변환하기 - 한 번 더 봐야
@@ -405,7 +402,7 @@ public class testClass{
 	public void printResult() // 결과값 출력(중앙 출력)
 	{
 		
-		if(!formula.equals("=")) {
+		if(!formula.equals("=")) { // 2x4 = 8 
 			switch(math) {
 			case "+" : result = calculation(temp, number, "+"); break;
 			case "-" : result = calculation(temp, number, "-"); break;
@@ -445,9 +442,12 @@ public class testClass{
 	{
 
 		textPanel.blankSpace.setText(temp +  text); // 중앙 화면
+		//textPanel.inputSpace.setText(setComma(temp)); // 입력화면 	
 		textPanel.inputSpace.setText(setComma(temp)); // 입력화면 	
 		exceptionPrint();
 		record=""; // 입력값 초기화 
+		System.out.println(temp);
+		System.out.println(text);
 	}
 	
 	private void setCalculate() // 수식에 들어올 때 세팅 
@@ -474,10 +474,10 @@ public class testClass{
 	
 	private void calculate()
 	{
-		if(textPanel.blankSpace.getText().contains("+")) result = calculation(temp, number, "+");
-		else if(textPanel.blankSpace.getText().contains("-")) result = calculation(temp, number, "-");
-		else if(textPanel.blankSpace.getText().contains("x")) result = calculation(temp, number, "x");
-		else if(textPanel.blankSpace.getText().contains("÷")) result = calculation(temp, number, "÷");
+		if(textPanel.blankSpace.getText().contains("+")) temp = calculation(temp, number, "+");
+		else if(textPanel.blankSpace.getText().contains("-")) temp = calculation(temp, number, "-");
+		else if(textPanel.blankSpace.getText().contains("x")) temp = calculation(temp, number, "x");
+		else if(textPanel.blankSpace.getText().contains("÷")) temp = calculation(temp, number, "÷");
 	}
 	
 	private void exceptionPrint()
@@ -507,9 +507,6 @@ public class testClass{
         return changeResult;
     }
 	
-
-	
-
 
 	
 	public String calculation(String temp, String number, String operator) { // 결과 
