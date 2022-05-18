@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 
 import Utility.Constants;
+import models.OperatorData;
 import models.inputData;
 import view.CalculatorPanel;
 import view.PrintCalculator;
@@ -30,6 +31,7 @@ public class Calculator{
 	private JScrollPane scrollPane;
 	private TextPanel textPanel;
 	private RecordPanel recordPanel;
+	private OperatorData operatorData;
 	private String text;
 	private String inputRecord;
 	private String record = "";
@@ -58,6 +60,7 @@ public class Calculator{
 		recordPanel = new RecordPanel();
 		scrollPane = new JScrollPane(recordPanel);
 		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성 
+		operatorData = new OperatorData();
 		callCalculator();// 계산기 출력 
 	}
 	
@@ -403,15 +406,11 @@ public class Calculator{
 			
 			recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
 			exceptionPrint(); // 예외 문
+			operatorData.setResult("Hello world");
+			System.out.println(operatorData.getResult());
 			
 			formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
 	}
-	
-
-	
-	
-	
-	
 	
 	
 	public void printResult() // 결과값 출력(중앙 출력)
@@ -530,6 +529,7 @@ public class Calculator{
         }        
         return changeResult;
     }
+	
 
 }
 

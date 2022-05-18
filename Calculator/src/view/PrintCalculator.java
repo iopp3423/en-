@@ -41,12 +41,12 @@ public class PrintCalculator{
 		content.fill=GridBagConstraints.BOTH; //여백 채우기
 		content.weighty=0.1;// 비율이 0.2:0.1이므로 버튼의 크기는 세로축으로 2배
 		content.weightx=1;
-		content.gridx=0;  
-		content.gridy=0;   //버튼이 두개로 0,0 기준으로 생성
+		content.gridx=Constants.RESET;  
+		content.gridy=Constants.RESET;   //버튼이 두개로 0,0 기준으로 생성
 		lastCalculatorPanel.add(textPanel, content);
         content.weighty=0.2; // 비율이 0.2:0.1이므로 버튼의 크기는 세축으로 1배
         content.weightx=1;
-        content.gridx=0;  
+        content.gridx=Constants.RESET;  
 		content.gridy=1;   //버튼이 두개로 0,0 기준으로 생성
 		lastCalculatorPanel.add(calculatorPanel, content);
 		lastCalculatorPanel.add(scrollPane, content);
