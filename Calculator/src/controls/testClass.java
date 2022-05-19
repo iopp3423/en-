@@ -39,7 +39,7 @@ public class testClass{
 	private int dotCount = Constants.RESET;
 	private String number = "";
 	private int pluscount = Constants.RESET;
-	private int plusMinus = -Constants.ONE;
+	private String plusMinus = "-";
 	private int buttonSize = Constants.RESET;
 
 	
@@ -162,7 +162,7 @@ public class testClass{
 	
 	private void inputZero()
 	{
-		
+		Data.setNegateOperator("");
 		if(text.equals("0"))
 		{
 			if(textPanel.inputSpace.getText() == "0") {
@@ -173,7 +173,6 @@ public class testClass{
 				record += text;// 키보드 입력
 				number = record; //// 넘버에 입력값 넣어주기
 				textPanel.inputSpace.setText(setComma(record));			
-				//System.out.println("number="+number);
 			}
 			limit = record.length();	
 		}
@@ -182,6 +181,7 @@ public class testClass{
 	
 	private void inputNumber() // 입력 
 	{		
+		Data.setNegateOperator("");
 		if(limit<Constants.LIMIT_INPUT) 
 		{	
 			if(Data.getFormula().equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
@@ -192,7 +192,7 @@ public class testClass{
 					
 			if(pluscount % 2 == 1) {
 				textPanel.inputSpace.setText("-" + setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
-				//number = record * plusMinus; //// 넘버에 입력값 넣어주기
+				number = plusMinus + record; //// 넘버에 입력값 넣어주기
 			}
 			else if(textPanel.inputSpace.getText().equals("0")){ // 0밖에 없으
 				textPanel.inputSpace.setText("");  // 0 없애기  
@@ -261,21 +261,30 @@ public class testClass{
 		
 		else if(textPanel.inputSpace.getText() != "0"){ // 0이 아니면 
 			
-		//number *= plusMinus;	
-		pluscount++;
 		
-		if(pluscount % 2 == Constants.ONE) { // 짝수면 플러스, 홀수면 마이너스 
+		if(pluscount % 2 == Constants.RESET) { // 짝수면 플러스, 홀수면 마이너스 
 			
 			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText("-" + setComma(record)); //그냥 +-
+			number = plusMinus + number;
+			pluscount++;
 		}
 		
 		
 		else {
 			if(record == "") textPanel.inputSpace.setText(setComma(Data.getTemp()));// 짝이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText(setComma(record));//그냥 +-
+			number = number.replace("-", "");
+			pluscount++;
 		}	
 	}
+		
+		if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != null) {
+			if(!textPanel.blankSpace.getText().contains("negate"))Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저
+			
+			textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면System.out.print("negate");
+			Data.setNegate("negate(" + Data.getNegate() + ")");
+		}
 		
 	}
 	
@@ -294,13 +303,12 @@ public class testClass{
 			textPanel.inputSpace.setText(record);
 			dotCount++;		
 		}
-		
-		/*
-		if(result == "0" && record.equals(".")) { // 2.5 - negate. -> 0
-			textPanel.inputSpace.setText(result + record);
+			
+		if(Data.getResult().equals("0") && record.equals(".")) { // 2.5 - negate. -> 0
+			textPanel.inputSpace.setText(Data.getResult() + record);
 			dotCount++;	
 		}
-		*/
+		
 		if(Data.getResult() == "0" && record.equals(".")) { // 2.5 - negate. -> 0
 			textPanel.inputSpace.setText(Data.getResult() + record);
 			dotCount++;	
@@ -320,11 +328,7 @@ public class testClass{
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + number + text );
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
-		//textPanel.inputSpace.setText(setComma(Data.getResult()));
 		}
-		//changeNumber(Data.getResult());
-		
-		//textPanel.inputSpace.setText(setComma(result));
 							
 		/////////////////////////////////////////////////////////////////////////////////////////
 				
@@ -381,6 +385,7 @@ public class testClass{
 	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
 	{
 		if(textPanel.blankSpace.getText().equals(" ")) Data.setTemp(number);
+		Data.setNegateOperator(text);
 		calculate();
 		setCalculate();
 		printCalculate();
@@ -393,6 +398,11 @@ public class testClass{
 		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
 		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
 		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
+		System.out.println("temp=" + Data.getTemp());
+		System.out.println("result=" + Data.getResult());
+		System.out.println("operator=" + Data.getOperator());
+		System.out.println("formula=" + Data.getFormula());
+		
 	}
 	
 	private void printCalculate() // 화면에 값 출력 
@@ -405,6 +415,7 @@ public class testClass{
 		record=""; // 입력값 초기화 
 	}
 	
+	
 	private void setCalculate() // 수식에 들어올 때 세팅 
 	{
 		if(Data.getTemp().equals(""))Data.setTemp("0"); // 계산기 입력 없을 때 연산자 누르면 널값이 아닌 0이 올라감 
@@ -414,6 +425,7 @@ public class testClass{
 		Data.setOperator(text); // 부호 넣어주기 
 		pluscount = Constants.RESET;
 	}
+	
 	
 	private void exceptionPrint() // 예외처리 함수 
 	{
@@ -430,7 +442,7 @@ public class testClass{
 	
 	
 	private String setComma(String number) { // ,찍기 
-        String changeResult = number; //출력할 결과를 저장할 변수
+        String changeResult = number; // 출력할 결과를 저장할 변수
         Pattern pattern = Pattern.compile("(^[+-]?\\d+)(\\d{3})"); //정규표현식 
         Matcher regexMatcher = pattern.matcher(number); 
         
@@ -448,12 +460,6 @@ public class testClass{
 		BigDecimal leftNumber = new BigDecimal(temp);
 		BigDecimal rightNumber = new BigDecimal(number);
 		BigDecimal result = new BigDecimal("0");
-		BigDecimal set = new BigDecimal("0");
-		String checkLastChar;
-				
-		//if(number == "0") return "0으로 나눌 수 없습니다.";
-		//System.out.println(temp);
-		//System.out.println(number);
 		
 		try{
 			switch(operator) {  // 저장했던 연산
@@ -465,17 +471,6 @@ public class testClass{
 		}
 		catch (java.lang.ArithmeticException e){
 		}
-
-		/*
-		checkLastChar = result.toString().substring(result.toString().length()-Constants.ONE);	
-		if(checkLastChar == "0") set = result.stripTrailingZeros(); // 끝자리가 0 이면 0 없애
-		else if(result.toString().contains(".")) set = result.setScale(15, RoundingMode.HALF_EVEN); // 아니면 반올림7
-		else set = result;*/
-		//if(temp.equals("0")) result = set;
-		
-		//System.out.println(temp);
-		//System.out.println(number);
-		//System.out.println(result);
 		return result.toString();
 	}
 	
@@ -517,20 +512,6 @@ public class testClass{
 				"#.###############E0",		// 16글자 넘어가면 E로 바껴서 출
 				"###.#############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 		};
-			
-		/*
-		format.applyPattern(patterns[1]);
-		changedNumber = format.format(newNumber); // 뒤에 소수점 0나오면 없게 출력, 반올림 포함 먼저 정
-		
-		if(changedNumber.length() > 16) {
-			format.applyPattern(patterns[0]);
-		}
-
-		changedNumber = format.format(Double.parseDouble(changedNumber));
-		
-		*/
-		System.out.println(newNumber);
-		System.out.println("dddd");
 		
 		if(number.length() > 16) {
 			format.applyPattern(patterns[0]);
@@ -544,10 +525,8 @@ public class testClass{
 		else changedNumber = newNumber.toString();
 		System.out.println(changedNumber);
 		
-		
-		
-		
-		if(changedNumber.contains("E")) {
+			
+		if(changedNumber.contains("E")) { // E e 로 변
 			changedNumber = changedNumber.replace("E","e");
 		}
 

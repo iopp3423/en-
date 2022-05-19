@@ -10,6 +10,8 @@ public class OperatorData {
 	private String temp = "";
 	private String operator = "=";
 	private String formula = "";
+	private String negateOperator = "";
+	private String negate = "";
 	
 	public void setResult(String result) { // = 저
 		this.result = result;
@@ -34,5 +36,17 @@ public class OperatorData {
 	}
 	public String getFormula() {
 		return formula;
+	}
+	public void setNegateOperator(String negate) {
+		this.negateOperator = negate;
+	}
+	public String getNegateOperator() {
+		return negateOperator;
+	}
+	public void setNegate(String negate) {
+		this.negate = negate;
+	}
+	public String getNegate() {
+		return negate;
 	}
 }
