@@ -331,7 +331,9 @@ public class testClass{
 		printResult();
 
 		textPanel.blankSpace.setText(Data.getTemp() + Data.getOperator() + number + text );
-		textPanel.inputSpace.setText(setComma(Data.getResult()));
+		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
+		//changeNumber(Data.getResult());
+		
 		//textPanel.inputSpace.setText(setComma(result));
 							
 		/////////////////////////////////////////////////////////////////////////////////////////
@@ -341,8 +343,8 @@ public class testClass{
 			textPanel.inputSpace.setText(setComma(number));
 		
 			if(Double.parseDouble(number) % Constants.CHECK_DECIMAL == Constants.RESET) { // 3.0 = 입력시 정수로 출력 
-				textPanel.blankSpace.setText(adjustNumber(number)+text);
-				textPanel.inputSpace.setText(setComma(adjustNumber(number)));
+				textPanel.blankSpace.setText(deleteDotZeroNumber(number)+text);
+				textPanel.inputSpace.setText(setComma(deleteDotZeroNumber(number)));
 			}
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
@@ -453,7 +455,7 @@ public class testClass{
 	
 	private void setCalculate() // 수식에 들어올 때 세팅 
 	{
-		if(Data.getTemp().equals(""))Data.setTemp("0");
+		if(Data.getTemp().equals(""))Data.setTemp("0"); // 계산기 입력 없을 때 연산자 누르면 널값이 아닌 0이 올라감 
 		number = "0"; // number 초기화 
 		//record=""; // 입력값 초기화 
 		dotCount = Constants.RESET;
@@ -555,15 +557,37 @@ public class testClass{
 	}
 	
 	
-	public String adjustNumber(String changeNumber) {
+	public String deleteDotZeroNumber(String changeNumber) {
 		
 		String changed;
 		DecimalFormat numberFormat = new DecimalFormat("0"); //형변환 Decimal	
 		changed = numberFormat.format(Double.parseDouble(changeNumber));
-		//numberFormat.applyPattern("###,###.#######");
 		  return changed;
 	}
 	
+	
+	public String changeNumber(String number) {
+		DecimalFormat format=new DecimalFormat();
+		
+		String changedNumber;
+		
+		String patterns[]= {
+				"###############E0",		// 16글자 넘어가면 E로 바껴서 출
+				"###.##############" // 뒤에 소수점 0나오면 없게 출력, 반올림 포
+		};
+			
+		if(textPanel.inputSpace.getText().length() > 16) {
+			format.applyPattern(patterns[0]);
+		}
+		else {
+			format.applyPattern(patterns[1]);
+		}
+			
+		changedNumber = format.format(Double.parseDouble(number));
+		
+		return changedNumber;
+		
+	}
 }
 	
 	
