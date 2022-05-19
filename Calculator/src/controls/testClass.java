@@ -74,6 +74,7 @@ public class testClass{
 			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
 			
 			switch(text){
+			
 				case "\u232B": delete(); break;
 				case "C" : reset(); break;
 				case "CE": resetPart(); break;
@@ -385,8 +386,6 @@ public class testClass{
 		
 		recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
 		exceptionPrint(); // 예외 문
-		
-		//System.out.println(temp);
 		adjustFontSize();
 		formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
 	}
@@ -450,17 +449,28 @@ public class testClass{
 	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
 	{
 		if(centerProperty.equals(" ")) Data.setTemp(number);
+		System.out.println("이건가" + Data.getTemp());
 		calculate();
 		setCalculate();
 		printCalculate();
 	}
 	
 	
+	private void calculate()
+	{
+		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
+		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
+		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
+		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
+		System.out.println(number);
+		System.out.println("---------");
+	}
 	
 	private void printCalculate() // 화면에 값 출력 
 	{
 		
 		textPanel.blankSpace.setText(Data.getTemp() +  text); // 중앙 화면
+		System.out.println("뭐지=" + Data.getTemp() +  text);
 		//textPanel.blankSpace.setText(Data.getTemp() +  text); // 중앙 화면
 		textPanel.inputSpace.setText(setComma(Data.getTemp())); // 입력화면 	
 		exceptionPrint();
@@ -474,7 +484,7 @@ public class testClass{
 		dotCount = Constants.RESET;
 		formula = ""; // "=" 초기
 		//math = text; // math 에 부호 넣어주
-		Data.setOperator(text); // math 에 부호 넣어주기 
+		Data.setOperator(text); // 부호 넣어주기 
 		pluscount = Constants.RESET;
 	}
 	
@@ -488,16 +498,7 @@ public class testClass{
 		//System.out.println(result);
 		//return result;
 	}*/
-	
-	private void calculate()
-	{
-		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
-		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
-		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
-		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
-		System.out.println(text);
-		System.out.println("---------");
-	}
+
 	
 	private void exceptionPrint()
 	{
@@ -551,7 +552,7 @@ public class testClass{
 
 		
 		
-		System.out.println("result=" + result);
+		//System.out.println("result=" + result);
 		checkLastChar = result.toString().substring(result.toString().length()-Constants.ONE);
 		
 		if(checkLastChar == "0") set = result.stripTrailingZeros(); // 끝자리가 0 이면 0 없애
@@ -559,7 +560,7 @@ public class testClass{
 		else set = result;
 		//set = result.setScale(6, RoundingMode.HALF_EVEN); // 아니면 반올림7
 		
-		System.out.println("set=" + set);
+		//System.out.println("set=" + set);
 		
 		return set.toString();
 	}
@@ -580,6 +581,7 @@ public class testClass{
 		case 18 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
 		case 19 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
 		}
+		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
 	}
 }
 	
