@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 
 
@@ -31,21 +32,22 @@ public class testClass{
 	private TextPanel textPanel;
 	private RecordPanel recordPanel;
 	private OperatorData Data;
+	
 	private String text;
 	private String record = "";
-	//private String math="=";
-	//private String centerProperty;
-	//private String result = "";
-	//private String temp;
-	//private int length; // 길이 
-	private String formula="";
 	private int limit; // 숫자 입력 제한 
 	private int dotCount = Constants.RESET;
 	private String number = "";
 	private int pluscount = Constants.RESET;
 	private int plusMinus = -Constants.ONE;
 	private int buttonSize = Constants.RESET;
-
+	
+	//private String math="=";
+	//private String centerProperty;
+	//private String result = "";
+	//private String temp;
+	//private int length; // 길이 
+	//private String formula="";
 	
 	public testClass(PrintCalculator printCalculator)
 	{	
@@ -92,7 +94,6 @@ public class testClass{
 				case "-" : combineCalculate(); break;
 				case "÷" : combineCalculate(); break;
 			}	
-			//inputdata(); // 키패드 
 			adjustFontSize();
 		}
 		
@@ -163,7 +164,7 @@ public class testClass{
 		
 		pluscount = Constants.RESET;
 		
-		if(formula == "=") { /// 계산하고 바로 지울 때 중간값만 지우기 
+		if(Data.getFormula() == "=") { /// 계산하고 바로 지울 때 중간값만 지우기 
 			
 			 for(int index=textPanel.inputSpace.getText().length(); index>Constants.RESET; index--)
 				{
@@ -219,7 +220,7 @@ public class testClass{
 	{		
 		if(limit<Constants.LIMIT_INPUT) 
 		{	
-			if(formula.equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
+			if(Data.getFormula().equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
 				reset();
 			}
 			
@@ -252,7 +253,8 @@ public class testClass{
 		record = "";
 		//math = "=";
 		Data.setOperator("=");
-		formula = "";
+		Data.setFormula("");
+		//formula = "";
 		dotCount=Constants.RESET;
 		//result = "0";
 		Data.setResult("0");
@@ -348,7 +350,6 @@ public class testClass{
 	
 	
 	private void result(){ // 결
-				
 		
 		pluscount = Constants.RESET;
 		
@@ -366,11 +367,19 @@ public class testClass{
 			textPanel.blankSpace.setText(number+ text);
 			textPanel.inputSpace.setText(setComma(number));
 		}
+		if(Data.getOperator().equals(text) && textPanel.blankSpace.getText().contains(".")) { // .이 포함되어있을 시 정수로 출력 
+			textPanel.blankSpace.setText(Integer.parseInt(number)+text);
+			
+
+			textPanel.inputSpace.setText(setComma(number));
+			System.out.println("skdhkfkK");
+		}
 		/////////////////////////////////////////////////////////////////////////////////////////
 	
 		if(Data.getResult().contains("E")) { // e로 변환하기 - 한 번 더 봐야
 			textPanel.inputSpace.setText(setComma(Data.getResult()));
 		}
+		
 		/*
 		if(result.contains("E")) { // e로 변환하기 - 한 번 더 봐야
 			textPanel.inputSpace.setText(setComma(result));
@@ -380,14 +389,15 @@ public class testClass{
 		recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
 		exceptionPrint(); // 예외 문
 		adjustFontSize();
-		formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
+		//formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
+		Data.setFormula("=");
 	}
 	
 	
 	public void printResult() // 결과값 출력(중앙 출력)
 	{
 		
-		if(!formula.equals("=")) { // 2x4 = 8 
+		if(!Data.getFormula().equals("=")) { // 2x4 = 8 
 			switch(Data.getOperator()) {
 			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
 			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
@@ -396,7 +406,7 @@ public class testClass{
 			}
 		}
 		
-		if(formula.equals("=")) { //계산 후 바로 = 이 눌리면 
+		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
 			
 			textPanel.blankSpace.setText(Data.getResult() + Data.getOperator() + number + text);
 			
@@ -475,7 +485,8 @@ public class testClass{
 		number = "0"; // number 초기화 
 		//record=""; // 입력값 초기화 
 		dotCount = Constants.RESET;
-		formula = ""; // "=" 초기
+		Data.setFormula("");
+		//formula = ""; // "=" 초기
 		//math = text; // math 에 부호 넣어주
 		Data.setOperator(text); // 부호 넣어주기 
 		pluscount = Constants.RESET;
@@ -544,16 +555,12 @@ public class testClass{
 		}
 
 		
-		
-		//System.out.println("result=" + result);
 		checkLastChar = result.toString().substring(result.toString().length()-Constants.ONE);
 		
 		if(checkLastChar == "0") set = result.stripTrailingZeros(); // 끝자리가 0 이면 0 없애
 		else if(result.toString().contains(".")) set = result.setScale(15, RoundingMode.HALF_EVEN); // 아니면 반올림7
 		else set = result;
-		//set = result.setScale(6, RoundingMode.HALF_EVEN); // 아니면 반올림7
-		
-		//System.out.println("set=" + set);
+
 		
 		return set.toString();
 	}
@@ -574,6 +581,8 @@ public class testClass{
 		}
 		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
 	}
+	
+	
 }
 	
 	
