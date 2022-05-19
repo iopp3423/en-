@@ -220,6 +220,7 @@ public class testClass{
 		dotCount=Constants.RESET;
 		Data.setResult("0");
 		Data.setTemp("0");
+		Data.setNegateOperator("");
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50)); 
 		
 		for(int index=textPanel.inputSpace.getText().length(); index>Constants.RESET; index--)
@@ -279,14 +280,27 @@ public class testClass{
 		}	
 	}
 		
-		if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != null) {
-			if(!textPanel.blankSpace.getText().contains("negate"))Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저
+		
+
+		if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "") { // 9 + ->negate
+			if(!textPanel.blankSpace.getText().contains("negate"))Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장 
 			
-			textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면System.out.print("negate");
-			Data.setNegate("negate(" + Data.getNegate() + ")");
+			textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면
+			textPanel.inputSpace.setText(Data.getTemp());
+			Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
+		}
+		
+		
+		else if(textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "") { // 9 + 5 = 14 -> negate
+			if(!textPanel.blankSpace.getText().contains("negate")) Data.setNegate("negate(" + Data.getResult() + ")"); // 제일 처음에 negate 저장 
+			
+			textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
+			textPanel.inputSpace.setText(Data.getResult());
+			Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
 		}
 		
 	}
+	
 	
 	private void inputDot() // 소수점 
 	{
@@ -320,7 +334,7 @@ public class testClass{
 	private void result(){ // 결
 		
 		pluscount = Constants.RESET;
-		
+		Data.setNegateOperator(text);
 		if(number == "0") number = Data.getTemp(); // 2X4=, 2+5= 형식 처리  
 		
 		printResult();
@@ -398,10 +412,10 @@ public class testClass{
 		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
 		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
 		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
-		System.out.println("temp=" + Data.getTemp());
-		System.out.println("result=" + Data.getResult());
-		System.out.println("operator=" + Data.getOperator());
-		System.out.println("formula=" + Data.getFormula());
+		//System.out.println("temp=" + Data.getTemp());
+		//System.out.println("result=" + Data.getResult());
+		//System.out.println("operator=" + Data.getOperator());
+		//System.out.println("formula=" + Data.getFormula());
 		
 	}
 	
@@ -438,6 +452,18 @@ public class testClass{
 		if(Data.getOperator().equals("÷") && record.equals("0")) {
 			textPanel.inputSpace.setText("0으로 나눌 수 없습니다.");
 		}
+		
+		
+		if(textPanel.inputSpace.getText().contains("e")){ // 문자열 자르
+			String longText = textPanel.inputSpace.getText();
+			String[] textArray = longText.split("e");
+			
+			for(int index=Constants.RESET; index<textArray.length; index++) {	
+				System.out.println(textArray[index]);
+			}
+			
+			if(textArray[1].length()>4) textPanel.inputSpace.setText("오버플로");
+		}		
 	}
 	
 	
@@ -525,10 +551,16 @@ public class testClass{
 		else changedNumber = newNumber.toString();
 		System.out.println(changedNumber);
 		
-			
-		if(changedNumber.contains("E")) { // E e 로 변
+		
+		if(changedNumber.contains("E-")) { // E e 로 변
 			changedNumber = changedNumber.replace("E","e");
 		}
+		
+		else if(changedNumber.contains("E")) { // E e 로 변
+			changedNumber = changedNumber.replace("E","e+");
+		}
+		
+		
 
 		return changedNumber;
 		
