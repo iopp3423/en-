@@ -35,24 +35,7 @@ public class OperatorData {
 	public String getFormula() {
 		return formula;
 	}
-	public String patterns() {
-		Double a = 123.45;
-		double number = 123456.78;
-		DecimalFormat df = new DecimalFormat("0.##");
-		DecimalFormat numberFormat = new DecimalFormat("###,###.0"); //형변환 Decimal
-		numberFormat.applyPattern("###,###.#######");
-		
-		BigDecimal leftNumber = new BigDecimal("123123.123");
-		
-		df.format(leftNumber);
-		
-		a = numberFormat.format(leftNumber);
-		
-		  DecimalFormat df2 = new DecimalFormat("0000,0000.00"); //만자리
-		  System.out.println("0000,0000.00 : "+df2.format(number));
-		//numberFormat.format(Integer.parseInt(number));
-		//numberFormat.format(Double.parseDouble(number));
-	}
+	
 	public void patt() {
 		DecimalFormat format=new DecimalFormat();
 		

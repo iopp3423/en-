@@ -366,13 +366,11 @@ public class testClass{
 		if(Data.getOperator().equals(text)){//.equals(text)) { // 0.1 =====
 			textPanel.blankSpace.setText(number+ text);
 			textPanel.inputSpace.setText(setComma(number));
-		}
-		if(Data.getOperator().equals(text) && textPanel.blankSpace.getText().contains(".")) { // .이 포함되어있을 시 정수로 출력 
-			textPanel.blankSpace.setText(Integer.parseInt(number)+text);
-			
-
-			textPanel.inputSpace.setText(setComma(number));
-			System.out.println("skdhkfkK");
+		
+			if(Double.parseDouble(number) % 1.0 == 0) { // .0이 포함되어있을 시 정수로 출력
+				textPanel.blankSpace.setText(adjustNumber(number)+text);
+				textPanel.inputSpace.setText(setComma(adjustNumber(number)));
+			}
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -582,6 +580,15 @@ public class testClass{
 		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
 	}
 	
+	
+	public String adjustNumber(String changeNumber) {
+		
+		String changed;
+		DecimalFormat numberFormat = new DecimalFormat("0"); //형변환 Decimal	
+		changed = numberFormat.format(Double.parseDouble(changeNumber));
+		//numberFormat.applyPattern("###,###.#######");
+		  return changed;
+	}
 	
 }
 	
