@@ -116,9 +116,9 @@ public class testClass{
 			case 55 : text = "7"; inputNumber(); break;
 			case 56 : text = "8"; inputNumber(); break;
 			case 57 : text = "9"; inputNumber(); break;
+			case 10 : text = "="; result(); break;
 			case 107 : text = "+"; combineCalculate(); break;
 			case 109 : text = "-"; combineCalculate(); break;
-			case 10 : text = "="; result(); break;
 			case 47 : text = "÷"; combineCalculate(); break;
 			case 106 : text = "x"; combineCalculate();  break;
 			case 8: text = "\u232B"; delete(); break;
@@ -127,33 +127,6 @@ public class testClass{
 			
 			adjustFontSize();
 			
-		}
-	};
-	KeyAdapter keyoverride = new KeyAdapter() {
-		public void keyReleased(KeyEvent e) {
-			System.out.println(e.getKeyCode());
-			//length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
-			switch(e.getKeyCode()) {			
-			case 48 : text = "0"; inputNumber(); break;
-			case 49 : text = "1"; inputNumber(); break;
-			case 50 : text = "2"; inputNumber(); break;
-			case 51 : text = "3"; inputNumber(); break;
-			case 52 : text = "4"; inputNumber(); break;
-			case 53 : text = "5"; inputNumber(); break;
-			case 54 : text = "6"; inputNumber(); break;
-			case 55 : text = "7"; inputNumber(); break;
-			case 56 : text = "8"; inputNumber(); break;
-			case 57 : text = "9"; inputNumber(); break;
-			case 107 : text = "+"; combineCalculate(); break;
-			case 109 : text = "-"; combineCalculate(); break;
-			case 10 : text = "="; result(); break;
-			case 47 : text = "÷"; combineCalculate(); break;
-			case 106 : text = "x"; combineCalculate();  break;
-			case 8: text = "\u232B"; delete(); break;
-			case 27: text = "C"; reset(); break;
-			}
-			
-			adjustFontSize();		
 		}
 	};
 	
@@ -367,7 +340,7 @@ public class testClass{
 			textPanel.blankSpace.setText(number+ text);
 			textPanel.inputSpace.setText(setComma(number));
 		
-			if(Double.parseDouble(number) % 1.0 == 0) { // .0이 포함되어있을 시 정수로 출력
+			if(Double.parseDouble(number) % Constants.CHECK_DECIMAL == Constants.RESET) { // 3.0 = 입력시 정수로 출력 
 				textPanel.blankSpace.setText(adjustNumber(number)+text);
 				textPanel.inputSpace.setText(setComma(adjustNumber(number)));
 			}
@@ -480,6 +453,7 @@ public class testClass{
 	
 	private void setCalculate() // 수식에 들어올 때 세팅 
 	{
+		if(Data.getTemp().equals(""))Data.setTemp("0");
 		number = "0"; // number 초기화 
 		//record=""; // 입력값 초기화 
 		dotCount = Constants.RESET;
