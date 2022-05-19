@@ -95,7 +95,7 @@ public class testClass{
 	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
-			System.out.println(e.getKeyCode());		
+			//System.out.println(e.getKeyCode());		
 			switch(e.getKeyCode()) {			
 			case 48 : text = "0"; inputNumber(); break;
 			case 49 : text = "1"; inputNumber(); break;
@@ -340,7 +340,7 @@ public class testClass{
 		printResult();
 
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
-		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + number + text );
+		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + changeNumber(number) + text);
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
 		}
 							
@@ -380,7 +380,7 @@ public class testClass{
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
 			Data.setTemp(Data.getResult());	
-			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + number + text);
+			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + changeNumber(number) + text);
 			
 			switch(Data.getOperator()) {
 			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
@@ -424,7 +424,7 @@ public class testClass{
 		
 		textPanel.blankSpace.setText(Data.getTemp() +  text); // 중앙 화면
 		textPanel.inputSpace.setText(setComma(Data.getTemp())); // 입력화면 	
-		adjustFontSize(); // 사이즈 조
+		adjustFontSize(); // 사이즈 조절 
 		exceptionPrint();
 		record=""; // 입력값 초기화 
 	}
@@ -458,11 +458,7 @@ public class testClass{
 			String longText = textPanel.inputSpace.getText();
 			String[] textArray = longText.split("e");
 			
-			for(int index=Constants.RESET; index<textArray.length; index++) {	
-				System.out.println(textArray[index]);
-			}
-			
-			if(textArray[1].length()>4) textPanel.inputSpace.setText("오버플로");
+			if(textArray[1].length()>5) textPanel.inputSpace.setText("오버플로");
 		}		
 	}
 	
@@ -533,20 +529,23 @@ public class testClass{
 		String changedNumber="";
 		BigDecimal newNumber = new BigDecimal(number);
 		
-		
 		String patterns[]= {
 				"#.###############E0",		// 16글자 넘어가면 E로 바껴서 출
-				"###.#############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
+				"###.###############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
+				//"###.##############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 		};
 		
+		System.out.println(number);
 		if(number.length() > 16) {
 			format.applyPattern(patterns[0]);
 			changedNumber = format.format(newNumber);
+			System.out.println(changedNumber);
 		}
 
 		else if(number.contains(".")) {
 			format.applyPattern(patterns[1]);
-			changedNumber = format.format(newNumber); // 뒤에 소수점 0나오면 없게 출력, 반올림 포함 먼저 정
+			changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정
+			System.out.println(changedNumber);
 		}
 		else changedNumber = newNumber.toString();
 		System.out.println(changedNumber);
