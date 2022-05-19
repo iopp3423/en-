@@ -330,7 +330,7 @@ public class testClass{
 		
 		printResult();
 
-		textPanel.blankSpace.setText(Data.getTemp() + Data.getOperator() + number + text );
+		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + number + text );
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
 		//changeNumber(Data.getResult());
 		
@@ -361,7 +361,7 @@ public class testClass{
 		
 		recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
 		exceptionPrint(); // 예외 문
-		adjustFontSize();
+		adjustFontSize(); // 사이즈 조
 		//formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
 		Data.setFormula("=");
 	}
@@ -531,13 +531,15 @@ public class testClass{
 		
 		checkLastChar = result.toString().substring(result.toString().length()-Constants.ONE);
 		
+		/*
 		if(checkLastChar == "0") set = result.stripTrailingZeros(); // 끝자리가 0 이면 0 없애
 		else if(result.toString().contains(".")) set = result.setScale(15, RoundingMode.HALF_EVEN); // 아니면 반올림7
-		else set = result;
+		else set = result;*/
 
 		
-		return set.toString();
+		return result.toString();
 	}
+	
 	
 	public void adjustFontSize()
 	{
@@ -568,23 +570,28 @@ public class testClass{
 	
 	public String changeNumber(String number) {
 		DecimalFormat format=new DecimalFormat();
-		
 		String changedNumber;
+		BigDecimal newNumber = new BigDecimal(number);
+		
+		
 		
 		String patterns[]= {
-				"###############E0",		// 16글자 넘어가면 E로 바껴서 출
+				"#.#################E0",		// 16글자 넘어가면 E로 바껴서 출
 				"###.##############" // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 		};
 			
-		if(textPanel.inputSpace.getText().length() > 16) {
+		format.applyPattern(patterns[1]);
+		changedNumber = format.format(newNumber); // 뒤에 소수점 0나오면 없게 출력, 반올림 포함 먼저 정
+		
+		if(changedNumber.length() > 16) {
 			format.applyPattern(patterns[0]);
 		}
-		else {
-			format.applyPattern(patterns[1]);
-		}
-			
-		changedNumber = format.format(Double.parseDouble(number));
+
+		System.out.println("dddd");
+		System.out.println(textPanel.inputSpace.getText().length());
+		changedNumber = format.format(Double.parseDouble(changedNumber));
 		
+		System.out.println(changedNumber);
 		return changedNumber;
 		
 	}
