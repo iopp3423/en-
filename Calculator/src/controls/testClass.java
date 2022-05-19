@@ -41,13 +41,7 @@ public class testClass{
 	private int pluscount = Constants.RESET;
 	private int plusMinus = -Constants.ONE;
 	private int buttonSize = Constants.RESET;
-	
-	//private String math="=";
-	//private String centerProperty;
-	//private String result = "";
-	//private String temp;
-	//private int length; // 길이 
-	//private String formula="";
+
 	
 	public testClass(PrintCalculator printCalculator)
 	{	
@@ -69,9 +63,7 @@ public class testClass{
 
 	ActionListener actionlistener = new ActionListener(){ // 누른 키패드 가져오기
 		public void actionPerformed(ActionEvent e) {				
-			text = (e.getActionCommand()); // 입력한  값 가져오기 
-			//length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
-			
+			text = (e.getActionCommand()); // 입력한  값 가져오기 				
 			switch(text){
 				case "0" : inputZero(); break;
 				case "1" : inputNumber();break;
@@ -103,8 +95,7 @@ public class testClass{
 	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
-			System.out.println(e.getKeyCode());
-			//length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
+			System.out.println(e.getKeyCode());		
 			switch(e.getKeyCode()) {			
 			case 48 : text = "0"; inputNumber(); break;
 			case 49 : text = "1"; inputNumber(); break;
@@ -224,15 +215,11 @@ public class testClass{
 		limit = Constants.RESET;
 		pluscount = Constants.RESET;
 		record = "";
-		//math = "=";
 		Data.setOperator("=");
 		Data.setFormula("");
-		//formula = "";
 		dotCount=Constants.RESET;
-		//result = "0";
 		Data.setResult("0");
 		Data.setTemp("0");
-		//temp = "0";
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50)); 
 		
 		for(int index=textPanel.inputSpace.getText().length(); index>Constants.RESET; index--)
@@ -265,7 +252,7 @@ public class testClass{
 		
 	}
 	
-	public void changeSign()
+	private void changeSign()
 	{
 		
 		if(textPanel.inputSpace.getText() == "0") { // 0 이면 +- 안붙
@@ -330,15 +317,17 @@ public class testClass{
 		
 		printResult();
 
+		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + number + text );
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
+		}
 		//changeNumber(Data.getResult());
 		
 		//textPanel.inputSpace.setText(setComma(result));
 							
 		/////////////////////////////////////////////////////////////////////////////////////////
 				
-		if(Data.getOperator().equals(text)){//.equals(text)) { // 0.1 =====
+		else if(Data.getOperator().equals(text)){//.equals(text)) { // 0.1 =====
 			textPanel.blankSpace.setText(number+ text);
 			textPanel.inputSpace.setText(setComma(number));
 		
@@ -348,26 +337,16 @@ public class testClass{
 			}
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
-	
-		if(Data.getResult().contains("E")) { // e로 변환하기 - 한 번 더 봐야
-			textPanel.inputSpace.setText(setComma(Data.getResult()));
-		}
 		
-		/*
-		if(result.contains("E")) { // e로 변환하기 - 한 번 더 봐야
-			textPanel.inputSpace.setText(setComma(result));
-		}
-		*/
-		
+		if(buttonSize == 20) buttonSize = Constants.RESET;
 		recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
 		exceptionPrint(); // 예외 문
 		adjustFontSize(); // 사이즈 조
-		//formula = "=";// formula 가 = 이면 바로 = 눌러서 계산한	
 		Data.setFormula("=");
 	}
 	
 	
-	public void printResult() // 결과값 출력(중앙 출력)
+	private void printResult() // 결과값 출력(중앙 출력)
 	{
 		
 		if(!Data.getFormula().equals("=")) { // 2x4 = 8 
@@ -380,10 +359,9 @@ public class testClass{
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
+			Data.setTemp(Data.getResult());	
+			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + number + text);
 			
-			textPanel.blankSpace.setText(Data.getResult() + Data.getOperator() + number + text);
-			
-			Data.setTemp(Data.getResult());		
 			switch(Data.getOperator()) {
 			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
 			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
@@ -391,33 +369,8 @@ public class testClass{
 			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
 			
-			textPanel.inputSpace.setText(setComma(Data.getResult())); // 결과값 출력
+			textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));// 결과값 출력
 		}
-		/*
-		if(!formula.equals("=")) { // 2x4 = 8 
-			switch(math) {
-			case "+" : result = calculation(temp, number, "+"); break;
-			case "-" : result = calculation(temp, number, "-"); break;
-			case "x" : result = calculation(temp, number, "x");break;
-			case "÷" : result = calculation(temp, number, "÷"); break;
-			}
-		}
-		
-		if(formula.equals("=")) { //계산 후 바로 = 이 눌리면 
-			
-			textPanel.blankSpace.setText(result + math + number + text);
-			
-			temp = result;		
-			switch(math) {
-			case "+" : result = calculation(temp, number, "+"); break;
-			case "-" : result = calculation(temp, number, "-"); break;
-			case "x" : result = calculation(temp, number, "x");break;
-			case "÷" : result = calculation(temp, number, "÷"); break;
-			}
-			
-			textPanel.inputSpace.setText(setComma(result)); // 결과값 출력
-		}
-		*/
 		exceptionPrint();
 	}
 	
@@ -425,7 +378,6 @@ public class testClass{
 	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
 	{
 		if(textPanel.blankSpace.getText().equals(" ")) Data.setTemp(number);
-		System.out.println("이건가" + Data.getTemp());
 		calculate();
 		setCalculate();
 		printCalculate();
@@ -438,17 +390,14 @@ public class testClass{
 		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
 		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
 		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
-		System.out.println(number);
-		System.out.println("---------");
 	}
 	
 	private void printCalculate() // 화면에 값 출력 
 	{
 		
 		textPanel.blankSpace.setText(Data.getTemp() +  text); // 중앙 화면
-		System.out.println("뭐지=" + Data.getTemp() +  text);
-		//textPanel.blankSpace.setText(Data.getTemp() +  text); // 중앙 화면
 		textPanel.inputSpace.setText(setComma(Data.getTemp())); // 입력화면 	
+		adjustFontSize(); // 사이즈 조
 		exceptionPrint();
 		record=""; // 입력값 초기화 
 	}
@@ -457,28 +406,13 @@ public class testClass{
 	{
 		if(Data.getTemp().equals(""))Data.setTemp("0"); // 계산기 입력 없을 때 연산자 누르면 널값이 아닌 0이 올라감 
 		number = "0"; // number 초기화 
-		//record=""; // 입력값 초기화 
 		dotCount = Constants.RESET;
 		Data.setFormula("");
-		//formula = ""; // "=" 초기
-		//math = text; // math 에 부호 넣어주
 		Data.setOperator(text); // 부호 넣어주기 
 		pluscount = Constants.RESET;
 	}
 	
-	/*private String changeDataType(String data) // 데이터 타입 변
-	{
-		//BigDecimal BigC = new BigDecimal(String.valueOf(data));
-		//BigDecimal BigD = new BigDecimal(String.valueOf( Data));
-		//BigDecimal mul =  BigC.multiply(BigD);
-		//double double_bigNum = mul.doubleValue(); //BigIntger -> double	
-		result = String.format("%.14e",data);
-		//System.out.println(result);
-		//return result;
-	}*/
-
-	
-	private void exceptionPrint()
+	private void exceptionPrint() // 예외처리 함수 
 	{
 		String errorMessage = textPanel.inputSpace.getText();
 		switch(errorMessage) {
@@ -486,7 +420,7 @@ public class testClass{
 		case "Infinity" : textPanel.inputSpace.setText("0으로 나눌 수 없습니다."); break;
 		}
 		
-		if(/*math.equals("÷")*/Data.getOperator().equals("÷") && record.equals("0")) {
+		if(Data.getOperator().equals("÷") && record.equals("0")) {
 			textPanel.inputSpace.setText("0으로 나눌 수 없습니다.");
 		}
 	}
@@ -507,14 +441,15 @@ public class testClass{
 	
 
 	
-	public String calculation(String temp, String number, String operator) { // 결과 
+	private String calculation(String temp, String number, String operator) { // 결과 
 		BigDecimal leftNumber = new BigDecimal(temp);
 		BigDecimal rightNumber = new BigDecimal(number);
 		BigDecimal result = new BigDecimal("0");
-		BigDecimal set = new BigDecimal("1");
+		BigDecimal set = new BigDecimal("0");
 		String checkLastChar;
 				
 		//if(number == "0") return "0으로 나눌 수 없습니다.";
+		System.out.println(temp);
 		System.out.println(number);
 		
 		try{
@@ -528,20 +463,18 @@ public class testClass{
 		catch (java.lang.ArithmeticException e){
 		}
 
-		
-		checkLastChar = result.toString().substring(result.toString().length()-Constants.ONE);
-		
 		/*
+		checkLastChar = result.toString().substring(result.toString().length()-Constants.ONE);	
 		if(checkLastChar == "0") set = result.stripTrailingZeros(); // 끝자리가 0 이면 0 없애
 		else if(result.toString().contains(".")) set = result.setScale(15, RoundingMode.HALF_EVEN); // 아니면 반올림7
 		else set = result;*/
-
+		//if(temp.equals("0")) result = set;
 		
 		return result.toString();
 	}
 	
 	
-	public void adjustFontSize()
+	private void adjustFontSize()
 	{
 		int fontlength = textPanel.inputSpace.getText().length();
 		switch(fontlength) {
@@ -559,7 +492,7 @@ public class testClass{
 	}
 	
 	
-	public String deleteDotZeroNumber(String changeNumber) {
+	private String deleteDotZeroNumber(String changeNumber) {
 		
 		String changed;
 		DecimalFormat numberFormat = new DecimalFormat("0"); //형변환 Decimal	
@@ -568,15 +501,14 @@ public class testClass{
 	}
 	
 	
-	public String changeNumber(String number) {
+	private String changeNumber(String number) {
 		DecimalFormat format=new DecimalFormat();
 		String changedNumber;
 		BigDecimal newNumber = new BigDecimal(number);
 		
 		
-		
 		String patterns[]= {
-				"#.#################E0",		// 16글자 넘어가면 E로 바껴서 출
+				"#.###############E0",		// 16글자 넘어가면 E로 바껴서 출
 				"###.##############" // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 		};
 			
@@ -587,14 +519,16 @@ public class testClass{
 			format.applyPattern(patterns[0]);
 		}
 
-		System.out.println("dddd");
-		System.out.println(textPanel.inputSpace.getText().length());
 		changedNumber = format.format(Double.parseDouble(changedNumber));
 		
-		System.out.println(changedNumber);
+		if(changedNumber.contains("E")) {
+			changedNumber = changedNumber.replace("E","e");
+		}
+
 		return changedNumber;
 		
 	}
+	
 }
 	
 	

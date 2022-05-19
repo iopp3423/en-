@@ -14,13 +14,14 @@ public class CalculationController{
 		testClass calculatorr = new testClass(printCalculator);	
 
 		
-		DecimalFormat format=new DecimalFormat();
+		//DecimalFormat format=new DecimalFormat();
 		
 		
 		// 소수점 뒤에 0이 출력되면 안됨
 		
 		// 나누기 할 때 뒤에 0 잘라야함
 		// 16자리 넘어가면 E로 변환해야함
+		/*
 		String patterns[]= {
 				"#####.######",
 				"0",
@@ -60,7 +61,7 @@ public class CalculationController{
 		for(int index=Constants.RESET;index<patterns.length;index++) {
 			format.applyPattern(patterns[index]);
 			System.out.println("[pattern "+patterns[index]+"] "+format.format(Double.parseDouble(number3)));
-		}
+		}*/
 	}
 	
 	

@@ -20,15 +20,12 @@ import Utility.Constants;
 public class RecordPanel extends JPanel{
 
 	public JButton [] button;
-	public ArrayList<JButton> list;
 	
 	public RecordPanel() {
 		
 		
-		button = new JButton[40];
+		button = new JButton[20];
 		setLayout(new GridLayout(0,1,0,1));		
-		list = new ArrayList<JButton>();
-
 		
 		
 		for(int index=0; index<button.length; index++)
