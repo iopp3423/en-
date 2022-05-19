@@ -375,7 +375,6 @@ public class testClass{
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
-			//System.out.println("Data=" + Data.getResult());
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
@@ -422,8 +421,8 @@ public class testClass{
 	private void printCalculate() // 화면에 값 출력 
 	{
 		
-		textPanel.blankSpace.setText(Data.getTemp() +  text); // 중앙 화면
-		textPanel.inputSpace.setText(setComma(Data.getTemp())); // 입력화면 	
+		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  text); // 중앙 화면
+		textPanel.inputSpace.setText(setComma(changeNumber(Data.getTemp()))); // 입력화면 	
 		adjustFontSize(); // 사이즈 조절 
 		exceptionPrint();
 		record=""; // 입력값 초기화 
@@ -531,6 +530,7 @@ public class testClass{
 		
 		String patterns[]= {
 				"#.###############E0",		// 16글자 넘어가면 E로 바껴서 출
+				//"###.##########################"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 				"###.###############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 				//"###.##############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 		};
