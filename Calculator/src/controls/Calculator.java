@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 
 import Utility.Constants;
 import models.OperatorData;
-import models.inputData;
 import view.CalculatorPanel;
 import view.PrintCalculator;
 import view.RecordPanel;
@@ -50,7 +49,7 @@ public class Calculator{
 	private int buttonSize = Constants.RESET;
 
 	
-	public Calculator(PrintCalculator printCalculator, inputData data)
+	public Calculator(PrintCalculator printCalculator)
 	{	
 		this.printCalculator = printCalculator;
 		JPanel LastPanel = new JPanel(new GridBagLayout()); //텍스트,입력 패널 합치는 패널 

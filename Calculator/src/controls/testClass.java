@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 
 import Utility.Constants;
 import models.OperatorData;
-import models.inputData;
 import view.CalculatorPanel;
 import view.PrintCalculator;
 import view.RecordPanel;
@@ -33,14 +32,13 @@ public class testClass{
 	private RecordPanel recordPanel;
 	private OperatorData Data;
 	private String text;
-	private String inputRecord;
 	private String record = "";
 	//private String math="=";
-	private String formula="";
-	private String centerProperty;
+	//private String centerProperty;
 	//private String result = "";
 	//private String temp;
-	private int length; // 길이 
+	//private int length; // 길이 
+	private String formula="";
 	private int limit; // 숫자 입력 제한 
 	private int dotCount = Constants.RESET;
 	private String number = "";
@@ -49,7 +47,7 @@ public class testClass{
 	private int buttonSize = Constants.RESET;
 
 	
-	public testClass(PrintCalculator printCalculator, inputData data)
+	public testClass(PrintCalculator printCalculator)
 	{	
 		this.printCalculator = printCalculator;
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
@@ -70,11 +68,19 @@ public class testClass{
 	ActionListener actionlistener = new ActionListener(){ // 누른 키패드 가져오기
 		public void actionPerformed(ActionEvent e) {				
 			text = (e.getActionCommand()); // 입력한  값 가져오기 
-			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
-			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
+			//length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
 			
 			switch(text){
-			
+				case "0" : inputZero(); break;
+				case "1" : inputNumber();break;
+				case "2" : inputNumber();break;
+				case "3" : inputNumber();break;
+				case "4" : inputNumber();break;
+				case "5" : inputNumber();break;
+				case "6" : inputNumber();break;
+				case "7" : inputNumber();break;
+				case "8" : inputNumber();break;
+				case "9" : inputNumber();break;
 				case "\u232B": delete(); break;
 				case "C" : reset(); break;
 				case "CE": resetPart(); break;
@@ -86,7 +92,7 @@ public class testClass{
 				case "-" : combineCalculate(); break;
 				case "÷" : combineCalculate(); break;
 			}	
-			inputdata(); // 키패드 
+			//inputdata(); // 키패드 
 			adjustFontSize();
 		}
 		
@@ -97,8 +103,7 @@ public class testClass{
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
 			System.out.println(e.getKeyCode());
-			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
-			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
+			//length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
 			switch(e.getKeyCode()) {			
 			case 48 : text = "0"; inputNumber(); break;
 			case 49 : text = "1"; inputNumber(); break;
@@ -126,8 +131,7 @@ public class testClass{
 	KeyAdapter keyoverride = new KeyAdapter() {
 		public void keyReleased(KeyEvent e) {
 			System.out.println(e.getKeyCode());
-			length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
-			centerProperty = textPanel.blankSpace.getText(); // 중간 화면 값 가져오기 
+			//length = textPanel.inputSpace.getText().length(); // 입력패드의 길이 가져오기			
 			switch(e.getKeyCode()) {			
 			case 48 : text = "0"; inputNumber(); break;
 			case 49 : text = "1"; inputNumber(); break;
@@ -155,11 +159,13 @@ public class testClass{
 		
 	private void delete() 
 	{	
+		String inputRecord;
+		
 		pluscount = Constants.RESET;
 		
 		if(formula == "=") { /// 계산하고 바로 지울 때 중간값만 지우기 
 			
-			 for(int index=length; index>Constants.RESET; index--)
+			 for(int index=textPanel.inputSpace.getText().length(); index>Constants.RESET; index--)
 				{
 					if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
 		             {
@@ -170,14 +176,14 @@ public class testClass{
 		 }
 		 
 		
-		 else if (length == Constants.ONE)   //글자수가 1일 때  백스페이스 누르면 0으로 초기
+		 else if (textPanel.inputSpace.getText().length() == Constants.ONE)   //글자수가 1일 때  백스페이스 누르면 0으로 초기
          {
 			 textPanel.inputSpace.setText("0");
 			 number = "0";
 			 record = "";
          }
 		
-		 if(length != Constants.ONE) //글자수 1 아니면 
+		 if(textPanel.inputSpace.getText().length() != Constants.ONE) //글자수 1 아니면 
 		 {
 			 inputRecord = record.substring(Constants.RESET,record.length()-Constants.ONE); // 문자열자르기
 			 textPanel.inputSpace.setText(setComma(inputRecord));
@@ -189,7 +195,7 @@ public class testClass{
 	}
 	
 	
-	private void inputdata()
+	private void inputZero()
 	{
 		
 		if(text.equals("0"))
@@ -205,20 +211,7 @@ public class testClass{
 				//System.out.println("number="+number);
 			}
 			limit = record.length();	
-			
 		}
-		switch(text) {
-		case "1" : inputNumber();break;
-		case "2" : inputNumber();break;
-		case "3" : inputNumber();break;
-		case "4" : inputNumber();break;
-		case "5" : inputNumber();break;
-		case "6" : inputNumber();break;
-		case "7" : inputNumber();break;
-		case "8" : inputNumber();break;
-		case "9" : inputNumber();break;
-		}
-
 	}
 	
 	
@@ -267,7 +260,7 @@ public class testClass{
 		//temp = "0";
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50)); 
 		
-		for(int index=length; index>Constants.RESET; index--)
+		for(int index=textPanel.inputSpace.getText().length(); index>Constants.RESET; index--)
 		{
 			if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
              {
@@ -287,7 +280,7 @@ public class testClass{
 		dotCount = Constants.RESET;
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50));
 		
-		for(int index=length; index>Constants.RESET; index--)
+		for(int index=textPanel.inputSpace.getText().length(); index>Constants.RESET; index--)
 		{
 			if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
              {
@@ -448,7 +441,7 @@ public class testClass{
 	
 	private void combineCalculate() //사칙연산 안에 계산 함수들 묶는용
 	{
-		if(centerProperty.equals(" ")) Data.setTemp(number);
+		if(textPanel.blankSpace.getText().equals(" ")) Data.setTemp(number);
 		System.out.println("이건가" + Data.getTemp());
 		calculate();
 		setCalculate();
@@ -578,8 +571,6 @@ public class testClass{
 		case 15 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 38));break;
 		case 16 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 35));break;
 		case 17 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
-		case 18 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
-		case 19 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
 		}
 		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
 	}

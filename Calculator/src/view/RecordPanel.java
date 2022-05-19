@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -18,14 +20,17 @@ import Utility.Constants;
 public class RecordPanel extends JPanel{
 
 	public JButton [] button;
-
+	public ArrayList<JButton> list;
+	
 	public RecordPanel() {
 		
 		
 		button = new JButton[40];
-		setLayout(new GridLayout(0,1,0,1));
-		
+		setLayout(new GridLayout(0,1,0,1));		
+		list = new ArrayList<JButton>();
 
+		
+		
 		for(int index=0; index<button.length; index++)
 		{
 			button[index] = new JButton();
