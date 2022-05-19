@@ -320,6 +320,7 @@ public class testClass{
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + number + text );
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
+		//textPanel.inputSpace.setText(setComma(Data.getResult()));
 		}
 		//changeNumber(Data.getResult());
 		
@@ -356,6 +357,7 @@ public class testClass{
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
+			//System.out.println("Data=" + Data.getResult());
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
@@ -370,6 +372,7 @@ public class testClass{
 			}
 			
 			textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));// 결과값 출력
+			
 		}
 		exceptionPrint();
 	}
@@ -449,14 +452,14 @@ public class testClass{
 		String checkLastChar;
 				
 		//if(number == "0") return "0으로 나눌 수 없습니다.";
-		System.out.println(temp);
-		System.out.println(number);
+		//System.out.println(temp);
+		//System.out.println(number);
 		
 		try{
 			switch(operator) {  // 저장했던 연산
 			case "+": result = leftNumber.add(rightNumber);break;
 			case "-": result = leftNumber.subtract(rightNumber);break;
-			case "÷": result = leftNumber.divide(rightNumber, 15, RoundingMode.HALF_EVEN);break;
+			case "÷": result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN);break;
 			case "x": result = leftNumber.multiply(rightNumber); break;	
 			}
 		}
@@ -470,6 +473,9 @@ public class testClass{
 		else set = result;*/
 		//if(temp.equals("0")) result = set;
 		
+		//System.out.println(temp);
+		//System.out.println(number);
+		//System.out.println(result);
 		return result.toString();
 	}
 	
@@ -503,15 +509,16 @@ public class testClass{
 	
 	private String changeNumber(String number) {
 		DecimalFormat format=new DecimalFormat();
-		String changedNumber;
+		String changedNumber="";
 		BigDecimal newNumber = new BigDecimal(number);
 		
 		
 		String patterns[]= {
 				"#.###############E0",		// 16글자 넘어가면 E로 바껴서 출
-				"###.##############" // 뒤에 소수점 0나오면 없게 출력, 반올림 포
+				"###.#############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 		};
 			
+		/*
 		format.applyPattern(patterns[1]);
 		changedNumber = format.format(newNumber); // 뒤에 소수점 0나오면 없게 출력, 반올림 포함 먼저 정
 		
@@ -520,6 +527,25 @@ public class testClass{
 		}
 
 		changedNumber = format.format(Double.parseDouble(changedNumber));
+		
+		*/
+		System.out.println(newNumber);
+		System.out.println("dddd");
+		
+		if(number.length() > 16) {
+			format.applyPattern(patterns[0]);
+			changedNumber = format.format(newNumber);
+		}
+
+		else if(number.contains(".")) {
+			format.applyPattern(patterns[1]);
+			changedNumber = format.format(newNumber); // 뒤에 소수점 0나오면 없게 출력, 반올림 포함 먼저 정
+		}
+		else changedNumber = newNumber.toString();
+		System.out.println(changedNumber);
+		
+		
+		
 		
 		if(changedNumber.contains("E")) {
 			changedNumber = changedNumber.replace("E","e");

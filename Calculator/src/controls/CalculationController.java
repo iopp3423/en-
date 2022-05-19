@@ -13,15 +13,15 @@ public class CalculationController{
 		//Calculator calculator = new Calculator(printCalculator, data);	
 		testClass calculatorr = new testClass(printCalculator);	
 
-		
-		//DecimalFormat format=new DecimalFormat();
+		/*
+		DecimalFormat format=new DecimalFormat();
 		
 		
 		// 소수점 뒤에 0이 출력되면 안됨
 		
 		// 나누기 할 때 뒤에 0 잘라야함
 		// 16자리 넘어가면 E로 변환해야함
-		/*
+		
 		String patterns[]= {
 				"#####.######",
 				"0",
@@ -46,7 +46,7 @@ public class CalculationController{
 				"###############E0"				//지수 형식으로 출력
 		};
 			
-		String number1="9999999999999999";
+		String number1="0.0000000000000001";
 		String number2="6.66666666666666666";
 		String number3="33.37";
 			
