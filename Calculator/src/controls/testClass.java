@@ -345,8 +345,9 @@ public class testClass{
 	
 	private void inputDot() // 소수점 
 	{
-		//Data.setTemp("");
-		//record = "";
+		if(Data.getFormula().equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
+			reset();
+		}
 		if(textPanel.inputSpace.getText().equals("0")) { // 0일 때 
 			record = "0" + text;// 키보드 입력한 값	
 			textPanel.inputSpace.setText(setComma(record));
