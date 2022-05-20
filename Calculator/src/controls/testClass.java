@@ -341,7 +341,10 @@ public class testClass{
 
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + changeNumber(number) + text);
+		System.out.println(Data.getResult());
+		System.out.println("--------");
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
+	
 		}
 							
 		/////////////////////////////////////////////////////////////////////////////////////////
@@ -452,7 +455,6 @@ public class testClass{
 			textPanel.inputSpace.setText("0으로 나눌 수 없습니다.");
 		}
 		
-		
 		if(textPanel.inputSpace.getText().contains("e")){ // 문자열 자르
 			String longText = textPanel.inputSpace.getText();
 			String[] textArray = longText.split("e");
@@ -480,22 +482,27 @@ public class testClass{
 	private String calculation(String temp, String number, String operator) { // 결과 
 		BigDecimal leftNumber = new BigDecimal(temp);
 		BigDecimal rightNumber = new BigDecimal(number);
-		BigDecimal result = new BigDecimal("0");
+		String result="";
 		
 		try{
 			switch(operator) {  // 저장했던 연산
-			case "+": result = leftNumber.add(rightNumber);break;
-			case "-": result = leftNumber.subtract(rightNumber);break;
-			case "÷": result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN);break;
-			case "x": result = leftNumber.multiply(rightNumber); break;	
+			case "+": result = leftNumber.add(rightNumber).toString();break;
+			case "-": result = leftNumber.subtract(rightNumber).toString();break;
+			case "÷": result = leftNumber.divide(rightNumber).toString();break;
+			case "x": result = leftNumber.multiply(rightNumber).toString(); break;	
 			}
 		}
 		catch (java.lang.ArithmeticException e){
+			if(e.getMessage().equals("Division undefined")) result = "Nan";
+			else if(e.getMessage().equals("Non-terminating decimal expansion; no exact representable decimal result.")) {
+				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
+			}
 		}
-		return result.toString();
+		System.out.println(result);
+		return result;
 	}
-	
-	
+	//Division undefined
+	//Non-terminating decimal expansion; no exact representable decimal result.
 	private void adjustFontSize()
 	{
 		int fontlength = textPanel.inputSpace.getText().length();
@@ -524,6 +531,8 @@ public class testClass{
 	
 	
 	private String changeNumber(String number) {
+		if(number.equals("Nan")) return "정의되지 않은 결과입니다.";
+		if(number.equals("")) return "0으로 나눌 수 없습니다.";
 		DecimalFormat format=new DecimalFormat();
 		String changedNumber="";
 		BigDecimal newNumber = new BigDecimal(number);
@@ -535,20 +544,20 @@ public class testClass{
 				//"###.##############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 		};
 		
-		System.out.println(number);
+		//System.out.println(number);
 		if(number.length() > 16) {
 			format.applyPattern(patterns[0]);
 			changedNumber = format.format(newNumber);
-			System.out.println(changedNumber);
+			//System.out.println(changedNumber);
 		}
 
 		else if(number.contains(".")) {
 			format.applyPattern(patterns[1]);
 			changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정
-			System.out.println(changedNumber);
+
 		}
 		else changedNumber = newNumber.toString();
-		System.out.println(changedNumber);
+
 		
 		
 		if(changedNumber.contains("E-")) { // E e 로 변
