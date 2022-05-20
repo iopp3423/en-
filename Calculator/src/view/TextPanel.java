@@ -94,9 +94,7 @@ public class TextPanel extends JPanel
 					calculatorPanel.setVisible(true);
 					scrollPane.setVisible(false);
 					printCalculator.frame.add(printCalculator.lastCalculatorPanel);
-					
 					panelCount++;
-					System.out.println("\uD83D\uDDD1");
 				}
 			}
 			
@@ -111,6 +109,7 @@ public class TextPanel extends JPanel
 				{
 					recordPanel.button[index].setText("");
 				}
+				recordPanel.button[Constants.RESET].setText("아직 기록이 없습니다.");
 			}
 		});
 		

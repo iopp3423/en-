@@ -87,14 +87,6 @@ public class testClass{
 			number = leftNumber[1]; // 오른쪽 값 저장 
 			Data.setResult(recordList[3]); // 결과값 저장 
 			
-			System.out.println("temp=" + Data.getTemp() + "number=" + number);
-			System.out.println("result=" + Data.getResult());
-			
-			System.out.println(Data.getResult());
-			System.out.println(Data.getOperator());
-			System.out.println(Data.getTemp());
-			System.out.println(text);
-			
 		}
 		
 	};
@@ -373,13 +365,17 @@ public class testClass{
 		
 		pluscount = Constants.RESET;
 		Data.setNegateOperator(text);
-		if(number == "0") number = Data.getTemp(); // 2X4=, 2+5= 형식 처리  
+		if(number == "0") number = Data.getTemp(); // 2X4=, 2+5= 형식 처리 
+		if(textPanel.inputSpace.getText().contains("정") || textPanel.inputSpace.getText().contains("나눌")) reset();
 		
 		printResult();
 
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + changeNumber(number) + text);
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
+		
+		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정"))
+		recordPanel.button[buttonSize++].setText("<HTML> "+textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); //로그 남기기 
 		//System.out.println("temp=" + Data.getTemp() + "number=" + number);
 		//System.out.println("result=" + Data.getResult());
 	
@@ -399,7 +395,6 @@ public class testClass{
 		/////////////////////////////////////////////////////////////////////////////////////////
 		
 		if(buttonSize == 20) buttonSize = Constants.RESET;
-		recordPanel.button[buttonSize++].setText("<HTML> "+textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); //로그 남기기 
 		exceptionPrint(); // 예외 문
 		adjustFontSize(); // 사이즈 조
 		Data.setFormula("=");
@@ -461,7 +456,6 @@ public class testClass{
 	
 	private void printCalculate() // 화면에 값 출력 
 	{
-		
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  text); // 중앙 화면
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getTemp()))); // 입력화면 	
 		adjustFontSize(); // 사이즈 조절 
@@ -526,7 +520,6 @@ public class testClass{
 				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
 			}
 		}
-		System.out.println(result);
 		return result;
 	}
 	
@@ -574,11 +567,9 @@ public class testClass{
 				//"###.##############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 		};
 		
-		//System.out.println(number);
 		if(number.length() > 16) {
 			format.applyPattern(patterns[0]);
 			changedNumber = format.format(newNumber);
-			//System.out.println(changedNumber);
 		}
 
 		else if(number.contains(".")) {
@@ -597,8 +588,6 @@ public class testClass{
 			changedNumber = changedNumber.replace("E","e+");
 		}
 		
-		
-
 		return changedNumber;
 		
 	}
