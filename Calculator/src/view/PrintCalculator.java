@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class PrintCalculator{
 
@@ -39,12 +41,12 @@ public class PrintCalculator{
 		//lastRecordPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints content=new GridBagConstraints(); /// constraint 설
 		content.fill=GridBagConstraints.BOTH; //여백 채우기
-		content.weighty=0.1;// 비율이 0.2:0.1이므로 버튼의 크기는 세로축으로 2배
+		content.weighty=1;// 비율
 		content.weightx=1;
 		content.gridx=Constants.RESET;  
 		content.gridy=Constants.RESET;   //버튼이 두개로 0,0 기준으로 생성
 		lastCalculatorPanel.add(textPanel, content);
-        content.weighty=0.2; // 비율이 0.2:0.1이므로 버튼의 크기는 세축으로 1배
+        content.weighty=2; // 비율
         content.weightx=1;
         content.gridx=Constants.RESET;  
 		content.gridy=1;   //버튼이 두개로 0,0 기준으로 생성
@@ -55,8 +57,6 @@ public class PrintCalculator{
 		frame.setLayout(new BorderLayout()); // 프레임  설정하기 
 		frame.add(lastCalculatorPanel, BorderLayout.CENTER); // 키패드 
 		frame.setVisible(true);
-		//frame.setFocusable(true); // 안되니까 나중에 확인하기 
-		//frame.requestFocus(); //얘랑 세트 
 			
 		frame.addComponentListener(new ComponentAdapter() {  // 화면 
 		    public void componentResized(ComponentEvent e) {
@@ -75,7 +75,6 @@ public class PrintCalculator{
 		    	}		        
 		    }
 		});
-
 	}
 }
 

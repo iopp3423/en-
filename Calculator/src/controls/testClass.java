@@ -10,12 +10,16 @@ import view.PrintCalculator;
 import view.RecordPanel;
 import view.TextPanel;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.math.BigDecimal;
+
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.math.BigInteger;
@@ -32,7 +36,6 @@ public class testClass{
 	private TextPanel textPanel;
 	private RecordPanel recordPanel;
 	private OperatorData Data;
-	
 	private String text;
 	private String record = "";
 	private int limit; // 숫자 입력 제한 
@@ -62,7 +65,6 @@ public class testClass{
 	
 	ActionListener printRecord = new ActionListener(){ // 누른 키패드 가져오기
 		public void actionPerformed(ActionEvent e) {			
-
 			String getRecod = (e.getActionCommand()); // 입력한  값 가져오기 	
 			String[] leftNumber = new String[1];
 			String[] recordList = getRecod.split(" ");
@@ -90,9 +92,19 @@ public class testClass{
 		}
 		
 	};
+	
+	FocusListener focus = new FocusListener() {
+		public void focusGained(FocusEvent e) {
+			System.out.println("포커스얻음");
+		} 
+
+		 public void focusLost(FocusEvent e) {
+			 System.out.println("포커스잃음");
+		 }
+	};
 
 	ActionListener actionlistener = new ActionListener(){ // 누른 키패드 가져오기
-		public void actionPerformed(ActionEvent e) {				
+		public void actionPerformed(ActionEvent e) {	
 			text = (e.getActionCommand()); // 입력한  값 가져오기 				
 			switch(text){
 				case "0" : inputZero(); break;
@@ -121,11 +133,9 @@ public class testClass{
 		
 	};
 	
-	
-	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
-			//System.out.println(e.getKeyCode());		
+			System.out.println(e.getKeyCode());		
 			if(e.getKeyCode() == 56 && e.isShiftDown()) {
 				text = "x";
 				combineCalculate();
@@ -136,7 +146,7 @@ public class testClass{
 				combineCalculate();
 				return;
 			}
-			switch(e.getKeyCode()) {	
+			switch(e.getKeyCode()) {
 			case 48 : text = "0"; inputNumber(); break;
 			case 49 : text = "1"; inputNumber(); break;
 			case 50 : text = "2"; inputNumber(); break;
@@ -165,6 +175,7 @@ public class testClass{
 		
 	private void delete() 
 	{	
+		
 		String inputRecord;
 		
 		pluscount = Constants.RESET;
@@ -313,7 +324,6 @@ public class testClass{
 			else if (record != "") textPanel.inputSpace.setText("-" + setComma(record)); //그냥 +-
 			number = plusMinus + number;
 			pluscount++;
-			//System.out.println(number);
 		}
 		
 		
@@ -322,13 +332,38 @@ public class testClass{
 			else if (record != "") textPanel.inputSpace.setText(setComma(record));//그냥 +-
 			number = number.replace("-", "");
 			pluscount++;
-			//System.out.println("----");
-			//System.out.println(number);
 		}	
 	}
 		
-		
-/*
+		if(Data.getNegateOperator() != "") {
+			System.out.println("ddd");
+			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) {
+				Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장
+				Data.setNegateCount(Constants.RESET);
+				System.out.println("1");
+			}
+			if(textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) {
+				Data.setNegate("negate(" + Data.getResult() + ")"); // 제일 처음에 negate 저장
+				Data.setNegateCount(Constants.ONE);
+				System.out.println("2");
+			}
+			
+			
+			if(Data.getNegateCount() == Constants.RESET) {
+				textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면
+				textPanel.inputSpace.setText(Data.getTemp());
+				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
+				System.out.println("3");
+			}
+			else if(Data.getNegateCount() == Constants.ONE) {	
+				textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
+				textPanel.inputSpace.setText(Data.getResult());
+				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
+				System.out.println("4");
+			}
+
+		}
+		/*
 		if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "") { // 9 + ->negate
 			if(!textPanel.blankSpace.getText().contains("negate"))Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장 
 			
@@ -344,8 +379,14 @@ public class testClass{
 			textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
 			textPanel.inputSpace.setText(Data.getResult());
 			Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
-		}*/
-		
+		}
+		*/
+		System.out.println(Data.getResult());
+		System.out.println(Data.getOperator());
+		System.out.println(Data.getTemp());
+		//54
+		//x
+		//9
 	}
 	
 	
@@ -467,7 +508,6 @@ public class testClass{
 		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
 		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
 		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
-		System.out.println("hhh");
 	}
 	
 	private void printCalculate() // 화면에 값 출력 

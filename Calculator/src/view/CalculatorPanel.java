@@ -4,9 +4,14 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import Utility.Constants;
@@ -124,16 +129,8 @@ public class CalculatorPanel extends JPanel
 				button[index].setBackground(new Color(243, 249, 252));
 				button[index].addMouseListener(numberMouse);
 			}
-			//setFocusable(true);
-			//requestFocus();
-			button[index].setFocusable(true);
-			button[index].requestFocus();
 			add(button[index]);			
 		}	
-		setFocusable(true);
-		requestFocus();
-		//setFocusable(true);
-			
 		
 		
 	}

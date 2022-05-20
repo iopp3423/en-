@@ -67,19 +67,18 @@ public class TextPanel extends JPanel
 		//lastCalculatorPanel.add(scrollPane, content);
 		
 				
-				recordcontent.fill=GridBagConstraints.BOTH; //여백 채우기
-				recordcontent.weighty=0.1;// 비율이 0.2:0.1이므로 버튼의 크기는 세로축으로 2배
-				recordcontent.weightx=1;
-				recordcontent.gridx=0;  
-				recordcontent.gridy=0;   //버튼이 두개로 0,0 기준으로 생성
-				//lastRecordPanel.add(textPanel, recordcontent);
-				recordcontent.weighty=0.2; // 비율이 0.2:0.1이므로 버튼의 크기는 세축으로 1배
-				recordcontent.weightx=1;
-				recordcontent.gridx=0;  
-				recordcontent.gridy=1;   //버튼이 두개로 0,0 기준으로 생성
-				lastRecordPanel.add(scrollPane, recordcontent);
+		recordcontent.fill=GridBagConstraints.BOTH; //여백 채우기
+		recordcontent.weighty=0.1;// 비율이 0.2:0.1이므로 버튼의 크기는 세로축으로 2배
+		recordcontent.weightx=1;
+		recordcontent.gridx=0;  
+		recordcontent.gridy=0;   //버튼이 두개로 0,0 기준으로 생성
+		//lastRecordPanel.add(textPanel, recordcontent);
+		recordcontent.weighty=0.2; // 비율이 0.2:0.1이므로 버튼의 크기는 세축으로 1배
+		recordcontent.weightx=1;
+		recordcontent.gridx=0;  
+		recordcontent.gridy=1;   //버튼이 두개로 0,0 기준으로 생성
+		lastRecordPanel.add(scrollPane, recordcontent);
 		        
-		
 			
 		
 		

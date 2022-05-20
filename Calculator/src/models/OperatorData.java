@@ -12,6 +12,7 @@ public class OperatorData {
 	private String formula = "";
 	private String negateOperator = "";
 	private String negate = "";
+	private int negateCount = 0; 
 	
 	public void setResult(String result) { // = 저
 		this.result = result;
@@ -48,5 +49,11 @@ public class OperatorData {
 	}
 	public String getNegate() {
 		return negate;
+	}
+	public void setNegateCount(int negateCount) {
+		this.negateCount = negateCount;
+	}
+	public int getNegateCount() {
+		return negateCount;
 	}
 }
