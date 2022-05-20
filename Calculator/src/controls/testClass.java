@@ -311,12 +311,14 @@ public class testClass{
 	private void changeSign()
 	{
 		
+		
 		if(textPanel.inputSpace.getText() == "0") { // 0 이면 +- 안붙
 			textPanel.inputSpace.setText("0");
 		}
 		
+		
 		else if(textPanel.inputSpace.getText() != "0"){ // 0이 아니면 
-			
+			//printNegate();
 		
 		if(pluscount % 2 == Constants.RESET) { // 짝수면 플러스, 홀수면 마이너스 
 			
@@ -333,60 +335,45 @@ public class testClass{
 			number = number.replace("-", "");
 			pluscount++;
 		}	
-	}
+		
+		
 		
 		if(Data.getNegateOperator() != "") {
-			System.out.println("ddd");
-			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) {
+			int plusMinus = pluscount % 2;
+			
+			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
 				Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장
 				Data.setNegateCount(Constants.RESET);
-				System.out.println("1");
+				//System.out.println("1");
 			}
-			if(textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) {
+			if(textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
 				Data.setNegate("negate(" + Data.getResult() + ")"); // 제일 처음에 negate 저장
 				Data.setNegateCount(Constants.ONE);
-				System.out.println("2");
+				//System.out.println("2");
 			}
 			
 			
-			if(Data.getNegateCount() == Constants.RESET) {
+			if(Data.getNegateCount() == Constants.RESET) { // 2 + -> negate
 				textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면
-				textPanel.inputSpace.setText(Data.getTemp());
+				switch(plusMinus) {
+				case 0:textPanel.inputSpace.setText(Data.getTemp().replace("-","")); break;
+				case 1:textPanel.inputSpace.setText("-" + Data.getTemp()); break;
+				}
 				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
-				System.out.println("3");
 			}
-			else if(Data.getNegateCount() == Constants.ONE) {	
+			else if(Data.getNegateCount() == Constants.ONE) {	// 2 + 4 = 6 -> negate
 				textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
-				textPanel.inputSpace.setText(Data.getResult());
+				switch(plusMinus) {
+				case 0: textPanel.inputSpace.setText(Data.getResult().replace("-",""));break;
+				case 1: textPanel.inputSpace.setText("-" + Data.getResult());break;
+				}
 				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
 				System.out.println("4");
 			}
-
+			System.out.println(pluscount);
 		}
-		/*
-		if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "") { // 9 + ->negate
-			if(!textPanel.blankSpace.getText().contains("negate"))Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장 
-			
-			textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면
-			textPanel.inputSpace.setText(Data.getTemp());
-			Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
-		}
+	}
 		
-		
-		else if(textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "") { // 9 + 5 = 14 -> negate
-			if(!textPanel.blankSpace.getText().contains("negate")) Data.setNegate("negate(" + Data.getResult() + ")"); // 제일 처음에 negate 저장 
-			
-			textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
-			textPanel.inputSpace.setText(Data.getResult());
-			Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
-		}
-		*/
-		System.out.println(Data.getResult());
-		System.out.println(Data.getOperator());
-		System.out.println(Data.getTemp());
-		//54
-		//x
-		//9
 	}
 	
 	
@@ -646,6 +633,38 @@ public class testClass{
 		
 		return changedNumber;
 		
+	}
+	
+	public void printNegate() {
+		if(Data.getNegateOperator() != "") {
+			System.out.println("ddd");
+			
+			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
+				Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장
+				Data.setNegateCount(Constants.RESET);
+				System.out.println("1");
+			}
+			if(textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
+				Data.setNegate("negate(" + Data.getResult() + ")"); // 제일 처음에 negate 저장
+				Data.setNegateCount(Constants.ONE);
+				System.out.println("2");
+			}
+			
+			
+			if(Data.getNegateCount() == Constants.RESET) { // 2 + -> negate
+				textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면
+				textPanel.inputSpace.setText(Data.getTemp());
+				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
+				System.out.println("3");
+			}
+			else if(Data.getNegateCount() == Constants.ONE) {	// 2 + 4 = 6 -> negate
+				textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
+				textPanel.inputSpace.setText(Data.getResult());
+				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
+				System.out.println("4");
+			}
+
+		}
 	}
 	
 }
