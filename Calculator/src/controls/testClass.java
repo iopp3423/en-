@@ -47,7 +47,7 @@ public class testClass{
 	{	
 		this.printCalculator = printCalculator;
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
-		recordPanel = new RecordPanel();
+		recordPanel = new RecordPanel(printRecord);
 		scrollPane = new JScrollPane(recordPanel);
 		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성 
 		Data = new OperatorData();
@@ -60,6 +60,16 @@ public class testClass{
 		printCalculator.openCalculator(calculatorPanel, textPanel, recordPanel, scrollPane); // 계산기 출력	
 	}
 	
+	
+	ActionListener printRecord = new ActionListener(){ // 누른 키패드 가져오기
+		public void actionPerformed(ActionEvent e) {				
+			String getRecod = (e.getActionCommand()); // 입력한  값 가져오기 	
+			String[] recordList = getRecod.split(" ");
+			textPanel.blankSpace.setText(recordList[1]);
+			textPanel.inputSpace.setText(recordList[3]);
+		}
+		
+	};
 
 	ActionListener actionlistener = new ActionListener(){ // 누른 키패드 가져오기
 		public void actionPerformed(ActionEvent e) {				
@@ -361,7 +371,7 @@ public class testClass{
 		/////////////////////////////////////////////////////////////////////////////////////////
 		
 		if(buttonSize == 20) buttonSize = Constants.RESET;
-		recordPanel.button[buttonSize++].setText("<HTML>"+textPanel.blankSpace.getText() +"<br>"+ textPanel.inputSpace.getText()); //로그 남기기 
+		recordPanel.button[buttonSize++].setText("<HTML> "+textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); //로그 남기기 
 		exceptionPrint(); // 예외 문
 		adjustFontSize(); // 사이즈 조
 		Data.setFormula("=");
@@ -445,16 +455,6 @@ public class testClass{
 	
 	private void exceptionPrint() // 예외처리 함수 
 	{
-		String errorMessage = textPanel.inputSpace.getText();
-		switch(errorMessage) {
-		case "NaN" : textPanel.inputSpace.setText("정의되지 않은 결과입니다."); break;
-		case "Infinity" : textPanel.inputSpace.setText("0으로 나눌 수 없습니다."); break;
-		}
-		
-		if(Data.getOperator().equals("÷") && record.equals("0")) {
-			textPanel.inputSpace.setText("0으로 나눌 수 없습니다.");
-		}
-		
 		if(textPanel.inputSpace.getText().contains("e")){ // 문자열 자르
 			String longText = textPanel.inputSpace.getText();
 			String[] textArray = longText.split("e");
@@ -493,16 +493,17 @@ public class testClass{
 			}
 		}
 		catch (java.lang.ArithmeticException e){
-			if(e.getMessage().equals("Division undefined")) result = "Nan";
-			else if(e.getMessage().equals("Non-terminating decimal expansion; no exact representable decimal result.")) {
+			if(e.getMessage().equals("Division undefined")) result = "Nan"; // 정의되지 않은 결과 
+			else if(e.getMessage().equals("Non-terminating decimal expansion; no exact representable decimal result.")) { // 무리수 계산 
 				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
 			}
 		}
 		System.out.println(result);
 		return result;
 	}
-	//Division undefined
-	//Non-terminating decimal expansion; no exact representable decimal result.
+	
+	
+	
 	private void adjustFontSize()
 	{
 		int fontlength = textPanel.inputSpace.getText().length();
@@ -533,6 +534,7 @@ public class testClass{
 	private String changeNumber(String number) {
 		if(number.equals("Nan")) return "정의되지 않은 결과입니다.";
 		if(number.equals("")) return "0으로 나눌 수 없습니다.";
+		
 		DecimalFormat format=new DecimalFormat();
 		String changedNumber="";
 		BigDecimal newNumber = new BigDecimal(number);
@@ -558,7 +560,6 @@ public class testClass{
 		}
 		else changedNumber = newNumber.toString();
 
-		
 		
 		if(changedNumber.contains("E-")) { // E e 로 변
 			changedNumber = changedNumber.replace("E","e");

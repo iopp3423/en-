@@ -52,7 +52,7 @@ public class PrintCalculator{
 		lastCalculatorPanel.add(scrollPane, content);
 		scrollPane.setVisible(false);   
         
-		frame.setLayout(new BorderLayout()); // 프레임  설정하기 	
+		frame.setLayout(new BorderLayout()); // 프레임  설정하기 
 		frame.add(lastCalculatorPanel, BorderLayout.CENTER); // 키패드 
 		frame.setVisible(true);
 		//frame.setFocusable(true); // 안되니까 나중에 확인하기 

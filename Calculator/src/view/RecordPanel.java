@@ -21,13 +21,13 @@ public class RecordPanel extends JPanel{
 
 	public JButton [] button;
 	
-	public RecordPanel() {
+	public RecordPanel(ActionListener printRecord) {
 		
 		
 		button = new JButton[20];
 		setLayout(new GridLayout(0,1,0,1));		
 		
-		
+
 		for(int index=0; index<button.length; index++)
 		{
 			button[index] = new JButton();
@@ -37,8 +37,8 @@ public class RecordPanel extends JPanel{
 			button[index].setBorderPainted(false);//있어야 색 적용가능 
 			if(index == Constants.RESET) button[index].setText("아직 기록이 없습니다.");
 			add(button[index]);
+			button[index].addActionListener(printRecord);
 		}
-		
 	}
 	
 }
