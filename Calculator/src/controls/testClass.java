@@ -318,7 +318,6 @@ public class testClass{
 		
 		
 		else if(textPanel.inputSpace.getText() != "0"){ // 0이 아니면 
-			//printNegate();
 		
 		if(pluscount % 2 == Constants.RESET) { // 짝수면 플러스, 홀수면 마이너스 
 			
@@ -334,45 +333,11 @@ public class testClass{
 			else if (record != "") textPanel.inputSpace.setText(setComma(record));//그냥 +-
 			number = number.replace("-", "");
 			pluscount++;
-		}	
-		
-		
-		
-		if(Data.getNegateOperator() != "") {
-			int plusMinus = pluscount % 2;
+			}	
 			
-			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
-				Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장
-				Data.setNegateCount(Constants.RESET);
-				//System.out.println("1");
-			}
-			if(textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
-				Data.setNegate("negate(" + Data.getResult() + ")"); // 제일 처음에 negate 저장
-				Data.setNegateCount(Constants.ONE);
-				//System.out.println("2");
-			}
+		printNegate();
 			
-			
-			if(Data.getNegateCount() == Constants.RESET) { // 2 + -> negate
-				textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면
-				switch(plusMinus) {
-				case 0:textPanel.inputSpace.setText(Data.getTemp().replace("-","")); break;
-				case 1:textPanel.inputSpace.setText("-" + Data.getTemp()); break;
-				}
-				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
-			}
-			else if(Data.getNegateCount() == Constants.ONE) {	// 2 + 4 = 6 -> negate
-				textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
-				switch(plusMinus) {
-				case 0: textPanel.inputSpace.setText(Data.getResult().replace("-",""));break;
-				case 1: textPanel.inputSpace.setText("-" + Data.getResult());break;
-				}
-				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
-				System.out.println("4");
-			}
-			System.out.println(pluscount);
 		}
-	}
 		
 	}
 	
@@ -439,11 +404,7 @@ public class testClass{
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
 		
-		if(buttonSize == 20) buttonSize = Constants.RESET;
-		//System.out.println(Data.getResult());
-		//System.out.println(Data.getTemp());
-		//System.out.println(number);
-		
+		if(buttonSize == 20) buttonSize = Constants.RESET;		
 		exceptionPrint(); // 예외 문
 		adjustFontSize(); // 사이즈 조
 		Data.setFormula("=");
@@ -460,6 +421,10 @@ public class testClass{
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
+			System.out.println(Data.getTemp());
+			System.out.println(number);
+			System.out.println(Data.getOperator());
+			System.out.println(Data.getResult());
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
@@ -637,33 +602,38 @@ public class testClass{
 	
 	public void printNegate() {
 		if(Data.getNegateOperator() != "") {
-			System.out.println("ddd");
+			int plusMinus = pluscount % 2;
 			
 			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
 				Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장
 				Data.setNegateCount(Constants.RESET);
-				System.out.println("1");
+				//System.out.println("1");
 			}
 			if(textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
 				Data.setNegate("negate(" + Data.getResult() + ")"); // 제일 처음에 negate 저장
 				Data.setNegateCount(Constants.ONE);
-				System.out.println("2");
+				//System.out.println("2");
 			}
 			
 			
 			if(Data.getNegateCount() == Constants.RESET) { // 2 + -> negate
 				textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면
-				textPanel.inputSpace.setText(Data.getTemp());
+				switch(plusMinus) {			
+				case 0:number = Data.getTemp().replace("-",""); break;
+				case 1:number = "-" + Data.getTemp(); break;
+				}
 				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
-				System.out.println("3");
 			}
 			else if(Data.getNegateCount() == Constants.ONE) {	// 2 + 4 = 6 -> negate
 				textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
-				textPanel.inputSpace.setText(Data.getResult());
+				switch(plusMinus) {
+				case 0: number = Data.getResult().replace("-","");break;
+				case 1: number ="-" + Data.getResult();break;
+				}
 				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
 				System.out.println("4");
 			}
-
+			textPanel.inputSpace.setText(number);
 		}
 	}
 	
