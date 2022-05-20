@@ -384,20 +384,28 @@ public class Calculator{
 		
 		pluscount = Constants.RESET;
 		Data.setNegateOperator(text);
+		boolean isnegate;
+		
+		if(textPanel.blankSpace.getText().contains("negate")) isnegate = true;
+		else isnegate = false;
+		
 		if(number == "0") number = Data.getTemp(); // 2X4=, 2+5= 형식 처리 
 		if(textPanel.inputSpace.getText().contains("정") || textPanel.inputSpace.getText().contains("나눌")) reset();
 		
 		printResult();
 
+		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정") && isnegate) { // negate 로그 남기기 
+		recordPanel.button[buttonSize++].setText("<HTML> "+textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
+		}
+		
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + changeNumber(number) + text);
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
 		
-		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정"))
-		recordPanel.button[buttonSize++].setText("<HTML> "+textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); //로그 남기기 
-
+		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정") && !isnegate) // negate 없을 때 로그 남기
+		recordPanel.button[buttonSize++].setText("<HTML> "+textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
-							
+		
 		/////////////////////////////////////////////////////////////////////////////////////////
 				
 		else if(Data.getOperator().equals(text)){//.equals(text)) { // 0.1 =====
@@ -410,7 +418,6 @@ public class Calculator{
 			}
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
-		
 		if(buttonSize == 20) buttonSize = Constants.RESET;		
 		exceptionPrint(); // 예외 문
 		adjustFontSize(); // 사이즈 조
