@@ -125,7 +125,7 @@ public class testClass{
 	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
-			System.out.println(e.getKeyCode());		
+			//System.out.println(e.getKeyCode());		
 			if(e.getKeyCode() == 56 && e.isShiftDown()) {
 				text = "x";
 				combineCalculate();
@@ -313,7 +313,7 @@ public class testClass{
 			else if (record != "") textPanel.inputSpace.setText("-" + setComma(record)); //그냥 +-
 			number = plusMinus + number;
 			pluscount++;
-			System.out.println(number);
+			//System.out.println(number);
 		}
 		
 		
@@ -322,8 +322,8 @@ public class testClass{
 			else if (record != "") textPanel.inputSpace.setText(setComma(record));//그냥 +-
 			number = number.replace("-", "");
 			pluscount++;
-			System.out.println("----");
-			System.out.println(number);
+			//System.out.println("----");
+			//System.out.println(number);
 		}	
 	}
 		
@@ -412,9 +412,9 @@ public class testClass{
 		/////////////////////////////////////////////////////////////////////////////////////////
 		
 		if(buttonSize == 20) buttonSize = Constants.RESET;
-		System.out.println(Data.getResult());
-		System.out.println(Data.getTemp());
-		System.out.println(number);
+		//System.out.println(Data.getResult());
+		//System.out.println(Data.getTemp());
+		//System.out.println(number);
 		
 		exceptionPrint(); // 예외 문
 		adjustFontSize(); // 사이즈 조
@@ -425,7 +425,8 @@ public class testClass{
 	private void printResult() // 결과값 출력(중앙 출력)
 	{
 		if(!Data.getFormula().equals("=")) { // 2x4 = 8 
-			switch(Data.getOperator().substring(Data.getOperator().length() - 1)) { // 2 x <-연산자 찾
+			
+			switch(Data.getOperator()) {
 			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
 			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
@@ -437,13 +438,12 @@ public class testClass{
 			Data.setTemp(Data.getResult());	
 			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + changeNumber(number) + text);
 			
-			switch(Data.getOperator().substring(Data.getOperator().length() - 1)) {
+			switch(Data.getOperator()) {
 			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
 			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
-			
 			textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));// 결과값 출력
 			
 		}
@@ -463,11 +463,11 @@ public class testClass{
 	
 	private void calculate()
 	{
-		String CheckOperator = textPanel.blankSpace.getText();// 2 x <-연산자 찾
-		if(CheckOperator.substring(CheckOperator.length() - 1).contains("+"))Data.setTemp(calculation(Data.getTemp(), number, "+"));
-		else if(CheckOperator.substring(CheckOperator.length() - 1).contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
-		else if(CheckOperator.substring(CheckOperator.length() - 1).contains("x"))Data.setTemp(calculation(Data.getTemp(), number, "x"));
-		else if(CheckOperator.substring(CheckOperator.length() - 1).contains("÷"))Data.setTemp(calculation(Data.getTemp(), number, "÷"));		
+		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
+		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
+		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
+		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
+		System.out.println("hhh");
 	}
 	
 	private void printCalculate() // 화면에 값 출력 
