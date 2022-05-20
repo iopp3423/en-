@@ -325,7 +325,7 @@ public class Calculator{
 		
 		else if(textPanel.inputSpace.getText() != "0"){ // 0이 아니면 
 		
-		if(pluscount % 2 == Constants.RESET) { // 짝수면 플러스, 홀수면 마이너스 
+		if(pluscount % 2 == Constants.RESET && !textPanel.inputSpace.getText().contains("-")) { // 짝수면 플러스, 홀수면 마이너스 
 			
 			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 짝수 이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText("-" + setComma(record)); //그냥 +-
@@ -340,9 +340,10 @@ public class Calculator{
 			number = number.replace("-", "");
 			pluscount++;
 			}	
-			
+		
 		printNegate();
-			
+		System.out.println(textPanel.inputSpace.getText());
+		if(textPanel.inputSpace.getText().contains("--")) textPanel.inputSpace.setText(textPanel.inputSpace.getText().replace("--","-"));
 		}
 		
 	}
@@ -431,10 +432,6 @@ public class Calculator{
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
-			//System.out.println(Data.getTemp());
-			//System.out.println(number);
-			//System.out.println(Data.getOperator());
-			//System.out.println(Data.getResult());
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
@@ -632,16 +629,17 @@ public class Calculator{
 				}
 				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
 			}
+			
 			else if(Data.getNegateCount() == Constants.ONE) {	// 2 + 4 = 6 -> negate
 				textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
 				switch(plusMinus) {
 				case 0: number = Data.getResult().replace("-","");break;
-				case 1: number ="-" + Data.getResult();break;
+				case 1: number = "-" + Data.getResult(); break;
 				}
 				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
 			}
-			textPanel.inputSpace.setText(number);
 			
+			textPanel.inputSpace.setText(setComma(number));
 		}
 	}
 	
