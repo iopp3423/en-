@@ -179,9 +179,7 @@ public class testClass{
 						 number = "0";
 		             }
 				}
-		 }
-		 
-		
+		 }	
 		 else if (textPanel.inputSpace.getText().length() == Constants.ONE)   //글자수가 1일 때  백스페이스 누르면 0으로 초기
          {
 			 textPanel.inputSpace.setText("0");
@@ -204,6 +202,11 @@ public class testClass{
 	private void inputZero()
 	{
 		Data.setNegateOperator("");
+		
+		if(Data.getFormula().equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
+			reset();
+		}
+		
 		if(text.equals("0"))
 		{
 			if(textPanel.inputSpace.getText() == "0") {
@@ -306,23 +309,26 @@ public class testClass{
 		
 		if(pluscount % 2 == Constants.RESET) { // 짝수면 플러스, 홀수면 마이너스 
 			
-			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
+			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 짝수 이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText("-" + setComma(record)); //그냥 +-
 			number = plusMinus + number;
 			pluscount++;
+			System.out.println(number);
 		}
 		
 		
 		else {
-			if(record == "") textPanel.inputSpace.setText(setComma(Data.getTemp()));// 짝이면서 2 -> 사칙연산 -> +-눌렀을 
+			if(record == "") textPanel.inputSpace.setText(setComma(Data.getTemp()));// 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText(setComma(record));//그냥 +-
 			number = number.replace("-", "");
 			pluscount++;
+			System.out.println("----");
+			System.out.println(number);
 		}	
 	}
 		
 		
-
+/*
 		if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "") { // 9 + ->negate
 			if(!textPanel.blankSpace.getText().contains("negate"))Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장 
 			
@@ -338,7 +344,7 @@ public class testClass{
 			textPanel.blankSpace.setText(Data.getNegate()); // 중앙 화면
 			textPanel.inputSpace.setText(Data.getResult());
 			Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
-		}
+		}*/
 		
 	}
 	
@@ -418,9 +424,8 @@ public class testClass{
 	
 	private void printResult() // 결과값 출력(중앙 출력)
 	{
-		
 		if(!Data.getFormula().equals("=")) { // 2x4 = 8 
-			switch(Data.getOperator()) {
+			switch(Data.getOperator().substring(Data.getOperator().length() - 1)) { // 2 x <-연산자 찾
 			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
 			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
@@ -432,7 +437,7 @@ public class testClass{
 			Data.setTemp(Data.getResult());	
 			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + changeNumber(number) + text);
 			
-			switch(Data.getOperator()) {
+			switch(Data.getOperator().substring(Data.getOperator().length() - 1)) {
 			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
 			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
@@ -458,10 +463,11 @@ public class testClass{
 	
 	private void calculate()
 	{
-		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
-		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
-		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
-		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));		
+		String CheckOperator = textPanel.blankSpace.getText();// 2 x <-연산자 찾
+		if(CheckOperator.substring(CheckOperator.length() - 1).contains("+"))Data.setTemp(calculation(Data.getTemp(), number, "+"));
+		else if(CheckOperator.substring(CheckOperator.length() - 1).contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
+		else if(CheckOperator.substring(CheckOperator.length() - 1).contains("x"))Data.setTemp(calculation(Data.getTemp(), number, "x"));
+		else if(CheckOperator.substring(CheckOperator.length() - 1).contains("÷"))Data.setTemp(calculation(Data.getTemp(), number, "÷"));		
 	}
 	
 	private void printCalculate() // 화면에 값 출력 
