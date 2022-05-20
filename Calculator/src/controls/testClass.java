@@ -237,6 +237,13 @@ public class testClass{
 	private void inputNumber() // 입력 
 	{		
 		Data.setNegateOperator("");
+		
+		if(Data.getResult().equals("0") && textPanel.blankSpace.getText().contains("negate")) {
+			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
+			textPanel.inputSpace.setText(textPanel.inputSpace.getText().replace("-", ""));
+			pluscount++;
+		}
+		
 		if(limit<Constants.LIMIT_INPUT) 
 		{	
 			if(Data.getFormula().equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
@@ -244,7 +251,7 @@ public class testClass{
 			}
 			
 			record += text;// 입력
-					
+			
 			if(pluscount % 2 == 1) {
 				textPanel.inputSpace.setText("-" + setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
 				number = plusMinus + record; //// 넘버에 입력값 넣어주기
@@ -421,10 +428,10 @@ public class testClass{
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
-			System.out.println(Data.getTemp());
-			System.out.println(number);
-			System.out.println(Data.getOperator());
-			System.out.println(Data.getResult());
+			//System.out.println(Data.getTemp());
+			//System.out.println(number);
+			//System.out.println(Data.getOperator());
+			//System.out.println(Data.getResult());
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
@@ -607,12 +614,10 @@ public class testClass{
 			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
 				Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장
 				Data.setNegateCount(Constants.RESET);
-				//System.out.println("1");
 			}
 			if(textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
 				Data.setNegate("negate(" + Data.getResult() + ")"); // 제일 처음에 negate 저장
 				Data.setNegateCount(Constants.ONE);
-				//System.out.println("2");
 			}
 			
 			
@@ -631,9 +636,9 @@ public class testClass{
 				case 1: number ="-" + Data.getResult();break;
 				}
 				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
-				System.out.println("4");
 			}
 			textPanel.inputSpace.setText(number);
+			
 		}
 	}
 	
