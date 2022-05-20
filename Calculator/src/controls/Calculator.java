@@ -54,7 +54,7 @@ public class Calculator{
 		this.printCalculator = printCalculator;
 		JPanel LastPanel = new JPanel(new GridBagLayout()); //텍스트,입력 패널 합치는 패널 
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
-		recordPanel = new RecordPanel();
+		//recordPanel = new RecordPanel();
 		scrollPane = new JScrollPane(recordPanel);
 		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성 
 		operatorData = new OperatorData();

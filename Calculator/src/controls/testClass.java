@@ -54,7 +54,6 @@ public class testClass{
 		callCalculator();// 계산기 출력 
 	}
 	
-	
 	public void callCalculator() // 계산기 출력 
 	{
 		printCalculator.openCalculator(calculatorPanel, textPanel, recordPanel, scrollPane); // 계산기 출력	
@@ -62,11 +61,40 @@ public class testClass{
 	
 	
 	ActionListener printRecord = new ActionListener(){ // 누른 키패드 가져오기
-		public void actionPerformed(ActionEvent e) {				
+		public void actionPerformed(ActionEvent e) {			
+
 			String getRecod = (e.getActionCommand()); // 입력한  값 가져오기 	
+			String[] leftNumber = new String[1];
 			String[] recordList = getRecod.split(" ");
 			textPanel.blankSpace.setText(recordList[1]);
 			textPanel.inputSpace.setText(recordList[3]);
+			recordList[1] = recordList[1].replace("=", "");
+			
+			if(recordList[1].contains("-")) {
+				leftNumber = recordList[1].split("-");			
+			}
+			if(recordList[1].contains("+")) {
+				leftNumber = recordList[1].split("+");
+			}	
+			if(recordList[1].contains("x")) {
+				leftNumber = recordList[1].split("x");
+			}
+			if(recordList[1].contains("÷")) {
+				leftNumber = recordList[1].split("÷");
+			}
+				
+			Data.setTemp(leftNumber[0]); // 왼쪽값 저장 
+			number = leftNumber[1]; // 오른쪽 값 저장 
+			Data.setResult(recordList[3]); // 결과값 저장 
+			
+			System.out.println("temp=" + Data.getTemp() + "number=" + number);
+			System.out.println("result=" + Data.getResult());
+			
+			System.out.println(Data.getResult());
+			System.out.println(Data.getOperator());
+			System.out.println(Data.getTemp());
+			System.out.println(text);
+			
 		}
 		
 	};
@@ -351,9 +379,9 @@ public class testClass{
 
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + changeNumber(number) + text);
-		System.out.println(Data.getResult());
-		System.out.println("--------");
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
+		//System.out.println("temp=" + Data.getTemp() + "number=" + number);
+		//System.out.println("result=" + Data.getResult());
 	
 		}
 							
