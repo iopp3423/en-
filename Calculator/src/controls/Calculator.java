@@ -242,7 +242,6 @@ public class Calculator{
 			}
 			
 			record += text;// 입력
-			
 			if(pluscount % 2 == 1) {
 				textPanel.inputSpace.setText("-" + setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
 				number = plusMinus + record; //// 넘버에 입력값 넣어주기
@@ -332,12 +331,11 @@ public class Calculator{
 			}	
 		
 		printNegate();
-		//System.out.println(textPanel.inputSpace.getText());
-		//System.out.println(Data.getResult());
+		
 			if(textPanel.inputSpace.getText().contains("--")) {
 				textPanel.inputSpace.setText(textPanel.inputSpace.getText().replace("--",""));
 				number = number.replace("--", "-");
-				System.out.println(number);
+				//System.out.println(number);
 				pluscount++;
 			}
 		}
@@ -376,7 +374,6 @@ public class Calculator{
 			textPanel.inputSpace.setText(Data.getResult() + record);
 			dotCount++;	
 		}	
-		
 	}
 	
 	
@@ -395,7 +392,7 @@ public class Calculator{
 		printResult();
 
 		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정") && isnegate) { // negate 로그 남기기 
-		recordPanel.button[buttonSize++].setText("<HTML> "+textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
+		recordPanel.button[buttonSize++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
@@ -403,7 +400,7 @@ public class Calculator{
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
 		
 		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정") && !isnegate) // negate 없을 때 로그 남기
-		recordPanel.button[buttonSize++].setText("<HTML> "+textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
+		recordPanel.button[buttonSize++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		
 		/////////////////////////////////////////////////////////////////////////////////////////
@@ -428,7 +425,7 @@ public class Calculator{
 	private void printResult() // 결과값 출력(중앙 출력)
 	{
 		if(!Data.getFormula().equals("=")) { // 2x4 = 8 
-			
+			if(textPanel.inputSpace.getText().equals("0.")) number = "0";
 			switch(Data.getOperator()) {
 			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
 			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
@@ -438,7 +435,7 @@ public class Calculator{
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
-			Data.setTemp(Data.getResult());	
+			//Data.setTemp(Data.getResult());	
 			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + changeNumber(number) + text);
 			
 			switch(Data.getOperator()) {
@@ -448,7 +445,6 @@ public class Calculator{
 			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
 			textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));// 결과값 출력
-			
 		}
 		exceptionPrint();
 	}
@@ -466,10 +462,14 @@ public class Calculator{
 	
 	private void calculate()
 	{
+		System.out.println("temp=" + Data.getTemp());
+		if(textPanel.inputSpace.getText().equals("0.")) number = "0";
+		System.out.println("temp=" + Data.getTemp());
 		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
 		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
 		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
 		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
+		System.out.println("temp=" + Data.getTemp());
 	}
 	
 	private void printCalculate() // 화면에 값 출력 
@@ -519,11 +519,12 @@ public class Calculator{
 	
 
 	
-	private String calculation(String temp, String number, String operator) { // 결과 
+	private String calculation(String temp, String number, String operator) { // 결과
 		BigDecimal leftNumber = new BigDecimal(temp);
 		BigDecimal rightNumber = new BigDecimal(number);
 		String result="";
-		
+		//System.out.println(leftNumber);
+		//System.out.println(rightNumber);
 		try{
 			switch(operator) {  // 저장했던 연산
 			case "+": result = leftNumber.add(rightNumber).toString();break;
@@ -538,6 +539,8 @@ public class Calculator{
 				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
 			}
 		}
+		//System.out.println("----------");
+		//System.out.println(result);
 		return result;
 	}
 	

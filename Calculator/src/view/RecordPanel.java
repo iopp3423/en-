@@ -31,14 +31,17 @@ public class RecordPanel extends JPanel{
 		for(int index=0; index<button.length; index++)
 		{
 			button[index] = new JButton();
-			button[index].setPreferredSize(new Dimension(200, 60));
+			button[index].setPreferredSize(new Dimension(270, 60));
 			button[index].setHorizontalAlignment(SwingConstants.RIGHT); // 오른 배치 
-			button[index].setOpaque(true);//있어야 색 적용가능 
+			button[index].setOpaque(true);//있어야 색 적용가능
 			button[index].setBorderPainted(false);//있어야 색 적용가능 
+			button[index].setMaximumSize(new Dimension(200,300));
 			if(index == Constants.RESET) button[index].setText("아직 기록이 없습니다.");
 			add(button[index]);
 			button[index].addActionListener(printRecord);
 		}
+		
+		
 	}
 	
 }
