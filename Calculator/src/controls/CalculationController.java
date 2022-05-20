@@ -10,8 +10,8 @@ public class CalculationController{
 	
 	public CalculationController() {
 		PrintCalculator printCalculator = new PrintCalculator();
-		//Calculator calculator = new Calculator(printCalculator, data);	
-		testClass calculatorr = new testClass(printCalculator);	
+		Calculator calculator = new Calculator(printCalculator);	
+		//testClass calculatorr = new testClass(printCalculator);	
 
 		/*
 		DecimalFormat format=new DecimalFormat();

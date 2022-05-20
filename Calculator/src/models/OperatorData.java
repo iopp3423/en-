@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 public class OperatorData {
 
 	
-	private String result = "";
+	private String result = "0";
 	private String temp = "";
 	private String operator = "=";
 	private String formula = "";
