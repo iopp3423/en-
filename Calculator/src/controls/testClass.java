@@ -345,9 +345,10 @@ public class testClass{
 	
 	private void inputDot() // 소수점 
 	{
-			
+		//Data.setTemp("");
+		//record = "";
 		if(textPanel.inputSpace.getText().equals("0")) { // 0일 때 
-			record += "0" + text;// 키보드 입력한 값	
+			record = "0" + text;// 키보드 입력한 값	
 			textPanel.inputSpace.setText(setComma(record));
 			dotCount++;		
 		}
@@ -404,6 +405,10 @@ public class testClass{
 		/////////////////////////////////////////////////////////////////////////////////////////
 		
 		if(buttonSize == 20) buttonSize = Constants.RESET;
+		System.out.println(Data.getResult());
+		System.out.println(Data.getTemp());
+		System.out.println(number);
+		
 		exceptionPrint(); // 예외 문
 		adjustFontSize(); // 사이즈 조
 		Data.setFormula("=");
@@ -455,12 +460,7 @@ public class testClass{
 		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
 		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
 		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
-		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
-		//System.out.println("temp=" + Data.getTemp());
-		//System.out.println("result=" + Data.getResult());
-		//System.out.println("operator=" + Data.getOperator());
-		//System.out.println("formula=" + Data.getFormula());
-		
+		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));		
 	}
 	
 	private void printCalculate() // 화면에 값 출력 
