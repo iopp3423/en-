@@ -125,8 +125,18 @@ public class testClass{
 	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
-			//System.out.println(e.getKeyCode());		
-			switch(e.getKeyCode()) {			
+			System.out.println(e.getKeyCode());		
+			if(e.getKeyCode() == 56 && e.isShiftDown()) {
+				text = "x";
+				combineCalculate();
+				return;
+			}
+			if(e.getKeyCode() == 61 && e.isShiftDown()) {
+				text = "+";
+				combineCalculate();
+				return;
+			}
+			switch(e.getKeyCode()) {	
 			case 48 : text = "0"; inputNumber(); break;
 			case 49 : text = "1"; inputNumber(); break;
 			case 50 : text = "2"; inputNumber(); break;
@@ -138,14 +148,15 @@ public class testClass{
 			case 56 : text = "8"; inputNumber(); break;
 			case 57 : text = "9"; inputNumber(); break;
 			case 10 : text = "="; result(); break;
+			case 61 : text = "="; result(); break;
 			case 107 : text = "+"; combineCalculate(); break;
 			case 109 : text = "-"; combineCalculate(); break;
+			case 111 : text = "÷"; combineCalculate(); break;
 			case 47 : text = "÷"; combineCalculate(); break;
 			case 106 : text = "x"; combineCalculate();  break;
 			case 8: text = "\u232B"; delete(); break;
 			case 27: text = "C"; reset(); break;
 			}
-			
 			adjustFontSize();
 			
 		}
@@ -376,9 +387,7 @@ public class testClass{
 		
 		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정"))
 		recordPanel.button[buttonSize++].setText("<HTML> "+textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); //로그 남기기 
-		//System.out.println("temp=" + Data.getTemp() + "number=" + number);
-		//System.out.println("result=" + Data.getResult());
-	
+
 		}
 							
 		/////////////////////////////////////////////////////////////////////////////////////////
