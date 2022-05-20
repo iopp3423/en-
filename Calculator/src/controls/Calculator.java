@@ -92,16 +92,6 @@ public class Calculator{
 		}
 		
 	};
-	
-	FocusListener focus = new FocusListener() {
-		public void focusGained(FocusEvent e) {
-			System.out.println("포커스얻음");
-		} 
-
-		 public void focusLost(FocusEvent e) {
-			 System.out.println("포커스잃음");
-		 }
-	};
 
 	ActionListener actionlistener = new ActionListener(){ // 누른 키패드 가져오기
 		public void actionPerformed(ActionEvent e) {	
@@ -342,8 +332,14 @@ public class Calculator{
 			}	
 		
 		printNegate();
-		System.out.println(textPanel.inputSpace.getText());
-		if(textPanel.inputSpace.getText().contains("--")) textPanel.inputSpace.setText(textPanel.inputSpace.getText().replace("--","-"));
+		//System.out.println(textPanel.inputSpace.getText());
+		//System.out.println(Data.getResult());
+			if(textPanel.inputSpace.getText().contains("--")) {
+				textPanel.inputSpace.setText(textPanel.inputSpace.getText().replace("--",""));
+				number = number.replace("--", "-");
+				System.out.println(number);
+				pluscount++;
+			}
 		}
 		
 	}
