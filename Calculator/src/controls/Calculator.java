@@ -40,7 +40,7 @@ public class Calculator{
 	private String record = "";
 	private int limit; // 숫자 입력 제한 
 	private int dotCount = Constants.RESET;
-	private String number = "";
+	private String number = "0";
 	private int pluscount = Constants.RESET;
 	private String plusMinus = "-";
 	private int buttonSize = Constants.RESET;
@@ -220,7 +220,7 @@ public class Calculator{
 			{				 		
 				record += text;// 키보드 입력
 				number = record; //// 넘버에 입력값 넣어주기
-				textPanel.inputSpace.setText(setComma(record));			
+				textPanel.inputSpace.setText(setComma(record));	
 			}
 			limit = record.length();	
 		}
@@ -426,28 +426,26 @@ public class Calculator{
 	{
 		if(!Data.getFormula().equals("=")) { // 2x4 = 8 
 			if(textPanel.inputSpace.getText().equals("0.")) number = "0";
-			switch(Data.getOperator()) {
-			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
-			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
-			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
-			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
-			}
-			
-		}
-		
-		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
-			//Data.setTemp(Data.getResult());	
-			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + changeNumber(number) + text);
-			
+			if(Data.getResult().equals("0")) Data.setResult(Data.getTemp()); //원래 없었고 밑에 Data.getTemp()였음 참
 			switch(Data.getOperator()) {
 			case "+" : Data.setResult(calculation(Data.getResult(), number, "+")); break;
 			case "-" : Data.setResult(calculation(Data.getResult(), number, "-")); break;
 			case "x" : Data.setResult(calculation(Data.getResult(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getResult(), number, "÷")); break;
 			}
-			System.out.println(Data.getResult());
 			System.out.println(Data.getTemp());
-			System.out.println(number);
+		}
+		
+		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
+			//Data.setTemp(Data.getResult());	
+			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + changeNumber(number) + text);
+			
+			switch(Data.getOperator()) { //  원래 로직 Data.getTemp()였는데 바꿈 참고 
+			case "+" : Data.setResult(calculation(Data.getResult(), number, "+")); break;
+			case "-" : Data.setResult(calculation(Data.getResult(), number, "-")); break;
+			case "x" : Data.setResult(calculation(Data.getResult(), number, "x"));break;
+			case "÷" : Data.setResult(calculation(Data.getResult(), number, "÷")); break;
+			}
 			textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));// 결과값 출력
 		}
 		exceptionPrint();
@@ -466,9 +464,6 @@ public class Calculator{
 	
 	private void calculate()
 	{
-		//System.out.println("temp=" + Data.getTemp());
-		//if(textPanel.inputSpace.getText().equals("0.")) number = "0";
-		//System.out.println("temp=" + Data.getTemp());
 		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
 		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
 		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
@@ -487,7 +482,7 @@ public class Calculator{
 	
 	private void setCalculate() // 수식에 들어올 때 세팅 
 	{
-		if(Data.getTemp().equals(""))Data.setTemp("0"); // 계산기 입력 없을 때 연산자 누르면 널값이 아닌 0이 올라감 
+		//if(Data.getTemp().equals(""))Data.setTemp("0"); // 계산기 입력 없을 때 연산자 누르면 널값이 아닌 0이 올라감 
 		number = "0"; // number 초기화 
 		dotCount = Constants.RESET;
 		Data.setFormula("");
@@ -526,8 +521,7 @@ public class Calculator{
 		BigDecimal leftNumber = new BigDecimal(temp);
 		BigDecimal rightNumber = new BigDecimal(number);
 		String result="";
-		//System.out.println(leftNumber);
-		//System.out.println(rightNumber);
+
 		try{
 			switch(operator) {  // 저장했던 연산
 			case "+": result = leftNumber.add(rightNumber).toString();break;
@@ -579,6 +573,7 @@ public class Calculator{
 		if(number.equals("Nan")) return "정의되지 않은 결과입니다.";
 		if(number.equals("")) return "0으로 나눌 수 없습니다.";
 		
+
 		DecimalFormat format=new DecimalFormat();
 		String changedNumber="";
 		BigDecimal newNumber = new BigDecimal(number);

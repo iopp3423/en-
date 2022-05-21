@@ -7,7 +7,7 @@ public class OperatorData {
 
 	
 	private String result = "0";
-	private String temp = "";
+	private String temp = "0";
 	private String operator = "=";
 	private String formula = "";
 	private String negateOperator = "";
