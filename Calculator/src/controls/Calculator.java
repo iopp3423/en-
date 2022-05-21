@@ -432,6 +432,7 @@ public class Calculator{
 			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
 			}
+			
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
@@ -439,11 +440,14 @@ public class Calculator{
 			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + changeNumber(number) + text);
 			
 			switch(Data.getOperator()) {
-			case "+" : Data.setResult(calculation(Data.getTemp(), number, "+")); break;
-			case "-" : Data.setResult(calculation(Data.getTemp(), number, "-")); break;
-			case "x" : Data.setResult(calculation(Data.getTemp(), number, "x"));break;
-			case "÷" : Data.setResult(calculation(Data.getTemp(), number, "÷")); break;
+			case "+" : Data.setResult(calculation(Data.getResult(), number, "+")); break;
+			case "-" : Data.setResult(calculation(Data.getResult(), number, "-")); break;
+			case "x" : Data.setResult(calculation(Data.getResult(), number, "x"));break;
+			case "÷" : Data.setResult(calculation(Data.getResult(), number, "÷")); break;
 			}
+			System.out.println(Data.getResult());
+			System.out.println(Data.getTemp());
+			System.out.println(number);
 			textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));// 결과값 출력
 		}
 		exceptionPrint();
@@ -462,14 +466,13 @@ public class Calculator{
 	
 	private void calculate()
 	{
-		System.out.println("temp=" + Data.getTemp());
-		if(textPanel.inputSpace.getText().equals("0.")) number = "0";
-		System.out.println("temp=" + Data.getTemp());
+		//System.out.println("temp=" + Data.getTemp());
+		//if(textPanel.inputSpace.getText().equals("0.")) number = "0";
+		//System.out.println("temp=" + Data.getTemp());
 		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
 		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
 		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
 		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
-		System.out.println("temp=" + Data.getTemp());
 	}
 	
 	private void printCalculate() // 화면에 값 출력 
@@ -539,7 +542,6 @@ public class Calculator{
 				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
 			}
 		}
-		//System.out.println("----------");
 		//System.out.println(result);
 		return result;
 	}
