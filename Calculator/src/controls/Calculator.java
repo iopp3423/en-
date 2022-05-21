@@ -233,8 +233,8 @@ public class Calculator{
 		if(Data.getResult().equals("0") && textPanel.blankSpace.getText().contains("negate")) {
 			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
 			pluscount++;
+			
 		}
-		
 		if(limit<Constants.LIMIT_INPUT) 
 		{	
 			if(Data.getFormula().equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
@@ -415,6 +415,7 @@ public class Calculator{
 			}
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
+
 		if(buttonSize == 20) buttonSize = Constants.RESET;		
 		exceptionPrint(); // 예외 문
 		adjustFontSize(); // 사이즈 조
@@ -433,11 +434,9 @@ public class Calculator{
 			case "x" : Data.setResult(calculation(Data.getResult(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getResult(), number, "÷")); break;
 			}
-			System.out.println(Data.getTemp());
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
-			//Data.setTemp(Data.getResult());	
 			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + changeNumber(number) + text);
 			
 			switch(Data.getOperator()) { //  원래 로직 Data.getTemp()였는데 바꿈 참고 
@@ -472,8 +471,14 @@ public class Calculator{
 	
 	private void printCalculate() // 화면에 값 출력 
 	{
-		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  text); // 중앙 화면
-		textPanel.inputSpace.setText(setComma(changeNumber(Data.getTemp()))); // 입력화면 	
+		if(textPanel.blankSpace.getText().contains("negate")) {
+			textPanel.blankSpace.setText(Data.getNegate() + text);
+			textPanel.inputSpace.setText("-" + setComma(Data.getResult())); // 입력화면
+		}
+		else {
+			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  text); // 중앙 화면
+			textPanel.inputSpace.setText(setComma(changeNumber(Data.getTemp()))); // 입력화면 	
+		}
 		adjustFontSize(); // 사이즈 조절 
 		exceptionPrint();
 		record=""; // 입력값 초기화 
