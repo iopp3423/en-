@@ -29,7 +29,7 @@ public class PrintCalculator{
 		frame.setVisible(true);
 		frame.setMinimumSize(new Dimension(250, 350));
 		Toolkit toolkit = Toolkit.getDefaultToolkit(); // 계산기 아이콘 변경
-		Image img = toolkit.getImage("/Users/jojunhui/Desktop/en/Calculator/계산기.png");
+		Image img = toolkit.getImage("/Users/jojunhui/Desktop/en/Calculator/src/Image/계산기.png");
 	    frame.setIconImage(img);
 	}
 	

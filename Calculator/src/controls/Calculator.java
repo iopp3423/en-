@@ -419,6 +419,7 @@ public class Calculator{
 				textPanel.blankSpace.setText(deleteDotZeroNumber(number)+text);
 				textPanel.inputSpace.setText(setComma(deleteDotZeroNumber(number)));
 			}
+			recordPanel.button[buttonSize++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
 
