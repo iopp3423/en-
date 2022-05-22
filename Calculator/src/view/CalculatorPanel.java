@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -111,6 +112,7 @@ public class CalculatorPanel extends JPanel
 			button[index].addKeyListener(keyAdapter); // 버튼에 키보드 
 			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
 
+			button[index].setFont(new Font("맑은 고딕", Constants.RESET, Constants.FONT_SIZE));
 			
 			button[index].setOpaque(true);//있어야 색 적용가능 
 			button[index].setBorderPainted(false);//있어야 색 적용가능 
