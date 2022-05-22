@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -25,8 +26,10 @@ public class CalculatorPanel extends JPanel
 	private MouseAdapter formulaMouse;
 	private MouseAdapter resultMouse;
 	private MouseAdapter numberMouse;
+	private KeyAdapter buttonColor;
 	
 	public CalculatorPanel(ActionListener Listener, KeyAdapter KeyAdapter)
+	
 	{	
 		this.listener = Listener;
 		this.keyAdapter = KeyAdapter;
@@ -107,10 +110,25 @@ public class CalculatorPanel extends JPanel
 		    }   
 		};
 		
+		buttonColor = new KeyAdapter() {
+			
+			public void keyPressed(KeyEvent e) {
+			JButton button = (JButton)e.getSource();
+			button.setBackground(Color.BLACK);
+			}
+			
+			public void keyReleased(KeyEvent e)
+			{
+				JButton button = (JButton)e.getSource();
+		    	button.setBackground(new Color(220, 237, 246));
+			}
+			
+		};
 		for(int index = Constants.RESET; index<Constants.CALCULATOR; index++)
 		{
 			button[index].addKeyListener(keyAdapter); // 버튼에 키보드 
 			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
+			//button[index].addKeyListener(buttonColor); // 키보드 입력 색상 변
 
 			button[index].setFont(new Font("맑은 고딕", Constants.RESET, Constants.FONT_SIZE));
 			
@@ -131,7 +149,7 @@ public class CalculatorPanel extends JPanel
 				button[index].setBackground(new Color(243, 249, 252));
 				button[index].addMouseListener(numberMouse);
 			}
-			add(button[index]);			
+			add(button[index]);		
 		}	
 		
 		

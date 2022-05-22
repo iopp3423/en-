@@ -57,6 +57,8 @@ public class PrintCalculator{
 		frame.setLayout(new BorderLayout()); // 프레임  설정하기 
 		frame.add(lastCalculatorPanel, BorderLayout.CENTER); // 키패드 
 		frame.setVisible(true);
+
+		
 			
 		frame.addComponentListener(new ComponentAdapter() {  // 화면 
 		    public void componentResized(ComponentEvent e) {

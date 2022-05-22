@@ -41,8 +41,8 @@ public class TextPanel extends JPanel
 		blankSpace = new JLabel(" ");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		logSet = new JButton(new ImageIcon(new ImageIcon("/Users/jojunhui/Desktop/쓰레기통.png").getImage().getScaledInstance(35, 30, Image.SCALE_SMOOTH)));
-		JButton log = new JButton(new ImageIcon(new ImageIcon("/Users/jojunhui/Desktop/시계.png").getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH)));
+		logSet = new JButton(new ImageIcon(new ImageIcon("/Users/jojunhui/Desktop/en/Calculator/쓰레기통.png").getImage().getScaledInstance(35, 30, Image.SCALE_SMOOTH)));
+		JButton log = new JButton(new ImageIcon(new ImageIcon("/Users/jojunhui/Desktop/en/Calculator/시계.png").getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH)));
 		
 		logSet.setBorderPainted(false); 
 		logSet.setFocusPainted(false); 

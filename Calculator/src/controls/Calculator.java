@@ -1,4 +1,5 @@
 package controls;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -19,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.math.BigDecimal;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -125,7 +127,8 @@ public class Calculator{
 	
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
-			System.out.println(e.getKeyCode());		
+			System.out.println(e.getKeyCode());	
+	        
 			if(e.getKeyCode() == 56 && e.isShiftDown()) {
 				text = "x";
 				combineCalculate();
@@ -157,8 +160,7 @@ public class Calculator{
 			case 8: text = "\u232B"; delete(); break;
 			case 27: text = "C"; reset(); break;
 			}
-			adjustFontSize();
-			
+			adjustFontSize();		
 		}
 	};
 	
