@@ -38,13 +38,14 @@ public class Calculator{
 	private TextPanel textPanel;
 	private RecordPanel recordPanel;
 	private OperatorData Data;
+	
 	private String text;
 	private String record = "";
 	private int limit; // 숫자 입력 제한 
-	private int dotCount = Constants.RESET;
+	//private int dotCount = Constants.RESET;
 	private String number = "0";
 	private int pluscount = Constants.RESET;
-	private String plusMinus = "-";
+	//private String plusMinus = "-";
 	private int buttonNumber = Constants.RESET;
 
 	
@@ -98,7 +99,7 @@ public class Calculator{
 	ActionListener actionlistener = new ActionListener(){ // 누른 키패드 가져오기
 		public void actionPerformed(ActionEvent e) {	
 			text = (e.getActionCommand()); // 입력한  값 가져오기 	
-			if(recordPanel.button[0].getText().contains("아직")) buttonNumber = Constants.RESET;
+			if(recordPanel.button[Constants.RESET].getText().contains("아직")) buttonNumber = Constants.RESET;
 			switch(text){
 				case "0" : inputZero(); break;
 				case "1" : inputNumber();break;
@@ -129,7 +130,8 @@ public class Calculator{
 	KeyAdapter keyAdapter = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
 			System.out.println(e.getKeyCode());	
-	        
+			if(recordPanel.button[Constants.RESET].getText().contains("아직")) buttonNumber = Constants.RESET;
+			
 			if(e.getKeyCode() == 56 && e.isShiftDown()) {
 				text = "x";
 				combineCalculate();
@@ -175,11 +177,12 @@ public class Calculator{
 		
 
 		if(Data.getFormula() == "=" && !Data.getOperator().equals("=")) { /// 계산하고 바로 지울 때 중간값만 지우기 
-			System.out.println(Data.getOperator());
+			//System.out.println(Data.getOperator());
 			 for(int index=textPanel.blankSpace.getText().length(); index>Constants.RESET; index--)
 				{
 					if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
 		             {
+						Data.setDotCount(Constants.RESET);
 						 textPanel.blankSpace.setText(setComma(" ")); // 중간 값 
 						 number = "0";
 		             }
@@ -191,6 +194,7 @@ public class Calculator{
 		
 		 else if (textPanel.inputSpace.getText().length() == Constants.ONE)   //글자수가 1일 때  백스페이스 누르면 0으로 초기
          {
+			 Data.setDotCount(Constants.RESET);
 			 textPanel.inputSpace.setText("0");
 			 number = "0";
 			 record = "";
@@ -254,7 +258,8 @@ public class Calculator{
 			record += text;// 입력
 			if(pluscount % 2 == 1) {
 				textPanel.inputSpace.setText("-" + setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
-				number = plusMinus + record; //// 넘버에 입력값 넣어주기
+				number = "-" + record; //// 넘버에 입력값 넣어주기
+				//number = plusMinus + record; //// 넘버에 입력값 넣어주기
 			}
 			else if(textPanel.inputSpace.getText().equals("0")){ // 0밖에 없으
 				textPanel.inputSpace.setText("");  // 0 없애기  
@@ -279,7 +284,7 @@ public class Calculator{
 		record = "";
 		Data.setOperator("=");
 		Data.setFormula("");
-		dotCount=Constants.RESET;
+		Data.setDotCount(Constants.RESET);
 		Data.setResult("0");
 		Data.setTemp("0");
 		Data.setNegateOperator("");
@@ -302,7 +307,7 @@ public class Calculator{
 		pluscount = Constants.RESET;
 		record = "";
 		number = "0";
-		dotCount = Constants.RESET;
+		Data.setDotCount(Constants.RESET);
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50));
 		
 		for(int index=textPanel.inputSpace.getText().length(); index>Constants.RESET; index--)
@@ -328,7 +333,8 @@ public class Calculator{
 			
 			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 짝수 이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText("-" + setComma(record)); //그냥 +-
-			number = plusMinus + number;
+			//number = plusMinus + number;
+			number = "-" + number;
 			pluscount++;
 		}
 		
@@ -365,24 +371,24 @@ public class Calculator{
 		if(textPanel.inputSpace.getText().equals("0")) { // 0일 때 
 			record = "0" + text;// 키보드 입력한 값	
 			textPanel.inputSpace.setText(setComma(record));
-			dotCount++;		
+			Data.setDotCount(Constants.ONE);	
 		}
 		
-		if (dotCount == Constants.RESET && !(textPanel.inputSpace.getText().equals("0"))) { // 0제외 
+		if (Data.getDotCount() == Constants.RESET && !(textPanel.inputSpace.getText().equals("0"))) { // 0제외 
 			record += text;// 키보드 입력한 값	
 			
 			textPanel.inputSpace.setText(record);
-			dotCount++;		
+			Data.setDotCount(Constants.ONE);
 		}
 			
 		if(Data.getResult().equals("0") && record.equals(".")) { // 2.5 - negate. -> 0
 			textPanel.inputSpace.setText(Data.getResult() + record);
-			dotCount++;	
+			Data.setDotCount(Constants.ONE);	
 		}
 		
 		if(Data.getResult() == "0" && record.equals(".")) { // 2.5 - negate. -> 0
 			textPanel.inputSpace.setText(Data.getResult() + record);
-			dotCount++;	
+			Data.setDotCount(Constants.ONE);	
 		}	
 	}
 	
@@ -504,7 +510,7 @@ public class Calculator{
 	{
 		//if(Data.getTemp().equals(""))Data.setTemp("0"); // 계산기 입력 없을 때 연산자 누르면 널값이 아닌 0이 올라감 
 		number = "0"; // number 초기화 
-		dotCount = Constants.RESET;
+		Data.setDotCount(Constants.RESET);
 		Data.setFormula("");
 		Data.setOperator(text); // 부호 넣어주기 
 		pluscount = Constants.RESET;

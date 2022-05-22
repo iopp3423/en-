@@ -14,7 +14,7 @@ public class OperatorData {
 	private String formula = "";
 	private String negateOperator = "";
 	private String negate = "";
-	private int buttonSize=Constants.RESET;
+	private int dotCount=Constants.RESET;
 	private int negateCount = Constants.RESET; 
 	
 	public void setResult(String result) { // = 저
@@ -59,10 +59,10 @@ public class OperatorData {
 	public int getNegateCount() {
 		return negateCount;
 	}
-	public void setButtonSize(int buttonSize) {
-		this.buttonSize = buttonSize;
+	public void setDotCount(int dotCount) {
+		this.dotCount = dotCount;
 	}
-	public int getButtonSize() {
-		return buttonSize;
+	public int getDotCount() {
+		return dotCount;
 	}
 }
