@@ -41,7 +41,7 @@ public class Calculator{
 	
 	private String text;
 	private String record = "";
-	private int limit; // 숫자 입력 제한 
+	//private int limit; // 숫자 입력 제한 
 	//private int dotCount = Constants.RESET;
 	private String number = "0";
 	private int pluscount = Constants.RESET;
@@ -202,7 +202,6 @@ public class Calculator{
 		
 		 else if(textPanel.inputSpace.getText().length() != Constants.ONE) //글자수 1 아니면 
 		 {
-			 System.out.println(Data.getOperator());
 			 inputRecord = record.substring(Constants.RESET,record.length()-Constants.ONE); // 문자열자르기
 			 textPanel.inputSpace.setText(setComma(inputRecord));
 			 
@@ -216,6 +215,7 @@ public class Calculator{
 	
 	private void inputZero()
 	{
+		int limit = record.length();
 		Data.setNegateOperator("");
 		if(Data.getResult().equals("0") && textPanel.blankSpace.getText().contains("negate")) {
 			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
@@ -236,13 +236,14 @@ public class Calculator{
 				number = record; //// 넘버에 입력값 넣어주기
 				textPanel.inputSpace.setText(setComma(record));	
 			}
-			limit = record.length();	
+			//limit = record.length();	
 		}
 	}
 	
 	
 	private void inputNumber() // 입력 
 	{		
+		int limit = record.length();
 		Data.setNegateOperator("");	
 		if(Data.getResult().equals("0") && textPanel.blankSpace.getText().contains("negate")) {
 			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
@@ -272,14 +273,14 @@ public class Calculator{
 			}	
 			
 		}
-		limit = record.length();
+		//limit = record.length();
 	}
 	
 	
 	private void reset() // C
 	{
 		number = "0";
-		limit = Constants.RESET;
+		//limit = Constants.RESET;
 		pluscount = Constants.RESET;
 		record = "";
 		Data.setOperator("=");
