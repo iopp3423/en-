@@ -399,6 +399,10 @@ public class Calculator{
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + changeNumber(number) + text);
 		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
 		
+		if(textPanel.inputSpace.getText().contains("0으")) {
+			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator());
+		}
+		
 		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정") && !isnegate) // negate 없을 때 로그 남기
 		recordPanel.button[buttonSize++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
@@ -576,7 +580,9 @@ public class Calculator{
 	
 	private String changeNumber(String number) {
 		if(number.equals("Nan")) return "정의되지 않은 결과입니다.";
-		if(number.equals("")) return "0으로 나눌 수 없습니다.";
+		if(number.equals("")) {
+			return "0으로 나눌 수 없습니다.";
+		}
 		
 
 		DecimalFormat format=new DecimalFormat();
@@ -614,6 +620,7 @@ public class Calculator{
 		return changedNumber;
 		
 	}
+	
 	
 	public void printNegate() {
 		if(Data.getNegateOperator() != "") {
