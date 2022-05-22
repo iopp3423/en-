@@ -174,15 +174,17 @@ public class Calculator{
 		
 		if(Data.getFormula() == "=") { /// 계산하고 바로 지울 때 중간값만 지우기 
 			
-			 for(int index=textPanel.inputSpace.getText().length(); index>Constants.RESET; index--)
+			 for(int index=textPanel.blankSpace.getText().length(); index>Constants.RESET; index--)
 				{
 					if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
 		             {
 						 textPanel.blankSpace.setText(setComma(" ")); // 중간 값 
 						 number = "0";
+						 System.out.println("aaa");
 		             }
 				}
 		 }	
+		
 		 else if (textPanel.inputSpace.getText().length() == Constants.ONE)   //글자수가 1일 때  백스페이스 누르면 0으로 초기
          {
 			 textPanel.inputSpace.setText("0");
@@ -190,7 +192,7 @@ public class Calculator{
 			 record = "";
          }
 		
-		 if(textPanel.inputSpace.getText().length() != Constants.ONE) //글자수 1 아니면 
+		 else if(textPanel.inputSpace.getText().length() != Constants.ONE) //글자수 1 아니면 
 		 {
 			 inputRecord = record.substring(Constants.RESET,record.length()-Constants.ONE); // 문자열자르기
 			 textPanel.inputSpace.setText(setComma(inputRecord));
@@ -198,6 +200,7 @@ public class Calculator{
 			 number = inputRecord; //지운만큼 넘버값 줄이기 
 			 record = inputRecord;
 		 }
+		 
 
 	}
 	
