@@ -45,7 +45,7 @@ public class Calculator{
 	private String number = "0";
 	private int pluscount = Constants.RESET;
 	private String plusMinus = "-";
-	private int buttonSize = Constants.RESET;
+	private int buttonNumber = Constants.RESET;
 
 	
 	public Calculator(PrintCalculator printCalculator)
@@ -97,7 +97,8 @@ public class Calculator{
 
 	ActionListener actionlistener = new ActionListener(){ // 누른 키패드 가져오기
 		public void actionPerformed(ActionEvent e) {	
-			text = (e.getActionCommand()); // 입력한  값 가져오기 				
+			text = (e.getActionCommand()); // 입력한  값 가져오기 	
+			if(recordPanel.button[0].getText().contains("아직")) buttonNumber = Constants.RESET;
 			switch(text){
 				case "0" : inputZero(); break;
 				case "1" : inputNumber();break;
@@ -184,7 +185,7 @@ public class Calculator{
 		             }
 				}
 		 }	
-		else if(Data.getFormula() == "=" && Data.getOperator().equals("=")) { /// 계산하고 바로 지울 때 중간값만 지우기 
+		else if(Data.getFormula() == "=" && Data.getOperator().equals("=")) { /// 22 = 하고 백스페이스 하면 변경사항 없
 			//
 		 }	
 		
@@ -401,7 +402,7 @@ public class Calculator{
 		printResult();
 
 		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정") && isnegate) { // negate 로그 남기기 
-		recordPanel.button[buttonSize++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
+		recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
@@ -413,7 +414,7 @@ public class Calculator{
 		}
 		
 		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정") && !isnegate) // negate 없을 때 로그 남기
-		recordPanel.button[buttonSize++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
+		recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		
 		/////////////////////////////////////////////////////////////////////////////////////////
@@ -426,11 +427,11 @@ public class Calculator{
 				textPanel.blankSpace.setText(deleteDotZeroNumber(number)+text);
 				textPanel.inputSpace.setText(setComma(deleteDotZeroNumber(number)));
 			}
-			recordPanel.button[buttonSize++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
+			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		/////////////////////////////////////////////////////////////////////////////////////////
 
-		if(buttonSize == 20) buttonSize = Constants.RESET;		
+		if(buttonNumber == 20) buttonNumber = Constants.RESET;		
 		exceptionPrint(); // 예외 문
 		adjustFontSize(); // 사이즈 조
 		Data.setFormula("=");

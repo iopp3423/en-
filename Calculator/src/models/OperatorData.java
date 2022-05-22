@@ -3,6 +3,8 @@ package models;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
+import Utility.Constants;
+
 public class OperatorData {
 
 	
@@ -12,7 +14,8 @@ public class OperatorData {
 	private String formula = "";
 	private String negateOperator = "";
 	private String negate = "";
-	private int negateCount = 0; 
+	private int buttonSize=Constants.RESET;
+	private int negateCount = Constants.RESET; 
 	
 	public void setResult(String result) { // = 저
 		this.result = result;
@@ -55,5 +58,11 @@ public class OperatorData {
 	}
 	public int getNegateCount() {
 		return negateCount;
+	}
+	public void setButtonSize(int buttonSize) {
+		this.buttonSize = buttonSize;
+	}
+	public int getButtonSize() {
+		return buttonSize;
 	}
 }
