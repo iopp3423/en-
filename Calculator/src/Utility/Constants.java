@@ -13,4 +13,6 @@ public class Constants {
 	public static final int SCREEN_SIZE_HEIGHT = 600;
 	public static final int RESULT = 19;
 	public static final int INPUT_FONT_SIZE = 70;
+	public static final int EVEN_CHECK = 2;
+	public static final int Odd_CHECK = 1;
 }

@@ -8,16 +8,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import Utility.Constants;
+import models.OperatorData;
 import view.TextPanel;
 
 public class supportText {
 	
 	private TextPanel textPanel;
+	private OperatorData Data;
 	
 
-	public supportText(TextPanel textPanel) {
+	public supportText(TextPanel textPanel, OperatorData Data) {
 		this.textPanel = textPanel;
+		this.Data = Data;
 	}
+	
 	
 	
 	public String setComma(String number) { // ,찍기 
@@ -47,20 +51,33 @@ public class supportText {
 		String patterns[]= {
 				"#.###############E0",		// 16글자 넘어가면 E로 바껴서 출
 				//"###.##########################"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
-				"###.###############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
+				"###.###############", // 뒤에 소수점 0나오면 없게 출력, 반올림 포
+				"###.#############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 				//"###.##############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
 		};
 		
-		if(number.length() > 16) {
+		if(number.length() > 16) { // e로 바꿔서 
 			format.applyPattern(patterns[0]);
 			changedNumber = format.format(newNumber);
 		}
 
 		else if(number.contains(".")) {
-			format.applyPattern(patterns[1]);
-			changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정
-
+				format.applyPattern(patterns[2]);
+				if(format.format(newNumber).toString().equals("0")) {
+				format.applyPattern(patterns[1]);
+				changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정
+				System.out.println("a");
+			}
+				
+				else if(format.format(newNumber).toString() != "0") {
+					//System.out.println(format.format(newNumber));
+					format.applyPattern(patterns[2]);
+					changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정
+					System.out.println("b");
+				}
 		}
+		
+		
 		else changedNumber = newNumber.toString();
 
 		
@@ -102,6 +119,7 @@ public class supportText {
 		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
 	}
 	
+	
 	public void exceptionPrint() // 예외처리 함수 
 	{
 		if(textPanel.inputSpace.getText().contains("e")){ // 문자열 자르
@@ -111,6 +129,7 @@ public class supportText {
 			if(textArray[1].length()>5) textPanel.inputSpace.setText("오버플로");
 		}		
 	}
+	
 	
 	public String calculate(String temp, String number, String operator) {  // 계산 결과 반
 		BigDecimal leftNumber = new BigDecimal(temp);
@@ -131,6 +150,7 @@ public class supportText {
 				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
 			}
 		}
+		System.out.println(result.length());
 		return result;
 			
 	}

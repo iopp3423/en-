@@ -42,13 +42,10 @@ public class Calculator{
 	
 	private String text;
 	private String record = "";
-	//private int dotCount = Constants.RESET;
 	private String number = "0";
 	private int pluscount = Constants.RESET;
-	//private String plusMinus = "-";
 	private int buttonNumber = Constants.RESET;
 
-	
 	public Calculator(PrintCalculator printCalculator)
 	{	
 		this.printCalculator = printCalculator;
@@ -58,7 +55,7 @@ public class Calculator{
 		scrollPane = new JScrollPane(recordPanel);
 		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);
 		Data = new OperatorData();
-		support = new supportText(textPanel);
+		support = new supportText(textPanel, Data);
 		callCalculator();// 계산기 출력 
 	}
 	
@@ -260,7 +257,7 @@ public class Calculator{
 			}
 			
 			record += text;// 입력
-			if(pluscount % 2 == 1) {
+			if(pluscount % Constants.EVEN_CHECK == Constants.Odd_CHECK) {
 				textPanel.inputSpace.setText("-" + support.setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
 				number = "-" + record; //// 넘버에 입력값 넣어주기
 				//number = plusMinus + record; //// 넘버에 입력값 넣어주기
@@ -331,7 +328,7 @@ public class Calculator{
 		
 		else if(textPanel.inputSpace.getText() != "0"){ // 0이 아니면 
 		
-		if(pluscount % 2 == Constants.RESET && !textPanel.inputSpace.getText().contains("-")) { // 짝수면 플러스, 홀수면 마이너스 
+		if(pluscount % Constants.EVEN_CHECK == Constants.RESET && !textPanel.inputSpace.getText().contains("-")) { // 짝수면 플러스, 홀수면 마이너스 
 			
 			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 짝수 이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText("-" + support.setComma(record)); //그냥 +-
@@ -480,13 +477,13 @@ public class Calculator{
 	{
 		if(textPanel.blankSpace.getText().equals(" ")) Data.setTemp(number);
 		Data.setNegateOperator(text);
-		calculate();
+		moveCalculate();
 		setCalculate();
 		printCalculate();
 	}
 	
 	
-	private void calculate()
+	private void moveCalculate()
 	{
 		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(support.calculate(Data.getTemp(), number, "+"));
 		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(support.calculate(Data.getTemp(), number, "x"));
@@ -520,33 +517,10 @@ public class Calculator{
 		pluscount = Constants.RESET;
 	}
 	
-	/*
-	private String calculate(String temp, String number, String operator) { // 결과
-		BigDecimal leftNumber = new BigDecimal(temp);
-		BigDecimal rightNumber = new BigDecimal(number);
-		String result="";
-
-		try{
-			switch(operator) {  // 저장했던 연산
-			case "+": result = leftNumber.add(rightNumber).toString();break;
-			case "-": result = leftNumber.subtract(rightNumber).toString();break;
-			case "÷": result = leftNumber.divide(rightNumber).toString();break;
-			case "x": result = leftNumber.multiply(rightNumber).toString(); break;	
-			}
-		}
-		catch (java.lang.ArithmeticException e){
-			if(e.getMessage().equals("Division undefined")) result = "Nan"; // 정의되지 않은 결과 
-			else if(e.getMessage().equals("Non-terminating decimal expansion; no exact representable decimal result.")) { // 무리수 계산 
-				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
-			}
-		}
-		return result;
-	}
-	*/
 	
 	public void printNegate() {
 		if(Data.getNegateOperator() != "") {
-			int plusMinus = pluscount % 2;
+			int plusMinus = pluscount % Constants.EVEN_CHECK;
 			
 			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
 				Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장
