@@ -65,4 +65,5 @@ public class OperatorData {
 	public int getDotCount() {
 		return dotCount;
 	}
+	
 }

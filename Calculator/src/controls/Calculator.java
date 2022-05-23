@@ -496,17 +496,27 @@ public class Calculator{
 	
 	private void printCalculate() // 화면에 값 출력 
 	{
+		if(textPanel.blankSpace.getText().contains("-") || textPanel.blankSpace.getText().contains("+") || textPanel.blankSpace.getText().contains("x") || textPanel.blankSpace.getText().contains("÷")) {
+			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText()+ record+ "=" + " <br> "+ Data.getTemp()); // 로그 남기기
+		}
+		
 		if(textPanel.blankSpace.getText().contains("negate")) {
 			textPanel.blankSpace.setText(Data.getNegate() + text);
 			textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
-			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		else {
 			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getTemp()))); // 입력화면 	
-			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
-		System.out.println(Data.getFormula());
+		
+
+		System.out.println(number);
+		System.out.println(text);
+		System.out.println(record);
+		System.out.println(Data.getResult());
+		System.out.println(Data.getTemp());
+		
+		
 		support.adjustFontSize(); // 사이즈 조절 
 		support.exceptionPrint();
 		record=""; // 입력값 초기화 
