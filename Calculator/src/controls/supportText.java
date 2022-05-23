@@ -1,14 +1,22 @@
 package controls;
 
+import java.awt.Font;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class supportText {
+import Utility.Constants;
+import view.TextPanel;
 
+public class supportText {
 	
+	private TextPanel textPanel;
 	
+
+	public supportText(TextPanel textPanel) {
+		this.textPanel = textPanel;
+	}
 	
 	
 	public String setComma(String number) { // ,찍기 
@@ -24,7 +32,7 @@ public class supportText {
         return changeResult;
     }
 	
-	public String changeNumber(String number) {
+	public String changeNumber(String number) { // 숫자 변경 
 		if(number.equals("Nan")) return "정의되지 않은 결과입니다.";
 		if(number.equals("")) {
 			return "0으로 나눌 수 없습니다.";
@@ -67,11 +75,29 @@ public class supportText {
 		
 	}
 	
-	public String deleteDotZeroNumber(String changedNumber) {
+	public String deleteDotZeroNumber(String changedNumber) { // 3.0 === > 3 으로 변경ㅇ 
 		
 		String changed;
 		DecimalFormat numberFormat = new DecimalFormat("0"); //형변환 Decimal	
 		changed = numberFormat.format(Double.parseDouble(changedNumber));
 		  return changed;
+	}
+	
+	
+	public void adjustFontSize() // 폰트 사이즈 조절 
+	{
+		int fontlength = textPanel.inputSpace.getText().length();
+		switch(fontlength) {
+		case 1 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 70));break;
+		case 10 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 54));break;
+		case 11 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 52));break;
+		case 12 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50));break;
+		case 13 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 47));break;
+		case 14 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 42));break;
+		case 15 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 38));break;
+		case 16 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 35));break;
+		case 17 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
+		}
+		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
 	}
 }

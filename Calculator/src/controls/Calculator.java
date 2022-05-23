@@ -49,15 +49,16 @@ public class Calculator{
 	private int buttonNumber = Constants.RESET;
 
 	
-	public Calculator(PrintCalculator printCalculator, supportText support)
+	public Calculator(PrintCalculator printCalculator)
 	{	
 		this.printCalculator = printCalculator;
-		this.support = support;
+		//this.support = support;
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
 		recordPanel = new RecordPanel(printRecord);
 		scrollPane = new JScrollPane(recordPanel);
 		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);
 		Data = new OperatorData();
+		support = new supportText(textPanel);
 		callCalculator();// 계산기 출력 
 	}
 	
@@ -123,7 +124,7 @@ public class Calculator{
 				case "-" : combineCalculate(); break;
 				case "÷" : combineCalculate(); break;
 			}	
-			adjustFontSize();
+			support.adjustFontSize();
 		}
 		
 	};
@@ -164,7 +165,7 @@ public class Calculator{
 			case 8: text = "\u232B"; delete(); break;
 			case 27: text = "C"; reset(); break;
 			}
-			adjustFontSize();		
+			support.adjustFontSize();		
 		}
 	};
 	
@@ -440,7 +441,7 @@ public class Calculator{
 
 		if(buttonNumber == 20) buttonNumber = Constants.RESET;		
 		exceptionPrint(); // 예외 문
-		adjustFontSize(); // 사이즈 조
+		support.adjustFontSize(); // 사이즈 조
 		Data.setFormula("=");
 	}
 	
@@ -449,7 +450,9 @@ public class Calculator{
 	{
 		if(!Data.getFormula().equals("=")) { // 2x4 = 8 
 			if(textPanel.inputSpace.getText().equals("0.")) number = "0";
+			
 			if(Data.getResult().equals("0")) Data.setResult(Data.getTemp()); //원래 없었고 밑에 Data.getTemp()였음 참
+			
 			switch(Data.getOperator()) {
 			case "+" : Data.setResult(calculation(Data.getResult(), number, "+")); break;
 			case "-" : Data.setResult(calculation(Data.getResult(), number, "-")); break;
@@ -501,7 +504,7 @@ public class Calculator{
 			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getTemp()))); // 입력화면 	
 		}
-		adjustFontSize(); // 사이즈 조절 
+		support.adjustFontSize(); // 사이즈 조절 
 		exceptionPrint();
 		record=""; // 입력값 초기화 
 	}
@@ -528,22 +531,6 @@ public class Calculator{
 		}		
 	}
 	
-	/*
-	private String support.setComma(String number) { // ,찍기 
-        String changeResult = number; // 출력할 결과를 저장할 변수
-        Pattern pattern = Pattern.compile("(^[+-]?\\d+)(\\d{3})"); //정규표현식 
-        Matcher regexMatcher = pattern.matcher(number); 
-        
-        while(regexMatcher.find()) {                
-        	changeResult = regexMatcher.replaceAll("$1,$2"); //치환 
-                                 	
-            regexMatcher.reset(changeResult); 
-        }        
-        return changeResult;
-    }
-	*/
-
-	
 	private String calculation(String temp, String number, String operator) { // 결과
 		BigDecimal leftNumber = new BigDecimal(temp);
 		BigDecimal rightNumber = new BigDecimal(number);
@@ -566,8 +553,7 @@ public class Calculator{
 		return result;
 	}
 	
-	
-	
+	/*
 	private void adjustFontSize()
 	{
 		int fontlength = textPanel.inputSpace.getText().length();
@@ -583,59 +569,6 @@ public class Calculator{
 		case 17 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
 		}
 		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
-	}
-	
-	/*
-	private String deleteDotZeroNumber(String changedNumber) {
-		
-		String changed;
-		DecimalFormat numberFormat = new DecimalFormat("0"); //형변환 Decimal	
-		changed = numberFormat.format(Double.parseDouble(changedNumber));
-		  return changed;
-	}*/
-	
-	/*
-	private String changeNumber(String number) {
-		if(number.equals("Nan")) return "정의되지 않은 결과입니다.";
-		if(number.equals("")) {
-			return "0으로 나눌 수 없습니다.";
-		}
-		
-
-		DecimalFormat format=new DecimalFormat();
-		String changedNumber="";
-		BigDecimal newNumber = new BigDecimal(number);
-		
-		String patterns[]= {
-				"#.###############E0",		// 16글자 넘어가면 E로 바껴서 출
-				//"###.##########################"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
-				"###.###############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
-				//"###.##############"  // 뒤에 소수점 0나오면 없게 출력, 반올림 포
-		};
-		
-		if(number.length() > 16) {
-			format.applyPattern(patterns[0]);
-			changedNumber = format.format(newNumber);
-		}
-
-		else if(number.contains(".")) {
-			format.applyPattern(patterns[1]);
-			changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정
-
-		}
-		else changedNumber = newNumber.toString();
-
-		
-		if(changedNumber.contains("E-")) { // E e 로 변
-			changedNumber = changedNumber.replace("E","e");
-		}
-		
-		else if(changedNumber.contains("E")) { // E e 로 변
-			changedNumber = changedNumber.replace("E","e+");
-		}
-		
-		return changedNumber;
-		
 	}
 	*/
 	
