@@ -220,7 +220,7 @@ public class Calculator{
 		
 		Data.setNegateOperator("");
 		if(Data.getResult().equals("0") && textPanel.blankSpace.getText().contains("negate")) {
-			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
+			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
 		}
 		
 		if(Data.getFormula().equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
@@ -248,7 +248,7 @@ public class Calculator{
 		
 		Data.setNegateOperator("");	
 		if(Data.getResult().equals("0") && textPanel.blankSpace.getText().contains("negate")) {
-			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
+			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
 			pluscount++;
 			
 		}
@@ -364,7 +364,7 @@ public class Calculator{
 	{
 		Data.setNegateOperator("");
 		if(Data.getResult().equals("0") && textPanel.blankSpace.getText().contains("negate")) {
-			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
+			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
 		}
 		if(Data.getFormula().equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
 			reset();
@@ -413,11 +413,11 @@ public class Calculator{
 		}
 		
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
-		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + changeNumber(number) + text);
-		textPanel.inputSpace.setText(support.setComma(changeNumber(Data.getResult())));
+		textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) + Data.getOperator() + support.changeNumber(number) + text);
+		textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getResult())));
 		
 		if(textPanel.inputSpace.getText().contains("0으")) {
-			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator());
+			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) + Data.getOperator());
 		}
 		
 		if(!textPanel.inputSpace.getText().contains("나눌") && !textPanel.inputSpace.getText().contains("정") && !isnegate) // negate 없을 때 로그 남기
@@ -459,7 +459,7 @@ public class Calculator{
 		}
 		
 		if(Data.getFormula().equals("=")) { //계산 후 바로 = 이 눌리면 
-			textPanel.blankSpace.setText(changeNumber(Data.getResult()) + Data.getOperator() + changeNumber(number) + text);
+			textPanel.blankSpace.setText(support.changeNumber(Data.getResult()) + Data.getOperator() + support.changeNumber(number) + text);
 			
 			switch(Data.getOperator()) { //  원래 로직 Data.getTemp()였는데 바꿈 참고 
 			case "+" : Data.setResult(calculation(Data.getResult(), number, "+")); break;
@@ -467,7 +467,7 @@ public class Calculator{
 			case "x" : Data.setResult(calculation(Data.getResult(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getResult(), number, "÷")); break;
 			}
-			textPanel.inputSpace.setText(support.setComma(changeNumber(Data.getResult())));// 결과값 출력
+			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getResult())));// 결과값 출력
 		}
 		exceptionPrint();
 	}
@@ -498,8 +498,8 @@ public class Calculator{
 			textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
 		}
 		else {
-			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  text); // 중앙 화면
-			textPanel.inputSpace.setText(support.setComma(changeNumber(Data.getTemp()))); // 입력화면 	
+			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  text); // 중앙 화면
+			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getTemp()))); // 입력화면 	
 		}
 		adjustFontSize(); // 사이즈 조절 
 		exceptionPrint();
@@ -586,15 +586,15 @@ public class Calculator{
 	}
 	
 	
-	private String deleteDotZeroNumber(String changeNumber) {
+	private String deleteDotZeroNumber(String changedNumber) {
 		
 		String changed;
 		DecimalFormat numberFormat = new DecimalFormat("0"); //형변환 Decimal	
-		changed = numberFormat.format(Double.parseDouble(changeNumber));
+		changed = numberFormat.format(Double.parseDouble(changedNumber));
 		  return changed;
 	}
 	
-	
+	/*
 	private String changeNumber(String number) {
 		if(number.equals("Nan")) return "정의되지 않은 결과입니다.";
 		if(number.equals("")) {
@@ -637,7 +637,7 @@ public class Calculator{
 		return changedNumber;
 		
 	}
-	
+	*/
 	
 	public void printNegate() {
 		if(Data.getNegateOperator() != "") {
