@@ -279,6 +279,7 @@ public class Calculator{
 	
 	private void reset() // C
 	{
+		Data.setNegate("");
 		number = "0";
 		pluscount = Constants.RESET;
 		record = "";
@@ -308,6 +309,7 @@ public class Calculator{
 		record = "";
 		number = "0";
 		Data.setDotCount(Constants.RESET);
+		Data.setNegate("");
 		textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50));
 		
 		for(int index=textPanel.inputSpace.getText().length(); index>Constants.RESET; index--)
@@ -321,21 +323,22 @@ public class Calculator{
 	}
 	
 	private void changeSign()
-	{
+	{		
 		if(textPanel.inputSpace.getText() == "0") { // 0 이면 +- 안붙
 			textPanel.inputSpace.setText("0");
 		}
 		
 		
 		else if(textPanel.inputSpace.getText() != "0"){ // 0이 아니면 
-		
+		pluscount++;
+			
 		if(pluscount % Constants.EVEN_CHECK == Constants.RESET && !textPanel.inputSpace.getText().contains("-")) { // 짝수면 플러스, 홀수면 마이너스 
 			
 			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 짝수 이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText("-" + support.setComma(record)); //그냥 +-
 			//number = plusMinus + number;
 			number = "-" + number;
-			pluscount++;
+			//pluscount++;
 		}
 		
 		
@@ -343,7 +346,7 @@ public class Calculator{
 			if(record == "") textPanel.inputSpace.setText(support.setComma(Data.getTemp()));// 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText(support.setComma(record));//그냥 +-
 			number = number.replace("-", "");
-			pluscount++;
+			//pluscount++;
 			}	
 		
 		printNegate();
@@ -352,7 +355,7 @@ public class Calculator{
 				textPanel.inputSpace.setText(textPanel.inputSpace.getText().replace("--",""));
 				number = number.replace("--", "-");
 				//System.out.println(number);
-				pluscount++;
+				//pluscount++;
 			}
 		}
 		
@@ -411,11 +414,17 @@ public class Calculator{
 		recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		
+		if(Data.getNegate().contains("negate")) { // 9 * 5 = negate + 5 출력 
+			textPanel.blankSpace.setText(Data.getNegate() + Data.getOperator() + support.changeNumber(number) + text);
+			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getResult())));
+		}
+		
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) + Data.getOperator() + support.changeNumber(number) + text);
 		textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getResult())));
 		
-		if(textPanel.inputSpace.getText().contains("0으")) {
+		
+		if(textPanel.inputSpace.getText().contains("0으")) { //0으로 나눌 수 없습니다. 
 			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) + Data.getOperator());
 		}
 		
@@ -494,32 +503,34 @@ public class Calculator{
 	
 	private void printCalculate() // 화면에 값 출력 
 	{
+		int plusMinus = pluscount % Constants.EVEN_CHECK;
+		
 		if(textPanel.blankSpace.getText().contains("-") || textPanel.blankSpace.getText().contains("+") || textPanel.blankSpace.getText().contains("x") || textPanel.blankSpace.getText().contains("÷")) {
 			if(record.equals(".")) record = "0"; // 33 + . + -> 기록에  33 + . = 33 => 33 + 0 = 으로 수정 
 			if(buttonNumber == 20) buttonNumber = Constants.RESET; // 로그초기
 			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText()+ record+ "=" + " <br> "+ Data.getTemp()); // 로그 남기기
 		}
 		
-		if(textPanel.blankSpace.getText().contains("negate")) {
-			//textPanel.blankSpace.setText(Data.getNegate() + text);
-			//textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
-			//Data.setTemp(Data.getResult());
-			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  text); // 중앙 화면
-			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getTemp()))); // 입력화면 
+		
+		if(textPanel.blankSpace.getText().contains("negate") && Data.getFormula().equals("=")) {
+			textPanel.blankSpace.setText(Data.getNegate() + text);
+			textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
+			switch(plusMinus) {			
+			case 0:Data.setResult(Data.getResult().replace("-","")); break;
+			case 1:Data.setResult("-" + Data.getResult()); break;
+			}
+			Data.setResult("-" + Data.getResult());
 		}
+		
 		else {
 			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getTemp()))); // 입력화면 	
 		}
-				
-		System.out.println(Data.getTemp());
-		System.out.println(Data.getNegate());
-		System.out.println(Data.getResult());
-		System.out.println(record);
-		System.out.println(number);
+
 		support.adjustFontSize(); // 사이즈 조절 
 		support.exceptionPrint();
 		record=""; // 입력값 초기화 
+		Data.setFormula("");
 	}
 	
 	
@@ -527,8 +538,7 @@ public class Calculator{
 	{
 		//if(Data.getTemp().equals(""))Data.setTemp("0"); // 계산기 입력 없을 때 연산자 누르면 널값이 아닌 0이 올라감 
 		number = "0"; // number 초기화 
-		Data.setDotCount(Constants.RESET);
-		Data.setFormula("");
+		Data.setDotCount(Constants.RESET);	
 		Data.setOperator(text); // 부호 넣어주기 
 		pluscount = Constants.RESET;
 	}
