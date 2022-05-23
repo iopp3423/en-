@@ -497,7 +497,7 @@ public class Calculator{
 	private void printCalculate() // 화면에 값 출력 
 	{
 		if(textPanel.blankSpace.getText().contains("-") || textPanel.blankSpace.getText().contains("+") || textPanel.blankSpace.getText().contains("x") || textPanel.blankSpace.getText().contains("÷")) {
-			if(record.equals(".")) record = "0";
+			if(record.equals(".")) record = "0"; // 33 + . + -> 기록에  33 + . = 33 => 33 + 0 = 으로 수정 
 			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText()+ record+ "=" + " <br> "+ Data.getTemp()); // 로그 남기기
 		}
 		

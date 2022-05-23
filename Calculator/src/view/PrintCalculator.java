@@ -26,7 +26,7 @@ public class PrintCalculator{
 		frame.setPreferredSize(new Dimension(Constants.SCREEN_SIZE_WIDTH, Constants.SCREEN_SIZE_HEIGHT));	
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
 		frame.setLocationRelativeTo(null); // 화면 나오는 위치
-		frame.setVisible(true);
+		
 		frame.setMinimumSize(new Dimension(250, 350));
 		Toolkit toolkit = Toolkit.getDefaultToolkit(); // 계산기 아이콘 변경
 		Image img = toolkit.getImage("/Users/jojunhui/Desktop/en/Calculator/src/Image/계산기.png");
@@ -56,6 +56,9 @@ public class PrintCalculator{
 		frame.setLayout(new BorderLayout()); // 프레임  설정하기 
 		frame.add(lastCalculatorPanel, BorderLayout.CENTER); // 키패드 
 		frame.setVisible(true);
+		frame.requestFocusInWindow();
+		frame.setFocusable(true);	
+		frame.requestFocus();
 
 		
 			
@@ -76,7 +79,18 @@ public class PrintCalculator{
 		    	}		        
 		    }
 		});
+		
+		frame.addWindowListener( new WindowAdapter() {
+		    public void windowOpened( WindowEvent e ){
+		    	for(int index = Constants.RESET; index<Constants.CALCULATOR; index++)
+		    	{
+		    		calculatorPanel.button[index].requestFocus();
+		    	}
+		    }
+		}); 
 	}
+	
+	
 }
 
 
