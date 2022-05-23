@@ -65,15 +65,13 @@ public class supportText {
 				format.applyPattern(patterns[2]);
 				if(format.format(newNumber).toString().equals("0")) {
 				format.applyPattern(patterns[1]);
-				changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정
-				System.out.println("a");
+				changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함, 0.000000000001 * ==== 할 때 0으로 바뀌는 거 고쳐
 			}
 				
 				else if(format.format(newNumber).toString() != "0") {
-					//System.out.println(format.format(newNumber));
 					format.applyPattern(patterns[2]);
-					changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정
-					System.out.println("b");
+					changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함, 10 / 3 * 2 적용시켜줌
+
 				}
 		}
 		

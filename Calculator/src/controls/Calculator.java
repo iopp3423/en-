@@ -67,9 +67,9 @@ public class Calculator{
 	
 	ActionListener printRecord = new ActionListener(){ // 누른 키패드 가져오기
 		public void actionPerformed(ActionEvent e) {			
-			String getRecod = (e.getActionCommand()); // 입력한  값 가져오기 	
+			String getRecode = (e.getActionCommand()); // 입력한  값 가져오기 	
 			String[] leftNumber = new String[1];
-			String[] recordList = getRecod.split(" ");
+			String[] recordList = getRecode.split(" ");
 			textPanel.blankSpace.setText(recordList[1]);
 			textPanel.inputSpace.setText(recordList[3]);
 			recordList[1] = recordList[1].replace("=", "");
@@ -86,7 +86,13 @@ public class Calculator{
 			if(recordList[1].contains("÷")) {
 				leftNumber = recordList[1].split("÷");
 			}
-				
+			
+			recordList[3] = recordList[3].replace(",", "");
+			System.out.println(getRecode);
+			System.out.println(leftNumber[0]);
+			System.out.println(leftNumber[1]);
+			System.out.println(recordList[3]);
+			
 			Data.setTemp(leftNumber[0]); // 왼쪽값 저장 
 			number = leftNumber[1]; // 오른쪽 값 저장 
 			Data.setResult(recordList[3]); // 결과값 저장 
