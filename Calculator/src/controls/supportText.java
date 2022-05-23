@@ -134,7 +134,6 @@ public class supportText {
 		BigDecimal leftNumber = new BigDecimal(temp);
 		BigDecimal rightNumber = new BigDecimal(number);
 		String result="";
-		System.out.println(leftNumber);
 		try{
 			switch(operator) {  // 저장했던 연산
 			case "+": result = leftNumber.add(rightNumber).toString();break;

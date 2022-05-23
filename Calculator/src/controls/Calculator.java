@@ -279,6 +279,7 @@ public class Calculator{
 	
 	private void reset() // C
 	{
+		Data.setcheckingNegate(false);
 		Data.setNegate("");
 		number = "0";
 		pluscount = Constants.RESET;
@@ -414,15 +415,16 @@ public class Calculator{
 		recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		
-		if(Data.getNegate().contains("negate")) { // 9 * 5 = negate + 5 출력 
-			textPanel.blankSpace.setText(Data.getNegate() + Data.getOperator() + support.changeNumber(number) + text);
-			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getResult())));
-		}
+		
 		
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) + Data.getOperator() + support.changeNumber(number) + text);
 		textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getResult())));
 		
+		if(Data.getNegate().contains("negate") && Data.getcheckingNegate() == true) { // 9 * 5 = negate + 5 출력 
+			textPanel.blankSpace.setText(Data.getNegate() + Data.getOperator() + support.changeNumber(number) + text);
+			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getResult())));
+		}
 		
 		if(textPanel.inputSpace.getText().contains("0으")) { //0으로 나눌 수 없습니다. 
 			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) + Data.getOperator());
@@ -515,6 +517,7 @@ public class Calculator{
 		if(textPanel.blankSpace.getText().contains("negate") && Data.getFormula().equals("=")) {
 			textPanel.blankSpace.setText(Data.getNegate() + text);
 			textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
+			Data.setcheckingNegate(true);
 			switch(plusMinus) {			
 			case 0:Data.setResult(Data.getResult().replace("-","")); break;
 			case 1:Data.setResult("-" + Data.getResult()); break;

@@ -14,6 +14,7 @@ public class OperatorData {
 	private String formula = "";
 	private String negateOperator = "";
 	private String negate = "";
+	private boolean checkingNegate = false;
 	private int dotCount=Constants.RESET;
 	private int negateCount = Constants.RESET; 
 	
@@ -64,6 +65,12 @@ public class OperatorData {
 	}
 	public int getDotCount() {
 		return dotCount;
+	}
+	public void setcheckingNegate(boolean checkingNegate) {
+		this.checkingNegate = checkingNegate;
+	}
+	public boolean getcheckingNegate() {
+		return checkingNegate;
 	}
 	
 }
