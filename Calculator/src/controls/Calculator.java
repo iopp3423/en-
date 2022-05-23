@@ -431,8 +431,8 @@ public class Calculator{
 			textPanel.inputSpace.setText(support.setComma(number));
 		
 			if(Double.parseDouble(number) % Constants.CHECK_DECIMAL == Constants.RESET) { // 3.0 = 입력시 정수로 출력 
-				textPanel.blankSpace.setText(deleteDotZeroNumber(number)+text);
-				textPanel.inputSpace.setText(support.setComma(deleteDotZeroNumber(number)));
+				textPanel.blankSpace.setText(support.deleteDotZeroNumber(number)+text);
+				textPanel.inputSpace.setText(support.setComma(support.deleteDotZeroNumber(number)));
 			}
 			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
@@ -585,14 +585,14 @@ public class Calculator{
 		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
 	}
 	
-	
+	/*
 	private String deleteDotZeroNumber(String changedNumber) {
 		
 		String changed;
 		DecimalFormat numberFormat = new DecimalFormat("0"); //형변환 Decimal	
 		changed = numberFormat.format(Double.parseDouble(changedNumber));
 		  return changed;
-	}
+	}*/
 	
 	/*
 	private String changeNumber(String number) {

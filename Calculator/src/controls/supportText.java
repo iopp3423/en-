@@ -66,4 +66,12 @@ public class supportText {
 		return changedNumber;
 		
 	}
+	
+	public String deleteDotZeroNumber(String changedNumber) {
+		
+		String changed;
+		DecimalFormat numberFormat = new DecimalFormat("0"); //형변환 Decimal	
+		changed = numberFormat.format(Double.parseDouble(changedNumber));
+		  return changed;
+	}
 }
