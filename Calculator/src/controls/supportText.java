@@ -89,9 +89,7 @@ public class supportText {
 		if(changedNumber.contains("1e")) { // E e 로 변
 			changedNumber = changedNumber.replace("1e","1.e");
 		}
-		System.out.println(changedNumber);
 		return changedNumber;
-		
 	}
 	
 	public String deleteDotZeroNumber(String changedNumber) { // 3.0 === > 3 으로 변경ㅇ 
@@ -151,7 +149,6 @@ public class supportText {
 				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
 			}
 		}
-		System.out.println(result.length());
 		return result;
 			
 	}

@@ -454,7 +454,7 @@ public class Calculator{
 			switch(Data.getOperator()) {
 			case "+" : Data.setResult(support.calculate(Data.getResult(), number, "+")); break;
 			case "-" : Data.setResult(support.calculate(Data.getResult(), number, "-")); break;
-			case "x" : Data.setResult(support.calculate(Data.getResult(), number, "x"));break;
+			case "x" : Data.setResult(support.calculate(Data.getResult(), number, "x")); break;
 			case "÷" : Data.setResult(support.calculate(Data.getResult(), number, "÷")); break;
 			}
 		}
@@ -496,18 +496,27 @@ public class Calculator{
 	{
 		if(textPanel.blankSpace.getText().contains("-") || textPanel.blankSpace.getText().contains("+") || textPanel.blankSpace.getText().contains("x") || textPanel.blankSpace.getText().contains("÷")) {
 			if(record.equals(".")) record = "0"; // 33 + . + -> 기록에  33 + . = 33 => 33 + 0 = 으로 수정 
+			if(buttonNumber == 20) buttonNumber = Constants.RESET; // 로그초기
 			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText()+ record+ "=" + " <br> "+ Data.getTemp()); // 로그 남기기
 		}
 		
 		if(textPanel.blankSpace.getText().contains("negate")) {
-			textPanel.blankSpace.setText(Data.getNegate() + text);
-			textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
+			//textPanel.blankSpace.setText(Data.getNegate() + text);
+			//textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
+			//Data.setTemp(Data.getResult());
+			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  text); // 중앙 화면
+			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getTemp()))); // 입력화면 
 		}
 		else {
 			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getTemp()))); // 입력화면 	
 		}
 				
+		System.out.println(Data.getTemp());
+		System.out.println(Data.getNegate());
+		System.out.println(Data.getResult());
+		System.out.println(record);
+		System.out.println(number);
 		support.adjustFontSize(); // 사이즈 조절 
 		support.exceptionPrint();
 		record=""; // 입력값 초기화 
@@ -537,7 +546,6 @@ public class Calculator{
 				Data.setNegate("negate(" + Data.getResult() + ")"); // 제일 처음에 negate 저장
 				Data.setNegateCount(Constants.ONE);
 			}
-			
 			
 			if(Data.getNegateCount() == Constants.RESET) { // 2 + -> negate
 				textPanel.blankSpace.setText(Data.getTemp() +  Data.getNegateOperator() + Data.getNegate()); // 중앙 화면
