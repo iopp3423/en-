@@ -38,7 +38,6 @@ public class PrintCalculator{
 	{
 		frameset();	
 		lastCalculatorPanel = new JPanel(new GridBagLayout()); //텍스트,입력 패널 합치는 패널 
-		//lastRecordPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints content=new GridBagConstraints(); /// constraint 설
 		content.fill=GridBagConstraints.BOTH; //여백 채우기
 		content.weighty=1;// 비율

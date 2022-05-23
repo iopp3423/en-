@@ -24,6 +24,8 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -49,10 +51,10 @@ public class Calculator{
 	public Calculator(PrintCalculator printCalculator)
 	{	
 		this.printCalculator = printCalculator;
-		//this.support = support;
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
 		recordPanel = new RecordPanel(printRecord);
 		scrollPane = new JScrollPane(recordPanel);
+
 		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);
 		Data = new OperatorData();
 		support = new supportText(textPanel, Data);
@@ -88,10 +90,6 @@ public class Calculator{
 			}
 			
 			recordList[3] = recordList[3].replace(",", "");
-			System.out.println(getRecode);
-			System.out.println(leftNumber[0]);
-			System.out.println(leftNumber[1]);
-			System.out.println(recordList[3]);
 			
 			Data.setTemp(leftNumber[0]); // 왼쪽값 저장 
 			number = leftNumber[1]; // 오른쪽 값 저장 
@@ -171,7 +169,6 @@ public class Calculator{
 			support.adjustFontSize();		
 		}
 	};
-	
 		
 	private void delete() 
 	{	
@@ -502,11 +499,14 @@ public class Calculator{
 		if(textPanel.blankSpace.getText().contains("negate")) {
 			textPanel.blankSpace.setText(Data.getNegate() + text);
 			textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
+			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
 		else {
 			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  text); // 중앙 화면
 			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getTemp()))); // 입력화면 	
+			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
+		System.out.println(Data.getFormula());
 		support.adjustFontSize(); // 사이즈 조절 
 		support.exceptionPrint();
 		record=""; // 입력값 초기화 
