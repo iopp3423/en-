@@ -10,7 +10,6 @@ public class CalculationController{
 	
 	public CalculationController() {
 		PrintCalculator printCalculator = new PrintCalculator();
-		//supportText supportClass = new supportText();
 		Calculator calculator = new Calculator(printCalculator);			
 	}
 }

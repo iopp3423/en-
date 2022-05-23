@@ -86,7 +86,10 @@ public class supportText {
 		else if(changedNumber.contains("E")) { // E e 로 변
 			changedNumber = changedNumber.replace("E","e+");
 		}
-		
+		if(changedNumber.contains("1e")) { // E e 로 변
+			changedNumber = changedNumber.replace("1e","1.e");
+		}
+		System.out.println(changedNumber);
 		return changedNumber;
 		
 	}

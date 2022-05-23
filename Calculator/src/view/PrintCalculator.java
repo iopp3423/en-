@@ -56,9 +56,6 @@ public class PrintCalculator{
 		frame.setLayout(new BorderLayout()); // 프레임  설정하기 
 		frame.add(lastCalculatorPanel, BorderLayout.CENTER); // 키패드 
 		frame.setVisible(true);
-		frame.requestFocusInWindow();
-		frame.setFocusable(true);	
-		frame.requestFocus();
 
 		
 			
@@ -80,7 +77,7 @@ public class PrintCalculator{
 		    }
 		});
 		
-		frame.addWindowListener( new WindowAdapter() {
+		frame.addWindowListener( new WindowAdapter() { // 키보드 오토포커
 		    public void windowOpened( WindowEvent e ){
 		    	for(int index = Constants.RESET; index<Constants.CALCULATOR; index++)
 		    	{

@@ -129,8 +129,6 @@ public class CalculatorPanel extends JPanel
 		{
 			button[index].addKeyListener(keyAdapter); // 버튼에 키보드 
 			button[index].addActionListener(listener); //버튼에마우스 이벤트 달아줌
-			button[index].setFocusable(true);	
-			button[index].requestFocus();
 			//button[index].addKeyListener(buttonColor); // 키보드 입력 색상 변
 
 			button[index].setFont(new Font("맑은 고딕", Constants.RESET, Constants.FONT_SIZE));

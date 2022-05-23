@@ -54,7 +54,6 @@ public class Calculator{
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
 		recordPanel = new RecordPanel(printRecord);
 		scrollPane = new JScrollPane(recordPanel);
-
 		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);
 		Data = new OperatorData();
 		support = new supportText(textPanel, Data);
@@ -176,8 +175,7 @@ public class Calculator{
 		String inputRecord;
 		
 		pluscount = Constants.RESET;
-		
-
+	
 		if(Data.getFormula() == "=" && !Data.getOperator().equals("=")) { /// 계산하고 바로 지울 때 중간값만 지우기 
 			//System.out.println(Data.getOperator());
 			 for(int index=textPanel.blankSpace.getText().length(); index>Constants.RESET; index--)
