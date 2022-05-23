@@ -2,6 +2,7 @@ package controls;
 
 import java.awt.Font;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -109,5 +110,28 @@ public class supportText {
 			
 			if(textArray[1].length()>5) textPanel.inputSpace.setText("오버플로");
 		}		
+	}
+	
+	public String calculate(String temp, String number, String operator) {  // 계산 결과 반
+		BigDecimal leftNumber = new BigDecimal(temp);
+		BigDecimal rightNumber = new BigDecimal(number);
+		String result="";
+
+		try{
+			switch(operator) {  // 저장했던 연산
+			case "+": result = leftNumber.add(rightNumber).toString();break;
+			case "-": result = leftNumber.subtract(rightNumber).toString();break;
+			case "÷": result = leftNumber.divide(rightNumber).toString();break;
+			case "x": result = leftNumber.multiply(rightNumber).toString(); break;	
+			}
+		}
+		catch (java.lang.ArithmeticException e){
+			if(e.getMessage().equals("Division undefined")) result = "Nan"; // 정의되지 않은 결과 
+			else if(e.getMessage().equals("Non-terminating decimal expansion; no exact representable decimal result.")) { // 무리수 계산 
+				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
+			}
+		}
+		return result;
+			
 	}
 }

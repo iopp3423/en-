@@ -454,10 +454,10 @@ public class Calculator{
 			if(Data.getResult().equals("0")) Data.setResult(Data.getTemp()); //원래 없었고 밑에 Data.getTemp()였음 참
 			
 			switch(Data.getOperator()) {
-			case "+" : Data.setResult(calculation(Data.getResult(), number, "+")); break;
-			case "-" : Data.setResult(calculation(Data.getResult(), number, "-")); break;
-			case "x" : Data.setResult(calculation(Data.getResult(), number, "x"));break;
-			case "÷" : Data.setResult(calculation(Data.getResult(), number, "÷")); break;
+			case "+" : Data.setResult(support.calculate(Data.getResult(), number, "+")); break;
+			case "-" : Data.setResult(support.calculate(Data.getResult(), number, "-")); break;
+			case "x" : Data.setResult(support.calculate(Data.getResult(), number, "x"));break;
+			case "÷" : Data.setResult(support.calculate(Data.getResult(), number, "÷")); break;
 			}
 		}
 		
@@ -465,10 +465,10 @@ public class Calculator{
 			textPanel.blankSpace.setText(support.changeNumber(Data.getResult()) + Data.getOperator() + support.changeNumber(number) + text);
 			
 			switch(Data.getOperator()) { //  원래 로직 Data.getTemp()였는데 바꿈 참고 
-			case "+" : Data.setResult(calculation(Data.getResult(), number, "+")); break;
-			case "-" : Data.setResult(calculation(Data.getResult(), number, "-")); break;
-			case "x" : Data.setResult(calculation(Data.getResult(), number, "x"));break;
-			case "÷" : Data.setResult(calculation(Data.getResult(), number, "÷")); break;
+			case "+" : Data.setResult(support.calculate(Data.getResult(), number, "+")); break;
+			case "-" : Data.setResult(support.calculate(Data.getResult(), number, "-")); break;
+			case "x" : Data.setResult(support.calculate(Data.getResult(), number, "x"));break;
+			case "÷" : Data.setResult(support.calculate(Data.getResult(), number, "÷")); break;
 			}
 			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getResult())));// 결과값 출력
 		}
@@ -488,10 +488,10 @@ public class Calculator{
 	
 	private void calculate()
 	{
-		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(calculation(Data.getTemp(), number, "+"));
-		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(calculation(Data.getTemp(), number, "x"));
-		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(calculation(Data.getTemp(), number, "÷"));
-		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(calculation(Data.getTemp(), number, "-"));
+		if(textPanel.blankSpace.getText().contains("+")) Data.setTemp(support.calculate(Data.getTemp(), number, "+"));
+		else if(textPanel.blankSpace.getText().contains("x")) Data.setTemp(support.calculate(Data.getTemp(), number, "x"));
+		else if(textPanel.blankSpace.getText().contains("÷")) Data.setTemp(support.calculate(Data.getTemp(), number, "÷"));
+		else if(textPanel.blankSpace.getText().contains("-"))Data.setTemp(support.calculate(Data.getTemp(), number, "-"));
 	}
 	
 	private void printCalculate() // 화면에 값 출력 
@@ -521,17 +521,7 @@ public class Calculator{
 	}
 	
 	/*
-	private void exceptionPrint() // 예외처리 함수 
-	{
-		if(textPanel.inputSpace.getText().contains("e")){ // 문자열 자르
-			String longText = textPanel.inputSpace.getText();
-			String[] textArray = longText.split("e");
-			
-			if(textArray[1].length()>5) textPanel.inputSpace.setText("오버플로");
-		}		
-	}*/
-	
-	private String calculation(String temp, String number, String operator) { // 결과
+	private String calculate(String temp, String number, String operator) { // 결과
 		BigDecimal leftNumber = new BigDecimal(temp);
 		BigDecimal rightNumber = new BigDecimal(number);
 		String result="";
@@ -552,6 +542,7 @@ public class Calculator{
 		}
 		return result;
 	}
+	*/
 	
 	public void printNegate() {
 		if(Data.getNegateOperator() != "") {
