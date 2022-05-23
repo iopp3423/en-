@@ -38,6 +38,7 @@ public class Calculator{
 	private TextPanel textPanel;
 	private RecordPanel recordPanel;
 	private OperatorData Data;
+	private supportText support;
 	
 	private String text;
 	private String record = "";
@@ -48,13 +49,14 @@ public class Calculator{
 	private int buttonNumber = Constants.RESET;
 
 	
-	public Calculator(PrintCalculator printCalculator)
+	public Calculator(PrintCalculator printCalculator, supportText support)
 	{	
 		this.printCalculator = printCalculator;
+		this.support = support;
 		calculatorPanel = new CalculatorPanel(actionlistener, keyAdapter);
 		recordPanel = new RecordPanel(printRecord);
 		scrollPane = new JScrollPane(recordPanel);
-		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);  //입력패드 생성 
+		textPanel = new TextPanel(calculatorPanel, scrollPane, printCalculator, recordPanel);  //입력패드 생성 textPanel = new TextPanel(calculatorPanel, recordPanel);
 		Data = new OperatorData();
 		callCalculator();// 계산기 출력 
 	}
@@ -182,7 +184,7 @@ public class Calculator{
 					if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
 		             {
 						Data.setDotCount(Constants.RESET);
-						 textPanel.blankSpace.setText(setComma(" ")); // 중간 값 
+						 textPanel.blankSpace.setText(support.setComma(" ")); // 중간 값 
 						 number = "0";
 		             }
 				}
@@ -202,7 +204,7 @@ public class Calculator{
 		 else if(textPanel.inputSpace.getText().length() != Constants.ONE) //글자수 1 아니면 
 		 {
 			 inputRecord = record.substring(Constants.RESET,record.length()-Constants.ONE); // 문자열자르기
-			 textPanel.inputSpace.setText(setComma(inputRecord));
+			 textPanel.inputSpace.setText(support.setComma(inputRecord));
 			 
 			 number = inputRecord; //지운만큼 넘버값 줄이기 
 			 record = inputRecord;
@@ -234,7 +236,7 @@ public class Calculator{
 			{				 		
 				record += text;// 키보드 입력
 				number = record; //// 넘버에 입력값 넣어주기
-				textPanel.inputSpace.setText(setComma(record));	
+				textPanel.inputSpace.setText(support.setComma(record));	
 			}
 		}
 	}
@@ -258,17 +260,17 @@ public class Calculator{
 			
 			record += text;// 입력
 			if(pluscount % 2 == 1) {
-				textPanel.inputSpace.setText("-" + setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
+				textPanel.inputSpace.setText("-" + support.setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
 				number = "-" + record; //// 넘버에 입력값 넣어주기
 				//number = plusMinus + record; //// 넘버에 입력값 넣어주기
 			}
 			else if(textPanel.inputSpace.getText().equals("0")){ // 0밖에 없으
 				textPanel.inputSpace.setText("");  // 0 없애기  
-				textPanel.inputSpace.setText(setComma(record));
+				textPanel.inputSpace.setText(support.setComma(record));
 				number = record; //// 넘버에 입력값 넣어주기
 			}
 			else {
-				textPanel.inputSpace.setText(setComma(record));
+				textPanel.inputSpace.setText(support.setComma(record));
 				number = record; //// 넘버에 입력값 넣어주기
 			}	
 			
@@ -331,7 +333,7 @@ public class Calculator{
 		if(pluscount % 2 == Constants.RESET && !textPanel.inputSpace.getText().contains("-")) { // 짝수면 플러스, 홀수면 마이너스 
 			
 			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 짝수 이면서 2 -> 사칙연산 -> +-눌렀을 
-			else if (record != "") textPanel.inputSpace.setText("-" + setComma(record)); //그냥 +-
+			else if (record != "") textPanel.inputSpace.setText("-" + support.setComma(record)); //그냥 +-
 			//number = plusMinus + number;
 			number = "-" + number;
 			pluscount++;
@@ -339,8 +341,8 @@ public class Calculator{
 		
 		
 		else {
-			if(record == "") textPanel.inputSpace.setText(setComma(Data.getTemp()));// 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
-			else if (record != "") textPanel.inputSpace.setText(setComma(record));//그냥 +-
+			if(record == "") textPanel.inputSpace.setText(support.setComma(Data.getTemp()));// 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
+			else if (record != "") textPanel.inputSpace.setText(support.setComma(record));//그냥 +-
 			number = number.replace("-", "");
 			pluscount++;
 			}	
@@ -369,7 +371,7 @@ public class Calculator{
 		}
 		if(textPanel.inputSpace.getText().equals("0")) { // 0일 때 
 			record = "0" + text;// 키보드 입력한 값	
-			textPanel.inputSpace.setText(setComma(record));
+			textPanel.inputSpace.setText(support.setComma(record));
 			Data.setDotCount(Constants.ONE);	
 		}
 		
@@ -412,7 +414,7 @@ public class Calculator{
 		
 		if(!Data.getOperator().equals(text)) { // 2 x 5 = 10 
 		textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator() + changeNumber(number) + text);
-		textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));
+		textPanel.inputSpace.setText(support.setComma(changeNumber(Data.getResult())));
 		
 		if(textPanel.inputSpace.getText().contains("0으")) {
 			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) + Data.getOperator());
@@ -426,11 +428,11 @@ public class Calculator{
 				
 		else if(Data.getOperator().equals(text)){//.equals(text)) { // 0.1 =====
 			textPanel.blankSpace.setText(number+ text);
-			textPanel.inputSpace.setText(setComma(number));
+			textPanel.inputSpace.setText(support.setComma(number));
 		
 			if(Double.parseDouble(number) % Constants.CHECK_DECIMAL == Constants.RESET) { // 3.0 = 입력시 정수로 출력 
 				textPanel.blankSpace.setText(deleteDotZeroNumber(number)+text);
-				textPanel.inputSpace.setText(setComma(deleteDotZeroNumber(number)));
+				textPanel.inputSpace.setText(support.setComma(deleteDotZeroNumber(number)));
 			}
 			recordPanel.button[buttonNumber++].setText("<HTML> "+ textPanel.blankSpace.getText() +" <br> "+ textPanel.inputSpace.getText()); 
 		}
@@ -465,7 +467,7 @@ public class Calculator{
 			case "x" : Data.setResult(calculation(Data.getResult(), number, "x"));break;
 			case "÷" : Data.setResult(calculation(Data.getResult(), number, "÷")); break;
 			}
-			textPanel.inputSpace.setText(setComma(changeNumber(Data.getResult())));// 결과값 출력
+			textPanel.inputSpace.setText(support.setComma(changeNumber(Data.getResult())));// 결과값 출력
 		}
 		exceptionPrint();
 	}
@@ -493,11 +495,11 @@ public class Calculator{
 	{
 		if(textPanel.blankSpace.getText().contains("negate")) {
 			textPanel.blankSpace.setText(Data.getNegate() + text);
-			textPanel.inputSpace.setText("-" + setComma(Data.getResult())); // 입력화면
+			textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
 		}
 		else {
 			textPanel.blankSpace.setText(changeNumber(Data.getTemp()) +  text); // 중앙 화면
-			textPanel.inputSpace.setText(setComma(changeNumber(Data.getTemp()))); // 입력화면 	
+			textPanel.inputSpace.setText(support.setComma(changeNumber(Data.getTemp()))); // 입력화면 	
 		}
 		adjustFontSize(); // 사이즈 조절 
 		exceptionPrint();
@@ -526,8 +528,8 @@ public class Calculator{
 		}		
 	}
 	
-	
-	private String setComma(String number) { // ,찍기 
+	/*
+	private String support.setComma(String number) { // ,찍기 
         String changeResult = number; // 출력할 결과를 저장할 변수
         Pattern pattern = Pattern.compile("(^[+-]?\\d+)(\\d{3})"); //정규표현식 
         Matcher regexMatcher = pattern.matcher(number); 
@@ -539,7 +541,7 @@ public class Calculator{
         }        
         return changeResult;
     }
-	
+	*/
 
 	
 	private String calculation(String temp, String number, String operator) { // 결과
@@ -561,7 +563,6 @@ public class Calculator{
 				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
 			}
 		}
-		//System.out.println(result);
 		return result;
 	}
 	
@@ -670,7 +671,7 @@ public class Calculator{
 				Data.setNegate("negate(" + Data.getNegate() + ")"); // negate 출
 			}
 			
-			textPanel.inputSpace.setText(setComma(number));
+			textPanel.inputSpace.setText(support.setComma(number));
 		}
 	}
 	
