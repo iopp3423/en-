@@ -173,11 +173,8 @@ public class Calculator{
 	{	
 		
 		String inputRecord;
-		
-		pluscount = Constants.RESET;
 	
 		if(Data.getFormula() == "=" && !Data.getOperator().equals("=")) { /// 계산하고 바로 지울 때 중간값만 지우기 
-			//System.out.println(Data.getOperator());
 			 for(int index=textPanel.blankSpace.getText().length(); index>Constants.RESET; index--)
 				{
 					if (index == Constants.ONE)   //글자가 없을 때 백스페이스 누르면 0으로 초기
@@ -185,6 +182,7 @@ public class Calculator{
 						Data.setDotCount(Constants.RESET);
 						 textPanel.blankSpace.setText(support.setComma(" ")); // 중간 값 
 						 number = "0";
+						 pluscount = Constants.RESET;
 		             }
 				}
 		 }	
@@ -246,11 +244,17 @@ public class Calculator{
 		int limit = record.length();
 		
 		Data.setNegateOperator("");	
+		pluscount = Constants.RESET;
+				
 		if(Data.getResult().equals("0") && textPanel.blankSpace.getText().contains("negate")) {
 			textPanel.blankSpace.setText(support.changeNumber(Data.getTemp()) +  Data.getOperator()); // 중앙 화면
-			pluscount++;
-			
+			pluscount = Constants.RESET;
+			System.out.println("count=" + pluscount);
 		}
+		else if(textPanel.blankSpace.getText().contains("negate")) {
+			pluscount = Constants.RESET;
+		}
+		
 		if(limit<Constants.LIMIT_INPUT) 
 		{	
 			if(Data.getFormula().equals("=")) { // 계산하고 바로 숫자패드 입력 시초기
@@ -261,7 +265,6 @@ public class Calculator{
 			if(pluscount % Constants.EVEN_CHECK == Constants.Odd_CHECK) {
 				textPanel.inputSpace.setText("-" + support.setComma(record)); //pluscount 홀수면 - 붙혀서 출력하
 				number = "-" + record; //// 넘버에 입력값 넣어주기
-				//number = plusMinus + record; //// 넘버에 입력값 넣어주기
 			}
 			else if(textPanel.inputSpace.getText().equals("0")){ // 0밖에 없으
 				textPanel.inputSpace.setText("");  // 0 없애기  
@@ -332,14 +335,12 @@ public class Calculator{
 		
 		else if(textPanel.inputSpace.getText() != "0"){ // 0이 아니면 
 		pluscount++;
-			
-		if(pluscount % Constants.EVEN_CHECK == Constants.RESET && !textPanel.inputSpace.getText().contains("-")) { // 짝수면 플러스, 홀수면 마이너스 
+		
+		if(pluscount % Constants.EVEN_CHECK == Constants.Odd_CHECK && !textPanel.inputSpace.getText().contains("-")) { // 짝수면 플러스, 홀수면 마이너스 
 			
 			if(record == "") textPanel.inputSpace.setText("-" + (Data.getTemp())); // 짝수 이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText("-" + support.setComma(record)); //그냥 +-
-			//number = plusMinus + number;
 			number = "-" + number;
-			//pluscount++;
 		}
 		
 		
@@ -347,7 +348,6 @@ public class Calculator{
 			if(record == "") textPanel.inputSpace.setText(support.setComma(Data.getTemp()));// 홀수이면서 2 -> 사칙연산 -> +-눌렀을 
 			else if (record != "") textPanel.inputSpace.setText(support.setComma(record));//그냥 +-
 			number = number.replace("-", "");
-			//pluscount++;
 			}	
 		
 		printNegate();
@@ -355,8 +355,6 @@ public class Calculator{
 			if(textPanel.inputSpace.getText().contains("--")) {
 				textPanel.inputSpace.setText(textPanel.inputSpace.getText().replace("--",""));
 				number = number.replace("--", "-");
-				//System.out.println(number);
-				//pluscount++;
 			}
 		}
 		
@@ -399,7 +397,6 @@ public class Calculator{
 	
 	private void result(){ // 결
 		
-		pluscount = Constants.RESET;
 		Data.setNegateOperator(text);
 		boolean isnegate;
 		
@@ -516,13 +513,19 @@ public class Calculator{
 		
 		if(textPanel.blankSpace.getText().contains("negate") && Data.getFormula().equals("=")) {
 			textPanel.blankSpace.setText(Data.getNegate() + text);
-			textPanel.inputSpace.setText("-" + support.setComma(Data.getResult())); // 입력화면
+			
 			Data.setcheckingNegate(true);
-			switch(plusMinus) {			
-			case 0:Data.setResult(Data.getResult().replace("-","")); break;
-			case 1:Data.setResult("-" + Data.getResult()); break;
+				
+			if(plusMinus == Constants.RESET) { 		
+				Data.setResult(Data.getResult().replace("-","")); 
+				System.out.println("Result2= " + Data.getResult());
 			}
-			Data.setResult("-" + Data.getResult());
+			else if(plusMinus == Constants.ONE) { 
+				Data.setResult("-" + Data.getResult());
+				textPanel.inputSpace.setText(support.setComma(Data.getResult())); // 입력화면
+				//pluscount = Constants.EVEN_CHECK;
+			}
+			
 		}
 		
 		else {
@@ -543,13 +546,14 @@ public class Calculator{
 		number = "0"; // number 초기화 
 		Data.setDotCount(Constants.RESET);	
 		Data.setOperator(text); // 부호 넣어주기 
-		pluscount = Constants.RESET;
+		//pluscount = Constants.RESET;
 	}
 	
 	
 	public void printNegate() {
 		if(Data.getNegateOperator() != "") {
 			int plusMinus = pluscount % Constants.EVEN_CHECK;
+			//System.out.println(pluscount);
 			
 			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
 				Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장
