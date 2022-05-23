@@ -440,7 +440,7 @@ public class Calculator{
 		/////////////////////////////////////////////////////////////////////////////////////////
 
 		if(buttonNumber == 20) buttonNumber = Constants.RESET;		
-		exceptionPrint(); // 예외 문
+		support.exceptionPrint(); // 예외 문
 		support.adjustFontSize(); // 사이즈 조
 		Data.setFormula("=");
 	}
@@ -472,7 +472,7 @@ public class Calculator{
 			}
 			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getResult())));// 결과값 출력
 		}
-		exceptionPrint();
+		support.exceptionPrint();
 	}
 	
 	
@@ -505,7 +505,7 @@ public class Calculator{
 			textPanel.inputSpace.setText(support.setComma(support.changeNumber(Data.getTemp()))); // 입력화면 	
 		}
 		support.adjustFontSize(); // 사이즈 조절 
-		exceptionPrint();
+		support.exceptionPrint();
 		record=""; // 입력값 초기화 
 	}
 	
@@ -520,7 +520,7 @@ public class Calculator{
 		pluscount = Constants.RESET;
 	}
 	
-	
+	/*
 	private void exceptionPrint() // 예외처리 함수 
 	{
 		if(textPanel.inputSpace.getText().contains("e")){ // 문자열 자르
@@ -529,7 +529,7 @@ public class Calculator{
 			
 			if(textArray[1].length()>5) textPanel.inputSpace.setText("오버플로");
 		}		
-	}
+	}*/
 	
 	private String calculation(String temp, String number, String operator) { // 결과
 		BigDecimal leftNumber = new BigDecimal(temp);
@@ -552,25 +552,6 @@ public class Calculator{
 		}
 		return result;
 	}
-	
-	/*
-	private void adjustFontSize()
-	{
-		int fontlength = textPanel.inputSpace.getText().length();
-		switch(fontlength) {
-		case 1 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 70));break;
-		case 10 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 54));break;
-		case 11 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 52));break;
-		case 12 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 50));break;
-		case 13 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 47));break;
-		case 14 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 42));break;
-		case 15 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 38));break;
-		case 16 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 35));break;
-		case 17 : textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));break;
-		}
-		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
-	}
-	*/
 	
 	public void printNegate() {
 		if(Data.getNegateOperator() != "") {

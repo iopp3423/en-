@@ -100,4 +100,14 @@ public class supportText {
 		}
 		if(fontlength>19) textPanel.inputSpace.setFont(new Font("맑은 고딕",  Constants.RESET, 30));
 	}
+	
+	public void exceptionPrint() // 예외처리 함수 
+	{
+		if(textPanel.inputSpace.getText().contains("e")){ // 문자열 자르
+			String longText = textPanel.inputSpace.getText();
+			String[] textArray = longText.split("e");
+			
+			if(textArray[1].length()>5) textPanel.inputSpace.setText("오버플로");
+		}		
+	}
 }
