@@ -2,6 +2,7 @@ package controls;
 
 import java.awt.Font;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;
@@ -145,6 +146,7 @@ public class supportText {
 		catch (java.lang.ArithmeticException e){
 			if(e.getMessage().equals("Division undefined")) result = "Nan"; // 정의되지 않은 결과 
 			else if(e.getMessage().equals("Non-terminating decimal expansion; no exact representable decimal result.")) { // 무리수 계산 
+				//result = leftNumber.divide(rightNumber, MathContext.DECIMAL128).toString();
 				result = leftNumber.divide(rightNumber, 14, RoundingMode.HALF_EVEN).toString();
 			}
 		}

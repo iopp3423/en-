@@ -523,7 +523,6 @@ public class Calculator{
 			else if(plusMinus == Constants.ONE) { 
 				Data.setResult("-" + Data.getResult());
 				textPanel.inputSpace.setText(support.setComma(Data.getResult())); // 입력화면
-				//pluscount = Constants.EVEN_CHECK;
 			}
 			
 		}
@@ -546,14 +545,12 @@ public class Calculator{
 		number = "0"; // number 초기화 
 		Data.setDotCount(Constants.RESET);	
 		Data.setOperator(text); // 부호 넣어주기 
-		//pluscount = Constants.RESET;
 	}
 	
 	
 	public void printNegate() {
 		if(Data.getNegateOperator() != "") {
 			int plusMinus = pluscount % Constants.EVEN_CHECK;
-			//System.out.println(pluscount);
 			
 			if(!textPanel.blankSpace.getText().contains("=") && Data.getNegateOperator() != "" && !textPanel.blankSpace.getText().contains("negate")) { // 처음 negate 입력 
 				Data.setNegate("negate(" + Data.getTemp() + ")"); // 제일 처음에 negate 저장
