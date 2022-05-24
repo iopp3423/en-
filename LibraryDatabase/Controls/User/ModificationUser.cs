@@ -167,7 +167,7 @@ namespace LibruryDatabase.Controls
 
             memberDto.Id = id;
             memberDto.Address = address;
-            memberDao.ModifyAddress(memberDto.Id, memberDto.Address);
+            memberDao.ModifyAddress(memberDto.Address, memberDto.Id);
             ClearandStore();// 리스트 초기화 후 저장
 
             logDto.Id = id;

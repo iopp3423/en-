@@ -88,8 +88,8 @@ namespace LibruryDatabase.Models
 
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            string status = response.StatusCode.ToString();
 
+            string status = response.StatusCode.ToString();
             if (status == "OK")
             {
                 Stream stream = response.GetResponseStream();
