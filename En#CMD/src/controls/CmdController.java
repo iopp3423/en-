@@ -24,15 +24,15 @@ public class CmdController {
 	
 	
 	public CmdController() {
-		cd = new Cd();
+		command = new InputCommand();
+		location = new RouteLocation();
+		print = new PrintLocation();
+		cd = new Cd(location, print);
 		cls = new Cls();
 		copy = new Copy();
 		dir = new Dir();
 		help = new Help();
 		move = new Move();
-		command = new InputCommand();
-		location = new RouteLocation();
-		print = new PrintLocation();
 	}
 	
 	public void cmdControl() {
@@ -48,7 +48,8 @@ public class CmdController {
 	    }*/
 	    
 		//System.out.println(CheckDirectoryAndStoreLocation(inputCommand));
-		CheckLocationOrError(inputCommand);
+		cd.CheckLocationOrError(inputCommand);
+		//CheckLocationOrError(inputCommand);
 		}
 		/*
 		 if(CheckDirectoryAndStoreLocation(inputCommand)) { // 경로가 맞으면 
