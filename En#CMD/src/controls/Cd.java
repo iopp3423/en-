@@ -29,8 +29,7 @@ public class Cd {
 	}
 	
 	public boolean CheckDirectoryAndStoreLocation(String inputDirectory) {
-		//File f = new File("c:\\Users\\user\\OneDrive\\Desktop");
-		if(inputDirectory.equals("cd")) { // 처음으로 이동
+		if(inputDirectory.equals("cd")) { // 기존 주소 유지
 			return true;
 		}
 		else if(inputDirectory.equals("cd\\")) { // 처음으로 이동
@@ -60,14 +59,14 @@ public class Cd {
 			slashCount = (countChar(location.getCurrentLocation(), '\\')); // \ 갯수세기
 			location.setCurrentLocation(""); // 초기화
 			
-			for(int index=Constants.FIRST_LOCATION; index<slashCount-1; index++) {
+			for(int index=Constants.FIRST_LOCATION; index<slashCount-Constants.TWO_STEP_UP; index++) {
 				location.setCurrentLocation(location.getCurrentLocation() +"\\" +  beforeCommand[index]);
 			}
 			return true;
 		}
 		
 		
-		else if(inputDirectory.contains("cd")) {	
+		else if(inputDirectory.contains("cd")) {// cd ~~ 명령 
         String cdAndCommand[] =inputDirectory.split(" ");                 
 		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
 		File currentLocation = new File(location.getCurrentLocation() + directory);
@@ -90,6 +89,7 @@ public class Cd {
 			location.setErrorMessage("'"+inputDirectory+"'" + "은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다."); // cd를 쓰지 않으면 
 			return false;
 		}
+		
 	}
 
 

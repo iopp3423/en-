@@ -12,12 +12,12 @@ import utility.InputCommand;
 import views.PrintLocation;
 
 public class CmdController {
-	private Cd cd;
-	private Cls cls;
-	private Copy copy;
-	private Dir dir;
-	private Help help;
-	private Move move;
+	private Cd GoCd;
+	private Cls GoCls;
+	private Copy GoCopy;
+	private Dir GoDir;
+	private Help GoHelp;
+	private Move GoMove;
 	private InputCommand command;
 	private RouteLocation location;
 	private PrintLocation print;
@@ -27,12 +27,12 @@ public class CmdController {
 		command = new InputCommand();
 		location = new RouteLocation();
 		print = new PrintLocation();
-		cd = new Cd(location, print);
-		cls = new Cls();
-		copy = new Copy();
-		dir = new Dir();
-		help = new Help();
-		move = new Move();
+		GoCd = new Cd(location, print);
+		GoCls = new Cls();
+		GoCopy = new Copy();
+		GoDir = new Dir(location, print);
+		GoHelp = new Help();
+		GoMove = new Move();
 		print.printNotice();
 	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 	}
@@ -41,8 +41,8 @@ public class CmdController {
 		while(true) {
 		String inputCommand = command.inputInstruction();
 	
-
-		cd.CheckLocationOrError(inputCommand);
+		if(inputCommand.contains("dir")) GoDir.dir();
+		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
 		
 		}
 	}
