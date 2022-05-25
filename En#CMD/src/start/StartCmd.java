@@ -1,6 +1,6 @@
-package controls;
+package start;
 
-public class test {
+public class StartCmd {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
