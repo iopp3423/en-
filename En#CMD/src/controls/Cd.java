@@ -30,13 +30,51 @@ public class Cd {
 	
 	public boolean CheckDirectoryAndStoreLocation(String inputDirectory) {
 		//File f = new File("c:\\Users\\user\\OneDrive\\Desktop");
-		 
-		if(inputDirectory.contains("cd")) {
-        String cdAndCommand[] =inputDirectory.split(" "); 
-                 
+		if(inputDirectory.equals("cd")) { // 처음으로 이동
+			return true;
+		}
+		else if(inputDirectory.equals("cd\\")) { // 처음으로 이동
+			location.setCurrentLocation("");
+			return true;
+		}
+		
+		else if(inputDirectory.equals("cd..")) { // 1단계 위로 이동
+			int slashCount=Constants.RESET;
+			String beforeCommand[] = location.getCurrentLocation().split("\\\\"); // \기준으로 문자열 스플릿
+						
+			slashCount = (countChar(location.getCurrentLocation(), '\\')); // \ 갯수세기
+			location.setCurrentLocation(""); // 초기화
+			
+			for(int index=Constants.FIRST_LOCATION; index<slashCount; index++) {
+				location.setCurrentLocation(location.getCurrentLocation() +"\\" +  beforeCommand[index]);
+			}
+			
+			return true;
+		}
+		
+		else if(inputDirectory.equals("cd..\\..")) { // 2단계 위로 이동
+			
+			int slashCount=Constants.RESET;
+			String beforeCommand[] = location.getCurrentLocation().split("\\\\"); // \기준으로 문자열 스플릿
+						
+			slashCount = (countChar(location.getCurrentLocation(), '\\')); // \ 갯수세기
+			location.setCurrentLocation(""); // 초기화
+			
+			for(int index=Constants.FIRST_LOCATION; index<slashCount-1; index++) {
+				location.setCurrentLocation(location.getCurrentLocation() +"\\" +  beforeCommand[index]);
+			}
+			return true;
+		}
+		
+		
+		else if(inputDirectory.contains("cd")) {	
+        String cdAndCommand[] =inputDirectory.split(" ");                 
 		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
 		File currentLocation = new File(location.getCurrentLocation() + directory);
 		
+		//System.out.println(inputDirectory);
+		//System.out.println(directory);
+		//System.out.println(currentLocation);
 		
 		 if(currentLocation.isDirectory()) {
 			 location.setCurrentLocation(location.getCurrentLocation() + directory);  // 현재 위치 저장 
@@ -45,13 +83,31 @@ public class Cd {
 		 else {
 			 location.setErrorMessage("지정된 경로를 찾을 수 없습니다.");            
 		    }
-		 
-		 //System.out.println("directory=" + directory);
-		 //System.out.println(location.getCurrentLocation());
 		 return currentLocation.isDirectory(); // true면 존재, false면 존재 x
 		}
 		
-		location.setErrorMessage("'"+inputDirectory+"'" + "은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다."); // cd를 쓰지 않으면 
-		return false;
+		else {
+			location.setErrorMessage("'"+inputDirectory+"'" + "은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다."); // cd를 쓰지 않으면 
+			return false;
+		}
 	}
+
+
+
+	public int countChar(String command, char slash) { // \ 개수세기
+		
+		int slashCount = Constants.RESET;         
+		
+		for (int index = Constants.START; index < command.length(); index++) {
+			if (command.charAt(index) == slash) { 
+				slashCount++;            
+				}        
+			}        
+		
+		return slashCount;   
+	}	
 }
+
+
+//System.out.println("directory=" + directory);
+//System.out.println(location.getCurrentLocation());
