@@ -1,5 +1,9 @@
 package views;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PrintLocation {
 
 	
@@ -17,5 +21,10 @@ public class PrintLocation {
 			System.out.println(errorMessage);
 			System.out.printf(location);
 		}
+	}
+	
+	public void printDir(SimpleDateFormat date, String attribute, String size, File dirList) {
+		
+		System.out.printf("%s %3s %6s %s \n",date.format(new Date(dirList.lastModified())), attribute,size,dirList.getName());
 	}
 }
