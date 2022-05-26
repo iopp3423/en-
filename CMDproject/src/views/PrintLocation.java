@@ -4,6 +4,8 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import utility.Constants;
+
 public class PrintLocation {
 
 	
@@ -26,6 +28,11 @@ public class PrintLocation {
 	public void printDir(SimpleDateFormat date, String attribute, String size, File dirList) {
 		
 		System.out.printf("%s %3s %6s %s \n",date.format(new Date(dirList.lastModified())), attribute,size,dirList.getName());
+	}
+	public void printFileAndDirectoryData(long directoryLength, long fileLength) {
+		
+		System.out.printf("%14s개 파일\n", directoryLength);
+		System.out.printf("%14s개 디렉터리\n\n", fileLength);
 	}
 	
 	public void printHelp() {

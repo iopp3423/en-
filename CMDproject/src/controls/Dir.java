@@ -24,36 +24,42 @@ public class Dir {
 	
 	public void printCurrentLocationDir() {
 		File currentLocation = new File(location.getCurrentLocation());
-		long length = Constants.RESET;
-		
-		
-		//if(currentLocation.isDirectory()) {
-		    File[] dirList = currentLocation.listFiles(); // 현재위치
-		    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd a HH:mm"); // 시간 
-		    
-		    for(int index=Constants.START; index < dirList.length; index++) {
-		    	
-		    String attribute = "";
-		    String size = "";
-		    
-		    if(dirList[index].isDirectory()){
-		        attribute = "DIR";
-		       }
-		    if(dirList[index].length() != Constants.RESET ) {
-		    	size = dirList[index].length() + "";
-		    }
-		    
-		   
-	            length ++;
-	        
-		    print.printDir(date, attribute, size, dirList[index]); // dir 출력
+		long directoryLength = Constants.RESET;	
+		long fileLength = Constants.RESET;
+		int d = 0;
+	    File[] dirList = currentLocation.listFiles(); // 현재위치
+	    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd a HH:mm"); // 시간 
+	    
+	    
+	    for(int index=Constants.START; index < dirList.length; index++) {
+	    	
+	    String attribute = "";
+	    String size = "";
+	    
+	    if(dirList[index].isDirectory()){ // 디렉토리이면  DIR 저장 
+	        attribute = "DIR" + d++; 	 	   
+	        directoryLength ++; // 디렉토리 개수 
+	       }
+	    else if(!dirList[index].isDirectory()) {
+	    	fileLength++; // 파일개수 
+	    	
+	    	if(dirList[index].length() != Constants.RESET) {
+	    		size = dirList[index].length() + ""; // 디렉토리 아닐 때 사이즈
+	    	}
+	    }
 
-		    }
-		    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
-		    System.out.println(length);
-		}
+	    
+        
+	    print.printDir(date, attribute, size, dirList[index]); // dir 출력
+
+	    }
+	    print.printFileAndDirectoryData(fileLength, directoryLength);
+	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
+	    System.out.println(fileLength);
+	    System.out.println(directoryLength);
+	}
 		
-	//}
+
 	
 	public long folderFileCount(File directory) {
 	    long length = 0;
