@@ -71,10 +71,6 @@ public class Cd {
 		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
 		File currentLocation = new File(location.getCurrentLocation() + directory);
 		
-		//System.out.println(inputDirectory);
-		//System.out.println(directory);
-		//System.out.println(currentLocation);
-		
 		 if(currentLocation.isDirectory()) {
 			 location.setCurrentLocation(location.getCurrentLocation() + directory);  // 현재 위치 저장 
 			 System.out.println("디렉토리 위치 맞음");

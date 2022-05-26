@@ -10,4 +10,5 @@ public class Constants {
 	public static final int COMMAND = 1;
 	
 	public static final boolean IS_ERROR = false;
+	public static final boolean IS_DESIGNATE_LOCATION_DIR = true;
 }

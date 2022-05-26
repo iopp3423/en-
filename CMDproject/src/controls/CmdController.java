@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import models.RouteLocation;
 import utility.Constants;
-import utility.InputCommand;
+import utility.dataProcessing;
 import views.PrintLocation;
 
 public class CmdController {
@@ -17,19 +17,21 @@ public class CmdController {
 	private Copy GoCopy;
 	private Dir GoDir;
 	private Move GoMove;
-	private InputCommand command;
+	private dataProcessing command;
 	private RouteLocation location;
 	private PrintLocation print;
+	private dataProcessing data;
 	
 	
 	public CmdController() {
-		command = new InputCommand();
+		command = new dataProcessing();
 		location = new RouteLocation();
 		print = new PrintLocation();
+		data = new dataProcessing();
 		GoCd = new Cd(location, print);
 		GoCls = new Cls();
 		GoCopy = new Copy();
-		GoDir = new Dir(location, print);
+		GoDir = new Dir(location, print, data);
 		GoMove = new Move();
 		print.printNotice();
 	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
@@ -40,7 +42,7 @@ public class CmdController {
 		String inputCommand = command.inputInstruction();
 	
 
-		if(inputCommand.contains("dir")) GoDir.printCurrentLocationDir();
+		if(inputCommand.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
 		else if (inputCommand.equals("help")) {
 			print.printHelp();

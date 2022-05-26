@@ -29,10 +29,14 @@ public class PrintLocation {
 		
 		System.out.printf("%s %3s %6s %s \n",date.format(new Date(dirList.lastModified())), attribute,size,dirList.getName());
 	}
-	public void printFileAndDirectoryData(long directoryLength, long fileLength) {
+	public void printFileAndDirectoryData(long fileLength, long directoryLength, String directoryByte,String fileByte) {
 		
-		System.out.printf("%14s개 파일\n", directoryLength);
-		System.out.printf("%14s개 디렉터리\n\n", fileLength);
+		System.out.printf("%14s개 파일 %17s바이트\n", fileLength, fileByte);
+		System.out.printf("%14s개 디렉터리 %15s바이트\n\n", directoryLength, directoryByte);
+	}
+	
+	public void printSentence(String sentence) {
+		System.out.println(sentence);
 	}
 	
 	public void printHelp() {
