@@ -1,6 +1,5 @@
 package start;
 
-
 import controls.CmdController;
 
 public class StartCmd {

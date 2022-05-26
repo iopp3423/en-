@@ -43,7 +43,7 @@ public class CmdController {
 	
 		if(inputCommand.contains("dir")) GoDir.dir();
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
-		
+		else GoCd.CheckLocationOrError(inputCommand);
 		}
 	}
 	
