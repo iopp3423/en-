@@ -16,7 +16,6 @@ public class CmdController {
 	private Cls GoCls;
 	private Copy GoCopy;
 	private Dir GoDir;
-	private Help GoHelp;
 	private Move GoMove;
 	private InputCommand command;
 	private RouteLocation location;
@@ -31,7 +30,6 @@ public class CmdController {
 		GoCls = new Cls();
 		GoCopy = new Copy();
 		GoDir = new Dir(location, print);
-		GoHelp = new Help();
 		GoMove = new Move();
 		print.printNotice();
 	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
@@ -41,6 +39,7 @@ public class CmdController {
 		while(true) {
 		String inputCommand = command.inputInstruction();
 	
+
 		if(inputCommand.contains("dir")) GoDir.printCurrentLocationDir();
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
 		else if (inputCommand.equals("help")) {
