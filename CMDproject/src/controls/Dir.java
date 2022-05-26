@@ -1,6 +1,10 @@
 package controls;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,7 +21,8 @@ public class Dir {
 		this.print = print;
 	}
 	
-	public void dir() {
+	
+	public void printCurrentLocationDir() {
 		File currentLocation = new File(location.getCurrentLocation());
 		
 		if(currentLocation.isDirectory()) {
@@ -27,6 +32,15 @@ public class Dir {
 		    for(int index=Constants.START; index < dirList.length; index++) {
 		        //System.out.println(dirList[index].getName());
 		    
+		   Path path = Paths.get(location.getCurrentLocation());
+		   try {
+			long bytes = Files.size(path);
+			System.out.println(bytes);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		   
 		    String attribute = "";
 		    String size = "";
 		    
@@ -36,8 +50,8 @@ public class Dir {
 		    if(dirList[index].length() != Constants.RESET ) {
 		    	size = dirList[index].length() + "";
 		    }
-
-		    print.printDir(date, attribute, size, dirList[index]); // dir 출력
+		    
+		    //print.printDir(date, attribute, size, dirList[index]); // dir 출력
 
 		    }
 		    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력

@@ -41,13 +41,16 @@ public class CmdController {
 		while(true) {
 		String inputCommand = command.inputInstruction();
 	
-		if(inputCommand.contains("dir")) GoDir.dir();
+		if(inputCommand.contains("dir")) GoDir.printCurrentLocationDir();
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
+		else if (inputCommand.equals("help")) {
+			print.printHelp();
+			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
+		}
 		else GoCd.CheckLocationOrError(inputCommand);
 		}
 	}
-	
-	
+
 	
 	
 	/*
