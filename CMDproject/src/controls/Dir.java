@@ -47,8 +47,8 @@ public class Dir {
 			 printCurrentLocationDir(Constants.IS_DESIGNATE_LOCATION_DIR);
 		} 
 		 
-		 else { // dir askldasdlkj입력했을 때
-			 print.printSentence(location.getCurrentLocation() + "디렉터리");
+		 else { // dir askldasdlkj 이상한 값 입력했을 때
+			 print.printSentence("C:" + location.getCurrentLocation() + "디렉터리");
 			 print.printSentence("파일을 찾을 수 없습니다.");  
 			 print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 		}
@@ -71,7 +71,7 @@ public class Dir {
 	    String size = "";
 	    
 	    if(dirList[index].isDirectory()){ // 디렉토리이면  DIR 저장 
-	        attribute = "DIR";	 	   
+	        attribute = "<DIR>";	 	   
 	        directoryLength++; // 디렉토리 개수 
 	        directoryByte += dirList[index].length(); // 디렉토리 용량 
 	       }
@@ -96,24 +96,4 @@ public class Dir {
 	    if(judgment == Constants.IS_DESIGNATE_LOCATION_DIR) location.setCurrentLocation(location.getTemporaryStorage());
 	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 	}
-		
-	
-
-    /*
-   // 디렉토리 전체 용량
-    System.out.println("전체 용량 : " +  FileUtils.sizeOfDirectory(new File(location.getCurrentLocation())) + "Byte");
-    
-    
-    // 하위의 모든 파일
-    for (File info : FileUtils.listFiles(new File(location.getCurrentLocation()), TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE)) {
-        System.out.println(info.getName());
-    }
-    
-     // 하위의 모든 디렉토리
-    for (File info : FileUtils.listFilesAndDirs(new File(location.getCurrentLocation()), TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE)) {
-        if(info.isDirectory()) {
-            System.out.println(info.getName());
-        }
-    }
-    */
 }

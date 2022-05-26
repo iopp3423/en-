@@ -48,6 +48,12 @@ public class CmdController {
 			print.printHelp();
 			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
 		}
+		else if(inputCommand.equals("cls")) {
+			for(int index=Constants.RESET; index <60; index++) {
+				print.printSentence("");
+			}
+			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
+		}
 		else GoCd.CheckLocationOrError(inputCommand);
 		}
 	}
