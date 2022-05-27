@@ -14,6 +14,10 @@ public class dataProcessing {
 	public String inputInstruction() {
 		String instruction = scan.nextLine();	
 		
+		if(instruction.contains("C:") || instruction.contains("c:")) {
+			instruction = instruction.replace("C:", "");
+			instruction = instruction.replace("c:", "");
+		}
 		return instruction;
 	}
 	

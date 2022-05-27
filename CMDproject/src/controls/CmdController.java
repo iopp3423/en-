@@ -39,19 +39,17 @@ public class CmdController {
 	public void cmdControl() {
 		while(true) {
 		String inputCommand = command.inputInstruction();
-		if(inputCommand.contains("C:") || inputCommand.contains("c:")) {
-			inputCommand = inputCommand.replace("C:", "");
-			inputCommand = inputCommand.replace("c:", "");
-		}
+		String instruction = inputCommand.substring(0,4);
+		System.out.println(instruction);
 		
-		if(inputCommand.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
-		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
-		else if(inputCommand.contains("move"))GoMove.moveController(inputCommand);
-		else if (inputCommand.equals("help")) {
+		if(instruction.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
+		else if(instruction.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
+		else if(instruction.contains("move"))GoMove.moveController(inputCommand);
+		else if (instruction.equals("help")) {
 			print.printHelp();
 			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
 		}
-		else if(inputCommand.equals("cls")) {
+		else if(instruction.equals("cls")) {
 			for(int index=Constants.RESET; index <Constants.CLS; index++) {
 				print.printSentence("");
 			}
