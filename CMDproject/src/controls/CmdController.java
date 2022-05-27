@@ -29,7 +29,7 @@ public class CmdController {
 		print = new PrintLocation();
 		data = new dataProcessing();
 		GoCd = new Cd(location, print);
-		GoCopy = new Copy();
+		GoCopy = new Copy(location, print);
 		GoDir = new Dir(location, print, data);
 		GoMove = new Moved(location, print);
 		print.printNotice();
@@ -39,22 +39,30 @@ public class CmdController {
 	public void cmdControl() {
 		while(true) {
 		String inputCommand = command.inputInstruction();
-		String instruction = inputCommand.substring(0,4);
+		String instruction = "";
+		
+		if(inputCommand.length() >= Constants.INSTRUCTION) {
+		instruction = inputCommand.substring(Constants.RESET, Constants.INSTRUCTION);
+		}
+		else instruction = inputCommand; // cd\, dir, cls입력시 명령어 다시 복붙
+		
 		System.out.println(instruction);
 		
 		if(instruction.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(instruction.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
 		else if(instruction.contains("move"))GoMove.moveController(inputCommand);
+		else if(instruction.contains("copy"))GoCopy.copyController(inputCommand);
 		else if (instruction.equals("help")) {
 			print.printHelp();
 			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
 		}
 		else if(instruction.equals("cls")) {
 			for(int index=Constants.RESET; index <Constants.CLS; index++) {
-				print.printSentence("");
+				print.printSentence("\n");
 			}
 			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
 		}
+
 		else GoCd.CheckLocationOrError(inputCommand);
 		}
 		

@@ -27,7 +27,6 @@ public class Moved {
 		}		
 		else {// move\\users\\user\onedrive\desktop\a.txt b.txt 3¹ø, // move\\users\\user\desktop\a.txt 5¹ø
 			MoveFileNewLocationToCurrentLocation(inputCommand);
-			System.out.println("55555");
 		}
 		
 		print.printSentence("C:" + location.getCurrentLocation() + ">");
