@@ -39,7 +39,11 @@ public class CmdController {
 	public void cmdControl() {
 		while(true) {
 		String inputCommand = command.inputInstruction();
-
+		if(inputCommand.contains("C:") || inputCommand.contains("c:")) {
+			inputCommand = inputCommand.replace("C:", "");
+			inputCommand = inputCommand.replace("c:", "");
+		}
+		
 		if(inputCommand.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
 		else if(inputCommand.contains("move"))GoMove.moveController(inputCommand);

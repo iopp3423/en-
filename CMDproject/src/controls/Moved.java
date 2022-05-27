@@ -61,15 +61,21 @@ public class Moved {
 		File oldFile = new File(location.getCurrentLocation() + "\\" + fileAndLocation[Constants.FILE]); // 현재위치 + 파일
 		File newFile = new File(newLocation + "\\" + file); // 지정위치 + 파일
 		
-		if(newLocation.isDirectory() && oldFile.renameTo(newFile)) { // 경로 맞고 파일 이동 성공했으면
+		if(newLocation.isDirectory()){	
+		
+			if(oldFile.renameTo(newFile)) { // 경로 맞고 파일 이동 성공했으면
 			print.printSentence("1개 파일을 이동하였습니다.\n");
-		}
+			}
+			else {
+				print.printSentence("지정된 파일을 찾을 수 없습니다.\n");// 경로에 파일이 업으면
+			}
+		}		
 		else {
 			print.printSentence("지정된 경로를 찾을 수 없습니다.\r\n"
 							+ "     0개 파일을 이동했습니다.\n");
 		}		
-	}
 	
+	}
 	
 	private void MoveFileNewLocationToNewLocation(String inputCommand) { // 4번
 		String files[] = sliceSentence(inputCommand);
