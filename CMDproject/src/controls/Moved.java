@@ -69,7 +69,7 @@ public class Moved {
 		File newFile = new File(newLocation + "\\" + file); // 지정위치 + 파일
 		
 		if(newLocation.isDirectory() && oldFile.renameTo(newFile)) { // 경로 맞고 파일 이동 성공했으면
-			print.printSentence("파일을 이동하였습니다.");
+			print.printSentence("1개 파일을 이동하였습니다.");
 		}
 		else {
 			print.printSentence("지정된 경로를 찾을 수 없습니다.\r\n"
@@ -88,7 +88,7 @@ public class Moved {
 
 		if(startLocation.isDirectory() && destinaionLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
 			if(startFile.renameTo(destinaionFile)){
-				print.printSentence("파일을 이동하였습니다.");
+				print.printSentence("1개 파일을 이동하였습니다.");
 			}
 			else {
 				print.printSentence("지정된 파일을 찾을 수 없습니다.");
@@ -97,32 +97,25 @@ public class Moved {
 		else {
 			print.printSentence("지정된 경로를 찾을 수 없습니다.");
 		}		
-		
-		//System.out.println(startFile);
-		//System.out.println(destinaionFile);
-		//System.out.println(startLocation);
-		//System.out.println(destinaionLocation);
 	}
+	
 			
 	private void MoveFileNewLocationToCurrentLocation(String inputCommand) {
 		inputCommand = inputCommand.replace("move", "");
 		String files[];
 		String file = extractFile(inputCommand);
-		File newLocation = new File(extractRoute(inputCommand)); // move\\users\\user\onedrive\desktop\
+		File newLocation = new File(extractRoute(inputCommand)); // move\\users\\user\onedrive\desktop
 		File currentLocaion = new File(location.getCurrentLocation()); // 현재위치
-		
-		
-		
+
+				
 		if(file.contains(" ")) { // move\\users\\user\onedrive\desktop\a.txt b.txt 경우
 			files = sliceSentence(file);
 			
 			File startFile = new File(newLocation + "\\" + files[Constants.OLD_FILE]);
 			File destinaionFile = new File(location.getCurrentLocation() + "\\" + files[Constants.NEW_FILE]);
-			System.out.println(startFile);
-			System.out.println(destinaionFile);
 			if(currentLocaion.isDirectory() && newLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
 				if(startFile.renameTo(destinaionFile)){
-					print.printSentence("파일을 이동하였습니다.");
+					print.printSentence("1개 파일을 이동하였습니다.");
 				}
 				else {
 					print.printSentence("지정된 파일을 찾을 수 없습니다.");
@@ -132,12 +125,31 @@ public class Moved {
 				print.printSentence("지정된 경로를 찾을 수 없습니다.");
 			}		
 		}
+		
+		else {
+			File startFile = new File(newLocation + "\\" + file);
+			File destinationFile = new File(location.getCurrentLocation() + "\\" + file);
+			System.out.println(startFile);
+			System.out.println(destinationFile);
+			if(currentLocaion.isDirectory() && newLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
+				
+				if(startFile.renameTo(destinationFile)){
+					print.printSentence("1개 파일을 이동하였습니다.");
+					System.out.println("ddddddd");
+				}
+				else {
+					print.printSentence("지정된 파일을 찾을 수 없습니다.");
+					System.out.println("ddddddd");
+				}
+			}
+			else {
+				print.printSentence("지정된 경로를 찾을 수 없습니다.");
+				System.out.println("ddddddd");
+			}
+		}
 
 	}
 
-		
-	
-	
 	
 	private String[] sliceSentence(String inputCommand) {
 		String slicedSentence[] = inputCommand.split(" ");
