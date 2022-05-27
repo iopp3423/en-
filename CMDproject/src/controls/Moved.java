@@ -18,18 +18,23 @@ public class Moved {
 	}
 
 	public void moveController(String inputCommand) {
+		//move a.txt b.txt 1번 
 		if(inputCommand.contains("move ") && !inputCommand.contains("\\")) MoveFileCurrentLocationToCurrentLocation(inputCommand);  //move a.txt b.txt
-		//  move a.txt b.txt
+		// move\\users\\user\onedrive\desktop\a.txt \\users\\user\onedrive\desktop\b.txt 4번 
+		else if(checkBlankAndSlash(inputCommand, " \\") == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) {
+			MoveFileNewLocationToNewLocation(inputCommand);
+			System.out.println("44444");
+		}
+		// move a.txt users\\user\onedrive\desktop\b.txt 2번 
 		else if(blankCount(inputCommand, ' ') == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) {
 			MoveFileCurrentLocationToDestinationLocation(inputCommand);
 			System.out.println("22222222");
-		}
-		// move a.txt users\\user\onedrive\desktop\b.txt
-		else if(inputCommand.contains(" \\")) System.out.println("44444");
-		// move\\users\\user\onedrive\desktop\a.txt \\users\\user\onedrive\desktop\b.txt
+		}		
+		// move\\users\\user\onedrive\desktop\a.txt b.txt 3번
+		// move\\users\\user\desktop\a.txt 5번
 		else System.out.println("55555");
-		// move\\users\\user\onedrive\desktop\a.txt b.txt
-		// move\\users\\user\desktop\a.txt 
+		
+		print.printSentence("C:" + location.getCurrentLocation() + ">");
 	}
 	
 	
@@ -46,11 +51,10 @@ public class Moved {
 		else{
 			print.printMoveFileSucessOrFail("지정된 파일을 찾을 수 없습니다.", !Constants.IS_SUCESS);
 		}
-		print.printSentence("C:" + location.getCurrentLocation() + ">");
 	}
 	
 	
-	public void MoveFileCurrentLocationToDestinationLocation(String inputCommand) {
+	private void MoveFileCurrentLocationToDestinationLocation(String inputCommand) { // 현재 위치에서 데스크탑에 b.txt으로 파일 이동
 		String file =  extractFile(inputCommand);  // move a.txt \\users\\user\onedrive\desktop\b.txt -> b.txt 추출
 		String route = extractRoute(inputCommand); // move a.txt \\users\\user\onedrive\desktop\ 추출
 		String fileAndLocation[];
@@ -62,7 +66,7 @@ public class Moved {
 		File newFile = new File(newLocation + "\\" + file); // 지정위치 + 파일
 		
 		if(newLocation.isDirectory() && oldFile.renameTo(newFile)) { // 경로 맞고 파일 이동 성공했으면
-			System.out.println("파일을 이동하였습니다.");
+			print.printSentence("파일을 이동하였습니다.");
 		}
 		else {
 			print.printSentence("지정된 경로를 찾을 수 없습니다.\r\n"
@@ -71,13 +75,45 @@ public class Moved {
 	}
 	
 	
+	private void MoveFileNewLocationToNewLocation(String inputCommand) {
+		String files[] = sliceSentence(inputCommand);
+
+		File startFile = new File(files[Constants.START_LOCAION]);
+		File destinaionFile = new File(files[Constants.DESTINATION_LOCAION]);		
+		File startLocation = new File(extractRoute(files[Constants.START_LOCAION]));
+		File destinaionLocation = new File(extractRoute(files[Constants.DESTINATION_LOCAION]));
+
+		if(startLocation.isDirectory() && destinaionLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
+			if(startFile.renameTo(destinaionFile)){
+				print.printSentence("파일을 이동하였습니다.");
+			}
+			else {
+				print.printSentence("지정된 파일을 찾을 수 없습니다.");
+			}
+		}
+		else {
+			print.printSentence("지정된 경로를 찾을 수 없습니다.");
+		}		
+		
+		//System.out.println(startFile);
+		//System.out.println(destinaionFile);
+		//System.out.println(startLocation);
+		//System.out.println(destinaionLocation);
+	}
+			
+	
+
+		
+	
+	
+	
 	private String[] sliceSentence(String inputCommand) {
 		String slicedSentence[] = inputCommand.split(" ");
 			return slicedSentence;
 	}
 	
 	
-	private int blankCount(String command, char string) { // 공백 개수세기
+	private int blankCount(String command, char string) { 
 		
 		int blankCount = Constants.RESET;         
 		
@@ -90,12 +126,23 @@ public class Moved {
 		return blankCount;   
 	}
 	
+	private int checkBlankAndSlash(String command, String blank) {
+		int blankAndSlashCount = Constants.RESET;
+		for (int index = Constants.RESET; index < command.length(); index++) {
+            if (command.substring(index).startsWith(blank)) {
+            	blankAndSlashCount++;
+            }
+        }
+		
+		
+		return blankAndSlashCount;
+	}
+	
 	public String extractFile(String sentence) {
 		Pattern pattern = Pattern.compile("[^\\\\/\\n]+$");
 		
 		Matcher matcher = pattern.matcher(sentence);
 		while (matcher.find()) {
-			//System.out.println(matcher.group());
 			return matcher.group();
 		}
 		return "";
@@ -106,7 +153,6 @@ public class Moved {
 		
 		Matcher matcher = pattern.matcher(sentence);
 		while (matcher.find()) {
-			//System.out.println(matcher.group());
 			return matcher.group();
 		}
 		return "";
