@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import models.RouteLocation;
 import utility.Constants;
@@ -21,7 +23,6 @@ public class CmdController {
 	private PrintLocation print;
 	private dataProcessing data;
 	
-	//https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=choilee6&logNo=70165346445
 	public CmdController() {
 		command = new dataProcessing();
 		location = new RouteLocation();
@@ -38,7 +39,7 @@ public class CmdController {
 	public void cmdControl() {
 		while(true) {
 		String inputCommand = command.inputInstruction();
-	
+		test(inputCommand);
 
 		if(inputCommand.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
@@ -55,8 +56,19 @@ public class CmdController {
 		}
 		else GoCd.CheckLocationOrError(inputCommand);
 		}
+		
 	}
 
+	public void test(String sentence) {
+		String change="";
+		Pattern pattern = Pattern.compile(".+\\\\(?=.+)");
+		
+		Matcher matcher = pattern.matcher(sentence);
+		while (matcher.find()) {
+			System.out.println(matcher.group());
+		}
+		System.out.println("½ÇÆÐ");
+	}
 	
 	
 	/*
