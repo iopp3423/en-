@@ -29,6 +29,8 @@ public class PrintLocation {
 		
 		System.out.printf("%s %3s %6s %s \n",date.format(new Date(dirList.lastModified())), attribute,size,dirList.getName());
 	}
+	
+	
 	public void printFileAndDirectoryData(long fileLength, long directoryLength, String directoryByte,String fileByte) {
 		
 		System.out.printf("%14s개 파일 %17s바이트\n", fileLength, fileByte);
@@ -36,7 +38,12 @@ public class PrintLocation {
 	}
 	
 	public void printSentence(String sentence) {
-		System.out.println(sentence);
+		System.out.printf(sentence);
+	}
+	
+	public void printMoveFileSucessOrFail(String sentence , boolean IS_SUCESS) { // move a.txt b.txt 출력 
+		if(IS_SUCESS)System.out.printf("%20s\n\n", sentence);
+		else if(!IS_SUCESS)System.out.println(sentence + "\n");
 	}
 	
 	public void printHelp() {

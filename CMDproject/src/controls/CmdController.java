@@ -30,7 +30,7 @@ public class CmdController {
 		GoCd = new Cd(location, print);
 		GoCopy = new Copy();
 		GoDir = new Dir(location, print, data);
-		GoMove = new Moved();
+		GoMove = new Moved(location, print);
 		print.printNotice();
 	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 	}
@@ -42,7 +42,7 @@ public class CmdController {
 
 		if(inputCommand.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
-		else if(inputCommand.contains("move"))System.out.println("ddd");
+		else if(inputCommand.contains("move"))GoMove.moveController(inputCommand);
 		else if (inputCommand.equals("help")) {
 			print.printHelp();
 			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
