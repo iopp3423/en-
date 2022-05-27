@@ -1,5 +1,5 @@
 package controls;
 
-public class Move {
+public class Moved {
 
 }

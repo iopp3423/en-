@@ -13,26 +13,24 @@ import views.PrintLocation;
 
 public class CmdController {
 	private Cd GoCd;
-	private Cls GoCls;
 	private Copy GoCopy;
 	private Dir GoDir;
-	private Move GoMove;
+	private Moved GoMove;
 	private dataProcessing command;
 	private RouteLocation location;
 	private PrintLocation print;
 	private dataProcessing data;
 	
-	
+	//https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=choilee6&logNo=70165346445
 	public CmdController() {
 		command = new dataProcessing();
 		location = new RouteLocation();
 		print = new PrintLocation();
 		data = new dataProcessing();
 		GoCd = new Cd(location, print);
-		GoCls = new Cls();
 		GoCopy = new Copy();
 		GoDir = new Dir(location, print, data);
-		GoMove = new Move();
+		GoMove = new Moved();
 		print.printNotice();
 	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 	}
@@ -44,12 +42,13 @@ public class CmdController {
 
 		if(inputCommand.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
+		else if(inputCommand.contains("move"))System.out.println("ddd");
 		else if (inputCommand.equals("help")) {
 			print.printHelp();
 			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
 		}
 		else if(inputCommand.equals("cls")) {
-			for(int index=Constants.RESET; index <60; index++) {
+			for(int index=Constants.RESET; index <Constants.CLS; index++) {
 				print.printSentence("");
 			}
 			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
