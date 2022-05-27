@@ -39,7 +39,6 @@ public class CmdController {
 	public void cmdControl() {
 		while(true) {
 		String inputCommand = command.inputInstruction();
-		//test(inputCommand);
 
 		if(inputCommand.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
@@ -59,33 +58,4 @@ public class CmdController {
 		
 	}
 
-	public void test(String sentence) {
-		String change="";
-		Pattern pattern = Pattern.compile(".+(\\?<=.+$)");
-		
-		Matcher matcher = pattern.matcher(sentence);
-		while (matcher.find()) {
-			System.out.println(matcher.group());
-		}
-		System.out.println("실패");
-	}
-	
-	
-	/*
-	File f = new File("c:\\Users\\user\\OneDrive\\Desktop");
-    if(f.isDirectory()) {
-        System.out.println("디랙토리");  
-    } else {
-        System.out.println("지정된 경로를 찾을 수 없습니다.");            
-    }*/
-
-    
-    //파일의 존재 여부
-	//System.out.println(f.getAbsolutePath()); 
-    //System.out.println("파일의 존재 여부 " + f.exists());
-    //System.out.println("파일의 크기 " + f.length());
-    //System.out.println("파일의 마지막 수정날짜 " + f.lastModified()/1000/86400);
-    //System.getProperty ("user.home") ;
-    //String home = System.getProperty("user.home");
-    //System.out.println(location.getHome());
 }

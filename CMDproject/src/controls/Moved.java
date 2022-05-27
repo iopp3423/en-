@@ -18,21 +18,14 @@ public class Moved {
 	}
 
 	public void moveController(String inputCommand) {
-		//move a.txt b.txt 1번 
-		if(inputCommand.contains("move ") && !inputCommand.contains("\\")) MoveFileCurrentLocationToCurrentLocation(inputCommand);  //move a.txt b.txt
-		// move\\users\\user\onedrive\desktop\a.txt \\users\\user\onedrive\desktop\b.txt 4번 
-		else if(checkBlankAndSlash(inputCommand, " \\") == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) {
+		if(inputCommand.contains("move ") && !inputCommand.contains("\\")) MoveFileCurrentLocationToCurrentLocation(inputCommand);  //move a.txt b.txt 1번 
+		else if(checkBlankAndSlash(inputCommand, " \\") == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) {// move\\users\\user\onedrive\desktop\a.txt \\users\\user\onedrive\desktop\b.txt 4번 
 			MoveFileNewLocationToNewLocation(inputCommand);
-			//System.out.println("44444");
 		}
-		// move a.txt users\\user\onedrive\desktop\b.txt 2번 
-		else if(blankCount(inputCommand, ' ') == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) {
+		else if(blankCount(inputCommand, ' ') == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) { // move a.txt users\\user\onedrive\desktop\b.txt 2번 
 			MoveFileCurrentLocationToNewLocation(inputCommand);
-			//System.out.println("22222222");
 		}		
-		// move\\users\\user\onedrive\desktop\a.txt b.txt 3번
-		// move\\users\\user\desktop\a.txt 5번
-		else {
+		else {// move\\users\\user\onedrive\desktop\a.txt b.txt 3번, // move\\users\\user\desktop\a.txt 5번
 			MoveFileNewLocationToCurrentLocation(inputCommand);
 			System.out.println("55555");
 		}
@@ -41,7 +34,7 @@ public class Moved {
 	}
 	
 	
-	private void MoveFileCurrentLocationToCurrentLocation(String inputCommand) {
+	private void MoveFileCurrentLocationToCurrentLocation(String inputCommand) { // 1번
 		String slicedSentence[];
 		slicedSentence = sliceSentence(inputCommand);
 		
@@ -57,7 +50,7 @@ public class Moved {
 	}
 	
 	
-	private void MoveFileCurrentLocationToNewLocation(String inputCommand) { // 현재 위치에서 데스크탑에 b.txt으로 파일 이동
+	private void MoveFileCurrentLocationToNewLocation(String inputCommand) { // 현재 위치에서 데스크탑에 b.txt으로 파일 이동 2번
 		String file =  extractFile(inputCommand);  // move a.txt \\users\\user\onedrive\desktop\b.txt -> b.txt 추출
 		String route = extractRoute(inputCommand); // move a.txt \\users\\user\onedrive\desktop\ 추출
 		String fileAndLocation[];
@@ -69,38 +62,29 @@ public class Moved {
 		File newFile = new File(newLocation + "\\" + file); // 지정위치 + 파일
 		
 		if(newLocation.isDirectory() && oldFile.renameTo(newFile)) { // 경로 맞고 파일 이동 성공했으면
-			print.printSentence("1개 파일을 이동하였습니다.");
+			print.printSentence("1개 파일을 이동하였습니다.\n");
 		}
 		else {
 			print.printSentence("지정된 경로를 찾을 수 없습니다.\r\n"
-							+ "     0개 파일을 이동했습니다.");
+							+ "     0개 파일을 이동했습니다.\n");
 		}		
 	}
 	
 	
-	private void MoveFileNewLocationToNewLocation(String inputCommand) {
+	private void MoveFileNewLocationToNewLocation(String inputCommand) { // 4번
 		String files[] = sliceSentence(inputCommand);
 
 		File startFile = new File(files[Constants.START_LOCAION]);
-		File destinaionFile = new File(files[Constants.DESTINATION_LOCAION]);		
+		File destinationFile = new File(files[Constants.DESTINATION_LOCAION]);		
 		File startLocation = new File(extractRoute(files[Constants.START_LOCAION]));
 		File destinaionLocation = new File(extractRoute(files[Constants.DESTINATION_LOCAION]));
 
-		if(startLocation.isDirectory() && destinaionLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
-			if(startFile.renameTo(destinaionFile)){
-				print.printSentence("1개 파일을 이동하였습니다.");
-			}
-			else {
-				print.printSentence("지정된 파일을 찾을 수 없습니다.");
-			}
-		}
-		else {
-			print.printSentence("지정된 경로를 찾을 수 없습니다.");
-		}		
+		CheckFileAndDirectoryAfterPrint(startLocation, destinaionLocation, startFile, destinationFile);	
+		
 	}
 	
 			
-	private void MoveFileNewLocationToCurrentLocation(String inputCommand) {
+	private void MoveFileNewLocationToCurrentLocation(String inputCommand) { // 3, 5번 
 		inputCommand = inputCommand.replace("move", "");
 		String files[];
 		String file = extractFile(inputCommand);
@@ -109,43 +93,16 @@ public class Moved {
 
 				
 		if(file.contains(" ")) { // move\\users\\user\onedrive\desktop\a.txt b.txt 경우
-			files = sliceSentence(file);
-			
+			files = sliceSentence(file);	
 			File startFile = new File(newLocation + "\\" + files[Constants.OLD_FILE]);
-			File destinaionFile = new File(location.getCurrentLocation() + "\\" + files[Constants.NEW_FILE]);
-			if(currentLocaion.isDirectory() && newLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
-				if(startFile.renameTo(destinaionFile)){
-					print.printSentence("1개 파일을 이동하였습니다.");
-				}
-				else {
-					print.printSentence("지정된 파일을 찾을 수 없습니다.");
-				}
-			}
-			else {
-				print.printSentence("지정된 경로를 찾을 수 없습니다.");
-			}		
+			File destinationFile = new File(location.getCurrentLocation() + "\\" + files[Constants.NEW_FILE]);
+			CheckFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);					
 		}
 		
 		else {
 			File startFile = new File(newLocation + "\\" + file);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + file);
-			System.out.println(startFile);
-			System.out.println(destinationFile);
-			if(currentLocaion.isDirectory() && newLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
-				
-				if(startFile.renameTo(destinationFile)){
-					print.printSentence("1개 파일을 이동하였습니다.");
-					System.out.println("ddddddd");
-				}
-				else {
-					print.printSentence("지정된 파일을 찾을 수 없습니다.");
-					System.out.println("ddddddd");
-				}
-			}
-			else {
-				print.printSentence("지정된 경로를 찾을 수 없습니다.");
-				System.out.println("ddddddd");
-			}
+			CheckFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);	
 		}
 
 	}
@@ -200,5 +157,21 @@ public class Moved {
 			return matcher.group();
 		}
 		return "";
+	}
+	
+	private void CheckFileAndDirectoryAfterPrint(File startLocation, File destinaionLocation, File startFile, File destinationFile) {
+		
+		if(startLocation.isDirectory() && destinaionLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
+			
+			if(startFile.renameTo(destinationFile)){
+				print.printSentence("1개 파일을 이동하였습니다.\n");
+			}
+			else {
+				print.printSentence("지정된 파일을 찾을 수 없습니다.\n");
+			}
+		}
+		else {
+			print.printSentence("지정된 경로를 찾을 수 없습니다.\n");
+		}
 	}
 }
