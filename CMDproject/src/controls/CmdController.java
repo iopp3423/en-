@@ -39,7 +39,7 @@ public class CmdController {
 	public void cmdControl() {
 		while(true) {
 		String inputCommand = command.inputInstruction();
-		test(inputCommand);
+		//test(inputCommand);
 
 		if(inputCommand.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(inputCommand.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
@@ -61,7 +61,7 @@ public class CmdController {
 
 	public void test(String sentence) {
 		String change="";
-		Pattern pattern = Pattern.compile(".+\\\\(?=.+)");
+		Pattern pattern = Pattern.compile(".+(\\?<=.+$)");
 		
 		Matcher matcher = pattern.matcher(sentence);
 		while (matcher.find()) {
