@@ -33,4 +33,55 @@ public class dataProcessing {
         }        
         return changeResult;
     }
+	
+	public String[] sliceSentence(String inputCommand) {
+		String slicedSentence[] = inputCommand.split(" ");
+			return slicedSentence;
+	}
+	
+	
+	public int blankCount(String command, char string) { 
+		
+		int blankCount = Constants.RESET;         
+		
+		for (int index = Constants.START; index < command.length(); index++) {
+			if (command.charAt(index) == string) { 
+				blankCount++;            
+				}        
+			}        
+		
+		return blankCount;   
+	}
+	
+	public int checkBlankAndSlash(String command, String blank) {
+		int blankAndSlashCount = Constants.RESET;
+		for (int index = Constants.RESET; index < command.length(); index++) {
+            if (command.substring(index).startsWith(blank)) {
+            	blankAndSlashCount++;
+            }
+        }
+		
+		
+		return blankAndSlashCount;
+	}
+	
+	public String extractFile(String sentence) {
+		Pattern pattern = Pattern.compile("[^\\\\/\\n]+$");
+		
+		Matcher matcher = pattern.matcher(sentence);
+		while (matcher.find()) {
+			return matcher.group();
+		}
+		return "";
+	}
+	
+	public String extractRoute(String sentence) {
+		Pattern pattern = Pattern.compile(".+\\\\(?=.+)");
+		
+		Matcher matcher = pattern.matcher(sentence);
+		while (matcher.find()) {
+			return matcher.group();
+		}
+		return "";
+	}
 }
