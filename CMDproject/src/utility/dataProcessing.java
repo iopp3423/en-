@@ -21,6 +21,16 @@ public class dataProcessing {
 		return instruction;
 	}
 	
+	public boolean is_inputYesOrNo() {
+		String instruction = scan.nextLine();
+		
+		if(instruction.equals("y") || instruction.equals("yes")) return true;
+		if(instruction.equals("Y") || instruction.equals("Yes")) return true;
+		else if(instruction.equals("n") || instruction.equals("no")) return false;
+		else if(instruction.equals("N") || instruction.equals("No")) return false;
+		else return true;
+	}
+	
 	public String setComma(String number) { // ,찍기 
         String changeResult = number; // 출력할 결과를 저장할 변수
         Pattern pattern = Pattern.compile("(^[+-]?\\d+)(\\d{3})"); //정규표현식 
