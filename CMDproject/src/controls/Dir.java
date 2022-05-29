@@ -35,7 +35,7 @@ public class Dir {
 			}	
 	}
 	
-	public void printDesignateLocationDir(String inputDirectory) {// 위치 지정 후 dir 출력
+	private void printDesignateLocationDir(String inputDirectory) {// 위치 지정 후 dir 출력
 		
 	    String cdAndCommand[] = inputDirectory.split(" ");                 
 		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
@@ -54,8 +54,7 @@ public class Dir {
 		}
 	}
 	
-	
-	public void printCurrentLocationDir(boolean judgment) { // 현재위치 dir 저장
+	private void printCurrentLocationDir(boolean judgment) { // 현재위치 dir 저장
 		String storedLocation = location.getCurrentLocation();
 		if(storedLocation.equals("")) storedLocation = "\\"; // 루트 폴더일 때 
 		
@@ -77,7 +76,6 @@ public class Dir {
 	    if(dirList[index].isDirectory() && !dirList[index].isHidden()){ // 디렉토리이면  DIR 저장 
 	        attribute = "<DIR>";	 	   
 	        directoryLength++; // 디렉토리 개수 
-	        directoryByte += dirList[index].length(); // 디렉토리 용량 
 	    	print.printDir(date, attribute, size, dirList[index]); // dir 출력
 	       }
 	    
@@ -93,8 +91,9 @@ public class Dir {
 	    	print.printDir(date, attribute, size, dirList[index]); // dir 출력
 	        
 	    }
+
 	   }
-	    
+	    directoryByte = currentLocation.getUsableSpace();
 	    print.printFileAndDirectoryData(fileLength, directoryLength, data.setComma(Long.toString(fileByte)), data.setComma(Long.toString(directoryByte)));
 	     
 	    

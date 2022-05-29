@@ -34,7 +34,7 @@ public class PrintLocation {
 	public void printFileAndDirectoryData(long fileLength, long directoryLength,String fileByte, String directoryByte) {
 		
 		System.out.printf("%14s개 파일 %17s바이트\n", fileLength, fileByte);
-		System.out.printf("%14s개 디렉터리 %15s바이트\n\n", directoryLength, directoryByte);
+		System.out.printf("%14s개 디렉터리 %15s바이트남음\n\n", directoryLength, directoryByte);
 	}
 	
 	public void printSentence(String sentence) {
