@@ -41,7 +41,7 @@ public class CmdController {
 		while(true) {
 		String inputCommand = command.inputInstruction();
 		String instruction = "";
-
+		
 		if(inputCommand.length() >= Constants.INSTRUCTION) {
 		instruction = inputCommand.substring(Constants.RESET, Constants.INSTRUCTION);
 		}
@@ -64,8 +64,8 @@ public class CmdController {
 		}
 
 		else GoCd.CheckLocationOrError(inputCommand);
-		}
-		
+
+		}	
 	}
 
 }

@@ -111,7 +111,7 @@ public class dataProcessing {
 		return "";
 	}
 	
-	public int countChar(String command, char slash) { // \ 개수세기
+	public int countSlash(String command, char slash) { // \ 개수세기
 		
 		int slashCount = Constants.RESET;         
 		

@@ -23,9 +23,16 @@ public class Cd {
 	
 	public void CheckLocationOrError(String inputDirectory) {
 		
+		//System.out.println(location.getCurrentLocation());
 		if(CheckDirectoryAndStoreLocation(inputDirectory)) { // 경로가 맞으면 
-			 print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
-		    } 
+			if(location.getCurrentLocation().equals("")) { // root폴더이면 
+				print.printCurrentLocation("C:\\" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
+			}
+			else{
+				print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
+			}
+		 } 
+		
 		 else { // 경로가 맞지 않으면
 			 print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), Constants.IS_ERROR);  // 지정된 경로를 찾을 수 없습니다 출력 
 		    }
@@ -51,11 +58,11 @@ public class Cd {
 		int slashCount=Constants.RESET;
 		String beforeCommand[] = location.getCurrentLocation().split("\\\\"); // \기준으로 문자열 스플릿
 					
-		slashCount = (data.countChar(location.getCurrentLocation(), '\\')); // \ 갯수세기
+		slashCount = (data.countSlash(location.getCurrentLocation(), '\\')); // \ 갯수세기
 		location.setCurrentLocation(""); // 초기화
 		
 		for(int index=Constants.FIRST_LOCATION; index<slashCount; index++) {
-			location.setCurrentLocation(location.getCurrentLocation() +"\\" +  beforeCommand[index]);
+			location.setCurrentLocation(location.getCurrentLocation() + "\\" +  beforeCommand[index]);
 		}
 		
 		return true;
@@ -65,7 +72,7 @@ public class Cd {
 		int slashCount=Constants.RESET;
 		String beforeCommand[] = location.getCurrentLocation().split("\\\\"); // \기준으로 문자열 스플릿
 					
-		slashCount = (data.countChar(location.getCurrentLocation(), '\\')); // \ 갯수세기
+		slashCount = (data.countSlash(location.getCurrentLocation(), '\\')); // \ 갯수세기
 		location.setCurrentLocation(""); // 초기화
 		
 		for(int index=Constants.FIRST_LOCATION; index<slashCount-Constants.TWO_STEP_UP; index++) {

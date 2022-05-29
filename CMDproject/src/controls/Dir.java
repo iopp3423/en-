@@ -43,7 +43,6 @@ public class Dir {
 		
 		 if(currentLocation.isDirectory()) {
 			 location.setCurrentLocation(location.getCurrentLocation() + directory);  // 현재 위치 저장 
-			 System.out.println("디렉토리 위치 맞음");
 			 printCurrentLocationDir(Constants.IS_DESIGNATE_LOCATION_DIR);
 		} 
 		 
@@ -54,8 +53,12 @@ public class Dir {
 		}
 	}
 	
+	
 	public void printCurrentLocationDir(boolean judgment) { // 현재위치 dir 저장
-		File currentLocation = new File(location.getCurrentLocation());
+		String storedLocation = location.getCurrentLocation();
+		if(storedLocation.equals("")) storedLocation = "\\"; // 루트 폴더일 때 
+		
+		File currentLocation = new File(storedLocation);
 		long directoryLength = Constants.RESET;	
 		long fileLength = Constants.RESET;
 		long directoryByte = Constants.RESET;
@@ -70,13 +73,14 @@ public class Dir {
 	    String attribute = "";
 	    String size = "";
 	    
-	    if(dirList[index].isDirectory()){ // 디렉토리이면  DIR 저장 
+	    if(dirList[index].isDirectory() && !dirList[index].isHidden()){ // 디렉토리이면  DIR 저장 
 	        attribute = "<DIR>";	 	   
 	        directoryLength++; // 디렉토리 개수 
 	        directoryByte += dirList[index].length(); // 디렉토리 용량 
+	    	print.printDir(date, attribute, size, dirList[index]); // dir 출력
 	       }
 	    
-	    else if(!dirList[index].isDirectory()) {
+	    else if(!dirList[index].isDirectory() && !dirList[index].isHidden()) {
 	    	
 	    	if(dirList[index].isFile()) {
 		    	fileLength++; // 파일개수 
@@ -85,10 +89,10 @@ public class Dir {
 	    	if(dirList[index].length() != Constants.RESET) {
 	    		size = dirList[index].length() + ""; // 디렉토리 아닐 때 0 이면 ""로 치환
 	    	}
+	    	print.printDir(date, attribute, size, dirList[index]); // dir 출력
+	        
 	    }
-
-	    print.printDir(date, attribute, size, dirList[index]); // dir 출력
-	    }
+	   }
 	    
 	    print.printFileAndDirectoryData(fileLength, directoryLength, data.setComma(Long.toString(fileByte)), data.setComma(Long.toString(directoryByte)));
 	     
