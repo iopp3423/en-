@@ -47,8 +47,9 @@ public class Dir {
 		} 
 		 
 		 else { // dir askldasdlkj 이상한 값 입력했을 때
-			 print.printSentence("C:" + location.getCurrentLocation() + "디렉터리");
-			 print.printSentence("파일을 찾을 수 없습니다.");  
+			 print.printSentence(" C 드라이브의 볼륨에는 이름이 없습니다.\n 볼륨 일련 번호 : BAF3-12D7\n\n");
+			 print.printSentence("C:" + location.getCurrentLocation() + " 디렉터리\n\n");
+			 print.printSentence("파일을 찾을 수 없습니다.\n\n");  
 			 print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 		}
 	}
