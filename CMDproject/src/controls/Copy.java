@@ -24,8 +24,13 @@ public class Copy {
 	
 	//StandardCopyOption.REPLACE_EXISTING 덮어쓰기
 	
-	public void copyController(String inputCommand) {
-		if(inputCommand.contains("copy ") && !inputCommand.contains("\\")) copyFileCurrentLocationToCurrentLocation(inputCommand);  //copy a.txt b.txt 1번 
+	public void controlCopy(String inputCommand) {
+		if(inputCommand.equals("copy")) {
+			print.printSentence("명령 구문이 올바르지 않습니다.\n\n");
+		}
+		else if(inputCommand.contains("copy ") && !inputCommand.contains("\\")) {
+			copyFileCurrentLocationToCurrentLocation(inputCommand);  //copy a.txt b.txt 1번 
+		}
 		else if(data.checkBlankAndSlash(inputCommand, " \\") == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) {// copy\\users\\user\onedrive\desktop\a.txt \\users\\user\onedrive\desktop\b.txt 4번 
 			copyFileNewLocationToNewLocation(inputCommand);
 		}
@@ -155,7 +160,7 @@ public class Copy {
 			}	
 		}
 		else {
-			print.printSentence("지정된 경로를 찾을 수 없습니다.");
+			print.printSentence("지정된 경로를 찾을 수 없습니다.\n");
 		}
 	}
 }

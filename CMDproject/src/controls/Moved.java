@@ -20,8 +20,13 @@ public class Moved {
 		this.data = data;
 	}
 
-	public void moveController(String inputCommand) {
-		if(inputCommand.contains("move ") && !inputCommand.contains("\\")) moveFileCurrentLocationToCurrentLocation(inputCommand);  //move a.txt b.txt 1번 
+	public void controlMove(String inputCommand) {
+		if(inputCommand.equals("move")) {
+			print.printSentence("명령 구문이 올바르지 않습니다.\n\n");
+		}
+		else if(inputCommand.contains("move ") && !inputCommand.contains("\\")) {
+			moveFileCurrentLocationToCurrentLocation(inputCommand);  //move a.txt b.txt 1번 
+		}
 		else if(data.checkBlankAndSlash(inputCommand, " \\") == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) {// move\\users\\user\onedrive\desktop\a.txt \\users\\user\onedrive\desktop\b.txt 4번 
 			moveFileNewLocationToNewLocation(inputCommand);
 		}

@@ -4,16 +4,19 @@ import java.io.File;
 
 import models.RouteLocation;
 import utility.Constants;
+import utility.dataProcessing;
 import views.PrintLocation;
 
 
 public class Cd {
 	private RouteLocation location;
 	private PrintLocation print;
+	private dataProcessing data;
 	
-	public Cd(RouteLocation location, PrintLocation print) {
+	public Cd(RouteLocation location, PrintLocation print, dataProcessing data) {
 		this.location = location;
 		this.print = print;
+		this.data = data;
 	}
 
 	
@@ -36,7 +39,7 @@ public class Cd {
 		}	
 		else if(inputDirectory.equals("cd..")) return MoveOneStopUp();	
 		else if(inputDirectory.equals("cd..\\..")) return MoveTwoStepUp();
-		else if(inputDirectory.contains("cd")) return actCd(inputDirectory);// cd명령
+		else if(inputDirectory.contains("cd ")) return actCd(inputDirectory);// cd명령
 		else {
 			location.setErrorMessage("'"+inputDirectory+"'" + "은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다."); // cd를 쓰지 않으면 
 			return false;
@@ -48,7 +51,7 @@ public class Cd {
 		int slashCount=Constants.RESET;
 		String beforeCommand[] = location.getCurrentLocation().split("\\\\"); // \기준으로 문자열 스플릿
 					
-		slashCount = (countChar(location.getCurrentLocation(), '\\')); // \ 갯수세기
+		slashCount = (data.countChar(location.getCurrentLocation(), '\\')); // \ 갯수세기
 		location.setCurrentLocation(""); // 초기화
 		
 		for(int index=Constants.FIRST_LOCATION; index<slashCount; index++) {
@@ -62,7 +65,7 @@ public class Cd {
 		int slashCount=Constants.RESET;
 		String beforeCommand[] = location.getCurrentLocation().split("\\\\"); // \기준으로 문자열 스플릿
 					
-		slashCount = (countChar(location.getCurrentLocation(), '\\')); // \ 갯수세기
+		slashCount = (data.countChar(location.getCurrentLocation(), '\\')); // \ 갯수세기
 		location.setCurrentLocation(""); // 초기화
 		
 		for(int index=Constants.FIRST_LOCATION; index<slashCount-Constants.TWO_STEP_UP; index++) {
@@ -74,7 +77,7 @@ public class Cd {
 	
 	private boolean actCd(String inputDirectory) {
 		
-		String cdAndCommand[] = inputDirectory.split(" ");                 
+		String cdAndCommand[] = inputDirectory.split(" ");
 		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
 		File currentLocation = new File(location.getCurrentLocation() + directory);
 		
@@ -84,20 +87,8 @@ public class Cd {
 		 else {
 			 location.setErrorMessage("지정된 경로를 찾을 수 없습니다.");            
 		    }
+		 
 		 return currentLocation.isDirectory(); // true면 존재, false면 존재 x
 	}
-
-
-	private int countChar(String command, char slash) { // \ 개수세기
-		
-		int slashCount = Constants.RESET;         
-		
-		for (int index = Constants.START; index < command.length(); index++) {
-			if (command.charAt(index) == slash) { 
-				slashCount++;            
-				}        
-			}        
-		
-		return slashCount;   
-	}	
+	
 }

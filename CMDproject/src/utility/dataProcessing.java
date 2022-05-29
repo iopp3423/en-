@@ -110,4 +110,17 @@ public class dataProcessing {
 		}
 		return "";
 	}
+	
+	public int countChar(String command, char slash) { // \ 개수세기
+		
+		int slashCount = Constants.RESET;         
+		
+		for (int index = Constants.START; index < command.length(); index++) {
+			if (command.charAt(index) == slash) { 
+				slashCount++;            
+				}        
+			}        
+		
+		return slashCount;   
+	}
 }

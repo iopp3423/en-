@@ -28,7 +28,7 @@ public class CmdController {
 		location = new RouteLocation();
 		print = new PrintLocation();
 		data = new dataProcessing();
-		GoCd = new Cd(location, print);
+		GoCd = new Cd(location, print, data);
 		GoCopy = new Copy(location, print, data);
 		GoDir = new Dir(location, print, data);
 		GoMove = new Moved(location, print, data);
@@ -41,8 +41,7 @@ public class CmdController {
 		while(true) {
 		String inputCommand = command.inputInstruction();
 		String instruction = "";
-		System.out.println(inputCommand);
-		//System.out.println("현재위치=" + location.getCurrentLocation());
+
 		if(inputCommand.length() >= Constants.INSTRUCTION) {
 		instruction = inputCommand.substring(Constants.RESET, Constants.INSTRUCTION);
 		}
@@ -51,8 +50,8 @@ public class CmdController {
 		
 		if(instruction.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(instruction.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
-		else if(instruction.contains("move"))GoMove.moveController(inputCommand);
-		else if(instruction.contains("copy"))GoCopy.copyController(inputCommand);
+		else if(instruction.contains("move"))GoMove.controlMove(inputCommand);
+		else if(instruction.contains("copy"))GoCopy.controlCopy(inputCommand);
 		else if (instruction.equals("help")) {
 			print.printHelp();
 			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
