@@ -46,9 +46,7 @@ public class Copy {
 		
 		File oldfile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE]);
 		File newfile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE]);
-		
-		
-		
+			
 		try {
 			Files.copy(oldfile.toPath(), newfile.toPath());
 			print.printSentence("     1개 파일이 복사되었습니다.\n");
@@ -91,6 +89,8 @@ public class Copy {
 		File oldFile = new File(location.getCurrentLocation() + "\\" + fileAndLocation[Constants.FILE]); // 현재위치 + 파일
 		File newFile = new File(newLocation + "\\" + file); // 지정위치 + 파일
 		
+		
+		/*
 		if(newLocation.isDirectory()){	
 		
 			if(oldFile.renameTo(newFile)) { // 경로 맞고 파일 이동 성공했으면
@@ -104,7 +104,7 @@ public class Copy {
 			print.printSentence("지정된 경로를 찾을 수 없습니다.\r\n"
 							+ "     0개 파일을 이동했습니다.\n");
 		}		
-	
+	*/
 	}
 	
 	private void copyFileNewLocationToNewLocation(String inputCommand) { // 4번

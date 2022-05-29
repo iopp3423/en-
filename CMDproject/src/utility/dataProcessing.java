@@ -11,6 +11,7 @@ public class dataProcessing {
 		scan = new Scanner(System.in);
 	}
 	
+	
 	public String inputInstruction() {
 		String instruction = scan.nextLine();	
 		
@@ -19,6 +20,13 @@ public class dataProcessing {
 			instruction = instruction.replace("c:", "");
 		}
 		return instruction;
+	}
+	
+	public String removeC(String location){
+		if(location.contains("C:")) {
+			location = location.replace("C:", "");
+		}
+		return location;
 	}
 	
 	public boolean is_inputYesOrNo() {

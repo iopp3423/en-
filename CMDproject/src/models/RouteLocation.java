@@ -2,7 +2,7 @@ package models;
 
 public class RouteLocation {
 	private String home = System.getProperty("user.home");
-	private String currentLocation="\\" + "users" + "\\" + "user";
+	private String currentLocation= System.getProperty("user.home");
 	private String errorMessage="";
 	private String temporaryStorage="";
 	
