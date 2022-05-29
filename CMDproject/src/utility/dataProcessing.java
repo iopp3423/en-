@@ -11,6 +11,11 @@ public class dataProcessing {
 		scan = new Scanner(System.in);
 	}
 	
+	public void removeBlank(String changeInputToOneblank) {
+		
+		changeInputToOneblank = changeInputToOneblank.replaceAll("\\s+", " "); // 중복 공백 제거
+		changeInputToOneblank = changeInputToOneblank.trim();
+	}
 	
 	public String inputInstruction() {
 		String instruction = scan.nextLine();	
@@ -19,6 +24,9 @@ public class dataProcessing {
 			instruction = instruction.replace("C:", "");
 			instruction = instruction.replace("c:", "");
 		}
+		instruction = instruction.replaceAll("\\s+", " "); // 중복 공백 제거
+		instruction = instruction.trim(); // 문자열 앞 뒤 공백 제거
+		
 		return instruction;
 	}
 	
