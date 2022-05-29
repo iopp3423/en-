@@ -9,7 +9,6 @@ public class RouteLocation {
 	public String getHome() {
 		return home;
 	}
-	
 	public void setCurrentLocation(String location) {
 		this.currentLocation = location;
 	}

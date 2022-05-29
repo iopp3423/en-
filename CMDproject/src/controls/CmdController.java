@@ -41,7 +41,7 @@ public class CmdController {
 		while(true) {
 		String inputCommand = command.inputInstruction();
 		String instruction = "";
-		System.out.println("현재위치=" + location.getCurrentLocation());
+		//System.out.println("현재위치=" + location.getCurrentLocation());
 		if(inputCommand.length() >= Constants.INSTRUCTION) {
 		instruction = inputCommand.substring(Constants.RESET, Constants.INSTRUCTION);
 		}
