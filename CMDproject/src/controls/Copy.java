@@ -1,6 +1,8 @@
 package controls;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -53,7 +55,7 @@ public class Copy {
 		File newFile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE]);
 		File currentLocation = new File(location.getCurrentLocation());
 		
-		checkFileAndDirectoryAfterPrint(currentLocation, currentLocation, oldFile, newFile, slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE]);
+		checkFileAndDirectoryAfterPrint(currentLocation, currentLocation, oldFile, newFile, slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE], "");
 
 	}
 	
@@ -62,6 +64,7 @@ public class Copy {
 		String file =  data.extractFile(inputCommand);  // move a.txt \\users\\user\onedrive\desktop\b.txt -> b.txt 추출
 		String route = data.extractRoute(inputCommand); // move a.txt \\users\\user\onedrive\desktop\ 추출
 		String fileAndLocation[];
+		String exceptionString = "     0개 파일이 복사되었습니다.\n";
 
 		fileAndLocation = data.sliceSentence(route); // move a.txt \\users\\user\onedrive\desktop\  a.txt, 경로 저장
 		
@@ -69,36 +72,8 @@ public class Copy {
 		File oldFile = new File(location.getCurrentLocation() + "\\" + fileAndLocation[Constants.FILE]); // 현재위치 + 파일
 		File newFile = new File(newLocation + "\\" + file); // 지정위치 + 파일
 		
-		if(newLocation.isDirectory()) {
-			try {
-				Files.copy(oldFile.toPath(), newFile.toPath());
-				print.printSentence("     1개 파일이 복사되었습니다.\n");
-			} 
-			catch(java.nio.file.NoSuchFileException e) {
-				print.printSentence("지정된 파일을 찾을 수 없습니다.\n");
-			}
-			catch(java.nio.file.FileAlreadyExistsException e) {
-				print.printSentence(fileAndLocation[Constants.FILE] + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");
-				if(data.is_inputYesOrNo()) {
-					print.printSentence("     1개 파일이 복사되었습니다.\n");
-					try {
-						Files.copy(oldFile.toPath(), newFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-				else {
-					print.printSentence("     0개 파일이 복사되었습니다.\n");
-				}
-			}
-			catch (IOException e) {
-				e.printStackTrace();
-			}	
-		}
-		else {
-			print.printSentence("지정된 경로를 찾을 수 없습니다.\r\n"
-					+ "     0개 파일이 복사되었습니다.\n");
-		}
+		checkFileAndDirectoryAfterPrint(newLocation, newLocation, oldFile, newFile, file, exceptionString);
+		
 	}
 	
 	private void copyFileNewLocationToNewLocation(String inputCommand) { // 4번
@@ -110,7 +85,7 @@ public class Copy {
 		File destinaionLocation = new File(data.extractRoute(files[Constants.DESTINATION_LOCAION]));
 		String oldFile = data.extractFile(files[Constants.START_LOCAION]);
 		
-		checkFileAndDirectoryAfterPrint(startLocation, destinaionLocation, startFile, destinationFile, oldFile);	
+		checkFileAndDirectoryAfterPrint(startLocation, destinaionLocation, startFile, destinationFile, oldFile, "");	
 		
 	}
 	
@@ -128,51 +103,104 @@ public class Copy {
 			File startFile = new File(newLocation + "\\" + files[Constants.OLD_FILE]);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + files[Constants.NEW_FILE]);
 
-			checkFileAndDirectoryAfterPrint(currentLocation, newLocation, startFile, destinationFile, files[Constants.OLD_FILE]);					
+			checkFileAndDirectoryAfterPrint(currentLocation, newLocation, startFile, destinationFile, files[Constants.OLD_FILE], "");					
 		}
 		
 		else {
 			File startFile = new File(newLocation + "\\" + file); // copy\\users\\user\onedrive\desktop\a.txt경우 
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + file);
 			
-			checkFileAndDirectoryAfterPrint(currentLocation, newLocation, startFile, destinationFile, file);	
+			checkFileAndDirectoryAfterPrint(currentLocation, newLocation, startFile, destinationFile, file, "");	
 		}
 
 	}
 
 
-	private void checkFileAndDirectoryAfterPrint(File startLocation, File destinaionLocation, File startFile, File destinationFile, String oldFile) {
+	private void checkFileAndDirectoryAfterPrint(File startLocation, File destinaionLocation, File startFile, File destinationFile, String oldFile, String exceptionString) {
 				
-		if(startLocation.isFile() && destinaionLocation.isFile()) {
+		if(startLocation.isDirectory() && destinaionLocation.isDirectory()) {
 			try {
-				Files.copy(startFile.toPath(), destinationFile.toPath());
+				Files.copy(startFile.toPath(), destinationFile.toPath());				
 				print.printSentence("     1개 파일이 복사되었습니다.\n");
 			} 
 			catch(java.nio.file.NoSuchFileException e) {
 				print.printSentence("지정된 파일을 찾을 수 없습니다.\n");
 			}
 			catch(java.nio.file.FileAlreadyExistsException e) {
+				
+				if(isCopyFileOfDirectory(startFile, destinationFile)) return;
+				
 				print.printSentence(oldFile + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");
 				
-				if(data.is_inputYesOrNo()) {
-					try {
-						Files.copy(startFile.toPath(), destinationFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-					print.printSentence("     1개 파일이 복사되었습니다.\n");
-				}
-				
-				else {
-					print.printSentence("     0개 파일이 복사되었습니다.\n");
-				}
+				checkCopy(startFile, destinationFile);								
 			}
 			catch (IOException e) {
 				e.printStackTrace();
 			}	
 		}
 		else {
-			print.printSentence("지정된 경로를 찾을 수 없습니다.\n");
+			print.printSentence("지정된 경로를 찾을 수 없습니다.\r\n" + exceptionString);
 		}
 	}
+	
+	
+	private void copyDirectory(File sourceFile, File targetFile){
+		File[] targetFileList = sourceFile.listFiles();
+		
+		for (File file : targetFileList) {
+			File temporaryStorage = new File(targetFile.getAbsolutePath() + File.separator + file.getName());
+			if(file.isDirectory()){
+				temporaryStorage.mkdir();
+				copyDirectory(file, temporaryStorage);
+			} else {
+				FileInputStream fileInput = null;
+				FileOutputStream filtOutput = null;
+				try {
+					fileInput = new FileInputStream(file);
+					filtOutput = new FileOutputStream(temporaryStorage) ;
+					byte[] filtByte = new byte[Constants.BYTE];
+					int fileCount = Constants.RESET;
+					while((fileCount=fileInput.read(filtByte)) != -Constants.FILE){
+						filtOutput.write(filtByte, Constants.RESET, fileCount);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally{
+					try {
+						fileInput.close();
+						filtOutput.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}	
+				}
+			}
+		  }	
+	    }
+	
+	private boolean isCopyFileOfDirectory(File startFile, File destinationFile) {	
+		if(startFile.isDirectory() && destinationFile.isDirectory()) {
+			copyDirectory(startFile, destinationFile);
+			print.printSentence("     1개 파일이 복사되었습니다.\n");
+			return true;
+		}	
+		return false;
+	}
+	
+	
+	private void checkCopy(File startFile, File destinationFile) {
+		
+		if(data.is_inputYesOrNo()) {
+			try {
+				Files.copy(startFile.toPath(), destinationFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			print.printSentence("     1개 파일이 복사되었습니다.\n");
+		}
+		
+		else {
+			print.printSentence("     0개 파일이 복사되었습니다.\n");
+		}
+	}
+
 }
