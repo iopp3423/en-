@@ -34,12 +34,12 @@ public class Copy {
 		else if(data.checkBlankAndSlash(inputCommand, " \\") == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) {// copy\\users\\user\onedrive\desktop\a.txt \\users\\user\onedrive\desktop\b.txt 4번 
 			copyFileNewLocationToNewLocation(inputCommand);
 		}
+		else if(inputCommand.contains("copy \\")){// copy\\users\\user\onedrive\desktop\a.txt b.txt 3번, // copy\\users\\user\desktop\a.txt 5번
+			copyFileNewLocationToCurrentLocation(inputCommand);
+		}
 		else if(data.blankCount(inputCommand, ' ') == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) { // copy a.txt users\\user\onedrive\desktop\b.txt 2번 
 			copyFileCurrentLocationToNewLocation(inputCommand);
 		}		
-		else {// copy\\users\\user\onedrive\desktop\a.txt b.txt 3번, // copy\\users\\user\desktop\a.txt 5번
-			copyFileNewLocationToCurrentLocation(inputCommand);
-		}
 		
 		print.printSentence("C:" + location.getCurrentLocation() + ">");
 	}
@@ -116,7 +116,7 @@ public class Copy {
 	
 			
 	private void copyFileNewLocationToCurrentLocation(String inputCommand) { // 3, 5번 
-		inputCommand = inputCommand.replace("copy", "");
+		inputCommand = inputCommand.replace("copy ", "");
 		String files[];
 		String file = data.extractFile(inputCommand);
 		File newLocation = new File(data.extractRoute(inputCommand)); // move\\users\\user\onedrive\desktop
