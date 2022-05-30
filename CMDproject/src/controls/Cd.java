@@ -85,14 +85,18 @@ public class Cd {
 	private boolean actCd(String inputDirectory) {
 		
 		String cdAndCommand[] = inputDirectory.split(" ");
-		File directory = new File(cdAndCommand[Constants.COMMAND] + "\\");
+		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
 		File currentLocation = new File(location.getCurrentLocation() + directory);
-		
-		 if(currentLocation.isDirectory()) {
+
+		if(inputDirectory.contains("cd \\")){
+			location.setErrorMessage("지정된 경로를 찾을 수 없습니다.\n");   
+			return Constants.IS_ERROR;
+		}
+		else if(currentLocation.isDirectory()) {
 			 location.setCurrentLocation(location.getCurrentLocation() + directory);  // 현재 위치 저장 
 		    } 
 		 else {
-			 location.setErrorMessage("지정된 경로를 찾을 수 없습니다.");            
+			 location.setErrorMessage("지정된 경로를 찾을 수 없습니다.");     
 		    }
 		 
 		 return currentLocation.isDirectory(); // true면 존재, false면 존재 x
