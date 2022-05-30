@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,12 +34,12 @@ public class Moved {
 		else if(data.checkBlankAndSlash(inputCommand, " \\") == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) {// move\\users\\user\onedrive\desktop\a.txt \\users\\user\onedrive\desktop\b.txt 4번 
 			moveFileNewLocationToNewLocation(inputCommand);
 		}
+		else if(inputCommand.contains("move \\")){// move\\users\\user\onedrive\desktop\a.txt b.txt 3번, // move\\users\\user\desktop\a.txt 5번
+			moveFileNewLocationToCurrentLocation(inputCommand);
+		}
 		else if(data.blankCount(inputCommand, ' ') == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) { // move a.txt users\\user\onedrive\desktop\b.txt 2번 
 			moveFileCurrentLocationToNewLocation(inputCommand);
 		}		
-		else {// move\\users\\user\onedrive\desktop\a.txt b.txt 3번, // move\\users\\user\desktop\a.txt 5번
-			moveFileNewLocationToCurrentLocation(inputCommand);
-		}
 		
 		print.printSentence("C:" + location.getCurrentLocation() + ">");
 	}
@@ -51,10 +52,7 @@ public class Moved {
 		File oldFile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE]);
 		File newFile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE]);
 
-		System.out.println(oldFile);
-		System.out.println(newFile);
-		
-		if(MoveoverapFile(oldFile, newFile)) {
+		if(MoveoverapFile(oldFile, newFile) == Constants.IS_ERROR) {
 			
 		}
 		else if(oldFile.renameTo(newFile)){
@@ -77,8 +75,10 @@ public class Moved {
 		File oldFile = new File(location.getCurrentLocation() + "\\" + fileAndLocation[Constants.FILE]); // 현재위치 + 파일
 		File newFile = new File(newLocation + "\\" + file); // 지정위치 + 파일
 		
-		if(newLocation.isDirectory()){	
-		
+		if(MoveoverapFile(oldFile, newFile) == Constants.IS_ERROR) {		
+		}
+
+		else if(newLocation.isDirectory()){	
 			if(oldFile.renameTo(newFile)) { // 경로 맞고 파일 이동 성공했으면
 			print.printSentence("1개 파일을 이동하였습니다.\n");
 			}
@@ -101,13 +101,16 @@ public class Moved {
 		File startLocation = new File(data.extractRoute(files[Constants.START_LOCAION]));
 		File destinaionLocation = new File(data.extractRoute(files[Constants.DESTINATION_LOCAION]));
 
-		checkFileAndDirectoryAfterPrint(startLocation, destinaionLocation, startFile, destinationFile);	
+		if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) {		
+		}
+		
+		else checkFileAndDirectoryAfterPrint(startLocation, destinaionLocation, startFile, destinationFile);	
 		
 	}
 	
 			
 	private void moveFileNewLocationToCurrentLocation(String inputCommand) { // 3, 5번 
-		inputCommand = inputCommand.replace("move", "");
+		inputCommand = inputCommand.replace("move ", "");
 		String files[];
 		String file = data.extractFile(inputCommand);
 		File newLocation = new File(data.extractRoute(inputCommand)); // move\\users\\user\onedrive\desktop
@@ -118,13 +121,25 @@ public class Moved {
 			files = data.sliceSentence(file);	
 			File startFile = new File(newLocation + "\\" + files[Constants.OLD_FILE]);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + files[Constants.NEW_FILE]);
-			checkFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);					
+			
+			System.out.println(startFile);
+			System.out.println(destinationFile);
+			
+			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) {		
+			}
+			else checkFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);					
 		}
 		
 		else {
 			File startFile = new File(newLocation + "\\" + file);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + file);
-			checkFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);	
+			
+			System.out.println(startFile);
+			System.out.println(destinationFile);
+			
+			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) {		
+			}
+			else checkFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);	
 		}
 
 	}
@@ -147,21 +162,29 @@ public class Moved {
 	}
 	
 	private boolean MoveoverapFile(File startLocation, File destinaionLocation) {
-		boolean is_overapFile = false;
+		boolean is_overapFile = true;
 		
-		/*
-		if(destinaionLocation.exists()) {
+		
+		if(startLocation.exists() && destinaionLocation.exists()) { // 이미 파일이 있을 때 
 			try {
 				Files.copy(startLocation.toPath(), destinaionLocation.toPath());
 				print.printSentence("     1개 파일이 복사되었습니다.\n");
 			} 
 
 			catch(java.nio.file.FileAlreadyExistsException e) {
-				is_overapFile = true;
-				print.printSentence(destinaionLocation + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");
+				is_overapFile = false;
+				print.printSentence(destinaionLocation + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");	
+				
 				if(data.is_inputYesOrNo()) {
+					try {
+						Files.copy(startLocation.toPath(), destinaionLocation.toPath(),StandardCopyOption.REPLACE_EXISTING);
+						startLocation.delete(); // 파일 복사 후 삭제
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 					print.printSentence("     1개 파일을 이동했습니다.\n");
 				}
+				
 				else {
 					print.printSentence("     0개 파일을 이동했습니다.\n");
 				}
@@ -170,43 +193,9 @@ public class Moved {
 				e.printStackTrace();
 			}	     
 		} 	
-		*/
-		FileWriter fw; // FileWriter 선언
-
-		try {
-			fw = new FileWriter(startLocation, false); // 파일이 있을경우 덮어쓰기
-			fw.write("Writer 1 : Hello world \r\nWrite Test\r\n");
-			fw.close();
-		} catch (IOException e1) {
-
-			e1.printStackTrace();
-		}		
 		
 		return is_overapFile;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		FileWriter fw, fw_append; // FileWriter 선언
-
-		try {
-			fw = new FileWriter(".\\java_Text.txt", false); // 파일이 있을경우 덮어쓰기
-			fw.write("Writer 1 : Hello world \r\nWrite Test\r\n");
-			fw.close();
-		} catch (IOException e1) {
-
-			e1.printStackTrace();
-		}
-
-		try {
-			fw_append = new FileWriter(".\\java_Text.txt", true); // 파일이 있을경우 이어쓰기
-			fw_append.write("Writer 2 : Append Test\r\nGoodbye~");
-			fw_append.close();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
-		return;
-	}
+	
 }

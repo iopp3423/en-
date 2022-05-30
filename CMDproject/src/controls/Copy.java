@@ -81,6 +81,11 @@ public class Copy {
 				print.printSentence(fileAndLocation[Constants.FILE] + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");
 				if(data.is_inputYesOrNo()) {
 					print.printSentence("     1개 파일이 복사되었습니다.\n");
+					try {
+						Files.copy(oldFile.toPath(), newFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 				else {
 					print.printSentence("     0개 파일이 복사되었습니다.\n");
