@@ -25,6 +25,9 @@ public class Dir {
 	}
 	
 	public void CheckcurrentLocationOrDesignateDir(String inputDirectory) {
+			print.printSentence(" C 드라이브의 볼륨에는 이름이 없습니다.\n 볼륨 일련 번호 : BAF3-12D7\n\n");
+			print.printSentence("C:" + location.getCurrentLocation() + " 디렉터리\n\n");
+			
 			if(inputDirectory.contains("dir ")) {// dir 후 위치지정				
 				location.setTemporaryStorage(location.getCurrentLocation()); // 임시저장소 dir + 위치 입력 전 위치값 저장
 				printDesignateLocationDir(inputDirectory);
@@ -40,15 +43,13 @@ public class Dir {
 	    String cdAndCommand[] = inputDirectory.split(" ");                 
 		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
 		File currentLocation = new File(location.getCurrentLocation() + directory);
-		
+		 
 		 if(currentLocation.isDirectory()) {
 			 location.setCurrentLocation(location.getCurrentLocation() + directory);  // 현재 위치 저장 
 			 printCurrentLocationDir(Constants.IS_DESIGNATE_LOCATION_DIR);
 		} 
 		 
 		 else { // dir askldasdlkj 이상한 값 입력했을 때
-			 print.printSentence(" C 드라이브의 볼륨에는 이름이 없습니다.\n 볼륨 일련 번호 : BAF3-12D7\n\n");
-			 print.printSentence("C:" + location.getCurrentLocation() + " 디렉터리\n\n");
 			 print.printSentence("파일을 찾을 수 없습니다.\n\n");  
 			 print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 		}
@@ -125,11 +126,9 @@ public class Dir {
 		for(int index=Constants.FIRST_LOCATION; index<slashCount; index++) { // 현재 기준 전 위치까지 자르기
 			currentLocation = (currentLocation + "\\" +  beforeCommand[index]);
 		}
-		//System.out.println(currentLocation);
-		//System.out.println(location.getCurrentLocation());
 		
-		if(location.getCurrentLocation().equals("")) return dotFile;
-		if(slashCount == Constants.BLANK_LOCATION) currentLocation = ("\\");
+		if(location.getCurrentLocation().equals("")) return dotFile; // 현재위치가 root 일 때
+		if(slashCount == Constants.BLANK_LOCATION) currentLocation = ("\\"); // 현재 위치가 root 바로 다음 일 때
 		
 		File beforeDirectory = new File(currentLocation);		
 		File[] directoryList = beforeDirectory.listFiles();
@@ -146,6 +145,7 @@ public class Dir {
 		 }
 		 
 	 }
+		 
 	
 	return dotFile;
 }

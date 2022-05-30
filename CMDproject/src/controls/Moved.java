@@ -1,6 +1,9 @@
 package controls;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,10 +48,16 @@ public class Moved {
 		String slicedSentence[];
 		slicedSentence = data.sliceSentence(inputCommand);
 		
-		File oldfile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE]);
-		File newfile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE]);
+		File oldFile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE]);
+		File newFile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE]);
 
-		if(oldfile.renameTo(newfile)){
+		System.out.println(oldFile);
+		System.out.println(newFile);
+		
+		if(MoveoverapFile(oldFile, newFile)) {
+			
+		}
+		else if(oldFile.renameTo(newFile)){
 			print.printMoveFileSucessOrFail("1개 파일을 이동했습니다.", Constants.IS_SUCESS);
 		}
 		else{
@@ -135,5 +144,69 @@ public class Moved {
 		else {
 			print.printSentence("지정된 경로를 찾을 수 없습니다.\n");
 		}
+	}
+	
+	private boolean MoveoverapFile(File startLocation, File destinaionLocation) {
+		boolean is_overapFile = false;
+		
+		/*
+		if(destinaionLocation.exists()) {
+			try {
+				Files.copy(startLocation.toPath(), destinaionLocation.toPath());
+				print.printSentence("     1개 파일이 복사되었습니다.\n");
+			} 
+
+			catch(java.nio.file.FileAlreadyExistsException e) {
+				is_overapFile = true;
+				print.printSentence(destinaionLocation + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");
+				if(data.is_inputYesOrNo()) {
+					print.printSentence("     1개 파일을 이동했습니다.\n");
+				}
+				else {
+					print.printSentence("     0개 파일을 이동했습니다.\n");
+				}
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}	     
+		} 	
+		*/
+		FileWriter fw; // FileWriter 선언
+
+		try {
+			fw = new FileWriter(startLocation, false); // 파일이 있을경우 덮어쓰기
+			fw.write("Writer 1 : Hello world \r\nWrite Test\r\n");
+			fw.close();
+		} catch (IOException e1) {
+
+			e1.printStackTrace();
+		}		
+		
+		return is_overapFile;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		FileWriter fw, fw_append; // FileWriter 선언
+
+		try {
+			fw = new FileWriter(".\\java_Text.txt", false); // 파일이 있을경우 덮어쓰기
+			fw.write("Writer 1 : Hello world \r\nWrite Test\r\n");
+			fw.close();
+		} catch (IOException e1) {
+
+			e1.printStackTrace();
+		}
+
+		try {
+			fw_append = new FileWriter(".\\java_Text.txt", true); // 파일이 있을경우 이어쓰기
+			fw_append.write("Writer 2 : Append Test\r\nGoodbye~");
+			fw_append.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		return;
 	}
 }

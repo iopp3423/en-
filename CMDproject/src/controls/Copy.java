@@ -148,9 +148,16 @@ public class Copy {
 			}
 			catch(java.nio.file.FileAlreadyExistsException e) {
 				print.printSentence(oldFile + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");
+				
 				if(data.is_inputYesOrNo()) {
+					try {
+						Files.copy(startFile.toPath(), destinationFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 					print.printSentence("     1개 파일이 복사되었습니다.\n");
 				}
+				
 				else {
 					print.printSentence("     0개 파일이 복사되었습니다.\n");
 				}
