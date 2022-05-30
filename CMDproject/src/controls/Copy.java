@@ -143,7 +143,7 @@ public class Copy {
 
 	private void checkFileAndDirectoryAfterPrint(File startLocation, File destinaionLocation, File startFile, File destinationFile, String oldFile) {
 				
-		if(startLocation.isDirectory() && destinaionLocation.isDirectory()) {
+		if(startLocation.isFile() && destinaionLocation.isFile()) {
 			try {
 				Files.copy(startFile.toPath(), destinationFile.toPath());
 				print.printSentence("     1개 파일이 복사되었습니다.\n");

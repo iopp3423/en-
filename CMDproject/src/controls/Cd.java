@@ -85,7 +85,7 @@ public class Cd {
 	private boolean actCd(String inputDirectory) {
 		
 		String cdAndCommand[] = inputDirectory.split(" ");
-		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
+		File directory = new File(cdAndCommand[Constants.COMMAND] + "\\");
 		File currentLocation = new File(location.getCurrentLocation() + directory);
 		
 		 if(currentLocation.isDirectory()) {
