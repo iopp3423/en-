@@ -56,39 +56,49 @@ public class Dir {
 	
 	private void printCurrentLocationDir(boolean judgment) { // 현재위치 dir 저장
 		String storedLocation = location.getCurrentLocation();
+		String dotDirectory = "";
 		if(storedLocation.equals("")) storedLocation = "\\"; // 루트 폴더일 때 
 		
 		File currentLocation = new File(storedLocation);
+		File[] directoryList = currentLocation.listFiles(); // 현재위치
+	    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd a HH:mm"); // 시간 
+	    
 		long directoryLength = Constants.RESET;	
 		long fileLength = Constants.RESET;
 		long directoryByte = Constants.RESET;
 		long fileByte = Constants.RESET;
 		
-	    File[] dirList = currentLocation.listFiles(); // 현재위치
-	    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd a HH:mm"); // 시간 
+		dotDirectory = extractDotDirectory(storedLocation); // 디렉토리에서  . .. 폴더 추출 
+	    File changeDotDirectory = new File(dotDirectory);
 	    
-	    
-	    for(int index=Constants.START; index < dirList.length; index++) {
+	    for(int index=Constants.START; index < directoryList.length; index++) {
 	    	
 	    String attribute = "";
 	    String size = "";
+	    if(dotDirectory != "") {   	 	
+	    	attribute = "<DIR>";
+	    	directoryLength++; // 디렉토리 개수
+	    	print.printDirDot(date, attribute, size, changeDotDirectory, ".");
+	    	print.printDirDot(date, attribute, size, changeDotDirectory, "..");
+	    	dotDirectory = "";
+	    }
 	    
-	    if(dirList[index].isDirectory() && !dirList[index].isHidden()){ // 디렉토리이면  DIR 저장 
+	    if(directoryList[index].isDirectory() && !directoryList[index].isHidden()){ // 디렉토리이면  DIR 저장 
 	        attribute = "<DIR>";	 	   
 	        directoryLength++; // 디렉토리 개수 
-	    	print.printDir(date, attribute, size, dirList[index]); // dir 출력
+	    	print.printDir(date, attribute, size, directoryList[index]); // dir 출력
 	       }
 	    
-	    else if(!dirList[index].isDirectory() && !dirList[index].isHidden()) {
+	    else if(!directoryList[index].isDirectory() && !directoryList[index].isHidden()) {
 	    	
-	    	if(dirList[index].isFile()) {
+	    	if(directoryList[index].isFile()) {
 		    	fileLength++; // 파일개수 
-		    	fileByte += dirList[index].length(); // 파일 용량 
+		    	fileByte += directoryList[index].length(); // 파일 용량 
 	    	}
-	    	if(dirList[index].length() != Constants.RESET) {
-	    		size = dirList[index].length() + ""; // 디렉토리 아닐 때 0 이면 ""로 치환
+	    	if(directoryList[index].length() != Constants.RESET) {
+	    		size = directoryList[index].length() + ""; // 디렉토리 아닐 때 0 이면 ""로 치환
 	    	}
-	    	print.printDir(date, attribute, size, dirList[index]); // dir 출력
+	    	print.printDir(date, attribute, size, directoryList[index]); // dir 출력
 	        
 	    }
 
@@ -100,4 +110,38 @@ public class Dir {
 	    if(judgment == Constants.IS_DESIGNATE_LOCATION_DIR) location.setCurrentLocation(location.getTemporaryStorage());
 	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 	}
+	
+	
+	
+	private String extractDotDirectory(String currentLocation) {
+		int slashCount=Constants.RESET;
+		String beforeCommand[] = currentLocation.split("\\\\"); // \기준으로 문자열 스플릿
+		String dotFile = "";
+					
+		slashCount = (data.countSlash(currentLocation, '\\')); // \ 갯수세기
+		currentLocation = ""; // 초기화
+		
+		for(int index=Constants.FIRST_LOCATION; index<slashCount; index++) { // 현재 기준 전 위치까지 자르기
+			currentLocation = (currentLocation + "\\" +  beforeCommand[index]);
+		}
+					
+		File beforeDirectory = new File(currentLocation);		
+		File[] directoryList = beforeDirectory.listFiles();
+		 
+		 for(int index=Constants.START; index < directoryList.length; index++) {
+		    		    
+		    if(directoryList[index].isDirectory() && !directoryList[index].isHidden()){ // 디렉토리이면  DIR 저장  	   
+		        //directoryLength++; // 디렉토리 개수 
+		        if(directoryList[index].getName().toString().equals(beforeCommand[slashCount]) // user  문자열 앞글자가 소문자이거나
+		        || directoryList[index].getName().toString().equals(data.capitalizeFirstLetter(beforeCommand[slashCount]))) { // User 앞글자가 대문자인데 디렉토리명과 같으면		  
+		        	dotFile = directoryList[index].toString(); // cmd에서 .에 해당하는 디렉토리 저장
+		        }
+		 }
+		    System.out.println(directoryList[index].getName());
+	 }
+		 System.out.println(beforeCommand[slashCount]);
+		 System.out.println(data.capitalizeFirstLetter(beforeCommand[slashCount]));
+	return dotFile;
+}
+		
 }

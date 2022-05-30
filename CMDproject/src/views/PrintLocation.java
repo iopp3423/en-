@@ -30,6 +30,10 @@ public class PrintLocation {
 		System.out.printf("%s %3s %6s %s \n",date.format(new Date(dirList.lastModified())), attribute,size,dirList.getName());
 	}
 	
+	public void printDirDot(SimpleDateFormat date, String attribute, String size, File dirList, String dot) {
+		
+		System.out.printf("%s %3s %6s %s \n",date.format(new Date(dirList.lastModified())), attribute,size, dot);
+	}
 	
 	public void printFileAndDirectoryData(long fileLength, long directoryLength,String fileByte, String directoryByte) {
 		

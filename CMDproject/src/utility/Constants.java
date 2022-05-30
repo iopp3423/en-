@@ -25,6 +25,8 @@ public class Constants {
 	
 	public static final int INSTRUCTION = 4;
 	
+	public static final int FIRST_CHAR = 1;
+	
 	public static final boolean IS_ERROR = false;
 	public static final boolean IS_DESIGNATE_LOCATION_DIR = true;
 	public static final boolean IS_SUCESS = true;

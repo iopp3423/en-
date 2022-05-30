@@ -11,12 +11,6 @@ public class dataProcessing {
 		scan = new Scanner(System.in);
 	}
 	
-	public void removeBlank(String changeInputToOneblank) {
-		
-		changeInputToOneblank = changeInputToOneblank.replaceAll("\\s+", " "); // 중복 공백 제거
-		changeInputToOneblank = changeInputToOneblank.trim();
-	}
-	
 	public String inputInstruction() {
 		String instruction = scan.nextLine();	
 		
@@ -123,4 +117,19 @@ public class dataProcessing {
 		
 		return slashCount;   
 	}
+	
+	public String capitalizeFirstLetter(String str) {         
+		// 첫번째 글자 substring        
+		String firstLetter = str.substring(Constants.RESET, Constants.FIRST_CHAR);        
+		// 첫번째 글자를 제외한 나머지 글자 substring        
+		String remainLetter = str.substring(Constants.FIRST_CHAR);         
+		// 첫번째 글자를 대문자로 변환        
+		firstLetter = firstLetter.toUpperCase();        
+		// 나머지 글자를 소문자로 변환        
+		remainLetter = remainLetter.toLowerCase();        
+		// 첫번째 글자(대문자) + 나머지 글자(소문자)       
+		String result = firstLetter + remainLetter;    
+		
+		return result;    
+	}	
 }
