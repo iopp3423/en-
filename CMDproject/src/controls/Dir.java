@@ -1,7 +1,10 @@
 package controls;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,8 +28,9 @@ public class Dir {
 	}
 	
 	public void CheckcurrentLocationOrDesignateDir(String inputDirectory) {
-			print.printSentence(" C 드라이브의 볼륨에는 이름이 없습니다.\n 볼륨 일련 번호 : BAF3-12D7\n\n");
-			print.printSentence("C:" + location.getCurrentLocation() + " 디렉터리\n\n");
+		
+			getCmdNumber(); // 일련번호 출력 
+	
 			
 			if(inputDirectory.contains("dir ")) {// dir 후 위치지정				
 				location.setTemporaryStorage(location.getCurrentLocation()); // 임시저장소 dir + 위치 입력 전 위치값 저장
@@ -149,5 +153,21 @@ public class Dir {
 	
 	return dotFile;
 }
-		
+	private void getCmdNumber() {
+		try {
+			String line;
+			InputStream cmdNumber;
+			cmdNumber = Runtime.getRuntime().exec("cmd /c " + "dir").getInputStream();
+			BufferedReader bufferReader = new BufferedReader(new InputStreamReader(cmdNumber, "MS949"));
+			for(int index=0;index<2;index++) {
+				line = bufferReader.readLine();
+				System.out.println(line);
+			}
+			System.out.println();
+			bufferReader.close();
+			cmdNumber.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

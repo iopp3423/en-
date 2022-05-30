@@ -132,6 +132,10 @@ public class Copy {
 				
 				print.printSentence(oldFile + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");
 				
+				
+				
+				
+				
 				checkCopy(startFile, destinationFile);								
 			}
 			catch (IOException e) {
@@ -141,6 +145,15 @@ public class Copy {
 		else {
 			print.printSentence("지정된 경로를 찾을 수 없습니다.\r\n" + exceptionString);
 		}
+	}
+	
+	private boolean isCopyFileOfDirectory(File startFile, File destinationFile) {	
+		if(startFile.isDirectory() && destinationFile.isDirectory()) {
+			copyDirectory(startFile, destinationFile);
+			print.printSentence("     1개 파일이 복사되었습니다.\n");
+			return true;
+		}	
+		return false;
 	}
 	
 	
@@ -177,14 +190,6 @@ public class Copy {
 		  }	
 	    }
 	
-	private boolean isCopyFileOfDirectory(File startFile, File destinationFile) {	
-		if(startFile.isDirectory() && destinationFile.isDirectory()) {
-			copyDirectory(startFile, destinationFile);
-			print.printSentence("     1개 파일이 복사되었습니다.\n");
-			return true;
-		}	
-		return false;
-	}
 	
 	
 	private void checkCopy(File startFile, File destinationFile) {
