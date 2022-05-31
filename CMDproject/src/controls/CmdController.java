@@ -50,7 +50,8 @@ public class CmdController {
 		}
 		else instruction = inputCommand; // cd\, dir, cls입력시 바로 이동
 		
-		if(instruction.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
+		if(instruction.equals("")) print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력continue;
+		else if(instruction.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(instruction.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
 		else if(instruction.contains("move"))GoMove.controlMove(inputCommand);
 		else if(instruction.contains("copy"))GoCopy.controlCopy(inputCommand);

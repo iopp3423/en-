@@ -86,10 +86,14 @@ public class Cd {
 		String cdAndCommand[] = inputDirectory.split(" ");
 		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
 		File currentLocation = new File(location.getCurrentLocation() + directory);
+		File resetLocation = new File(directory.toString().replace("\\\\", "\\"));
 
-		if(inputDirectory.contains("cd \\")){
-			location.setErrorMessage("지정된 경로를 찾을 수 없습니다.\n");   
-			return Constants.IS_ERROR;
+		if(inputDirectory.contains("cd \\") && resetLocation.isDirectory()){
+			location.setCurrentLocation(resetLocation.toString());
+			return !Constants.IS_ERROR;
+
+			//location.setErrorMessage("지정된 경로를 찾을 수 없습니다.\n");   
+			//return Constants.IS_ERROR;
 		}
 		else if(currentLocation.isDirectory()) {
 			 location.setCurrentLocation(location.getCurrentLocation() + directory);  // 현재 위치 저장 

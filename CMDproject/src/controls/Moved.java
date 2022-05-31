@@ -122,9 +122,6 @@ public class Moved {
 			File startFile = new File(newLocation + "\\" + files[Constants.OLD_FILE]);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + files[Constants.NEW_FILE]);
 			
-			System.out.println(startFile);
-			System.out.println(destinationFile);
-			
 			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) {		
 			}
 			else checkFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);					
@@ -133,9 +130,6 @@ public class Moved {
 		else {
 			File startFile = new File(newLocation + "\\" + file);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + file);
-			
-			System.out.println(startFile);
-			System.out.println(destinationFile);
 			
 			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) {		
 			}
@@ -161,30 +155,29 @@ public class Moved {
 		}
 	}
 	
-	private boolean MoveoverapFile(File startLocation, File destinaionLocation) {
+	private boolean MoveoverapFile(File startLocation, File destinationLocation) {
 		boolean is_overapFile = true;
 		
-		
-		if(startLocation.exists() && destinaionLocation.exists()) { // 이미 파일이 있을 때 
+		if(startLocation.isFile() && destinationLocation.isFile()) { // 이미 파일이 있을 때 
 			try {
-				Files.copy(startLocation.toPath(), destinaionLocation.toPath());
+				Files.copy(startLocation.toPath(), destinationLocation.toPath());
 				print.printSentence("     1개 파일이 복사되었습니다.\n");
 			} 
 
 			catch(java.nio.file.FileAlreadyExistsException e) {
 				is_overapFile = false;
-				print.printSentence(destinaionLocation + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");	
+
+				print.printSentence(destinationLocation + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");	
 				
 				if(data.is_inputYesOrNo()) {
 					try {
-						Files.copy(startLocation.toPath(), destinaionLocation.toPath(),StandardCopyOption.REPLACE_EXISTING);
+						Files.copy(startLocation.toPath(), destinationLocation.toPath(),StandardCopyOption.REPLACE_EXISTING);
 						startLocation.delete(); // 파일 복사 후 삭제
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 					print.printSentence("     1개 파일을 이동했습니다.\n");
 				}
-				
 				else {
 					print.printSentence("     0개 파일을 이동했습니다.\n");
 				}
