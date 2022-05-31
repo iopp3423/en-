@@ -23,7 +23,6 @@ public class Cd {
 	
 	public void CheckLocationOrError(String inputDirectory) {
 		
-		//System.out.println(location.getCurrentLocation());
 		if(CheckDirectoryAndStoreLocation(inputDirectory)) { // 경로가 맞으면 
 			if(location.getCurrentLocation().equals("")) { // root폴더이면 
 				print.printCurrentLocation("C:\\" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);

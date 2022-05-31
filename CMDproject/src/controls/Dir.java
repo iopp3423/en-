@@ -150,7 +150,6 @@ public class Dir {
 		 
 	 }
 		 
-	
 	return dotFile;
 }
 	private void getCmdNumber() {
@@ -159,7 +158,7 @@ public class Dir {
 			InputStream cmdNumber;
 			cmdNumber = Runtime.getRuntime().exec("cmd /c " + "dir").getInputStream();
 			BufferedReader bufferReader = new BufferedReader(new InputStreamReader(cmdNumber, "MS949"));
-			for(int index=0;index<2;index++) {
+			for(int index=Constants.START;index<Constants.CMD_NUMBER;index++) {
 				line = bufferReader.readLine();
 				System.out.println(line);
 			}

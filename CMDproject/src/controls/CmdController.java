@@ -41,12 +41,14 @@ public class CmdController {
 		while(true) {
 		String inputCommand = command.inputInstruction();
 		String instruction = "";
+
+		inputCommand = removeC(inputCommand);	
+
 		
 		if(inputCommand.length() >= Constants.INSTRUCTION) {
 		instruction = inputCommand.substring(Constants.RESET, Constants.INSTRUCTION);
 		}
 		else instruction = inputCommand; // cd\, dir, cls입력시 바로 이동
-		
 		
 		if(instruction.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
 		else if(instruction.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
@@ -66,6 +68,16 @@ public class CmdController {
 		else GoCd.CheckLocationOrError(inputCommand);
 
 		}	
+	
 	}
 
+	private String removeC(String inputCommand) {
+		if(inputCommand.contains("C:\\") || inputCommand.contains("c:\\")) {
+			
+			inputCommand = inputCommand.replace("C:\\", "");
+			inputCommand = inputCommand.replace("c:\\", "");
+			location.setCurrentLocation("");
+		}
+		return inputCommand;
+	}
 }

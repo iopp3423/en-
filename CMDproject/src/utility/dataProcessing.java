@@ -14,10 +14,10 @@ public class dataProcessing {
 	public String inputInstruction() {
 		String instruction = scan.nextLine();	
 		
-		if(instruction.contains("C:") || instruction.contains("c:")) {
-			instruction = instruction.replace("C:", "");
-			instruction = instruction.replace("c:", "");
+		if(instruction.contains(" .\\")) {	
+		instruction = instruction.replace(".\\", "");
 		}
+		
 		instruction = instruction.replaceAll("\\s+", " "); // 중복 공백 제거
 		instruction = instruction.trim(); // 문자열 앞 뒤 공백 제거
 		
@@ -25,8 +25,9 @@ public class dataProcessing {
 	}
 	
 	public String removeC(String location){
-		if(location.contains("C:")) {
+		if(location.contains("C:")  || location.contains("c:")) {
 			location = location.replace("C:", "");
+			location = location.replace("c:", "");
 		}
 		return location;
 	}

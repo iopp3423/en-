@@ -30,6 +30,8 @@ public class Constants {
 	public static final int BLANK_LOCATION = 1;
 	public static final int BYTE = 4096;
 	
+	public static final int CMD_NUMBER = 2;
+	
 	public static final boolean IS_ERROR = false;
 	public static final boolean IS_DESIGNATE_LOCATION_DIR = true;
 	public static final boolean IS_SUCESS = true;
