@@ -38,7 +38,10 @@ public class Cd {
 	}
 	
 	public boolean CheckDirectoryAndStoreLocation(String inputDirectory) {
-		if(inputDirectory.equals("cd"))return true;
+		if(inputDirectory.equals("cd")) {
+			print.printSentence("\n"); 
+			return true;
+		}
 		else if(inputDirectory.equals("cd\\")) { // 처음으로 이동
 			location.setCurrentLocation("");
 			return true;
@@ -74,7 +77,7 @@ public class Cd {
 		slashCount = (data.countSlash(location.getCurrentLocation(), '\\')); // \ 갯수세기
 		location.setCurrentLocation(""); // 초기화
 		
-		for(int index=Constants.FIRST_LOCATION; index<slashCount-Constants.TWO_STEP_UP; index++) {
+		for(int index=Constants.FIRST_LOCATION; index < slashCount-Constants.TWO_STEP_UP; index++) {
 			location.setCurrentLocation(location.getCurrentLocation() +"\\" +  beforeCommand[index]);
 		}
 		return true;
@@ -86,14 +89,17 @@ public class Cd {
 		String cdAndCommand[] = inputDirectory.split(" ");
 		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
 		File currentLocation = new File(location.getCurrentLocation() + directory);
-		File resetLocation = new File(directory.toString().replace("\\\\", "\\"));
+		File resetLocation = new File(cdAndCommand[Constants.COMMAND]);
 
-		if(inputDirectory.contains("cd \\") && resetLocation.isDirectory()){
-			location.setCurrentLocation(resetLocation.toString());
-			return !Constants.IS_ERROR;
-
-			//location.setErrorMessage("지정된 경로를 찾을 수 없습니다.\n");   
-			//return Constants.IS_ERROR;
+		if(inputDirectory.contains("cd \\")){
+			if(resetLocation.isDirectory()) {
+				location.setCurrentLocation(resetLocation.toString());
+				return !Constants.IS_ERROR;	
+			}
+			else {
+				location.setErrorMessage("지정된 경로를 찾을 수 없습니다.\n");
+				return Constants.IS_ERROR;
+			}
 		}
 		else if(currentLocation.isDirectory()) {
 			 location.setCurrentLocation(location.getCurrentLocation() + directory);  // 현재 위치 저장 

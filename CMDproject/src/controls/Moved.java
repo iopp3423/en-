@@ -51,13 +51,20 @@ public class Moved {
 		
 		File oldFile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE]);
 		File newFile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE]);
+		File relativeRoute = new File(newFile + "\\" + slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE]);
+		
 
-		if(MoveoverapFile(oldFile, newFile) == Constants.IS_ERROR) {
-			
+		if(newFile.isDirectory()) { // 상대경로 파일 이동 
+			if(MoveoverapFile(oldFile, relativeRoute) == Constants.IS_ERROR) return;// 중복 파일 있으면 처리 후 리턴	
+			if(oldFile.renameTo(relativeRoute)) print.printMoveFileSucessOrFail("1개 파일을 이동했습니다.", Constants.IS_SUCESS); // 없으면 이동 
 		}
+		
+		else if(MoveoverapFile(oldFile, newFile) == Constants.IS_ERROR) return;		
+		
 		else if(oldFile.renameTo(newFile)){
 			print.printMoveFileSucessOrFail("1개 파일을 이동했습니다.", Constants.IS_SUCESS);
 		}
+		
 		else{
 			print.printMoveFileSucessOrFail("지정된 파일을 찾을 수 없습니다.", !Constants.IS_SUCESS);
 		}
@@ -75,8 +82,7 @@ public class Moved {
 		File oldFile = new File(location.getCurrentLocation() + "\\" + fileAndLocation[Constants.FILE]); // 현재위치 + 파일
 		File newFile = new File(newLocation + "\\" + file); // 지정위치 + 파일
 		
-		if(MoveoverapFile(oldFile, newFile) == Constants.IS_ERROR) {		
-		}
+		if(MoveoverapFile(oldFile, newFile) == Constants.IS_ERROR) return;
 
 		else if(newLocation.isDirectory()){	
 			if(oldFile.renameTo(newFile)) { // 경로 맞고 파일 이동 성공했으면
@@ -101,8 +107,7 @@ public class Moved {
 		File startLocation = new File(data.extractRoute(files[Constants.START_LOCAION]));
 		File destinaionLocation = new File(data.extractRoute(files[Constants.DESTINATION_LOCAION]));
 
-		if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) {		
-		}
+		if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) return;
 		
 		else checkFileAndDirectoryAfterPrint(startLocation, destinaionLocation, startFile, destinationFile);	
 		
@@ -122,8 +127,7 @@ public class Moved {
 			File startFile = new File(newLocation + "\\" + files[Constants.OLD_FILE]);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + files[Constants.NEW_FILE]);
 			
-			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) {		
-			}
+			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) return;
 			else checkFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);					
 		}
 		
@@ -131,8 +135,7 @@ public class Moved {
 			File startFile = new File(newLocation + "\\" + file);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + file);
 			
-			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) {		
-			}
+			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) return;
 			else checkFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);	
 		}
 

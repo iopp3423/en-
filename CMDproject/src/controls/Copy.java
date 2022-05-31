@@ -54,9 +54,14 @@ public class Copy {
 		File oldFile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE]);
 		File newFile = new File(location.getCurrentLocation() + "\\" + slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE]);
 		File currentLocation = new File(location.getCurrentLocation());
+		File relativeRoute = new File(newFile + "\\" + slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE]);
 		
+		if(newFile.isDirectory()) { // 상대경로 파일 이동 
+			checkFileAndDirectoryAfterPrint(currentLocation, newFile, oldFile, relativeRoute, slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE], "");
+			return;
+		}
+			
 		checkFileAndDirectoryAfterPrint(currentLocation, currentLocation, oldFile, newFile, slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE], "");
-
 	}
 	
 	
@@ -131,12 +136,8 @@ public class Copy {
 				if(isCopyFileOfDirectory(startFile, destinationFile)) return;
 				
 				print.printSentence(oldFile + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");
-				
-				
-				
-				
-				
-				checkCopy(startFile, destinationFile);								
+					
+				checkOverlapCopy(startFile, destinationFile);								
 			}
 			catch (IOException e) {
 				e.printStackTrace();
@@ -192,7 +193,7 @@ public class Copy {
 	
 	
 	
-	private void checkCopy(File startFile, File destinationFile) {
+	private void checkOverlapCopy(File startFile, File destinationFile) {
 		
 		if(data.is_inputYesOrNo()) {
 			try {
