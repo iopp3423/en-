@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="pluscount"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="pluscount"/>
+			<item value="plus"/>
+			<item value="system"/>
+			<item value="pluscount\"/>
+			<item value="plusMinus"/>
+			<item value="even"/>
+			<item value="setNegate"/>
+			<item value="length"/>
+			<item value="e"/>
+			<item value="changeNumber"/>
+			<item value="change"/>
+			<item value="format.applyPattern(patterns[1]);&#x0A;&#x09;&#x09;&#x09;changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정"/>
+			<item value="sub"/>
+			<item value="substract"/>
+			<item value="2"/>
+		</list>
+		<list key="replacehistory">
+			<item value="support.calculate"/>
+			<item value="calculate"/>
+			<item value="support.exceptionPrint();"/>
+			<item value="support.exceptionPrint()"/>
+			<item value="support.adjustFontSize()"/>
+			<item value="support.private void adjustFontSize()&#x0A;&#x09;{&#x0A;&#x09;&#x09;int fontlength = textPanel.inputSpace.getText().length();&#x0A;&#x09;&#x09;switch(fontlength) {&#x0A;&#x09;&#x09;case 1 : textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 70));break;&#x0A;&#x09;&#x09;case 10 : textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 54));break;&#x0A;&#x09;&#x09;case 11 : textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 52));break;&#x0A;&#x09;&#x09;case 12 : textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 50));break;&#x0A;&#x09;&#x09;case 13 : textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 47));break;&#x0A;&#x09;&#x09;case 14 : textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 42));break;&#x0A;&#x09;&#x09;case 15 : textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 38));break;&#x0A;&#x09;&#x09;case 16 : textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 35));break;&#x0A;&#x09;&#x09;case 17 : textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 30));break;&#x0A;&#x09;&#x09;}&#x0A;&#x09;&#x09;if(fontlength&gt;19) textPanel.inputSpace.setFont(new Font(&quot;맑은 고딕&quot;,  Constants.RESET, 30));&#x0A;&#x09;}"/>
+			<item value="support.changeNumber"/>
+			<item value="changeNumber"/>
+			<item value="support.setComma"/>
+			<item value="Constants.RESET"/>
+			<item value=""/>
+			<item value="calculator"/>
+			<item value="pluscount"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="1437"/>
+		<item key="DIALOG_Y_ORIGIN" value="148"/>
+		<item key="DIALOG_WIDTH" value="336"/>
+		<item key="DIALOG_HEIGHT" value="402"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
+</section>
