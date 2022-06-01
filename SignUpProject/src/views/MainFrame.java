@@ -15,6 +15,8 @@ public class MainFrame extends JFrame{
 	{
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/사진1.png"));
 		MainPanel panel = new MainPanel(new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage());
+		System.out.println(imageIcon);
+		System.out.println(panel);
 		add(panel);
 		
 		

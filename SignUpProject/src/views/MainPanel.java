@@ -17,9 +17,12 @@ import javax.swing.JLabel;
 public class MainPanel extends JPanel{
 	
 	private Image image;
+	private MainPanelCollection searchFrame;
 	
 	public MainPanel(Image image) {
 		this.image = image;
+		searchFrame = new MainPanelCollection();
+		
 		setSize(new Dimension(image.getWidth(null), image.getHeight(null)));
 		setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
 		setLayout(null);	
@@ -39,6 +42,9 @@ public class MainPanel extends JPanel{
 		setFontAndSize(searchId, 12);
 		setFontAndSize(searchPw, 12);
 		setFontAndSize(signUp, 12);
+		login.setBackground(Color.ORANGE);
+
+		
 		
 		
 		idLabel.setBounds(50, 180, 200, 40);
@@ -63,22 +69,23 @@ public class MainPanel extends JPanel{
 		add(pwInput);
 		add(idInput);
 		
-		idLabel.addMouseListener(new MouseAdapter()  
+		searchId.addMouseListener(new MouseAdapter()  
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
-		       // you can open a new frame here as
-		       // i have assumed you have declared "frame" as instance variable
-		    	System.out.println("hhhh");
-
+		    	searchFrame.searchIdFrame.setVisible(true);
 		    }  
 		}); 
+		searchPw.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	searchFrame.searchPwFrame.setVisible(true);
+		    }  
+		});
 	}
 	
-	public void paintComponent(Graphics g) {
-		g.drawImage(image, 0, 0, null);
-		setOpaque(false);
-	}
+	
 	
 	private JLabel setFontAndSize(JLabel label, int size) {
 		
@@ -89,8 +96,7 @@ public class MainPanel extends JPanel{
 	}
 	
 	
-	
-	
+
 	
 	
 	/*
