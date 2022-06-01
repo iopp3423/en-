@@ -27,6 +27,7 @@ public class Copy {
 	//StandardCopyOption.REPLACE_EXISTING 덮어쓰기
 	
 	public void controlCopy(String inputCommand) {
+		
 		if(inputCommand.equals("copy")) {
 			print.printSentence("명령 구문이 올바르지 않습니다.\n\n");
 		}
@@ -42,7 +43,9 @@ public class Copy {
 		else if(data.blankCount(inputCommand, ' ') == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) { // copy a.txt users\\user\onedrive\desktop\b.txt 2번 
 			copyFileCurrentLocationToNewLocation(inputCommand);
 		}		
-		
+		else {
+			print.printSentence("지정된 경로를 찾을 수 없습니다.\n\n");
+		}
 		print.printSentence("C:" + location.getCurrentLocation() + ">");
 	}
 	
@@ -56,11 +59,16 @@ public class Copy {
 		File currentLocation = new File(location.getCurrentLocation());
 		File relativeRoute = new File(newFile + "\\" + slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE]);
 		
-		if(newFile.isDirectory()) { // 상대경로 파일 이동 
+		
+		if(oldFile.equals(newFile)) {
+			print.printSentence("같은경로로 복사할 수 없습니다.\n\n");
+			return;
+		}
+		else if(newFile.isDirectory()) { // 상대경로 파일 이동 
 			checkFileAndDirectoryAfterPrint(currentLocation, newFile, oldFile, relativeRoute, slicedSentence[Constants.CURRENT_LOACTION_OLD_FILE], "");
 			return;
 		}
-			
+
 		checkFileAndDirectoryAfterPrint(currentLocation, currentLocation, oldFile, newFile, slicedSentence[Constants.CURRENT_LOACTION_NEW_FILE], "");
 	}
 	
@@ -122,11 +130,19 @@ public class Copy {
 
 
 	private void checkFileAndDirectoryAfterPrint(File startLocation, File destinaionLocation, File startFile, File destinationFile, String oldFile, String exceptionString) {
-				
+		
 		if(startLocation.isDirectory() && destinaionLocation.isDirectory()) {
 			try {
+				if(startFile.isFile()) {
 				Files.copy(startFile.toPath(), destinationFile.toPath());				
 				print.printSentence("     1개 파일이 복사되었습니다.\n");
+				}
+				else if(startFile.isDirectory()) {
+					Files.copy(startFile.toPath(), destinationFile.toPath());	
+					copyDirectory(startFile, destinationFile);
+					print.printSentence("     1개 폴더가 복사되었습니다.\n");
+				}
+				else print.printSentence("지정된 파일을 찾을 수 없습니다.\n");
 			} 
 			catch(java.nio.file.NoSuchFileException e) {
 				print.printSentence("지정된 파일을 찾을 수 없습니다.\n");
@@ -195,7 +211,7 @@ public class Copy {
 	
 	private void checkOverlapCopy(File startFile, File destinationFile) {
 		
-		if(data.is_inputYesOrNo()) {
+		if(data.isinputYesOrNo()) {
 			try {
 				Files.copy(startFile.toPath(), destinationFile.toPath(),StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e1) {

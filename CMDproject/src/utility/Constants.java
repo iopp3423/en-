@@ -23,7 +23,7 @@ public class Constants {
 	public static final int OLD_FILE = 0;
 	public static final int NEW_FILE = 1;
 	
-	public static final int INSTRUCTION = 4;
+	public static final int INSTRUCTION = 5;
 	
 	public static final int FIRST_CHAR = 1;
 	

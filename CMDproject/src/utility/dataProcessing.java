@@ -13,14 +13,23 @@ public class dataProcessing {
 	
 	public String inputInstruction() {
 		String instruction = scan.nextLine();	
-		
+		 
+		if(instruction.equals("dir..")) {
+			instruction = instruction.replace("dir..", "dir ..");
+		}
+		if(instruction.contains("/")) {
+			instruction = instruction.replace("/","\\");
+		}
+		if(instruction.contains("\\\\")) {
+			instruction = instruction.replace("\\\\","\\");
+		}
 		if(instruction.contains(" .\\")) {	
 		instruction = instruction.replace(".\\", "");
 		}
 		
 		instruction = instruction.replaceAll("\\s+", " "); // 중복 공백 제거
 		instruction = instruction.trim(); // 문자열 앞 뒤 공백 제거
-		
+	
 		return instruction;
 	}
 	
@@ -32,12 +41,11 @@ public class dataProcessing {
 		return location;
 	}
 	
-	public boolean is_inputYesOrNo() {
+	public boolean isinputYesOrNo() {
 		String instruction = scan.nextLine();
 		
-		if(instruction.equals("y") || instruction.equals("yes")) return true;
+		instruction = capitalizeFirstLetter(instruction);
 		if(instruction.equals("Y") || instruction.equals("Yes")) return true;
-		else if(instruction.equals("n") || instruction.equals("no")) return false;
 		else if(instruction.equals("N") || instruction.equals("No")) return false;
 		else return true;
 	}

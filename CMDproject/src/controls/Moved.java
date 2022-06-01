@@ -25,6 +25,8 @@ public class Moved {
 	}
 
 	public void controlMove(String inputCommand) {
+		inputCommand = removeLastSlashChar(inputCommand);
+		
 		if(inputCommand.equals("move")) {
 			print.printSentence("명령 구문이 올바르지 않습니다.\n\n");
 		}
@@ -40,7 +42,9 @@ public class Moved {
 		else if(data.blankCount(inputCommand, ' ') == Constants.MOVE_CURRENT_TO_DESIGNATE_LOCATION) { // move a.txt users\\user\onedrive\desktop\b.txt 2번 
 			moveFileCurrentLocationToNewLocation(inputCommand);
 		}		
-		
+		else {
+			print.printSentence("지정된 경로를 찾을 수 없습니다.\n\n");
+		}
 		print.printSentence("C:" + location.getCurrentLocation() + ">");
 	}
 	
@@ -55,11 +59,11 @@ public class Moved {
 		
 
 		if(newFile.isDirectory()) { // 상대경로 파일 이동 
-			if(MoveoverapFile(oldFile, relativeRoute) == Constants.IS_ERROR) return;// 중복 파일 있으면 처리 후 리턴	
+			if(moveoverapFile(oldFile, relativeRoute) == Constants.IS_ERROR) return;// 중복 파일 있으면 처리 후 리턴	
 			if(oldFile.renameTo(relativeRoute)) print.printMoveFileSucessOrFail("1개 파일을 이동했습니다.", Constants.IS_SUCESS); // 없으면 이동 
 		}
 		
-		else if(MoveoverapFile(oldFile, newFile) == Constants.IS_ERROR) return;		
+		else if(moveoverapFile(oldFile, newFile) == Constants.IS_ERROR) return;		
 		
 		else if(oldFile.renameTo(newFile)){
 			print.printMoveFileSucessOrFail("1개 파일을 이동했습니다.", Constants.IS_SUCESS);
@@ -81,12 +85,21 @@ public class Moved {
 		File newLocation = new File(fileAndLocation[Constants.LOCATION]); // 디렉토리 위치
 		File oldFile = new File(location.getCurrentLocation() + "\\" + fileAndLocation[Constants.FILE]); // 현재위치 + 파일
 		File newFile = new File(newLocation + "\\" + file); // 지정위치 + 파일
+		File noneFile = new File(newFile + "\\"+fileAndLocation[Constants.FILE]);
 		
-		if(MoveoverapFile(oldFile, newFile) == Constants.IS_ERROR) return;
+		
+		if(inputCommand.contains(" ..\\")) {
+			newFile =  new File(moveStepUP(location.getCurrentLocation()) + "\\" + file);		
+			oldFile = new File(location.getCurrentLocation() + "\\" + fileAndLocation[Constants.FILE]);
+		}
+		if(moveoverapFile(oldFile, newFile) == Constants.IS_ERROR) return;
 
-		else if(newLocation.isDirectory()){	
+		if(newLocation.isDirectory()){	
 			if(oldFile.renameTo(newFile)) { // 경로 맞고 파일 이동 성공했으면
 			print.printSentence("1개 파일을 이동하였습니다.\n");
+			}
+			else if(newFile.isDirectory() && oldFile.renameTo(noneFile)) {
+				print.printSentence("1개 파일을 이동하였습니다.\n");				
 			}
 			else {
 				print.printSentence("지정된 파일을 찾을 수 없습니다.\n");// 경로에 파일이 업으면
@@ -107,7 +120,7 @@ public class Moved {
 		File startLocation = new File(data.extractRoute(files[Constants.START_LOCAION]));
 		File destinaionLocation = new File(data.extractRoute(files[Constants.DESTINATION_LOCAION]));
 
-		if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) return;
+		if(moveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) return;
 		
 		else checkFileAndDirectoryAfterPrint(startLocation, destinaionLocation, startFile, destinationFile);	
 		
@@ -126,8 +139,8 @@ public class Moved {
 			files = data.sliceSentence(file);	
 			File startFile = new File(newLocation + "\\" + files[Constants.OLD_FILE]);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + files[Constants.NEW_FILE]);
-			
-			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) return;
+
+			if(moveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) return;
 			else checkFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);					
 		}
 		
@@ -135,7 +148,7 @@ public class Moved {
 			File startFile = new File(newLocation + "\\" + file);
 			File destinationFile = new File(location.getCurrentLocation() + "\\" + file);
 			
-			if(MoveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) return;
+			if(moveoverapFile(startFile, destinationFile) == Constants.IS_ERROR) return;
 			else checkFileAndDirectoryAfterPrint(currentLocaion, newLocation, startFile, destinationFile);	
 		}
 
@@ -144,7 +157,21 @@ public class Moved {
 
 	private void checkFileAndDirectoryAfterPrint(File startLocation, File destinaionLocation, File startFile, File destinationFile) {
 		
-		if(startLocation.isDirectory() && destinaionLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
+		File noneFile = new File(destinationFile + "\\" + data.extractFile(startFile.toString()));
+			
+		if(startLocation.isDirectory()) { // 경로 맞고 파일 이동 성공했으면
+			
+			if(startFile.renameTo(destinationFile)){
+				print.printSentence("1개 파일을 이동하였습니다.\n");
+			}
+			else if(destinaionLocation.isDirectory() && startFile.renameTo(noneFile)) {
+				print.printSentence("1개 파일을 이동하였습니다.\n");		
+			}
+			else {
+				print.printSentence("지정된 파일을 찾을 수 없습니다.\n");
+			}
+		}
+		else if(startLocation.isDirectory() && destinaionLocation.isFile()) { // 경로 맞고 파일 이동 성공했으면
 			
 			if(startFile.renameTo(destinationFile)){
 				print.printSentence("1개 파일을 이동하였습니다.\n");
@@ -158,13 +185,12 @@ public class Moved {
 		}
 	}
 	
-	private boolean MoveoverapFile(File startLocation, File destinationLocation) {
+	private boolean moveoverapFile(File startLocation, File destinationLocation) {
 		boolean is_overapFile = true;
 		
 		if(startLocation.isFile() && destinationLocation.isFile()) { // 이미 파일이 있을 때 
 			try {
 				Files.copy(startLocation.toPath(), destinationLocation.toPath());
-				print.printSentence("     1개 파일이 복사되었습니다.\n");
 			} 
 
 			catch(java.nio.file.FileAlreadyExistsException e) {
@@ -172,7 +198,7 @@ public class Moved {
 
 				print.printSentence(destinationLocation + "을(를) 덮어쓰시겠습니까? (Yes/No/All):");	
 				
-				if(data.is_inputYesOrNo()) {
+				if(data.isinputYesOrNo()) {
 					try {
 						Files.copy(startLocation.toPath(), destinationLocation.toPath(),StandardCopyOption.REPLACE_EXISTING);
 						startLocation.delete(); // 파일 복사 후 삭제
@@ -193,5 +219,30 @@ public class Moved {
 		return is_overapFile;
 	}
 	
+	private String removeLastSlashChar(String inputCommand) {
+		
+        String lastCharacter = inputCommand.substring(inputCommand.length() - 1);
+        if(lastCharacter.equals("\\")) {    	
+        	inputCommand = inputCommand.substring(Constants.START, inputCommand.length() - 1);
+        }
+
+        return inputCommand;
+	}
+	
+	
+	private String moveStepUP(String changeLocation) {
+		
+		File changeFile = new File(changeLocation + "\\..");
+		
+		try {
+			changeLocation = (changeFile.getCanonicalPath().toString().replace("C:", ""));
+	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	return changeLocation;
+	}
 	
 }

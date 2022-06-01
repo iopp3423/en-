@@ -31,13 +31,12 @@ public class Dir {
 		
 			getCmdNumber(); // 일련번호 출력 
 	
-			
-			if(inputDirectory.contains("dir ")) {// dir 후 위치지정				
+			if(inputDirectory.startsWith("dir ") || (inputDirectory.startsWith("dir.."))) {// dir 후 위치지정				
 				location.setTemporaryStorage(location.getCurrentLocation()); // 임시저장소 dir + 위치 입력 전 위치값 저장
 				printDesignateLocationDir(inputDirectory);
 			}
 			
-			else if(inputDirectory.equals("dir")) {
+			else if(inputDirectory.startsWith("dir")) {
 				printCurrentLocationDir(!Constants.IS_DESIGNATE_LOCATION_DIR); // 현재위치 dir 출력
 			}	
 	}
@@ -47,9 +46,10 @@ public class Dir {
 	    String cdAndCommand[] = inputDirectory.split(" ");                 
 		File directory = new File("\\" + cdAndCommand[Constants.COMMAND]);
 		File currentLocation = new File(location.getCurrentLocation() + directory);
-		 
+		
 		 if(currentLocation.isDirectory()) {
 			 location.setCurrentLocation(location.getCurrentLocation() + directory);  // 현재 위치 저장 
+			 System.out.println(location.getCurrentLocation());
 			 printCurrentLocationDir(Constants.IS_DESIGNATE_LOCATION_DIR);
 		} 
 		 
@@ -57,6 +57,7 @@ public class Dir {
 			 print.printSentence("파일을 찾을 수 없습니다.\n\n");  
 			 print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 		}
+		 
 	}
 	
 	private void printCurrentLocationDir(boolean judgment) { // 현재위치 dir 저장
@@ -113,7 +114,7 @@ public class Dir {
 	    print.printFileAndDirectoryData(fileLength, directoryLength, data.setComma(Long.toString(fileByte)), data.setComma(Long.toString(directoryByte)));
 	     
 	    
-	    if(judgment == Constants.IS_DESIGNATE_LOCATION_DIR) location.setCurrentLocation(location.getTemporaryStorage());
+	    if(judgment == Constants.IS_DESIGNATE_LOCATION_DIR && location.getTemporaryStorage() != "") location.setCurrentLocation(location.getTemporaryStorage());
 	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 	}
 	

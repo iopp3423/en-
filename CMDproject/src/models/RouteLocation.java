@@ -1,14 +1,11 @@
 package models;
 
 public class RouteLocation {
-	private String home = System.getProperty("user.home");
+
 	private String currentLocation= System.getProperty("user.home");
 	private String errorMessage="";
 	private String temporaryStorage="";
 	
-	public String getHome() {
-		return home;
-	}
 	public void setCurrentLocation(String location) {
 		this.currentLocation = location;
 	}

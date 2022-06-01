@@ -1,6 +1,7 @@
 package controls;
 
 import java.io.File;
+import java.io.IOException;
 
 import models.RouteLocation;
 import utility.Constants;
@@ -21,9 +22,9 @@ public class Cd {
 
 	
 	
-	public void CheckLocationOrError(String inputDirectory) {
+	public void checkLocationOrError(String inputDirectory) {
 		
-		if(CheckDirectoryAndStoreLocation(inputDirectory)) { // 경로가 맞으면 
+		if(checkDirectoryAndStoreLocation(inputDirectory)) { // 경로가 맞으면 
 			if(location.getCurrentLocation().equals("")) { // root폴더이면 
 				print.printCurrentLocation("C:\\" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
 			}
@@ -37,7 +38,8 @@ public class Cd {
 		    }
 	}
 	
-	public boolean CheckDirectoryAndStoreLocation(String inputDirectory) {
+	public boolean checkDirectoryAndStoreLocation(String inputDirectory) {
+		
 		if(inputDirectory.equals("cd")) {
 			print.printSentence("\n"); 
 			return true;
@@ -45,44 +47,15 @@ public class Cd {
 		else if(inputDirectory.equals("cd\\")) { // 처음으로 이동
 			location.setCurrentLocation("");
 			return true;
-		}	
-		else if(inputDirectory.equals("cd..")) return MoveOneStopUp();	
-		else if(inputDirectory.equals("cd..\\..")) return MoveTwoStepUp();
+		}
+		else if(inputDirectory.contains("..")) return moveStepUP(inputDirectory);		
 		else if(inputDirectory.contains("cd ")) return actCd(inputDirectory);// cd명령
-		else {
+		else{
 			location.setErrorMessage("'"+inputDirectory+"'" + "은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다."); // cd를 쓰지 않으면 
 			return false;
 		}
 		
 	}
-	
-	private boolean MoveOneStopUp() {
-		int slashCount=Constants.RESET;
-		String beforeCommand[] = location.getCurrentLocation().split("\\\\"); // \기준으로 문자열 스플릿
-					
-		slashCount = (data.countSlash(location.getCurrentLocation(), '\\')); // \ 갯수세기
-		location.setCurrentLocation(""); // 초기화
-		
-		for(int index=Constants.FIRST_LOCATION; index<slashCount; index++) {
-			location.setCurrentLocation(location.getCurrentLocation() + "\\" +  beforeCommand[index]);
-		}
-		
-		return true;
-	}
-	
-	private boolean MoveTwoStepUp() {	
-		int slashCount=Constants.RESET;
-		String beforeCommand[] = location.getCurrentLocation().split("\\\\"); // \기준으로 문자열 스플릿
-					
-		slashCount = (data.countSlash(location.getCurrentLocation(), '\\')); // \ 갯수세기
-		location.setCurrentLocation(""); // 초기화
-		
-		for(int index=Constants.FIRST_LOCATION; index < slashCount-Constants.TWO_STEP_UP; index++) {
-			location.setCurrentLocation(location.getCurrentLocation() +"\\" +  beforeCommand[index]);
-		}
-		return true;
-	}
-
 	
 	private boolean actCd(String inputDirectory) {
 		
@@ -111,4 +84,37 @@ public class Cd {
 		 return currentLocation.isDirectory(); // true면 존재, false면 존재 x
 	}
 	
+	
+	private boolean moveStepUP(String inputCommand) {
+		
+		String change = location.getCurrentLocation()+ "\\" + inputCommand;
+	
+		change = change.replace("cd", "");
+		change = change.replace(" ", "");
+		inputCommand = inputCommand.replace("cd", "");
+		inputCommand = inputCommand.replace(" ", "");
+				
+		File changeFile = new File(change);
+		
+		for (int index = Constants.START; index < inputCommand.length(); index++) {
+
+            if (inputCommand.substring(index, index+1).startsWith(".") || inputCommand.substring(index, index+1).startsWith("\\")) {
+            }
+            else {
+            	location.setErrorMessage("지정된 경로를 찾을 수 없습니다.");
+            	return false;
+            };
+        }
+		
+		
+		try {
+			location.setCurrentLocation(changeFile.getCanonicalPath().toString().replace("C:", ""));
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 }

@@ -1,6 +1,10 @@
 package controls;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,7 +36,7 @@ public class CmdController {
 		GoCopy = new Copy(location, print, data);
 		GoDir = new Dir(location, print, data);
 		GoMove = new Moved(location, print, data);
-		print.printNotice();
+		printVersion();
 		location.setCurrentLocation(data.removeC(location.getCurrentLocation()));
 	    print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력
 	}
@@ -52,7 +56,7 @@ public class CmdController {
 		
 		if(instruction.equals("")) print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);  // 현재 위치 출력continue;
 		else if(instruction.contains("dir")) GoDir.CheckcurrentLocationOrDesignateDir(inputCommand);
-		else if(instruction.contains("cd"))GoCd.CheckLocationOrError(inputCommand);
+		else if(instruction.contains("cd"))GoCd.checkLocationOrError(inputCommand);
 		else if(instruction.contains("move"))GoMove.controlMove(inputCommand);
 		else if(instruction.contains("copy"))GoCopy.controlCopy(inputCommand);
 		else if (instruction.equals("help")) {
@@ -66,18 +70,48 @@ public class CmdController {
 			print.printCurrentLocation("C:" + location.getCurrentLocation() + ">", location.getErrorMessage(), !Constants.IS_ERROR);
 		}
 
-		else GoCd.CheckLocationOrError(inputCommand);
+		else GoCd.checkLocationOrError(inputCommand);
 
 		}	
 	
 	}
+	private void printVersion() {
+		try {
+			String line;
+			InputStream cmdNumber;
+			cmdNumber = Runtime.getRuntime().exec("cmd").getInputStream();
+			BufferedReader bufferReader = new BufferedReader(new InputStreamReader(cmdNumber, "MS949"));
+			for(int index=Constants.START;index<Constants.CMD_NUMBER;index++) {
+				line = bufferReader.readLine();
+				print.printSentence(line + "\n");
+			}
+			System.out.println();
+			bufferReader.close();
+			cmdNumber.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private String removeC(String inputCommand) {
 		if(inputCommand.contains("C:\\") || inputCommand.contains("c:\\")) {
-			
-			inputCommand = inputCommand.replace("C:\\", "");
-			inputCommand = inputCommand.replace("c:\\", "");
-			location.setCurrentLocation("");
+
+		
+			if(inputCommand.contains("cd") || inputCommand.contains("dir")) {
+				inputCommand = inputCommand.replace("C:\\", "");
+				inputCommand = inputCommand.replace("c:\\", "");
+				location.setCurrentLocation("");		
+			}
+			else {
+				inputCommand = inputCommand.replace("C:\\", "\\");
+				inputCommand = inputCommand.replace("c:\\", "\\");
+			}
+		}
+		else if(inputCommand.contains("C:") || inputCommand.contains("c:")) {
+			inputCommand = inputCommand.replace("C:", "");
+			inputCommand = inputCommand.replace("c:", "");
+			if(inputCommand.contains("cd") || inputCommand.contains("dir"))
+				location.setCurrentLocation("");	
 		}
 		return inputCommand;
 	}
