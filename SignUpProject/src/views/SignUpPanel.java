@@ -173,8 +173,6 @@ public class SignUpPanel extends JPanel{
 		label.setFont(new Font("bold", Font.BOLD, size));
 		label.setHorizontalAlignment(JLabel.CENTER);
 		label.setForeground(Color.WHITE);
-		//label.setForeground(Color.BLACK);
-		//label.setBackground(Color.WHITE);
 		label.setOpaque(false);	
 	}
 }

@@ -9,6 +9,5 @@ public class SignUpController {
 	public SignUpController() {
 		MainFrame frame = new MainFrame();
 		frame.setFrame();
-		
 	}
 }

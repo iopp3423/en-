@@ -21,16 +21,21 @@ public class MainPanel extends JPanel{
 	private MainPanelCollection searchFrame;
 	private SignUpPanel signUpPanel;
 	private ControllerPanel controllerPanel;
+	private editPanel edit;
 	
 	public MainPanel(Image image, JFrame mainFrame) {
 		this.image = image;
 		
 		searchFrame = new MainPanelCollection();
 		signUpPanel = new SignUpPanel(); // 회원가입 화면 
-		controllerPanel = new ControllerPanel();
+		edit = new editPanel();
+		controllerPanel = new ControllerPanel(edit);
 		
+		mainFrame.add(edit);
 		mainFrame.add(signUpPanel);
 		mainFrame.add(controllerPanel);
+
+		edit.setVisible(false);
 		controllerPanel.setVisible(false);
 		signUpPanel.setVisible(false);
 		

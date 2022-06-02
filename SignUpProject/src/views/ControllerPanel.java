@@ -17,13 +17,12 @@ import utility.Constants;
 
 public class ControllerPanel extends JPanel{
 
-	Image image;
+	private Image image;
 	
-	public ControllerPanel() {
+	public ControllerPanel(editPanel edit) {
 		
-
-		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/메뉴.png"));
 		
+		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/메뉴.png"));	
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage();
 			
 		setSize(new Dimension(image.getWidth(null), image.getHeight(null)));
@@ -34,10 +33,7 @@ public class ControllerPanel extends JPanel{
 		JButton setButton = new JButton(new ImageIcon(new ImageIcon("/image/set.png").getImage().getScaledInstance(240, 400, Image.SCALE_SMOOTH)));
 		JButton logoutButton = new JButton(new ImageIcon(new ImageIcon("/image/logout.png").getImage().getScaledInstance(240, 400, Image.SCALE_SMOOTH)));
 		JButton deleteButton = new JButton(new ImageIcon(new ImageIcon("/image/delete.png").getImage().getScaledInstance(240, 400, Image.SCALE_SMOOTH)));
-		
-
-		editButton.setPressedIcon(new ImageIcon(new ImageIcon("/image/set.png").getImage().getScaledInstance(240, 400, Image.SCALE_SMOOTH)));
-		
+				
 		setButtonImage(editButton);
 		setButtonImage(setButton);
 		setButtonImage(logoutButton);
@@ -68,7 +64,7 @@ public class ControllerPanel extends JPanel{
 		    }
 		    public void mousePressed(MouseEvent e) { // 마우스클릭 
 		    	JButton button = (JButton)e.getSource();
-		    	System.out.println("dddd");
+		    	edit.setVisible(true);
 		    }   
 		}); 
 		setButton.addMouseListener(new MouseAdapter()  

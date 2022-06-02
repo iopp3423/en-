@@ -17,11 +17,11 @@ import utility.Constants;
 
 public class MainPanelCollection{
 
-	JFrame searchIdFrame;
-	JFrame searchPwFrame;
-	searchIdPanel idPanel;
-	searchPwPanel pwPanel;
-	Image image;
+	public JFrame searchIdFrame;
+	public JFrame searchPwFrame;
+	public searchIdPanel idPanel;
+	public searchPwPanel pwPanel;
+	private Image image;
 	
 	public MainPanelCollection()// 계정이름, 비밀번호 잊으셨나요 클릭 시 나오는 프레임
 	{

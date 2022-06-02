@@ -16,7 +16,7 @@ public class MainFrame{
 	public void setFrame() {
 		mainFrame = new JFrame();
 		
-		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/사진1.png"));
+		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/메인.png"));
 		MainPanel mainPanel = new MainPanel(new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage(), mainFrame);
 		
 		mainFrame.add(mainPanel);
