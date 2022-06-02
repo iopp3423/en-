@@ -1,12 +1,14 @@
 package controls;
 
 import views.MainFrame;
+import views.SignUpPanel;
 
 public class SignUpController {
 
-	private MainFrame frame;
-	
+
 	public SignUpController() {
-		frame = new MainFrame();
+		MainFrame frame = new MainFrame();
+		frame.setFrame();
+		
 	}
 }

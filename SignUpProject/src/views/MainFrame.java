@@ -7,25 +7,26 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import utility.Constants;
 
-public class MainFrame extends JFrame{
+public class MainFrame{
 	
 	public MainPanel mainPanel;
+	public JFrame mainFrame;
+
 	
-	public MainFrame()
-	{
+	public void setFrame() {
+		mainFrame = new JFrame();
+		
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/사진1.png"));
-		MainPanel panel = new MainPanel(new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage());
-		System.out.println(imageIcon);
-		System.out.println(panel);
-		add(panel);
+		MainPanel mainPanel = new MainPanel(new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage(), mainFrame);
 		
-		
-		setSize(Constants.SCREEN_SIZE_WIDTH,Constants.SCREEN_SIZE_HEIGHT);
-		setPreferredSize(new Dimension(Constants.SCREEN_SIZE_WIDTH, Constants.SCREEN_SIZE_HEIGHT));	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
-		setLocationRelativeTo(null); // 화면 나오는 위치
-		setVisible(true);
-		pack();
+		mainFrame.add(mainPanel);
+			
+		mainFrame.setSize(Constants.SCREEN_SIZE_WIDTH,Constants.SCREEN_SIZE_HEIGHT);
+		mainFrame.setPreferredSize(new Dimension(Constants.SCREEN_SIZE_WIDTH, Constants.SCREEN_SIZE_HEIGHT));	
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 프로그램 실행 후 종료
+		mainFrame.setLocationRelativeTo(null); // 화면 나오는 위치
+		mainFrame.setVisible(true);
+		mainFrame.pack();
 	}
 	
 }

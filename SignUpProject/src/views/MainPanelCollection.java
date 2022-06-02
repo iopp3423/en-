@@ -19,12 +19,17 @@ public class MainPanelCollection{
 
 	JFrame searchIdFrame;
 	JFrame searchPwFrame;
+	searchIdPanel idPanel;
+	searchPwPanel pwPanel;
 	Image image;
 	
-	public MainPanelCollection()
+	public MainPanelCollection()// 계정이름, 비밀번호 잊으셨나요 클릭 시 나오는 프레임
 	{
 		searchIdFrame = new JFrame();
 		searchPwFrame = new JFrame();
+		idPanel = new searchIdPanel();
+		pwPanel = new searchPwPanel();
+		
 		
 		searchIdFrame.setSize(500,400);
 		searchIdFrame.setPreferredSize(new Dimension(500,400));	
@@ -38,83 +43,121 @@ public class MainPanelCollection{
 		searchPwFrame.setResizable(false);
 		searchPwFrame.setVisible(false);
 		
-		searchIdPanel();
-		searchPwPanel();
+
+		searchPwFrame.add(pwPanel);
+		searchIdFrame.add(idPanel);
+		
 		searchIdFrame.pack();
 		searchPwFrame.pack();
 	}
 	
-	public void searchIdPanel() { // 계정이름을 잊으셨나요 클릭 시 프레임에 붙이는 패널 
-		JPanel panel = new JPanel();
+	public class searchIdPanel extends JPanel{ // 계정이름을 잊으셨나요 클릭 시 프레임에 붙이는 패널 
+
 		JLabel nameLabel = new JLabel("이름");
 		JLabel emailLabel = new JLabel("이메일");
+		JLabel emailInputLabel = new JLabel("인증번호");
 		JTextField nameField = new JTextField();
 		JTextField emailField = new JTextField();
+		JTextField emailNumberField = new JTextField();
 		JButton sendEmailButton = new JButton("인증번호 받기");
+		JButton checkEmailButton = new JButton("확인");
 		JButton exitButton = new JButton("OK");
 		
-		panel.setLayout(null);
+		public searchIdPanel() {
+			
+		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/사진2.png"));
+		image = new ImageIcon(imageIcon.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH)).getImage();
 		
+		setSize(new Dimension(image.getWidth(null), image.getHeight(null)));
+		setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
+		setLayout(null);
+
+		emailInputLabel.setBounds(60, 200, 150, 50);
 		nameLabel.setBounds(70, 50, 150, 50);
 		emailLabel.setBounds(70, 100, 150, 50);
 		
 		nameField.setBounds(110, 50, 300, 50);
 		emailField.setBounds(110, 100, 200, 50);
+		emailNumberField.setBounds(110, 200, 200, 50);
+		
 		sendEmailButton.setBounds(310, 100, 100, 50);
 		exitButton.setBounds(200, 300, 100, 50);
+		checkEmailButton.setBounds(310, 200, 100, 50);
 		
-		panel.add(exitButton);
-		panel.add(sendEmailButton);
-		panel.add(nameField);
-		panel.add(emailField);
-		panel.add(nameLabel);
-		panel.add(emailLabel);
+		add(exitButton);
+		add(sendEmailButton);
+		add(checkEmailButton);
 		
-		exitButton.addMouseListener(new MouseAdapter()  
-		{  
+		add(nameField);
+		add(emailField);
+		add(emailNumberField);
+		
+		add(nameLabel);
+		add(emailLabel);
+		add(emailInputLabel);
+		
+		exitButton.addMouseListener(new MouseAdapter(){  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
 		    	searchIdFrame.setVisible(false);
 		    }  
 		}); 
-			
-		searchIdFrame.add(panel);
+		
+		}
+		
+		public void paintComponent(Graphics g) {
+			g.drawImage(image, 0, 0, null);
+			setOpaque(false);
+		}
 	}
 	
-	
-	public void searchPwPanel() {
+	class searchPwPanel extends JPanel{ // 비밀번호를 잊으셨나요 클릭 시 프레임에 붙이는 패널 
 		Image image;
-		JPanel panel = new JPanel();
+
 		JLabel idLabel = new JLabel("아이디");
 		JLabel emailLabel = new JLabel("이메일");
+		JLabel emailInputLabel = new JLabel("인증번호");
 		JTextField nameField = new JTextField();
 		JTextField emailField = new JTextField();
+		JTextField emailNumberField = new JTextField();
 		JButton sendEmailButton = new JButton("인증번호 받기");
+		JButton checkEmailButton = new JButton("확인");
 		JButton exitButton = new JButton("OK");
+		
+		public searchPwPanel() {
 		
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/사진2.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH)).getImage();
-
-		panel.setSize(new Dimension(image.getWidth(null), image.getHeight(null)));
-		panel.setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
-		panel.setLayout(null);
 		
-		panel.setOpaque(false);
-		
+		setSize(new Dimension(image.getWidth(null), image.getHeight(null)));
+		setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
+		setLayout(null);
+	
+		emailInputLabel.setBounds(60, 200, 150, 50);
 		idLabel.setBounds(70, 50, 150, 50);
 		emailLabel.setBounds(70, 100, 150, 50);
 		
 		nameField.setBounds(110, 50, 300, 50);
 		emailField.setBounds(110, 100, 200, 50);
-		sendEmailButton.setBounds(310, 100, 100, 50);
-		exitButton.setBounds(200, 300, 100, 50);
+		emailNumberField.setBounds(110, 200, 200, 50);
 		
-		panel.add(exitButton);
-		panel.add(sendEmailButton);
-		panel.add(nameField);
-		panel.add(emailField);
-		panel.add(idLabel);
-		panel.add(emailLabel);
+		sendEmailButton.setBounds(310, 100, 100, 50);		
+		exitButton.setBounds(200, 300, 100, 50);
+		checkEmailButton.setBounds(310, 200, 100, 50);
+		
+		add(exitButton);
+		add(sendEmailButton);
+		add(checkEmailButton);
+		
+		add(nameField);
+		add(emailField);
+		add(emailNumberField);
+		
+		add(idLabel);
+		add(emailLabel);
+		add(emailInputLabel);
+		
+		
 		
 		exitButton.addMouseListener(new MouseAdapter()  
 		{  
@@ -124,11 +167,12 @@ public class MainPanelCollection{
 		    }  
 		}); 
 			
-		searchPwFrame.add(panel);
-	}
-	
-	public void paintComponent(Graphics g) {
-		g.drawImage(image, 0, 0, null);
+
+		}
+		public void paintComponent(Graphics g) {
+			g.drawImage(image, 0, 0, null);
+			setOpaque(false);
+		}
 		
 	}
 }

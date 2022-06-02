@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -18,10 +19,20 @@ public class MainPanel extends JPanel{
 	
 	private Image image;
 	private MainPanelCollection searchFrame;
+	private SignUpPanel signUpPanel;
+	private ControllerPanel controllerPanel;
 	
-	public MainPanel(Image image) {
+	public MainPanel(Image image, JFrame mainFrame) {
 		this.image = image;
+		
 		searchFrame = new MainPanelCollection();
+		signUpPanel = new SignUpPanel(); // 회원가입 화면 
+		controllerPanel = new ControllerPanel();
+		
+		mainFrame.add(signUpPanel);
+		mainFrame.add(controllerPanel);
+		controllerPanel.setVisible(false);
+		signUpPanel.setVisible(false);
 		
 		setSize(new Dimension(image.getWidth(null), image.getHeight(null)));
 		setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
@@ -42,9 +53,7 @@ public class MainPanel extends JPanel{
 		setFontAndSize(searchId, 12);
 		setFontAndSize(searchPw, 12);
 		setFontAndSize(signUp, 12);
-		login.setBackground(Color.ORANGE);
-
-		
+				
 		
 		
 		idLabel.setBounds(50, 180, 200, 40);
@@ -62,12 +71,33 @@ public class MainPanel extends JPanel{
 		
 		add(idLabel);
 		add(pwLabel);
+		
 		add(searchId);
 		add(searchPw);
+		
 		add(login);
 		add(signUp);
+		
 		add(pwInput);
 		add(idInput);
+		
+		
+		
+		login.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	controllerPanel.setVisible(true);
+		    }  
+		}); 
+		
+		signUp.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	signUpPanel.setVisible(true);
+		    }  
+		}); 
 		
 		searchId.addMouseListener(new MouseAdapter()  
 		{  
@@ -85,11 +115,14 @@ public class MainPanel extends JPanel{
 		});
 	}
 	
-	
+	public void paintComponent(Graphics g) {
+		g.drawImage(image, 0, 0, null);
+		setOpaque(false);
+	}
 	
 	private JLabel setFontAndSize(JLabel label, int size) {
 		
-		label.setFont(new Font("Serif", Font.BOLD, 14));
+		label.setFont(new Font("Serif", Font.BOLD, size));
 		label.setForeground(Color.WHITE);
 		
 		return label;
