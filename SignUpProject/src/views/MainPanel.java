@@ -125,34 +125,10 @@ public class MainPanel extends JPanel{
 		setOpaque(false);
 	}
 	
-	private JLabel setFontAndSize(JLabel label, int size) {
+	private void setFontAndSize(JLabel label, int size) {
 		
 		label.setFont(new Font("Serif", Font.BOLD, size));
-		label.setForeground(Color.WHITE);
-		
-		return label;
+		label.setForeground(Color.WHITE);	
 	}
 	
-	
-
-	
-	
-	/*
-	public Dimension getDim() {
-		return new Dimension(image.getWidth(null), image.getHeight(null));
-	}
-	
-
-	
-	public MainPanel() {
-		
-		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/사진1.png"));
-		ImagePanel panel = new ImagePanel(imageIcon.getImage().getScaledInstance(500, 720, Image.SCALE_SMOOTH));
-		
-		setSize(panel.getDim());
-		setPreferredSize(panel.getDim());
-		add(panel);
-			
-	}
-	*/
 }

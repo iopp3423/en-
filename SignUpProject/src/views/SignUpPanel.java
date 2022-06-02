@@ -154,9 +154,10 @@ public class SignUpPanel extends JPanel{
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
-		    	JOptionPane.showMessageDialog(signUpButton, "환영합니다.", "Message",JOptionPane.PLAIN_MESSAGE);
-		    	setVisible(false);
-		    	
+		    	ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입완료.png"));
+				ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		    	JOptionPane.showMessageDialog(null, "환영합니다.", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);
+		    	setVisible(false);		    	
 		    }  
 		}); 
 		

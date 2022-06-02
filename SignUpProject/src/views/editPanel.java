@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -40,7 +41,7 @@ public class editPanel extends JPanel{
 	
 		JButton addressButton = new JButton("주소찾기");
 		JButton backButton = new JButton("뒤로가기");
-		JButton signUpButton = new JButton("회원수정");
+		JButton reviseButton = new JButton("회원수정");
 		
 		String[] phoneNumber = {"010", "011", "016", "0503"}; 
 		String[] adress = {"@gmail.com", "@naver.com", "@daum.net", "@cyworld.com", "@hanmail.net", "@kakao.com", "@yahoo.com"};
@@ -62,7 +63,7 @@ public class editPanel extends JPanel{
 		
 		addressButton.setBounds(280, 480, 100, 40);
 		backButton.setBounds(50, 10, 100, 35);
-		signUpButton.setBounds(50, 560, 100, 40);
+		reviseButton.setBounds(50, 560, 100, 40);
 		
 		phoneBox.setBounds(175, 385, 80, 40);
 		emailBox.setBounds(280, 330, 150, 38);
@@ -82,13 +83,25 @@ public class editPanel extends JPanel{
 		
 		add(addressButton);
 		add(backButton);
-		add(signUpButton);
+		add(reviseButton);
 		
 		
 		backButton.addMouseListener(new MouseAdapter()  
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
+		    	setVisible(false);
+		    }  
+		}); 
+		
+		reviseButton.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	setVisible(false);
+		    	ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입완료.png"));
+				ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		    	JOptionPane.showMessageDialog(null, "수정되었습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);
 		    	setVisible(false);
 		    }  
 		}); 

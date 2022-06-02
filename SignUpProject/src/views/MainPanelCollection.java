@@ -1,6 +1,8 @@
 package views;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -59,33 +61,41 @@ public class MainPanelCollection{
 		JTextField nameField = new JTextField();
 		JTextField emailField = new JTextField();
 		JTextField emailNumberField = new JTextField();
-		JButton sendEmailButton = new JButton("인증번호 받기");
+		JButton getEmailButton = new JButton("인증번호 받기");
 		JButton checkEmailButton = new JButton("확인");
 		JButton exitButton = new JButton("OK");
 		
 		public searchIdPanel() {
 			
-		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/사진2.png"));
+		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/찾기.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH)).getImage();
 		
 		setSize(new Dimension(image.getWidth(null), image.getHeight(null)));
 		setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
 		setLayout(null);
 
-		emailInputLabel.setBounds(60, 200, 150, 50);
-		nameLabel.setBounds(70, 50, 150, 50);
-		emailLabel.setBounds(70, 100, 150, 50);
+		setFontAndSize(nameLabel,14);
+		setFontAndSize(emailLabel,14);
+		setFontAndSize(emailInputLabel,14);
+		
+		emailInputLabel.setVisible(false);
+    	emailNumberField.setVisible(false);
+    	checkEmailButton.setVisible(false);
+    	
+		emailInputLabel.setBounds(55, 200, 150, 50);
+		nameLabel.setBounds(65, 50, 150, 50);
+		emailLabel.setBounds(65, 100, 150, 50);
 		
 		nameField.setBounds(110, 50, 300, 50);
 		emailField.setBounds(110, 100, 200, 50);
 		emailNumberField.setBounds(110, 200, 200, 50);
 		
-		sendEmailButton.setBounds(310, 100, 100, 50);
+		getEmailButton.setBounds(310, 100, 100, 50);
 		exitButton.setBounds(200, 300, 100, 50);
 		checkEmailButton.setBounds(310, 200, 100, 50);
 		
 		add(exitButton);
-		add(sendEmailButton);
+		add(getEmailButton);
 		add(checkEmailButton);
 		
 		add(nameField);
@@ -95,6 +105,16 @@ public class MainPanelCollection{
 		add(nameLabel);
 		add(emailLabel);
 		add(emailInputLabel);
+		
+		getEmailButton.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	emailInputLabel.setVisible(true);
+		    	emailNumberField.setVisible(true);
+		    	checkEmailButton.setVisible(true);
+		    }  
+		}); 
 		
 		exitButton.addMouseListener(new MouseAdapter(){  
 		    public void mouseClicked(MouseEvent e)  
@@ -111,42 +131,52 @@ public class MainPanelCollection{
 		}
 	}
 	
-	class searchPwPanel extends JPanel{ // 비밀번호를 잊으셨나요 클릭 시 프레임에 붙이는 패널 
+	public class searchPwPanel extends JPanel{ // 비밀번호를 잊으셨나요 클릭 시 프레임에 붙이는 패널 
 		Image image;
 
 		JLabel idLabel = new JLabel("아이디");
 		JLabel emailLabel = new JLabel("이메일");
 		JLabel emailInputLabel = new JLabel("인증번호");
+		
 		JTextField nameField = new JTextField();
 		JTextField emailField = new JTextField();
 		JTextField emailNumberField = new JTextField();
-		JButton sendEmailButton = new JButton("인증번호 받기");
+		
+		JButton getEmailButton = new JButton("인증번호 받기");
 		JButton checkEmailButton = new JButton("확인");
 		JButton exitButton = new JButton("OK");
 		
 		public searchPwPanel() {
 		
-		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/사진2.png"));
+		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/찾기.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH)).getImage();
 		
 		setSize(new Dimension(image.getWidth(null), image.getHeight(null)));
 		setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
 		setLayout(null);
+		
+		setFontAndSize(idLabel,14);
+		setFontAndSize(emailLabel,14);
+		setFontAndSize(emailInputLabel,14);
+		
+		emailInputLabel.setVisible(false);
+    	emailNumberField.setVisible(false);
+    	checkEmailButton.setVisible(false);
 	
-		emailInputLabel.setBounds(60, 200, 150, 50);
-		idLabel.setBounds(70, 50, 150, 50);
-		emailLabel.setBounds(70, 100, 150, 50);
+		emailInputLabel.setBounds(55, 200, 150, 50);
+		idLabel.setBounds(65, 50, 150, 50);
+		emailLabel.setBounds(65, 100, 150, 50);
 		
 		nameField.setBounds(110, 50, 300, 50);
 		emailField.setBounds(110, 100, 200, 50);
 		emailNumberField.setBounds(110, 200, 200, 50);
 		
-		sendEmailButton.setBounds(310, 100, 100, 50);		
+		getEmailButton.setBounds(310, 100, 100, 50);		
 		exitButton.setBounds(200, 300, 100, 50);
 		checkEmailButton.setBounds(310, 200, 100, 50);
 		
 		add(exitButton);
-		add(sendEmailButton);
+		add(getEmailButton);
 		add(checkEmailButton);
 		
 		add(nameField);
@@ -158,6 +188,15 @@ public class MainPanelCollection{
 		add(emailInputLabel);
 		
 		
+		getEmailButton.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	emailInputLabel.setVisible(true);
+		    	emailNumberField.setVisible(true);
+		    	checkEmailButton.setVisible(true);
+		    }  
+		}); 
 		
 		exitButton.addMouseListener(new MouseAdapter()  
 		{  
@@ -174,5 +213,11 @@ public class MainPanelCollection{
 			setOpaque(false);
 		}
 		
+	}
+	private void setFontAndSize(JLabel label, int size) {
+		
+		label.setFont(new Font("Serif", Font.BOLD, size));
+		label.setForeground(Color.WHITE);
+
 	}
 }
