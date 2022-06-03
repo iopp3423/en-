@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controls.controller;
+import controls.Controller;
 import utility.Constants;
 
 public class ControllerPanel extends JPanel{
@@ -25,7 +25,7 @@ public class ControllerPanel extends JPanel{
 	private JFrame deleteFrame;
 	private JPanel deletePanel;
 	
-	public ControllerPanel(editPanel edit, controller control) {
+	public ControllerPanel(editPanel edit, Controller control) {
 		
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/메뉴.png"));	
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage();
@@ -75,18 +75,18 @@ public class ControllerPanel extends JPanel{
 		
 		editButton.addMouseListener(new MouseAdapter()  
 		{  
-		    public void mouseEntered(MouseEvent e) {
-		        JButton button = (JButton)e.getSource();
-		       
-		    }
 
-		    public void mouseExited(MouseEvent e) {
-		        JButton button = (JButton)e.getSource();
-		        
-		    }
 		    public void mousePressed(MouseEvent e) { // 마우스클릭 
-
-		    	
+		    	    	
+		    	edit.nameField.setText(control.loginId.get(0).getName());
+		    	edit.passwordField.setText(control.loginId.get(0).getPassword());
+		    	edit.passwordCheckField.setText(control.loginId.get(0).getPassword());
+		    	edit.birthField.setText(control.loginId.get(0).getBirth());
+		    	edit.emailField.setText(control.loginId.get(0).getEmail());
+		    	edit.centerPhoneField.setText(control.loginId.get(0).getCallNumber().substring(0, 4));
+		    	edit.lastPhoneField.setText(control.loginId.get(0).getCallNumber().substring(4));
+		    	edit.addressField.setText(control.loginId.get(0).getAddress());
+		    	edit.zipCodeField.setText(control.loginId.get(0).getZipCode());
 		    	edit.setVisible(true);	    	
 		    }   
 		}); 
@@ -159,9 +159,9 @@ public class ControllerPanel extends JPanel{
 	public class deletePanel extends JPanel{
 		
 		private Image deleteimage;
-		private controller control;
+		private Controller control;
 		
-		public deletePanel(controller control) {
+		public deletePanel(Controller control) {
 			
 		ImageIcon deleteIcon = new ImageIcon(MainPanel.class.getResource("/image/삭제.png"));	
 		deleteimage = new ImageIcon(deleteIcon.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH)).getImage();

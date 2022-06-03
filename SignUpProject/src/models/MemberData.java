@@ -79,10 +79,7 @@ public class MemberData {
             String query = "DELETE FROM member WHERE id =?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
 
-            // 4. pstmt.set<데이터타입>(? 순서, 값) ex).setString(), .setInt ...
             preparedStmt.setString(1, id);
-
-            // 5. SQL 문장을 실행하고 결과를 리턴 - SQL 문장 실행 후, 변경된 row 수 int type 리턴
             preparedStmt.execute(); 
       
         } catch (SQLException e) {
@@ -110,12 +107,6 @@ public class MemberData {
             // Connection 객체 생성
             conn = DriverManager.getConnection(Constants.DB_URL, Constants.USERNAME, Constants.PASSWORD); // DB 연결
 
-            // Statement 객체 생성
-            //statement = conn.createStatement();
-
-            // SQL 문장을 실행하고 결과를 리턴
-            // statement.excuteQuery(SQL) : select
-            // statement.excuteUpdate(SQL) : insert, update, delete ..
             String query = "INSERT INTO member(name,id, pw, birth, email, callnumber, address, zipcode)" + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             
             PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -127,6 +118,43 @@ public class MemberData {
             preparedStmt.setString (6, callNumber);
             preparedStmt.setString (7, address);
             preparedStmt.setString (8, zipCode);
+            preparedStmt.execute();
+      
+        } catch (SQLException e) {
+
+            System.out.println("SQL Error : " + e.getMessage());
+
+        } catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+        	closeConn(conn, statement, Contents);
+        }
+	}
+	
+	public void reviseMember(String name, String password,  String birth, String email, String callNumber, String address, String zipCode, String id) {
+		Connection conn = null;
+		Statement statement = null;
+		ResultSet Contents = null;
+			
+		try {
+            // JDBC 드라이버 로딩
+            Class.forName(Constants.JDBC_DRIVER);
+
+            // Connection 객체 생성
+            conn = DriverManager.getConnection(Constants.DB_URL, Constants.USERNAME, Constants.PASSWORD); // DB 연결
+
+            String query = "UPDATE member set name=?, pw=?, birth=?, email=?, callnumber=?, address=?, zipcode=? WHERE id=?";
+            
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString (1, name);
+            preparedStmt.setString (2, password);
+            preparedStmt.setString (3, birth);
+            preparedStmt.setString (4, email);
+            preparedStmt.setString (5, callNumber);
+            preparedStmt.setString (6, address);
+            preparedStmt.setString (7, zipCode);
+            preparedStmt.setString (8, id);
             preparedStmt.execute();
       
         } catch (SQLException e) {

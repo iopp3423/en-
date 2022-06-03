@@ -22,17 +22,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controls.controller;
+import controls.Controller;
 import utility.Constants;
 
 public class SignUpPanel extends JPanel{
 
 	private Image image;
-	private controller control;
+	private Controller control;
 	private boolean isIdPass = false;
 
 	
-	public SignUpPanel(controller control) {
+	public SignUpPanel(Controller control) {
 
 		this.control = control;
 		
@@ -229,31 +229,36 @@ public class SignUpPanel extends JPanel{
 		    			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			passwordField.setText("");
 		    			passwordCheckField.setText("");
-		    			break;	    			
+		    			break;	
 		    		case "2":
+		    			JOptionPane.showMessageDialog(null, "아이디를 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			idField.setText("");
+		    			idField.setText("");
+		    			break;
+		    		case "3":
 		    			JOptionPane.showMessageDialog(null, "비밀번호를 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			passwordField.setText("");
 		    			passwordCheckField.setText("");
 		    			break;
-		    		case "3":
+		    		case "4":
 		    			JOptionPane.showMessageDialog(null, "생년월일을 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			birthField.setText("");
 		    			break;
-		    		case "4":
+		    		case "5":
 		    			JOptionPane.showMessageDialog(null, "이메일을 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			emailField.setText("");
 		    			break;
 
-		    		case "5":
+		    		case "6":
 		    			JOptionPane.showMessageDialog(null, "전화번호를 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			centerPhoneField.setText("");
 		    			lastPhoneField.setText("");
 		    			break;
-		    		case "6":
-		    			JOptionPane.showMessageDialog(null, "아이디를 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
-		    			idField.setText("");
-		    			break;
 		    		case "7":
+		    			JOptionPane.showMessageDialog(null, "이름을 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // 이 중복체크 메시지 
+		    			nameField.setText("");
+		    			break;
+		    		case "8":
 		    			JOptionPane.showMessageDialog(null, "누락된 입력이 있습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			break;
 		    		}	

@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import controls.controller;
+import controls.Controller;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,15 +27,15 @@ public class MainPanel extends JPanel{
 	private SignUpPanel signUpPanel;
 	private ControllerPanel controllerPanel;
 	private editPanel edit;
-	private controller control;
+	private Controller control;
 	
 	public MainPanel(Image image, JFrame mainFrame) {
 		this.image = image;
 		
-		control = new controller();
+		control = new Controller();
 		searchFrame = new MainPanelCollection();
 		signUpPanel = new SignUpPanel(control); // 회원가입 화면 
-		edit = new editPanel();
+		edit = new editPanel(control);
 		controllerPanel = new ControllerPanel(edit, control);
 		
 		mainFrame.add(edit);

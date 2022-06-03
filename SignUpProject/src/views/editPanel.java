@@ -1,10 +1,14 @@
 package views;
 
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,12 +18,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controls.Controller;
+
 public class editPanel extends JPanel{
 
 	private Image image;
+	public Controller control;
+	public JTextField nameField; 
+	public JTextField passwordField;
+	public JTextField passwordCheckField;
+	public JTextField birthField;
+	public JTextField emailField;
+	public JTextField centerPhoneField;
+	public JTextField lastPhoneField ;
+	public JTextField addressField;
+	public JTextField zipCodeField;
 	
 	
-	public  editPanel() {
+	public  editPanel(Controller control) {
+		this.control = control;
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원수정.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage();
 		
@@ -28,15 +45,15 @@ public class editPanel extends JPanel{
 		setLayout(null);
 			
 		
-		JTextField nameField = new JTextField();
-		JTextField passwordField = new JTextField();
-		JTextField passwordCheckField = new JTextField();
-		JTextField birthField = new JTextField();
-		JTextField emailField = new JTextField();
-		JTextField centerPhoneField = new JTextField();
-		JTextField lastPhoneField = new JTextField();
-		JTextField addressField = new JTextField();
-		JTextField zipCodeField = new JTextField();
+		nameField = new JTextField();
+		passwordField = new JTextField();
+		passwordCheckField = new JTextField();
+		birthField = new JTextField();
+		emailField = new JTextField();
+		centerPhoneField = new JTextField();
+		lastPhoneField = new JTextField();
+		addressField = new JTextField();
+		zipCodeField = new JTextField();
 		
 	
 		JButton addressButton = new JButton("주소찾기");
@@ -68,6 +85,7 @@ public class editPanel extends JPanel{
 		phoneBox.setBounds(175, 385, 80, 40);
 		emailBox.setBounds(280, 330, 150, 38);
 		
+		
 		add(nameField);
 		add(passwordField);
 		add(passwordCheckField);
@@ -86,6 +104,24 @@ public class editPanel extends JPanel{
 		add(reviseButton);
 		
 		
+		addressButton.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	if (Desktop.isDesktopSupported()) {
+		            Desktop desktop = Desktop.getDesktop();
+		            try {
+		                URI uri = new URI("https://www.juso.go.kr/openIndexPage.do");
+		                desktop.browse(uri);
+		            } catch (IOException ex) {
+		                ex.printStackTrace();
+		            } catch (URISyntaxException ex) {
+		                ex.printStackTrace();
+		            }
+		    }
+		    }  
+		}); 
+		
 		backButton.addMouseListener(new MouseAdapter()  
 		{  
 		    public void mouseClicked(MouseEvent e)  
@@ -98,11 +134,54 @@ public class editPanel extends JPanel{
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
-		    	setVisible(false);
-		    	ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입완료.png"));
-				ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		    	ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png")); // 바로 가져오면 gif가져와
+				ImageIcon signFailImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+		    	ImageIcon signIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입완료.png"));
+				ImageIcon signupImage = new ImageIcon(signIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+				
+		    	String errorCheck = control.reviseMember(nameField.getText(), passwordField.getText(), passwordCheckField.getText(), birthField.getText(), 
+	    				emailField.getText() , centerPhoneField.getText() + 
+	    				lastPhoneField.getText(), addressField.getText(), zipCodeField.getText());
+	    		
+	    		switch(errorCheck) {    
+	    		case "0": // 비밀번호 일치 류 
+	    			JOptionPane.showMessageDialog(null, "이름을 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+	    			passwordField.setText("");
+	    			passwordCheckField.setText("");		
+	    		case "1": // 비밀번호 일치 류 
+	    			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+	    			passwordField.setText("");
+	    			passwordCheckField.setText("");
+	    			break;	
+	    		case "2":
+	    			JOptionPane.showMessageDialog(null, "비밀번호를 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+	    			passwordField.setText("");
+	    			passwordCheckField.setText("");
+	    			break;
+	    		case "3":
+	    			JOptionPane.showMessageDialog(null, "생년월일을 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+	    			birthField.setText("");
+	    			break;
+	    		case "4":
+	    			JOptionPane.showMessageDialog(null, "이메일을 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+	    			emailField.setText("");
+	    			break;
+
+	    		case "5":
+	    			JOptionPane.showMessageDialog(null, "전화번호를 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+	    			centerPhoneField.setText("");
+	    			lastPhoneField.setText("");
+	    			break;
+	    		case "6":
+	    			JOptionPane.showMessageDialog(null, "이름을 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+	    			nameField.setText("");
+	    			break;
+	    		
+	    		case "7":
 		    	JOptionPane.showMessageDialog(null, "수정되었습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);
 		    	setVisible(false);
+		    	break;
+	    		}
 		    }  
 		}); 
 		
