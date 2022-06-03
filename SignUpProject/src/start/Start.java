@@ -10,7 +10,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
 import controls.SignUpController;
-import controls.test;
+
 
 import com.mysql.cj.Session;
 
@@ -19,11 +19,8 @@ public class Start {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//SignUpController controller = new SignUpController();
-		
-		test ts = new test();
-		ts.asdasd();
-		
+		SignUpController controller = new SignUpController();
+
 	}
 
 }

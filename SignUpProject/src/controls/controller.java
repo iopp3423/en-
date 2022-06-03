@@ -13,21 +13,24 @@ public class controller {
 
 	public MemberData data;
 	public MemberDto dto;
-	public List<MemberDto> member;
+	public List<MemberDto> members;
+	public List<MemberDto> loginId;
 	
 	public controller() {
 		data = new MemberData();
 		dto = new MemberDto();
-		member = new ArrayList<MemberDto>();
+		members = new ArrayList<MemberDto>();
+		loginId = new ArrayList<MemberDto>();
 	}
 	
 	public boolean loginControl(String id, char[] pw) {
 		
-		member = data.returnMember(); //데베 유저 목록 리스트로 받기
+		members = data.returnMember(); //데베 유저 목록 리스트로 받기
 		
-		for (MemberDto number : member) {
-			
-			if(number.getId().equals(id) && Arrays.equals(pw, number.getPassword().toCharArray())) {
+		for (MemberDto member : members) {
+			if(member.getId().equals(id) && Arrays.equals(pw, member.getPassword().toCharArray())) {
+				loginId.add(new MemberDto(member.getName(), member.getId(),member.getPassword(),member.getBirth(),member.getEmail(),member.getCallNumber(),member.getAddress(),member.getZipCode()));
+				
 				return true; 
 			}
 			if(id.equals("")) 
@@ -38,11 +41,11 @@ public class controller {
 	
 	
 	public boolean checkId(String id) {	
-		member = data.returnMember(); //데베 유저 목록 리스트로 받기
+		members = data.returnMember(); //데베 유저 목록 리스트로 받기
 		
-		for (MemberDto number : member) {
+		for (MemberDto member : members) {
 
-			if(number.getId().equals(id)) {
+			if(member.getId().equals(id)) {
 				return false;// 중복아이디 있
 			}
         }
@@ -60,14 +63,16 @@ public class controller {
 		if(!Pattern.matches(Constants.BIRTH, birth)) return "3";
 		if(!Pattern.matches(Constants.EMAIL, email)) return "4";
 		if(!Pattern.matches(Constants.CALLNUMBER, callNumber)) return "5";
-		if(!Pattern.matches(Constants.IDKOREAN, id)) return "6";
-		if(!Pattern.matches(Constants.IDENGLSIGH, id)) return "6";
-		
-		
-			
+		if(!Pattern.matches(Constants.NAMEKOREAN, name) && !Pattern.matches(Constants.NAMEENGLSIGH, name)) return "6";
+				
 		
 		data.addMember(name, id, password, passwordCheck, birth, email, callNumber, address, zipCode);
 		return "0";
+	}
+	
+	public void removeMember() {
+		System.out.println("ddd");
+		data.removeMember(loginId.get(0).getId());
 	}
 	
 

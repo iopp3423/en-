@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controls.controller;
 import utility.Constants;
 
 public class ControllerPanel extends JPanel{
@@ -24,7 +25,7 @@ public class ControllerPanel extends JPanel{
 	private JFrame deleteFrame;
 	private JPanel deletePanel;
 	
-	public ControllerPanel(editPanel edit) {
+	public ControllerPanel(editPanel edit, controller control) {
 		
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/메뉴.png"));	
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage();
@@ -39,7 +40,7 @@ public class ControllerPanel extends JPanel{
 		JButton deleteButton = new JButton(new ImageIcon(new ImageIcon("/image/delete.png").getImage().getScaledInstance(240, 400, Image.SCALE_SMOOTH)));
 		
 		deleteFrame = new JFrame();		
-		deletePanel = new deletePanel();
+		deletePanel = new deletePanel(control);
 		
 		deleteFrame.setSize(500,400);
 		deleteFrame.setPreferredSize(new Dimension(500,400));	
@@ -86,7 +87,7 @@ public class ControllerPanel extends JPanel{
 		    public void mousePressed(MouseEvent e) { // 마우스클릭 
 
 		    	
-		    	//edit.setVisible(true);	    	
+		    	edit.setVisible(true);	    	
 		    }   
 		}); 
 		setButton.addMouseListener(new MouseAdapter()  
@@ -158,8 +159,9 @@ public class ControllerPanel extends JPanel{
 	public class deletePanel extends JPanel{
 		
 		private Image deleteimage;
+		private controller control;
 		
-		public deletePanel() {
+		public deletePanel(controller control) {
 			
 		ImageIcon deleteIcon = new ImageIcon(MainPanel.class.getResource("/image/삭제.png"));	
 		deleteimage = new ImageIcon(deleteIcon.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH)).getImage();
@@ -206,7 +208,8 @@ public class ControllerPanel extends JPanel{
 		
 		yesButton.addMouseListener(new MouseAdapter()  
 		{  
-		    public void mouseClicked(MouseEvent e) { // 마우스클릭 		    	
+		    public void mouseClicked(MouseEvent e) { // 마우스클릭
+		    	control.removeMember();
 		    	deleteFrame.setVisible(false);
 		    	JOptionPane.showMessageDialog(null, "탈퇴되었습니다.", "안내메시지",  JOptionPane.QUESTION_MESSAGE, cancelImage);
 		    }   

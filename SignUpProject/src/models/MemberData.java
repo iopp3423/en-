@@ -13,9 +13,7 @@ import utility.Constants;
 
 public class MemberData {
 
-
-	
-	public List<MemberDto> returnMember() { //데베 회원리스트 저장 후 반
+	public List<MemberDto> returnMember() { //데베 회원리스트 저장 후 반호ㅓㅏㄴ
 		List<MemberDto> member = new ArrayList<MemberDto>();
 		
 		// MySql에 사용하는 객체 생
@@ -59,6 +57,47 @@ public class MemberData {
 		return member;
 	}
 	
+	public void removeMember(String id) {
+		Connection conn = null;
+		Statement statement = null;
+		ResultSet Contents = null;
+			
+		try {
+            // JDBC 드라이버 로딩
+            Class.forName(Constants.JDBC_DRIVER);
+
+            // Connection 객체 생성
+            conn = DriverManager.getConnection(Constants.DB_URL, Constants.USERNAME, Constants.PASSWORD); // DB 연결
+
+            // Statement 객체 생성
+            //statement = conn.createStatement();
+            statement = conn.createStatement();
+
+            // SQL 문장을 실행하고 결과를 리턴
+            // statement.excuteQuery(SQL) : select
+            // statement.excuteUpdate(SQL) : insert, update, delete ..
+            String query = "DELETE FROM member WHERE id =?";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+
+            // 4. pstmt.set<데이터타입>(? 순서, 값) ex).setString(), .setInt ...
+            preparedStmt.setString(1, id);
+
+            // 5. SQL 문장을 실행하고 결과를 리턴 - SQL 문장 실행 후, 변경된 row 수 int type 리턴
+            preparedStmt.execute(); 
+      
+        } catch (SQLException e) {
+
+            System.out.println("SQL Error : " + e.getMessage());
+
+        } catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+        	closeConn(conn, statement, Contents);
+        }
+	    
+	}
+	
 	public void addMember(String name, String id, String password, String passwordCheck, String birth, String email, String callNumber, String address, String zipCode) {
 		Connection conn = null;
 		Statement statement = null;
@@ -78,7 +117,6 @@ public class MemberData {
             // statement.excuteQuery(SQL) : select
             // statement.excuteUpdate(SQL) : insert, update, delete ..
             String query = "INSERT INTO member(name,id, pw, birth, email, callnumber, address, zipcode)" + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-            //statement.executeUpdate("INSERT INTO member(name,id, pw, birth, email, callnumber, address, zipcode)" + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setString (1, name);

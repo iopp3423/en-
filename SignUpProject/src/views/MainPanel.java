@@ -36,7 +36,7 @@ public class MainPanel extends JPanel{
 		searchFrame = new MainPanelCollection();
 		signUpPanel = new SignUpPanel(control); // 회원가입 화면 
 		edit = new editPanel();
-		controllerPanel = new ControllerPanel(edit);
+		controllerPanel = new ControllerPanel(edit, control);
 		
 		mainFrame.add(edit);
 		mainFrame.add(signUpPanel);

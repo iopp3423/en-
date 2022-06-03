@@ -216,7 +216,7 @@ public class SignUpPanel extends JPanel{
 				
 		    	if(isIdPass) {
 		    		String errorCheck = control.checkMember(nameField.getText(), idField.getText(), passwordField.getText(), passwordCheckField.getText(), birthField.getText(), 
-		    				emailField.getText() + emailBox.getSelectedItem().toString() , phoneBox.getSelectedItem().toString() + centerPhoneField.getText() + 
+		    				emailField.getText() , centerPhoneField.getText() + 
 		    				lastPhoneField.getText(), addressField.getText(), zipCodeField.getText());
 		    		
 		    		switch(errorCheck) {
@@ -240,17 +240,17 @@ public class SignUpPanel extends JPanel{
 		    			birthField.setText("");
 		    			break;
 		    		case "4":
-		    			JOptionPane.showMessageDialog(null, "이메일 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			JOptionPane.showMessageDialog(null, "이메일을 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			emailField.setText("");
 		    			break;
 
 		    		case "5":
-		    			JOptionPane.showMessageDialog(null, "전화번호 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			JOptionPane.showMessageDialog(null, "전화번호를 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			centerPhoneField.setText("");
 		    			lastPhoneField.setText("");
 		    			break;
 		    		case "6":
-		    			JOptionPane.showMessageDialog(null, "아이디 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			JOptionPane.showMessageDialog(null, "아이디를 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			idField.setText("");
 		    			break;
 		    		case "7":

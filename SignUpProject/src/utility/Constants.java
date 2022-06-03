@@ -11,11 +11,11 @@ public class Constants {
 	public static final String PASSWORD = "00000000"; // DB Password
 	
 	
-	public static final String PWCHECK = "^[1-9a-z]{7,14}+$";
+	public static final String PWCHECK = "^[0-9a-z]{7,14}+$";
 	public static final String BIRTH = "^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))$";
-	public static final String EMAIL = "^[1-9a-zA-Z]{4,14}+$";
-	public static final String CALLNUMBER = "^[1-9]{8}+$";
-	public static final String IDKOREAN = "^[가-힣]{2,4}+$";
-	public static final String IDENGLSIGH = "^[a-zA-Z]{2,4}+$";
+	public static final String EMAIL = "^[0-9a-zA-Z]{4,14}+$";
+	public static final String CALLNUMBER = "^[0-9]{8}+$";
+	public static final String NAMEKOREAN = "^[가-힣]{2,4}+$";
+	public static final String NAMEENGLSIGH = "^[a-zA-Z]{2,10}+$";
 	
 }
