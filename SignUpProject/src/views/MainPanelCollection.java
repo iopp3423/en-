@@ -12,9 +12,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controls.Controller;
+import controls.SendEmail;
 import utility.Constants;
 
 public class MainPanelCollection{
@@ -25,12 +28,14 @@ public class MainPanelCollection{
 	public searchPwPanel pwPanel;
 	private Image image;
 	
-	public MainPanelCollection()// 계정이름, 비밀번호 잊으셨나요 클릭 시 나오는 프레임
+	
+	public MainPanelCollection(Controller control)// 계정이름, 비밀번호 잊으셨나요 클릭 시 나오는 프레임
 	{
+		SendEmail send = new SendEmail();
 		searchIdFrame = new JFrame();
 		searchPwFrame = new JFrame();
-		idPanel = new searchIdPanel();
-		pwPanel = new searchPwPanel();
+		idPanel = new searchIdPanel(control, send);
+		pwPanel = new searchPwPanel(control, send);
 		
 		
 		searchIdFrame.setSize(500,400);
@@ -55,18 +60,25 @@ public class MainPanelCollection{
 	
 	public class searchIdPanel extends JPanel{ // 계정이름을 잊으셨나요 클릭 시 프레임에 붙이는 패널 
 
-		JLabel nameLabel = new JLabel("이름");
-		JLabel emailLabel = new JLabel("이메일");
-		JLabel emailInputLabel = new JLabel("인증번호");
-		JTextField nameField = new JTextField();
-		JTextField emailField = new JTextField();
-		JTextField emailNumberField = new JTextField();
-		JButton getEmailButton = new JButton("인증번호 받기");
-		JButton checkEmailButton = new JButton("확인");
-		JButton exitButton = new JButton("OK");
+		public JLabel nameLabel = new JLabel("이름");
+		public JLabel emailLabel = new JLabel("이메일");
+		public JLabel emailInputLabel = new JLabel("인증번호");
 		
-		public searchIdPanel() {
+		public JTextField nameField = new JTextField();
+		public JTextField emailField = new JTextField();
+		public JTextField emailNumberField = new JTextField();
+		
+		public JButton getEmailButton = new JButton("인증번호 받기");
+		public JButton checkEmailButton = new JButton("확인");
+		public JButton exitButton = new JButton("OK");
+		private Controller control;
+		private SendEmail send;
+		
+		public searchIdPanel(Controller control, SendEmail send) {
 			
+			
+		this.send = send;
+		this.control = control;
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/찾기.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH)).getImage();
 		
@@ -110,11 +122,40 @@ public class MainPanelCollection{
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
-		    	emailInputLabel.setVisible(true);
-		    	emailNumberField.setVisible(true);
-		    	checkEmailButton.setVisible(true);
+		    	
+		    	if(!control.checkData(idPanel.nameField.getText(), idPanel.emailField.getText())) { // 회원목록에 없는 이름이면 
+		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png"));
+					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			    	JOptionPane.showMessageDialog(null, "일치하는 계정이 없습니다.", "Message", JOptionPane.PLAIN_MESSAGE, signupImage);
+		    	}
+		    	
+		    	else {
+			    	send.sendEmail(control.members.get(0).getEmail()); // 입력한 이메일로 메일 발송
+			    	emailInputLabel.setVisible(true);
+			    	emailNumberField.setVisible(true);
+			    	checkEmailButton.setVisible(true);				    	
+		    	}	    	
 		    }  
 		}); 
+		
+		
+		checkEmailButton.addMouseListener(new MouseAdapter(){  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	
+		    	if(send.randomNumber == Integer.parseInt(emailNumberField.getText())) {
+		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입완료.png"));
+					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			    	JOptionPane.showMessageDialog(null, "Id : " + control.searchId.get(0).getId(), "Message", JOptionPane.PLAIN_MESSAGE, signupImage);
+		    	}
+		    	else {
+		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png"));
+					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			    	JOptionPane.showMessageDialog(null, "인증번호가 일치하지 않습니다.", "Message", JOptionPane.PLAIN_MESSAGE, signupImage);
+		    	}
+		    }  
+		}); 
+		
 		
 		exitButton.addMouseListener(new MouseAdapter(){  
 		    public void mouseClicked(MouseEvent e)  
@@ -134,20 +175,25 @@ public class MainPanelCollection{
 	public class searchPwPanel extends JPanel{ // 비밀번호를 잊으셨나요 클릭 시 프레임에 붙이는 패널 
 		Image image;
 
-		JLabel idLabel = new JLabel("아이디");
-		JLabel emailLabel = new JLabel("이메일");
-		JLabel emailInputLabel = new JLabel("인증번호");
+		public JLabel idLabel = new JLabel("아이디");
+		public JLabel emailLabel = new JLabel("이메일");
+		public JLabel emailInputLabel = new JLabel("인증번호");
 		
-		JTextField nameField = new JTextField();
-		JTextField emailField = new JTextField();
-		JTextField emailNumberField = new JTextField();
+		public JTextField nameField = new JTextField();
+		public JTextField emailField = new JTextField();
+		public JTextField emailNumberField = new JTextField();		
 		
-		JButton getEmailButton = new JButton("인증번호 받기");
-		JButton checkEmailButton = new JButton("확인");
-		JButton exitButton = new JButton("OK");
+		public JButton getEmailButton = new JButton("인증번호 받기");
+		public JButton checkEmailButton = new JButton("확인");
+		public JButton exitButton = new JButton("OK");
 		
-		public searchPwPanel() {
+		private SendEmail send;
+		private Controller control;
 		
+		public searchPwPanel(Controller control, SendEmail send) {
+		
+		this.send = send;
+		this.control = control;	
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/찾기.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH)).getImage();
 		

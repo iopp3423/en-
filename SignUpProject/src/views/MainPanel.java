@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controls.Controller;
+import controls.SendEmail;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,8 +33,9 @@ public class MainPanel extends JPanel{
 	public MainPanel(Image image, JFrame mainFrame) {
 		this.image = image;
 		
+		
 		control = new Controller();
-		searchFrame = new MainPanelCollection();
+		searchFrame = new MainPanelCollection(control);
 		signUpPanel = new SignUpPanel(control); // 회원가입 화면 
 		edit = new editPanel(control);
 		controllerPanel = new ControllerPanel(edit, control);
@@ -107,7 +109,7 @@ public class MainPanel extends JPanel{
 		    	else {
 		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png"));
 					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-			    	JOptionPane.showMessageDialog(null, "일치하는 계정이 없습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);
+			    	JOptionPane.showMessageDialog(null, "일치하는 계정이 없습니다.", "Message", JOptionPane.PLAIN_MESSAGE, signupImage);
 			    	idInput.setText("");
 			    	pwInput.setText("");
 		    	}

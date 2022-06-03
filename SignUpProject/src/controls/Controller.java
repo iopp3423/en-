@@ -15,12 +15,14 @@ public class Controller {
 	public MemberDto dto;
 	public List<MemberDto> members;
 	public List<MemberDto> loginId;
+	public List<MemberDto> searchId;
 	
 	public Controller() {
 		data = new MemberData();
 		dto = new MemberDto();
 		members = new ArrayList<MemberDto>();
 		loginId = new ArrayList<MemberDto>();
+		searchId = new ArrayList<MemberDto>();
 	}
 	
 	public boolean loginControl(String id, char[] pw) {
@@ -30,7 +32,6 @@ public class Controller {
 		for (MemberDto member : members) {
 			if(member.getId().equals(id) && Arrays.equals(pw, member.getPassword().toCharArray())) {
 				loginId.add(new MemberDto(member.getName(), member.getId(),member.getPassword(),member.getBirth(),member.getEmail(),member.getCallNumber(),member.getAddress(),member.getZipCode()));
-				
 				return true; 
 			}
 			if(id.equals("")) 
@@ -98,6 +99,21 @@ public class Controller {
 		data.removeMember(loginId.get(0).getId());
 		
 	}
+	
+	public boolean checkData(String storeddata, String email) {
+		members = data.returnMember(); //데베 유저 목록 리스트로 받기
+		
+		for (MemberDto member : members) {
+
+			if(member.getName().equals(storeddata) && member.getEmail().equals(email)
+			|| member.getId().equals(storeddata) && member.getEmail().equals(email)) {
+				searchId.add(new MemberDto(member.getName(), member.getId(),member.getPassword(),member.getBirth(),member.getEmail(),member.getCallNumber(),member.getAddress(),member.getZipCode()));
+				return true; // 계정정보가 맞으면 
+			}
+        }
+		return false; // 계정정보가 틀리면 
+	}
+	
 	
 
 }

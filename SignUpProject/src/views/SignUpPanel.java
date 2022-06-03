@@ -216,7 +216,7 @@ public class SignUpPanel extends JPanel{
 				
 		    	if(isIdPass) {
 		    		String errorCheck = control.checkMember(nameField.getText(), idField.getText(), passwordField.getText(), passwordCheckField.getText(), birthField.getText(), 
-		    				emailField.getText() , centerPhoneField.getText() + 
+		    				emailField.getText() + emailBox.getSelectedItem().toString() , centerPhoneField.getText() + 
 		    				lastPhoneField.getText(), addressField.getText(), zipCodeField.getText());
 		    		
 		    		switch(errorCheck) {
