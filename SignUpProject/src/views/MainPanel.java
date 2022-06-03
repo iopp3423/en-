@@ -13,6 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import controls.controller;
+
 import javax.swing.JLabel;
 
 public class MainPanel extends JPanel{
@@ -22,10 +25,12 @@ public class MainPanel extends JPanel{
 	private SignUpPanel signUpPanel;
 	private ControllerPanel controllerPanel;
 	private editPanel edit;
+	private controller control;
 	
 	public MainPanel(Image image, JFrame mainFrame) {
 		this.image = image;
 		
+		control = new controller();
 		searchFrame = new MainPanelCollection();
 		signUpPanel = new SignUpPanel(); // 회원가입 화면 
 		edit = new editPanel();
@@ -92,6 +97,7 @@ public class MainPanel extends JPanel{
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
+		    	control.loginControl(idInput.getText(), pwInput.getText());   	
 		    	controllerPanel.setVisible(true);
 		    }  
 		}); 
