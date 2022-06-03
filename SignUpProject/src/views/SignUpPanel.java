@@ -74,6 +74,7 @@ public class SignUpPanel extends JPanel{
 		addressButton.setBounds(250, 562, 100, 40);
 		backButton.setBounds(30, 20, 100, 40);
 		signUpButton.setBounds(30, 630, 150, 40);
+		idCheckButton.setFocusable(false);
 		
 		//콤보박스 설정
 		phoneBox.setBounds(140, 460, 80, 40);

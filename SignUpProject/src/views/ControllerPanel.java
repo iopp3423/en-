@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import utility.Constants;
 
@@ -54,17 +55,22 @@ public class ControllerPanel extends JPanel{
 		setButtonImage(logoutButton);
 		setButtonImage(deleteButton);
 		
+
 		editButton.setBounds(120, 57, 240, 400);
 		setButton.setBounds(380, 57, 240, 400);
 		logoutButton.setBounds(640, 57, 240, 400);
 		deleteButton.setBounds(900, 57, 240, 400);
 		
+		//editButton.setSelectedIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(240, 400, Image.SCALE_SMOOTH)));
+		//editButton.setPressedIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(240, 400, Image.SCALE_SMOOTH)));
+    	
 		add(editButton);
 		add(setButton);
 		add(logoutButton);
 		add(deleteButton);
 		
-		
+		//editButton.setIcon(new ImageIcon("/image/set.png"));
+    
 		
 		editButton.addMouseListener(new MouseAdapter()  
 		{  
@@ -78,8 +84,9 @@ public class ControllerPanel extends JPanel{
 		        
 		    }
 		    public void mousePressed(MouseEvent e) { // 마우스클릭 
-		    	JButton button = (JButton)e.getSource();
-		    	edit.setVisible(true);
+
+		    	
+		    	//edit.setVisible(true);	    	
 		    }   
 		}); 
 		setButton.addMouseListener(new MouseAdapter()  
@@ -132,9 +139,7 @@ public class ControllerPanel extends JPanel{
 		    	deleteFrame.setVisible(true);
 		    }   
 		}); 
-		
-		
-		
+	
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -164,6 +169,7 @@ public class ControllerPanel extends JPanel{
 		setLayout(null);			
 		
 		JLabel label = new JLabel("회원탈퇴 하시겠습니까?");
+		//JTextField passwordField = new JTextField();
 	
 		ImageIcon noIcon = new ImageIcon(ControllerPanel.class.getResource("/image/no.png"));	
 		JButton noButton = new JButton(new ImageIcon(noIcon.getImage().getScaledInstance(80, 90, Image.SCALE_SMOOTH)));
@@ -171,22 +177,23 @@ public class ControllerPanel extends JPanel{
 		ImageIcon yesIcon = new ImageIcon(ControllerPanel.class.getResource("/image/yes.png"));	
 		JButton yesButton = new JButton(new ImageIcon(yesIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
 		
-		
+		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그아웃안내.png"));
+		ImageIcon cancelImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			
 		setButtonImage(yesButton);
 		setButtonImage(noButton);
-		
-		
+			
 		label.setBounds(30, 20, 200, 100);
 		yesButton.setBounds(30, 100, 80,80);
 		noButton.setBounds(120, 100, 80,90);
 		
+		//passwordField.setBounds(30, 200, 80, 80); 
+				
 		add(yesButton);
 		add(noButton);
 		add(label);
 		
-		
-		
-		
+
 		label.setFont(new Font("bold", Font.BOLD, 20));
 		label.setForeground(Color.WHITE);	
 		
@@ -194,7 +201,14 @@ public class ControllerPanel extends JPanel{
 		{  
 		    public void mouseClicked(MouseEvent e) { // 마우스클릭 		    	
 		    	deleteFrame.setVisible(false);
-		    	System.out.println("ddd");
+		    }   
+		}); 
+		
+		yesButton.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e) { // 마우스클릭 		    	
+		    	deleteFrame.setVisible(false);
+		    	JOptionPane.showMessageDialog(null, "탈퇴되었습니다.", "안내메시지",  JOptionPane.QUESTION_MESSAGE, cancelImage);
 		    }   
 		}); 
 		

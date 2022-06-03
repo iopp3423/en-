@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="pluscount"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="depen"/>
+			<item value="deleteFrame"/>
+			<item value="option"/>
 			<item value="pluscount"/>
 			<item value="plus"/>
 			<item value="system"/>
@@ -20,9 +23,6 @@
 			<item value="changeNumber"/>
 			<item value="change"/>
 			<item value="format.applyPattern(patterns[1]);&#x0A;&#x09;&#x09;&#x09;changedNumber = format.format(newNumber); // 뒤에 소수점 0으로 끝나 없게 출력, 반올림 포함 먼저 정"/>
-			<item value="sub"/>
-			<item value="substract"/>
-			<item value="2"/>
 		</list>
 		<list key="replacehistory">
 			<item value="support.calculate"/>
