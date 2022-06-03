@@ -17,13 +17,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controls.controller;
+
 public class SignUpPanel extends JPanel{
 
 	private Image image;
+	private controller control;
+	private boolean isIdPass = false;
 
 	
-	public SignUpPanel() {
+	public SignUpPanel(controller control) {
 
+		this.control = control;
 		
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage();
@@ -143,6 +148,28 @@ public class SignUpPanel extends JPanel{
 		add(signUpButton);
 		
 		
+		
+		
+		idCheckButton.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	if(control.checkId(idField.getText())) {
+		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입완료.png"));
+					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			    	JOptionPane.showMessageDialog(null, "가능한 Id입니다.", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);		
+			    	isIdPass = true;
+			    	}
+		    	else {
+		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그아웃안내.png"));
+					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			    	JOptionPane.showMessageDialog(null, "이미 존재하는 Id입니다.", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);
+			    	idField.setText("");
+			    	isIdPass = false;
+		    	}
+		    }  
+		}); 
+		
 		backButton.addMouseListener(new MouseAdapter()  
 		{  
 		    public void mouseClicked(MouseEvent e)  
@@ -155,10 +182,35 @@ public class SignUpPanel extends JPanel{
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
-		    	ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입완료.png"));
-				ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-		    	JOptionPane.showMessageDialog(null, "환영합니다.", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);
-		    	setVisible(false);		    	
+	    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png")); // 바로 가져오면 gif가져와
+				ImageIcon signFailImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+				
+		    	ImageIcon signIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입완료.png"));
+				ImageIcon signUpImage = new ImageIcon(signIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+				
+		    	if(isIdPass) {
+		    		String errorCheck = control.checkMember(nameField.getText(), idField.getText(), passwordField.getText(), passwordCheckField.getText(), birthField.getText(), 
+		    				emailField.getText() + emailBox.getSelectedItem().toString() , phoneBox.getSelectedItem().toString() + centerPhoneField.getText() + 
+		    				lastPhoneField.getText(), addressField.getText(), zipCodeField.getText());
+		    		
+		    		switch(errorCheck) {
+		    		case "0": // 회원가입 완료 
+		    			JOptionPane.showMessageDialog(null, "환영합니다.", "Message",JOptionPane.PLAIN_MESSAGE, signUpImage);
+		    			setVisible(false);
+		    			break;
+		    			
+		    		case "1": // 비밀번호 일치 ㅇ류 
+		    			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			passwordField.setText("");
+		    			passwordCheckField.setText("");
+		    			break;
+		    		}
+		    		
+		    	}
+		    	
+		    	else {
+			    	JOptionPane.showMessageDialog(null, "Id중복체크를 해주세요.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage);
+		    	}
 		    }  
 		}); 
 		

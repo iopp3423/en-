@@ -1,6 +1,7 @@
 package models;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,6 +57,50 @@ public class MemberData {
 		        }
 		
 		return member;
+	}
+	
+	public void addMember(String name, String id, String password, String passwordCheck, String birth, String email, String callNumber, String address, String zipCode) {
+		Connection conn = null;
+		Statement statement = null;
+		ResultSet Contents = null;
+			
+		try {
+            // JDBC 드라이버 로딩
+            Class.forName(Constants.JDBC_DRIVER);
+
+            // Connection 객체 생성
+            conn = DriverManager.getConnection(Constants.DB_URL, Constants.USERNAME, Constants.PASSWORD); // DB 연결
+
+            // Statement 객체 생성
+            //statement = conn.createStatement();
+
+            // SQL 문장을 실행하고 결과를 리턴
+            // statement.excuteQuery(SQL) : select
+            // statement.excuteUpdate(SQL) : insert, update, delete ..
+            String query = "INSERT INTO member(name,id, pw, birth, email, callnumber, address, zipcode)" + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            //statement.executeUpdate("INSERT INTO member(name,id, pw, birth, email, callnumber, address, zipcode)" + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            preparedStmt.setString (1, name);
+            preparedStmt.setString (2, id);
+            preparedStmt.setString (3, password);
+            preparedStmt.setString (4, birth);
+            preparedStmt.setString (5, email);
+            preparedStmt.setString (6, callNumber);
+            preparedStmt.setString (7, address);
+            preparedStmt.setString (8, zipCode);
+            preparedStmt.execute();
+      
+        } catch (SQLException e) {
+
+            System.out.println("SQL Error : " + e.getMessage());
+
+        } catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+        	closeConn(conn, statement, Contents);
+        }
 	}
 	
 	

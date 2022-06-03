@@ -34,7 +34,7 @@ public class MainPanel extends JPanel{
 		
 		control = new controller();
 		searchFrame = new MainPanelCollection();
-		signUpPanel = new SignUpPanel(); // 회원가입 화면 
+		signUpPanel = new SignUpPanel(control); // 회원가입 화면 
 		edit = new editPanel();
 		controllerPanel = new ControllerPanel(edit);
 		
@@ -99,14 +99,15 @@ public class MainPanel extends JPanel{
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    { 
-		    	System.out.println(pwInput.getPassword());
-		    	if(control.loginControl(idInput.getText(), pwInput.getPassword())) {  		
+		    	if(control.loginControl(idInput.getText(), pwInput.getPassword())) {
+			    	idInput.setText("");
+			    	pwInput.setText("");
 		    		controllerPanel.setVisible(true);
 		    	} 	
 		    	else {
 		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png"));
 					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-			    	JOptionPane.showMessageDialog(null, "잘못입력하셨습니다", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);
+			    	JOptionPane.showMessageDialog(null, "일치하는 계정이 없습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);
 			    	idInput.setText("");
 			    	pwInput.setText("");
 		    	}
