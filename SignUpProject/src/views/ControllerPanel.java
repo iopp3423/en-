@@ -40,7 +40,7 @@ public class ControllerPanel extends JPanel{
 		JButton deleteButton = new JButton(new ImageIcon(new ImageIcon("/image/delete.png").getImage().getScaledInstance(240, 400, Image.SCALE_SMOOTH)));
 		
 		deleteFrame = new JFrame();		
-		deletePanel = new deletePanel(control);
+		deletePanel = new deletePanel(control, this);
 		
 		deleteFrame.setSize(500,400);
 		deleteFrame.setPreferredSize(new Dimension(500,400));	
@@ -160,8 +160,9 @@ public class ControllerPanel extends JPanel{
 		
 		private Image deleteimage;
 		private Controller control;
+		private ControllerPanel controlPanel;
 		
-		public deletePanel(Controller control) {
+		public deletePanel(Controller control, ControllerPanel controlPanel) {
 			
 		ImageIcon deleteIcon = new ImageIcon(MainPanel.class.getResource("/image/삭제.png"));	
 		deleteimage = new ImageIcon(deleteIcon.getImage().getScaledInstance(500, 400, Image.SCALE_SMOOTH)).getImage();
@@ -211,6 +212,7 @@ public class ControllerPanel extends JPanel{
 		    public void mouseClicked(MouseEvent e) { // 마우스클릭
 		    	control.removeMember();
 		    	deleteFrame.setVisible(false);
+		    	controlPanel.setVisible(false);
 		    	JOptionPane.showMessageDialog(null, "탈퇴되었습니다.", "안내메시지",  JOptionPane.QUESTION_MESSAGE, cancelImage);
 		    }   
 		}); 
