@@ -12,11 +12,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controls.controller;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class MainPanel extends JPanel{
 	
@@ -50,7 +52,7 @@ public class MainPanel extends JPanel{
 		
 		
 		JTextField idInput = new JTextField();
-		JTextField pwInput = new JTextField();
+		JPasswordField pwInput = new JPasswordField();
 		JLabel idLabel = new JLabel("계정이름");
 		JLabel pwLabel = new JLabel("비밀번호");
 		JButton login = new JButton("로그인");
@@ -96,9 +98,18 @@ public class MainPanel extends JPanel{
 		login.addMouseListener(new MouseAdapter()  
 		{  
 		    public void mouseClicked(MouseEvent e)  
-		    {  
-		    	control.loginControl(idInput.getText(), pwInput.getText());   	
-		    	controllerPanel.setVisible(true);
+		    { 
+		    	System.out.println(pwInput.getPassword());
+		    	if(control.loginControl(idInput.getText(), pwInput.getPassword())) {  		
+		    		controllerPanel.setVisible(true);
+		    	} 	
+		    	else {
+		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png"));
+					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			    	JOptionPane.showMessageDialog(null, "잘못입력하셨습니다", "Message",JOptionPane.PLAIN_MESSAGE, signupImage);
+			    	idInput.setText("");
+			    	pwInput.setText("");
+		    	}
 		    }  
 		}); 
 		

@@ -1,6 +1,7 @@
 package controls;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import models.MemberData;
@@ -16,16 +17,19 @@ public class controller {
 		dto = new MemberDto();
 	}
 	
-	public void loginControl(String id, String pw) {
+	public boolean loginControl(String id, char[] pw) {
 		List<MemberDto> member = new ArrayList<MemberDto>();
-		
-		System.out.printf(id, pw);
-		
 		
 		member = data.returnMember();
 		
 		for (MemberDto number : member) {
-            System.out.println(number.getName());
+			System.out.println(number.getPassword());
+			System.out.println(pw);
+			
+			if(number.getId().equals(id) && Arrays.equals(pw, number.getPassword().toCharArray())) {
+				return true;
+			}
         }
+		return false;
 	}
 }
