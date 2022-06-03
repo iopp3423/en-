@@ -119,6 +119,7 @@ public class MainPanel extends JPanel{
 		    public void mouseClicked(MouseEvent e)  
 		    {  
 		    	signUpPanel.setVisible(true);
+		    	
 		    }  
 		}); 
 		

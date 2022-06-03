@@ -1,12 +1,17 @@
 package views;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controls.controller;
+import utility.Constants;
 
 public class SignUpPanel extends JPanel{
 
@@ -30,6 +36,8 @@ public class SignUpPanel extends JPanel{
 
 		this.control = control;
 		
+		ImageIcon backImage = new ImageIcon(new ImageIcon(MainPanel.class.getResource("/image/뒤로가기.png")).getImage().getScaledInstance(46, 46, Image.SCALE_SMOOTH));
+		ImageIcon signUpImage = new ImageIcon(new ImageIcon(MainPanel.class.getResource("/image/회원가입버튼.png")).getImage().getScaledInstance(100, 40, Image.SCALE_SMOOTH));
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage();
 		
@@ -64,11 +72,11 @@ public class SignUpPanel extends JPanel{
 		
 		JButton idCheckButton = new JButton("아이디 중복체크");
 		JButton addressButton = new JButton("주소찾기");
-		JButton backButton = new JButton("뒤로가기");
-		JButton signUpButton = new JButton("회원가입");
+		JButton backButton = new JButton(backImage);
+		JButton signUpButton = new JButton(signUpImage);
 		
 		String[] phoneNumber = {"010", "011", "016", "0503"}; 
-		String[] adress = {"gmail.com", "naver.com", "daum.net", "cyworld.com", "hanmail.net", "kakao.com", "yahoo.com"};
+		String[] adress = {"@gmail.com", "@naver.com", "@daum.net", "@cyworld.com", "@hanmail.net", "@kakao.com", "@yahoo.com"};
 		
 		JComboBox emailBox = new JComboBox(adress);
 		JComboBox phoneBox = new JComboBox(phoneNumber);
@@ -77,8 +85,8 @@ public class SignUpPanel extends JPanel{
 		// 버튼설정
 		idCheckButton.setBounds(340, 150, 100, 40);
 		addressButton.setBounds(250, 562, 100, 40);
-		backButton.setBounds(30, 20, 100, 40);
-		signUpButton.setBounds(30, 630, 150, 40);
+		backButton.setBounds(30, 20, 40, 40);
+		signUpButton.setBounds(30, 630, 100, 40);
 		idCheckButton.setFocusable(false);
 		
 		//콤보박스 설정
@@ -150,6 +158,24 @@ public class SignUpPanel extends JPanel{
 		
 		
 		
+		addressButton.addMouseListener(new MouseAdapter()  
+		{  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	if (Desktop.isDesktopSupported()) {
+		            Desktop desktop = Desktop.getDesktop();
+		            try {
+		                URI uri = new URI("https://www.juso.go.kr/openIndexPage.do");
+		                desktop.browse(uri);
+		            } catch (IOException ex) {
+		                ex.printStackTrace();
+		            } catch (URISyntaxException ex) {
+		                ex.printStackTrace();
+		            }
+		    }
+		    }  
+		}); 
+		
 		idCheckButton.addMouseListener(new MouseAdapter()  
 		{  
 		    public void mouseClicked(MouseEvent e)  
@@ -200,12 +226,37 @@ public class SignUpPanel extends JPanel{
 		    			break;
 		    			
 		    		case "1": // 비밀번호 일치 ㅇ류 
-		    			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			passwordField.setText("");
+		    			passwordCheckField.setText("");
+		    			break;	    			
+		    		case "2":
+		    			JOptionPane.showMessageDialog(null, "비밀번호를 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
 		    			passwordField.setText("");
 		    			passwordCheckField.setText("");
 		    			break;
-		    		}
-		    		
+		    		case "3":
+		    			JOptionPane.showMessageDialog(null, "생년월일을 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			birthField.setText("");
+		    			break;
+		    		case "4":
+		    			JOptionPane.showMessageDialog(null, "이메일 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			emailField.setText("");
+		    			break;
+
+		    		case "5":
+		    			JOptionPane.showMessageDialog(null, "전화번호 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			centerPhoneField.setText("");
+		    			lastPhoneField.setText("");
+		    			break;
+		    		case "6":
+		    			JOptionPane.showMessageDialog(null, "아이디 잘못 입력하셨습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			idField.setText("");
+		    			break;
+		    		case "7":
+		    			JOptionPane.showMessageDialog(null, "누락된 입력이 있습니다.", "Message",JOptionPane.PLAIN_MESSAGE, signFailImage); // id 중복체크 메시지 
+		    			break;
+		    		}	
 		    	}
 		    	
 		    	else {
@@ -213,6 +264,7 @@ public class SignUpPanel extends JPanel{
 		    	}
 		    }  
 		}); 
+		
 		
 	}
 	
@@ -229,4 +281,6 @@ public class SignUpPanel extends JPanel{
 		label.setForeground(Color.WHITE);
 		label.setOpaque(false);	
 	}
+
+	
 }
