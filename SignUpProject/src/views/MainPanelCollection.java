@@ -123,14 +123,14 @@ public class MainPanelCollection{
 		    public void mouseClicked(MouseEvent e)  
 		    {  
 		    	
-		    	if(!control.checkData(idPanel.nameField.getText(), idPanel.emailField.getText())) { // 회원목록에 없는 이름이면 
+		    	if(!control.checkData(nameField.getText(), emailField.getText())) { // 회원목록에 없는 이름이면 
 		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png"));
 					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
 			    	JOptionPane.showMessageDialog(null, "일치하는 계정이 없습니다.", "Message", JOptionPane.PLAIN_MESSAGE, signupImage);
 		    	}
 		    	
 		    	else {
-			    	send.sendEmail(control.members.get(0).getEmail()); // 입력한 이메일로 메일 발송
+			    	send.sendEmail(emailField.getText()); // 입력한 이메일로 메일 발송
 			    	emailInputLabel.setVisible(true);
 			    	emailNumberField.setVisible(true);
 			    	checkEmailButton.setVisible(true);				    	
@@ -160,6 +160,11 @@ public class MainPanelCollection{
 		exitButton.addMouseListener(new MouseAdapter(){  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
+		    	emailInputLabel.setVisible(false);
+		    	emailNumberField.setVisible(false);
+		    	checkEmailButton.setVisible(false);
+		    	nameField.setText("");
+		    	emailField.setText("");
 		    	searchIdFrame.setVisible(false);
 		    }  
 		}); 
@@ -179,7 +184,7 @@ public class MainPanelCollection{
 		public JLabel emailLabel = new JLabel("이메일");
 		public JLabel emailInputLabel = new JLabel("인증번호");
 		
-		public JTextField nameField = new JTextField();
+		public JTextField idField = new JTextField();
 		public JTextField emailField = new JTextField();
 		public JTextField emailNumberField = new JTextField();		
 		
@@ -213,7 +218,7 @@ public class MainPanelCollection{
 		idLabel.setBounds(65, 50, 150, 50);
 		emailLabel.setBounds(65, 100, 150, 50);
 		
-		nameField.setBounds(110, 50, 300, 50);
+		idField.setBounds(110, 50, 300, 50);
 		emailField.setBounds(110, 100, 200, 50);
 		emailNumberField.setBounds(110, 200, 200, 50);
 		
@@ -225,7 +230,7 @@ public class MainPanelCollection{
 		add(getEmailButton);
 		add(checkEmailButton);
 		
-		add(nameField);
+		add(idField);
 		add(emailField);
 		add(emailNumberField);
 		
@@ -238,9 +243,35 @@ public class MainPanelCollection{
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
-		    	emailInputLabel.setVisible(true);
-		    	emailNumberField.setVisible(true);
-		    	checkEmailButton.setVisible(true);
+		    	if(!control.checkData(idField.getText(), emailField.getText())) { // 회원목록에 없는 이름이면 
+		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png"));
+					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			    	JOptionPane.showMessageDialog(null, "일치하는 계정이 없습니다.", "Message", JOptionPane.PLAIN_MESSAGE, signupImage);
+		    	}
+		    	
+		    	else {
+			    	send.sendEmail(emailField.getText()); // 입력한 이메일로 메일 발송
+			    	emailInputLabel.setVisible(true);
+			    	emailNumberField.setVisible(true);
+			    	checkEmailButton.setVisible(true);				    	
+		    	}	    
+		    }  
+		}); 
+		
+		checkEmailButton.addMouseListener(new MouseAdapter(){  
+		    public void mouseClicked(MouseEvent e)  
+		    {  
+		    	
+		    	if(send.randomNumber == Integer.parseInt(emailNumberField.getText())) {
+		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입완료.png"));
+					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			    	JOptionPane.showMessageDialog(null, "password : " + control.searchId.get(0).getPassword(), "Message", JOptionPane.PLAIN_MESSAGE, signupImage);
+		    	}
+		    	else {
+		    		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/로그인오류.png"));
+					ImageIcon signupImage = new ImageIcon(imageIcon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+			    	JOptionPane.showMessageDialog(null, "인증번호가 일치하지 않습니다.", "Message", JOptionPane.PLAIN_MESSAGE, signupImage);
+		    	}
 		    }  
 		}); 
 		
@@ -248,6 +279,11 @@ public class MainPanelCollection{
 		{  
 		    public void mouseClicked(MouseEvent e)  
 		    {  
+		    	emailInputLabel.setVisible(false);
+		    	emailNumberField.setVisible(false);
+		    	checkEmailButton.setVisible(false);
+		    	idField.setText("");
+		    	emailField.setText("");
 		    	searchPwFrame.setVisible(false);
 		    }  
 		}); 

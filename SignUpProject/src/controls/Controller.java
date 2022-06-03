@@ -107,7 +107,7 @@ public class Controller {
 
 			if(member.getName().equals(storeddata) && member.getEmail().equals(email)
 			|| member.getId().equals(storeddata) && member.getEmail().equals(email)) {
-				searchId.add(new MemberDto(member.getName(), member.getId(),member.getPassword(),member.getBirth(),member.getEmail(),member.getCallNumber(),member.getAddress(),member.getZipCode()));
+				searchId.add(0, new MemberDto(member.getName(), member.getId(),member.getPassword(),member.getBirth(),member.getEmail(),member.getCallNumber(),member.getAddress(),member.getZipCode()));
 				return true; // 계정정보가 맞으면 
 			}
         }
