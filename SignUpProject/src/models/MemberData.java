@@ -76,7 +76,7 @@ public class MemberData {
             // SQL 문장을 실행하고 결과를 리턴
             // statement.excuteQuery(SQL) : select
             // statement.excuteUpdate(SQL) : insert, update, delete ..
-            String query = "DELETE FROM member WHERE id =?";
+            String query = "DELETE FROM member WHERE id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
 
             preparedStmt.setString(1, id);
