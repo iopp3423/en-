@@ -37,7 +37,7 @@ public class SignUpPanel extends JPanel{
 		this.control = control;
 		
 		ImageIcon backImage = new ImageIcon(new ImageIcon(MainPanel.class.getResource("/image/뒤로가기.png")).getImage().getScaledInstance(46, 46, Image.SCALE_SMOOTH));
-		ImageIcon signUpImage = new ImageIcon(new ImageIcon(MainPanel.class.getResource("/image/회원가입버튼.png")).getImage().getScaledInstance(100, 40, Image.SCALE_SMOOTH));
+		ImageIcon doneImage = new ImageIcon(new ImageIcon(MainPanel.class.getResource("/image/완료버튼.png")).getImage().getScaledInstance(46, 46, Image.SCALE_SMOOTH));
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원가입.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage();
 		
@@ -73,7 +73,7 @@ public class SignUpPanel extends JPanel{
 		JButton idCheckButton = new JButton("아이디 중복체크");
 		JButton addressButton = new JButton("주소찾기");
 		JButton backButton = new JButton(backImage);
-		JButton signUpButton = new JButton(signUpImage);
+		JButton signUpButton = new JButton(doneImage);
 		
 		String[] phoneNumber = {"010", "011", "016", "0503"}; 
 		String[] adress = {"@gmail.com", "@naver.com", "@daum.net", "@cyworld.com", "@hanmail.net", "@kakao.com", "@yahoo.com"};
@@ -86,7 +86,7 @@ public class SignUpPanel extends JPanel{
 		idCheckButton.setBounds(340, 150, 100, 40);
 		addressButton.setBounds(250, 562, 100, 40);
 		backButton.setBounds(30, 20, 40, 40);
-		signUpButton.setBounds(30, 630, 100, 40);
+		signUpButton.setBounds(30, 630, 40, 40);
 		idCheckButton.setFocusable(false);
 		
 		//콤보박스 설정

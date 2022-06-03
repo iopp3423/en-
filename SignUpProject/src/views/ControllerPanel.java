@@ -25,7 +25,7 @@ public class ControllerPanel extends JPanel{
 	private JFrame deleteFrame;
 	private JPanel deletePanel;
 	
-	public ControllerPanel(editPanel edit, Controller control) {
+	public ControllerPanel(EditPanel edit, Controller control) {
 		
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/메뉴.png"));	
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage();

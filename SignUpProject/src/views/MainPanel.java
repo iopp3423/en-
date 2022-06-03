@@ -27,7 +27,7 @@ public class MainPanel extends JPanel{
 	private MainPanelCollection searchFrame;
 	private SignUpPanel signUpPanel;
 	private ControllerPanel controllerPanel;
-	private editPanel edit;
+	private EditPanel edit;
 	private Controller control;
 	
 	public MainPanel(Image image, JFrame mainFrame) {
@@ -37,7 +37,7 @@ public class MainPanel extends JPanel{
 		control = new Controller();
 		searchFrame = new MainPanelCollection(control);
 		signUpPanel = new SignUpPanel(control); // 회원가입 화면 
-		edit = new editPanel(control);
+		edit = new EditPanel(control);
 		controllerPanel = new ControllerPanel(edit, control);
 		
 		mainFrame.add(edit);

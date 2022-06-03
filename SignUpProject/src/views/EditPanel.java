@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 import controls.Controller;
 
-public class editPanel extends JPanel{
+public class EditPanel extends JPanel{
 
 	private Image image;
 	public Controller control;
@@ -35,7 +35,7 @@ public class editPanel extends JPanel{
 	public JTextField zipCodeField;
 	
 	
-	public  editPanel(Controller control) {
+	public  EditPanel(Controller control) {
 		this.control = control;
 		ImageIcon imageIcon = new ImageIcon(MainPanel.class.getResource("/image/회원수정.png"));
 		image = new ImageIcon(imageIcon.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH)).getImage();
@@ -55,10 +55,12 @@ public class editPanel extends JPanel{
 		addressField = new JTextField();
 		zipCodeField = new JTextField();
 		
-	
+		ImageIcon backImage = new ImageIcon(new ImageIcon(MainPanel.class.getResource("/image/뒤로가기.png")).getImage().getScaledInstance(46, 46, Image.SCALE_SMOOTH));
+		ImageIcon doneImage = new ImageIcon(new ImageIcon(MainPanel.class.getResource("/image/완료버튼.png")).getImage().getScaledInstance(46, 46, Image.SCALE_SMOOTH));
+		
 		JButton addressButton = new JButton("주소찾기");
-		JButton backButton = new JButton("뒤로가기");
-		JButton reviseButton = new JButton("회원수정");
+		JButton backButton = new JButton(backImage);
+		JButton reviseButton = new JButton(doneImage);
 		
 		String[] phoneNumber = {"010", "011", "016", "0503"}; 
 		String[] adress = {"@gmail.com", "@naver.com", "@daum.net", "@cyworld.com", "@hanmail.net", "@kakao.com", "@yahoo.com"};
@@ -79,8 +81,8 @@ public class editPanel extends JPanel{
 		zipCodeField.setBounds(175, 480, 100, 40);
 		
 		addressButton.setBounds(280, 480, 100, 40);
-		backButton.setBounds(50, 10, 100, 35);
-		reviseButton.setBounds(50, 560, 100, 40);
+		backButton.setBounds(50, 10, 40, 40);
+		reviseButton.setBounds(50, 560, 40, 40);
 		
 		phoneBox.setBounds(175, 385, 80, 40);
 		emailBox.setBounds(280, 330, 150, 38);
