@@ -6,6 +6,9 @@ import java.util.Properties;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 import controls.SignUpController;
 import controls.test;
 
@@ -19,7 +22,8 @@ public class Start {
 		//SignUpController controller = new SignUpController();
 		
 		test ts = new test();
-		ts.naverMailSend();
+		ts.asdasd();
+		
 	}
 
 }

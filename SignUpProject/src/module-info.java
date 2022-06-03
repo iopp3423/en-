@@ -3,4 +3,5 @@ module SignUpProject {
 	requires java.sql;
 	requires mysql.connector.java;
 	requires mail;
+	requires activation;
 }
